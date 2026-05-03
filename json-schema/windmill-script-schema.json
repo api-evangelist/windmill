@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windmill/refs/heads/main/json-schema/windmill-script-schema.json",
+  "title": "Script",
+  "description": "Windmill Script schema",
+  "type": "object",
+  "properties": {
+    "workspace_id": {
+      "type": "string"
+    },
+    "hash": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "parent_hashes": {
+      "type": "array",
+      "description": "The first element is the direct parent of the script, the second is the parent of the first, etc\n",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "archived": {
+      "type": "boolean"
+    },
+    "schema": {
+      "type": "object"
+    },
+    "deleted": {
+      "type": "boolean"
+    },
+    "is_template": {
+      "type": "boolean"
+    },
+    "extra_perms": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "lock": {
+      "type": "string"
+    },
+    "lock_error_logs": {
+      "type": "string"
+    },
+    "language": {
+      "$ref": "#/components/schemas/ScriptLang"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "script",
+        "failure",
+        "trigger",
+        "command",
+        "approval",
+        "preprocessor"
+      ]
+    },
+    "starred": {
+      "type": "boolean"
+    },
+    "tag": {
+      "type": "string"
+    },
+    "has_draft": {
+      "type": "boolean"
+    },
+    "draft_only": {
+      "type": "boolean"
+    },
+    "envs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "concurrent_limit": {
+      "type": "integer"
+    },
+    "concurrency_time_window_s": {
+      "type": "integer"
+    },
+    "concurrency_key": {
+      "type": "string"
+    },
+    "debounce_key": {
+      "type": "string"
+    },
+    "debounce_delay_s": {
+      "type": "integer"
+    },
+    "debounce_args_to_accumulate": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "max_total_debouncing_time": {
+      "type": "integer"
+    },
+    "max_total_debounces_amount": {
+      "type": "integer"
+    },
+    "cache_ttl": {
+      "type": "number"
+    },
+    "dedicated_worker": {
+      "type": "boolean"
+    },
+    "ws_error_handler_muted": {
+      "type": "boolean"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "restart_unless_cancelled": {
+      "type": "boolean"
+    },
+    "timeout": {
+      "type": "integer"
+    },
+    "delete_after_secs": {
+      "type": "integer",
+      "description": "If set, delete the job's args, result and logs after this many seconds following job completion"
+    },
+    "visible_to_runner_only": {
+      "type": "boolean"
+    },
+    "auto_kind": {
+      "type": "string"
+    },
+    "codebase": {
+      "type": "string"
+    },
+    "has_preprocessor": {
+      "type": "boolean"
+    },
+    "on_behalf_of_email": {
+      "type": "string"
+    },
+    "modules": {
+      "type": "object",
+      "nullable": true,
+      "description": "Additional script modules keyed by relative file path",
+      "additionalProperties": {
+        "$ref": "#/components/schemas/ScriptModule"
+      }
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "hash",
+    "path",
+    "summary",
+    "description",
+    "content",
+    "created_by",
+    "created_at",
+    "archived",
+    "deleted",
+    "is_template",
+    "extra_perms",
+    "language",
+    "kind",
+    "starred",
+    "has_preprocessor"
+  ]
+}

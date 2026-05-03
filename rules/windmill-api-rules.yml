@@ -1,0 +1,112 @@
+extends: [[spectral:oas, recommended]]
+
+rules:
+  # Windmill uses workspace-scoped paths: /w/{workspace}/{resource}
+  windmill-workspace-path-prefix:
+    description: Workspace-scoped paths must use /w/{workspace}/ prefix
+    message: "Workspace operations should use '/w/{workspace}/' path prefix, got: {{value}}"
+    severity: warn
+    given: "$.paths"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+
+  # All paths should use kebab-case segments
+  windmill-path-kebab-case:
+    description: Path segments should use kebab-case
+    message: "Path segment '{{value}}' should use kebab-case"
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[a-z0-9{}_\\-]+)+$"
+
+  # All operation IDs should use camelCase (Windmill convention)
+  windmill-operation-id-camel-case:
+    description: OperationIds should use camelCase per Windmill convention
+    message: "OperationId '{{value}}' should use camelCase"
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]+$"
+
+  # Operations must have tags
+  windmill-operation-tags-required:
+    description: All operations must have at least one tag
+    message: "Operation is missing tags"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: tags
+      function: truthy
+
+  # Summaries must be present
+  windmill-summary-required:
+    description: All operations must have a summary
+    message: "Operation is missing a summary"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch]"
+    then:
+      field: summary
+      function: truthy
+
+  # Windmill uses 200 for success; all successful responses must be documented
+  windmill-success-response-required:
+    description: Operations must define at least one success response
+    message: "Operation has no success (2xx) response defined"
+    severity: error
+    given: "$.paths[*][get,post,put,delete,patch].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          minProperties: 1
+
+  # Schemas should have descriptions
+  windmill-schema-descriptions:
+    description: Schema components should have descriptions
+    message: "Schema component '{{path}}' is missing a description"
+    severity: info
+    given: "$.components.schemas[*]"
+    then:
+      field: description
+      function: truthy
+
+  # Parameters should have descriptions
+  windmill-parameter-descriptions:
+    description: Parameters should have descriptions
+    message: "Parameter '{{value}}' is missing a description"
+    severity: warn
+    given: "$.paths[*][*].parameters[*]"
+    then:
+      field: description
+      function: truthy
+
+  # Workspace path parameter must be named 'workspace'
+  windmill-workspace-param-name:
+    description: Workspace path parameter must be named 'workspace'
+    message: "Workspace path parameter should be named 'workspace', not '{{value}}'"
+    severity: warn
+    given: "$.paths['/w/{workspace}/**'][*].parameters[?(@.in=='path')]"
+    then:
+      field: name
+      function: enumeration
+      functionOptions:
+        values:
+          - workspace
+
+  # GET operations must not have request bodies
+  windmill-no-get-request-body:
+    description: GET operations must not have request bodies
+    message: "GET operation should not have a requestBody"
+    severity: error
+    given: "$.paths[*].get"
+    then:
+      field: requestBody
+      function: falsy

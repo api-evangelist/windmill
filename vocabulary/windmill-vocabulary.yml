@@ -1,0 +1,183 @@
+vocabulary:
+  name: Windmill Vocabulary
+  description: >-
+    Domain vocabulary for Windmill, the open-source developer platform and workflow
+    engine for scripts, flows, schedules, and internal tools. Covers core concepts
+    in workflow automation, job execution, resource management, and platform administration.
+  version: '1.0'
+  created: '2026-05-03'
+  modified: '2026-05-03'
+  tags:
+    - Automation
+    - Internal Tools
+    - Open Source
+    - Workflows
+    - Scripts
+    - Jobs
+
+terms:
+  - term: Script
+    definition: >-
+      A reusable unit of code in Windmill, written in TypeScript (Deno/Bun), Python,
+      Go, PHP, Bash, C#, SQL, or Rust. Scripts can be run directly, triggered by
+      schedules, or composed into flows.
+    category: Core Concept
+    tags:
+      - Scripts
+      - Automation
+
+  - term: Flow
+    definition: >-
+      A visual, multi-step workflow in Windmill that chains scripts and operations
+      together. Flows support branching, loops, error handling, and approval steps.
+      Equivalent to workflow orchestration in tools like Airflow or Temporal.
+    category: Core Concept
+    tags:
+      - Workflows
+      - Automation
+      - Orchestration
+
+  - term: Job
+    definition: >-
+      A single execution instance of a script or flow in Windmill. Jobs are either
+      queued (waiting to execute), running, or completed. Each job has a unique ID
+      and stores its arguments, results, and execution metadata.
+    category: Core Concept
+    tags:
+      - Jobs
+      - Execution
+
+  - term: Workspace
+    definition: >-
+      An isolated environment in Windmill containing its own scripts, flows, resources,
+      variables, schedules, and users. Similar to a project or organization namespace.
+    category: Platform
+    tags:
+      - Workspace
+      - Multi-tenant
+      - Platform
+
+  - term: Resource
+    definition: >-
+      A named, typed credential or configuration object stored in Windmill (e.g., a
+      database connection, API key, or cloud credentials). Resources are referenced
+      by scripts and flows using their path.
+    category: Platform
+    tags:
+      - Resources
+      - Credentials
+      - Configuration
+
+  - term: Variable
+    definition: >-
+      A workspace-level key-value store in Windmill for storing configuration or
+      secrets. Variables can be plain text or secret (encrypted). They are accessible
+      from scripts via environment variable injection.
+    category: Platform
+    tags:
+      - Variables
+      - Secrets
+      - Configuration
+
+  - term: Schedule
+    definition: >-
+      A cron-based or interval-based trigger in Windmill that automatically runs
+      a script or flow on a defined schedule. Supports full cron expressions and
+      timezone configuration.
+    category: Automation
+    tags:
+      - Schedules
+      - Automation
+      - Cron
+
+  - term: Worker
+    definition: >-
+      A Windmill process that picks up and executes jobs from the queue. Workers
+      can be specialized by worker group tags to run specific types of jobs.
+    category: Infrastructure
+    tags:
+      - Workers
+      - Infrastructure
+      - Execution
+
+  - term: Trigger
+    definition: >-
+      A mechanism in Windmill that initiates job execution based on external events.
+      Supports HTTP webhooks, Postgres triggers, Kafka, SQS, MQTT, NATS, GCP Pub/Sub,
+      Azure Service Bus, WebSocket, email, and native triggers.
+    category: Automation
+    tags:
+      - Triggers
+      - Events
+      - Webhooks
+
+  - term: App
+    definition: >-
+      A visual internal tool built on Windmill using a drag-and-drop UI builder.
+      Apps interact with scripts and flows as backends. Equivalent to Retool or
+      internal dashboards.
+    category: Platform
+    tags:
+      - Apps
+      - Internal Tools
+      - UI
+
+  - term: Path
+    definition: >-
+      A hierarchical identifier for scripts, flows, apps, resources, and variables
+      in Windmill, using slash-separated segments with a user or folder prefix
+      (e.g., u/username/my_script or f/folder/my_flow).
+    category: Core Concept
+    tags:
+      - Paths
+      - Naming
+
+  - term: operationId
+    definition: >-
+      A unique camelCase identifier for each API operation in the Windmill OpenAPI spec,
+      used by client SDKs and integration tooling to reference specific endpoints.
+    category: API
+    tags:
+      - OpenAPI
+      - Integration
+
+  - term: Git Sync
+    definition: >-
+      A Windmill feature that synchronizes workspace scripts, flows, and apps with a
+      connected Git repository, enabling version control and GitOps workflows.
+    category: Platform
+    tags:
+      - Git
+      - Version Control
+      - GitOps
+
+  - term: MCP
+    definition: >-
+      Model Context Protocol support in Windmill, enabling AI agents to discover and
+      invoke Windmill scripts and flows as tools via the MCP standard.
+    category: Platform
+    tags:
+      - MCP
+      - AI
+      - Agents
+
+  - term: Deno
+    definition: >-
+      A TypeScript/JavaScript runtime supported by Windmill scripts. Deno is the
+      primary runtime for TypeScript scripts in Windmill, offering secure defaults
+      and built-in TypeScript support.
+    category: Runtime
+    tags:
+      - Deno
+      - TypeScript
+      - Runtime
+
+  - term: Bun
+    definition: >-
+      A fast JavaScript/TypeScript runtime supported by Windmill as an alternative
+      to Deno for running TypeScript scripts with improved performance.
+    category: Runtime
+    tags:
+      - Bun
+      - TypeScript
+      - Runtime

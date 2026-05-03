@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windmill/refs/heads/main/json-schema/windmill-user-schema.json",
+  "title": "User",
+  "description": "Windmill User schema",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    },
+    "is_admin": {
+      "type": "boolean"
+    },
+    "name": {
+      "type": "string"
+    },
+    "is_super_admin": {
+      "type": "boolean"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "operator": {
+      "type": "boolean"
+    },
+    "disabled": {
+      "type": "boolean"
+    },
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "folders": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "folders_owners": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "added_via": {
+      "nullable": true,
+      "allOf": [
+        {
+          "$ref": "#/components/schemas/UserSource"
+        }
+      ]
+    },
+    "is_service_account": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "email",
+    "username",
+    "is_admin",
+    "is_super_admin",
+    "created_at",
+    "operator",
+    "disabled",
+    "folders",
+    "folders_owners"
+  ]
+}

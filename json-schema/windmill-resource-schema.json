@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windmill/refs/heads/main/json-schema/windmill-resource-schema.json",
+  "title": "Resource",
+  "description": "Windmill Resource schema",
+  "type": "object",
+  "properties": {
+    "workspace_id": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "resource_type": {
+      "type": "string"
+    },
+    "value": {},
+    "is_oauth": {
+      "type": "boolean"
+    },
+    "extra_perms": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "edited_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "path",
+    "resource_type",
+    "is_oauth"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windmill/refs/heads/main/json-schema/windmill-createvariable-schema.json",
+  "title": "CreateVariable",
+  "description": "Windmill CreateVariable schema",
+  "type": "object",
+  "properties": {
+    "path": {
+      "type": "string",
+      "description": "The path to the variable"
+    },
+    "value": {
+      "type": "string",
+      "description": "The value of the variable"
+    },
+    "is_secret": {
+      "type": "boolean",
+      "description": "Whether the variable is a secret"
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the variable"
+    },
+    "account": {
+      "type": "integer",
+      "description": "The account identifier"
+    },
+    "is_oauth": {
+      "type": "boolean",
+      "description": "Whether the variable is an OAuth variable"
+    },
+    "expires_at": {
+      "type": "string",
+      "description": "The expiration date of the variable",
+      "format": "date-time"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "path",
+    "value",
+    "is_secret",
+    "description"
+  ]
+}

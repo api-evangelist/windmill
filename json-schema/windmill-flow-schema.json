@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windmill/refs/heads/main/json-schema/windmill-flow-schema.json",
+  "title": "Flow",
+  "description": "Windmill Flow schema",
+  "allOf": [
+    {
+      "$ref": "../../openflow.openapi.yaml#/components/schemas/OpenFlow"
+    },
+    {
+      "$ref": "#/components/schemas/FlowMetadata"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "lock_error_logs": {
+          "type": "string"
+        },
+        "version_id": {
+          "type": "number"
+        }
+      }
+    }
+  ]
+}

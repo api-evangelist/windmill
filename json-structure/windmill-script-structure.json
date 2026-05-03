@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/windmill/refs/heads/main/json-structure/windmill-script-structure.json",
+  "title": "Windmill Script Structure",
+  "description": "Structure definition for Windmill Script",
+  "structure": {
+    "type": "object",
+    "required": [
+      "hash",
+      "path",
+      "summary",
+      "description",
+      "content",
+      "created_by",
+      "created_at",
+      "archived",
+      "deleted",
+      "is_template",
+      "extra_perms",
+      "language",
+      "kind",
+      "starred",
+      "has_preprocessor"
+    ],
+    "properties": {
+      "workspace_id": {
+        "type": "string"
+      },
+      "hash": {
+        "type": "string"
+      },
+      "path": {
+        "type": "string"
+      },
+      "parent_hashes": {
+        "type": "array",
+        "items": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "content": {
+        "type": "string"
+      },
+      "created_by": {
+        "type": "string"
+      },
+      "created_at": {
+        "type": "string"
+      },
+      "archived": {
+        "type": "boolean"
+      },
+      "schema": {
+        "type": "object"
+      },
+      "deleted": {
+        "type": "boolean"
+      },
+      "is_template": {
+        "type": "boolean"
+      },
+      "extra_perms": {
+        "type": "object"
+      },
+      "lock": {
+        "type": "string"
+      },
+      "lock_error_logs": {
+        "type": "string"
+      },
+      "language": {
+        "type": "ScriptLang"
+      },
+      "kind": {
+        "type": "string",
+        "enum": [
+          "script",
+          "failure",
+          "trigger",
+          "command",
+          "approval",
+          "preprocessor"
+        ]
+      },
+      "starred": {
+        "type": "boolean"
+      },
+      "tag": {
+        "type": "string"
+      }
+    }
+  }
+}

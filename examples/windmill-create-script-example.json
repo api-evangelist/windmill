@@ -1,0 +1,25 @@
+{
+  "operation": "create-script",
+  "method": "POST",
+  "path": "/w/{workspace}/scripts/create",
+  "summary": "Create Script",
+  "request": {
+    "path": "u/user/my_script",
+    "summary": "My Hello World Script",
+    "description": "A simple example script",
+    "content": "export async function main(name: string) {\n  return `Hello ${name}`;\n}",
+    "language": "deno",
+    "schema": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name to greet"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    }
+  },
+  "response": "u/user/my_script"
+}
