@@ -1,491 +1,862 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Windmill Workflow Automation"
-  description: >-
-    Workflow automation capability for Windmill, enabling end-to-end management
-    of scripts, flows, schedules, resources, and job execution. Designed for
-    platform engineers and automation teams building internal tools, ETL pipelines,
-    and scheduled workflows on the Windmill platform.
+  label: Windmill Workflow Automation
+  description: Workflow automation capability for Windmill, enabling end-to-end management of scripts, flows, schedules, resources,
+    and job execution. Designed for platform engineers and automation teams building internal tools, ETL pipelines, and scheduled
+    workflows on the Windmill platform.
   tags:
-    - Windmill
-    - Automation
-    - Workflows
-    - Scripts
-    - Jobs
-    - Schedules
-    - Internal Tools
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Windmill
+  - Automation
+  - Workflows
+  - Scripts
+  - Jobs
+  - Schedules
+  - Internal Tools
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      WINDMILL_TOKEN: WINDMILL_TOKEN
-
+- namespace: env
+  keys:
+    WINDMILL_TOKEN: WINDMILL_TOKEN
 capability:
   consumes:
-    - import: windmill
-      location: ./shared/windmill-api.yaml
-
+  - type: http
+    namespace: windmill
+    baseUri: https://app.windmill.dev/api
+    description: Windmill platform API for workflow automation and script management
+    authentication:
+      type: bearer
+      token: '{{WINDMILL_TOKEN}}'
+    resources:
+    - name: scripts
+      path: /w/{workspace}/scripts
+      description: Script management and execution
+      operations:
+      - name: create-script
+        method: POST
+        description: Create Script
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        body:
+          type: json
+          data:
+            path: '{{tools.path}}'
+            content: '{{tools.content}}'
+            language: '{{tools.language}}'
+            summary: '{{tools.summary}}'
+            description: '{{tools.description}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+      - name: list-scripts
+        method: GET
+        description: List Scripts
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: per_page
+          in: query
+          type: integer
+          required: false
+          description: Number of results per page
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-script-by-path
+        method: GET
+        description: Get Script by Path
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: Script path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-script-by-path
+        method: DELETE
+        description: Delete Script by Path
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: Script path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: flows
+      path: /w/{workspace}/flows
+      description: Flow management and execution
+      operations:
+      - name: create-flow
+        method: POST
+        description: Create Flow
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        body:
+          type: json
+          data:
+            path: '{{tools.path}}'
+            summary: '{{tools.summary}}'
+            description: '{{tools.description}}'
+            value: '{{tools.value}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+      - name: list-flows
+        method: GET
+        description: List Flows
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: per_page
+          in: query
+          type: integer
+          required: false
+          description: Number of results per page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-flow-by-path
+        method: GET
+        description: Get Flow by Path
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: Flow path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: jobs
+      path: /w/{workspace}/jobs
+      description: Job execution and monitoring
+      operations:
+      - name: run-script-by-path
+        method: POST
+        description: Run Script by Path
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: path
+          in: path
+          type: string
+          required: true
+          description: Script path
+        body:
+          type: json
+          data:
+            args: '{{tools.args}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+      - name: list-completed-jobs
+        method: GET
+        description: List Completed Jobs
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: per_page
+          in: query
+          type: integer
+          required: false
+          description: Number of results per page
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-completed-job
+        method: GET
+        description: Get Completed Job
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Job identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: cancel-queued-job
+        method: POST
+        description: Cancel Queued Job
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        - name: id
+          in: path
+          type: string
+          required: true
+          description: Job identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: schedules
+      path: /w/{workspace}/schedules
+      description: Schedule management
+      operations:
+      - name: create-schedule
+        method: POST
+        description: Create Schedule
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        body:
+          type: json
+          data:
+            path: '{{tools.path}}'
+            schedule: '{{tools.schedule}}'
+            script_path: '{{tools.script_path}}'
+            is_flow: '{{tools.is_flow}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+      - name: list-schedules
+        method: GET
+        description: List Schedules
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources
+      path: /w/{workspace}/resources
+      description: Resource management
+      operations:
+      - name: create-resource
+        method: POST
+        description: Create Resource
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        body:
+          type: json
+          data:
+            path: '{{tools.path}}'
+            resource_type: '{{tools.resource_type}}'
+            value: '{{tools.value}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+      - name: list-resources
+        method: GET
+        description: List Resources
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces
+      path: /workspaces
+      description: Workspace administration
+      operations:
+      - name: list-workspaces
+        method: GET
+        description: List Workspaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-workspace
+        method: POST
+        description: Create Workspace
+        body:
+          type: json
+          data:
+            id: '{{tools.id}}'
+            name: '{{tools.name}}'
+            username: '{{tools.username}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+    - name: users
+      path: /w/{workspace}/users
+      description: User management
+      operations:
+      - name: list-users
+        method: GET
+        description: List Users in Workspace
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: variables
+      path: /w/{workspace}/variables
+      description: Variable management
+      operations:
+      - name: create-variable
+        method: POST
+        description: Create Variable
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        body:
+          type: json
+          data:
+            path: '{{tools.path}}'
+            value: '{{tools.value}}'
+            is_secret: '{{tools.is_secret}}'
+            description: '{{tools.description}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: string
+          value: $.
+      - name: list-contextual-variables
+        method: GET
+        description: List Contextual Variables
+        inputParameters:
+        - name: workspace
+          in: path
+          type: string
+          required: true
+          description: Workspace identifier
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: windmill-workflow-api
-      description: "Unified REST API for Windmill workflow automation."
-      resources:
-        - path: /v1/scripts
-          name: scripts
-          description: "Script management and execution"
-          operations:
-            - method: GET
-              name: list-scripts
-              description: "List all scripts in a workspace"
-              call: "windmill.list-scripts"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-script
-              description: "Create a new script"
-              call: "windmill.create-script"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/scripts/{path}
-          name: script
-          description: "Individual script operations"
-          operations:
-            - method: GET
-              name: get-script
-              description: "Get a script by path"
-              call: "windmill.get-script-by-path"
-              with:
-                workspace: "rest.workspace"
-                path: "rest.path"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: DELETE
-              name: delete-script
-              description: "Delete a script by path"
-              call: "windmill.delete-script-by-path"
-              with:
-                workspace: "rest.workspace"
-                path: "rest.path"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/flows
-          name: flows
-          description: "Flow management"
-          operations:
-            - method: GET
-              name: list-flows
-              description: "List all flows in a workspace"
-              call: "windmill.list-flows"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-flow
-              description: "Create a new flow"
-              call: "windmill.create-flow"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/flows/{path}
-          name: flow
-          description: "Individual flow operations"
-          operations:
-            - method: GET
-              name: get-flow
-              description: "Get a flow by path"
-              call: "windmill.get-flow-by-path"
-              with:
-                workspace: "rest.workspace"
-                path: "rest.path"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/jobs
-          name: jobs
-          description: "Job listing and monitoring"
-          operations:
-            - method: GET
-              name: list-jobs
-              description: "List completed jobs"
-              call: "windmill.list-completed-jobs"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/jobs/{id}
-          name: job
-          description: "Individual job operations"
-          operations:
-            - method: GET
-              name: get-job
-              description: "Get a completed job"
-              call: "windmill.get-completed-job"
-              with:
-                workspace: "rest.workspace"
-                id: "rest.id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/runs
-          name: runs
-          description: "Job execution"
-          operations:
-            - method: POST
-              name: run-script
-              description: "Run a script by path"
-              call: "windmill.run-script-by-path"
-              with:
-                workspace: "rest.workspace"
-                path: "rest.path"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/schedules
-          name: schedules
-          description: "Schedule management"
-          operations:
-            - method: GET
-              name: list-schedules
-              description: "List all schedules"
-              call: "windmill.list-schedules"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-schedule
-              description: "Create a new schedule"
-              call: "windmill.create-schedule"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/resources
-          name: resources
-          description: "Resource management"
-          operations:
-            - method: GET
-              name: list-resources
-              description: "List all resources"
-              call: "windmill.list-resources"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-resource
-              description: "Create a new resource"
-              call: "windmill.create-resource"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/variables
-          name: variables
-          description: "Variable management"
-          operations:
-            - method: GET
-              name: list-variables
-              description: "List contextual variables"
-              call: "windmill.list-contextual-variables"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-variable
-              description: "Create a new variable"
-              call: "windmill.create-variable"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/workspaces
-          name: workspaces
-          description: "Workspace administration"
-          operations:
-            - method: GET
-              name: list-workspaces
-              description: "List all workspaces"
-              call: "windmill.list-workspaces"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-workspace
-              description: "Create a new workspace"
-              call: "windmill.create-workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/users
-          name: users
-          description: "User management"
-          operations:
-            - method: GET
-              name: list-users
-              description: "List users in workspace"
-              call: "windmill.list-users"
-              with:
-                workspace: "rest.workspace"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: windmill-workflow-mcp
-      transport: http
-      description: "MCP server for AI-assisted Windmill workflow automation."
-      tools:
-        - name: list-scripts
-          description: "List all scripts in a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-scripts"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-script
-          description: "Get a specific script by path from a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "windmill.get-script-by-path"
-          with:
-            workspace: "tools.workspace"
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-script
-          description: "Create a new script in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.create-script"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: run-script
-          description: "Execute a script by path in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.run-script-by-path"
-          with:
-            workspace: "tools.workspace"
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-flows
-          description: "List all flows in a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-flows"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-flow
-          description: "Get a specific flow by path from a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "windmill.get-flow-by-path"
-          with:
-            workspace: "tools.workspace"
-            path: "tools.path"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-flow
-          description: "Create a new flow in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.create-flow"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-jobs
-          description: "List completed jobs in a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-completed-jobs"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: get-job
-          description: "Get a specific completed job by ID"
-          hints:
-            readOnly: true
-            openWorld: false
-          call: "windmill.get-completed-job"
-          with:
-            workspace: "tools.workspace"
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: cancel-job
-          description: "Cancel a queued job in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: true
-            idempotent: true
-          call: "windmill.cancel-queued-job"
-          with:
-            workspace: "tools.workspace"
-            id: "tools.id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-schedules
-          description: "List all schedules in a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-schedules"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-schedule
-          description: "Create a new schedule in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.create-schedule"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-resources
-          description: "List all resources in a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-resources"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-resource
-          description: "Create a new resource in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.create-resource"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-variable
-          description: "Create a new variable in a Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.create-variable"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-workspaces
-          description: "List all available Windmill workspaces"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-workspaces"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: create-workspace
-          description: "Create a new Windmill workspace"
-          hints:
-            readOnly: false
-            destructive: false
-          call: "windmill.create-workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: list-users
-          description: "List users in a Windmill workspace"
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "windmill.list-users"
-          with:
-            workspace: "tools.workspace"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: windmill-workflow-api
+    description: Unified REST API for Windmill workflow automation.
+    resources:
+    - path: /v1/scripts
+      name: scripts
+      description: Script management and execution
+      operations:
+      - method: GET
+        name: list-scripts
+        description: List all scripts in a workspace
+        call: windmill.list-scripts
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-script
+        description: Create a new script
+        call: windmill.create-script
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/scripts/{path}
+      name: script
+      description: Individual script operations
+      operations:
+      - method: GET
+        name: get-script
+        description: Get a script by path
+        call: windmill.get-script-by-path
+        with:
+          workspace: rest.workspace
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete-script
+        description: Delete a script by path
+        call: windmill.delete-script-by-path
+        with:
+          workspace: rest.workspace
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flows
+      name: flows
+      description: Flow management
+      operations:
+      - method: GET
+        name: list-flows
+        description: List all flows in a workspace
+        call: windmill.list-flows
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-flow
+        description: Create a new flow
+        call: windmill.create-flow
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/flows/{path}
+      name: flow
+      description: Individual flow operations
+      operations:
+      - method: GET
+        name: get-flow
+        description: Get a flow by path
+        call: windmill.get-flow-by-path
+        with:
+          workspace: rest.workspace
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs
+      name: jobs
+      description: Job listing and monitoring
+      operations:
+      - method: GET
+        name: list-jobs
+        description: List completed jobs
+        call: windmill.list-completed-jobs
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{id}
+      name: job
+      description: Individual job operations
+      operations:
+      - method: GET
+        name: get-job
+        description: Get a completed job
+        call: windmill.get-completed-job
+        with:
+          workspace: rest.workspace
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/runs
+      name: runs
+      description: Job execution
+      operations:
+      - method: POST
+        name: run-script
+        description: Run a script by path
+        call: windmill.run-script-by-path
+        with:
+          workspace: rest.workspace
+          path: rest.path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/schedules
+      name: schedules
+      description: Schedule management
+      operations:
+      - method: GET
+        name: list-schedules
+        description: List all schedules
+        call: windmill.list-schedules
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-schedule
+        description: Create a new schedule
+        call: windmill.create-schedule
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources
+      name: resources
+      description: Resource management
+      operations:
+      - method: GET
+        name: list-resources
+        description: List all resources
+        call: windmill.list-resources
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-resource
+        description: Create a new resource
+        call: windmill.create-resource
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/variables
+      name: variables
+      description: Variable management
+      operations:
+      - method: GET
+        name: list-variables
+        description: List contextual variables
+        call: windmill.list-contextual-variables
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-variable
+        description: Create a new variable
+        call: windmill.create-variable
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces
+      name: workspaces
+      description: Workspace administration
+      operations:
+      - method: GET
+        name: list-workspaces
+        description: List all workspaces
+        call: windmill.list-workspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-workspace
+        description: Create a new workspace
+        call: windmill.create-workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users
+      name: users
+      description: User management
+      operations:
+      - method: GET
+        name: list-users
+        description: List users in workspace
+        call: windmill.list-users
+        with:
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: windmill-workflow-mcp
+    transport: http
+    description: MCP server for AI-assisted Windmill workflow automation.
+    tools:
+    - name: list-scripts
+      description: List all scripts in a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-scripts
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-script
+      description: Get a specific script by path from a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: false
+      call: windmill.get-script-by-path
+      with:
+        workspace: tools.workspace
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-script
+      description: Create a new script in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.create-script
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: run-script
+      description: Execute a script by path in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.run-script-by-path
+      with:
+        workspace: tools.workspace
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-flows
+      description: List all flows in a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-flows
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-flow
+      description: Get a specific flow by path from a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: false
+      call: windmill.get-flow-by-path
+      with:
+        workspace: tools.workspace
+        path: tools.path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-flow
+      description: Create a new flow in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.create-flow
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-jobs
+      description: List completed jobs in a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-completed-jobs
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job
+      description: Get a specific completed job by ID
+      hints:
+        readOnly: true
+        openWorld: false
+      call: windmill.get-completed-job
+      with:
+        workspace: tools.workspace
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-job
+      description: Cancel a queued job in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill.cancel-queued-job
+      with:
+        workspace: tools.workspace
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-schedules
+      description: List all schedules in a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-schedules
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-schedule
+      description: Create a new schedule in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.create-schedule
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-resources
+      description: List all resources in a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-resources
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-resource
+      description: Create a new resource in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.create-resource
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-variable
+      description: Create a new variable in a Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.create-variable
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-workspaces
+      description: List all available Windmill workspaces
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-workspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-workspace
+      description: Create a new Windmill workspace
+      hints:
+        readOnly: false
+        destructive: false
+      call: windmill.create-workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users
+      description: List users in a Windmill workspace
+      hints:
+        readOnly: true
+        openWorld: true
+      call: windmill.list-users
+      with:
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
