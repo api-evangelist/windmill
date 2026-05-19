@@ -1,0 +1,298 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — admin
+  description: 'Windmill API — admin. 6 operations. Lead operation: Convert Manual User to Group User (require Admin Privilege).
+    Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - admin
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-admin
+    baseUri: ''
+    description: Windmill API — admin business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-users-convert_to_group-username
+      path: /w/{workspace}/users/convert_to_group/{username}
+      operations:
+      - name: convertusertogroup
+        method: POST
+        description: Convert Manual User to Group User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-delete-username
+      path: /w/{workspace}/users/delete/{username}
+      operations:
+      - name: deleteuser
+        method: DELETE
+        description: Delete User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-get-username
+      path: /w/{workspace}/users/get/{username}
+      operations:
+      - name: getuser
+        method: GET
+        description: Get User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-offboard-username
+      path: /w/{workspace}/users/offboard/{username}
+      operations:
+      - name: offboardworkspaceuser
+        method: POST
+        description: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-users-offboard_preview-username
+      path: /w/{workspace}/users/offboard_preview/{username}
+      operations:
+      - name: offboardpreview
+        method: GET
+        description: Preview Offboarding for a Workspace User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-update-username
+      path: /w/{workspace}/users/update/{username}
+      operations:
+      - name: updateuser
+        method: POST
+        description: Update User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-admin-rest
+    port: 8080
+    description: REST adapter for Windmill API — admin. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/w/{workspace}/users/convert-to-group/{username}
+      name: w-workspace-users-convert-to-group-username
+      description: REST surface for w-workspace-users-convert_to_group-username.
+      operations:
+      - method: POST
+        name: convertusertogroup
+        description: Convert Manual User to Group User (require Admin Privilege)
+        call: windmill-admin.convertusertogroup
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/delete/{username}
+      name: w-workspace-users-delete-username
+      description: REST surface for w-workspace-users-delete-username.
+      operations:
+      - method: DELETE
+        name: deleteuser
+        description: Delete User (require Admin Privilege)
+        call: windmill-admin.deleteuser
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/get/{username}
+      name: w-workspace-users-get-username
+      description: REST surface for w-workspace-users-get-username.
+      operations:
+      - method: GET
+        name: getuser
+        description: Get User (require Admin Privilege)
+        call: windmill-admin.getuser
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/offboard/{username}
+      name: w-workspace-users-offboard-username
+      description: REST surface for w-workspace-users-offboard-username.
+      operations:
+      - method: POST
+        name: offboardworkspaceuser
+        description: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+        call: windmill-admin.offboardworkspaceuser
+        with:
+          username: rest.username
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/offboard-preview/{username}
+      name: w-workspace-users-offboard-preview-username
+      description: REST surface for w-workspace-users-offboard_preview-username.
+      operations:
+      - method: GET
+        name: offboardpreview
+        description: Preview Offboarding for a Workspace User (require Admin Privilege)
+        call: windmill-admin.offboardpreview
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/update/{username}
+      name: w-workspace-users-update-username
+      description: REST surface for w-workspace-users-update-username.
+      operations:
+      - method: POST
+        name: updateuser
+        description: Update User (require Admin Privilege)
+        call: windmill-admin.updateuser
+        with:
+          username: rest.username
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-admin-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — admin. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: convert-manual-user-group-user
+      description: Convert Manual User to Group User (require Admin Privilege)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-admin.convertusertogroup
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user-require-admin-privilege
+      description: Delete User (require Admin Privilege)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-admin.deleteuser
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-require-admin-privilege
+      description: Get User (require Admin Privilege)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-admin.getuser
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: offboard-workspace-user-reassign-objects
+      description: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-admin.offboardworkspaceuser
+      with:
+        username: tools.username
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: preview-offboarding-workspace-user-require
+      description: Preview Offboarding for a Workspace User (require Admin Privilege)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-admin.offboardpreview
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user-require-admin-privilege
+      description: Update User (require Admin Privilege)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-admin.updateuser
+      with:
+        username: tools.username
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

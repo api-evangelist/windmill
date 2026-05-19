@@ -1,0 +1,359 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — email_trigger
+  description: 'Windmill API — email_trigger. 8 operations. Lead operation: Create Email Trigger. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - email_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-email-trigger
+    baseUri: ''
+    description: Windmill API — email_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-email_triggers-create
+      path: /w/{workspace}/email_triggers/create
+      operations:
+      - name: createemailtrigger
+        method: POST
+        description: Create Email Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-email_triggers-delete-path
+      path: /w/{workspace}/email_triggers/delete/{path}
+      operations:
+      - name: deleteemailtrigger
+        method: DELETE
+        description: Delete Email Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-email_triggers-exists-path
+      path: /w/{workspace}/email_triggers/exists/{path}
+      operations:
+      - name: existsemailtrigger
+        method: GET
+        description: Does Email Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-email_triggers-get-path
+      path: /w/{workspace}/email_triggers/get/{path}
+      operations:
+      - name: getemailtrigger
+        method: GET
+        description: Get Email Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-email_triggers-list
+      path: /w/{workspace}/email_triggers/list
+      operations:
+      - name: listemailtriggers
+        method: GET
+        description: List Email Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-email_triggers-local_part_exists
+      path: /w/{workspace}/email_triggers/local_part_exists
+      operations:
+      - name: existsemaillocalpart
+        method: POST
+        description: Does Email Local Part Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-email_triggers-setmode-path
+      path: /w/{workspace}/email_triggers/setmode/{path}
+      operations:
+      - name: setemailtriggermode
+        method: POST
+        description: Enable/disable Email Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-email_triggers-update-path
+      path: /w/{workspace}/email_triggers/update/{path}
+      operations:
+      - name: updateemailtrigger
+        method: POST
+        description: Update Email Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-email-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — email_trigger. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/email-triggers/create
+      name: w-workspace-email-triggers-create
+      description: REST surface for w-workspace-email_triggers-create.
+      operations:
+      - method: POST
+        name: createemailtrigger
+        description: Create Email Trigger
+        call: windmill-email-trigger.createemailtrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/delete/{path}
+      name: w-workspace-email-triggers-delete-path
+      description: REST surface for w-workspace-email_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deleteemailtrigger
+        description: Delete Email Trigger
+        call: windmill-email-trigger.deleteemailtrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/exists/{path}
+      name: w-workspace-email-triggers-exists-path
+      description: REST surface for w-workspace-email_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existsemailtrigger
+        description: Does Email Trigger Exists
+        call: windmill-email-trigger.existsemailtrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/get/{path}
+      name: w-workspace-email-triggers-get-path
+      description: REST surface for w-workspace-email_triggers-get-path.
+      operations:
+      - method: GET
+        name: getemailtrigger
+        description: Get Email Trigger
+        call: windmill-email-trigger.getemailtrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/list
+      name: w-workspace-email-triggers-list
+      description: REST surface for w-workspace-email_triggers-list.
+      operations:
+      - method: GET
+        name: listemailtriggers
+        description: List Email Triggers
+        call: windmill-email-trigger.listemailtriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/local-part-exists
+      name: w-workspace-email-triggers-local-part-exists
+      description: REST surface for w-workspace-email_triggers-local_part_exists.
+      operations:
+      - method: POST
+        name: existsemaillocalpart
+        description: Does Email Local Part Exists
+        call: windmill-email-trigger.existsemaillocalpart
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/setmode/{path}
+      name: w-workspace-email-triggers-setmode-path
+      description: REST surface for w-workspace-email_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setemailtriggermode
+        description: Enable/disable Email Trigger
+        call: windmill-email-trigger.setemailtriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/email-triggers/update/{path}
+      name: w-workspace-email-triggers-update-path
+      description: REST surface for w-workspace-email_triggers-update-path.
+      operations:
+      - method: POST
+        name: updateemailtrigger
+        description: Update Email Trigger
+        call: windmill-email-trigger.updateemailtrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-email-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — email_trigger. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-email-trigger
+      description: Create Email Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-email-trigger.createemailtrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-email-trigger
+      description: Delete Email Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-email-trigger.deleteemailtrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-email-trigger-exists
+      description: Does Email Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-email-trigger.existsemailtrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-email-trigger
+      description: Get Email Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-email-trigger.getemailtrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-email-triggers
+      description: List Email Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-email-trigger.listemailtriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-email-local-part-exists
+      description: Does Email Local Part Exists
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-email-trigger.existsemaillocalpart
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-disable-email-trigger
+      description: Enable/disable Email Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-email-trigger.setemailtriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-email-trigger
+      description: Update Email Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-email-trigger.updateemailtrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

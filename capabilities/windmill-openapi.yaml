@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — openapi
+  description: 'Windmill API — openapi. 2 operations. Lead operation: Download the OpenAPI V3.1 Spec as a File. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - openapi
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-openapi
+    baseUri: ''
+    description: Windmill API — openapi business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-openapi-download
+      path: /w/{workspace}/openapi/download
+      operations:
+      - name: downloadopenapispec
+        method: POST
+        description: Download the OpenAPI V3.1 Spec as a File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: w-workspace-openapi-generate
+      path: /w/{workspace}/openapi/generate
+      operations:
+      - name: generateopenapispec
+        method: POST
+        description: Generate Openapi Spec from Http Routes/webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-openapi-rest
+    port: 8080
+    description: REST adapter for Windmill API — openapi. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/openapi/download
+      name: w-workspace-openapi-download
+      description: REST surface for w-workspace-openapi-download.
+      operations:
+      - method: POST
+        name: downloadopenapispec
+        description: Download the OpenAPI V3.1 Spec as a File
+        call: windmill-openapi.downloadopenapispec
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/openapi/generate
+      name: w-workspace-openapi-generate
+      description: REST surface for w-workspace-openapi-generate.
+      operations:
+      - method: POST
+        name: generateopenapispec
+        description: Generate Openapi Spec from Http Routes/webhook
+        call: windmill-openapi.generateopenapispec
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-openapi-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — openapi. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: download-openapi-v3-1-spec-file
+      description: Download the OpenAPI V3.1 Spec as a File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-openapi.downloadopenapispec
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-openapi-spec-http-routes
+      description: Generate Openapi Spec from Http Routes/webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-openapi.generateopenapispec
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

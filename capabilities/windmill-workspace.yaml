@@ -1,0 +1,3959 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — workspace
+  description: 'Windmill API — workspace. 103 operations. Lead operation: Create a New Deployment Request. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - workspace
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-workspace
+    baseUri: ''
+    description: Windmill API — workspace business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-deployment_request
+      path: /w/{workspace}/deployment_request
+      operations:
+      - name: createdeploymentrequest
+        method: POST
+        description: Create a New Deployment Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-deployment_request-eligible_deployers
+      path: /w/{workspace}/deployment_request/eligible_deployers
+      operations:
+      - name: listdeploymentrequesteligibledeployers
+        method: GET
+        description: List Users Eligible to be Deployment Request Assignees
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-deployment_request-open
+      path: /w/{workspace}/deployment_request/open
+      operations:
+      - name: getopendeploymentrequest
+        method: GET
+        description: Get the Currently Open Deployment Request for this Fork
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-deployment_request-id-cancel
+      path: /w/{workspace}/deployment_request/{id}/cancel
+      operations:
+      - name: canceldeploymentrequest
+        method: POST
+        description: Cancel an Open Deployment Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: w-workspace-deployment_request-id-close_merged
+      path: /w/{workspace}/deployment_request/{id}/close_merged
+      operations:
+      - name: closedeploymentrequestmerged
+        method: POST
+        description: Close a Deployment Request After a Successful Merge
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+    - name: w-workspace-deployment_request-id-comment
+      path: /w/{workspace}/deployment_request/{id}/comment
+      operations:
+      - name: createdeploymentrequestcomment
+        method: POST
+        description: Append a Comment to an Open Deployment Request
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-github_app-token
+      path: /w/{workspace}/github_app/token
+      operations:
+      - name: getgithubapptoken
+        method: POST
+        description: Get Github App Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-shared_ui
+      path: /w/{workspace}/shared_ui
+      operations:
+      - name: updatesharedui
+        method: PUT
+        description: Replace the Workspace Shared UI Folder (admin Only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-shared_ui-get
+      path: /w/{workspace}/shared_ui/get
+      operations:
+      - name: getsharedui
+        method: GET
+        description: Get the Workspace Shared UI Folder (full Content)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-shared_ui-list
+      path: /w/{workspace}/shared_ui/list
+      operations:
+      - name: listsharedui
+        method: GET
+        description: List Paths/sizes of the Workspace Shared UI Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-shared_ui-version
+      path: /w/{workspace}/shared_ui/version
+      operations:
+      - name: getshareduiversion
+        method: GET
+        description: Get the Current Version of the Workspace Shared UI Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-add_user
+      path: /w/{workspace}/workspaces/add_user
+      operations:
+      - name: adduser
+        method: POST
+        description: Add User to Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-archive
+      path: /w/{workspace}/workspaces/archive
+      operations:
+      - name: archiveworkspace
+        method: POST
+        description: Archive Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-available_teams_channels
+      path: /w/{workspace}/workspaces/available_teams_channels
+      operations:
+      - name: listavailableteamschannels
+        method: GET
+        description: List Available Channels for a Specific Team
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: team_id
+          in: query
+          type: string
+          description: Microsoft Teams team ID
+          required: true
+    - name: w-workspace-workspaces-available_teams_ids
+      path: /w/{workspace}/workspaces/available_teams_ids
+      operations:
+      - name: listavailableteamsids
+        method: GET
+        description: List Available Teams Ids
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search
+          in: query
+          type: string
+          description: Search teams by name. If omitted, returns first page of all teams.
+        - name: next_link
+          in: query
+          type: string
+          description: Pagination cursor URL from previous response. Pass this to fetch the next page of results.
+    - name: w-workspace-workspaces-change_workspace_color
+      path: /w/{workspace}/workspaces/change_workspace_color
+      operations:
+      - name: changeworkspacecolor
+        method: POST
+        description: Change Workspace Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: w-workspace-workspaces-change_workspace_id
+      path: /w/{workspace}/workspaces/change_workspace_id
+      operations:
+      - name: changeworkspaceid
+        method: POST
+        description: Change Workspace Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: w-workspace-workspaces-change_workspace_name
+      path: /w/{workspace}/workspaces/change_workspace_name
+      operations:
+      - name: changeworkspacename
+        method: POST
+        description: Change Workspace Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: w-workspace-workspaces-cloud_quotas
+      path: /w/{workspace}/workspaces/cloud_quotas
+      operations:
+      - name: getcloudquotas
+        method: GET
+        description: Get Cloud Quota Usage and Limits for Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-compare-target_workspace_id
+      path: /w/{workspace}/workspaces/compare/{target_workspace_id}
+      operations:
+      - name: compareworkspaces
+        method: GET
+        description: Compare Two Workspaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: target_workspace_id
+          in: path
+          type: string
+          description: The ID of the workspace to compare with
+          required: true
+    - name: w-workspace-workspaces-connect_slack
+      path: /w/{workspace}/workspaces/connect_slack
+      operations:
+      - name: connectslack
+        method: POST
+        description: Connect Slack (non-interactive; Pre-minted Bot Token)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-connect_teams
+      path: /w/{workspace}/workspaces/connect_teams
+      operations:
+      - name: connectteams
+        method: POST
+        description: Connect Teams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-create_fork
+      path: /w/{workspace}/workspaces/create_fork
+      operations:
+      - name: createworkspacefork
+        method: POST
+        description: Create Forked Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-create_pg_database
+      path: /w/{workspace}/workspaces/create_pg_database
+      operations:
+      - name: createpgdatabase
+        method: POST
+        description: Create a New PostgreSQL Database for a Datatable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-create_service_account
+      path: /w/{workspace}/workspaces/create_service_account
+      operations:
+      - name: createserviceaccount
+        method: POST
+        description: Create a Service Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-create_workspace_fork_branch
+      path: /w/{workspace}/workspaces/create_workspace_fork_branch
+      operations:
+      - name: createworkspaceforkgitbranch
+        method: POST
+        description: Create Forked Workspace Branch with Git Sync
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-default_app
+      path: /w/{workspace}/workspaces/default_app
+      operations:
+      - name: getworkspacedefaultapp
+        method: GET
+        description: Get Default App for Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-default_scripts
+      path: /w/{workspace}/workspaces/default_scripts
+      operations:
+      - name: editdefaultscripts
+        method: POST
+        description: Edit Default Scripts for Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+      - name: getdefaultscripts
+        method: GET
+        description: Get Default Scripts for Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-delete_git_sync_repository
+      path: /w/{workspace}/workspaces/delete_git_sync_repository
+      operations:
+      - name: deletegitsyncrepository
+        method: DELETE
+        description: Delete Individual Git Sync Repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-delete_invite
+      path: /w/{workspace}/workspaces/delete_invite
+      operations:
+      - name: deleteinvite
+        method: POST
+        description: Delete User Invite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-drop_forked_datatable_databases
+      path: /w/{workspace}/workspaces/drop_forked_datatable_databases
+      operations:
+      - name: dropforkeddatatabledatabases
+        method: POST
+        description: Drop Forked Datatable Databases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_auto_invite
+      path: /w/{workspace}/workspaces/edit_auto_invite
+      operations:
+      - name: editautoinvite
+        method: POST
+        description: Edit Auto Invite
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_copilot_config
+      path: /w/{workspace}/workspaces/edit_copilot_config
+      operations:
+      - name: editcopilotconfig
+        method: POST
+        description: Edit Copilot Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_datatable_config
+      path: /w/{workspace}/workspaces/edit_datatable_config
+      operations:
+      - name: editdatatableconfig
+        method: POST
+        description: Edit Datatable Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_default_app
+      path: /w/{workspace}/workspaces/edit_default_app
+      operations:
+      - name: editworkspacedefaultapp
+        method: POST
+        description: Edit Default App for Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_deploy_to
+      path: /w/{workspace}/workspaces/edit_deploy_to
+      operations:
+      - name: editdeployto
+        method: POST
+        description: Edit Deploy to
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_deploy_ui_config
+      path: /w/{workspace}/workspaces/edit_deploy_ui_config
+      operations:
+      - name: editworkspacedeployuisettings
+        method: POST
+        description: Edit Workspace Deploy Ui Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_ducklake_config
+      path: /w/{workspace}/workspaces/edit_ducklake_config
+      operations:
+      - name: editducklakeconfig
+        method: POST
+        description: Edit Ducklake Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_error_handler
+      path: /w/{workspace}/workspaces/edit_error_handler
+      operations:
+      - name: editerrorhandler
+        method: POST
+        description: Edit Error Handler
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_git_sync_config
+      path: /w/{workspace}/workspaces/edit_git_sync_config
+      operations:
+      - name: editworkspacegitsyncconfig
+        method: POST
+        description: Edit Workspace Git Sync Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_git_sync_repository
+      path: /w/{workspace}/workspaces/edit_git_sync_repository
+      operations:
+      - name: editgitsyncrepository
+        method: POST
+        description: Add or Update Individual Git Sync Repository
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_instance_groups
+      path: /w/{workspace}/workspaces/edit_instance_groups
+      operations:
+      - name: editinstancegroups
+        method: POST
+        description: Edit Instance Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_large_file_storage_config
+      path: /w/{workspace}/workspaces/edit_large_file_storage_config
+      operations:
+      - name: editlargefilestorageconfig
+        method: POST
+        description: Edit Large File Storage Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_slack_command
+      path: /w/{workspace}/workspaces/edit_slack_command
+      operations:
+      - name: editslackcommand
+        method: POST
+        description: Edit Slack Command
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_success_handler
+      path: /w/{workspace}/workspaces/edit_success_handler
+      operations:
+      - name: editsuccesshandler
+        method: POST
+        description: Edit Success Handler
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_teams_command
+      path: /w/{workspace}/workspaces/edit_teams_command
+      operations:
+      - name: editteamscommand
+        method: POST
+        description: Edit Teams Command
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-edit_webhook
+      path: /w/{workspace}/workspaces/edit_webhook
+      operations:
+      - name: editwebhook
+        method: POST
+        description: Edit Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-encryption_key
+      path: /w/{workspace}/workspaces/encryption_key
+      operations:
+      - name: getworkspaceencryptionkey
+        method: GET
+        description: Retrieves the Encryption Key for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setworkspaceencryptionkey
+        method: POST
+        description: Update the Encryption Key for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-export_pg_schema
+      path: /w/{workspace}/workspaces/export_pg_schema
+      operations:
+      - name: exportpgschema
+        method: POST
+        description: Export the Schema of a PostgreSQL Database
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-get_as_superadmin
+      path: /w/{workspace}/workspaces/get_as_superadmin
+      operations:
+      - name: getworkspaceassuperadmin
+        method: GET
+        description: Get Workspace as Super Admin (require to be Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_copilot_info
+      path: /w/{workspace}/workspaces/get_copilot_info
+      operations:
+      - name: getcopilotinfo
+        method: GET
+        description: Get Copilot Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_copilot_settings_state
+      path: /w/{workspace}/workspaces/get_copilot_settings_state
+      operations:
+      - name: getcopilotsettingsstate
+        method: GET
+        description: Get Copilot Settings State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_datatable_full_schema
+      path: /w/{workspace}/workspaces/get_datatable_full_schema
+      operations:
+      - name: getdatatablefullschema
+        method: POST
+        description: Get the Full Schema of a Datatable Database as TableEditorValues
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-get_datatable_table_schema
+      path: /w/{workspace}/workspaces/get_datatable_table_schema
+      operations:
+      - name: getdatatabletableschema
+        method: GET
+        description: Get One Datatable Table Schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: datatable_name
+          in: query
+          type: string
+          required: true
+        - name: schema_name
+          in: query
+          type: string
+          required: true
+        - name: table_name
+          in: query
+          type: string
+          required: true
+    - name: w-workspace-workspaces-get_dependency_map
+      path: /w/{workspace}/workspaces/get_dependency_map
+      operations:
+      - name: getdependencymap
+        method: GET
+        description: Get Dependency Map
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_dependents-imported_path
+      path: /w/{workspace}/workspaces/get_dependents/{imported_path}
+      operations:
+      - name: getdependents
+        method: GET
+        description: Get Dependents of an Imported Path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: imported_path
+          in: path
+          type: string
+          description: The imported path to get dependents for
+          required: true
+    - name: w-workspace-workspaces-get_dependents_amounts
+      path: /w/{workspace}/workspaces/get_dependents_amounts
+      operations:
+      - name: getdependentsamounts
+        method: POST
+        description: Get Dependents Amounts for Multiple Imported Paths
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-get_deploy_to
+      path: /w/{workspace}/workspaces/get_deploy_to
+      operations:
+      - name: getdeployto
+        method: GET
+        description: Get Deploy to
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_imports-importer_path
+      path: /w/{workspace}/workspaces/get_imports/{importer_path}
+      operations:
+      - name: getimports
+        method: GET
+        description: Get Script Imports for an Importer Path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: importer_path
+          in: path
+          type: string
+          description: The script path to get imports for
+          required: true
+    - name: w-workspace-workspaces-get_public_settings
+      path: /w/{workspace}/workspaces/get_public_settings
+      operations:
+      - name: getpublicsettings
+        method: GET
+        description: Get Public Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_settings
+      path: /w/{workspace}/workspaces/get_settings
+      operations:
+      - name: getsettings
+        method: GET
+        description: Get Settings (admin Only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-get_workspace_name
+      path: /w/{workspace}/workspaces/get_workspace_name
+      operations:
+      - name: getworkspacename
+        method: GET
+        description: Get Workspace Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-git_sync_enabled
+      path: /w/{workspace}/workspaces/git_sync_enabled
+      operations:
+      - name: getgitsyncenabled
+        method: GET
+        description: Check if Git Sync is Available for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-import_pg_database
+      path: /w/{workspace}/workspaces/import_pg_database
+      operations:
+      - name: importpgdatabase
+        method: POST
+        description: Import a PostgreSQL Database from Source to Target via Pg_dump
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-invite_user
+      path: /w/{workspace}/workspaces/invite_user
+      operations:
+      - name: inviteuser
+        method: POST
+        description: Invite User to Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-is_premium
+      path: /w/{workspace}/workspaces/is_premium
+      operations:
+      - name: getispremium
+        method: GET
+        description: Get if Workspace is Premium
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-leave
+      path: /w/{workspace}/workspaces/leave
+      operations:
+      - name: leaveworkspace
+        method: POST
+        description: Leave Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-list_datatable_schemas
+      path: /w/{workspace}/workspaces/list_datatable_schemas
+      operations:
+      - name: listdatatableschemas
+        method: GET
+        description: List Schemas of All Connected Datatables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-list_datatable_tables
+      path: /w/{workspace}/workspaces/list_datatable_tables
+      operations:
+      - name: listdatatabletables
+        method: GET
+        description: List Tables of All Connected Datatables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-list_datatables
+      path: /w/{workspace}/workspaces/list_datatables
+      operations:
+      - name: listdatatables
+        method: GET
+        description: List Datatables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-list_ducklakes
+      path: /w/{workspace}/workspaces/list_ducklakes
+      operations:
+      - name: listducklakes
+        method: GET
+        description: List Ducklakes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-list_pending_invites
+      path: /w/{workspace}/workspaces/list_pending_invites
+      operations:
+      - name: listpendinginvites
+        method: GET
+        description: List Pending Invites for a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-log_chat
+      path: /w/{workspace}/workspaces/log_chat
+      operations:
+      - name: logaichat
+        method: POST
+        description: Log AI Chat Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-operator_settings
+      path: /w/{workspace}/workspaces/operator_settings
+      operations:
+      - name: updateoperatorsettings
+        method: POST
+        description: Update Operator Settings for a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-premium_info
+      path: /w/{workspace}/workspaces/premium_info
+      operations:
+      - name: getpremiuminfo
+        method: GET
+        description: Get Premium Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: skip_subscription_fetch
+          in: query
+          type: boolean
+          description: skip fetching subscription status from stripe
+    - name: w-workspace-workspaces-protection_rules
+      path: /w/{workspace}/workspaces/protection_rules
+      operations:
+      - name: listprotectionrules
+        method: GET
+        description: List All Protection Rules for a Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createprotectionrule
+        method: POST
+        description: Create a New Protection Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-protection_rules-rule_name
+      path: /w/{workspace}/workspaces/protection_rules/{rule_name}
+      operations:
+      - name: updateprotectionrule
+        method: POST
+        description: Update an Existing Protection Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_name
+          in: path
+          type: string
+          description: Name of the protection rule to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteprotectionrule
+        method: DELETE
+        description: Delete a Protection Rule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: rule_name
+          in: path
+          type: string
+          description: Name of the protection rule to delete
+          required: true
+    - name: w-workspace-workspaces-prune_versions
+      path: /w/{workspace}/workspaces/prune_versions
+      operations:
+      - name: pruneversions
+        method: POST
+        description: Prune Old Versions of Scripts, Flows, or Apps
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-rebuild_dependency_map
+      path: /w/{workspace}/workspaces/rebuild_dependency_map
+      operations:
+      - name: rebuilddependencymap
+        method: POST
+        description: Rebuild Dependency Map
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-reset_diff_tally-fork_workspace_id
+      path: /w/{workspace}/workspaces/reset_diff_tally/{fork_workspace_id}
+      operations:
+      - name: resetdifftally
+        method: POST
+        description: Resets the Ahead and Behind Deployement Counter After a Deployement
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: fork_workspace_id
+          in: path
+          type: string
+          description: The ID of the workspace to compare with
+          required: true
+    - name: w-workspace-workspaces-run_slack_message_test_job
+      path: /w/{workspace}/workspaces/run_slack_message_test_job
+      operations:
+      - name: runslackmessagetestjob
+        method: POST
+        description: Run a Job that Sends a Message to Slack
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-run_teams_message_test_job
+      path: /w/{workspace}/workspaces/run_teams_message_test_job
+      operations:
+      - name: runteamsmessagetestjob
+        method: POST
+        description: Run a Job that Sends a Message to Teams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-set_environment_variable
+      path: /w/{workspace}/workspaces/set_environment_variable
+      operations:
+      - name: setenvironmentvariable
+        method: POST
+        description: Set Environment Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-slack_oauth_config
+      path: /w/{workspace}/workspaces/slack_oauth_config
+      operations:
+      - name: getworkspaceslackoauthconfig
+        method: GET
+        description: Get Workspace Slack Oauth Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setworkspaceslackoauthconfig
+        method: POST
+        description: Set Workspace Slack Oauth Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteworkspaceslackoauthconfig
+        method: DELETE
+        description: Delete Workspace Slack Oauth Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-threshold_alert
+      path: /w/{workspace}/workspaces/threshold_alert
+      operations:
+      - name: getthresholdalert
+        method: GET
+        description: Get Threshold Alert Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setthresholdalert
+        method: POST
+        description: Set Threshold Alert Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-usage
+      path: /w/{workspace}/workspaces/usage
+      operations:
+      - name: getworkspaceusage
+        method: GET
+        description: Get Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-used_triggers
+      path: /w/{workspace}/workspaces/used_triggers
+      operations:
+      - name: getusedtriggers
+        method: GET
+        description: Get Used Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces-allowed_domain_auto_invite
+      path: /workspaces/allowed_domain_auto_invite
+      operations:
+      - name: isdomainallowed
+        method: GET
+        description: Is Domain Allowed for Auto Invi
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces-create
+      path: /workspaces/create
+      operations:
+      - name: createworkspace
+        method: POST
+        description: Create Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: workspaces-delete-workspace
+      path: /workspaces/delete/{workspace}
+      operations:
+      - name: deleteworkspace
+        method: DELETE
+        description: Delete Workspace (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: only_delete_forks
+          in: query
+          type: boolean
+    - name: workspaces-exists
+      path: /workspaces/exists
+      operations:
+      - name: existsworkspace
+        method: POST
+        description: Exists Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: workspaces-exists_username
+      path: /workspaces/exists_username
+      operations:
+      - name: existsusername
+        method: POST
+        description: Exists Username
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: workspaces-list
+      path: /workspaces/list
+      operations:
+      - name: listworkspaces
+        method: GET
+        description: List All Workspaces Visible to Me
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces-list_as_superadmin
+      path: /workspaces/list_as_superadmin
+      operations:
+      - name: listworkspacesassuperadmin
+        method: GET
+        description: List All Workspaces as Super Admin (require to be Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces-unarchive-workspace
+      path: /workspaces/unarchive/{workspace}
+      operations:
+      - name: unarchiveworkspace
+        method: POST
+        description: Unarchive Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workspaces-users
+      path: /workspaces/users
+      operations:
+      - name: listuserworkspaces
+        method: GET
+        description: List All Workspaces Visible to Me with User Info
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-workspace-rest
+    port: 8080
+    description: REST adapter for Windmill API — workspace. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/deployment-request
+      name: w-workspace-deployment-request
+      description: REST surface for w-workspace-deployment_request.
+      operations:
+      - method: POST
+        name: createdeploymentrequest
+        description: Create a New Deployment Request
+        call: windmill-workspace.createdeploymentrequest
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/deployment-request/eligible-deployers
+      name: w-workspace-deployment-request-eligible-deployers
+      description: REST surface for w-workspace-deployment_request-eligible_deployers.
+      operations:
+      - method: GET
+        name: listdeploymentrequesteligibledeployers
+        description: List Users Eligible to be Deployment Request Assignees
+        call: windmill-workspace.listdeploymentrequesteligibledeployers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/deployment-request/open
+      name: w-workspace-deployment-request-open
+      description: REST surface for w-workspace-deployment_request-open.
+      operations:
+      - method: GET
+        name: getopendeploymentrequest
+        description: Get the Currently Open Deployment Request for this Fork
+        call: windmill-workspace.getopendeploymentrequest
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/deployment-request/{id}/cancel
+      name: w-workspace-deployment-request-id-cancel
+      description: REST surface for w-workspace-deployment_request-id-cancel.
+      operations:
+      - method: POST
+        name: canceldeploymentrequest
+        description: Cancel an Open Deployment Request
+        call: windmill-workspace.canceldeploymentrequest
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/deployment-request/{id}/close-merged
+      name: w-workspace-deployment-request-id-close-merged
+      description: REST surface for w-workspace-deployment_request-id-close_merged.
+      operations:
+      - method: POST
+        name: closedeploymentrequestmerged
+        description: Close a Deployment Request After a Successful Merge
+        call: windmill-workspace.closedeploymentrequestmerged
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/deployment-request/{id}/comment
+      name: w-workspace-deployment-request-id-comment
+      description: REST surface for w-workspace-deployment_request-id-comment.
+      operations:
+      - method: POST
+        name: createdeploymentrequestcomment
+        description: Append a Comment to an Open Deployment Request
+        call: windmill-workspace.createdeploymentrequestcomment
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/github-app/token
+      name: w-workspace-github-app-token
+      description: REST surface for w-workspace-github_app-token.
+      operations:
+      - method: POST
+        name: getgithubapptoken
+        description: Get Github App Token
+        call: windmill-workspace.getgithubapptoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/shared-ui
+      name: w-workspace-shared-ui
+      description: REST surface for w-workspace-shared_ui.
+      operations:
+      - method: PUT
+        name: updatesharedui
+        description: Replace the Workspace Shared UI Folder (admin Only)
+        call: windmill-workspace.updatesharedui
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/shared-ui/get
+      name: w-workspace-shared-ui-get
+      description: REST surface for w-workspace-shared_ui-get.
+      operations:
+      - method: GET
+        name: getsharedui
+        description: Get the Workspace Shared UI Folder (full Content)
+        call: windmill-workspace.getsharedui
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/shared-ui/list
+      name: w-workspace-shared-ui-list
+      description: REST surface for w-workspace-shared_ui-list.
+      operations:
+      - method: GET
+        name: listsharedui
+        description: List Paths/sizes of the Workspace Shared UI Folder
+        call: windmill-workspace.listsharedui
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/shared-ui/version
+      name: w-workspace-shared-ui-version
+      description: REST surface for w-workspace-shared_ui-version.
+      operations:
+      - method: GET
+        name: getshareduiversion
+        description: Get the Current Version of the Workspace Shared UI Folder
+        call: windmill-workspace.getshareduiversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/add-user
+      name: w-workspace-workspaces-add-user
+      description: REST surface for w-workspace-workspaces-add_user.
+      operations:
+      - method: POST
+        name: adduser
+        description: Add User to Workspace
+        call: windmill-workspace.adduser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/archive
+      name: w-workspace-workspaces-archive
+      description: REST surface for w-workspace-workspaces-archive.
+      operations:
+      - method: POST
+        name: archiveworkspace
+        description: Archive Workspace
+        call: windmill-workspace.archiveworkspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/available-teams-channels
+      name: w-workspace-workspaces-available-teams-channels
+      description: REST surface for w-workspace-workspaces-available_teams_channels.
+      operations:
+      - method: GET
+        name: listavailableteamschannels
+        description: List Available Channels for a Specific Team
+        call: windmill-workspace.listavailableteamschannels
+        with:
+          team_id: rest.team_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/available-teams-ids
+      name: w-workspace-workspaces-available-teams-ids
+      description: REST surface for w-workspace-workspaces-available_teams_ids.
+      operations:
+      - method: GET
+        name: listavailableteamsids
+        description: List Available Teams Ids
+        call: windmill-workspace.listavailableteamsids
+        with:
+          search: rest.search
+          next_link: rest.next_link
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/change-workspace-color
+      name: w-workspace-workspaces-change-workspace-color
+      description: REST surface for w-workspace-workspaces-change_workspace_color.
+      operations:
+      - method: POST
+        name: changeworkspacecolor
+        description: Change Workspace Id
+        call: windmill-workspace.changeworkspacecolor
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/change-workspace-id
+      name: w-workspace-workspaces-change-workspace-id
+      description: REST surface for w-workspace-workspaces-change_workspace_id.
+      operations:
+      - method: POST
+        name: changeworkspaceid
+        description: Change Workspace Id
+        call: windmill-workspace.changeworkspaceid
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/change-workspace-name
+      name: w-workspace-workspaces-change-workspace-name
+      description: REST surface for w-workspace-workspaces-change_workspace_name.
+      operations:
+      - method: POST
+        name: changeworkspacename
+        description: Change Workspace Name
+        call: windmill-workspace.changeworkspacename
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/cloud-quotas
+      name: w-workspace-workspaces-cloud-quotas
+      description: REST surface for w-workspace-workspaces-cloud_quotas.
+      operations:
+      - method: GET
+        name: getcloudquotas
+        description: Get Cloud Quota Usage and Limits for Workspace
+        call: windmill-workspace.getcloudquotas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/compare/{target-workspace-id}
+      name: w-workspace-workspaces-compare-target-workspace-id
+      description: REST surface for w-workspace-workspaces-compare-target_workspace_id.
+      operations:
+      - method: GET
+        name: compareworkspaces
+        description: Compare Two Workspaces
+        call: windmill-workspace.compareworkspaces
+        with:
+          target_workspace_id: rest.target_workspace_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/connect-slack
+      name: w-workspace-workspaces-connect-slack
+      description: REST surface for w-workspace-workspaces-connect_slack.
+      operations:
+      - method: POST
+        name: connectslack
+        description: Connect Slack (non-interactive; Pre-minted Bot Token)
+        call: windmill-workspace.connectslack
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/connect-teams
+      name: w-workspace-workspaces-connect-teams
+      description: REST surface for w-workspace-workspaces-connect_teams.
+      operations:
+      - method: POST
+        name: connectteams
+        description: Connect Teams
+        call: windmill-workspace.connectteams
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/create-fork
+      name: w-workspace-workspaces-create-fork
+      description: REST surface for w-workspace-workspaces-create_fork.
+      operations:
+      - method: POST
+        name: createworkspacefork
+        description: Create Forked Workspace
+        call: windmill-workspace.createworkspacefork
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/create-pg-database
+      name: w-workspace-workspaces-create-pg-database
+      description: REST surface for w-workspace-workspaces-create_pg_database.
+      operations:
+      - method: POST
+        name: createpgdatabase
+        description: Create a New PostgreSQL Database for a Datatable
+        call: windmill-workspace.createpgdatabase
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/create-service-account
+      name: w-workspace-workspaces-create-service-account
+      description: REST surface for w-workspace-workspaces-create_service_account.
+      operations:
+      - method: POST
+        name: createserviceaccount
+        description: Create a Service Account
+        call: windmill-workspace.createserviceaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/create-workspace-fork-branch
+      name: w-workspace-workspaces-create-workspace-fork-branch
+      description: REST surface for w-workspace-workspaces-create_workspace_fork_branch.
+      operations:
+      - method: POST
+        name: createworkspaceforkgitbranch
+        description: Create Forked Workspace Branch with Git Sync
+        call: windmill-workspace.createworkspaceforkgitbranch
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/default-app
+      name: w-workspace-workspaces-default-app
+      description: REST surface for w-workspace-workspaces-default_app.
+      operations:
+      - method: GET
+        name: getworkspacedefaultapp
+        description: Get Default App for Workspace
+        call: windmill-workspace.getworkspacedefaultapp
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/default-scripts
+      name: w-workspace-workspaces-default-scripts
+      description: REST surface for w-workspace-workspaces-default_scripts.
+      operations:
+      - method: POST
+        name: editdefaultscripts
+        description: Edit Default Scripts for Workspace
+        call: windmill-workspace.editdefaultscripts
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: getdefaultscripts
+        description: Get Default Scripts for Workspace
+        call: windmill-workspace.getdefaultscripts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/delete-git-sync-repository
+      name: w-workspace-workspaces-delete-git-sync-repository
+      description: REST surface for w-workspace-workspaces-delete_git_sync_repository.
+      operations:
+      - method: DELETE
+        name: deletegitsyncrepository
+        description: Delete Individual Git Sync Repository
+        call: windmill-workspace.deletegitsyncrepository
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/delete-invite
+      name: w-workspace-workspaces-delete-invite
+      description: REST surface for w-workspace-workspaces-delete_invite.
+      operations:
+      - method: POST
+        name: deleteinvite
+        description: Delete User Invite
+        call: windmill-workspace.deleteinvite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/drop-forked-datatable-databases
+      name: w-workspace-workspaces-drop-forked-datatable-databases
+      description: REST surface for w-workspace-workspaces-drop_forked_datatable_databases.
+      operations:
+      - method: POST
+        name: dropforkeddatatabledatabases
+        description: Drop Forked Datatable Databases
+        call: windmill-workspace.dropforkeddatatabledatabases
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-auto-invite
+      name: w-workspace-workspaces-edit-auto-invite
+      description: REST surface for w-workspace-workspaces-edit_auto_invite.
+      operations:
+      - method: POST
+        name: editautoinvite
+        description: Edit Auto Invite
+        call: windmill-workspace.editautoinvite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-copilot-config
+      name: w-workspace-workspaces-edit-copilot-config
+      description: REST surface for w-workspace-workspaces-edit_copilot_config.
+      operations:
+      - method: POST
+        name: editcopilotconfig
+        description: Edit Copilot Config
+        call: windmill-workspace.editcopilotconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-datatable-config
+      name: w-workspace-workspaces-edit-datatable-config
+      description: REST surface for w-workspace-workspaces-edit_datatable_config.
+      operations:
+      - method: POST
+        name: editdatatableconfig
+        description: Edit Datatable Settings
+        call: windmill-workspace.editdatatableconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-default-app
+      name: w-workspace-workspaces-edit-default-app
+      description: REST surface for w-workspace-workspaces-edit_default_app.
+      operations:
+      - method: POST
+        name: editworkspacedefaultapp
+        description: Edit Default App for Workspace
+        call: windmill-workspace.editworkspacedefaultapp
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-deploy-to
+      name: w-workspace-workspaces-edit-deploy-to
+      description: REST surface for w-workspace-workspaces-edit_deploy_to.
+      operations:
+      - method: POST
+        name: editdeployto
+        description: Edit Deploy to
+        call: windmill-workspace.editdeployto
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-deploy-ui-config
+      name: w-workspace-workspaces-edit-deploy-ui-config
+      description: REST surface for w-workspace-workspaces-edit_deploy_ui_config.
+      operations:
+      - method: POST
+        name: editworkspacedeployuisettings
+        description: Edit Workspace Deploy Ui Settings
+        call: windmill-workspace.editworkspacedeployuisettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-ducklake-config
+      name: w-workspace-workspaces-edit-ducklake-config
+      description: REST surface for w-workspace-workspaces-edit_ducklake_config.
+      operations:
+      - method: POST
+        name: editducklakeconfig
+        description: Edit Ducklake Settings
+        call: windmill-workspace.editducklakeconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-error-handler
+      name: w-workspace-workspaces-edit-error-handler
+      description: REST surface for w-workspace-workspaces-edit_error_handler.
+      operations:
+      - method: POST
+        name: editerrorhandler
+        description: Edit Error Handler
+        call: windmill-workspace.editerrorhandler
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-git-sync-config
+      name: w-workspace-workspaces-edit-git-sync-config
+      description: REST surface for w-workspace-workspaces-edit_git_sync_config.
+      operations:
+      - method: POST
+        name: editworkspacegitsyncconfig
+        description: Edit Workspace Git Sync Settings
+        call: windmill-workspace.editworkspacegitsyncconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-git-sync-repository
+      name: w-workspace-workspaces-edit-git-sync-repository
+      description: REST surface for w-workspace-workspaces-edit_git_sync_repository.
+      operations:
+      - method: POST
+        name: editgitsyncrepository
+        description: Add or Update Individual Git Sync Repository
+        call: windmill-workspace.editgitsyncrepository
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-instance-groups
+      name: w-workspace-workspaces-edit-instance-groups
+      description: REST surface for w-workspace-workspaces-edit_instance_groups.
+      operations:
+      - method: POST
+        name: editinstancegroups
+        description: Edit Instance Groups
+        call: windmill-workspace.editinstancegroups
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-large-file-storage-config
+      name: w-workspace-workspaces-edit-large-file-storage-config
+      description: REST surface for w-workspace-workspaces-edit_large_file_storage_config.
+      operations:
+      - method: POST
+        name: editlargefilestorageconfig
+        description: Edit Large File Storage Settings
+        call: windmill-workspace.editlargefilestorageconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-slack-command
+      name: w-workspace-workspaces-edit-slack-command
+      description: REST surface for w-workspace-workspaces-edit_slack_command.
+      operations:
+      - method: POST
+        name: editslackcommand
+        description: Edit Slack Command
+        call: windmill-workspace.editslackcommand
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-success-handler
+      name: w-workspace-workspaces-edit-success-handler
+      description: REST surface for w-workspace-workspaces-edit_success_handler.
+      operations:
+      - method: POST
+        name: editsuccesshandler
+        description: Edit Success Handler
+        call: windmill-workspace.editsuccesshandler
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-teams-command
+      name: w-workspace-workspaces-edit-teams-command
+      description: REST surface for w-workspace-workspaces-edit_teams_command.
+      operations:
+      - method: POST
+        name: editteamscommand
+        description: Edit Teams Command
+        call: windmill-workspace.editteamscommand
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/edit-webhook
+      name: w-workspace-workspaces-edit-webhook
+      description: REST surface for w-workspace-workspaces-edit_webhook.
+      operations:
+      - method: POST
+        name: editwebhook
+        description: Edit Webhook
+        call: windmill-workspace.editwebhook
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/encryption-key
+      name: w-workspace-workspaces-encryption-key
+      description: REST surface for w-workspace-workspaces-encryption_key.
+      operations:
+      - method: GET
+        name: getworkspaceencryptionkey
+        description: Retrieves the Encryption Key for this Workspace
+        call: windmill-workspace.getworkspaceencryptionkey
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setworkspaceencryptionkey
+        description: Update the Encryption Key for this Workspace
+        call: windmill-workspace.setworkspaceencryptionkey
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/export-pg-schema
+      name: w-workspace-workspaces-export-pg-schema
+      description: REST surface for w-workspace-workspaces-export_pg_schema.
+      operations:
+      - method: POST
+        name: exportpgschema
+        description: Export the Schema of a PostgreSQL Database
+        call: windmill-workspace.exportpgschema
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-as-superadmin
+      name: w-workspace-workspaces-get-as-superadmin
+      description: REST surface for w-workspace-workspaces-get_as_superadmin.
+      operations:
+      - method: GET
+        name: getworkspaceassuperadmin
+        description: Get Workspace as Super Admin (require to be Super Admin)
+        call: windmill-workspace.getworkspaceassuperadmin
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-copilot-info
+      name: w-workspace-workspaces-get-copilot-info
+      description: REST surface for w-workspace-workspaces-get_copilot_info.
+      operations:
+      - method: GET
+        name: getcopilotinfo
+        description: Get Copilot Info
+        call: windmill-workspace.getcopilotinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-copilot-settings-state
+      name: w-workspace-workspaces-get-copilot-settings-state
+      description: REST surface for w-workspace-workspaces-get_copilot_settings_state.
+      operations:
+      - method: GET
+        name: getcopilotsettingsstate
+        description: Get Copilot Settings State
+        call: windmill-workspace.getcopilotsettingsstate
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-datatable-full-schema
+      name: w-workspace-workspaces-get-datatable-full-schema
+      description: REST surface for w-workspace-workspaces-get_datatable_full_schema.
+      operations:
+      - method: POST
+        name: getdatatablefullschema
+        description: Get the Full Schema of a Datatable Database as TableEditorValues
+        call: windmill-workspace.getdatatablefullschema
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-datatable-table-schema
+      name: w-workspace-workspaces-get-datatable-table-schema
+      description: REST surface for w-workspace-workspaces-get_datatable_table_schema.
+      operations:
+      - method: GET
+        name: getdatatabletableschema
+        description: Get One Datatable Table Schema
+        call: windmill-workspace.getdatatabletableschema
+        with:
+          datatable_name: rest.datatable_name
+          schema_name: rest.schema_name
+          table_name: rest.table_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-dependency-map
+      name: w-workspace-workspaces-get-dependency-map
+      description: REST surface for w-workspace-workspaces-get_dependency_map.
+      operations:
+      - method: GET
+        name: getdependencymap
+        description: Get Dependency Map
+        call: windmill-workspace.getdependencymap
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-dependents/{imported-path}
+      name: w-workspace-workspaces-get-dependents-imported-path
+      description: REST surface for w-workspace-workspaces-get_dependents-imported_path.
+      operations:
+      - method: GET
+        name: getdependents
+        description: Get Dependents of an Imported Path
+        call: windmill-workspace.getdependents
+        with:
+          imported_path: rest.imported_path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-dependents-amounts
+      name: w-workspace-workspaces-get-dependents-amounts
+      description: REST surface for w-workspace-workspaces-get_dependents_amounts.
+      operations:
+      - method: POST
+        name: getdependentsamounts
+        description: Get Dependents Amounts for Multiple Imported Paths
+        call: windmill-workspace.getdependentsamounts
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-deploy-to
+      name: w-workspace-workspaces-get-deploy-to
+      description: REST surface for w-workspace-workspaces-get_deploy_to.
+      operations:
+      - method: GET
+        name: getdeployto
+        description: Get Deploy to
+        call: windmill-workspace.getdeployto
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-imports/{importer-path}
+      name: w-workspace-workspaces-get-imports-importer-path
+      description: REST surface for w-workspace-workspaces-get_imports-importer_path.
+      operations:
+      - method: GET
+        name: getimports
+        description: Get Script Imports for an Importer Path
+        call: windmill-workspace.getimports
+        with:
+          importer_path: rest.importer_path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-public-settings
+      name: w-workspace-workspaces-get-public-settings
+      description: REST surface for w-workspace-workspaces-get_public_settings.
+      operations:
+      - method: GET
+        name: getpublicsettings
+        description: Get Public Settings
+        call: windmill-workspace.getpublicsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-settings
+      name: w-workspace-workspaces-get-settings
+      description: REST surface for w-workspace-workspaces-get_settings.
+      operations:
+      - method: GET
+        name: getsettings
+        description: Get Settings (admin Only)
+        call: windmill-workspace.getsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-workspace-name
+      name: w-workspace-workspaces-get-workspace-name
+      description: REST surface for w-workspace-workspaces-get_workspace_name.
+      operations:
+      - method: GET
+        name: getworkspacename
+        description: Get Workspace Name
+        call: windmill-workspace.getworkspacename
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/git-sync-enabled
+      name: w-workspace-workspaces-git-sync-enabled
+      description: REST surface for w-workspace-workspaces-git_sync_enabled.
+      operations:
+      - method: GET
+        name: getgitsyncenabled
+        description: Check if Git Sync is Available for this Workspace
+        call: windmill-workspace.getgitsyncenabled
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/import-pg-database
+      name: w-workspace-workspaces-import-pg-database
+      description: REST surface for w-workspace-workspaces-import_pg_database.
+      operations:
+      - method: POST
+        name: importpgdatabase
+        description: Import a PostgreSQL Database from Source to Target via Pg_dump
+        call: windmill-workspace.importpgdatabase
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/invite-user
+      name: w-workspace-workspaces-invite-user
+      description: REST surface for w-workspace-workspaces-invite_user.
+      operations:
+      - method: POST
+        name: inviteuser
+        description: Invite User to Workspace
+        call: windmill-workspace.inviteuser
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/is-premium
+      name: w-workspace-workspaces-is-premium
+      description: REST surface for w-workspace-workspaces-is_premium.
+      operations:
+      - method: GET
+        name: getispremium
+        description: Get if Workspace is Premium
+        call: windmill-workspace.getispremium
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/leave
+      name: w-workspace-workspaces-leave
+      description: REST surface for w-workspace-workspaces-leave.
+      operations:
+      - method: POST
+        name: leaveworkspace
+        description: Leave Workspace
+        call: windmill-workspace.leaveworkspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/list-datatable-schemas
+      name: w-workspace-workspaces-list-datatable-schemas
+      description: REST surface for w-workspace-workspaces-list_datatable_schemas.
+      operations:
+      - method: GET
+        name: listdatatableschemas
+        description: List Schemas of All Connected Datatables
+        call: windmill-workspace.listdatatableschemas
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/list-datatable-tables
+      name: w-workspace-workspaces-list-datatable-tables
+      description: REST surface for w-workspace-workspaces-list_datatable_tables.
+      operations:
+      - method: GET
+        name: listdatatabletables
+        description: List Tables of All Connected Datatables
+        call: windmill-workspace.listdatatabletables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/list-datatables
+      name: w-workspace-workspaces-list-datatables
+      description: REST surface for w-workspace-workspaces-list_datatables.
+      operations:
+      - method: GET
+        name: listdatatables
+        description: List Datatables
+        call: windmill-workspace.listdatatables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/list-ducklakes
+      name: w-workspace-workspaces-list-ducklakes
+      description: REST surface for w-workspace-workspaces-list_ducklakes.
+      operations:
+      - method: GET
+        name: listducklakes
+        description: List Ducklakes
+        call: windmill-workspace.listducklakes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/list-pending-invites
+      name: w-workspace-workspaces-list-pending-invites
+      description: REST surface for w-workspace-workspaces-list_pending_invites.
+      operations:
+      - method: GET
+        name: listpendinginvites
+        description: List Pending Invites for a Workspace
+        call: windmill-workspace.listpendinginvites
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/log-chat
+      name: w-workspace-workspaces-log-chat
+      description: REST surface for w-workspace-workspaces-log_chat.
+      operations:
+      - method: POST
+        name: logaichat
+        description: Log AI Chat Message
+        call: windmill-workspace.logaichat
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/operator-settings
+      name: w-workspace-workspaces-operator-settings
+      description: REST surface for w-workspace-workspaces-operator_settings.
+      operations:
+      - method: POST
+        name: updateoperatorsettings
+        description: Update Operator Settings for a Workspace
+        call: windmill-workspace.updateoperatorsettings
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/premium-info
+      name: w-workspace-workspaces-premium-info
+      description: REST surface for w-workspace-workspaces-premium_info.
+      operations:
+      - method: GET
+        name: getpremiuminfo
+        description: Get Premium Info
+        call: windmill-workspace.getpremiuminfo
+        with:
+          skip_subscription_fetch: rest.skip_subscription_fetch
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/protection-rules
+      name: w-workspace-workspaces-protection-rules
+      description: REST surface for w-workspace-workspaces-protection_rules.
+      operations:
+      - method: GET
+        name: listprotectionrules
+        description: List All Protection Rules for a Workspace
+        call: windmill-workspace.listprotectionrules
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprotectionrule
+        description: Create a New Protection Rule
+        call: windmill-workspace.createprotectionrule
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/protection-rules/{rule-name}
+      name: w-workspace-workspaces-protection-rules-rule-name
+      description: REST surface for w-workspace-workspaces-protection_rules-rule_name.
+      operations:
+      - method: POST
+        name: updateprotectionrule
+        description: Update an Existing Protection Rule
+        call: windmill-workspace.updateprotectionrule
+        with:
+          rule_name: rest.rule_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteprotectionrule
+        description: Delete a Protection Rule
+        call: windmill-workspace.deleteprotectionrule
+        with:
+          rule_name: rest.rule_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/prune-versions
+      name: w-workspace-workspaces-prune-versions
+      description: REST surface for w-workspace-workspaces-prune_versions.
+      operations:
+      - method: POST
+        name: pruneversions
+        description: Prune Old Versions of Scripts, Flows, or Apps
+        call: windmill-workspace.pruneversions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/rebuild-dependency-map
+      name: w-workspace-workspaces-rebuild-dependency-map
+      description: REST surface for w-workspace-workspaces-rebuild_dependency_map.
+      operations:
+      - method: POST
+        name: rebuilddependencymap
+        description: Rebuild Dependency Map
+        call: windmill-workspace.rebuilddependencymap
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/reset-diff-tally/{fork-workspace-id}
+      name: w-workspace-workspaces-reset-diff-tally-fork-workspace-id
+      description: REST surface for w-workspace-workspaces-reset_diff_tally-fork_workspace_id.
+      operations:
+      - method: POST
+        name: resetdifftally
+        description: Resets the Ahead and Behind Deployement Counter After a Deployement
+        call: windmill-workspace.resetdifftally
+        with:
+          fork_workspace_id: rest.fork_workspace_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/run-slack-message-test-job
+      name: w-workspace-workspaces-run-slack-message-test-job
+      description: REST surface for w-workspace-workspaces-run_slack_message_test_job.
+      operations:
+      - method: POST
+        name: runslackmessagetestjob
+        description: Run a Job that Sends a Message to Slack
+        call: windmill-workspace.runslackmessagetestjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/run-teams-message-test-job
+      name: w-workspace-workspaces-run-teams-message-test-job
+      description: REST surface for w-workspace-workspaces-run_teams_message_test_job.
+      operations:
+      - method: POST
+        name: runteamsmessagetestjob
+        description: Run a Job that Sends a Message to Teams
+        call: windmill-workspace.runteamsmessagetestjob
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/set-environment-variable
+      name: w-workspace-workspaces-set-environment-variable
+      description: REST surface for w-workspace-workspaces-set_environment_variable.
+      operations:
+      - method: POST
+        name: setenvironmentvariable
+        description: Set Environment Variable
+        call: windmill-workspace.setenvironmentvariable
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/slack-oauth-config
+      name: w-workspace-workspaces-slack-oauth-config
+      description: REST surface for w-workspace-workspaces-slack_oauth_config.
+      operations:
+      - method: GET
+        name: getworkspaceslackoauthconfig
+        description: Get Workspace Slack Oauth Config
+        call: windmill-workspace.getworkspaceslackoauthconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setworkspaceslackoauthconfig
+        description: Set Workspace Slack Oauth Config
+        call: windmill-workspace.setworkspaceslackoauthconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteworkspaceslackoauthconfig
+        description: Delete Workspace Slack Oauth Config
+        call: windmill-workspace.deleteworkspaceslackoauthconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/threshold-alert
+      name: w-workspace-workspaces-threshold-alert
+      description: REST surface for w-workspace-workspaces-threshold_alert.
+      operations:
+      - method: GET
+        name: getthresholdalert
+        description: Get Threshold Alert Info
+        call: windmill-workspace.getthresholdalert
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setthresholdalert
+        description: Set Threshold Alert Info
+        call: windmill-workspace.setthresholdalert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/usage
+      name: w-workspace-workspaces-usage
+      description: REST surface for w-workspace-workspaces-usage.
+      operations:
+      - method: GET
+        name: getworkspaceusage
+        description: Get Usage
+        call: windmill-workspace.getworkspaceusage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/used-triggers
+      name: w-workspace-workspaces-used-triggers
+      description: REST surface for w-workspace-workspaces-used_triggers.
+      operations:
+      - method: GET
+        name: getusedtriggers
+        description: Get Used Triggers
+        call: windmill-workspace.getusedtriggers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/allowed-domain-auto-invite
+      name: workspaces-allowed-domain-auto-invite
+      description: REST surface for workspaces-allowed_domain_auto_invite.
+      operations:
+      - method: GET
+        name: isdomainallowed
+        description: Is Domain Allowed for Auto Invi
+        call: windmill-workspace.isdomainallowed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/create
+      name: workspaces-create
+      description: REST surface for workspaces-create.
+      operations:
+      - method: POST
+        name: createworkspace
+        description: Create Workspace
+        call: windmill-workspace.createworkspace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/delete/{workspace}
+      name: workspaces-delete-workspace
+      description: REST surface for workspaces-delete-workspace.
+      operations:
+      - method: DELETE
+        name: deleteworkspace
+        description: Delete Workspace (require Super Admin)
+        call: windmill-workspace.deleteworkspace
+        with:
+          only_delete_forks: rest.only_delete_forks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/exists
+      name: workspaces-exists
+      description: REST surface for workspaces-exists.
+      operations:
+      - method: POST
+        name: existsworkspace
+        description: Exists Workspace
+        call: windmill-workspace.existsworkspace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/exists-username
+      name: workspaces-exists-username
+      description: REST surface for workspaces-exists_username.
+      operations:
+      - method: POST
+        name: existsusername
+        description: Exists Username
+        call: windmill-workspace.existsusername
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/list
+      name: workspaces-list
+      description: REST surface for workspaces-list.
+      operations:
+      - method: GET
+        name: listworkspaces
+        description: List All Workspaces Visible to Me
+        call: windmill-workspace.listworkspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/list-as-superadmin
+      name: workspaces-list-as-superadmin
+      description: REST surface for workspaces-list_as_superadmin.
+      operations:
+      - method: GET
+        name: listworkspacesassuperadmin
+        description: List All Workspaces as Super Admin (require to be Super Admin)
+        call: windmill-workspace.listworkspacesassuperadmin
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/unarchive/{workspace}
+      name: workspaces-unarchive-workspace
+      description: REST surface for workspaces-unarchive-workspace.
+      operations:
+      - method: POST
+        name: unarchiveworkspace
+        description: Unarchive Workspace
+        call: windmill-workspace.unarchiveworkspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workspaces/users
+      name: workspaces-users
+      description: REST surface for workspaces-users.
+      operations:
+      - method: GET
+        name: listuserworkspaces
+        description: List All Workspaces Visible to Me with User Info
+        call: windmill-workspace.listuserworkspaces
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-workspace-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — workspace. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-new-deployment-request
+      description: Create a New Deployment Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createdeploymentrequest
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users-eligible-be-deployment
+      description: List Users Eligible to be Deployment Request Assignees
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listdeploymentrequesteligibledeployers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-currently-open-deployment-request
+      description: Get the Currently Open Deployment Request for this Fork
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getopendeploymentrequest
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-open-deployment-request
+      description: Cancel an Open Deployment Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.canceldeploymentrequest
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: close-deployment-request-after-successful
+      description: Close a Deployment Request After a Successful Merge
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.closedeploymentrequestmerged
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: append-comment-open-deployment-request
+      description: Append a Comment to an Open Deployment Request
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createdeploymentrequestcomment
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-github-app-token
+      description: Get Github App Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.getgithubapptoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: replace-workspace-shared-ui-folder
+      description: Replace the Workspace Shared UI Folder (admin Only)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.updatesharedui
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workspace-shared-ui-folder
+      description: Get the Workspace Shared UI Folder (full Content)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getsharedui
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-paths-sizes-workspace-shared
+      description: List Paths/sizes of the Workspace Shared UI Folder
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listsharedui
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-version-workspace-shared
+      description: Get the Current Version of the Workspace Shared UI Folder
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getshareduiversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-user-workspace
+      description: Add User to Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.adduser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: archive-workspace
+      description: Archive Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.archiveworkspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-available-channels-specific-team
+      description: List Available Channels for a Specific Team
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listavailableteamschannels
+      with:
+        team_id: tools.team_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-available-teams-ids
+      description: List Available Teams Ids
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listavailableteamsids
+      with:
+        search: tools.search
+        next_link: tools.next_link
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: change-workspace-id
+      description: Change Workspace Id
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.changeworkspacecolor
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: change-workspace-id-2
+      description: Change Workspace Id
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.changeworkspaceid
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: change-workspace-name
+      description: Change Workspace Name
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.changeworkspacename
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cloud-quota-usage-and
+      description: Get Cloud Quota Usage and Limits for Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getcloudquotas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: compare-two-workspaces
+      description: Compare Two Workspaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.compareworkspaces
+      with:
+        target_workspace_id: tools.target_workspace_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: connect-slack-non-interactive-pre
+      description: Connect Slack (non-interactive; Pre-minted Bot Token)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.connectslack
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: connect-teams
+      description: Connect Teams
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.connectteams
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-forked-workspace
+      description: Create Forked Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createworkspacefork
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-postgresql-database-datatable
+      description: Create a New PostgreSQL Database for a Datatable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createpgdatabase
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-service-account
+      description: Create a Service Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createserviceaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-forked-workspace-branch-git
+      description: Create Forked Workspace Branch with Git Sync
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createworkspaceforkgitbranch
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-default-app-workspace
+      description: Get Default App for Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getworkspacedefaultapp
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-default-scripts-workspace
+      description: Edit Default Scripts for Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editdefaultscripts
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-default-scripts-workspace
+      description: Get Default Scripts for Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getdefaultscripts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-individual-git-sync-repository
+      description: Delete Individual Git Sync Repository
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-workspace.deletegitsyncrepository
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user-invite
+      description: Delete User Invite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.deleteinvite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: drop-forked-datatable-databases
+      description: Drop Forked Datatable Databases
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.dropforkeddatatabledatabases
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-auto-invite
+      description: Edit Auto Invite
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editautoinvite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-copilot-config
+      description: Edit Copilot Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editcopilotconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-datatable-settings
+      description: Edit Datatable Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editdatatableconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-default-app-workspace
+      description: Edit Default App for Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editworkspacedefaultapp
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-deploy
+      description: Edit Deploy to
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editdeployto
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-workspace-deploy-ui-settings
+      description: Edit Workspace Deploy Ui Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editworkspacedeployuisettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-ducklake-settings
+      description: Edit Ducklake Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editducklakeconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-error-handler
+      description: Edit Error Handler
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editerrorhandler
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-workspace-git-sync-settings
+      description: Edit Workspace Git Sync Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editworkspacegitsyncconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-update-individual-git-sync
+      description: Add or Update Individual Git Sync Repository
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editgitsyncrepository
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-instance-groups
+      description: Edit Instance Groups
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editinstancegroups
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-large-file-storage-settings
+      description: Edit Large File Storage Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editlargefilestorageconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-slack-command
+      description: Edit Slack Command
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editslackcommand
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-success-handler
+      description: Edit Success Handler
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editsuccesshandler
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-teams-command
+      description: Edit Teams Command
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editteamscommand
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-webhook
+      description: Edit Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.editwebhook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieves-encryption-key-this-workspace
+      description: Retrieves the Encryption Key for this Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getworkspaceencryptionkey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-encryption-key-this-workspace
+      description: Update the Encryption Key for this Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.setworkspaceencryptionkey
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: export-schema-postgresql-database
+      description: Export the Schema of a PostgreSQL Database
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.exportpgschema
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workspace-super-admin-require
+      description: Get Workspace as Super Admin (require to be Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getworkspaceassuperadmin
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-copilot-info
+      description: Get Copilot Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getcopilotinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-copilot-settings-state
+      description: Get Copilot Settings State
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getcopilotsettingsstate
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-full-schema-datatable-database
+      description: Get the Full Schema of a Datatable Database as TableEditorValues
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.getdatatablefullschema
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-one-datatable-table-schema
+      description: Get One Datatable Table Schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getdatatabletableschema
+      with:
+        datatable_name: tools.datatable_name
+        schema_name: tools.schema_name
+        table_name: tools.table_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dependency-map
+      description: Get Dependency Map
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getdependencymap
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dependents-imported-path
+      description: Get Dependents of an Imported Path
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getdependents
+      with:
+        imported_path: tools.imported_path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-dependents-amounts-multiple-imported
+      description: Get Dependents Amounts for Multiple Imported Paths
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.getdependentsamounts
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-deploy
+      description: Get Deploy to
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getdeployto
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-script-imports-importer-path
+      description: Get Script Imports for an Importer Path
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getimports
+      with:
+        importer_path: tools.importer_path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-public-settings
+      description: Get Public Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getpublicsettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-settings-admin-only
+      description: Get Settings (admin Only)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getsettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workspace-name
+      description: Get Workspace Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getworkspacename
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-if-git-sync-is
+      description: Check if Git Sync is Available for this Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getgitsyncenabled
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: import-postgresql-database-source-target
+      description: Import a PostgreSQL Database from Source to Target via Pg_dump
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.importpgdatabase
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: invite-user-workspace
+      description: Invite User to Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.inviteuser
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-if-workspace-is-premium
+      description: Get if Workspace is Premium
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getispremium
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: leave-workspace
+      description: Leave Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.leaveworkspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-schemas-all-connected-datatables
+      description: List Schemas of All Connected Datatables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listdatatableschemas
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-tables-all-connected-datatables
+      description: List Tables of All Connected Datatables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listdatatabletables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-datatables
+      description: List Datatables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listdatatables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-ducklakes
+      description: List Ducklakes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listducklakes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-pending-invites-workspace
+      description: List Pending Invites for a Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listpendinginvites
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: log-ai-chat-message
+      description: Log AI Chat Message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.logaichat
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-operator-settings-workspace
+      description: Update Operator Settings for a Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.updateoperatorsettings
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-premium-info
+      description: Get Premium Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getpremiuminfo
+      with:
+        skip_subscription_fetch: tools.skip_subscription_fetch
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-protection-rules-workspace
+      description: List All Protection Rules for a Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listprotectionrules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-new-protection-rule
+      description: Create a New Protection Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createprotectionrule
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-existing-protection-rule
+      description: Update an Existing Protection Rule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.updateprotectionrule
+      with:
+        rule_name: tools.rule_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-protection-rule
+      description: Delete a Protection Rule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-workspace.deleteprotectionrule
+      with:
+        rule_name: tools.rule_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: prune-old-versions-scripts-flows
+      description: Prune Old Versions of Scripts, Flows, or Apps
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.pruneversions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rebuild-dependency-map
+      description: Rebuild Dependency Map
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.rebuilddependencymap
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resets-ahead-and-behind-deployement
+      description: Resets the Ahead and Behind Deployement Counter After a Deployement
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.resetdifftally
+      with:
+        fork_workspace_id: tools.fork_workspace_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: run-job-that-sends-message
+      description: Run a Job that Sends a Message to Slack
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.runslackmessagetestjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: run-job-that-sends-message-2
+      description: Run a Job that Sends a Message to Teams
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.runteamsmessagetestjob
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-environment-variable
+      description: Set Environment Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.setenvironmentvariable
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-workspace-slack-oauth-config
+      description: Get Workspace Slack Oauth Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getworkspaceslackoauthconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-workspace-slack-oauth-config
+      description: Set Workspace Slack Oauth Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.setworkspaceslackoauthconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-workspace-slack-oauth-config
+      description: Delete Workspace Slack Oauth Config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-workspace.deleteworkspaceslackoauthconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-threshold-alert-info
+      description: Get Threshold Alert Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getthresholdalert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-threshold-alert-info
+      description: Set Threshold Alert Info
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.setthresholdalert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-usage
+      description: Get Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getworkspaceusage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-used-triggers
+      description: Get Used Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.getusedtriggers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: is-domain-allowed-auto-invi
+      description: Is Domain Allowed for Auto Invi
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.isdomainallowed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-workspace
+      description: Create Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.createworkspace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-workspace-require-super-admin
+      description: Delete Workspace (require Super Admin)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-workspace.deleteworkspace
+      with:
+        only_delete_forks: tools.only_delete_forks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exists-workspace
+      description: Exists Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.existsworkspace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exists-username
+      description: Exists Username
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.existsusername
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-workspaces-visible-me
+      description: List All Workspaces Visible to Me
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listworkspaces
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-workspaces-super-admin
+      description: List All Workspaces as Super Admin (require to be Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listworkspacesassuperadmin
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unarchive-workspace
+      description: Unarchive Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace.unarchiveworkspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-workspaces-visible-me-2
+      description: List All Workspaces Visible to Me with User Info
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace.listuserworkspaces
+      outputParameters:
+      - type: object
+        mapping: $.

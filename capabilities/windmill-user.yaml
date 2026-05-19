@@ -1,0 +1,2180 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — user
+  description: 'Windmill API — user. 54 operations. Lead operation: Check if Password Login is Disabled Instance-wide. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - user
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-user
+    baseUri: ''
+    description: Windmill API — user business capability. Self-contained, no shared references.
+    resources:
+    - name: auth-is_password_login_disabled
+      path: /auth/is_password_login_disabled
+      operations:
+      - name: ispasswordlogindisabled
+        method: GET
+        description: Check if Password Login is Disabled Instance-wide
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: auth-is_smtp_configured
+      path: /auth/is_smtp_configured
+      operations:
+      - name: issmtpconfigured
+        method: GET
+        description: Check if SMTP is Configured for Password Reset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: auth-login
+      path: /auth/login
+      operations:
+      - name: login
+        method: POST
+        description: Login with Password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: auth-logout
+      path: /auth/logout
+      operations:
+      - name: logout
+        method: POST
+        description: Logout
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: auth-request_password_reset
+      path: /auth/request_password_reset
+      operations:
+      - name: requestpasswordreset
+        method: POST
+        description: Request Password Reset Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: auth-reset_password
+      path: /auth/reset_password
+      operations:
+      - name: resetpassword
+        method: POST
+        description: Reset Password Using Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: oauth-login_callback-client_name
+      path: /oauth/login_callback/{client_name}
+      operations:
+      - name: loginwithoauth
+        method: POST
+        description: Login with Oauth Authorization Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-accept_invite
+      path: /users/accept_invite
+      operations:
+      - name: acceptinvite
+        method: POST
+        description: Accept Invite to Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-all_runnables
+      path: /users/all_runnables
+      operations:
+      - name: getrunnable
+        method: GET
+        description: Get All Runnables in Every Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-create
+      path: /users/create
+      operations:
+      - name: createuserglobally
+        method: POST
+        description: Create User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-decline_invite
+      path: /users/decline_invite
+      operations:
+      - name: declineinvite
+        method: POST
+        description: Decline Invite to Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-delete-email
+      path: /users/delete/{email}
+      operations:
+      - name: globaluserdelete
+        method: DELETE
+        description: Global Delete User (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+    - name: users-email
+      path: /users/email
+      operations:
+      - name: getcurrentemail
+        method: GET
+        description: Get Current User Email (if Logged In)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-exists-email
+      path: /users/exists/{email}
+      operations:
+      - name: existsemail
+        method: GET
+        description: Exists Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+    - name: users-export
+      path: /users/export
+      operations:
+      - name: globalusersexport
+        method: GET
+        description: Global Export Users (require Super Admin and EE)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-ext_jwt_tokens
+      path: /users/ext_jwt_tokens
+      operations:
+      - name: listextjwttokens
+        method: GET
+        description: List External JWT Tokens (ee Only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+        - name: per_page
+          in: query
+          type: integer
+        - name: active_only
+          in: query
+          type: boolean
+          description: only tokens used in the last 30 days
+    - name: users-leave_instance
+      path: /users/leave_instance
+      operations:
+      - name: leaveinstance
+        method: POST
+        description: Leave Instance
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-list_as_super_admin
+      path: /users/list_as_super_admin
+      operations:
+      - name: listusersassuperadmin
+        method: GET
+        description: List All Users as Super Admin (require to be Super Amdin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: active_only
+          in: query
+          type: boolean
+          description: filter only active users
+    - name: users-list_invites
+      path: /users/list_invites
+      operations:
+      - name: listworkspaceinvites
+        method: GET
+        description: List All Workspace Invites
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-offboard-email
+      path: /users/offboard/{email}
+      operations:
+      - name: offboardglobaluser
+        method: POST
+        description: Offboard a User Globally (reassign Objects Across Workspaces, Optionally Delete)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-offboard_preview-email
+      path: /users/offboard_preview/{email}
+      operations:
+      - name: globaloffboardpreview
+        method: GET
+        description: Preview Global Offboarding for a User Across All Workspaces (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+    - name: users-onboarding
+      path: /users/onboarding
+      operations:
+      - name: submitonboardingdata
+        method: POST
+        description: Submit User Onboarding Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-overwrite
+      path: /users/overwrite
+      operations:
+      - name: globalusersoverwrite
+        method: POST
+        description: Global Overwrite Users (require Super Admin and EE)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-refresh_token
+      path: /users/refresh_token
+      operations:
+      - name: refreshusertoken
+        method: GET
+        description: Refresh the Current Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: if_expiring_in_less_than_s
+          in: query
+          type: integer
+    - name: users-rename-email
+      path: /users/rename/{email}
+      operations:
+      - name: globaluserrename
+        method: POST
+        description: Global Rename User (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-set_login_type-user
+      path: /users/set_login_type/{user}
+      operations:
+      - name: setlogintypeforuser
+        method: POST
+        description: Set Login Type for a Specific User (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-set_password_of-user
+      path: /users/set_password_of/{user}
+      operations:
+      - name: setpasswordforuser
+        method: POST
+        description: Set Password for a Specific User (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: user
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-setpassword
+      path: /users/setpassword
+      operations:
+      - name: setpassword
+        method: POST
+        description: Set Password
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-tokens-create
+      path: /users/tokens/create
+      operations:
+      - name: createtoken
+        method: POST
+        description: Create Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-tokens-delete-token_prefix
+      path: /users/tokens/delete/{token_prefix}
+      operations:
+      - name: deletetoken
+        method: DELETE
+        description: Delete Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token_prefix
+          in: path
+          type: string
+          required: true
+    - name: users-tokens-impersonate
+      path: /users/tokens/impersonate
+      operations:
+      - name: createtokenimpersonate
+        method: POST
+        description: Create Token to Impersonate a User (require Superadmin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-tokens-list
+      path: /users/tokens/list
+      operations:
+      - name: listtokens
+        method: GET
+        description: List Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: exclude_ephemeral
+          in: query
+          type: boolean
+    - name: users-tokens-update_scopes-token_prefix
+      path: /users/tokens/update_scopes/{token_prefix}
+      operations:
+      - name: updatetokenscopes
+        method: POST
+        description: Update Scopes of an Existing Token (owner Only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: token_prefix
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-tutorial_progress
+      path: /users/tutorial_progress
+      operations:
+      - name: gettutorialprogress
+        method: GET
+        description: Get Tutorial Progress
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatetutorialprogress
+        method: POST
+        description: Update Tutorial Progress
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-update-email
+      path: /users/update/{email}
+      operations:
+      - name: globaluserupdate
+        method: POST
+        description: Global Update User (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: users-usage
+      path: /users/usage
+      operations:
+      - name: getusage
+        method: GET
+        description: Get Current Usage Outside of Premium Workspaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users-username_info-email
+      path: /users/username_info/{email}
+      operations:
+      - name: globalusernameinfo
+        method: GET
+        description: Global Username Info (require Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: email
+          in: path
+          type: string
+          required: true
+    - name: users-whoami
+      path: /users/whoami
+      operations:
+      - name: globalwhoami
+        method: GET
+        description: Get Current Global Whoami (if Logged In)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-users-convert_to_group-username
+      path: /w/{workspace}/users/convert_to_group/{username}
+      operations:
+      - name: convertusertogroup
+        method: POST
+        description: Convert Manual User to Group User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-delete-username
+      path: /w/{workspace}/users/delete/{username}
+      operations:
+      - name: deleteuser
+        method: DELETE
+        description: Delete User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-exit_impersonation
+      path: /w/{workspace}/users/exit_impersonation
+      operations:
+      - name: exitimpersonation
+        method: POST
+        description: Exit Service Account Impersonation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-users-get-username
+      path: /w/{workspace}/users/get/{username}
+      operations:
+      - name: getuser
+        method: GET
+        description: Get User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-impersonate_service_account
+      path: /w/{workspace}/users/impersonate_service_account
+      operations:
+      - name: impersonateserviceaccount
+        method: POST
+        description: Impersonate a Service Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-users-is_owner-path
+      path: /w/{workspace}/users/is_owner/{path}
+      operations:
+      - name: isownerofpath
+        method: GET
+        description: Is Owner of Path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-users-list
+      path: /w/{workspace}/users/list
+      operations:
+      - name: listusers
+        method: GET
+        description: List Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-users-list_usage
+      path: /w/{workspace}/users/list_usage
+      operations:
+      - name: listusersusage
+        method: GET
+        description: List Users Usage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-users-list_usernames
+      path: /w/{workspace}/users/list_usernames
+      operations:
+      - name: listusernames
+        method: GET
+        description: List Usernames
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-users-offboard-username
+      path: /w/{workspace}/users/offboard/{username}
+      operations:
+      - name: offboardworkspaceuser
+        method: POST
+        description: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-users-offboard_preview-username
+      path: /w/{workspace}/users/offboard_preview/{username}
+      operations:
+      - name: offboardpreview
+        method: GET
+        description: Preview Offboarding for a Workspace User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-update-username
+      path: /w/{workspace}/users/update/{username}
+      operations:
+      - name: updateuser
+        method: POST
+        description: Update User (require Admin Privilege)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-users-username_to_email-username
+      path: /w/{workspace}/users/username_to_email/{username}
+      operations:
+      - name: usernametoemail
+        method: GET
+        description: Get Email from Username
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-users-whoami
+      path: /w/{workspace}/users/whoami
+      operations:
+      - name: whoami
+        method: GET
+        description: Whoami
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-users-whois-username
+      path: /w/{workspace}/users/whois/{username}
+      operations:
+      - name: whois
+        method: GET
+        description: Whois
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: username
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-user-rest
+    port: 8080
+    description: REST adapter for Windmill API — user. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/auth/is-password-login-disabled
+      name: auth-is-password-login-disabled
+      description: REST surface for auth-is_password_login_disabled.
+      operations:
+      - method: GET
+        name: ispasswordlogindisabled
+        description: Check if Password Login is Disabled Instance-wide
+        call: windmill-user.ispasswordlogindisabled
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auth/is-smtp-configured
+      name: auth-is-smtp-configured
+      description: REST surface for auth-is_smtp_configured.
+      operations:
+      - method: GET
+        name: issmtpconfigured
+        description: Check if SMTP is Configured for Password Reset
+        call: windmill-user.issmtpconfigured
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auth/login
+      name: auth-login
+      description: REST surface for auth-login.
+      operations:
+      - method: POST
+        name: login
+        description: Login with Password
+        call: windmill-user.login
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auth/logout
+      name: auth-logout
+      description: REST surface for auth-logout.
+      operations:
+      - method: POST
+        name: logout
+        description: Logout
+        call: windmill-user.logout
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auth/request-password-reset
+      name: auth-request-password-reset
+      description: REST surface for auth-request_password_reset.
+      operations:
+      - method: POST
+        name: requestpasswordreset
+        description: Request Password Reset Email
+        call: windmill-user.requestpasswordreset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/auth/reset-password
+      name: auth-reset-password
+      description: REST surface for auth-reset_password.
+      operations:
+      - method: POST
+        name: resetpassword
+        description: Reset Password Using Token
+        call: windmill-user.resetpassword
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/oauth/login-callback/{client-name}
+      name: oauth-login-callback-client-name
+      description: REST surface for oauth-login_callback-client_name.
+      operations:
+      - method: POST
+        name: loginwithoauth
+        description: Login with Oauth Authorization Flow
+        call: windmill-user.loginwithoauth
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/accept-invite
+      name: users-accept-invite
+      description: REST surface for users-accept_invite.
+      operations:
+      - method: POST
+        name: acceptinvite
+        description: Accept Invite to Workspace
+        call: windmill-user.acceptinvite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/all-runnables
+      name: users-all-runnables
+      description: REST surface for users-all_runnables.
+      operations:
+      - method: GET
+        name: getrunnable
+        description: Get All Runnables in Every Workspace
+        call: windmill-user.getrunnable
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/create
+      name: users-create
+      description: REST surface for users-create.
+      operations:
+      - method: POST
+        name: createuserglobally
+        description: Create User
+        call: windmill-user.createuserglobally
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/decline-invite
+      name: users-decline-invite
+      description: REST surface for users-decline_invite.
+      operations:
+      - method: POST
+        name: declineinvite
+        description: Decline Invite to Workspace
+        call: windmill-user.declineinvite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/delete/{email}
+      name: users-delete-email
+      description: REST surface for users-delete-email.
+      operations:
+      - method: DELETE
+        name: globaluserdelete
+        description: Global Delete User (require Super Admin)
+        call: windmill-user.globaluserdelete
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/email
+      name: users-email
+      description: REST surface for users-email.
+      operations:
+      - method: GET
+        name: getcurrentemail
+        description: Get Current User Email (if Logged In)
+        call: windmill-user.getcurrentemail
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/exists/{email}
+      name: users-exists-email
+      description: REST surface for users-exists-email.
+      operations:
+      - method: GET
+        name: existsemail
+        description: Exists Email
+        call: windmill-user.existsemail
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/export
+      name: users-export
+      description: REST surface for users-export.
+      operations:
+      - method: GET
+        name: globalusersexport
+        description: Global Export Users (require Super Admin and EE)
+        call: windmill-user.globalusersexport
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/ext-jwt-tokens
+      name: users-ext-jwt-tokens
+      description: REST surface for users-ext_jwt_tokens.
+      operations:
+      - method: GET
+        name: listextjwttokens
+        description: List External JWT Tokens (ee Only)
+        call: windmill-user.listextjwttokens
+        with:
+          page: rest.page
+          per_page: rest.per_page
+          active_only: rest.active_only
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/leave-instance
+      name: users-leave-instance
+      description: REST surface for users-leave_instance.
+      operations:
+      - method: POST
+        name: leaveinstance
+        description: Leave Instance
+        call: windmill-user.leaveinstance
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/list-as-super-admin
+      name: users-list-as-super-admin
+      description: REST surface for users-list_as_super_admin.
+      operations:
+      - method: GET
+        name: listusersassuperadmin
+        description: List All Users as Super Admin (require to be Super Amdin)
+        call: windmill-user.listusersassuperadmin
+        with:
+          active_only: rest.active_only
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/list-invites
+      name: users-list-invites
+      description: REST surface for users-list_invites.
+      operations:
+      - method: GET
+        name: listworkspaceinvites
+        description: List All Workspace Invites
+        call: windmill-user.listworkspaceinvites
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/offboard/{email}
+      name: users-offboard-email
+      description: REST surface for users-offboard-email.
+      operations:
+      - method: POST
+        name: offboardglobaluser
+        description: Offboard a User Globally (reassign Objects Across Workspaces, Optionally Delete)
+        call: windmill-user.offboardglobaluser
+        with:
+          email: rest.email
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/offboard-preview/{email}
+      name: users-offboard-preview-email
+      description: REST surface for users-offboard_preview-email.
+      operations:
+      - method: GET
+        name: globaloffboardpreview
+        description: Preview Global Offboarding for a User Across All Workspaces (require Super Admin)
+        call: windmill-user.globaloffboardpreview
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/onboarding
+      name: users-onboarding
+      description: REST surface for users-onboarding.
+      operations:
+      - method: POST
+        name: submitonboardingdata
+        description: Submit User Onboarding Data
+        call: windmill-user.submitonboardingdata
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/overwrite
+      name: users-overwrite
+      description: REST surface for users-overwrite.
+      operations:
+      - method: POST
+        name: globalusersoverwrite
+        description: Global Overwrite Users (require Super Admin and EE)
+        call: windmill-user.globalusersoverwrite
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/refresh-token
+      name: users-refresh-token
+      description: REST surface for users-refresh_token.
+      operations:
+      - method: GET
+        name: refreshusertoken
+        description: Refresh the Current Token
+        call: windmill-user.refreshusertoken
+        with:
+          if_expiring_in_less_than_s: rest.if_expiring_in_less_than_s
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/rename/{email}
+      name: users-rename-email
+      description: REST surface for users-rename-email.
+      operations:
+      - method: POST
+        name: globaluserrename
+        description: Global Rename User (require Super Admin)
+        call: windmill-user.globaluserrename
+        with:
+          email: rest.email
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/set-login-type/{user}
+      name: users-set-login-type-user
+      description: REST surface for users-set_login_type-user.
+      operations:
+      - method: POST
+        name: setlogintypeforuser
+        description: Set Login Type for a Specific User (require Super Admin)
+        call: windmill-user.setlogintypeforuser
+        with:
+          user: rest.user
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/set-password-of/{user}
+      name: users-set-password-of-user
+      description: REST surface for users-set_password_of-user.
+      operations:
+      - method: POST
+        name: setpasswordforuser
+        description: Set Password for a Specific User (require Super Admin)
+        call: windmill-user.setpasswordforuser
+        with:
+          user: rest.user
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/setpassword
+      name: users-setpassword
+      description: REST surface for users-setpassword.
+      operations:
+      - method: POST
+        name: setpassword
+        description: Set Password
+        call: windmill-user.setpassword
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/tokens/create
+      name: users-tokens-create
+      description: REST surface for users-tokens-create.
+      operations:
+      - method: POST
+        name: createtoken
+        description: Create Token
+        call: windmill-user.createtoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/tokens/delete/{token-prefix}
+      name: users-tokens-delete-token-prefix
+      description: REST surface for users-tokens-delete-token_prefix.
+      operations:
+      - method: DELETE
+        name: deletetoken
+        description: Delete Token
+        call: windmill-user.deletetoken
+        with:
+          token_prefix: rest.token_prefix
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/tokens/impersonate
+      name: users-tokens-impersonate
+      description: REST surface for users-tokens-impersonate.
+      operations:
+      - method: POST
+        name: createtokenimpersonate
+        description: Create Token to Impersonate a User (require Superadmin)
+        call: windmill-user.createtokenimpersonate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/tokens/list
+      name: users-tokens-list
+      description: REST surface for users-tokens-list.
+      operations:
+      - method: GET
+        name: listtokens
+        description: List Token
+        call: windmill-user.listtokens
+        with:
+          exclude_ephemeral: rest.exclude_ephemeral
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/tokens/update-scopes/{token-prefix}
+      name: users-tokens-update-scopes-token-prefix
+      description: REST surface for users-tokens-update_scopes-token_prefix.
+      operations:
+      - method: POST
+        name: updatetokenscopes
+        description: Update Scopes of an Existing Token (owner Only)
+        call: windmill-user.updatetokenscopes
+        with:
+          token_prefix: rest.token_prefix
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/tutorial-progress
+      name: users-tutorial-progress
+      description: REST surface for users-tutorial_progress.
+      operations:
+      - method: GET
+        name: gettutorialprogress
+        description: Get Tutorial Progress
+        call: windmill-user.gettutorialprogress
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatetutorialprogress
+        description: Update Tutorial Progress
+        call: windmill-user.updatetutorialprogress
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/update/{email}
+      name: users-update-email
+      description: REST surface for users-update-email.
+      operations:
+      - method: POST
+        name: globaluserupdate
+        description: Global Update User (require Super Admin)
+        call: windmill-user.globaluserupdate
+        with:
+          email: rest.email
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/usage
+      name: users-usage
+      description: REST surface for users-usage.
+      operations:
+      - method: GET
+        name: getusage
+        description: Get Current Usage Outside of Premium Workspaces
+        call: windmill-user.getusage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/username-info/{email}
+      name: users-username-info-email
+      description: REST surface for users-username_info-email.
+      operations:
+      - method: GET
+        name: globalusernameinfo
+        description: Global Username Info (require Super Admin)
+        call: windmill-user.globalusernameinfo
+        with:
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/users/whoami
+      name: users-whoami
+      description: REST surface for users-whoami.
+      operations:
+      - method: GET
+        name: globalwhoami
+        description: Get Current Global Whoami (if Logged In)
+        call: windmill-user.globalwhoami
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/convert-to-group/{username}
+      name: w-workspace-users-convert-to-group-username
+      description: REST surface for w-workspace-users-convert_to_group-username.
+      operations:
+      - method: POST
+        name: convertusertogroup
+        description: Convert Manual User to Group User (require Admin Privilege)
+        call: windmill-user.convertusertogroup
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/delete/{username}
+      name: w-workspace-users-delete-username
+      description: REST surface for w-workspace-users-delete-username.
+      operations:
+      - method: DELETE
+        name: deleteuser
+        description: Delete User (require Admin Privilege)
+        call: windmill-user.deleteuser
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/exit-impersonation
+      name: w-workspace-users-exit-impersonation
+      description: REST surface for w-workspace-users-exit_impersonation.
+      operations:
+      - method: POST
+        name: exitimpersonation
+        description: Exit Service Account Impersonation
+        call: windmill-user.exitimpersonation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/get/{username}
+      name: w-workspace-users-get-username
+      description: REST surface for w-workspace-users-get-username.
+      operations:
+      - method: GET
+        name: getuser
+        description: Get User (require Admin Privilege)
+        call: windmill-user.getuser
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/impersonate-service-account
+      name: w-workspace-users-impersonate-service-account
+      description: REST surface for w-workspace-users-impersonate_service_account.
+      operations:
+      - method: POST
+        name: impersonateserviceaccount
+        description: Impersonate a Service Account
+        call: windmill-user.impersonateserviceaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/is-owner/{path}
+      name: w-workspace-users-is-owner-path
+      description: REST surface for w-workspace-users-is_owner-path.
+      operations:
+      - method: GET
+        name: isownerofpath
+        description: Is Owner of Path
+        call: windmill-user.isownerofpath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/list
+      name: w-workspace-users-list
+      description: REST surface for w-workspace-users-list.
+      operations:
+      - method: GET
+        name: listusers
+        description: List Users
+        call: windmill-user.listusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/list-usage
+      name: w-workspace-users-list-usage
+      description: REST surface for w-workspace-users-list_usage.
+      operations:
+      - method: GET
+        name: listusersusage
+        description: List Users Usage
+        call: windmill-user.listusersusage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/list-usernames
+      name: w-workspace-users-list-usernames
+      description: REST surface for w-workspace-users-list_usernames.
+      operations:
+      - method: GET
+        name: listusernames
+        description: List Usernames
+        call: windmill-user.listusernames
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/offboard/{username}
+      name: w-workspace-users-offboard-username
+      description: REST surface for w-workspace-users-offboard-username.
+      operations:
+      - method: POST
+        name: offboardworkspaceuser
+        description: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+        call: windmill-user.offboardworkspaceuser
+        with:
+          username: rest.username
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/offboard-preview/{username}
+      name: w-workspace-users-offboard-preview-username
+      description: REST surface for w-workspace-users-offboard_preview-username.
+      operations:
+      - method: GET
+        name: offboardpreview
+        description: Preview Offboarding for a Workspace User (require Admin Privilege)
+        call: windmill-user.offboardpreview
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/update/{username}
+      name: w-workspace-users-update-username
+      description: REST surface for w-workspace-users-update-username.
+      operations:
+      - method: POST
+        name: updateuser
+        description: Update User (require Admin Privilege)
+        call: windmill-user.updateuser
+        with:
+          username: rest.username
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/username-to-email/{username}
+      name: w-workspace-users-username-to-email-username
+      description: REST surface for w-workspace-users-username_to_email-username.
+      operations:
+      - method: GET
+        name: usernametoemail
+        description: Get Email from Username
+        call: windmill-user.usernametoemail
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/whoami
+      name: w-workspace-users-whoami
+      description: REST surface for w-workspace-users-whoami.
+      operations:
+      - method: GET
+        name: whoami
+        description: Whoami
+        call: windmill-user.whoami
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/users/whois/{username}
+      name: w-workspace-users-whois-username
+      description: REST surface for w-workspace-users-whois-username.
+      operations:
+      - method: GET
+        name: whois
+        description: Whois
+        call: windmill-user.whois
+        with:
+          username: rest.username
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-user-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — user. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: check-if-password-login-is
+      description: Check if Password Login is Disabled Instance-wide
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.ispasswordlogindisabled
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-if-smtp-is-configured
+      description: Check if SMTP is Configured for Password Reset
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.issmtpconfigured
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: login-password
+      description: Login with Password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.login
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: logout
+      description: Logout
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.logout
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: request-password-reset-email
+      description: Request Password Reset Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.requestpasswordreset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-password-using-token
+      description: Reset Password Using Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.resetpassword
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: login-oauth-authorization-flow
+      description: Login with Oauth Authorization Flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.loginwithoauth
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: accept-invite-workspace
+      description: Accept Invite to Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.acceptinvite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-runnables-every-workspace
+      description: Get All Runnables in Every Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.getrunnable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-user
+      description: Create User
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.createuserglobally
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: decline-invite-workspace
+      description: Decline Invite to Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.declineinvite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: global-delete-user-require-super
+      description: Global Delete User (require Super Admin)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-user.globaluserdelete
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-user-email-if
+      description: Get Current User Email (if Logged In)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.getcurrentemail
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exists-email
+      description: Exists Email
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.existsemail
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: global-export-users-require-super
+      description: Global Export Users (require Super Admin and EE)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.globalusersexport
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-external-jwt-tokens-ee
+      description: List External JWT Tokens (ee Only)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listextjwttokens
+      with:
+        page: tools.page
+        per_page: tools.per_page
+        active_only: tools.active_only
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: leave-instance
+      description: Leave Instance
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.leaveinstance
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-users-super-admin
+      description: List All Users as Super Admin (require to be Super Amdin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listusersassuperadmin
+      with:
+        active_only: tools.active_only
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-workspace-invites
+      description: List All Workspace Invites
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listworkspaceinvites
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: offboard-user-globally-reassign-objects
+      description: Offboard a User Globally (reassign Objects Across Workspaces, Optionally Delete)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.offboardglobaluser
+      with:
+        email: tools.email
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: preview-global-offboarding-user-across
+      description: Preview Global Offboarding for a User Across All Workspaces (require Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.globaloffboardpreview
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submit-user-onboarding-data
+      description: Submit User Onboarding Data
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.submitonboardingdata
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: global-overwrite-users-require-super
+      description: Global Overwrite Users (require Super Admin and EE)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.globalusersoverwrite
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: refresh-current-token
+      description: Refresh the Current Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.refreshusertoken
+      with:
+        if_expiring_in_less_than_s: tools.if_expiring_in_less_than_s
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: global-rename-user-require-super
+      description: Global Rename User (require Super Admin)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.globaluserrename
+      with:
+        email: tools.email
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-login-type-specific-user
+      description: Set Login Type for a Specific User (require Super Admin)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.setlogintypeforuser
+      with:
+        user: tools.user
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-password-specific-user-require
+      description: Set Password for a Specific User (require Super Admin)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.setpasswordforuser
+      with:
+        user: tools.user
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-password
+      description: Set Password
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.setpassword
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-token
+      description: Create Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.createtoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-token
+      description: Delete Token
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-user.deletetoken
+      with:
+        token_prefix: tools.token_prefix
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-token-impersonate-user-require
+      description: Create Token to Impersonate a User (require Superadmin)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.createtokenimpersonate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-token
+      description: List Token
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listtokens
+      with:
+        exclude_ephemeral: tools.exclude_ephemeral
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-scopes-existing-token-owner
+      description: Update Scopes of an Existing Token (owner Only)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.updatetokenscopes
+      with:
+        token_prefix: tools.token_prefix
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tutorial-progress
+      description: Get Tutorial Progress
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.gettutorialprogress
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-tutorial-progress
+      description: Update Tutorial Progress
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.updatetutorialprogress
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: global-update-user-require-super
+      description: Global Update User (require Super Admin)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.globaluserupdate
+      with:
+        email: tools.email
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-usage-outside-premium
+      description: Get Current Usage Outside of Premium Workspaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.getusage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: global-username-info-require-super
+      description: Global Username Info (require Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.globalusernameinfo
+      with:
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-global-whoami-if
+      description: Get Current Global Whoami (if Logged In)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.globalwhoami
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: convert-manual-user-group-user
+      description: Convert Manual User to Group User (require Admin Privilege)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.convertusertogroup
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-user-require-admin-privilege
+      description: Delete User (require Admin Privilege)
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-user.deleteuser
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exit-service-account-impersonation
+      description: Exit Service Account Impersonation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.exitimpersonation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-require-admin-privilege
+      description: Get User (require Admin Privilege)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.getuser
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: impersonate-service-account
+      description: Impersonate a Service Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.impersonateserviceaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: is-owner-path
+      description: Is Owner of Path
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.isownerofpath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users
+      description: List Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-users-usage
+      description: List Users Usage
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listusersusage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-usernames
+      description: List Usernames
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.listusernames
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: offboard-workspace-user-reassign-objects
+      description: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.offboardworkspaceuser
+      with:
+        username: tools.username
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: preview-offboarding-workspace-user-require
+      description: Preview Offboarding for a Workspace User (require Admin Privilege)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.offboardpreview
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-user-require-admin-privilege
+      description: Update User (require Admin Privilege)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-user.updateuser
+      with:
+        username: tools.username
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-email-username
+      description: Get Email from Username
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.usernametoemail
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: whoami
+      description: Whoami
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.whoami
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: whois
+      description: Whois
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-user.whois
+      with:
+        username: tools.username
+      outputParameters:
+      - type: object
+        mapping: $.

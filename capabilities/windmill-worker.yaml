@@ -1,0 +1,359 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — worker
+  description: 'Windmill API — worker. 9 operations. Lead operation: Get Custom Tags Available for this Workspace. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - worker
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-worker
+    baseUri: ''
+    description: Windmill API — worker business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-workers-custom_tags
+      path: /w/{workspace}/workers/custom_tags
+      operations:
+      - name: getcustomtagsforworkspace
+        method: GET
+        description: Get Custom Tags Available for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-custom_tags
+      path: /workers/custom_tags
+      operations:
+      - name: getcustomtags
+        method: GET
+        description: Get All Instance Custom Tags (tags are Used to Dispatch Jobs to different worker groups)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: show_workspace_restriction
+          in: query
+          type: boolean
+    - name: workers-exists_workers_with_tags
+      path: /workers/exists_workers_with_tags
+      operations:
+      - name: existsworkerswithtags
+        method: GET
+        description: Exists Workers with Tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tags
+          in: query
+          type: string
+          description: comma separated list of tags
+          required: true
+        - name: workspace
+          in: query
+          type: string
+          description: workspace to filter tags visibility (required when TAGS_ARE_SENSITIVE is enabled for non-superadmins)
+    - name: workers-get_default_tags
+      path: /workers/get_default_tags
+      operations:
+      - name: gedefaulttags
+        method: GET
+        description: Get All Instance Default Tags
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-is_default_tags_per_workspace
+      path: /workers/is_default_tags_per_workspace
+      operations:
+      - name: isdefaulttagsperworkspace
+        method: GET
+        description: Is Default Tags Per Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-list
+      path: /workers/list
+      operations:
+      - name: listworkers
+        method: GET
+        description: List Workers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ping_since
+          in: query
+          type: integer
+          description: number of seconds the worker must have had a last ping more recent of (default to 300)
+    - name: workers-queue_counts
+      path: /workers/queue_counts
+      operations:
+      - name: getcountsofjobswaitingpertag
+        method: GET
+        description: Get Counts of Jobs Waiting for an Executor Per Tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-queue_metrics
+      path: /workers/queue_metrics
+      operations:
+      - name: getqueuemetrics
+        method: GET
+        description: Get Queue Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: workers-queue_running_counts
+      path: /workers/queue_running_counts
+      operations:
+      - name: getcountsofrunningjobspertag
+        method: GET
+        description: Get Counts of Currently Running Jobs Per Tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-worker-rest
+    port: 8080
+    description: REST adapter for Windmill API — worker. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/workers/custom-tags
+      name: w-workspace-workers-custom-tags
+      description: REST surface for w-workspace-workers-custom_tags.
+      operations:
+      - method: GET
+        name: getcustomtagsforworkspace
+        description: Get Custom Tags Available for this Workspace
+        call: windmill-worker.getcustomtagsforworkspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/custom-tags
+      name: workers-custom-tags
+      description: REST surface for workers-custom_tags.
+      operations:
+      - method: GET
+        name: getcustomtags
+        description: Get All Instance Custom Tags (tags are Used to Dispatch Jobs to different worker groups)
+        call: windmill-worker.getcustomtags
+        with:
+          show_workspace_restriction: rest.show_workspace_restriction
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/exists-workers-with-tags
+      name: workers-exists-workers-with-tags
+      description: REST surface for workers-exists_workers_with_tags.
+      operations:
+      - method: GET
+        name: existsworkerswithtags
+        description: Exists Workers with Tags
+        call: windmill-worker.existsworkerswithtags
+        with:
+          tags: rest.tags
+          workspace: rest.workspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/get-default-tags
+      name: workers-get-default-tags
+      description: REST surface for workers-get_default_tags.
+      operations:
+      - method: GET
+        name: gedefaulttags
+        description: Get All Instance Default Tags
+        call: windmill-worker.gedefaulttags
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/is-default-tags-per-workspace
+      name: workers-is-default-tags-per-workspace
+      description: REST surface for workers-is_default_tags_per_workspace.
+      operations:
+      - method: GET
+        name: isdefaulttagsperworkspace
+        description: Is Default Tags Per Workspace
+        call: windmill-worker.isdefaulttagsperworkspace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/list
+      name: workers-list
+      description: REST surface for workers-list.
+      operations:
+      - method: GET
+        name: listworkers
+        description: List Workers
+        call: windmill-worker.listworkers
+        with:
+          ping_since: rest.ping_since
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/queue-counts
+      name: workers-queue-counts
+      description: REST surface for workers-queue_counts.
+      operations:
+      - method: GET
+        name: getcountsofjobswaitingpertag
+        description: Get Counts of Jobs Waiting for an Executor Per Tag
+        call: windmill-worker.getcountsofjobswaitingpertag
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/queue-metrics
+      name: workers-queue-metrics
+      description: REST surface for workers-queue_metrics.
+      operations:
+      - method: GET
+        name: getqueuemetrics
+        description: Get Queue Metrics
+        call: windmill-worker.getqueuemetrics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/workers/queue-running-counts
+      name: workers-queue-running-counts
+      description: REST surface for workers-queue_running_counts.
+      operations:
+      - method: GET
+        name: getcountsofrunningjobspertag
+        description: Get Counts of Currently Running Jobs Per Tag
+        call: windmill-worker.getcountsofrunningjobspertag
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-worker-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — worker. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-custom-tags-available-this
+      description: Get Custom Tags Available for this Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.getcustomtagsforworkspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-instance-custom-tags
+      description: Get All Instance Custom Tags (tags are Used to Dispatch Jobs to different worker groups)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.getcustomtags
+      with:
+        show_workspace_restriction: tools.show_workspace_restriction
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: exists-workers-tags
+      description: Exists Workers with Tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.existsworkerswithtags
+      with:
+        tags: tools.tags
+        workspace: tools.workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-instance-default-tags
+      description: Get All Instance Default Tags
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.gedefaulttags
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: is-default-tags-per-workspace
+      description: Is Default Tags Per Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.isdefaulttagsperworkspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-workers
+      description: List Workers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.listworkers
+      with:
+        ping_since: tools.ping_since
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-counts-jobs-waiting-executor
+      description: Get Counts of Jobs Waiting for an Executor Per Tag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.getcountsofjobswaitingpertag
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-queue-metrics
+      description: Get Queue Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.getqueuemetrics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-counts-currently-running-jobs
+      description: Get Counts of Currently Running Jobs Per Tag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-worker.getcountsofrunningjobspertag
+      outputParameters:
+      - type: object
+        mapping: $.

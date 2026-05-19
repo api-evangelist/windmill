@@ -1,0 +1,111 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — health
+  description: 'Windmill API — health. 2 operations. Lead operation: Detailed Health Status. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - health
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-health
+    baseUri: ''
+    description: Windmill API — health business capability. Self-contained, no shared references.
+    resources:
+    - name: health-detailed
+      path: /health/detailed
+      operations:
+      - name: gethealthdetailed
+        method: GET
+        description: Detailed Health Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: health-status
+      path: /health/status
+      operations:
+      - name: gethealthstatus
+        method: GET
+        description: Health Status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: force
+          in: query
+          type: boolean
+          description: Force a fresh check, bypassing the cache
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-health-rest
+    port: 8080
+    description: REST adapter for Windmill API — health. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/health/detailed
+      name: health-detailed
+      description: REST surface for health-detailed.
+      operations:
+      - method: GET
+        name: gethealthdetailed
+        description: Detailed Health Status
+        call: windmill-health.gethealthdetailed
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/health/status
+      name: health-status
+      description: REST surface for health-status.
+      operations:
+      - method: GET
+        name: gethealthstatus
+        description: Health Status
+        call: windmill-health.gethealthstatus
+        with:
+          force: rest.force
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-health-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — health. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: detailed-health-status
+      description: Detailed Health Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-health.gethealthdetailed
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: health-status
+      description: Health Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-health.gethealthstatus
+      with:
+        force: tools.force
+      outputParameters:
+      - type: object
+        mapping: $.

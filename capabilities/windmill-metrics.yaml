@@ -1,0 +1,154 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — metrics
+  description: 'Windmill API — metrics. 3 operations. Lead operation: Get Job Metrics. Self-contained Naftiko capability covering
+    one Windmill business surface.'
+  tags:
+  - Windmill
+  - metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-metrics
+    baseUri: ''
+    description: Windmill API — metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-job_metrics-get-id
+      path: /w/{workspace}/job_metrics/get/{id}
+      operations:
+      - name: getjobmetrics
+        method: POST
+        description: Get Job Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-job_metrics-get_progress-id
+      path: /w/{workspace}/job_metrics/get_progress/{id}
+      operations:
+      - name: getjobprogress
+        method: GET
+        description: Get Job Progress
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-job_metrics-set_progress-id
+      path: /w/{workspace}/job_metrics/set_progress/{id}
+      operations:
+      - name: setjobprogress
+        method: POST
+        description: Set Job Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-metrics-rest
+    port: 8080
+    description: REST adapter for Windmill API — metrics. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/job-metrics/get/{id}
+      name: w-workspace-job-metrics-get-id
+      description: REST surface for w-workspace-job_metrics-get-id.
+      operations:
+      - method: POST
+        name: getjobmetrics
+        description: Get Job Metrics
+        call: windmill-metrics.getjobmetrics
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/job-metrics/get-progress/{id}
+      name: w-workspace-job-metrics-get-progress-id
+      description: REST surface for w-workspace-job_metrics-get_progress-id.
+      operations:
+      - method: GET
+        name: getjobprogress
+        description: Get Job Progress
+        call: windmill-metrics.getjobprogress
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/job-metrics/set-progress/{id}
+      name: w-workspace-job-metrics-set-progress-id
+      description: REST surface for w-workspace-job_metrics-set_progress-id.
+      operations:
+      - method: POST
+        name: setjobprogress
+        description: Set Job Metrics
+        call: windmill-metrics.setjobprogress
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — metrics. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-job-metrics
+      description: Get Job Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-metrics.getjobmetrics
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-job-progress
+      description: Get Job Progress
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-metrics.getjobprogress
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-job-metrics
+      description: Set Job Metrics
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-metrics.setjobprogress
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

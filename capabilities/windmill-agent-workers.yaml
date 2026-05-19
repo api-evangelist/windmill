@@ -1,0 +1,237 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — agent_workers
+  description: 'Windmill API — agent_workers. 5 operations. Lead operation: Blacklist Agent Token (requires Super Admin).
+    Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - agent_workers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-agent-workers
+    baseUri: ''
+    description: Windmill API — agent_workers business capability. Self-contained, no shared references.
+    resources:
+    - name: agent_workers-blacklist_token
+      path: /agent_workers/blacklist_token
+      operations:
+      - name: blacklistagenttoken
+        method: POST
+        description: Blacklist Agent Token (requires Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: agent_workers-create_agent_token
+      path: /agent_workers/create_agent_token
+      operations:
+      - name: createagenttoken
+        method: POST
+        description: Create Agent Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: agent_workers-get_min_version
+      path: /agent_workers/get_min_version
+      operations:
+      - name: getminversion
+        method: GET
+        description: Get Minimum Worker Version Across All Workers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agent_workers-list_blacklisted_tokens
+      path: /agent_workers/list_blacklisted_tokens
+      operations:
+      - name: listblacklistedagenttokens
+        method: GET
+        description: List Blacklisted Agent Tokens (requires Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include_expired
+          in: query
+          type: boolean
+          description: Whether to include expired blacklisted tokens
+    - name: agent_workers-remove_blacklist_token
+      path: /agent_workers/remove_blacklist_token
+      operations:
+      - name: removeblacklistagenttoken
+        method: POST
+        description: Remove Agent Token from Blacklist (requires Super Admin)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-agent-workers-rest
+    port: 8080
+    description: REST adapter for Windmill API — agent_workers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/agent-workers/blacklist-token
+      name: agent-workers-blacklist-token
+      description: REST surface for agent_workers-blacklist_token.
+      operations:
+      - method: POST
+        name: blacklistagenttoken
+        description: Blacklist Agent Token (requires Super Admin)
+        call: windmill-agent-workers.blacklistagenttoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent-workers/create-agent-token
+      name: agent-workers-create-agent-token
+      description: REST surface for agent_workers-create_agent_token.
+      operations:
+      - method: POST
+        name: createagenttoken
+        description: Create Agent Token
+        call: windmill-agent-workers.createagenttoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent-workers/get-min-version
+      name: agent-workers-get-min-version
+      description: REST surface for agent_workers-get_min_version.
+      operations:
+      - method: GET
+        name: getminversion
+        description: Get Minimum Worker Version Across All Workers
+        call: windmill-agent-workers.getminversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent-workers/list-blacklisted-tokens
+      name: agent-workers-list-blacklisted-tokens
+      description: REST surface for agent_workers-list_blacklisted_tokens.
+      operations:
+      - method: GET
+        name: listblacklistedagenttokens
+        description: List Blacklisted Agent Tokens (requires Super Admin)
+        call: windmill-agent-workers.listblacklistedagenttokens
+        with:
+          include_expired: rest.include_expired
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent-workers/remove-blacklist-token
+      name: agent-workers-remove-blacklist-token
+      description: REST surface for agent_workers-remove_blacklist_token.
+      operations:
+      - method: POST
+        name: removeblacklistagenttoken
+        description: Remove Agent Token from Blacklist (requires Super Admin)
+        call: windmill-agent-workers.removeblacklistagenttoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-agent-workers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — agent_workers. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: blacklist-agent-token-requires-super
+      description: Blacklist Agent Token (requires Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-agent-workers.blacklistagenttoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-agent-token
+      description: Create Agent Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-agent-workers.createagenttoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-minimum-worker-version-across
+      description: Get Minimum Worker Version Across All Workers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-agent-workers.getminversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-blacklisted-agent-tokens-requires
+      description: List Blacklisted Agent Tokens (requires Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-agent-workers.listblacklistedagenttokens
+      with:
+        include_expired: tools.include_expired
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-agent-token-blacklist-requires
+      description: Remove Agent Token from Blacklist (requires Super Admin)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-agent-workers.removeblacklistagenttoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

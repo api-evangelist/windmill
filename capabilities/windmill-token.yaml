@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — token
+  description: 'Windmill API — token. 1 operations. Lead operation: List of Available Scopes. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - token
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-token
+    baseUri: ''
+    description: Windmill API — token business capability. Self-contained, no shared references.
+    resources:
+    - name: tokens-list-scopes
+      path: /tokens/list/scopes
+      operations:
+      - name: listavailablescopes
+        method: GET
+        description: List of Available Scopes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-token-rest
+    port: 8080
+    description: REST adapter for Windmill API — token. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/tokens/list/scopes
+      name: tokens-list-scopes
+      description: REST surface for tokens-list-scopes.
+      operations:
+      - method: GET
+        name: listavailablescopes
+        description: List of Available Scopes
+        call: windmill-token.listavailablescopes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-token-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — token. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-available-scopes
+      description: List of Available Scopes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-token.listavailablescopes
+      outputParameters:
+      - type: object
+        mapping: $.

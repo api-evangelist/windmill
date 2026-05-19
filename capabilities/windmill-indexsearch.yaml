@@ -1,0 +1,340 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — indexSearch
+  description: 'Windmill API — indexSearch. 7 operations. Lead operation: Clear an Index and Restart the Indexer.. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - indexSearch
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-indexsearch
+    baseUri: ''
+    description: Windmill API — indexSearch business capability. Self-contained, no shared references.
+    resources:
+    - name: indexer-delete-idx_name
+      path: /indexer/delete/{idx_name}
+      operations:
+      - name: clearindex
+        method: DELETE
+        description: Clear an Index and Restart the Indexer.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: idx_name
+          in: path
+          type: string
+          required: true
+    - name: indexer-status
+      path: /indexer/status
+      operations:
+      - name: getindexerstatus
+        method: GET
+        description: Get Indexer Status Including Liveness and Storage Sizes.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: indexer-storage
+      path: /indexer/storage
+      operations:
+      - name: getindexstoragesizes
+        method: GET
+        description: Get Index Storage Sizes (disk and S3).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: srch-index-search-count_service_logs
+      path: /srch/index/search/count_service_logs
+      operations:
+      - name: countsearchlogsindex
+        method: GET
+        description: Search and Count the Log Line Hits on Every Provided Host
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search_query
+          in: query
+          type: string
+          required: true
+        - name: min_ts
+          in: query
+          type: string
+        - name: max_ts
+          in: query
+          type: string
+    - name: srch-index-search-service_logs
+      path: /srch/index/search/service_logs
+      operations:
+      - name: searchlogsindex
+        method: GET
+        description: Search Through Service Logs with a String Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search_query
+          in: query
+          type: string
+          required: true
+        - name: mode
+          in: query
+          type: string
+          required: true
+        - name: worker_group
+          in: query
+          type: string
+        - name: hostname
+          in: query
+          type: string
+          required: true
+        - name: min_ts
+          in: query
+          type: string
+        - name: max_ts
+          in: query
+          type: string
+    - name: srch-index-storage-disk
+      path: /srch/index/storage/disk
+      operations:
+      - name: getindexdiskstoragesizes
+        method: GET
+        description: Get Index Disk Storage Sizes from the Indexer.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: srch-w-workspace-index-search-job
+      path: /srch/w/{workspace}/index/search/job
+      operations:
+      - name: searchjobsindex
+        method: GET
+        description: Search Through Jobs with a String Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: search_query
+          in: query
+          type: string
+          required: true
+        - name: pagination_offset
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-indexsearch-rest
+    port: 8080
+    description: REST adapter for Windmill API — indexSearch. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/indexer/delete/{idx-name}
+      name: indexer-delete-idx-name
+      description: REST surface for indexer-delete-idx_name.
+      operations:
+      - method: DELETE
+        name: clearindex
+        description: Clear an Index and Restart the Indexer.
+        call: windmill-indexsearch.clearindex
+        with:
+          idx_name: rest.idx_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/indexer/status
+      name: indexer-status
+      description: REST surface for indexer-status.
+      operations:
+      - method: GET
+        name: getindexerstatus
+        description: Get Indexer Status Including Liveness and Storage Sizes.
+        call: windmill-indexsearch.getindexerstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/indexer/storage
+      name: indexer-storage
+      description: REST surface for indexer-storage.
+      operations:
+      - method: GET
+        name: getindexstoragesizes
+        description: Get Index Storage Sizes (disk and S3).
+        call: windmill-indexsearch.getindexstoragesizes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/srch/index/search/count-service-logs
+      name: srch-index-search-count-service-logs
+      description: REST surface for srch-index-search-count_service_logs.
+      operations:
+      - method: GET
+        name: countsearchlogsindex
+        description: Search and Count the Log Line Hits on Every Provided Host
+        call: windmill-indexsearch.countsearchlogsindex
+        with:
+          search_query: rest.search_query
+          min_ts: rest.min_ts
+          max_ts: rest.max_ts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/srch/index/search/service-logs
+      name: srch-index-search-service-logs
+      description: REST surface for srch-index-search-service_logs.
+      operations:
+      - method: GET
+        name: searchlogsindex
+        description: Search Through Service Logs with a String Query
+        call: windmill-indexsearch.searchlogsindex
+        with:
+          search_query: rest.search_query
+          mode: rest.mode
+          worker_group: rest.worker_group
+          hostname: rest.hostname
+          min_ts: rest.min_ts
+          max_ts: rest.max_ts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/srch/index/storage/disk
+      name: srch-index-storage-disk
+      description: REST surface for srch-index-storage-disk.
+      operations:
+      - method: GET
+        name: getindexdiskstoragesizes
+        description: Get Index Disk Storage Sizes from the Indexer.
+        call: windmill-indexsearch.getindexdiskstoragesizes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/srch/w/{workspace}/index/search/job
+      name: srch-w-workspace-index-search-job
+      description: REST surface for srch-w-workspace-index-search-job.
+      operations:
+      - method: GET
+        name: searchjobsindex
+        description: Search Through Jobs with a String Query
+        call: windmill-indexsearch.searchjobsindex
+        with:
+          search_query: rest.search_query
+          pagination_offset: rest.pagination_offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-indexsearch-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — indexSearch. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: clear-index-and-restart-indexer
+      description: Clear an Index and Restart the Indexer.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-indexsearch.clearindex
+      with:
+        idx_name: tools.idx_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-indexer-status-including-liveness
+      description: Get Indexer Status Including Liveness and Storage Sizes.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-indexsearch.getindexerstatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-index-storage-sizes-disk
+      description: Get Index Storage Sizes (disk and S3).
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-indexsearch.getindexstoragesizes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-and-count-log-line
+      description: Search and Count the Log Line Hits on Every Provided Host
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-indexsearch.countsearchlogsindex
+      with:
+        search_query: tools.search_query
+        min_ts: tools.min_ts
+        max_ts: tools.max_ts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-through-service-logs-string
+      description: Search Through Service Logs with a String Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-indexsearch.searchlogsindex
+      with:
+        search_query: tools.search_query
+        mode: tools.mode
+        worker_group: tools.worker_group
+        hostname: tools.hostname
+        min_ts: tools.min_ts
+        max_ts: tools.max_ts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-index-disk-storage-sizes
+      description: Get Index Disk Storage Sizes from the Indexer.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-indexsearch.getindexdiskstoragesizes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-through-jobs-string-query
+      description: Search Through Jobs with a String Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-indexsearch.searchjobsindex
+      with:
+        search_query: tools.search_query
+        pagination_offset: tools.pagination_offset
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,359 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — nats_trigger
+  description: 'Windmill API — nats_trigger. 8 operations. Lead operation: Create Nats Trigger. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - nats_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-nats-trigger
+    baseUri: ''
+    description: Windmill API — nats_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-nats_triggers-create
+      path: /w/{workspace}/nats_triggers/create
+      operations:
+      - name: createnatstrigger
+        method: POST
+        description: Create Nats Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-nats_triggers-delete-path
+      path: /w/{workspace}/nats_triggers/delete/{path}
+      operations:
+      - name: deletenatstrigger
+        method: DELETE
+        description: Delete Nats Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-nats_triggers-exists-path
+      path: /w/{workspace}/nats_triggers/exists/{path}
+      operations:
+      - name: existsnatstrigger
+        method: GET
+        description: Does Nats Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-nats_triggers-get-path
+      path: /w/{workspace}/nats_triggers/get/{path}
+      operations:
+      - name: getnatstrigger
+        method: GET
+        description: Get Nats Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-nats_triggers-list
+      path: /w/{workspace}/nats_triggers/list
+      operations:
+      - name: listnatstriggers
+        method: GET
+        description: List Nats Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-nats_triggers-setmode-path
+      path: /w/{workspace}/nats_triggers/setmode/{path}
+      operations:
+      - name: setnatstriggermode
+        method: POST
+        description: Set Enabled Nats Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-nats_triggers-test
+      path: /w/{workspace}/nats_triggers/test
+      operations:
+      - name: testnatsconnection
+        method: POST
+        description: Test NATS Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-nats_triggers-update-path
+      path: /w/{workspace}/nats_triggers/update/{path}
+      operations:
+      - name: updatenatstrigger
+        method: POST
+        description: Update Nats Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-nats-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — nats_trigger. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/nats-triggers/create
+      name: w-workspace-nats-triggers-create
+      description: REST surface for w-workspace-nats_triggers-create.
+      operations:
+      - method: POST
+        name: createnatstrigger
+        description: Create Nats Trigger
+        call: windmill-nats-trigger.createnatstrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/delete/{path}
+      name: w-workspace-nats-triggers-delete-path
+      description: REST surface for w-workspace-nats_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletenatstrigger
+        description: Delete Nats Trigger
+        call: windmill-nats-trigger.deletenatstrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/exists/{path}
+      name: w-workspace-nats-triggers-exists-path
+      description: REST surface for w-workspace-nats_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existsnatstrigger
+        description: Does Nats Trigger Exists
+        call: windmill-nats-trigger.existsnatstrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/get/{path}
+      name: w-workspace-nats-triggers-get-path
+      description: REST surface for w-workspace-nats_triggers-get-path.
+      operations:
+      - method: GET
+        name: getnatstrigger
+        description: Get Nats Trigger
+        call: windmill-nats-trigger.getnatstrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/list
+      name: w-workspace-nats-triggers-list
+      description: REST surface for w-workspace-nats_triggers-list.
+      operations:
+      - method: GET
+        name: listnatstriggers
+        description: List Nats Triggers
+        call: windmill-nats-trigger.listnatstriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/setmode/{path}
+      name: w-workspace-nats-triggers-setmode-path
+      description: REST surface for w-workspace-nats_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setnatstriggermode
+        description: Set Enabled Nats Trigger
+        call: windmill-nats-trigger.setnatstriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/test
+      name: w-workspace-nats-triggers-test
+      description: REST surface for w-workspace-nats_triggers-test.
+      operations:
+      - method: POST
+        name: testnatsconnection
+        description: Test NATS Connection
+        call: windmill-nats-trigger.testnatsconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/nats-triggers/update/{path}
+      name: w-workspace-nats-triggers-update-path
+      description: REST surface for w-workspace-nats_triggers-update-path.
+      operations:
+      - method: POST
+        name: updatenatstrigger
+        description: Update Nats Trigger
+        call: windmill-nats-trigger.updatenatstrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-nats-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — nats_trigger. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-nats-trigger
+      description: Create Nats Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-nats-trigger.createnatstrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-nats-trigger
+      description: Delete Nats Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-nats-trigger.deletenatstrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-nats-trigger-exists
+      description: Does Nats Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-nats-trigger.existsnatstrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-nats-trigger
+      description: Get Nats Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-nats-trigger.getnatstrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-nats-triggers
+      description: List Nats Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-nats-trigger.listnatstriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-enabled-nats-trigger
+      description: Set Enabled Nats Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-nats-trigger.setnatstriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-nats-connection
+      description: Test NATS Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-nats-trigger.testnatsconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-nats-trigger
+      description: Update Nats Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-nats-trigger.updatenatstrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

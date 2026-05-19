@@ -1,0 +1,359 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — websocket_trigger
+  description: 'Windmill API — websocket_trigger. 8 operations. Lead operation: Create Websocket Trigger. Self-contained Naftiko
+    capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - websocket_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-websocket-trigger
+    baseUri: ''
+    description: Windmill API — websocket_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-websocket_triggers-create
+      path: /w/{workspace}/websocket_triggers/create
+      operations:
+      - name: createwebsockettrigger
+        method: POST
+        description: Create Websocket Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-websocket_triggers-delete-path
+      path: /w/{workspace}/websocket_triggers/delete/{path}
+      operations:
+      - name: deletewebsockettrigger
+        method: DELETE
+        description: Delete Websocket Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-websocket_triggers-exists-path
+      path: /w/{workspace}/websocket_triggers/exists/{path}
+      operations:
+      - name: existswebsockettrigger
+        method: GET
+        description: Does Websocket Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-websocket_triggers-get-path
+      path: /w/{workspace}/websocket_triggers/get/{path}
+      operations:
+      - name: getwebsockettrigger
+        method: GET
+        description: Get Websocket Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-websocket_triggers-list
+      path: /w/{workspace}/websocket_triggers/list
+      operations:
+      - name: listwebsockettriggers
+        method: GET
+        description: List Websocket Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-websocket_triggers-setmode-path
+      path: /w/{workspace}/websocket_triggers/setmode/{path}
+      operations:
+      - name: setwebsockettriggermode
+        method: POST
+        description: Set Enabled Websocket Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-websocket_triggers-test
+      path: /w/{workspace}/websocket_triggers/test
+      operations:
+      - name: testwebsocketconnection
+        method: POST
+        description: Test Websocket Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-websocket_triggers-update-path
+      path: /w/{workspace}/websocket_triggers/update/{path}
+      operations:
+      - name: updatewebsockettrigger
+        method: POST
+        description: Update Websocket Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-websocket-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — websocket_trigger. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/w/{workspace}/websocket-triggers/create
+      name: w-workspace-websocket-triggers-create
+      description: REST surface for w-workspace-websocket_triggers-create.
+      operations:
+      - method: POST
+        name: createwebsockettrigger
+        description: Create Websocket Trigger
+        call: windmill-websocket-trigger.createwebsockettrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/delete/{path}
+      name: w-workspace-websocket-triggers-delete-path
+      description: REST surface for w-workspace-websocket_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletewebsockettrigger
+        description: Delete Websocket Trigger
+        call: windmill-websocket-trigger.deletewebsockettrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/exists/{path}
+      name: w-workspace-websocket-triggers-exists-path
+      description: REST surface for w-workspace-websocket_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existswebsockettrigger
+        description: Does Websocket Trigger Exists
+        call: windmill-websocket-trigger.existswebsockettrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/get/{path}
+      name: w-workspace-websocket-triggers-get-path
+      description: REST surface for w-workspace-websocket_triggers-get-path.
+      operations:
+      - method: GET
+        name: getwebsockettrigger
+        description: Get Websocket Trigger
+        call: windmill-websocket-trigger.getwebsockettrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/list
+      name: w-workspace-websocket-triggers-list
+      description: REST surface for w-workspace-websocket_triggers-list.
+      operations:
+      - method: GET
+        name: listwebsockettriggers
+        description: List Websocket Triggers
+        call: windmill-websocket-trigger.listwebsockettriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/setmode/{path}
+      name: w-workspace-websocket-triggers-setmode-path
+      description: REST surface for w-workspace-websocket_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setwebsockettriggermode
+        description: Set Enabled Websocket Trigger
+        call: windmill-websocket-trigger.setwebsockettriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/test
+      name: w-workspace-websocket-triggers-test
+      description: REST surface for w-workspace-websocket_triggers-test.
+      operations:
+      - method: POST
+        name: testwebsocketconnection
+        description: Test Websocket Connection
+        call: windmill-websocket-trigger.testwebsocketconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/websocket-triggers/update/{path}
+      name: w-workspace-websocket-triggers-update-path
+      description: REST surface for w-workspace-websocket_triggers-update-path.
+      operations:
+      - method: POST
+        name: updatewebsockettrigger
+        description: Update Websocket Trigger
+        call: windmill-websocket-trigger.updatewebsockettrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-websocket-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — websocket_trigger. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: create-websocket-trigger
+      description: Create Websocket Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-websocket-trigger.createwebsockettrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-websocket-trigger
+      description: Delete Websocket Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-websocket-trigger.deletewebsockettrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-websocket-trigger-exists
+      description: Does Websocket Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-websocket-trigger.existswebsockettrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-websocket-trigger
+      description: Get Websocket Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-websocket-trigger.getwebsockettrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-websocket-triggers
+      description: List Websocket Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-websocket-trigger.listwebsockettriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-enabled-websocket-trigger
+      description: Set Enabled Websocket Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-websocket-trigger.setwebsockettriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-websocket-connection
+      description: Test Websocket Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-websocket-trigger.testwebsocketconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-websocket-trigger
+      description: Update Websocket Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-websocket-trigger.updatewebsockettrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

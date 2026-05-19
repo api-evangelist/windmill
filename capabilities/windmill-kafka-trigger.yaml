@@ -1,0 +1,433 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — kafka_trigger
+  description: 'Windmill API — kafka_trigger. 10 operations. Lead operation: Commit Kafka Offsets for a Specific Trigger.
+    Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - kafka_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-kafka-trigger
+    baseUri: ''
+    description: Windmill API — kafka_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-kafka_triggers-commit_offsets-path
+      path: /w/{workspace}/kafka_triggers/commit_offsets/{path}
+      operations:
+      - name: commitkafkaoffsets
+        method: POST
+        description: Commit Kafka Offsets for a Specific Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-kafka_triggers-create
+      path: /w/{workspace}/kafka_triggers/create
+      operations:
+      - name: createkafkatrigger
+        method: POST
+        description: Create Kafka Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-kafka_triggers-delete-path
+      path: /w/{workspace}/kafka_triggers/delete/{path}
+      operations:
+      - name: deletekafkatrigger
+        method: DELETE
+        description: Delete Kafka Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-kafka_triggers-exists-path
+      path: /w/{workspace}/kafka_triggers/exists/{path}
+      operations:
+      - name: existskafkatrigger
+        method: GET
+        description: Does Kafka Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-kafka_triggers-get-path
+      path: /w/{workspace}/kafka_triggers/get/{path}
+      operations:
+      - name: getkafkatrigger
+        method: GET
+        description: Get Kafka Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-kafka_triggers-list
+      path: /w/{workspace}/kafka_triggers/list
+      operations:
+      - name: listkafkatriggers
+        method: GET
+        description: List Kafka Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-kafka_triggers-reset_offsets-path
+      path: /w/{workspace}/kafka_triggers/reset_offsets/{path}
+      operations:
+      - name: resetkafkaoffsets
+        method: POST
+        description: Reset Kafka Trigger Offsets to Earliest
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-kafka_triggers-setmode-path
+      path: /w/{workspace}/kafka_triggers/setmode/{path}
+      operations:
+      - name: setkafkatriggermode
+        method: POST
+        description: Set Enabled Kafka Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-kafka_triggers-test
+      path: /w/{workspace}/kafka_triggers/test
+      operations:
+      - name: testkafkaconnection
+        method: POST
+        description: Test Kafka Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-kafka_triggers-update-path
+      path: /w/{workspace}/kafka_triggers/update/{path}
+      operations:
+      - name: updatekafkatrigger
+        method: POST
+        description: Update Kafka Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-kafka-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — kafka_trigger. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/kafka-triggers/commit-offsets/{path}
+      name: w-workspace-kafka-triggers-commit-offsets-path
+      description: REST surface for w-workspace-kafka_triggers-commit_offsets-path.
+      operations:
+      - method: POST
+        name: commitkafkaoffsets
+        description: Commit Kafka Offsets for a Specific Trigger
+        call: windmill-kafka-trigger.commitkafkaoffsets
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/create
+      name: w-workspace-kafka-triggers-create
+      description: REST surface for w-workspace-kafka_triggers-create.
+      operations:
+      - method: POST
+        name: createkafkatrigger
+        description: Create Kafka Trigger
+        call: windmill-kafka-trigger.createkafkatrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/delete/{path}
+      name: w-workspace-kafka-triggers-delete-path
+      description: REST surface for w-workspace-kafka_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletekafkatrigger
+        description: Delete Kafka Trigger
+        call: windmill-kafka-trigger.deletekafkatrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/exists/{path}
+      name: w-workspace-kafka-triggers-exists-path
+      description: REST surface for w-workspace-kafka_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existskafkatrigger
+        description: Does Kafka Trigger Exists
+        call: windmill-kafka-trigger.existskafkatrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/get/{path}
+      name: w-workspace-kafka-triggers-get-path
+      description: REST surface for w-workspace-kafka_triggers-get-path.
+      operations:
+      - method: GET
+        name: getkafkatrigger
+        description: Get Kafka Trigger
+        call: windmill-kafka-trigger.getkafkatrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/list
+      name: w-workspace-kafka-triggers-list
+      description: REST surface for w-workspace-kafka_triggers-list.
+      operations:
+      - method: GET
+        name: listkafkatriggers
+        description: List Kafka Triggers
+        call: windmill-kafka-trigger.listkafkatriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/reset-offsets/{path}
+      name: w-workspace-kafka-triggers-reset-offsets-path
+      description: REST surface for w-workspace-kafka_triggers-reset_offsets-path.
+      operations:
+      - method: POST
+        name: resetkafkaoffsets
+        description: Reset Kafka Trigger Offsets to Earliest
+        call: windmill-kafka-trigger.resetkafkaoffsets
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/setmode/{path}
+      name: w-workspace-kafka-triggers-setmode-path
+      description: REST surface for w-workspace-kafka_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setkafkatriggermode
+        description: Set Enabled Kafka Trigger
+        call: windmill-kafka-trigger.setkafkatriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/test
+      name: w-workspace-kafka-triggers-test
+      description: REST surface for w-workspace-kafka_triggers-test.
+      operations:
+      - method: POST
+        name: testkafkaconnection
+        description: Test Kafka Connection
+        call: windmill-kafka-trigger.testkafkaconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/kafka-triggers/update/{path}
+      name: w-workspace-kafka-triggers-update-path
+      description: REST surface for w-workspace-kafka_triggers-update-path.
+      operations:
+      - method: POST
+        name: updatekafkatrigger
+        description: Update Kafka Trigger
+        call: windmill-kafka-trigger.updatekafkatrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-kafka-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — kafka_trigger. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: commit-kafka-offsets-specific-trigger
+      description: Commit Kafka Offsets for a Specific Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-kafka-trigger.commitkafkaoffsets
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-kafka-trigger
+      description: Create Kafka Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-kafka-trigger.createkafkatrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-kafka-trigger
+      description: Delete Kafka Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-kafka-trigger.deletekafkatrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-kafka-trigger-exists
+      description: Does Kafka Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-kafka-trigger.existskafkatrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-kafka-trigger
+      description: Get Kafka Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-kafka-trigger.getkafkatrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-kafka-triggers
+      description: List Kafka Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-kafka-trigger.listkafkatriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reset-kafka-trigger-offsets-earliest
+      description: Reset Kafka Trigger Offsets to Earliest
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-kafka-trigger.resetkafkaoffsets
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-enabled-kafka-trigger
+      description: Set Enabled Kafka Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-kafka-trigger.setkafkatriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-kafka-connection
+      description: Test Kafka Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-kafka-trigger.testkafkaconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-kafka-trigger
+      description: Update Kafka Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-kafka-trigger.updatekafkatrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — teams
+  description: 'Windmill API — teams. 1 operations. Lead operation: Send Update to Microsoft Teams Activity. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - teams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-teams
+    baseUri: ''
+    description: Windmill API — teams business capability. Self-contained, no shared references.
+    resources:
+    - name: teams-activities
+      path: /teams/activities
+      operations:
+      - name: sendmessagetoconversation
+        method: POST
+        description: Send Update to Microsoft Teams Activity
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-teams-rest
+    port: 8080
+    description: REST adapter for Windmill API — teams. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/teams/activities
+      name: teams-activities
+      description: REST surface for teams-activities.
+      operations:
+      - method: POST
+        name: sendmessagetoconversation
+        description: Send Update to Microsoft Teams Activity
+        call: windmill-teams.sendmessagetoconversation
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-teams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — teams. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: send-update-microsoft-teams-activity
+      description: Send Update to Microsoft Teams Activity
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-teams.sendmessagetoconversation
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

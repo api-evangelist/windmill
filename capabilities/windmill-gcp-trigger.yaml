@@ -1,0 +1,475 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — gcp_trigger
+  description: 'Windmill API — gcp_trigger. 11 operations. Lead operation: Create Gcp Trigger. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - gcp_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-gcp-trigger
+    baseUri: ''
+    description: Windmill API — gcp_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-gcp_triggers-create
+      path: /w/{workspace}/gcp_triggers/create
+      operations:
+      - name: creategcptrigger
+        method: POST
+        description: Create Gcp Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-gcp_triggers-delete-path
+      path: /w/{workspace}/gcp_triggers/delete/{path}
+      operations:
+      - name: deletegcptrigger
+        method: DELETE
+        description: Delete Gcp Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-gcp_triggers-exists-path
+      path: /w/{workspace}/gcp_triggers/exists/{path}
+      operations:
+      - name: existsgcptrigger
+        method: GET
+        description: Does Gcp Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-gcp_triggers-get-path
+      path: /w/{workspace}/gcp_triggers/get/{path}
+      operations:
+      - name: getgcptrigger
+        method: GET
+        description: Get Gcp Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-gcp_triggers-list
+      path: /w/{workspace}/gcp_triggers/list
+      operations:
+      - name: listgcptriggers
+        method: GET
+        description: List Gcp Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-gcp_triggers-setmode-path
+      path: /w/{workspace}/gcp_triggers/setmode/{path}
+      operations:
+      - name: setgcptriggermode
+        method: POST
+        description: Set Enabled Gcp Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-gcp_triggers-subscriptions-delete-path
+      path: /w/{workspace}/gcp_triggers/subscriptions/delete/{path}
+      operations:
+      - name: deletegcpsubscription
+        method: DELETE
+        description: Delete Gcp Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-gcp_triggers-subscriptions-list-path
+      path: /w/{workspace}/gcp_triggers/subscriptions/list/{path}
+      operations:
+      - name: listalltgoogletopicsubscriptions
+        method: POST
+        description: List All Subscription of a Give Topic from Google Cloud Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-gcp_triggers-test
+      path: /w/{workspace}/gcp_triggers/test
+      operations:
+      - name: testgcpconnection
+        method: POST
+        description: Test Gcp Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-gcp_triggers-topics-list-path
+      path: /w/{workspace}/gcp_triggers/topics/list/{path}
+      operations:
+      - name: listgoogletopics
+        method: GET
+        description: List All Topics of Google Cloud Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-gcp_triggers-update-path
+      path: /w/{workspace}/gcp_triggers/update/{path}
+      operations:
+      - name: updategcptrigger
+        method: POST
+        description: Update Gcp Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-gcp-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — gcp_trigger. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/gcp-triggers/create
+      name: w-workspace-gcp-triggers-create
+      description: REST surface for w-workspace-gcp_triggers-create.
+      operations:
+      - method: POST
+        name: creategcptrigger
+        description: Create Gcp Trigger
+        call: windmill-gcp-trigger.creategcptrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/delete/{path}
+      name: w-workspace-gcp-triggers-delete-path
+      description: REST surface for w-workspace-gcp_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletegcptrigger
+        description: Delete Gcp Trigger
+        call: windmill-gcp-trigger.deletegcptrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/exists/{path}
+      name: w-workspace-gcp-triggers-exists-path
+      description: REST surface for w-workspace-gcp_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existsgcptrigger
+        description: Does Gcp Trigger Exists
+        call: windmill-gcp-trigger.existsgcptrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/get/{path}
+      name: w-workspace-gcp-triggers-get-path
+      description: REST surface for w-workspace-gcp_triggers-get-path.
+      operations:
+      - method: GET
+        name: getgcptrigger
+        description: Get Gcp Trigger
+        call: windmill-gcp-trigger.getgcptrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/list
+      name: w-workspace-gcp-triggers-list
+      description: REST surface for w-workspace-gcp_triggers-list.
+      operations:
+      - method: GET
+        name: listgcptriggers
+        description: List Gcp Triggers
+        call: windmill-gcp-trigger.listgcptriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/setmode/{path}
+      name: w-workspace-gcp-triggers-setmode-path
+      description: REST surface for w-workspace-gcp_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setgcptriggermode
+        description: Set Enabled Gcp Trigger
+        call: windmill-gcp-trigger.setgcptriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/subscriptions/delete/{path}
+      name: w-workspace-gcp-triggers-subscriptions-delete-path
+      description: REST surface for w-workspace-gcp_triggers-subscriptions-delete-path.
+      operations:
+      - method: DELETE
+        name: deletegcpsubscription
+        description: Delete Gcp Trigger
+        call: windmill-gcp-trigger.deletegcpsubscription
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/subscriptions/list/{path}
+      name: w-workspace-gcp-triggers-subscriptions-list-path
+      description: REST surface for w-workspace-gcp_triggers-subscriptions-list-path.
+      operations:
+      - method: POST
+        name: listalltgoogletopicsubscriptions
+        description: List All Subscription of a Give Topic from Google Cloud Service
+        call: windmill-gcp-trigger.listalltgoogletopicsubscriptions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/test
+      name: w-workspace-gcp-triggers-test
+      description: REST surface for w-workspace-gcp_triggers-test.
+      operations:
+      - method: POST
+        name: testgcpconnection
+        description: Test Gcp Connection
+        call: windmill-gcp-trigger.testgcpconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/topics/list/{path}
+      name: w-workspace-gcp-triggers-topics-list-path
+      description: REST surface for w-workspace-gcp_triggers-topics-list-path.
+      operations:
+      - method: GET
+        name: listgoogletopics
+        description: List All Topics of Google Cloud Service
+        call: windmill-gcp-trigger.listgoogletopics
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/gcp-triggers/update/{path}
+      name: w-workspace-gcp-triggers-update-path
+      description: REST surface for w-workspace-gcp_triggers-update-path.
+      operations:
+      - method: POST
+        name: updategcptrigger
+        description: Update Gcp Trigger
+        call: windmill-gcp-trigger.updategcptrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-gcp-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — gcp_trigger. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-gcp-trigger
+      description: Create Gcp Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-gcp-trigger.creategcptrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-gcp-trigger
+      description: Delete Gcp Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-gcp-trigger.deletegcptrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-gcp-trigger-exists
+      description: Does Gcp Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-gcp-trigger.existsgcptrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-gcp-trigger
+      description: Get Gcp Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-gcp-trigger.getgcptrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-gcp-triggers
+      description: List Gcp Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-gcp-trigger.listgcptriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-enabled-gcp-trigger
+      description: Set Enabled Gcp Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-gcp-trigger.setgcptriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-gcp-trigger-2
+      description: Delete Gcp Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-gcp-trigger.deletegcpsubscription
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-subscription-give-topic
+      description: List All Subscription of a Give Topic from Google Cloud Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-gcp-trigger.listalltgoogletopicsubscriptions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-gcp-connection
+      description: Test Gcp Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-gcp-trigger.testgcpconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-topics-google-cloud
+      description: List All Topics of Google Cloud Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-gcp-trigger.listgoogletopics
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-gcp-trigger
+      description: Update Gcp Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-gcp-trigger.updategcptrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

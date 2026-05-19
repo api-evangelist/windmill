@@ -1,0 +1,110 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — service_logs
+  description: 'Windmill API — service_logs. 2 operations. Lead operation: Get Log File by Path. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - service_logs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-service-logs
+    baseUri: ''
+    description: Windmill API — service_logs business capability. Self-contained, no shared references.
+    resources:
+    - name: service_logs-get_log_file-path
+      path: /service_logs/get_log_file/{path}
+      operations:
+      - name: getlogfile
+        method: GET
+        description: Get Log File by Path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service_logs-list_files
+      path: /service_logs/list_files
+      operations:
+      - name: listlogfiles
+        method: GET
+        description: List Log Files Ordered by Timestamp
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: with_error
+          in: query
+          type: boolean
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-service-logs-rest
+    port: 8080
+    description: REST adapter for Windmill API — service_logs. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/service-logs/get-log-file/{path}
+      name: service-logs-get-log-file-path
+      description: REST surface for service_logs-get_log_file-path.
+      operations:
+      - method: GET
+        name: getlogfile
+        description: Get Log File by Path
+        call: windmill-service-logs.getlogfile
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-logs/list-files
+      name: service-logs-list-files
+      description: REST surface for service_logs-list_files.
+      operations:
+      - method: GET
+        name: listlogfiles
+        description: List Log Files Ordered by Timestamp
+        call: windmill-service-logs.listlogfiles
+        with:
+          with_error: rest.with_error
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-service-logs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — service_logs. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-log-file-path
+      description: Get Log File by Path
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-service-logs.getlogfile
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-log-files-ordered-timestamp
+      description: List Log Files Ordered by Timestamp
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-service-logs.listlogfiles
+      with:
+        with_error: tools.with_error
+      outputParameters:
+      - type: object
+        mapping: $.

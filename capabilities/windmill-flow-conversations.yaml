@@ -1,0 +1,169 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — flow_conversations
+  description: 'Windmill API — flow_conversations. 3 operations. Lead operation: Delete Flow Conversation. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - flow_conversations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-flow-conversations
+    baseUri: ''
+    description: Windmill API — flow_conversations business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-flow_conversations-delete-conversation_id
+      path: /w/{workspace}/flow_conversations/delete/{conversation_id}
+      operations:
+      - name: deleteflowconversation
+        method: DELETE
+        description: Delete Flow Conversation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: conversation_id
+          in: path
+          type: string
+          description: conversation id
+          required: true
+    - name: w-workspace-flow_conversations-list
+      path: /w/{workspace}/flow_conversations/list
+      operations:
+      - name: listflowconversations
+        method: GET
+        description: List Flow Conversations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: flow_path
+          in: query
+          type: string
+          description: filter conversations by flow path
+    - name: w-workspace-flow_conversations-conversation_id-messages
+      path: /w/{workspace}/flow_conversations/{conversation_id}/messages
+      operations:
+      - name: listconversationmessages
+        method: GET
+        description: List Conversation Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: conversation_id
+          in: path
+          type: string
+          description: conversation id
+          required: true
+        - name: after_seq
+          in: query
+          type: integer
+          description: Message sequence cursor to fetch only the messages after that cursor
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-flow-conversations-rest
+    port: 8080
+    description: REST adapter for Windmill API — flow_conversations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/w/{workspace}/flow-conversations/delete/{conversation-id}
+      name: w-workspace-flow-conversations-delete-conversation-id
+      description: REST surface for w-workspace-flow_conversations-delete-conversation_id.
+      operations:
+      - method: DELETE
+        name: deleteflowconversation
+        description: Delete Flow Conversation
+        call: windmill-flow-conversations.deleteflowconversation
+        with:
+          conversation_id: rest.conversation_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/flow-conversations/list
+      name: w-workspace-flow-conversations-list
+      description: REST surface for w-workspace-flow_conversations-list.
+      operations:
+      - method: GET
+        name: listflowconversations
+        description: List Flow Conversations
+        call: windmill-flow-conversations.listflowconversations
+        with:
+          flow_path: rest.flow_path
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/flow-conversations/{conversation-id}/messages
+      name: w-workspace-flow-conversations-conversation-id-messages
+      description: REST surface for w-workspace-flow_conversations-conversation_id-messages.
+      operations:
+      - method: GET
+        name: listconversationmessages
+        description: List Conversation Messages
+        call: windmill-flow-conversations.listconversationmessages
+        with:
+          conversation_id: rest.conversation_id
+          after_seq: rest.after_seq
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-flow-conversations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — flow_conversations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: delete-flow-conversation
+      description: Delete Flow Conversation
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-flow-conversations.deleteflowconversation
+      with:
+        conversation_id: tools.conversation_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-flow-conversations
+      description: List Flow Conversations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-flow-conversations.listflowconversations
+      with:
+        flow_path: tools.flow_path
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-conversation-messages
+      description: List Conversation Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-flow-conversations.listconversationmessages
+      with:
+        conversation_id: tools.conversation_id
+        after_seq: tools.after_seq
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,233 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — npm_proxy
+  description: 'Windmill API — npm_proxy. 4 operations. Lead operation: Get Specific File from Npm Package in Private Registry.
+    Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - npm_proxy
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-npm-proxy
+    baseUri: ''
+    description: Windmill API — npm_proxy business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-npm_proxy-file-package-version-filepath
+      path: /w/{workspace}/npm_proxy/file/{package}/{version}/{filepath}
+      operations:
+      - name: getnpmpackagefile
+        method: GET
+        description: Get Specific File from Npm Package in Private Registry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package
+          in: path
+          type: string
+          description: npm package name
+          required: true
+        - name: version
+          in: path
+          type: string
+          description: package version
+          required: true
+        - name: filepath
+          in: path
+          type: string
+          description: file path within package
+          required: true
+    - name: w-workspace-npm_proxy-filetree-package-version
+      path: /w/{workspace}/npm_proxy/filetree/{package}/{version}
+      operations:
+      - name: getnpmpackagefiletree
+        method: GET
+        description: Get Npm Package File Tree from Private Registry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package
+          in: path
+          type: string
+          description: npm package name
+          required: true
+        - name: version
+          in: path
+          type: string
+          description: package version
+          required: true
+    - name: w-workspace-npm_proxy-metadata-package
+      path: /w/{workspace}/npm_proxy/metadata/{package}
+      operations:
+      - name: getnpmpackagemetadata
+        method: GET
+        description: Get Npm Package Metadata from Private Registry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package
+          in: path
+          type: string
+          description: npm package name
+          required: true
+    - name: w-workspace-npm_proxy-resolve-package
+      path: /w/{workspace}/npm_proxy/resolve/{package}
+      operations:
+      - name: resolvenpmpackageversion
+        method: GET
+        description: Resolve Npm Package Version from Private Registry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: package
+          in: path
+          type: string
+          description: npm package name
+          required: true
+        - name: tag
+          in: query
+          type: string
+          description: version tag or reference
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-npm-proxy-rest
+    port: 8080
+    description: REST adapter for Windmill API — npm_proxy. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/npm-proxy/file/{package}/{version}/{filepath}
+      name: w-workspace-npm-proxy-file-package-version-filepath
+      description: REST surface for w-workspace-npm_proxy-file-package-version-filepath.
+      operations:
+      - method: GET
+        name: getnpmpackagefile
+        description: Get Specific File from Npm Package in Private Registry
+        call: windmill-npm-proxy.getnpmpackagefile
+        with:
+          package: rest.package
+          version: rest.version
+          filepath: rest.filepath
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/npm-proxy/filetree/{package}/{version}
+      name: w-workspace-npm-proxy-filetree-package-version
+      description: REST surface for w-workspace-npm_proxy-filetree-package-version.
+      operations:
+      - method: GET
+        name: getnpmpackagefiletree
+        description: Get Npm Package File Tree from Private Registry
+        call: windmill-npm-proxy.getnpmpackagefiletree
+        with:
+          package: rest.package
+          version: rest.version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/npm-proxy/metadata/{package}
+      name: w-workspace-npm-proxy-metadata-package
+      description: REST surface for w-workspace-npm_proxy-metadata-package.
+      operations:
+      - method: GET
+        name: getnpmpackagemetadata
+        description: Get Npm Package Metadata from Private Registry
+        call: windmill-npm-proxy.getnpmpackagemetadata
+        with:
+          package: rest.package
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/npm-proxy/resolve/{package}
+      name: w-workspace-npm-proxy-resolve-package
+      description: REST surface for w-workspace-npm_proxy-resolve-package.
+      operations:
+      - method: GET
+        name: resolvenpmpackageversion
+        description: Resolve Npm Package Version from Private Registry
+        call: windmill-npm-proxy.resolvenpmpackageversion
+        with:
+          package: rest.package
+          tag: rest.tag
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-npm-proxy-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — npm_proxy. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-specific-file-npm-package
+      description: Get Specific File from Npm Package in Private Registry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-npm-proxy.getnpmpackagefile
+      with:
+        package: tools.package
+        version: tools.version
+        filepath: tools.filepath
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-npm-package-file-tree
+      description: Get Npm Package File Tree from Private Registry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-npm-proxy.getnpmpackagefiletree
+      with:
+        package: tools.package
+        version: tools.version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-npm-package-metadata-private
+      description: Get Npm Package Metadata from Private Registry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-npm-proxy.getnpmpackagemetadata
+      with:
+        package: tools.package
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: resolve-npm-package-version-private
+      description: Resolve Npm Package Version from Private Registry
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-npm-proxy.resolvenpmpackageversion
+      with:
+        package: tools.package
+        tag: tools.tag
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — mcp
+  description: 'Windmill API — mcp. 1 operations. Lead operation: List Available MCP Tools. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - mcp
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-mcp
+    baseUri: ''
+    description: Windmill API — mcp business capability. Self-contained, no shared references.
+    resources:
+    - name: mcp-w-workspace-list_tools
+      path: /mcp/w/{workspace}/list_tools
+      operations:
+      - name: listmcptools
+        method: GET
+        description: List Available MCP Tools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-mcp-rest
+    port: 8080
+    description: REST adapter for Windmill API — mcp. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/mcp/w/{workspace}/list-tools
+      name: mcp-w-workspace-list-tools
+      description: REST surface for mcp-w-workspace-list_tools.
+      operations:
+      - method: GET
+        name: listmcptools
+        description: List Available MCP Tools
+        call: windmill-mcp.listmcptools
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-mcp-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — mcp. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-available-mcp-tools
+      description: List Available MCP Tools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-mcp.listmcptools
+      outputParameters:
+      - type: object
+        mapping: $.

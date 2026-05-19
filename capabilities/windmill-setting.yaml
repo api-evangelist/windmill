@@ -1,0 +1,1789 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — setting
+  description: 'Windmill API — setting. 46 operations. Lead operation: Get JWKS for Vault JWT Authentication. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - setting
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-setting
+    baseUri: ''
+    description: Windmill API — setting business capability. Self-contained, no shared references.
+    resources:
+    - name: .well-known-jwks.json
+      path: /.well-known/jwks.json
+      operations:
+      - name: getjwks
+        method: GET
+        description: Get JWKS for Vault JWT Authentication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: min_keep_alive_version
+      path: /min_keep_alive_version
+      operations:
+      - name: getminkeepaliveversion
+        method: GET
+        description: Get Minimum Worker Versions Required to Stay Alive
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: saml-test_metadata
+      path: /saml/test_metadata
+      operations:
+      - name: testmetadata
+        method: POST
+        description: Test Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-critical_alerts
+      path: /settings/critical_alerts
+      operations:
+      - name: getcriticalalerts
+        method: GET
+        description: Get All Critical Alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+        - name: page_size
+          in: query
+          type: integer
+        - name: acknowledged
+          in: query
+          type: boolean
+    - name: settings-critical_alerts-acknowledge_all
+      path: /settings/critical_alerts/acknowledge_all
+      operations:
+      - name: acknowledgeallcriticalalerts
+        method: POST
+        description: Acknowledge All Unacknowledged Critical Alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-critical_alerts-id-acknowledge
+      path: /settings/critical_alerts/{id}/acknowledge
+      operations:
+      - name: acknowledgecriticalalert
+        method: POST
+        description: Acknowledge a Critical Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of the critical alert to acknowledge
+          required: true
+    - name: settings-customer_portal
+      path: /settings/customer_portal
+      operations:
+      - name: createcustomerportalsession
+        method: POST
+        description: Create Customer Portal Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: license_key
+          in: query
+          type: string
+    - name: settings-drop_custom_instance_pg_database-name
+      path: /settings/drop_custom_instance_pg_database/{name}
+      operations:
+      - name: dropcustominstancedb
+        method: POST
+        description: Drops a Custom Instance Database (superadmin Only, Irreversible)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the database to drop
+          required: true
+    - name: settings-get_stats
+      path: /settings/get_stats
+      operations:
+      - name: getstats
+        method: GET
+        description: Get Telemetry Stats with HMAC Signature (EE Only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-global-key
+      path: /settings/global/{key}
+      operations:
+      - name: getglobal
+        method: GET
+        description: Get Global Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setglobal
+        method: POST
+        description: Post Global Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-instance_config
+      path: /settings/instance_config
+      operations:
+      - name: getinstanceconfig
+        method: GET
+        description: Get Full Instance Config (global Settings + Worker Configs)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: setinstanceconfig
+        method: PUT
+        description: Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are
+          Skipped.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-latest_key_renewal_attempt
+      path: /settings/latest_key_renewal_attempt
+      operations:
+      - name: getlatestkeyrenewalattempt
+        method: GET
+        description: Get Latest Key Renewal Attempt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-list_custom_instance_pg_databases
+      path: /settings/list_custom_instance_pg_databases
+      operations:
+      - name: listcustominstancedbs
+        method: POST
+        description: Returns the Set-up Statuses of Custom Instance Pg Databases
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-list_global
+      path: /settings/list_global
+      operations:
+      - name: listglobalsettings
+        method: GET
+        description: List Global Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-local
+      path: /settings/local
+      operations:
+      - name: getlocal
+        method: GET
+        description: Get Local Settings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-log_cleanup_status
+      path: /settings/log_cleanup_status
+      operations:
+      - name: getlogcleanupstatus
+        method: GET
+        description: Get Status of the Manual Log Cleanup Task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-migrate_secrets_from_aws_sm
+      path: /settings/migrate_secrets_from_aws_sm
+      operations:
+      - name: migratesecretsfromawssm
+        method: POST
+        description: Migrate Secrets from AWS Secrets Manager to Database
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-migrate_secrets_from_azure_kv
+      path: /settings/migrate_secrets_from_azure_kv
+      operations:
+      - name: migratesecretsfromazurekv
+        method: POST
+        description: Migrate Secrets from Azure Key Vault to Database
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-migrate_secrets_to_aws_sm
+      path: /settings/migrate_secrets_to_aws_sm
+      operations:
+      - name: migratesecretstoawssm
+        method: POST
+        description: Migrate Secrets from Database to AWS Secrets Manager
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-migrate_secrets_to_azure_kv
+      path: /settings/migrate_secrets_to_azure_kv
+      operations:
+      - name: migratesecretstoazurekv
+        method: POST
+        description: Migrate Secrets from Database to Azure Key Vault
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-migrate_secrets_to_database
+      path: /settings/migrate_secrets_to_database
+      operations:
+      - name: migratesecretstodatabase
+        method: POST
+        description: Migrate Secrets from HashiCorp Vault to Database
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-migrate_secrets_to_vault
+      path: /settings/migrate_secrets_to_vault
+      operations:
+      - name: migratesecretstovault
+        method: POST
+        description: Migrate Secrets from Database to HashiCorp Vault
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-object_storage_usage
+      path: /settings/object_storage_usage
+      operations:
+      - name: getobjectstorageusage
+        method: GET
+        description: Get Current or Last Object Storage Usage Computation (null if Never Run)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: computeobjectstorageusage
+        method: POST
+        description: Start a Background Computation of Object Storage Usage by Top-level Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-refresh_custom_instance_user_pwd
+      path: /settings/refresh_custom_instance_user_pwd
+      operations:
+      - name: refreshcustominstanceuserpwd
+        method: POST
+        description: Refreshes the Password for the Custom_instance_user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-renew_license_key
+      path: /settings/renew_license_key
+      operations:
+      - name: renewlicensekey
+        method: POST
+        description: Renew License Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: license_key
+          in: query
+          type: string
+    - name: settings-restart_worker_group-worker_group
+      path: /settings/restart_worker_group/{worker_group}
+      operations:
+      - name: restartworkergroup
+        method: POST
+        description: Restart Worker Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: worker_group
+          in: path
+          type: string
+          description: the name of the worker group to restart
+          required: true
+    - name: settings-run_log_cleanup
+      path: /settings/run_log_cleanup
+      operations:
+      - name: runlogcleanup
+        method: POST
+        description: Start a Manual Cleanup of Expired Logs from Object Storage
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-send_stats
+      path: /settings/send_stats
+      operations:
+      - name: sendstats
+        method: POST
+        description: Send Stats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: settings-setup_custom_instance_pg_database-name
+      path: /settings/setup_custom_instance_pg_database/{name}
+      operations:
+      - name: setupcustominstancedb
+        method: POST
+        description: Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: The name of the database to create
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_aws_sm_backend
+      path: /settings/test_aws_sm_backend
+      operations:
+      - name: testawssmbackend
+        method: POST
+        description: Test Connection to AWS Secrets Manager
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_azure_kv_backend
+      path: /settings/test_azure_kv_backend
+      operations:
+      - name: testazurekvbackend
+        method: POST
+        description: Test Azure Key Vault Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_critical_channels
+      path: /settings/test_critical_channels
+      operations:
+      - name: testcriticalchannels
+        method: POST
+        description: Test Critical Channels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_license_key
+      path: /settings/test_license_key
+      operations:
+      - name: testlicensekey
+        method: POST
+        description: Test License Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_object_storage_config
+      path: /settings/test_object_storage_config
+      operations:
+      - name: testobjectstorageconfig
+        method: POST
+        description: Test Object Storage Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_secret_backend
+      path: /settings/test_secret_backend
+      operations:
+      - name: testsecretbackend
+        method: POST
+        description: Test Secret Backend Connection (HashiCorp Vault)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings-test_smtp
+      path: /settings/test_smtp
+      operations:
+      - name: testsmtp
+        method: POST
+        description: Test Smtp
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: settings_u-ruff_config
+      path: /settings_u/ruff_config
+      operations:
+      - name: getruffconfig
+        method: GET
+        description: Get Instance Ruff Config (unauthenticated)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-critical_alerts
+      path: /w/{workspace}/workspaces/critical_alerts
+      operations:
+      - name: workspacegetcriticalalerts
+        method: GET
+        description: Get All Critical Alerts for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+        - name: page_size
+          in: query
+          type: integer
+        - name: acknowledged
+          in: query
+          type: boolean
+    - name: w-workspace-workspaces-critical_alerts-acknowledge_all
+      path: /w/{workspace}/workspaces/critical_alerts/acknowledge_all
+      operations:
+      - name: workspaceacknowledgeallcriticalalerts
+        method: POST
+        description: Acknowledge All Unacknowledged Critical Alerts for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-workspaces-critical_alerts-mute
+      path: /w/{workspace}/workspaces/critical_alerts/mute
+      operations:
+      - name: workspacemutecriticalalertsui
+        method: POST
+        description: Mute Critical Alert UI for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-workspaces-critical_alerts-id-acknowledge
+      path: /w/{workspace}/workspaces/critical_alerts/{id}/acknowledge
+      operations:
+      - name: workspaceacknowledgecriticalalert
+        method: POST
+        description: Acknowledge a Critical Alert for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: The ID of the critical alert to acknowledge
+          required: true
+    - name: w-workspace-workspaces-get_secondary_storage_names
+      path: /w/{workspace}/workspaces/get_secondary_storage_names
+      operations:
+      - name: getsecondarystoragenames
+        method: GET
+        description: Get Secondary Storage Names
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: include_default
+          in: query
+          type: boolean
+          description: If true, include "_default_" in the list if primary workspace storage is set
+    - name: w-workspace-workspaces-public_app_rate_limit
+      path: /w/{workspace}/workspaces/public_app_rate_limit
+      operations:
+      - name: setpublicappratelimit
+        method: POST
+        description: Set Public App Rate Limit for this Workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-setting-rest
+    port: 8080
+    description: REST adapter for Windmill API — setting. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/well-known/jwks-json
+      name: well-known-jwks-json
+      description: REST surface for .well-known-jwks.json.
+      operations:
+      - method: GET
+        name: getjwks
+        description: Get JWKS for Vault JWT Authentication
+        call: windmill-setting.getjwks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/min-keep-alive-version
+      name: min-keep-alive-version
+      description: REST surface for min_keep_alive_version.
+      operations:
+      - method: GET
+        name: getminkeepaliveversion
+        description: Get Minimum Worker Versions Required to Stay Alive
+        call: windmill-setting.getminkeepaliveversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/saml/test-metadata
+      name: saml-test-metadata
+      description: REST surface for saml-test_metadata.
+      operations:
+      - method: POST
+        name: testmetadata
+        description: Test Metadata
+        call: windmill-setting.testmetadata
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/critical-alerts
+      name: settings-critical-alerts
+      description: REST surface for settings-critical_alerts.
+      operations:
+      - method: GET
+        name: getcriticalalerts
+        description: Get All Critical Alerts
+        call: windmill-setting.getcriticalalerts
+        with:
+          page: rest.page
+          page_size: rest.page_size
+          acknowledged: rest.acknowledged
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/critical-alerts/acknowledge-all
+      name: settings-critical-alerts-acknowledge-all
+      description: REST surface for settings-critical_alerts-acknowledge_all.
+      operations:
+      - method: POST
+        name: acknowledgeallcriticalalerts
+        description: Acknowledge All Unacknowledged Critical Alerts
+        call: windmill-setting.acknowledgeallcriticalalerts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/critical-alerts/{id}/acknowledge
+      name: settings-critical-alerts-id-acknowledge
+      description: REST surface for settings-critical_alerts-id-acknowledge.
+      operations:
+      - method: POST
+        name: acknowledgecriticalalert
+        description: Acknowledge a Critical Alert
+        call: windmill-setting.acknowledgecriticalalert
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/customer-portal
+      name: settings-customer-portal
+      description: REST surface for settings-customer_portal.
+      operations:
+      - method: POST
+        name: createcustomerportalsession
+        description: Create Customer Portal Session
+        call: windmill-setting.createcustomerportalsession
+        with:
+          license_key: rest.license_key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/drop-custom-instance-pg-database/{name}
+      name: settings-drop-custom-instance-pg-database-name
+      description: REST surface for settings-drop_custom_instance_pg_database-name.
+      operations:
+      - method: POST
+        name: dropcustominstancedb
+        description: Drops a Custom Instance Database (superadmin Only, Irreversible)
+        call: windmill-setting.dropcustominstancedb
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/get-stats
+      name: settings-get-stats
+      description: REST surface for settings-get_stats.
+      operations:
+      - method: GET
+        name: getstats
+        description: Get Telemetry Stats with HMAC Signature (EE Only)
+        call: windmill-setting.getstats
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/global/{key}
+      name: settings-global-key
+      description: REST surface for settings-global-key.
+      operations:
+      - method: GET
+        name: getglobal
+        description: Get Global Settings
+        call: windmill-setting.getglobal
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: setglobal
+        description: Post Global Settings
+        call: windmill-setting.setglobal
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/instance-config
+      name: settings-instance-config
+      description: REST surface for settings-instance_config.
+      operations:
+      - method: GET
+        name: getinstanceconfig
+        description: Get Full Instance Config (global Settings + Worker Configs)
+        call: windmill-setting.getinstanceconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: setinstanceconfig
+        description: Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are
+          Skipped.
+        call: windmill-setting.setinstanceconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/latest-key-renewal-attempt
+      name: settings-latest-key-renewal-attempt
+      description: REST surface for settings-latest_key_renewal_attempt.
+      operations:
+      - method: GET
+        name: getlatestkeyrenewalattempt
+        description: Get Latest Key Renewal Attempt
+        call: windmill-setting.getlatestkeyrenewalattempt
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/list-custom-instance-pg-databases
+      name: settings-list-custom-instance-pg-databases
+      description: REST surface for settings-list_custom_instance_pg_databases.
+      operations:
+      - method: POST
+        name: listcustominstancedbs
+        description: Returns the Set-up Statuses of Custom Instance Pg Databases
+        call: windmill-setting.listcustominstancedbs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/list-global
+      name: settings-list-global
+      description: REST surface for settings-list_global.
+      operations:
+      - method: GET
+        name: listglobalsettings
+        description: List Global Settings
+        call: windmill-setting.listglobalsettings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/local
+      name: settings-local
+      description: REST surface for settings-local.
+      operations:
+      - method: GET
+        name: getlocal
+        description: Get Local Settings
+        call: windmill-setting.getlocal
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/log-cleanup-status
+      name: settings-log-cleanup-status
+      description: REST surface for settings-log_cleanup_status.
+      operations:
+      - method: GET
+        name: getlogcleanupstatus
+        description: Get Status of the Manual Log Cleanup Task
+        call: windmill-setting.getlogcleanupstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/migrate-secrets-from-aws-sm
+      name: settings-migrate-secrets-from-aws-sm
+      description: REST surface for settings-migrate_secrets_from_aws_sm.
+      operations:
+      - method: POST
+        name: migratesecretsfromawssm
+        description: Migrate Secrets from AWS Secrets Manager to Database
+        call: windmill-setting.migratesecretsfromawssm
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/migrate-secrets-from-azure-kv
+      name: settings-migrate-secrets-from-azure-kv
+      description: REST surface for settings-migrate_secrets_from_azure_kv.
+      operations:
+      - method: POST
+        name: migratesecretsfromazurekv
+        description: Migrate Secrets from Azure Key Vault to Database
+        call: windmill-setting.migratesecretsfromazurekv
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/migrate-secrets-to-aws-sm
+      name: settings-migrate-secrets-to-aws-sm
+      description: REST surface for settings-migrate_secrets_to_aws_sm.
+      operations:
+      - method: POST
+        name: migratesecretstoawssm
+        description: Migrate Secrets from Database to AWS Secrets Manager
+        call: windmill-setting.migratesecretstoawssm
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/migrate-secrets-to-azure-kv
+      name: settings-migrate-secrets-to-azure-kv
+      description: REST surface for settings-migrate_secrets_to_azure_kv.
+      operations:
+      - method: POST
+        name: migratesecretstoazurekv
+        description: Migrate Secrets from Database to Azure Key Vault
+        call: windmill-setting.migratesecretstoazurekv
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/migrate-secrets-to-database
+      name: settings-migrate-secrets-to-database
+      description: REST surface for settings-migrate_secrets_to_database.
+      operations:
+      - method: POST
+        name: migratesecretstodatabase
+        description: Migrate Secrets from HashiCorp Vault to Database
+        call: windmill-setting.migratesecretstodatabase
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/migrate-secrets-to-vault
+      name: settings-migrate-secrets-to-vault
+      description: REST surface for settings-migrate_secrets_to_vault.
+      operations:
+      - method: POST
+        name: migratesecretstovault
+        description: Migrate Secrets from Database to HashiCorp Vault
+        call: windmill-setting.migratesecretstovault
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/object-storage-usage
+      name: settings-object-storage-usage
+      description: REST surface for settings-object_storage_usage.
+      operations:
+      - method: GET
+        name: getobjectstorageusage
+        description: Get Current or Last Object Storage Usage Computation (null if Never Run)
+        call: windmill-setting.getobjectstorageusage
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: computeobjectstorageusage
+        description: Start a Background Computation of Object Storage Usage by Top-level Folder
+        call: windmill-setting.computeobjectstorageusage
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/refresh-custom-instance-user-pwd
+      name: settings-refresh-custom-instance-user-pwd
+      description: REST surface for settings-refresh_custom_instance_user_pwd.
+      operations:
+      - method: POST
+        name: refreshcustominstanceuserpwd
+        description: Refreshes the Password for the Custom_instance_user
+        call: windmill-setting.refreshcustominstanceuserpwd
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/renew-license-key
+      name: settings-renew-license-key
+      description: REST surface for settings-renew_license_key.
+      operations:
+      - method: POST
+        name: renewlicensekey
+        description: Renew License Key
+        call: windmill-setting.renewlicensekey
+        with:
+          license_key: rest.license_key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/restart-worker-group/{worker-group}
+      name: settings-restart-worker-group-worker-group
+      description: REST surface for settings-restart_worker_group-worker_group.
+      operations:
+      - method: POST
+        name: restartworkergroup
+        description: Restart Worker Group
+        call: windmill-setting.restartworkergroup
+        with:
+          worker_group: rest.worker_group
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/run-log-cleanup
+      name: settings-run-log-cleanup
+      description: REST surface for settings-run_log_cleanup.
+      operations:
+      - method: POST
+        name: runlogcleanup
+        description: Start a Manual Cleanup of Expired Logs from Object Storage
+        call: windmill-setting.runlogcleanup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/send-stats
+      name: settings-send-stats
+      description: REST surface for settings-send_stats.
+      operations:
+      - method: POST
+        name: sendstats
+        description: Send Stats
+        call: windmill-setting.sendstats
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/setup-custom-instance-pg-database/{name}
+      name: settings-setup-custom-instance-pg-database-name
+      description: REST surface for settings-setup_custom_instance_pg_database-name.
+      operations:
+      - method: POST
+        name: setupcustominstancedb
+        description: Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user
+        call: windmill-setting.setupcustominstancedb
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-aws-sm-backend
+      name: settings-test-aws-sm-backend
+      description: REST surface for settings-test_aws_sm_backend.
+      operations:
+      - method: POST
+        name: testawssmbackend
+        description: Test Connection to AWS Secrets Manager
+        call: windmill-setting.testawssmbackend
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-azure-kv-backend
+      name: settings-test-azure-kv-backend
+      description: REST surface for settings-test_azure_kv_backend.
+      operations:
+      - method: POST
+        name: testazurekvbackend
+        description: Test Azure Key Vault Connection
+        call: windmill-setting.testazurekvbackend
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-critical-channels
+      name: settings-test-critical-channels
+      description: REST surface for settings-test_critical_channels.
+      operations:
+      - method: POST
+        name: testcriticalchannels
+        description: Test Critical Channels
+        call: windmill-setting.testcriticalchannels
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-license-key
+      name: settings-test-license-key
+      description: REST surface for settings-test_license_key.
+      operations:
+      - method: POST
+        name: testlicensekey
+        description: Test License Key
+        call: windmill-setting.testlicensekey
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-object-storage-config
+      name: settings-test-object-storage-config
+      description: REST surface for settings-test_object_storage_config.
+      operations:
+      - method: POST
+        name: testobjectstorageconfig
+        description: Test Object Storage Config
+        call: windmill-setting.testobjectstorageconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-secret-backend
+      name: settings-test-secret-backend
+      description: REST surface for settings-test_secret_backend.
+      operations:
+      - method: POST
+        name: testsecretbackend
+        description: Test Secret Backend Connection (HashiCorp Vault)
+        call: windmill-setting.testsecretbackend
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings/test-smtp
+      name: settings-test-smtp
+      description: REST surface for settings-test_smtp.
+      operations:
+      - method: POST
+        name: testsmtp
+        description: Test Smtp
+        call: windmill-setting.testsmtp
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/settings-u/ruff-config
+      name: settings-u-ruff-config
+      description: REST surface for settings_u-ruff_config.
+      operations:
+      - method: GET
+        name: getruffconfig
+        description: Get Instance Ruff Config (unauthenticated)
+        call: windmill-setting.getruffconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/critical-alerts
+      name: w-workspace-workspaces-critical-alerts
+      description: REST surface for w-workspace-workspaces-critical_alerts.
+      operations:
+      - method: GET
+        name: workspacegetcriticalalerts
+        description: Get All Critical Alerts for this Workspace
+        call: windmill-setting.workspacegetcriticalalerts
+        with:
+          page: rest.page
+          page_size: rest.page_size
+          acknowledged: rest.acknowledged
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/critical-alerts/acknowledge-all
+      name: w-workspace-workspaces-critical-alerts-acknowledge-all
+      description: REST surface for w-workspace-workspaces-critical_alerts-acknowledge_all.
+      operations:
+      - method: POST
+        name: workspaceacknowledgeallcriticalalerts
+        description: Acknowledge All Unacknowledged Critical Alerts for this Workspace
+        call: windmill-setting.workspaceacknowledgeallcriticalalerts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/critical-alerts/mute
+      name: w-workspace-workspaces-critical-alerts-mute
+      description: REST surface for w-workspace-workspaces-critical_alerts-mute.
+      operations:
+      - method: POST
+        name: workspacemutecriticalalertsui
+        description: Mute Critical Alert UI for this Workspace
+        call: windmill-setting.workspacemutecriticalalertsui
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/critical-alerts/{id}/acknowledge
+      name: w-workspace-workspaces-critical-alerts-id-acknowledge
+      description: REST surface for w-workspace-workspaces-critical_alerts-id-acknowledge.
+      operations:
+      - method: POST
+        name: workspaceacknowledgecriticalalert
+        description: Acknowledge a Critical Alert for this Workspace
+        call: windmill-setting.workspaceacknowledgecriticalalert
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/get-secondary-storage-names
+      name: w-workspace-workspaces-get-secondary-storage-names
+      description: REST surface for w-workspace-workspaces-get_secondary_storage_names.
+      operations:
+      - method: GET
+        name: getsecondarystoragenames
+        description: Get Secondary Storage Names
+        call: windmill-setting.getsecondarystoragenames
+        with:
+          include_default: rest.include_default
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/workspaces/public-app-rate-limit
+      name: w-workspace-workspaces-public-app-rate-limit
+      description: REST surface for w-workspace-workspaces-public_app_rate_limit.
+      operations:
+      - method: POST
+        name: setpublicappratelimit
+        description: Set Public App Rate Limit for this Workspace
+        call: windmill-setting.setpublicappratelimit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-setting-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — setting. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-jwks-vault-jwt-authentication
+      description: Get JWKS for Vault JWT Authentication
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getjwks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-minimum-worker-versions-required
+      description: Get Minimum Worker Versions Required to Stay Alive
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getminkeepaliveversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-metadata
+      description: Test Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testmetadata
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-critical-alerts
+      description: Get All Critical Alerts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getcriticalalerts
+      with:
+        page: tools.page
+        page_size: tools.page_size
+        acknowledged: tools.acknowledged
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-all-unacknowledged-critical-alerts
+      description: Acknowledge All Unacknowledged Critical Alerts
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.acknowledgeallcriticalalerts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-critical-alert
+      description: Acknowledge a Critical Alert
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.acknowledgecriticalalert
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-customer-portal-session
+      description: Create Customer Portal Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.createcustomerportalsession
+      with:
+        license_key: tools.license_key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: drops-custom-instance-database-superadmin
+      description: Drops a Custom Instance Database (superadmin Only, Irreversible)
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.dropcustominstancedb
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-telemetry-stats-hmac-signature
+      description: Get Telemetry Stats with HMAC Signature (EE Only)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getstats
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-global-settings
+      description: Get Global Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getglobal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-global-settings
+      description: Post Global Settings
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.setglobal
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-full-instance-config-global
+      description: Get Full Instance Config (global Settings + Worker Configs)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getinstanceconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-instance-config-bulk-upsert
+      description: Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are Skipped.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: windmill-setting.setinstanceconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-latest-key-renewal-attempt
+      description: Get Latest Key Renewal Attempt
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getlatestkeyrenewalattempt
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: returns-set-up-statuses-custom
+      description: Returns the Set-up Statuses of Custom Instance Pg Databases
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.listcustominstancedbs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-global-settings
+      description: List Global Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.listglobalsettings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-local-settings
+      description: Get Local Settings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getlocal
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-status-manual-log-cleanup
+      description: Get Status of the Manual Log Cleanup Task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getlogcleanupstatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-secrets-aws-secrets-manager
+      description: Migrate Secrets from AWS Secrets Manager to Database
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.migratesecretsfromawssm
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-secrets-azure-key-vault
+      description: Migrate Secrets from Azure Key Vault to Database
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.migratesecretsfromazurekv
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-secrets-database-aws-secrets
+      description: Migrate Secrets from Database to AWS Secrets Manager
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.migratesecretstoawssm
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-secrets-database-azure-key
+      description: Migrate Secrets from Database to Azure Key Vault
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.migratesecretstoazurekv
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-secrets-hashicorp-vault-database
+      description: Migrate Secrets from HashiCorp Vault to Database
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.migratesecretstodatabase
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: migrate-secrets-database-hashicorp-vault
+      description: Migrate Secrets from Database to HashiCorp Vault
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.migratesecretstovault
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-last-object-storage
+      description: Get Current or Last Object Storage Usage Computation (null if Never Run)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getobjectstorageusage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-background-computation-object-storage
+      description: Start a Background Computation of Object Storage Usage by Top-level Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.computeobjectstorageusage
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: refreshes-password-custom-instance-user
+      description: Refreshes the Password for the Custom_instance_user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.refreshcustominstanceuserpwd
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renew-license-key
+      description: Renew License Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.renewlicensekey
+      with:
+        license_key: tools.license_key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: restart-worker-group
+      description: Restart Worker Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.restartworkergroup
+      with:
+        worker_group: tools.worker_group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-manual-cleanup-expired-logs
+      description: Start a Manual Cleanup of Expired Logs from Object Storage
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.runlogcleanup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: send-stats
+      description: Send Stats
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.sendstats
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: runs-create-database-windmill-postgres
+      description: Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.setupcustominstancedb
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-connection-aws-secrets-manager
+      description: Test Connection to AWS Secrets Manager
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testawssmbackend
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-azure-key-vault-connection
+      description: Test Azure Key Vault Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testazurekvbackend
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-critical-channels
+      description: Test Critical Channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testcriticalchannels
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-license-key
+      description: Test License Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testlicensekey
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-object-storage-config
+      description: Test Object Storage Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testobjectstorageconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-secret-backend-connection-hashicorp
+      description: Test Secret Backend Connection (HashiCorp Vault)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testsecretbackend
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-smtp
+      description: Test Smtp
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-setting.testsmtp
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-instance-ruff-config-unauthenticated
+      description: Get Instance Ruff Config (unauthenticated)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getruffconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-critical-alerts-this
+      description: Get All Critical Alerts for this Workspace
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.workspacegetcriticalalerts
+      with:
+        page: tools.page
+        page_size: tools.page_size
+        acknowledged: tools.acknowledged
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-all-unacknowledged-critical-alerts-2
+      description: Acknowledge All Unacknowledged Critical Alerts for this Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.workspaceacknowledgeallcriticalalerts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: mute-critical-alert-ui-this
+      description: Mute Critical Alert UI for this Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.workspacemutecriticalalertsui
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: acknowledge-critical-alert-this-workspace
+      description: Acknowledge a Critical Alert for this Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.workspaceacknowledgecriticalalert
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-secondary-storage-names
+      description: Get Secondary Storage Names
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-setting.getsecondarystoragenames
+      with:
+        include_default: tools.include_default
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-public-app-rate-limit
+      description: Set Public App Rate Limit for this Workspace
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-setting.setpublicappratelimit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

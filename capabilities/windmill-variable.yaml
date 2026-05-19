@@ -1,0 +1,473 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — variable
+  description: 'Windmill API — variable. 10 operations. Lead operation: Create Variable. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - variable
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-variable
+    baseUri: ''
+    description: Windmill API — variable business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-variables-create
+      path: /w/{workspace}/variables/create
+      operations:
+      - name: createvariable
+        method: POST
+        description: Create Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: already_encrypted
+          in: query
+          type: boolean
+          description: whether the variable is already encrypted (default false)
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-variables-delete-path
+      path: /w/{workspace}/variables/delete/{path}
+      operations:
+      - name: deletevariable
+        method: DELETE
+        description: Delete Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-variables-delete_bulk
+      path: /w/{workspace}/variables/delete_bulk
+      operations:
+      - name: deletevariablesbulk
+        method: DELETE
+        description: Delete Variables in Bulk
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-variables-encrypt
+      path: /w/{workspace}/variables/encrypt
+      operations:
+      - name: encryptvalue
+        method: POST
+        description: Encrypt Value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-variables-exists-path
+      path: /w/{workspace}/variables/exists/{path}
+      operations:
+      - name: existsvariable
+        method: GET
+        description: Does Variable Exists at Path
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-variables-get-path
+      path: /w/{workspace}/variables/get/{path}
+      operations:
+      - name: getvariable
+        method: GET
+        description: Get Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: decrypt_secret
+          in: query
+          type: boolean
+          description: ask to decrypt secret if this variable is secret
+        - name: include_encrypted
+          in: query
+          type: boolean
+          description: 'ask to include the encrypted value if secret and decrypt secret is not true (default: false)'
+    - name: w-workspace-variables-get_value-path
+      path: /w/{workspace}/variables/get_value/{path}
+      operations:
+      - name: getvariablevalue
+        method: GET
+        description: Get Variable Value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: allow_cache
+          in: query
+          type: boolean
+          description: allow getting a cached value for improved performance
+    - name: w-workspace-variables-list
+      path: /w/{workspace}/variables/list
+      operations:
+      - name: listvariable
+        method: GET
+        description: List Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path_start
+          in: query
+          type: string
+          description: filter variables by path prefix
+        - name: path
+          in: query
+          type: string
+          description: exact path match filter
+        - name: description
+          in: query
+          type: string
+          description: pattern match filter for description field (case-insensitive)
+        - name: value
+          in: query
+          type: string
+          description: pattern match filter for non-secret variable values (case-insensitive)
+        - name: broad_filter
+          in: query
+          type: string
+          description: broad search across multiple fields (case-insensitive substring match)
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-variables-list_contextual
+      path: /w/{workspace}/variables/list_contextual
+      operations:
+      - name: listcontextualvariables
+        method: GET
+        description: List Contextual Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-variables-update-path
+      path: /w/{workspace}/variables/update/{path}
+      operations:
+      - name: updatevariable
+        method: POST
+        description: Update Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: already_encrypted
+          in: query
+          type: boolean
+          description: whether the variable is already encrypted (default false)
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-variable-rest
+    port: 8080
+    description: REST adapter for Windmill API — variable. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/variables/create
+      name: w-workspace-variables-create
+      description: REST surface for w-workspace-variables-create.
+      operations:
+      - method: POST
+        name: createvariable
+        description: Create Variable
+        call: windmill-variable.createvariable
+        with:
+          already_encrypted: rest.already_encrypted
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/delete/{path}
+      name: w-workspace-variables-delete-path
+      description: REST surface for w-workspace-variables-delete-path.
+      operations:
+      - method: DELETE
+        name: deletevariable
+        description: Delete Variable
+        call: windmill-variable.deletevariable
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/delete-bulk
+      name: w-workspace-variables-delete-bulk
+      description: REST surface for w-workspace-variables-delete_bulk.
+      operations:
+      - method: DELETE
+        name: deletevariablesbulk
+        description: Delete Variables in Bulk
+        call: windmill-variable.deletevariablesbulk
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/encrypt
+      name: w-workspace-variables-encrypt
+      description: REST surface for w-workspace-variables-encrypt.
+      operations:
+      - method: POST
+        name: encryptvalue
+        description: Encrypt Value
+        call: windmill-variable.encryptvalue
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/exists/{path}
+      name: w-workspace-variables-exists-path
+      description: REST surface for w-workspace-variables-exists-path.
+      operations:
+      - method: GET
+        name: existsvariable
+        description: Does Variable Exists at Path
+        call: windmill-variable.existsvariable
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/get/{path}
+      name: w-workspace-variables-get-path
+      description: REST surface for w-workspace-variables-get-path.
+      operations:
+      - method: GET
+        name: getvariable
+        description: Get Variable
+        call: windmill-variable.getvariable
+        with:
+          decrypt_secret: rest.decrypt_secret
+          include_encrypted: rest.include_encrypted
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/get-value/{path}
+      name: w-workspace-variables-get-value-path
+      description: REST surface for w-workspace-variables-get_value-path.
+      operations:
+      - method: GET
+        name: getvariablevalue
+        description: Get Variable Value
+        call: windmill-variable.getvariablevalue
+        with:
+          allow_cache: rest.allow_cache
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/list
+      name: w-workspace-variables-list
+      description: REST surface for w-workspace-variables-list.
+      operations:
+      - method: GET
+        name: listvariable
+        description: List Variables
+        call: windmill-variable.listvariable
+        with:
+          path_start: rest.path_start
+          path: rest.path
+          description: rest.description
+          value: rest.value
+          broad_filter: rest.broad_filter
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/list-contextual
+      name: w-workspace-variables-list-contextual
+      description: REST surface for w-workspace-variables-list_contextual.
+      operations:
+      - method: GET
+        name: listcontextualvariables
+        description: List Contextual Variables
+        call: windmill-variable.listcontextualvariables
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/variables/update/{path}
+      name: w-workspace-variables-update-path
+      description: REST surface for w-workspace-variables-update-path.
+      operations:
+      - method: POST
+        name: updatevariable
+        description: Update Variable
+        call: windmill-variable.updatevariable
+        with:
+          already_encrypted: rest.already_encrypted
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-variable-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — variable. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-variable
+      description: Create Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-variable.createvariable
+      with:
+        already_encrypted: tools.already_encrypted
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-variable
+      description: Delete Variable
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-variable.deletevariable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-variables-bulk
+      description: Delete Variables in Bulk
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-variable.deletevariablesbulk
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: encrypt-value
+      description: Encrypt Value
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-variable.encryptvalue
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-variable-exists-path
+      description: Does Variable Exists at Path
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-variable.existsvariable
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-variable
+      description: Get Variable
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-variable.getvariable
+      with:
+        decrypt_secret: tools.decrypt_secret
+        include_encrypted: tools.include_encrypted
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-variable-value
+      description: Get Variable Value
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-variable.getvariablevalue
+      with:
+        allow_cache: tools.allow_cache
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-variables
+      description: List Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-variable.listvariable
+      with:
+        path_start: tools.path_start
+        path: tools.path
+        description: tools.description
+        value: tools.value
+        broad_filter: tools.broad_filter
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-contextual-variables
+      description: List Contextual Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-variable.listcontextualvariables
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-variable
+      description: Update Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-variable.updatevariable
+      with:
+        already_encrypted: tools.already_encrypted
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

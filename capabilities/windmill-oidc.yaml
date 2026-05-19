@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — oidc
+  description: 'Windmill API — oidc. 1 operations. Lead operation: Get OIDC Token (ee Only). Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - oidc
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-oidc
+    baseUri: ''
+    description: Windmill API — oidc business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-oidc-token-audience
+      path: /w/{workspace}/oidc/token/{audience}
+      operations:
+      - name: getoidctoken
+        method: POST
+        description: Get OIDC Token (ee Only)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: audience
+          in: path
+          type: string
+          required: true
+        - name: expires_in
+          in: query
+          type: number
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-oidc-rest
+    port: 8080
+    description: REST adapter for Windmill API — oidc. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/w/{workspace}/oidc/token/{audience}
+      name: w-workspace-oidc-token-audience
+      description: REST surface for w-workspace-oidc-token-audience.
+      operations:
+      - method: POST
+        name: getoidctoken
+        description: Get OIDC Token (ee Only)
+        call: windmill-oidc.getoidctoken
+        with:
+          audience: rest.audience
+          expires_in: rest.expires_in
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-oidc-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — oidc. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-oidc-token-ee-only
+      description: Get OIDC Token (ee Only)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-oidc.getoidctoken
+      with:
+        audience: tools.audience
+        expires_in: tools.expires_in
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,401 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — http_trigger
+  description: 'Windmill API — http_trigger. 9 operations. Lead operation: Create Http Trigger. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - http_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-http-trigger
+    baseUri: ''
+    description: Windmill API — http_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-http_triggers-create
+      path: /w/{workspace}/http_triggers/create
+      operations:
+      - name: createhttptrigger
+        method: POST
+        description: Create Http Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-http_triggers-create_many
+      path: /w/{workspace}/http_triggers/create_many
+      operations:
+      - name: createhttptriggers
+        method: POST
+        description: Create Many HTTP Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-http_triggers-delete-path
+      path: /w/{workspace}/http_triggers/delete/{path}
+      operations:
+      - name: deletehttptrigger
+        method: DELETE
+        description: Delete Http Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-http_triggers-exists-path
+      path: /w/{workspace}/http_triggers/exists/{path}
+      operations:
+      - name: existshttptrigger
+        method: GET
+        description: Does Http Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-http_triggers-get-path
+      path: /w/{workspace}/http_triggers/get/{path}
+      operations:
+      - name: gethttptrigger
+        method: GET
+        description: Get Http Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-http_triggers-list
+      path: /w/{workspace}/http_triggers/list
+      operations:
+      - name: listhttptriggers
+        method: GET
+        description: List Http Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-http_triggers-route_exists
+      path: /w/{workspace}/http_triggers/route_exists
+      operations:
+      - name: existsroute
+        method: POST
+        description: Does Route Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-http_triggers-setmode-path
+      path: /w/{workspace}/http_triggers/setmode/{path}
+      operations:
+      - name: sethttptriggermode
+        method: POST
+        description: Enable/disable Http Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-http_triggers-update-path
+      path: /w/{workspace}/http_triggers/update/{path}
+      operations:
+      - name: updatehttptrigger
+        method: POST
+        description: Update Http Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-http-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — http_trigger. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/http-triggers/create
+      name: w-workspace-http-triggers-create
+      description: REST surface for w-workspace-http_triggers-create.
+      operations:
+      - method: POST
+        name: createhttptrigger
+        description: Create Http Trigger
+        call: windmill-http-trigger.createhttptrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/create-many
+      name: w-workspace-http-triggers-create-many
+      description: REST surface for w-workspace-http_triggers-create_many.
+      operations:
+      - method: POST
+        name: createhttptriggers
+        description: Create Many HTTP Triggers
+        call: windmill-http-trigger.createhttptriggers
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/delete/{path}
+      name: w-workspace-http-triggers-delete-path
+      description: REST surface for w-workspace-http_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletehttptrigger
+        description: Delete Http Trigger
+        call: windmill-http-trigger.deletehttptrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/exists/{path}
+      name: w-workspace-http-triggers-exists-path
+      description: REST surface for w-workspace-http_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existshttptrigger
+        description: Does Http Trigger Exists
+        call: windmill-http-trigger.existshttptrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/get/{path}
+      name: w-workspace-http-triggers-get-path
+      description: REST surface for w-workspace-http_triggers-get-path.
+      operations:
+      - method: GET
+        name: gethttptrigger
+        description: Get Http Trigger
+        call: windmill-http-trigger.gethttptrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/list
+      name: w-workspace-http-triggers-list
+      description: REST surface for w-workspace-http_triggers-list.
+      operations:
+      - method: GET
+        name: listhttptriggers
+        description: List Http Triggers
+        call: windmill-http-trigger.listhttptriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/route-exists
+      name: w-workspace-http-triggers-route-exists
+      description: REST surface for w-workspace-http_triggers-route_exists.
+      operations:
+      - method: POST
+        name: existsroute
+        description: Does Route Exists
+        call: windmill-http-trigger.existsroute
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/setmode/{path}
+      name: w-workspace-http-triggers-setmode-path
+      description: REST surface for w-workspace-http_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: sethttptriggermode
+        description: Enable/disable Http Trigger
+        call: windmill-http-trigger.sethttptriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/http-triggers/update/{path}
+      name: w-workspace-http-triggers-update-path
+      description: REST surface for w-workspace-http_triggers-update-path.
+      operations:
+      - method: POST
+        name: updatehttptrigger
+        description: Update Http Trigger
+        call: windmill-http-trigger.updatehttptrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-http-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — http_trigger. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-http-trigger
+      description: Create Http Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-http-trigger.createhttptrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-many-http-triggers
+      description: Create Many HTTP Triggers
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-http-trigger.createhttptriggers
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-http-trigger
+      description: Delete Http Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-http-trigger.deletehttptrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-http-trigger-exists
+      description: Does Http Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-http-trigger.existshttptrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-http-trigger
+      description: Get Http Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-http-trigger.gethttptrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-http-triggers
+      description: List Http Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-http-trigger.listhttptriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-route-exists
+      description: Does Route Exists
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-http-trigger.existsroute
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: enable-disable-http-trigger
+      description: Enable/disable Http Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-http-trigger.sethttptriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-http-trigger
+      description: Update Http Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-http-trigger.updatehttptrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

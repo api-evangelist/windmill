@@ -1,0 +1,370 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — config
+  description: 'Windmill API — config. 10 operations. Lead operation: Get Config. Self-contained Naftiko capability covering
+    one Windmill business surface.'
+  tags:
+  - Windmill
+  - config
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-config
+    baseUri: ''
+    description: Windmill API — config business capability. Self-contained, no shared references.
+    resources:
+    - name: configs-get-name
+      path: /configs/get/{name}
+      operations:
+      - name: getconfig
+        method: GET
+        description: Get Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-list
+      path: /configs/list
+      operations:
+      - name: listconfigs
+        method: GET
+        description: List Configs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-list_all_dedicated_with_deps
+      path: /configs/list_all_dedicated_with_deps
+      operations:
+      - name: listalldedicatedwithdeps
+        method: GET
+        description: List All Dedicated Scripts with Their Dependencies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-list_all_workspace_dependencies
+      path: /configs/list_all_workspace_dependencies
+      operations:
+      - name: listallworkspacedependencies
+        method: GET
+        description: List All Workspace Dependencies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-list_autoscaling_events-worker_group
+      path: /configs/list_autoscaling_events/{worker_group}
+      operations:
+      - name: listautoscalingevents
+        method: GET
+        description: List Autoscaling Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: worker_group
+          in: path
+          type: string
+          required: true
+    - name: configs-list_available_python_versions
+      path: /configs/list_available_python_versions
+      operations:
+      - name: listavailablepythonversions
+        method: GET
+        description: Get Currently Available Python Versions Provided by UV.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-list_worker_groups
+      path: /configs/list_worker_groups
+      operations:
+      - name: listworkergroups
+        method: GET
+        description: List Worker Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-native_kubernetes_autoscaling_healthcheck
+      path: /configs/native_kubernetes_autoscaling_healthcheck
+      operations:
+      - name: nativekubernetesautoscalinghealthcheck
+        method: GET
+        description: Check Kubernetes Autoscaling Health for a Worker Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configs-update-name
+      path: /configs/update/{name}
+      operations:
+      - name: updateconfig
+        method: POST
+        description: Update Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteconfig
+        method: DELETE
+        description: Delete Config
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-config-rest
+    port: 8080
+    description: REST adapter for Windmill API — config. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/configs/get/{name}
+      name: configs-get-name
+      description: REST surface for configs-get-name.
+      operations:
+      - method: GET
+        name: getconfig
+        description: Get Config
+        call: windmill-config.getconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/list
+      name: configs-list
+      description: REST surface for configs-list.
+      operations:
+      - method: GET
+        name: listconfigs
+        description: List Configs
+        call: windmill-config.listconfigs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/list-all-dedicated-with-deps
+      name: configs-list-all-dedicated-with-deps
+      description: REST surface for configs-list_all_dedicated_with_deps.
+      operations:
+      - method: GET
+        name: listalldedicatedwithdeps
+        description: List All Dedicated Scripts with Their Dependencies
+        call: windmill-config.listalldedicatedwithdeps
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/list-all-workspace-dependencies
+      name: configs-list-all-workspace-dependencies
+      description: REST surface for configs-list_all_workspace_dependencies.
+      operations:
+      - method: GET
+        name: listallworkspacedependencies
+        description: List All Workspace Dependencies
+        call: windmill-config.listallworkspacedependencies
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/list-autoscaling-events/{worker-group}
+      name: configs-list-autoscaling-events-worker-group
+      description: REST surface for configs-list_autoscaling_events-worker_group.
+      operations:
+      - method: GET
+        name: listautoscalingevents
+        description: List Autoscaling Events
+        call: windmill-config.listautoscalingevents
+        with:
+          worker_group: rest.worker_group
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/list-available-python-versions
+      name: configs-list-available-python-versions
+      description: REST surface for configs-list_available_python_versions.
+      operations:
+      - method: GET
+        name: listavailablepythonversions
+        description: Get Currently Available Python Versions Provided by UV.
+        call: windmill-config.listavailablepythonversions
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/list-worker-groups
+      name: configs-list-worker-groups
+      description: REST surface for configs-list_worker_groups.
+      operations:
+      - method: GET
+        name: listworkergroups
+        description: List Worker Groups
+        call: windmill-config.listworkergroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/native-kubernetes-autoscaling-healthcheck
+      name: configs-native-kubernetes-autoscaling-healthcheck
+      description: REST surface for configs-native_kubernetes_autoscaling_healthcheck.
+      operations:
+      - method: GET
+        name: nativekubernetesautoscalinghealthcheck
+        description: Check Kubernetes Autoscaling Health for a Worker Group
+        call: windmill-config.nativekubernetesautoscalinghealthcheck
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configs/update/{name}
+      name: configs-update-name
+      description: REST surface for configs-update-name.
+      operations:
+      - method: POST
+        name: updateconfig
+        description: Update Config
+        call: windmill-config.updateconfig
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteconfig
+        description: Delete Config
+        call: windmill-config.deleteconfig
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-config-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — config. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-config
+      description: Get Config
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.getconfig
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-configs
+      description: List Configs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.listconfigs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-dedicated-scripts-their
+      description: List All Dedicated Scripts with Their Dependencies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.listalldedicatedwithdeps
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-workspace-dependencies
+      description: List All Workspace Dependencies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.listallworkspacedependencies
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-autoscaling-events
+      description: List Autoscaling Events
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.listautoscalingevents
+      with:
+        worker_group: tools.worker_group
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-currently-available-python-versions
+      description: Get Currently Available Python Versions Provided by UV.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.listavailablepythonversions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-worker-groups
+      description: List Worker Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.listworkergroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-kubernetes-autoscaling-health-worker
+      description: Check Kubernetes Autoscaling Health for a Worker Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-config.nativekubernetesautoscalinghealthcheck
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-config
+      description: Update Config
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-config.updateconfig
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-config
+      description: Delete Config
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-config.deleteconfig
+      outputParameters:
+      - type: object
+        mapping: $.

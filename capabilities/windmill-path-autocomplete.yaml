@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — path_autocomplete
+  description: 'Windmill API — path_autocomplete. 1 operations. Lead operation: List All Paths in a Workspace for Client-side
+    Autocomplete. Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - path_autocomplete
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-path-autocomplete
+    baseUri: ''
+    description: Windmill API — path_autocomplete business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-path_autocomplete-list_paths
+      path: /w/{workspace}/path_autocomplete/list_paths
+      operations:
+      - name: listpathautocompletepaths
+        method: GET
+        description: List All Paths in a Workspace for Client-side Autocomplete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-path-autocomplete-rest
+    port: 8080
+    description: REST adapter for Windmill API — path_autocomplete. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/w/{workspace}/path-autocomplete/list-paths
+      name: w-workspace-path-autocomplete-list-paths
+      description: REST surface for w-workspace-path_autocomplete-list_paths.
+      operations:
+      - method: GET
+        name: listpathautocompletepaths
+        description: List All Paths in a Workspace for Client-side Autocomplete
+        call: windmill-path-autocomplete.listpathautocompletepaths
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-path-autocomplete-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — path_autocomplete. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-paths-workspace-client
+      description: List All Paths in a Workspace for Client-side Autocomplete
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-path-autocomplete.listpathautocompletepaths
+      outputParameters:
+      - type: object
+        mapping: $.

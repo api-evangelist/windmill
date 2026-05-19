@@ -1,0 +1,385 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — workspace_integration
+  description: 'Windmill API — workspace_integration. 8 operations. Lead operation: List Available Native Trigger Services.
+    Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - workspace_integration
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-workspace-integration
+    baseUri: ''
+    description: Windmill API — workspace_integration business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-native_triggers-integrations-list
+      path: /w/{workspace}/native_triggers/integrations/list
+      operations:
+      - name: listnativetriggerservices
+        method: GET
+        description: List Available Native Trigger Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-native_triggers-integrations-service_name-callback
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/callback
+      operations:
+      - name: nativetriggerservicecallback
+        method: POST
+        description: Native Trigger Service Oauth Callback
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-native_triggers-integrations-service_name-create
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/create
+      operations:
+      - name: createnativetriggerservice
+        method: POST
+        description: Create Native Trigger Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-native_triggers-integrations-service_name-delete
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/delete
+      operations:
+      - name: deletenativetriggerservice
+        method: DELETE
+        description: Delete Native Trigger Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-native_triggers-integrations-service_name-exists
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/exists
+      operations:
+      - name: checkifnativetriggersserviceexists
+        method: GET
+        description: Check if Integrations for a Particular Service Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-native_triggers-integrations-service_name-generate_connect_url
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/generate_connect_url
+      operations:
+      - name: generatenativetriggerserviceconnecturl
+        method: POST
+        description: Generate Connect Url for Native Trigger Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-native_triggers-integrations-service_name-generate_instance_connect_
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/generate_instance_connect_url
+      operations:
+      - name: generateinstanceconnecturl
+        method: POST
+        description: Generate Connect Url Using Instance-level Credentials
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-native_triggers-integrations-service_name-instance_sharing_available
+      path: /w/{workspace}/native_triggers/integrations/{service_name}/instance_sharing_available
+      operations:
+      - name: checkinstancesharingavailable
+        method: GET
+        description: Check if Instance-level Credential Sharing is Available for a Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: service_name
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-workspace-integration-rest
+    port: 8080
+    description: REST adapter for Windmill API — workspace_integration. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/w/{workspace}/native-triggers/integrations/list
+      name: w-workspace-native-triggers-integrations-list
+      description: REST surface for w-workspace-native_triggers-integrations-list.
+      operations:
+      - method: GET
+        name: listnativetriggerservices
+        description: List Available Native Trigger Services
+        call: windmill-workspace-integration.listnativetriggerservices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/callback
+      name: w-workspace-native-triggers-integrations-service-name-callback
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-callback.
+      operations:
+      - method: POST
+        name: nativetriggerservicecallback
+        description: Native Trigger Service Oauth Callback
+        call: windmill-workspace-integration.nativetriggerservicecallback
+        with:
+          service_name: rest.service_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/create
+      name: w-workspace-native-triggers-integrations-service-name-create
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-create.
+      operations:
+      - method: POST
+        name: createnativetriggerservice
+        description: Create Native Trigger Service
+        call: windmill-workspace-integration.createnativetriggerservice
+        with:
+          service_name: rest.service_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/delete
+      name: w-workspace-native-triggers-integrations-service-name-delete
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-delete.
+      operations:
+      - method: DELETE
+        name: deletenativetriggerservice
+        description: Delete Native Trigger Service
+        call: windmill-workspace-integration.deletenativetriggerservice
+        with:
+          service_name: rest.service_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/exists
+      name: w-workspace-native-triggers-integrations-service-name-exists
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-exists.
+      operations:
+      - method: GET
+        name: checkifnativetriggersserviceexists
+        description: Check if Integrations for a Particular Service Exists
+        call: windmill-workspace-integration.checkifnativetriggersserviceexists
+        with:
+          service_name: rest.service_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/generate-connect-url
+      name: w-workspace-native-triggers-integrations-service-name-generate-connect-url
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-generate_connect_url.
+      operations:
+      - method: POST
+        name: generatenativetriggerserviceconnecturl
+        description: Generate Connect Url for Native Trigger Service
+        call: windmill-workspace-integration.generatenativetriggerserviceconnecturl
+        with:
+          service_name: rest.service_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/generate-instance-connect-url
+      name: w-workspace-native-triggers-integrations-service-name-generate-instance-connect
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-generate_instance_connect_.
+      operations:
+      - method: POST
+        name: generateinstanceconnecturl
+        description: Generate Connect Url Using Instance-level Credentials
+        call: windmill-workspace-integration.generateinstanceconnecturl
+        with:
+          service_name: rest.service_name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/native-triggers/integrations/{service-name}/instance-sharing-available
+      name: w-workspace-native-triggers-integrations-service-name-instance-sharing-available
+      description: REST surface for w-workspace-native_triggers-integrations-service_name-instance_sharing_available.
+      operations:
+      - method: GET
+        name: checkinstancesharingavailable
+        description: Check if Instance-level Credential Sharing is Available for a Service
+        call: windmill-workspace-integration.checkinstancesharingavailable
+        with:
+          service_name: rest.service_name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-workspace-integration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — workspace_integration. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-available-native-trigger-services
+      description: List Available Native Trigger Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace-integration.listnativetriggerservices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: native-trigger-service-oauth-callback
+      description: Native Trigger Service Oauth Callback
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace-integration.nativetriggerservicecallback
+      with:
+        service_name: tools.service_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-native-trigger-service
+      description: Create Native Trigger Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace-integration.createnativetriggerservice
+      with:
+        service_name: tools.service_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-native-trigger-service
+      description: Delete Native Trigger Service
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-workspace-integration.deletenativetriggerservice
+      with:
+        service_name: tools.service_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-if-integrations-particular-service
+      description: Check if Integrations for a Particular Service Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace-integration.checkifnativetriggersserviceexists
+      with:
+        service_name: tools.service_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-connect-url-native-trigger
+      description: Generate Connect Url for Native Trigger Service
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace-integration.generatenativetriggerserviceconnecturl
+      with:
+        service_name: tools.service_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-connect-url-using-instance
+      description: Generate Connect Url Using Instance-level Credentials
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-workspace-integration.generateinstanceconnecturl
+      with:
+        service_name: tools.service_name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-if-instance-level-credential
+      description: Check if Instance-level Credential Sharing is Available for a Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-workspace-integration.checkinstancesharingavailable
+      with:
+        service_name: tools.service_name
+      outputParameters:
+      - type: object
+        mapping: $.

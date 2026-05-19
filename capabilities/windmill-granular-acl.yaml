@@ -1,0 +1,175 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — granular_acl
+  description: 'Windmill API — granular_acl. 3 operations. Lead operation: Add Granular Acls. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - granular_acl
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-granular-acl
+    baseUri: ''
+    description: Windmill API — granular_acl business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-acls-add-kind-path
+      path: /w/{workspace}/acls/add/{kind}/{path}
+      operations:
+      - name: addgranularacls
+        method: POST
+        description: Add Granular Acls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: kind
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-acls-get-kind-path
+      path: /w/{workspace}/acls/get/{kind}/{path}
+      operations:
+      - name: getgranularacls
+        method: GET
+        description: Get Granular Acls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: kind
+          in: path
+          type: string
+          required: true
+    - name: w-workspace-acls-remove-kind-path
+      path: /w/{workspace}/acls/remove/{kind}/{path}
+      operations:
+      - name: removegranularacls
+        method: POST
+        description: Remove Granular Acls
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: kind
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-granular-acl-rest
+    port: 8080
+    description: REST adapter for Windmill API — granular_acl. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/acls/add/{kind}/{path}
+      name: w-workspace-acls-add-kind-path
+      description: REST surface for w-workspace-acls-add-kind-path.
+      operations:
+      - method: POST
+        name: addgranularacls
+        description: Add Granular Acls
+        call: windmill-granular-acl.addgranularacls
+        with:
+          kind: rest.kind
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/acls/get/{kind}/{path}
+      name: w-workspace-acls-get-kind-path
+      description: REST surface for w-workspace-acls-get-kind-path.
+      operations:
+      - method: GET
+        name: getgranularacls
+        description: Get Granular Acls
+        call: windmill-granular-acl.getgranularacls
+        with:
+          kind: rest.kind
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/acls/remove/{kind}/{path}
+      name: w-workspace-acls-remove-kind-path
+      description: REST surface for w-workspace-acls-remove-kind-path.
+      operations:
+      - method: POST
+        name: removegranularacls
+        description: Remove Granular Acls
+        call: windmill-granular-acl.removegranularacls
+        with:
+          kind: rest.kind
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-granular-acl-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — granular_acl. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: add-granular-acls
+      description: Add Granular Acls
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-granular-acl.addgranularacls
+      with:
+        kind: tools.kind
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-granular-acls
+      description: Get Granular Acls
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-granular-acl.getgranularacls
+      with:
+        kind: tools.kind
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-granular-acls
+      description: Remove Granular Acls
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-granular-acl.removegranularacls
+      with:
+        kind: tools.kind
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,359 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — mqtt_trigger
+  description: 'Windmill API — mqtt_trigger. 8 operations. Lead operation: Create Mqtt Trigger. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - mqtt_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-mqtt-trigger
+    baseUri: ''
+    description: Windmill API — mqtt_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-mqtt_triggers-create
+      path: /w/{workspace}/mqtt_triggers/create
+      operations:
+      - name: createmqtttrigger
+        method: POST
+        description: Create Mqtt Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-mqtt_triggers-delete-path
+      path: /w/{workspace}/mqtt_triggers/delete/{path}
+      operations:
+      - name: deletemqtttrigger
+        method: DELETE
+        description: Delete Mqtt Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-mqtt_triggers-exists-path
+      path: /w/{workspace}/mqtt_triggers/exists/{path}
+      operations:
+      - name: existsmqtttrigger
+        method: GET
+        description: Does Mqtt Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-mqtt_triggers-get-path
+      path: /w/{workspace}/mqtt_triggers/get/{path}
+      operations:
+      - name: getmqtttrigger
+        method: GET
+        description: Get Mqtt Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-mqtt_triggers-list
+      path: /w/{workspace}/mqtt_triggers/list
+      operations:
+      - name: listmqtttriggers
+        method: GET
+        description: List Mqtt Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-mqtt_triggers-setmode-path
+      path: /w/{workspace}/mqtt_triggers/setmode/{path}
+      operations:
+      - name: setmqtttriggermode
+        method: POST
+        description: Set Enabled Mqtt Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-mqtt_triggers-test
+      path: /w/{workspace}/mqtt_triggers/test
+      operations:
+      - name: testmqttconnection
+        method: POST
+        description: Test Mqtt Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-mqtt_triggers-update-path
+      path: /w/{workspace}/mqtt_triggers/update/{path}
+      operations:
+      - name: updatemqtttrigger
+        method: POST
+        description: Update Mqtt Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-mqtt-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — mqtt_trigger. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/w/{workspace}/mqtt-triggers/create
+      name: w-workspace-mqtt-triggers-create
+      description: REST surface for w-workspace-mqtt_triggers-create.
+      operations:
+      - method: POST
+        name: createmqtttrigger
+        description: Create Mqtt Trigger
+        call: windmill-mqtt-trigger.createmqtttrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/delete/{path}
+      name: w-workspace-mqtt-triggers-delete-path
+      description: REST surface for w-workspace-mqtt_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletemqtttrigger
+        description: Delete Mqtt Trigger
+        call: windmill-mqtt-trigger.deletemqtttrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/exists/{path}
+      name: w-workspace-mqtt-triggers-exists-path
+      description: REST surface for w-workspace-mqtt_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existsmqtttrigger
+        description: Does Mqtt Trigger Exists
+        call: windmill-mqtt-trigger.existsmqtttrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/get/{path}
+      name: w-workspace-mqtt-triggers-get-path
+      description: REST surface for w-workspace-mqtt_triggers-get-path.
+      operations:
+      - method: GET
+        name: getmqtttrigger
+        description: Get Mqtt Trigger
+        call: windmill-mqtt-trigger.getmqtttrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/list
+      name: w-workspace-mqtt-triggers-list
+      description: REST surface for w-workspace-mqtt_triggers-list.
+      operations:
+      - method: GET
+        name: listmqtttriggers
+        description: List Mqtt Triggers
+        call: windmill-mqtt-trigger.listmqtttriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/setmode/{path}
+      name: w-workspace-mqtt-triggers-setmode-path
+      description: REST surface for w-workspace-mqtt_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setmqtttriggermode
+        description: Set Enabled Mqtt Trigger
+        call: windmill-mqtt-trigger.setmqtttriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/test
+      name: w-workspace-mqtt-triggers-test
+      description: REST surface for w-workspace-mqtt_triggers-test.
+      operations:
+      - method: POST
+        name: testmqttconnection
+        description: Test Mqtt Connection
+        call: windmill-mqtt-trigger.testmqttconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/mqtt-triggers/update/{path}
+      name: w-workspace-mqtt-triggers-update-path
+      description: REST surface for w-workspace-mqtt_triggers-update-path.
+      operations:
+      - method: POST
+        name: updatemqtttrigger
+        description: Update Mqtt Trigger
+        call: windmill-mqtt-trigger.updatemqtttrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-mqtt-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — mqtt_trigger. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-mqtt-trigger
+      description: Create Mqtt Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-mqtt-trigger.createmqtttrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-mqtt-trigger
+      description: Delete Mqtt Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-mqtt-trigger.deletemqtttrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-mqtt-trigger-exists
+      description: Does Mqtt Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-mqtt-trigger.existsmqtttrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-mqtt-trigger
+      description: Get Mqtt Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-mqtt-trigger.getmqtttrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-mqtt-triggers
+      description: List Mqtt Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-mqtt-trigger.listmqtttriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-enabled-mqtt-trigger
+      description: Set Enabled Mqtt Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-mqtt-trigger.setmqtttriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-mqtt-connection
+      description: Test Mqtt Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-mqtt-trigger.testmqttconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-mqtt-trigger
+      description: Update Mqtt Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-mqtt-trigger.updatemqtttrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

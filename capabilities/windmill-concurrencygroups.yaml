@@ -1,0 +1,215 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — concurrencyGroups
+  description: 'Windmill API — concurrencyGroups. 4 operations. Lead operation: List All Concurrency Groups. Self-contained
+    Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - concurrencyGroups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-concurrencygroups
+    baseUri: ''
+    description: Windmill API — concurrencyGroups business capability. Self-contained, no shared references.
+    resources:
+    - name: concurrency_groups-list
+      path: /concurrency_groups/list
+      operations:
+      - name: listconcurrencygroups
+        method: GET
+        description: List All Concurrency Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: concurrency_groups-prune-concurrency_id
+      path: /concurrency_groups/prune/{concurrency_id}
+      operations:
+      - name: deleteconcurrencygroup
+        method: DELETE
+        description: Delete Concurrency Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: concurrency_groups-id-key
+      path: /concurrency_groups/{id}/key
+      operations:
+      - name: getconcurrencykey
+        method: GET
+        description: Get the Concurrency Key for a Job that has Concurrency Limits Enabled
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-concurrency_groups-list_jobs
+      path: /w/{workspace}/concurrency_groups/list_jobs
+      operations:
+      - name: listextendedjobs
+        method: GET
+        description: Get Intervals of Job Runtime Concurrency
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: concurrency_key
+          in: query
+          type: string
+        - name: row_limit
+          in: query
+          type: number
+        - name: is_skipped
+          in: query
+          type: boolean
+          description: is the job skipped
+        - name: is_flow_step
+          in: query
+          type: boolean
+          description: is the job a flow step
+        - name: has_null_parent
+          in: query
+          type: boolean
+          description: has null parent
+        - name: success
+          in: query
+          type: boolean
+          description: filter on successful jobs
+        - name: all_workspaces
+          in: query
+          type: boolean
+          description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        - name: is_not_schedule
+          in: query
+          type: boolean
+          description: is not a scheduled job
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-concurrencygroups-rest
+    port: 8080
+    description: REST adapter for Windmill API — concurrencyGroups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/concurrency-groups/list
+      name: concurrency-groups-list
+      description: REST surface for concurrency_groups-list.
+      operations:
+      - method: GET
+        name: listconcurrencygroups
+        description: List All Concurrency Groups
+        call: windmill-concurrencygroups.listconcurrencygroups
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/concurrency-groups/prune/{concurrency-id}
+      name: concurrency-groups-prune-concurrency-id
+      description: REST surface for concurrency_groups-prune-concurrency_id.
+      operations:
+      - method: DELETE
+        name: deleteconcurrencygroup
+        description: Delete Concurrency Group
+        call: windmill-concurrencygroups.deleteconcurrencygroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/concurrency-groups/{id}/key
+      name: concurrency-groups-id-key
+      description: REST surface for concurrency_groups-id-key.
+      operations:
+      - method: GET
+        name: getconcurrencykey
+        description: Get the Concurrency Key for a Job that has Concurrency Limits Enabled
+        call: windmill-concurrencygroups.getconcurrencykey
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/concurrency-groups/list-jobs
+      name: w-workspace-concurrency-groups-list-jobs
+      description: REST surface for w-workspace-concurrency_groups-list_jobs.
+      operations:
+      - method: GET
+        name: listextendedjobs
+        description: Get Intervals of Job Runtime Concurrency
+        call: windmill-concurrencygroups.listextendedjobs
+        with:
+          concurrency_key: rest.concurrency_key
+          row_limit: rest.row_limit
+          is_skipped: rest.is_skipped
+          is_flow_step: rest.is_flow_step
+          has_null_parent: rest.has_null_parent
+          success: rest.success
+          all_workspaces: rest.all_workspaces
+          is_not_schedule: rest.is_not_schedule
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-concurrencygroups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — concurrencyGroups. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-all-concurrency-groups
+      description: List All Concurrency Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-concurrencygroups.listconcurrencygroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-concurrency-group
+      description: Delete Concurrency Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-concurrencygroups.deleteconcurrencygroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-concurrency-key-job-that
+      description: Get the Concurrency Key for a Job that has Concurrency Limits Enabled
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-concurrencygroups.getconcurrencykey
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-intervals-job-runtime-concurrency
+      description: Get Intervals of Job Runtime Concurrency
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-concurrencygroups.listextendedjobs
+      with:
+        concurrency_key: tools.concurrency_key
+        row_limit: tools.row_limit
+        is_skipped: tools.is_skipped
+        is_flow_step: tools.is_flow_step
+        has_null_parent: tools.has_null_parent
+        success: tools.success
+        all_workspaces: tools.all_workspaces
+        is_not_schedule: tools.is_not_schedule
+      outputParameters:
+      - type: object
+        mapping: $.

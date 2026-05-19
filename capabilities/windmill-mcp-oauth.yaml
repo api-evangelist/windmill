@@ -1,0 +1,177 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — mcp_oauth
+  description: 'Windmill API — mcp_oauth. 3 operations. Lead operation: MCP OAuth Callback. Self-contained Naftiko capability
+    covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - mcp_oauth
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-mcp-oauth
+    baseUri: ''
+    description: Windmill API — mcp_oauth business capability. Self-contained, no shared references.
+    resources:
+    - name: mcp-oauth-callback
+      path: /mcp/oauth/callback
+      operations:
+      - name: mcpoauthcallback
+        method: GET
+        description: MCP OAuth Callback
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: code
+          in: query
+          type: string
+          description: OAuth authorization code
+          required: true
+        - name: state
+          in: query
+          type: string
+          description: CSRF state token
+          required: true
+    - name: mcp-oauth-discover
+      path: /mcp/oauth/discover
+      operations:
+      - name: discovermcpoauth
+        method: POST
+        description: Discover MCP Server OAuth Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: mcp-oauth-start
+      path: /mcp/oauth/start
+      operations:
+      - name: startmcpoauthpopup
+        method: GET
+        description: Start MCP OAuth Popup Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mcp_server_url
+          in: query
+          type: string
+          description: URL of the MCP server to connect to
+          required: true
+        - name: scopes
+          in: query
+          type: string
+          description: Comma-separated list of OAuth scopes to request
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-mcp-oauth-rest
+    port: 8080
+    description: REST adapter for Windmill API — mcp_oauth. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/mcp/oauth/callback
+      name: mcp-oauth-callback
+      description: REST surface for mcp-oauth-callback.
+      operations:
+      - method: GET
+        name: mcpoauthcallback
+        description: MCP OAuth Callback
+        call: windmill-mcp-oauth.mcpoauthcallback
+        with:
+          code: rest.code
+          state: rest.state
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mcp/oauth/discover
+      name: mcp-oauth-discover
+      description: REST surface for mcp-oauth-discover.
+      operations:
+      - method: POST
+        name: discovermcpoauth
+        description: Discover MCP Server OAuth Metadata
+        call: windmill-mcp-oauth.discovermcpoauth
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mcp/oauth/start
+      name: mcp-oauth-start
+      description: REST surface for mcp-oauth-start.
+      operations:
+      - method: GET
+        name: startmcpoauthpopup
+        description: Start MCP OAuth Popup Flow
+        call: windmill-mcp-oauth.startmcpoauthpopup
+        with:
+          mcp_server_url: rest.mcp_server_url
+          scopes: rest.scopes
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-mcp-oauth-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — mcp_oauth. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: mcp-oauth-callback
+      description: MCP OAuth Callback
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-mcp-oauth.mcpoauthcallback
+      with:
+        code: tools.code
+        state: tools.state
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: discover-mcp-server-oauth-metadata
+      description: Discover MCP Server OAuth Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-mcp-oauth.discovermcpoauth
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-mcp-oauth-popup-flow
+      description: Start MCP OAuth Popup Flow
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-mcp-oauth.startmcpoauthpopup
+      with:
+        mcp_server_url: tools.mcp_server_url
+        scopes: tools.scopes
+      outputParameters:
+      - type: object
+        mapping: $.

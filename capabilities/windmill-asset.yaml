@@ -1,0 +1,201 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — asset
+  description: 'Windmill API — asset. 3 operations. Lead operation: List All Assets in the Workspace with Cursor Pagination.
+    Self-contained Naftiko capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - asset
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-asset
+    baseUri: ''
+    description: Windmill API — asset business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-assets-list
+      path: /w/{workspace}/assets/list
+      operations:
+      - name: listassets
+        method: GET
+        description: List All Assets in the Workspace with Cursor Pagination
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of items per page (max 1000, default 50)
+        - name: cursor_created_at
+          in: query
+          type: string
+          description: Cursor timestamp for pagination (created_at of last item from previous page)
+        - name: cursor_id
+          in: query
+          type: integer
+          description: Cursor ID for pagination (id of last item from previous page)
+        - name: asset_path
+          in: query
+          type: string
+          description: Filter by asset path (case-insensitive partial match)
+        - name: usage_path
+          in: query
+          type: string
+          description: Filter by usage path (case-insensitive partial match)
+        - name: asset_kinds
+          in: query
+          type: string
+          description: Filter by asset kinds (multiple values allowed)
+        - name: path
+          in: query
+          type: string
+          description: exact path match filter
+        - name: columns
+          in: query
+          type: string
+          description: JSONB subset match filter for columns using base64 encoded JSON
+        - name: broad_filter
+          in: query
+          type: string
+          description: broad search across multiple fields (case-insensitive substring match)
+    - name: w-workspace-assets-list_by_usages
+      path: /w/{workspace}/assets/list_by_usages
+      operations:
+      - name: listassetsbyusage
+        method: POST
+        description: List All Assets Used by Given Usages Paths
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-assets-list_favorites
+      path: /w/{workspace}/assets/list_favorites
+      operations:
+      - name: listfavoriteassets
+        method: GET
+        description: List All Favorite Assets for the Authenticated User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-asset-rest
+    port: 8080
+    description: REST adapter for Windmill API — asset. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/w/{workspace}/assets/list
+      name: w-workspace-assets-list
+      description: REST surface for w-workspace-assets-list.
+      operations:
+      - method: GET
+        name: listassets
+        description: List All Assets in the Workspace with Cursor Pagination
+        call: windmill-asset.listassets
+        with:
+          per_page: rest.per_page
+          cursor_created_at: rest.cursor_created_at
+          cursor_id: rest.cursor_id
+          asset_path: rest.asset_path
+          usage_path: rest.usage_path
+          asset_kinds: rest.asset_kinds
+          path: rest.path
+          columns: rest.columns
+          broad_filter: rest.broad_filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/assets/list-by-usages
+      name: w-workspace-assets-list-by-usages
+      description: REST surface for w-workspace-assets-list_by_usages.
+      operations:
+      - method: POST
+        name: listassetsbyusage
+        description: List All Assets Used by Given Usages Paths
+        call: windmill-asset.listassetsbyusage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/assets/list-favorites
+      name: w-workspace-assets-list-favorites
+      description: REST surface for w-workspace-assets-list_favorites.
+      operations:
+      - method: GET
+        name: listfavoriteassets
+        description: List All Favorite Assets for the Authenticated User
+        call: windmill-asset.listfavoriteassets
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-asset-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — asset. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-all-assets-workspace-cursor
+      description: List All Assets in the Workspace with Cursor Pagination
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-asset.listassets
+      with:
+        per_page: tools.per_page
+        cursor_created_at: tools.cursor_created_at
+        cursor_id: tools.cursor_id
+        asset_path: tools.asset_path
+        usage_path: tools.usage_path
+        asset_kinds: tools.asset_kinds
+        path: tools.path
+        columns: tools.columns
+        broad_filter: tools.broad_filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-assets-used-given
+      description: List All Assets Used by Given Usages Paths
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-asset.listassetsbyusage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-all-favorite-assets-authenticated
+      description: List All Favorite Assets for the Authenticated User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-asset.listfavoriteassets
+      outputParameters:
+      - type: object
+        mapping: $.

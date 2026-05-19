@@ -1,0 +1,793 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Windmill API — postgres_trigger
+  description: 'Windmill API — postgres_trigger. 20 operations. Lead operation: Create Postgres Trigger. Self-contained Naftiko
+    capability covering one Windmill business surface.'
+  tags:
+  - Windmill
+  - postgres_trigger
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    WINDMILL_API_KEY: WINDMILL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: windmill-postgres-trigger
+    baseUri: ''
+    description: Windmill API — postgres_trigger business capability. Self-contained, no shared references.
+    resources:
+    - name: w-workspace-postgres_triggers-create
+      path: /w/{workspace}/postgres_triggers/create
+      operations:
+      - name: createpostgrestrigger
+        method: POST
+        description: Create Postgres Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-create_template_script
+      path: /w/{workspace}/postgres_triggers/create_template_script
+      operations:
+      - name: createtemplatescript
+        method: POST
+        description: Create Template Script
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-delete-path
+      path: /w/{workspace}/postgres_triggers/delete/{path}
+      operations:
+      - name: deletepostgrestrigger
+        method: DELETE
+        description: Delete Postgres Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-exists-path
+      path: /w/{workspace}/postgres_triggers/exists/{path}
+      operations:
+      - name: existspostgrestrigger
+        method: GET
+        description: Does Postgres Trigger Exists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-get-path
+      path: /w/{workspace}/postgres_triggers/get/{path}
+      operations:
+      - name: getpostgrestrigger
+        method: GET
+        description: Get Postgres Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-get_template_script-id
+      path: /w/{workspace}/postgres_triggers/get_template_script/{id}
+      operations:
+      - name: gettemplatescript
+        method: GET
+        description: Get Template Script
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-is_valid_postgres_configuration-path
+      path: /w/{workspace}/postgres_triggers/is_valid_postgres_configuration/{path}
+      operations:
+      - name: isvalidpostgresconfiguration
+        method: GET
+        description: Check if Postgres Configuration is Set to Logical
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-list
+      path: /w/{workspace}/postgres_triggers/list
+      operations:
+      - name: listpostgrestriggers
+        method: GET
+        description: List Postgres Triggers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: path
+          in: query
+          type: string
+          description: filter by path
+        - name: is_flow
+          in: query
+          type: boolean
+        - name: path_start
+          in: query
+          type: string
+        - name: label
+          in: query
+          type: string
+          description: Filter by label
+    - name: w-workspace-postgres_triggers-postgres-version-path
+      path: /w/{workspace}/postgres_triggers/postgres/version/{path}
+      operations:
+      - name: getpostgresversion
+        method: GET
+        description: Get Postgres Version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-publication-create-publication-path
+      path: /w/{workspace}/postgres_triggers/publication/create/{publication}/{path}
+      operations:
+      - name: createpostgrespublication
+        method: POST
+        description: Create Publication for Postgres
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-publication-delete-publication-path
+      path: /w/{workspace}/postgres_triggers/publication/delete/{publication}/{path}
+      operations:
+      - name: deletepostgrespublication
+        method: DELETE
+        description: Delete Postgres Publication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-publication-get-publication-path
+      path: /w/{workspace}/postgres_triggers/publication/get/{publication}/{path}
+      operations:
+      - name: getpostgrespublication
+        method: GET
+        description: Get Postgres Publication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-publication-list-path
+      path: /w/{workspace}/postgres_triggers/publication/list/{path}
+      operations:
+      - name: listpostgrespublication
+        method: GET
+        description: List Postgres Publication
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-publication-update-publication-path
+      path: /w/{workspace}/postgres_triggers/publication/update/{publication}/{path}
+      operations:
+      - name: updatepostgrespublication
+        method: POST
+        description: Update Publication for Postgres
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-setmode-path
+      path: /w/{workspace}/postgres_triggers/setmode/{path}
+      operations:
+      - name: setpostgrestriggermode
+        method: POST
+        description: Set Enabled Postgres Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-slot-create-path
+      path: /w/{workspace}/postgres_triggers/slot/create/{path}
+      operations:
+      - name: createpostgresreplicationslot
+        method: POST
+        description: Create Replication Slot for Postgres
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-slot-delete-path
+      path: /w/{workspace}/postgres_triggers/slot/delete/{path}
+      operations:
+      - name: deletepostgresreplicationslot
+        method: DELETE
+        description: Delete Postgres Replication Slot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-slot-list-path
+      path: /w/{workspace}/postgres_triggers/slot/list/{path}
+      operations:
+      - name: listpostgresreplicationslot
+        method: GET
+        description: List Postgres Replication Slot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: w-workspace-postgres_triggers-test
+      path: /w/{workspace}/postgres_triggers/test
+      operations:
+      - name: testpostgresconnection
+        method: POST
+        description: Test Postgres Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: w-workspace-postgres_triggers-update-path
+      path: /w/{workspace}/postgres_triggers/update/{path}
+      operations:
+      - name: updatepostgrestrigger
+        method: POST
+        description: Update Postgres Trigger
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.WINDMILL_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: windmill-postgres-trigger-rest
+    port: 8080
+    description: REST adapter for Windmill API — postgres_trigger. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/w/{workspace}/postgres-triggers/create
+      name: w-workspace-postgres-triggers-create
+      description: REST surface for w-workspace-postgres_triggers-create.
+      operations:
+      - method: POST
+        name: createpostgrestrigger
+        description: Create Postgres Trigger
+        call: windmill-postgres-trigger.createpostgrestrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/create-template-script
+      name: w-workspace-postgres-triggers-create-template-script
+      description: REST surface for w-workspace-postgres_triggers-create_template_script.
+      operations:
+      - method: POST
+        name: createtemplatescript
+        description: Create Template Script
+        call: windmill-postgres-trigger.createtemplatescript
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/delete/{path}
+      name: w-workspace-postgres-triggers-delete-path
+      description: REST surface for w-workspace-postgres_triggers-delete-path.
+      operations:
+      - method: DELETE
+        name: deletepostgrestrigger
+        description: Delete Postgres Trigger
+        call: windmill-postgres-trigger.deletepostgrestrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/exists/{path}
+      name: w-workspace-postgres-triggers-exists-path
+      description: REST surface for w-workspace-postgres_triggers-exists-path.
+      operations:
+      - method: GET
+        name: existspostgrestrigger
+        description: Does Postgres Trigger Exists
+        call: windmill-postgres-trigger.existspostgrestrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/get/{path}
+      name: w-workspace-postgres-triggers-get-path
+      description: REST surface for w-workspace-postgres_triggers-get-path.
+      operations:
+      - method: GET
+        name: getpostgrestrigger
+        description: Get Postgres Trigger
+        call: windmill-postgres-trigger.getpostgrestrigger
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/get-template-script/{id}
+      name: w-workspace-postgres-triggers-get-template-script-id
+      description: REST surface for w-workspace-postgres_triggers-get_template_script-id.
+      operations:
+      - method: GET
+        name: gettemplatescript
+        description: Get Template Script
+        call: windmill-postgres-trigger.gettemplatescript
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/is-valid-postgres-configuration/{path}
+      name: w-workspace-postgres-triggers-is-valid-postgres-configuration-path
+      description: REST surface for w-workspace-postgres_triggers-is_valid_postgres_configuration-path.
+      operations:
+      - method: GET
+        name: isvalidpostgresconfiguration
+        description: Check if Postgres Configuration is Set to Logical
+        call: windmill-postgres-trigger.isvalidpostgresconfiguration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/list
+      name: w-workspace-postgres-triggers-list
+      description: REST surface for w-workspace-postgres_triggers-list.
+      operations:
+      - method: GET
+        name: listpostgrestriggers
+        description: List Postgres Triggers
+        call: windmill-postgres-trigger.listpostgrestriggers
+        with:
+          path: rest.path
+          is_flow: rest.is_flow
+          path_start: rest.path_start
+          label: rest.label
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/postgres/version/{path}
+      name: w-workspace-postgres-triggers-postgres-version-path
+      description: REST surface for w-workspace-postgres_triggers-postgres-version-path.
+      operations:
+      - method: GET
+        name: getpostgresversion
+        description: Get Postgres Version
+        call: windmill-postgres-trigger.getpostgresversion
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/publication/create/{publication}/{path}
+      name: w-workspace-postgres-triggers-publication-create-publication-path
+      description: REST surface for w-workspace-postgres_triggers-publication-create-publication-path.
+      operations:
+      - method: POST
+        name: createpostgrespublication
+        description: Create Publication for Postgres
+        call: windmill-postgres-trigger.createpostgrespublication
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/publication/delete/{publication}/{path}
+      name: w-workspace-postgres-triggers-publication-delete-publication-path
+      description: REST surface for w-workspace-postgres_triggers-publication-delete-publication-path.
+      operations:
+      - method: DELETE
+        name: deletepostgrespublication
+        description: Delete Postgres Publication
+        call: windmill-postgres-trigger.deletepostgrespublication
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/publication/get/{publication}/{path}
+      name: w-workspace-postgres-triggers-publication-get-publication-path
+      description: REST surface for w-workspace-postgres_triggers-publication-get-publication-path.
+      operations:
+      - method: GET
+        name: getpostgrespublication
+        description: Get Postgres Publication
+        call: windmill-postgres-trigger.getpostgrespublication
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/publication/list/{path}
+      name: w-workspace-postgres-triggers-publication-list-path
+      description: REST surface for w-workspace-postgres_triggers-publication-list-path.
+      operations:
+      - method: GET
+        name: listpostgrespublication
+        description: List Postgres Publication
+        call: windmill-postgres-trigger.listpostgrespublication
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/publication/update/{publication}/{path}
+      name: w-workspace-postgres-triggers-publication-update-publication-path
+      description: REST surface for w-workspace-postgres_triggers-publication-update-publication-path.
+      operations:
+      - method: POST
+        name: updatepostgrespublication
+        description: Update Publication for Postgres
+        call: windmill-postgres-trigger.updatepostgrespublication
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/setmode/{path}
+      name: w-workspace-postgres-triggers-setmode-path
+      description: REST surface for w-workspace-postgres_triggers-setmode-path.
+      operations:
+      - method: POST
+        name: setpostgrestriggermode
+        description: Set Enabled Postgres Trigger
+        call: windmill-postgres-trigger.setpostgrestriggermode
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/slot/create/{path}
+      name: w-workspace-postgres-triggers-slot-create-path
+      description: REST surface for w-workspace-postgres_triggers-slot-create-path.
+      operations:
+      - method: POST
+        name: createpostgresreplicationslot
+        description: Create Replication Slot for Postgres
+        call: windmill-postgres-trigger.createpostgresreplicationslot
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/slot/delete/{path}
+      name: w-workspace-postgres-triggers-slot-delete-path
+      description: REST surface for w-workspace-postgres_triggers-slot-delete-path.
+      operations:
+      - method: DELETE
+        name: deletepostgresreplicationslot
+        description: Delete Postgres Replication Slot
+        call: windmill-postgres-trigger.deletepostgresreplicationslot
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/slot/list/{path}
+      name: w-workspace-postgres-triggers-slot-list-path
+      description: REST surface for w-workspace-postgres_triggers-slot-list-path.
+      operations:
+      - method: GET
+        name: listpostgresreplicationslot
+        description: List Postgres Replication Slot
+        call: windmill-postgres-trigger.listpostgresreplicationslot
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/test
+      name: w-workspace-postgres-triggers-test
+      description: REST surface for w-workspace-postgres_triggers-test.
+      operations:
+      - method: POST
+        name: testpostgresconnection
+        description: Test Postgres Connection
+        call: windmill-postgres-trigger.testpostgresconnection
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/w/{workspace}/postgres-triggers/update/{path}
+      name: w-workspace-postgres-triggers-update-path
+      description: REST surface for w-workspace-postgres_triggers-update-path.
+      operations:
+      - method: POST
+        name: updatepostgrestrigger
+        description: Update Postgres Trigger
+        call: windmill-postgres-trigger.updatepostgrestrigger
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: windmill-postgres-trigger-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Windmill API — postgres_trigger. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-postgres-trigger
+      description: Create Postgres Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.createpostgrestrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-template-script
+      description: Create Template Script
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.createtemplatescript
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-postgres-trigger
+      description: Delete Postgres Trigger
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-postgres-trigger.deletepostgrestrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: does-postgres-trigger-exists
+      description: Does Postgres Trigger Exists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.existspostgrestrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-postgres-trigger
+      description: Get Postgres Trigger
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.getpostgrestrigger
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-template-script
+      description: Get Template Script
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.gettemplatescript
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-if-postgres-configuration-is
+      description: Check if Postgres Configuration is Set to Logical
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.isvalidpostgresconfiguration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-postgres-triggers
+      description: List Postgres Triggers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.listpostgrestriggers
+      with:
+        path: tools.path
+        is_flow: tools.is_flow
+        path_start: tools.path_start
+        label: tools.label
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-postgres-version
+      description: Get Postgres Version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.getpostgresversion
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-publication-postgres
+      description: Create Publication for Postgres
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.createpostgrespublication
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-postgres-publication
+      description: Delete Postgres Publication
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-postgres-trigger.deletepostgrespublication
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-postgres-publication
+      description: Get Postgres Publication
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.getpostgrespublication
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-postgres-publication
+      description: List Postgres Publication
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.listpostgrespublication
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-publication-postgres
+      description: Update Publication for Postgres
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.updatepostgrespublication
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-enabled-postgres-trigger
+      description: Set Enabled Postgres Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.setpostgrestriggermode
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-replication-slot-postgres
+      description: Create Replication Slot for Postgres
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.createpostgresreplicationslot
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-postgres-replication-slot
+      description: Delete Postgres Replication Slot
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: windmill-postgres-trigger.deletepostgresreplicationslot
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-postgres-replication-slot
+      description: List Postgres Replication Slot
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: windmill-postgres-trigger.listpostgresreplicationslot
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: test-postgres-connection
+      description: Test Postgres Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.testpostgresconnection
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-postgres-trigger
+      description: Update Postgres Trigger
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: windmill-postgres-trigger.updatepostgrestrigger
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
