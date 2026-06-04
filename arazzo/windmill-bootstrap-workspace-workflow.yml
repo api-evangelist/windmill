@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Bootstrap a Workspace
+  summary: Create a workspace, confirm it exists, then read back its display name.
+  description: >-
+    A workspace is the top-level tenant boundary in Windmill. This workflow
+    creates a new workspace from an id and name, calls the exists endpoint to
+    confirm the id is now registered, then reads the workspace display name to
+    verify the bootstrap succeeded. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bootstrap-workspace
+  summary: Create a new Windmill workspace and verify it was provisioned.
+  description: >-
+    Creates a workspace by id and name, confirms its existence, then reads back
+    its display name.
+  inputs:
+    type: object
+    required:
+    - token
+    - id
+    - name
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      id:
+        type: string
+        description: The id for the new workspace (e.g. "my-team").
+      name:
+        type: string
+        description: The human-readable name for the workspace.
+      username:
+        type: string
+        description: Optional username for the creating user within the workspace.
+  steps:
+  - stepId: createWorkspace
+    description: >-
+      Create the workspace from the supplied id and name. The response body is
+      a token as plain text.
+    operationId: createWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        id: $inputs.id
+        name: $inputs.name
+        username: $inputs.username
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdToken: $response.body
+  - stepId: confirmExists
+    description: >-
+      Confirm the workspace id is now registered. The response body is a boolean.
+    operationId: existsWorkspace
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    requestBody:
+      contentType: application/json
+      payload:
+        id: $inputs.id
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      exists: $response.body
+  - stepId: getName
+    description: >-
+      Read the workspace display name to verify the bootstrap completed.
+    operationId: getWorkspaceName
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.id
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      name: $response.body
+  outputs:
+    workspaceId: $inputs.id
+    exists: $steps.confirmExists.outputs.exists
+    name: $steps.getName.outputs.name

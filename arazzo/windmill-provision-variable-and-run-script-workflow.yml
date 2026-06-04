@@ -1,0 +1,125 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Provision a Variable and Run a Consuming Script
+  summary: Create a variable, verify its value, then run a script that reads it.
+  description: >-
+    Variables store secrets and configuration that scripts read by path. This
+    workflow creates a variable, reads its value back to confirm it persisted,
+    then runs a script by path whose arguments reference the variable so the
+    script can consume it at runtime. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-variable-and-run-script
+  summary: Create a Windmill variable and run a script that consumes it.
+  description: >-
+    Creates a variable, verifies its stored value, then triggers a script run
+    whose arguments reference the variable path.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - variablePath
+    - variableValue
+    - isSecret
+    - description
+    - scriptPath
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      variablePath:
+        type: string
+        description: The path to create the variable at (e.g. "u/admin/api_key").
+      variableValue:
+        type: string
+        description: The string value of the variable.
+      isSecret:
+        type: boolean
+        description: Whether the variable is a secret.
+      description:
+        type: string
+        description: A description of the variable.
+      scriptPath:
+        type: string
+        description: Path to the script that consumes the variable.
+      args:
+        type: object
+        description: The argument map passed to the script (referencing the variable).
+  steps:
+  - stepId: createVariable
+    description: >-
+      Create the variable at the supplied path. The response body is the created
+      variable path as plain text.
+    operationId: createVariable
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.variablePath
+        value: $inputs.variableValue
+        is_secret: $inputs.isSecret
+        description: $inputs.description
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdPath: $response.body
+  - stepId: verifyVariable
+    description: >-
+      Read the variable value back to confirm it persisted as expected.
+    operationId: getVariableValue
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.variablePath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      value: $response.body
+  - stepId: runScript
+    description: >-
+      Run the consuming script asynchronously. The response body is the new job
+      UUID.
+    operationId: runScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.scriptPath
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  outputs:
+    variablePath: $steps.createVariable.outputs.createdPath
+    jobId: $steps.runScript.outputs.jobId

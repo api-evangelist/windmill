@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Provision a Resource and Run a Consuming Script
+  summary: Create a typed resource, verify its value, then run a script that consumes it.
+  description: >-
+    Resources hold connection details and configuration that scripts read at
+    runtime. This workflow creates a typed resource, reads its value back to
+    confirm it persisted, then runs a script by path whose arguments reference
+    the resource path so the script can consume it. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-resource-and-run-script
+  summary: Create a Windmill resource and run a script that consumes it.
+  description: >-
+    Creates a typed resource, verifies its stored value, then triggers a script
+    run whose arguments reference the resource path.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - resourcePath
+    - resourceType
+    - resourceValue
+    - scriptPath
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      resourcePath:
+        type: string
+        description: The path to create the resource at (e.g. "f/shared/api_creds").
+      resourceType:
+        type: string
+        description: The resource_type associated with the resource (e.g. "postgresql").
+      resourceValue:
+        type: object
+        description: The value payload stored in the resource.
+      scriptPath:
+        type: string
+        description: Path to the script that consumes the resource.
+      args:
+        type: object
+        description: The argument map passed to the script (referencing the resource path).
+  steps:
+  - stepId: createResource
+    description: >-
+      Create a typed resource at the supplied path. The response body is the
+      created resource path as plain text.
+    operationId: createResource
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: update_if_exists
+      in: query
+      value: true
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.resourcePath
+        value: $inputs.resourceValue
+        resource_type: $inputs.resourceType
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdPath: $response.body
+  - stepId: verifyResource
+    description: >-
+      Read the resource value back to confirm it persisted as expected.
+    operationId: getResourceValue
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.resourcePath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      value: $response.body
+  - stepId: runScript
+    description: >-
+      Run the consuming script asynchronously. The response body is the new job
+      UUID.
+    operationId: runScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.scriptPath
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  outputs:
+    resourcePath: $steps.createResource.outputs.createdPath
+    jobId: $steps.runScript.outputs.jobId

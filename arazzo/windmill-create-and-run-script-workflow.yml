@@ -1,0 +1,122 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Create and Run a Script
+  summary: Deploy a new script from source, confirm it deployed, then run it.
+  description: >-
+    A deploy-then-execute pattern useful for CI pipelines and one-off automation.
+    The workflow creates a script from inline source code and language, reads it
+    back by path to confirm the deployment landed and to capture its hash, then
+    submits an asynchronous run with the supplied arguments. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-and-run-script
+  summary: Create a Windmill script from source and immediately run it by path.
+  description: >-
+    Creates a script with the given path, content and language, verifies it by
+    reading it back, then starts an asynchronous run and returns the job id.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - path
+    - content
+    - language
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      path:
+        type: string
+        description: The path to deploy the script at (e.g. "f/automation/build").
+      content:
+        type: string
+        description: The script source code.
+      language:
+        type: string
+        description: The script language (e.g. "bun", "python3", "deno").
+      summary:
+        type: string
+        description: Optional short summary describing the script.
+      args:
+        type: object
+        description: The argument map passed to the script when run.
+  steps:
+  - stepId: createScript
+    description: >-
+      Deploy a new script from the supplied path, content and language. The
+      response body is the new script hash as plain text.
+    operationId: createScript
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.path
+        content: $inputs.content
+        language: $inputs.language
+        summary: $inputs.summary
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdHash: $response.body
+  - stepId: verifyScript
+    description: >-
+      Read the script back by path to confirm the deployment succeeded and to
+      capture the canonical hash of the deployed version.
+    operationId: getScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      hash: $response.body#/hash
+      scriptPath: $response.body#/path
+  - stepId: runScript
+    description: >-
+      Submit an asynchronous run of the freshly deployed script. The response
+      body is the new job UUID.
+    operationId: runScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  outputs:
+    hash: $steps.verifyScript.outputs.hash
+    jobId: $steps.runScript.outputs.jobId

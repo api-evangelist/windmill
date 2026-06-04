@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Schedule a Script
+  summary: Resolve a script, create a cron schedule for it, then read the schedule back.
+  description: >-
+    Automates recurring execution by attaching a cron schedule to an existing
+    script. The workflow first reads the script by path to confirm it exists and
+    to surface its argument schema, creates a schedule that targets that script
+    with a 6-field cron expression and timezone, then reads the schedule back to
+    confirm it was registered and enabled. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: schedule-script
+  summary: Create a recurring cron schedule for an existing Windmill script.
+  description: >-
+    Confirms the script exists, registers a cron schedule pointing at it with
+    the supplied arguments, then reads the schedule back to verify it.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - scriptPath
+    - schedulePath
+    - schedule
+    - timezone
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      scriptPath:
+        type: string
+        description: Path to the script the schedule should run.
+      schedulePath:
+        type: string
+        description: The unique path for the schedule (e.g. "u/admin/nightly").
+      schedule:
+        type: string
+        description: 6-field cron expression with seconds (e.g. "0 0 12 * * *").
+      timezone:
+        type: string
+        description: IANA timezone for the schedule (e.g. "UTC").
+      args:
+        type: object
+        description: The argument map passed to the scheduled script on each run.
+  steps:
+  - stepId: getScript
+    description: >-
+      Read the script by path to confirm it exists before scheduling it.
+    operationId: getScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.scriptPath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      scriptPath: $response.body#/path
+  - stepId: createSchedule
+    description: >-
+      Create a cron schedule targeting the script. is_flow is false because the
+      target is a script, and the schedule is enabled immediately.
+    operationId: createSchedule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    requestBody:
+      contentType: application/json
+      payload:
+        path: $inputs.schedulePath
+        schedule: $inputs.schedule
+        timezone: $inputs.timezone
+        script_path: $inputs.scriptPath
+        is_flow: false
+        args: $inputs.args
+        enabled: true
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdPath: $response.body
+  - stepId: getSchedule
+    description: >-
+      Read the schedule back to confirm it was registered with the expected
+      cron expression and enabled state.
+    operationId: getSchedule
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.schedulePath
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      enabled: $response.body#/enabled
+      cron: $response.body#/schedule
+  outputs:
+    schedulePath: $inputs.schedulePath
+    enabled: $steps.getSchedule.outputs.enabled

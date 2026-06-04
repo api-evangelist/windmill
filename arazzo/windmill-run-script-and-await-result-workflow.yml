@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Run a Script and Await its Result
+  summary: Trigger a script by path, poll the job until it completes, then read the result.
+  description: >-
+    The canonical Windmill execution pattern. The workflow first resolves the
+    target script to confirm it exists and to surface its argument schema, then
+    submits a run by path which returns an asynchronous job UUID. It polls the
+    completed-result-maybe endpoint until the job reports completion, branching
+    back to keep waiting while it is still running, and finally fetches the
+    full completed job record so callers get the result, success flag and
+    timing in one place. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-script-and-await-result
+  summary: Run a Windmill script by path and wait for the asynchronous job result.
+  description: >-
+    Resolves the script, starts an asynchronous run, polls until the job is
+    completed, then returns the result and success status of the completed job.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - path
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id (e.g. "demo").
+      path:
+        type: string
+        description: The script path to run (e.g. "f/examples/my_script").
+      args:
+        type: object
+        description: The argument map passed to the script as its inputs.
+  steps:
+  - stepId: getScript
+    description: >-
+      Fetch the script metadata to confirm the path exists and to surface the
+      expected argument schema before running it.
+    operationId: getScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      scriptHash: $response.body#/hash
+      scriptSchema: $response.body#/schema
+  - stepId: runScript
+    description: >-
+      Submit an asynchronous run of the script by path. The response body is the
+      newly created job UUID as plain text.
+    operationId: runScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  - stepId: pollResult
+    description: >-
+      Poll the completed-result-maybe endpoint. While the job is still running
+      the completed flag is false, so the flow loops back to poll again; once
+      completed it proceeds to read the full job record.
+    operationId: getCompletedJobResultMaybe
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      completed: $response.body#/completed
+      success: $response.body#/success
+      result: $response.body#/result
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollResult
+      criteria:
+      - context: $response.body
+        condition: $.completed == false
+        type: jsonpath
+    - name: jobDone
+      type: goto
+      stepId: getResult
+      criteria:
+      - context: $response.body
+        condition: $.completed == true
+        type: jsonpath
+  - stepId: getResult
+    description: >-
+      Read the full completed job record to capture the result payload, success
+      flag and execution timing.
+    operationId: getCompletedJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      result: $response.body#/result
+      success: $response.body#/success
+      durationMs: $response.body#/duration_ms
+  outputs:
+    jobId: $steps.runScript.outputs.jobId
+    result: $steps.getResult.outputs.result
+    success: $steps.getResult.outputs.success
+    durationMs: $steps.getResult.outputs.durationMs

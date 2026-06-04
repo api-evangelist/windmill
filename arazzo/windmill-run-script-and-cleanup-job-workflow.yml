@@ -1,0 +1,144 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Run a Script and Clean up its Job
+  summary: Run a script, await its result, capture it, then delete the completed job record.
+  description: >-
+    A run-then-purge pattern for sensitive or high-volume automation where the
+    job record should not be retained. The workflow runs a script by path, polls
+    the completed-result-maybe endpoint and loops while the job is still running,
+    reads the full completed job to capture the result, then deletes the
+    completed job record to remove its args, result and logs. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-script-and-cleanup-job
+  summary: Run a script, await and capture its result, then delete the job record.
+  description: >-
+    Starts an asynchronous run, polls until completion, captures the result of
+    the completed job, then deletes the completed job to purge its data.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - path
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      path:
+        type: string
+        description: The script path to run.
+      args:
+        type: object
+        description: The argument map passed to the script.
+  steps:
+  - stepId: runScript
+    description: >-
+      Submit an asynchronous run of the script by path. The response body is the
+      new job UUID.
+    operationId: runScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  - stepId: pollResult
+    description: >-
+      Poll the completed-result-maybe endpoint, looping back while the completed
+      flag is false and proceeding once the job has finished.
+    operationId: getCompletedJobResultMaybe
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      completed: $response.body#/completed
+      success: $response.body#/success
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollResult
+      criteria:
+      - context: $response.body
+        condition: $.completed == false
+        type: jsonpath
+    - name: jobDone
+      type: goto
+      stepId: captureResult
+      criteria:
+      - context: $response.body
+        condition: $.completed == true
+        type: jsonpath
+  - stepId: captureResult
+    description: >-
+      Read the full completed job to capture the result and success flag before
+      the record is purged.
+    operationId: getCompletedJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      result: $response.body#/result
+      success: $response.body#/success
+  - stepId: deleteJob
+    description: >-
+      Delete the completed job record to remove its args, result and logs.
+    operationId: deleteCompletedJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deletedId: $response.body#/id
+  outputs:
+    jobId: $steps.runScript.outputs.jobId
+    result: $steps.captureResult.outputs.result
+    success: $steps.captureResult.outputs.success
+    deletedId: $steps.deleteJob.outputs.deletedId

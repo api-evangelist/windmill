@@ -1,0 +1,153 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Run a Script with a Cancel Guard
+  summary: Run a script, inspect the job, and cancel it if it is still queued or running.
+  description: >-
+    A guarded execution pattern for long-running or stuck jobs. The workflow
+    runs a script by path, reads the job record which carries a type
+    discriminator of CompletedJob or QueuedJob, and branches: when the job has
+    already completed it reads the completed record, and when the job is still
+    queued or running it cancels the job with a supplied reason. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-script-with-cancel-guard
+  summary: Run a script and cancel the job if it has not completed when inspected.
+  description: >-
+    Starts an asynchronous script run, inspects the job, and either reads the
+    completed result or cancels the still-pending job with a reason.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - path
+    - args
+    - cancelReason
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      path:
+        type: string
+        description: The script path to run.
+      args:
+        type: object
+        description: The argument map passed to the script.
+      cancelReason:
+        type: string
+        description: Reason recorded if the job has to be cancelled.
+  steps:
+  - stepId: runScript
+    description: >-
+      Submit an asynchronous run of the script by path. The response body is the
+      new job UUID.
+    operationId: runScriptByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  - stepId: inspectJob
+    description: >-
+      Read the job record. The type field discriminates a CompletedJob from a
+      still-pending QueuedJob, which drives the cancel-or-read branch.
+    operationId: getJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobType: $response.body#/type
+    onSuccess:
+    - name: alreadyCompleted
+      type: goto
+      stepId: readCompleted
+      criteria:
+      - context: $response.body
+        condition: $.type == "CompletedJob"
+        type: jsonpath
+    - name: stillPending
+      type: goto
+      stepId: cancelJob
+      criteria:
+      - context: $response.body
+        condition: $.type == "QueuedJob"
+        type: jsonpath
+  - stepId: readCompleted
+    description: >-
+      Read the completed job record when the run already finished.
+    operationId: getCompletedJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      result: $response.body#/result
+      success: $response.body#/success
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: cancelJob
+    description: >-
+      Cancel the still-queued or running job with the supplied reason. The
+      response body is a confirmation string.
+    operationId: cancelQueuedJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runScript.outputs.jobId
+    requestBody:
+      contentType: application/json
+      payload:
+        reason: $inputs.cancelReason
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cancelConfirmation: $response.body
+  outputs:
+    jobId: $steps.runScript.outputs.jobId
+    result: $steps.readCompleted.outputs.result
+    cancelConfirmation: $steps.cancelJob.outputs.cancelConfirmation

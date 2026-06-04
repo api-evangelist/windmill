@@ -1,0 +1,143 @@
+arazzo: 1.0.1
+info:
+  title: Windmill Run a Flow and Await its Result
+  summary: Trigger a flow by path, poll job updates until completion, then read the result.
+  description: >-
+    The flow equivalent of the script run pattern. The workflow resolves the
+    target flow to confirm it exists, submits an asynchronous run by path which
+    returns a job UUID, polls the job-updates endpoint and loops while the
+    completed flag is false, then fetches the completed job result once the run
+    finishes. Every step spells out its request inline so the flow can be read
+    and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: windmillApi
+  url: ../openapi/windmill-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: run-flow-and-await-result
+  summary: Run a Windmill flow by path and wait for the asynchronous job result.
+  description: >-
+    Resolves the flow, starts an asynchronous run, polls job updates until the
+    run is completed, then returns the result of the completed job.
+  inputs:
+    type: object
+    required:
+    - token
+    - workspace
+    - path
+    - args
+    properties:
+      token:
+        type: string
+        description: Windmill API token presented as a Bearer credential.
+      workspace:
+        type: string
+        description: The Windmill workspace id.
+      path:
+        type: string
+        description: The flow path to run (e.g. "f/examples/my_flow").
+      args:
+        type: object
+        description: The argument map passed to the flow as its inputs.
+  steps:
+  - stepId: getFlow
+    description: >-
+      Fetch the flow metadata to confirm the path exists before running it.
+    operationId: getFlowByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      flowPath: $response.body#/path
+  - stepId: runFlow
+    description: >-
+      Submit an asynchronous run of the flow by path. The response body is the
+      newly created job UUID as plain text.
+    operationId: runFlowByPath
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: path
+      in: path
+      value: $inputs.path
+    requestBody:
+      contentType: application/json
+      payload: $inputs.args
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      jobId: $response.body
+  - stepId: pollUpdates
+    description: >-
+      Poll the job-updates endpoint. While the job is still running the
+      completed flag is false and the flow loops back to poll again; once
+      completed it proceeds to read the result.
+    operationId: getJobUpdates
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runFlow.outputs.jobId
+    - name: running
+      in: query
+      value: true
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      completed: $response.body#/completed
+      running: $response.body#/running
+    onSuccess:
+    - name: stillRunning
+      type: goto
+      stepId: pollUpdates
+      criteria:
+      - context: $response.body
+        condition: $.completed == false
+        type: jsonpath
+    - name: flowDone
+      type: goto
+      stepId: getResult
+      criteria:
+      - context: $response.body
+        condition: $.completed == true
+        type: jsonpath
+  - stepId: getResult
+    description: >-
+      Read the completed job result once the flow run has finished.
+    operationId: getCompletedJobResult
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.token"
+    - name: workspace
+      in: path
+      value: $inputs.workspace
+    - name: id
+      in: path
+      value: $steps.runFlow.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      result: $response.body
+  outputs:
+    jobId: $steps.runFlow.outputs.jobId
+    result: $steps.getResult.outputs.result
