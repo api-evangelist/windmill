@@ -1,0 +1,959 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin helpers API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: helpers
+paths:
+  /w/{workspace}/job_helpers/duckdb_connection_settings:
+    post:
+      summary: Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket
+      operationId: duckdbConnectionSettings
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: S3 resource to connect to
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3_resource:
+                  $ref: '#/components/schemas/S3Resource'
+      responses:
+        '200':
+          description: Connection settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_settings_str:
+                    type: string
+  /w/{workspace}/job_helpers/v2/duckdb_connection_settings:
+    post:
+      summary: Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket
+      operationId: duckdbConnectionSettingsV2
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: S3 resource path to use to generate the connection settings. If empty, the S3 resource defined in the workspace settings will be used
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3_resource_path:
+                  type: string
+      responses:
+        '200':
+          description: Connection settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  connection_settings_str:
+                    type: string
+                  azure_container_path:
+                    type: string
+                required:
+                - connection_settings_str
+  /w/{workspace}/job_helpers/polars_connection_settings:
+    post:
+      summary: Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket
+      operationId: polarsConnectionSettings
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: S3 resource to connect to
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3_resource:
+                  $ref: '#/components/schemas/S3Resource'
+      responses:
+        '200':
+          description: Connection settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  endpoint_url:
+                    type: string
+                  key:
+                    type: string
+                  secret:
+                    type: string
+                  use_ssl:
+                    type: boolean
+                  cache_regions:
+                    type: boolean
+                  client_kwargs:
+                    $ref: '#/components/schemas/PolarsClientKwargs'
+                required:
+                - endpoint_url
+                - use_ssl
+                - cache_regions
+                - client_kwargs
+  /w/{workspace}/job_helpers/v2/polars_connection_settings:
+    post:
+      summary: Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket
+      operationId: polarsConnectionSettingsV2
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: S3 resource path to use to generate the connection settings. If empty, the S3 resource defined in the workspace settings will be used
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3_resource_path:
+                  type: string
+      responses:
+        '200':
+          description: Connection settings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  s3fs_args:
+                    type: object
+                    properties:
+                      endpoint_url:
+                        type: string
+                      key:
+                        type: string
+                      secret:
+                        type: string
+                      use_ssl:
+                        type: boolean
+                      cache_regions:
+                        type: boolean
+                      client_kwargs:
+                        $ref: '#/components/schemas/PolarsClientKwargs'
+                    required:
+                    - endpoint_url
+                    - use_ssl
+                    - cache_regions
+                    - client_kwargs
+                  storage_options:
+                    type: object
+                    properties:
+                      aws_endpoint_url:
+                        type: string
+                      aws_access_key_id:
+                        type: string
+                      aws_secret_access_key:
+                        type: string
+                      aws_region:
+                        type: string
+                      aws_allow_http:
+                        type: string
+                    required:
+                    - aws_endpoint_url
+                    - aws_region
+                    - aws_allow_http
+                required:
+                - s3fs_args
+                - storage_options
+  /w/{workspace}/job_helpers/v2/s3_resource_info:
+    post:
+      summary: Returns the S3 Resource Associated to the Provided Path, or the workspace default S3 resource
+      operationId: s3ResourceInfo
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: S3 resource path to use. If empty, the S3 resource defined in the workspace settings will be used
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3_resource_path:
+                  type: string
+      responses:
+        '200':
+          description: Connection settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3Resource'
+  /w/{workspace}/job_helpers/test_connection:
+    get:
+      summary: Test Connection to the Workspace Object Storage
+      operationId: datasetStorageTestConnection
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Connection settings
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/job_helpers/list_stored_files:
+    get:
+      summary: List the File Keys Available in a Workspace Object Storage
+      operationId: listStoredFiles
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: max_keys
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: marker
+        in: query
+        schema:
+          type: string
+      - name: prefix
+        in: query
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of file keys
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next_marker:
+                    type: string
+                  windmill_large_files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WindmillLargeFile'
+                  restricted_access:
+                    type: boolean
+                required:
+                - windmill_large_files
+  /w/{workspace}/job_helpers/load_file_metadata:
+    get:
+      summary: Load Metadata of the File
+      operationId: loadFileMetadata
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FileMetadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WindmillFileMetadata'
+  /w/{workspace}/job_helpers/load_file_preview:
+    get:
+      summary: Load a Preview of the File
+      operationId: loadFilePreview
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: file_size_in_bytes
+        in: query
+        schema:
+          type: integer
+      - name: file_mime_type
+        in: query
+        schema:
+          type: string
+      - name: csv_separator
+        in: query
+        schema:
+          type: string
+      - name: csv_has_header
+        in: query
+        schema:
+          type: boolean
+      - name: read_bytes_from
+        in: query
+        schema:
+          type: integer
+      - name: read_bytes_length
+        in: query
+        schema:
+          type: integer
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FilePreview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WindmillFilePreview'
+  /w/{workspace}/job_helpers/list_git_repo_files:
+    get:
+      summary: List the File Keys Available in Instance Object Storage with Resource-based Access Control
+      operationId: listGitRepoFiles
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: max_keys
+        in: query
+        required: true
+        schema:
+          type: integer
+      - name: marker
+        in: query
+        schema:
+          type: string
+      - name: prefix
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Must follow format gitrepos/{workspace_id}/{resource_path}/...
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of file keys
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  next_marker:
+                    type: string
+                  windmill_large_files:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/WindmillLargeFile'
+                  restricted_access:
+                    type: boolean
+                required:
+                - windmill_large_files
+  /w/{workspace}/job_helpers/load_git_repo_file_preview:
+    get:
+      summary: Load a Preview of a File from Instance Storage with Resource-based Access Control
+      operationId: loadGitRepoFilePreview
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Must follow format gitrepos/{workspace_id}/{resource_path}/...
+      - name: file_size_in_bytes
+        in: query
+        schema:
+          type: integer
+      - name: file_mime_type
+        in: query
+        schema:
+          type: string
+      - name: csv_separator
+        in: query
+        schema:
+          type: string
+      - name: csv_has_header
+        in: query
+        schema:
+          type: boolean
+      - name: read_bytes_from
+        in: query
+        schema:
+          type: integer
+      - name: read_bytes_length
+        in: query
+        schema:
+          type: integer
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FilePreview
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WindmillFilePreview'
+  /w/{workspace}/job_helpers/load_git_repo_file_metadata:
+    get:
+      summary: Load File Metadata from Instance Storage with Resource-based Access Control
+      operationId: loadGitRepoFileMetadata
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+          description: Must follow format gitrepos/{workspace_id}/{resource_path}/...
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: FileMetadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WindmillFileMetadata'
+  /w/{workspace}/job_helpers/check_s3_folder_exists:
+    get:
+      summary: Check if S3 Path Exists and is a Folder
+      operationId: checkS3FolderExists
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        description: S3 file key to check (e.g., gitrepos/{workspace_id}/u/user/resource/{commit_hash})
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: marker_file
+        description: 'If provided, the folder is only considered to exist when this exact
+
+          sentinel file is present under file_key. Lets callers distinguish a
+
+          fully populated folder from a partial upload.
+
+          '
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: S3 folder existence check result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exists:
+                    type: boolean
+                    description: Whether the path exists
+                  is_folder:
+                    type: boolean
+                    description: Whether the path is a folder (true) or file (false)
+                required:
+                - exists
+                - is_folder
+  /w/{workspace}/job_helpers/load_parquet_preview/{path}:
+    get:
+      summary: Load a Preview of a Parquet File
+      operationId: loadParquetPreview
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: offset
+        in: query
+        schema:
+          type: number
+      - name: limit
+        in: query
+        schema:
+          type: number
+      - name: sort_col
+        in: query
+        schema:
+          type: string
+      - name: sort_desc
+        in: query
+        schema:
+          type: boolean
+      - name: search_col
+        in: query
+        schema:
+          type: string
+      - name: search_term
+        in: query
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Parquet Preview
+          content:
+            application/json: {}
+  /w/{workspace}/job_helpers/load_table_count/{path}:
+    get:
+      summary: Load the Table Row Count
+      operationId: loadTableRowCount
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: search_col
+        in: query
+        schema:
+          type: string
+      - name: search_term
+        in: query
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Table count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: number
+  /w/{workspace}/job_helpers/load_csv_preview/{path}:
+    get:
+      summary: Load a Preview of a Csv File
+      operationId: loadCsvPreview
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: offset
+        in: query
+        schema:
+          type: number
+      - name: limit
+        in: query
+        schema:
+          type: number
+      - name: sort_col
+        in: query
+        schema:
+          type: string
+      - name: sort_desc
+        in: query
+        schema:
+          type: boolean
+      - name: search_col
+        in: query
+        schema:
+          type: string
+      - name: search_term
+        in: query
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      - name: csv_separator
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Csv Preview
+          content:
+            application/json: {}
+  /w/{workspace}/job_helpers/delete_s3_file:
+    delete:
+      summary: Permanently Delete File from S3
+      operationId: deleteS3File
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Confirmation
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/job_helpers/move_s3_file:
+    get:
+      summary: Move a S3 File from One Path to the Other Within the Same Bucket
+      operationId: moveS3File
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: src_file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: dest_file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Confirmation
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/job_helpers/upload_s3_file:
+    post:
+      summary: Upload File to S3 Bucket
+      operationId: fileUpload
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: file_extension
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: s3_resource_path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      - name: content_type
+        in: query
+        schema:
+          type: string
+      - name: content_disposition
+        in: query
+        schema:
+          type: string
+      requestBody:
+        description: File content
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File upload status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_key:
+                    type: string
+                required:
+                - file_key
+  /w/{workspace}/job_helpers/upload_git_repo_file_to_instance_storage:
+    post:
+      summary: Upload a File to the Instance Storage Gitrepos Section for Viewing
+      operationId: gitRepoViewerFileUpload
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: file_extension
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: s3_resource_path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      - name: content_type
+        in: query
+        schema:
+          type: string
+      - name: content_disposition
+        in: query
+        schema:
+          type: string
+      requestBody:
+        description: File content
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File upload status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_key:
+                    type: string
+                required:
+                - file_key
+  /w/{workspace}/job_helpers/download_s3_file:
+    get:
+      summary: Download File from S3 Bucket
+      operationId: fileDownload
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: s3_resource_path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chunk of the downloaded file
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /w/{workspace}/job_helpers/download_s3_parquet_file_as_csv:
+    get:
+      summary: Download File to S3 Bucket
+      operationId: fileDownloadParquetAsCsv
+      tags:
+      - helpers
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: file_key
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: s3_resource_path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The downloaded file
+          content:
+            text/csv:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    PolarsClientKwargs:
+      type: object
+      properties:
+        region_name:
+          type: string
+      required:
+      - region_name
+    WindmillFileMetadata:
+      type: object
+      properties:
+        mime_type:
+          type: string
+        size_in_bytes:
+          type: integer
+        last_modified:
+          type: string
+          format: date-time
+        expires:
+          type: string
+          format: date-time
+        version_id:
+          type: string
+    WindmillFilePreview:
+      type: object
+      properties:
+        msg:
+          type: string
+        content:
+          type: string
+        content_type:
+          type: string
+          enum:
+          - RawText
+          - Csv
+          - Parquet
+          - Unknown
+      required:
+      - content_type
+    WindmillLargeFile:
+      type: object
+      properties:
+        s3:
+          type: string
+      required:
+      - s3
+    S3Resource:
+      type: object
+      properties:
+        bucket:
+          type: string
+        region:
+          type: string
+        endPoint:
+          type: string
+        useSSL:
+          type: boolean
+        accessKey:
+          type: string
+        secretKey:
+          type: string
+        pathStyle:
+          type: boolean
+      required:
+      - bucket
+      - region
+      - endPoint
+      - useSSL
+      - pathStyle
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

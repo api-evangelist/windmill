@@ -1,0 +1,268 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin asset API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: asset
+paths:
+  /w/{workspace}/assets/list:
+    get:
+      summary: List All Assets in the Workspace with Cursor Pagination
+      operationId: listAssets
+      tags:
+      - asset
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: per_page
+        in: query
+        description: Number of items per page (max 1000, default 50)
+        schema:
+          type: integer
+          default: 50
+          minimum: 1
+          maximum: 1000
+      - name: cursor_created_at
+        in: query
+        description: Cursor timestamp for pagination (created_at of last item from previous page)
+        schema:
+          type: string
+          format: date-time
+      - name: cursor_id
+        in: query
+        description: Cursor ID for pagination (id of last item from previous page)
+        schema:
+          type: integer
+          format: int64
+      - name: asset_path
+        in: query
+        description: Filter by asset path (case-insensitive partial match)
+        schema:
+          type: string
+      - name: usage_path
+        in: query
+        description: Filter by usage path (case-insensitive partial match)
+        schema:
+          type: string
+      - name: asset_kinds
+        in: query
+        description: Filter by asset kinds (multiple values allowed)
+        schema:
+          type: string
+      - name: path
+        in: query
+        description: exact path match filter
+        schema:
+          type: string
+      - name: columns
+        in: query
+        description: JSONB subset match filter for columns using base64 encoded JSON
+        schema:
+          type: string
+      - name: broad_filter
+        description: broad search across multiple fields (case-insensitive substring match)
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: paginated assets in the workspace
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - assets
+                properties:
+                  assets:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - path
+                      - kind
+                      - usages
+                      properties:
+                        path:
+                          type: string
+                        kind:
+                          $ref: '#/components/schemas/AssetKind'
+                        usages:
+                          type: array
+                          items:
+                            type: object
+                            required:
+                            - path
+                            - kind
+                            properties:
+                              path:
+                                type: string
+                              kind:
+                                $ref: '#/components/schemas/AssetUsageKind'
+                              access_type:
+                                $ref: '#/components/schemas/AssetUsageAccessType'
+                              columns:
+                                type: object
+                                description: The columns used (for tables)
+                                additionalProperties:
+                                  $ref: '#/components/schemas/AssetUsageAccessType'
+                              created_at:
+                                type: string
+                                format: date-time
+                                description: When the asset was detected
+                              metadata:
+                                type: object
+                                properties:
+                                  runnable_path:
+                                    type: string
+                                    description: The path of the script/flow that was run (only present when kind is 'job')
+                                  job_kind:
+                                    type: string
+                                    description: The kind of job (script, flow, preview, etc.) (only present when kind is 'job')
+                        metadata:
+                          type: object
+                          properties:
+                            resource_type:
+                              type: string
+                              description: The type of the resource (only present when kind is 'resource')
+                  next_cursor:
+                    type: object
+                    description: Cursor for the next page (null if no more pages)
+                    nullable: true
+                    properties:
+                      created_at:
+                        type: string
+                        format: date-time
+                        description: Timestamp to use for next page
+                      id:
+                        type: integer
+                        format: int64
+                        description: ID to use for next page
+  /w/{workspace}/assets/list_by_usages:
+    post:
+      summary: List All Assets Used by Given Usages Paths
+      operationId: listAssetsByUsage
+      tags:
+      - asset
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: list assets by usages
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - usages
+              properties:
+                usages:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - path
+                    - kind
+                    properties:
+                      path:
+                        type: string
+                      kind:
+                        $ref: '#/components/schemas/AssetUsageKind'
+      responses:
+        '200':
+          description: all assets used by the given usage paths, in the same order
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                    - path
+                    - kind
+                    properties:
+                      path:
+                        type: string
+                      kind:
+                        $ref: '#/components/schemas/AssetKind'
+                      access_type:
+                        $ref: '#/components/schemas/AssetUsageAccessType'
+  /w/{workspace}/assets/list_favorites:
+    get:
+      summary: List All Favorite Assets for the Authenticated User
+      operationId: listFavoriteAssets
+      tags:
+      - asset
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: list of favorite assets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - path
+                  properties:
+                    path:
+                      type: string
+                      description: The asset path
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    AssetUsageAccessType:
+      type: string
+      enum:
+      - r
+      - w
+      - rw
+      nullable: true
+    AssetUsageKind:
+      type: string
+      enum:
+      - script
+      - flow
+      - job
+    AssetKind:
+      type: string
+      enum:
+      - s3object
+      - resource
+      - ducklake
+      - datatable
+      - volume
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

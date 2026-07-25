@@ -1,0 +1,273 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin capture API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: capture
+paths:
+  /w/{workspace}/capture/set_config:
+    post:
+      summary: Set Capture Config
+      operationId: setCaptureConfig
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: capture config
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                trigger_kind:
+                  $ref: '#/components/schemas/CaptureTriggerKind'
+                path:
+                  type: string
+                is_flow:
+                  type: boolean
+                trigger_config:
+                  type: object
+              required:
+              - trigger_kind
+              - path
+              - is_flow
+      responses:
+        '200':
+          description: capture config set
+          content:
+            application/json:
+              schema:
+                type: object
+  /w/{workspace}/capture/ping_config/{trigger_kind}/{runnable_kind}/{path}:
+    post:
+      summary: Ping Capture Config
+      operationId: pingCaptureConfig
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: trigger_kind
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/CaptureTriggerKind'
+      - $ref: '#/components/parameters/RunnableKind'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: capture config pinged
+  /w/{workspace}/capture/get_configs/{runnable_kind}/{path}:
+    get:
+      summary: Get Capture Configs for a Script or Flow
+      operationId: getCaptureConfigs
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableKind'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: capture configs for a script or flow
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CaptureConfig'
+  /w/{workspace}/capture/list/{runnable_kind}/{path}:
+    get:
+      summary: List Captures for a Script or Flow
+      operationId: listCaptures
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableKind'
+      - $ref: '#/components/parameters/Path'
+      - name: trigger_kind
+        in: query
+        schema:
+          $ref: '#/components/schemas/CaptureTriggerKind'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: list of captures for a script or flow
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Capture'
+  /w/{workspace}/capture/move/{runnable_kind}/{path}:
+    post:
+      summary: Move Captures and Configs for a Script or Flow
+      operationId: moveCapturesAndConfigs
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableKind'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: move captures and configs to a new path
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_path:
+                  type: string
+      responses:
+        '200':
+          description: captures and configs moved
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/capture/{id}:
+    get:
+      summary: Get a Capture
+      operationId: getCapture
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: capture
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Capture'
+    delete:
+      summary: Delete a Capture
+      operationId: deleteCapture
+      tags:
+      - capture
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: capture deleted
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    RunnableKind:
+      name: runnable_kind
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - script
+        - flow
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    Capture:
+      type: object
+      properties:
+        trigger_kind:
+          $ref: '#/components/schemas/CaptureTriggerKind'
+        main_args: {}
+        preprocessor_args: {}
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - trigger_kind
+      - main_args
+      - preprocessor_args
+      - id
+      - created_at
+    CaptureTriggerKind:
+      type: string
+      enum:
+      - webhook
+      - http
+      - websocket
+      - kafka
+      - default_email
+      - nats
+      - postgres
+      - sqs
+      - mqtt
+      - gcp
+      - azure
+      - email
+    CaptureConfig:
+      type: object
+      properties:
+        trigger_config: {}
+        trigger_kind:
+          $ref: '#/components/schemas/CaptureTriggerKind'
+        error:
+          type: string
+        last_server_ping:
+          type: string
+          format: date-time
+      required:
+      - trigger_kind
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

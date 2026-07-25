@@ -1,0 +1,558 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin azure_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: azure_trigger
+paths:
+  /w/{workspace}/azure_triggers/create:
+    post:
+      summary: Create an Azure Event Grid Trigger
+      operationId: createAzureTrigger
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureTriggerData'
+      responses:
+        '201':
+          description: azure trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/azure_triggers/update/{path}:
+    post:
+      summary: Update an Azure Event Grid Trigger
+      operationId: updateAzureTrigger
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureTriggerData'
+      responses:
+        '200':
+          description: azure trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/azure_triggers/delete/{path}:
+    delete:
+      summary: Delete an Azure Event Grid Trigger
+      operationId: deleteAzureTrigger
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: azure trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/azure_triggers/get/{path}:
+    get:
+      summary: Get an Azure Event Grid Trigger
+      operationId: getAzureTrigger
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: azure trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureTrigger'
+  /w/{workspace}/azure_triggers/list:
+    get:
+      summary: List Azure Triggers
+      operationId: listAzureTriggers
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by exact path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: azure trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AzureTrigger'
+  /w/{workspace}/azure_triggers/exists/{path}:
+    get:
+      summary: Check Whether an Azure Trigger Exists
+      operationId: existsAzureTrigger
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: true/false
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/azure_triggers/setmode/{path}:
+    post:
+      summary: Set Azure Trigger Mode
+      operationId: setAzureTriggerMode
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: trigger mode updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/azure_triggers/test:
+    post:
+      summary: Test Azure Service Principal Connection
+      operationId: testAzureConnection
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestAzureConnection'
+      responses:
+        '200':
+          description: connection successful
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/azure_triggers/namespaces/topics/list/{path}:
+    post:
+      summary: List Topics Under an Event Grid Namespace
+      operationId: listAzureNamespaceTopics
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureListTopics'
+      responses:
+        '200':
+          description: topic list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /w/{workspace}/azure_triggers/namespaces/subscriptions/list/{path}:
+    post:
+      summary: List Subscriptions Under a Namespace Topic
+      operationId: listAzureNamespaceSubscriptions
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureListSubscriptions'
+      responses:
+        '200':
+          description: subscription list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /w/{workspace}/azure_triggers/subscriptions/delete/{path}:
+    delete:
+      summary: Delete an Event Grid Subscription on Azure
+      operationId: deleteAzureSubscription
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureDeleteSubscription'
+      responses:
+        '200':
+          description: subscription deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/azure_triggers/namespaces/list/{path}:
+    post:
+      summary: List Event Grid Namespaces the Service Principal Can Access
+      operationId: listAzureNamespaces
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: namespace list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AzureArmResource'
+  /w/{workspace}/azure_triggers/basic/topics/list/{path}:
+    post:
+      summary: List Basic Event Grid Topics + System Topics the Service Principal Can Access
+      operationId: listAzureBasicTopics
+      tags:
+      - azure_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: topic list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AzureArmResource'
+components:
+  schemas:
+    AzureTriggerData:
+      type: object
+      description: Data for creating or updating an Azure Event Grid trigger.
+      properties:
+        azure_resource_path:
+          type: string
+        azure_mode:
+          $ref: '#/components/schemas/AzureMode'
+        scope_resource_id:
+          type: string
+        topic_name:
+          type: string
+          nullable: true
+        subscription_name:
+          type: string
+        base_endpoint:
+          type: string
+          description: Base URL for push delivery endpoints (push modes only).
+        event_type_filters:
+          type: array
+          items:
+            type: string
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+        is_flow:
+          type: boolean
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+        permissioned_as:
+          type: string
+        preserve_permissioned_as:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - azure_resource_path
+      - azure_mode
+      - scope_resource_id
+      - subscription_name
+    AzureArmResource:
+      type: object
+      description: An ARM resource the service principal can see.
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        type:
+          type: string
+      required:
+      - id
+      - name
+      - type
+    AzureListSubscriptions:
+      type: object
+      properties:
+        scope_resource_id:
+          type: string
+        topic_name:
+          type: string
+      required:
+      - scope_resource_id
+      - topic_name
+    AzureTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      description: An Azure Event Grid trigger that executes a script or flow when events arrive.
+      properties:
+        azure_resource_path:
+          type: string
+        azure_mode:
+          $ref: '#/components/schemas/AzureMode'
+        scope_resource_id:
+          type: string
+          description: ARM resource ID of the topic (basic) or namespace (namespace modes).
+        topic_name:
+          type: string
+          nullable: true
+          description: Topic name within the namespace (namespace modes only).
+        subscription_name:
+          type: string
+        event_type_filters:
+          type: array
+          items:
+            type: string
+          nullable: true
+        server_id:
+          type: string
+        last_server_ping:
+          type: string
+          format: date-time
+        error:
+          type: string
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+      required:
+      - azure_resource_path
+      - azure_mode
+      - scope_resource_id
+      - subscription_name
+    TestAzureConnection:
+      type: object
+      properties:
+        azure_resource_path:
+          type: string
+      required:
+      - azure_resource_path
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    AzureDeleteSubscription:
+      type: object
+      properties:
+        azure_mode:
+          $ref: '#/components/schemas/AzureMode'
+        scope_resource_id:
+          type: string
+        topic_name:
+          type: string
+          nullable: true
+        subscription_name:
+          type: string
+      required:
+      - azure_mode
+      - scope_resource_id
+      - subscription_name
+    AzureListTopics:
+      type: object
+      properties:
+        scope_resource_id:
+          type: string
+      required:
+      - scope_resource_id
+    AzureMode:
+      type: string
+      enum:
+      - basic_push
+      - namespace_push
+      - namespace_pull
+      description: Azure Event Grid trigger mode.
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

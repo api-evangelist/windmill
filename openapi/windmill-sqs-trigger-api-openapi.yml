@@ -1,0 +1,469 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin sqs_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: sqs_trigger
+paths:
+  /w/{workspace}/sqs_triggers/create:
+    post:
+      summary: Create Sqs Trigger
+      operationId: createSqsTrigger
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new sqs trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewSqsTrigger'
+      responses:
+        '201':
+          description: sqs trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/sqs_triggers/update/{path}:
+    post:
+      summary: Update Sqs Trigger
+      operationId: updateSqsTrigger
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditSqsTrigger'
+      responses:
+        '200':
+          description: sqs trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/sqs_triggers/delete/{path}:
+    delete:
+      summary: Delete Sqs Trigger
+      operationId: deleteSqsTrigger
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: sqs trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/sqs_triggers/get/{path}:
+    get:
+      summary: Get Sqs Trigger
+      operationId: getSqsTrigger
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: sqs trigger deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SqsTrigger'
+  /w/{workspace}/sqs_triggers/list:
+    get:
+      summary: List Sqs Triggers
+      operationId: listSqsTriggers
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: sqs trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SqsTrigger'
+  /w/{workspace}/sqs_triggers/exists/{path}:
+    get:
+      summary: Does Sqs Trigger Exists
+      operationId: existsSqsTrigger
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: sqs trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/sqs_triggers/setmode/{path}:
+    post:
+      summary: Set Enabled Sqs Trigger
+      operationId: setSqsTriggerMode
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated sqs trigger enable
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: sqs trigger enabled set
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/sqs_triggers/test:
+    post:
+      summary: Test Sqs Connection
+      operationId: testSqsConnection
+      tags:
+      - sqs_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: test sqs connection
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connection:
+                  type: object
+              required:
+              - connection
+      responses:
+        '200':
+          description: successfuly connected to sqs
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    NewSqsTrigger:
+      type: object
+      properties:
+        queue_url:
+          type: string
+          description: The full URL of the AWS SQS queue to poll for messages
+        aws_auth_resource_type:
+          $ref: '#/components/schemas/AwsAuthResourceType'
+          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
+        aws_resource_path:
+          type: string
+          description: Path to the AWS resource containing credentials or OIDC configuration
+        message_attributes:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Array of SQS message attribute names to include with each message
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - queue_url
+      - aws_resource_path
+      - path
+      - script_path
+      - is_flow
+      - aws_auth_resource_type
+    AwsAuthResourceType:
+      type: string
+      enum:
+      - oidc
+      - credentials
+    SqsTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        queue_url:
+          type: string
+          description: The full URL of the AWS SQS queue to poll for messages
+        aws_auth_resource_type:
+          $ref: '#/components/schemas/AwsAuthResourceType'
+          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
+        aws_resource_path:
+          type: string
+          description: Path to the AWS resource containing credentials or OIDC configuration
+        message_attributes:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Array of SQS message attribute names to include with each message
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - queue_url
+      - aws_resource_path
+      - aws_auth_resource_type
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    EditSqsTrigger:
+      type: object
+      properties:
+        queue_url:
+          type: string
+          description: The full URL of the AWS SQS queue to poll for messages
+        aws_auth_resource_type:
+          $ref: '#/components/schemas/AwsAuthResourceType'
+          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
+        aws_resource_path:
+          type: string
+          description: Path to the AWS resource containing credentials or OIDC configuration
+        message_attributes:
+          type: array
+          nullable: true
+          items:
+            type: string
+          description: Array of SQS message attribute names to include with each message
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - queue_url
+      - aws_resource_path
+      - path
+      - script_path
+      - is_flow
+      - enabled
+      - aws_auth_resource_type
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

@@ -1,0 +1,288 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin workspace_integration API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: workspace_integration
+paths:
+  /w/{workspace}/native_triggers/integrations/list:
+    get:
+      summary: List Available Native Trigger Services
+      operationId: listNativeTriggerServices
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: native trigger services list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceIntegrations'
+  /w/{workspace}/native_triggers/integrations/{service_name}/exists:
+    get:
+      summary: Check if Integrations for a Particular Service Exists
+      operationId: checkIfNativeTriggersServiceExists
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      responses:
+        '200':
+          description: integration exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/native_triggers/integrations/{service_name}/create:
+    post:
+      summary: Create Native Trigger Service
+      operationId: createNativeTriggerService
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      requestBody:
+        description: new native trigger service
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceOAuthConfig'
+      responses:
+        '201':
+          description: native trigger service created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/native_triggers/integrations/{service_name}/generate_connect_url:
+    post:
+      summary: Generate Connect Url for Native Trigger Service
+      operationId: generateNativeTriggerServiceConnectUrl
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      requestBody:
+        description: redirect_uri
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedirectUri'
+      responses:
+        '200':
+          description: native trigger service connect url
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/native_triggers/integrations/{service_name}/instance_sharing_available:
+    get:
+      summary: Check if Instance-level Credential Sharing is Available for a Service
+      operationId: checkInstanceSharingAvailable
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      responses:
+        '200':
+          description: whether instance sharing is available
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/native_triggers/integrations/{service_name}/generate_instance_connect_url:
+    post:
+      summary: Generate Connect Url Using Instance-level Credentials
+      operationId: generateInstanceConnectUrl
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      requestBody:
+        description: redirect_uri
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RedirectUri'
+      responses:
+        '200':
+          description: authorization URL using instance credentials
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/native_triggers/integrations/{service_name}/delete:
+    delete:
+      summary: Delete Native Trigger Service
+      operationId: deleteNativeTriggerService
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      responses:
+        '200':
+          description: native trigger service deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/native_triggers/integrations/{service_name}/callback:
+    post:
+      summary: Native Trigger Service Oauth Callback
+      operationId: nativeTriggerServiceCallback
+      tags:
+      - workspace_integration
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      requestBody:
+        description: OAuth callback data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                state:
+                  type: string
+                redirect_uri:
+                  type: string
+                resource_path:
+                  type: string
+              required:
+              - code
+              - state
+              - redirect_uri
+      responses:
+        '200':
+          description: native trigger service oauth completed
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    WorkspaceIntegrations:
+      type: object
+      properties:
+        service_name:
+          $ref: '#/components/schemas/NativeServiceName'
+        oauth_data:
+          nullable: true
+          $ref: '#/components/schemas/WorkspaceOAuthConfig'
+        resource_path:
+          type: string
+          nullable: true
+          description: Path to the resource storing the OAuth token
+      required:
+      - service_name
+    WorkspaceOAuthConfig:
+      type: object
+      properties:
+        client_id:
+          type: string
+          description: The OAuth client ID for the workspace
+        client_secret:
+          type: string
+          description: The OAuth client secret for the workspace
+        base_url:
+          type: string
+          format: uri
+          description: The base URL of the workspace
+        redirect_uri:
+          type: string
+          format: uri
+          description: The OAuth redirect URI
+      required:
+      - client_id
+      - client_secret
+      - base_url
+      - redirect_uri
+    RedirectUri:
+      type: object
+      properties:
+        redirect_uri:
+          type: string
+      required:
+      - redirect_uri
+    NativeServiceName:
+      type: string
+      enum:
+      - nextcloud
+      - google
+      - github
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin settings API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: settings
+paths:
+  /version:
+    get:
+      summary: Get Backend Version
+      operationId: backendVersion
+      tags:
+      - settings
+      responses:
+        '200':
+          description: git version of backend
+          content:
+            text/plain:
+              schema:
+                type: string
+  /uptodate:
+    get:
+      summary: Is Backend up to Date
+      operationId: backendUptodate
+      tags:
+      - settings
+      responses:
+        '200':
+          description: is backend up to date
+          content:
+            text/plain:
+              schema:
+                type: string
+  /ee_license:
+    get:
+      summary: Get License Id
+      operationId: getLicenseId
+      tags:
+      - settings
+      responses:
+        '200':
+          description: get license id (empty if not ee)
+          content:
+            text/plain:
+              schema:
+                type: string
+  /openapi.yaml:
+    get:
+      summary: Get Openapi Yaml Spec
+      operationId: getOpenApiYaml
+      tags:
+      - settings
+      responses:
+        '200':
+          description: openapi yaml file content
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

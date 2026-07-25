@@ -1,0 +1,1317 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin setting API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: setting
+paths:
+  /settings/refresh_custom_instance_user_pwd:
+    post:
+      summary: Refreshes the Password for the Custom_instance_user
+      operationId: refreshCustomInstanceUserPwd
+      tags:
+      - setting
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  /settings/list_custom_instance_pg_databases:
+    post:
+      summary: Returns the Set-up Statuses of Custom Instance Pg Databases
+      operationId: listCustomInstanceDbs
+      tags:
+      - setting
+      responses:
+        '200':
+          description: Statuses of all custom instance dbs
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/CustomInstanceDb'
+  /settings/setup_custom_instance_pg_database/{name}:
+    post:
+      summary: Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user
+      operationId: setupCustomInstanceDb
+      tags:
+      - setting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  $ref: '#/components/schemas/CustomInstanceDbTag'
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: The name of the database to create
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomInstanceDb'
+  /settings/drop_custom_instance_pg_database/{name}:
+    post:
+      summary: Drops a Custom Instance Database (superadmin Only, Irreversible)
+      operationId: dropCustomInstanceDb
+      tags:
+      - setting
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: The name of the database to drop
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/global/{key}:
+    get:
+      summary: Get Global Settings
+      operationId: getGlobal
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/Key'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+    post:
+      summary: Post Global Settings
+      operationId: setGlobal
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/Key'
+      requestBody:
+        description: value set
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value: {}
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings_u/ruff_config:
+    get:
+      summary: Get Instance Ruff Config (unauthenticated)
+      description: 'Returns the instance-level ruff.toml content as plain text.
+
+        Intentionally unauthenticated so the LSP extra container can poll it
+
+        across any deployment topology. Responds with an empty body when the
+
+        instance config is unset. Ruff configuration is lint/format policy,
+
+        not a credential.
+
+        '
+      operationId: getRuffConfig
+      tags:
+      - setting
+      responses:
+        '200':
+          description: ruff.toml content (may be empty)
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/local:
+    get:
+      summary: Get Local Settings
+      operationId: getLocal
+      tags:
+      - setting
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /settings/test_smtp:
+    post:
+      summary: Test Smtp
+      operationId: testSmtp
+      tags:
+      - setting
+      requestBody:
+        description: test smtp payload
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                to:
+                  type: string
+                smtp:
+                  type: object
+                  properties:
+                    host:
+                      type: string
+                    username:
+                      type: string
+                    password:
+                      type: string
+                    port:
+                      type: integer
+                    from:
+                      type: string
+                    tls_implicit:
+                      type: boolean
+                    disable_tls:
+                      type: boolean
+                  required:
+                  - host
+                  - username
+                  - password
+                  - port
+                  - from
+                  - tls_implicit
+                  - disable_tls
+              required:
+              - to
+              - smtp
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/test_critical_channels:
+    post:
+      summary: Test Critical Channels
+      operationId: testCriticalChannels
+      tags:
+      - setting
+      requestBody:
+        description: test critical channel payload
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  email:
+                    type: string
+                  slack_channel:
+                    type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/critical_alerts:
+    get:
+      summary: Get All Critical Alerts
+      operationId: getCriticalAlerts
+      tags:
+      - setting
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+          description: The page number to retrieve (minimum value is 1)
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          default: 10
+          maximum: 100
+          description: Number of alerts per page (maximum is 100)
+      - in: query
+        name: acknowledged
+        schema:
+          type: boolean
+          nullable: true
+          description: Filter by acknowledgment status; true for acknowledged, false for unacknowledged, and omit for all alerts
+      responses:
+        '200':
+          description: Successfully retrieved all critical alerts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CriticalAlert'
+                  total_rows:
+                    type: integer
+                    description: Total number of rows matching the query.
+                    example: 100
+                  total_pages:
+                    type: integer
+                    description: Total number of pages based on the page size.
+                    example: 10
+  /settings/critical_alerts/{id}/acknowledge:
+    post:
+      summary: Acknowledge a Critical Alert
+      operationId: acknowledgeCriticalAlert
+      tags:
+      - setting
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: The ID of the critical alert to acknowledge
+      responses:
+        '200':
+          description: Successfully acknowledged the critical alert
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Critical alert acknowledged
+  /settings/critical_alerts/acknowledge_all:
+    post:
+      summary: Acknowledge All Unacknowledged Critical Alerts
+      operationId: acknowledgeAllCriticalAlerts
+      tags:
+      - setting
+      responses:
+        '200':
+          description: Successfully acknowledged all unacknowledged critical alerts.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: All unacknowledged critical alerts acknowledged
+  /settings/test_license_key:
+    post:
+      summary: Test License Key
+      operationId: testLicenseKey
+      tags:
+      - setting
+      requestBody:
+        description: test license key
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                license_key:
+                  type: string
+              required:
+              - license_key
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/test_object_storage_config:
+    post:
+      summary: Test Object Storage Config
+      operationId: testObjectStorageConfig
+      tags:
+      - setting
+      requestBody:
+        description: test object storage config
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/object_storage_usage:
+    get:
+      summary: Get Current or Last Object Storage Usage Computation (null if Never Run)
+      operationId: getObjectStorageUsage
+      tags:
+      - setting
+      responses:
+        '200':
+          description: current or last storage-usage computation state
+          content:
+            application/json:
+              schema:
+                nullable: true
+                type: object
+                properties:
+                  running:
+                    type: boolean
+                  started_at:
+                    type: string
+                    format: date-time
+                  finished_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  current_prefix:
+                    type: string
+                    nullable: true
+                  scanned_objects:
+                    type: integer
+                    format: int64
+                  folders:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        prefix:
+                          type: string
+                        size:
+                          type: integer
+                          format: int64
+                        partial:
+                          type: boolean
+                      required:
+                      - prefix
+                      - size
+                  error:
+                    type: string
+                    nullable: true
+                required:
+                - running
+                - started_at
+                - scanned_objects
+                - folders
+    post:
+      summary: Start a Background Computation of Object Storage Usage by Top-level Folder
+      operationId: computeObjectStorageUsage
+      tags:
+      - setting
+      responses:
+        '202':
+          description: computation started
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/run_log_cleanup:
+    post:
+      summary: Start a Manual Cleanup of Expired Logs from Object Storage
+      operationId: runLogCleanup
+      tags:
+      - setting
+      responses:
+        '202':
+          description: cleanup started
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/log_cleanup_status:
+    get:
+      summary: Get Status of the Manual Log Cleanup Task
+      operationId: getLogCleanupStatus
+      tags:
+      - setting
+      responses:
+        '200':
+          description: current or last log cleanup status (null if never run)
+          content:
+            application/json:
+              schema:
+                nullable: true
+                type: object
+                properties:
+                  running:
+                    type: boolean
+                  started_at:
+                    type: string
+                    format: date-time
+                  finished_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  phase:
+                    type: string
+                  total_service:
+                    type: integer
+                    format: int64
+                  processed_service:
+                    type: integer
+                    format: int64
+                  total_jobs:
+                    type: integer
+                    format: int64
+                  processed_jobs:
+                    type: integer
+                    format: int64
+                  s3_deleted:
+                    type: integer
+                    format: int64
+                  orphans_scanned:
+                    type: integer
+                    format: int64
+                  orphans_deleted:
+                    type: integer
+                    format: int64
+                  errors:
+                    type: integer
+                    format: int64
+                  last_error:
+                    type: string
+                    nullable: true
+                required:
+                - running
+                - started_at
+                - phase
+                - total_service
+                - processed_service
+                - total_jobs
+                - processed_jobs
+                - s3_deleted
+                - orphans_scanned
+                - orphans_deleted
+                - errors
+  /settings/send_stats:
+    post:
+      summary: Send Stats
+      operationId: sendStats
+      tags:
+      - setting
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/restart_worker_group/{worker_group}:
+    post:
+      summary: Restart Worker Group
+      description: Send a restart signal to all workers in the specified worker group. Workers will gracefully shut down and are expected to be restarted by their supervisor. Requires devops role.
+      operationId: restartWorkerGroup
+      tags:
+      - setting
+      parameters:
+      - name: worker_group
+        in: path
+        required: true
+        schema:
+          type: string
+        description: the name of the worker group to restart
+      responses:
+        '200':
+          description: restart signal sent
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/get_stats:
+    get:
+      summary: Get Telemetry Stats with HMAC Signature (EE Only)
+      operationId: getStats
+      tags:
+      - setting
+      responses:
+        '200':
+          description: telemetry stats JSON with signature
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  signature:
+                    type: string
+                  data:
+                    type: string
+  /settings/latest_key_renewal_attempt:
+    get:
+      summary: Get Latest Key Renewal Attempt
+      operationId: getLatestKeyRenewalAttempt
+      tags:
+      - setting
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
+                  attempted_at:
+                    type: string
+                    format: date-time
+                required:
+                - result
+                - attempted_at
+                nullable: true
+  /settings/renew_license_key:
+    post:
+      summary: Renew License Key
+      operationId: renewLicenseKey
+      tags:
+      - setting
+      parameters:
+      - name: license_key
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/customer_portal:
+    post:
+      summary: Create Customer Portal Session
+      operationId: createCustomerPortalSession
+      tags:
+      - setting
+      parameters:
+      - name: license_key
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: url to portal
+          content:
+            text/plain:
+              schema:
+                type: string
+  /saml/test_metadata:
+    post:
+      summary: Test Metadata
+      operationId: testMetadata
+      tags:
+      - setting
+      requestBody:
+        description: test metadata
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/list_global:
+    get:
+      summary: List Global Settings
+      operationId: listGlobalSettings
+      tags:
+      - setting
+      responses:
+        '200':
+          description: list of settings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GlobalSetting'
+  /settings/instance_config:
+    get:
+      summary: Get Full Instance Config (global Settings + Worker Configs)
+      operationId: getInstanceConfig
+      tags:
+      - setting
+      responses:
+        '200':
+          description: full instance configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceConfig'
+    put:
+      summary: Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are Skipped.
+      operationId: setInstanceConfig
+      tags:
+      - setting
+      requestBody:
+        description: full instance configuration to apply
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InstanceConfig'
+      responses:
+        '200':
+          description: instance config updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /min_keep_alive_version:
+    get:
+      summary: Get Minimum Worker Versions Required to Stay Alive
+      operationId: getMinKeepAliveVersion
+      tags:
+      - setting
+      responses:
+        '200':
+          description: minimum keep-alive versions for workers and agents
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - worker
+                - agent
+                properties:
+                  worker:
+                    type: string
+                    description: minimum version for normal workers
+                  agent:
+                    type: string
+                    description: minimum version for agent workers
+  /.well-known/jwks.json:
+    get:
+      summary: Get JWKS for Vault JWT Authentication
+      operationId: getJwks
+      tags:
+      - setting
+      responses:
+        '200':
+          description: JSON Web Key Set
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JwksResponse'
+  /settings/test_secret_backend:
+    post:
+      summary: Test Secret Backend Connection (HashiCorp Vault)
+      operationId: testSecretBackend
+      tags:
+      - setting
+      requestBody:
+        description: Vault settings to test
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaultSettings'
+      responses:
+        '200':
+          description: connection successful
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/migrate_secrets_to_vault:
+    post:
+      summary: Migrate Secrets from Database to HashiCorp Vault
+      operationId: migrateSecretsToVault
+      tags:
+      - setting
+      requestBody:
+        description: Vault settings for migration target
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaultSettings'
+      responses:
+        '200':
+          description: migration report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretMigrationReport'
+  /settings/migrate_secrets_to_database:
+    post:
+      summary: Migrate Secrets from HashiCorp Vault to Database
+      operationId: migrateSecretsToDatabase
+      tags:
+      - setting
+      requestBody:
+        description: Vault settings for migration source
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VaultSettings'
+      responses:
+        '200':
+          description: migration report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretMigrationReport'
+  /settings/test_azure_kv_backend:
+    post:
+      summary: Test Azure Key Vault Connection
+      operationId: testAzureKvBackend
+      tags:
+      - setting
+      requestBody:
+        description: Azure Key Vault settings to test
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureKeyVaultSettings'
+      responses:
+        '200':
+          description: connection successful
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/migrate_secrets_to_azure_kv:
+    post:
+      summary: Migrate Secrets from Database to Azure Key Vault
+      operationId: migrateSecretsToAzureKv
+      tags:
+      - setting
+      requestBody:
+        description: Azure Key Vault settings for migration target
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureKeyVaultSettings'
+      responses:
+        '200':
+          description: migration report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretMigrationReport'
+  /settings/migrate_secrets_from_azure_kv:
+    post:
+      summary: Migrate Secrets from Azure Key Vault to Database
+      operationId: migrateSecretsFromAzureKv
+      tags:
+      - setting
+      requestBody:
+        description: Azure Key Vault settings for migration source
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AzureKeyVaultSettings'
+      responses:
+        '200':
+          description: migration report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretMigrationReport'
+  /settings/test_aws_sm_backend:
+    post:
+      summary: Test Connection to AWS Secrets Manager
+      operationId: testAwsSmBackend
+      tags:
+      - setting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsSecretsManagerSettings'
+      responses:
+        '200':
+          description: connection test result
+          content:
+            text/plain:
+              schema:
+                type: string
+  /settings/migrate_secrets_to_aws_sm:
+    post:
+      summary: Migrate Secrets from Database to AWS Secrets Manager
+      operationId: migrateSecretsToAwsSm
+      tags:
+      - setting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsSecretsManagerSettings'
+      responses:
+        '200':
+          description: migration report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretMigrationReport'
+  /settings/migrate_secrets_from_aws_sm:
+    post:
+      summary: Migrate Secrets from AWS Secrets Manager to Database
+      operationId: migrateSecretsFromAwsSm
+      tags:
+      - setting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AwsSecretsManagerSettings'
+      responses:
+        '200':
+          description: migration report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecretMigrationReport'
+  /w/{workspace}/workspaces/get_secondary_storage_names:
+    get:
+      summary: Get Secondary Storage Names
+      operationId: getSecondaryStorageNames
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: include_default
+        in: query
+        description: If true, include "_default_" in the list if primary workspace storage is set
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/workspaces/critical_alerts:
+    get:
+      summary: Get All Critical Alerts for this Workspace
+      operationId: workspaceGetCriticalAlerts
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+          description: The page number to retrieve (minimum value is 1)
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          default: 10
+          maximum: 100
+          description: Number of alerts per page (maximum is 100)
+      - in: query
+        name: acknowledged
+        schema:
+          type: boolean
+          nullable: true
+          description: Filter by acknowledgment status; true for acknowledged, false for unacknowledged, and omit for all alerts
+      responses:
+        '200':
+          description: Successfully retrieved all critical alerts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  alerts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CriticalAlert'
+                  total_rows:
+                    type: integer
+                    description: Total number of rows matching the query.
+                    example: 100
+                  total_pages:
+                    type: integer
+                    description: Total number of pages based on the page size.
+                    example: 10
+  /w/{workspace}/workspaces/critical_alerts/{id}/acknowledge:
+    post:
+      summary: Acknowledge a Critical Alert for this Workspace
+      operationId: workspaceAcknowledgeCriticalAlert
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        description: The ID of the critical alert to acknowledge
+      responses:
+        '200':
+          description: Successfully acknowledged the critical alert
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Critical alert acknowledged
+  /w/{workspace}/workspaces/critical_alerts/acknowledge_all:
+    post:
+      summary: Acknowledge All Unacknowledged Critical Alerts for this Workspace
+      operationId: workspaceAcknowledgeAllCriticalAlerts
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Successfully acknowledged all unacknowledged critical alerts.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: All unacknowledged critical alerts acknowledged
+  /w/{workspace}/workspaces/critical_alerts/mute:
+    post:
+      summary: Mute Critical Alert UI for this Workspace
+      operationId: workspaceMuteCriticalAlertsUI
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Boolean flag to mute critical alerts.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mute_critical_alerts:
+                  type: boolean
+                  description: Whether critical alerts should be muted.
+                  example: true
+      responses:
+        '200':
+          description: Successfully updated mute critical alert settings.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'Updated mute critical alert UI settings for workspace: workspace_id'
+  /w/{workspace}/workspaces/public_app_rate_limit:
+    post:
+      summary: Set Public App Rate Limit for this Workspace
+      operationId: setPublicAppRateLimit
+      tags:
+      - setting
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Public app rate limit configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                public_app_execution_limit_per_minute:
+                  type: integer
+                  description: Rate limit for public app executions per minute per server. NULL or 0 to disable.
+                  example: 100
+      responses:
+        '200':
+          description: Successfully updated public app rate limit settings.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: 'Updated public app rate limit for workspace: workspace_id'
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Key:
+      name: key
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    InstanceConfig:
+      type: object
+      description: Unified instance configuration combining global settings and worker group configs
+      properties:
+        global_settings:
+          type: object
+          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
+
+            '
+          additionalProperties: true
+        worker_configs:
+          type: object
+          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
+
+            '
+          additionalProperties:
+            type: object
+            additionalProperties: true
+    CustomInstanceDb:
+      type: object
+      required:
+      - logs
+      - success
+      properties:
+        logs:
+          $ref: '#/components/schemas/CustomInstanceDbLogs'
+        success:
+          type: boolean
+          description: Whether the operation completed successfully
+          example: true
+        error:
+          type: string
+          nullable: true
+          description: Error message if the operation failed
+          example: Connection timeout
+        tag:
+          $ref: '#/components/schemas/CustomInstanceDbTag'
+    CustomInstanceDbLogs:
+      type: object
+      properties:
+        super_admin:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        database_credentials:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        valid_dbname:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        created_database:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        db_connect:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        grant_permissions:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+    JwksResponse:
+      type: object
+      required:
+      - keys
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Array of JSON Web Keys for JWT verification
+    SecretMigrationReport:
+      type: object
+      required:
+      - total_secrets
+      - migrated_count
+      - failed_count
+      - failures
+      properties:
+        total_secrets:
+          type: integer
+          format: int64
+          description: Total number of secrets found
+        migrated_count:
+          type: integer
+          format: int64
+          description: Number of secrets successfully migrated
+        failed_count:
+          type: integer
+          format: int64
+          description: Number of secrets that failed to migrate
+        failures:
+          type: array
+          items:
+            $ref: '#/components/schemas/SecretMigrationFailure'
+          description: Details of any failures encountered during migration
+    VaultSettings:
+      type: object
+      required:
+      - address
+      - mount_path
+      properties:
+        address:
+          type: string
+          description: HashiCorp Vault server address (e.g., https://vault.company.com:8200)
+        mount_path:
+          type: string
+          description: KV v2 secrets engine mount path (e.g., windmill)
+        jwt_role:
+          type: string
+          description: Vault JWT auth role name for Windmill (optional, if not provided token auth is used)
+        namespace:
+          type: string
+          description: Vault Enterprise namespace (optional)
+        token:
+          type: string
+          description: Static Vault token for testing/development (optional, if provided this is used instead of JWT authentication)
+        skip_ssl_verify:
+          type: boolean
+          description: Skip TLS certificate verification when connecting to Vault. Only use for self-signed certificates in development environments.
+    SecretMigrationFailure:
+      type: object
+      required:
+      - workspace_id
+      - path
+      - error
+      properties:
+        workspace_id:
+          type: string
+          description: Workspace ID where the secret is located
+        path:
+          type: string
+          description: Path of the secret that failed to migrate
+        error:
+          type: string
+          description: Error message
+    AwsSecretsManagerSettings:
+      type: object
+      required:
+      - region
+      properties:
+        region:
+          type: string
+          description: AWS region (e.g., us-east-1)
+        access_key_id:
+          type: string
+          description: AWS Access Key ID (optional, uses default credential chain if not provided)
+        secret_access_key:
+          type: string
+          description: AWS Secret Access Key (optional)
+        endpoint_url:
+          type: string
+          description: Custom endpoint URL for testing (e.g., LocalStack)
+        prefix:
+          type: string
+          description: Prefix for secret names (e.g., windmill/)
+    CustomInstanceDbTag:
+      type: string
+      enum:
+      - ducklake
+      - datatable
+    LoggedWizardStatus:
+      type: string
+      enum:
+      - OK
+      - SKIP
+      - FAIL
+    GlobalSetting:
+      type: object
+      properties:
+        name:
+          type: string
+        value: {}
+      required:
+      - name
+      - value
+    CriticalAlert:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the alert
+        alert_type:
+          type: string
+          description: Type of alert (e.g., critical_error)
+        message:
+          type: string
+          description: The message content of the alert
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the alert was created
+        acknowledged:
+          type: boolean
+          nullable: true
+          description: Acknowledgment status of the alert, can be true, false, or null if not set
+        workspace_id:
+          type: string
+          nullable: true
+          description: Workspace id if the alert is in the scope of a workspace
+    AzureKeyVaultSettings:
+      type: object
+      required:
+      - vault_url
+      - tenant_id
+      - client_id
+      properties:
+        vault_url:
+          type: string
+          description: Azure Key Vault URL (e.g., https://myvault.vault.azure.net)
+        tenant_id:
+          type: string
+          description: Azure AD tenant ID
+        client_id:
+          type: string
+          description: Azure AD application (client) ID
+        client_secret:
+          type: string
+          description: Azure AD client secret
+        token:
+          type: string
+          description: Static Bearer token for testing/development (optional, if provided this is used instead of OAuth2 authentication)
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

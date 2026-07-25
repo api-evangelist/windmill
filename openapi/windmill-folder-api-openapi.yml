@@ -1,0 +1,395 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin folder API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: folder
+paths:
+  /w/{workspace}/folders/list:
+    get:
+      summary: List Folders
+      operationId: listFolders
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: folder list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Folder'
+  /w/{workspace}/folders/listnames:
+    get:
+      summary: List Folder Names
+      operationId: listFolderNames
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: only_member_of
+        in: query
+        description: only list the folders the user is member of (default false)
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: folder list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/folders/create:
+    post:
+      summary: Create Folder
+      operationId: createFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: create folder
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                summary:
+                  type: string
+                owners:
+                  type: array
+                  items:
+                    type: string
+                extra_perms:
+                  additionalProperties:
+                    type: boolean
+                default_permissioned_as:
+                  $ref: '#/components/schemas/FolderDefaultPermissionedAs'
+              required:
+              - name
+      responses:
+        '200':
+          description: folder created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/folders/update/{name}:
+    post:
+      summary: Update Folder
+      operationId: updateFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: update folder
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                summary:
+                  type: string
+                owners:
+                  type: array
+                  items:
+                    type: string
+                extra_perms:
+                  additionalProperties:
+                    type: boolean
+                default_permissioned_as:
+                  $ref: '#/components/schemas/FolderDefaultPermissionedAs'
+      responses:
+        '200':
+          description: folder updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/folders/delete/{name}:
+    delete:
+      summary: Delete Folder
+      operationId: deleteFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: folder deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/folders/get/{name}:
+    get:
+      summary: Get Folder
+      operationId: getFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Folder'
+  /w/{workspace}/folders/exists/{name}:
+    get:
+      summary: Exists Folder
+      operationId: existsFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: folder exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/folders/getusage/{name}:
+    get:
+      summary: Get Folder Usage
+      operationId: getFolderUsage
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: folder
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scripts:
+                    type: number
+                  flows:
+                    type: number
+                  apps:
+                    type: number
+                  resources:
+                    type: number
+                  variables:
+                    type: number
+                  schedules:
+                    type: number
+                required:
+                - scripts
+                - flows
+                - apps
+                - resources
+                - variables
+                - schedules
+  /w/{workspace}/folders/addowner/{name}:
+    post:
+      summary: Add Owner to Folder
+      operationId: addOwnerToFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: owner user to folder
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+              required:
+              - owner
+      responses:
+        '200':
+          description: owner added to folder
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/folders/removeowner/{name}:
+    post:
+      summary: Remove Owner to Folder
+      operationId: removeOwnerToFolder
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: added owner to folder
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+                write:
+                  type: boolean
+              required:
+              - owner
+      responses:
+        '200':
+          description: owner removed from folder
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/folders_history/get/{name}:
+    get:
+      summary: Get Folder Permission History
+      operationId: getFolderPermissionHistory
+      tags:
+      - folder
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: folder permission history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    changed_by:
+                      type: string
+                    changed_at:
+                      type: string
+                      format: date-time
+                    change_type:
+                      type: string
+                    affected:
+                      type: string
+                      nullable: true
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    Folder:
+      type: object
+      properties:
+        name:
+          type: string
+        owners:
+          type: array
+          items:
+            type: string
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        summary:
+          type: string
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        default_permissioned_as:
+          $ref: '#/components/schemas/FolderDefaultPermissionedAs'
+      required:
+      - name
+      - owners
+      - extra_perms
+    FolderDefaultPermissionedAs:
+      description: 'Ordered list of rules applied at create-time when admins or `wm_deployers` members deploy items in this folder. The first rule whose `path_glob` matches the item path (relative to the folder root) wins, and its `permissioned_as` is used as the default.
+
+        '
+      type: array
+      items:
+        type: object
+        required:
+        - path_glob
+        - permissioned_as
+        properties:
+          path_glob:
+            type: string
+            description: 'Glob pattern evaluated against the item path *relative* to the folder root (e.g. "jobs/**" matches every item whose full path is `f/<folder>/jobs/...`). Supports `*`, `**`, `?`, `[abc]`, `{a,b}`.
+
+              '
+          permissioned_as:
+            type: string
+            description: 'Target identity the matched item should be permissioned as. Must be `u/<username>`, `g/<groupname>`, or an email that exists in this workspace.
+
+              '
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin config API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: config
+paths:
+  /configs/list_worker_groups:
+    get:
+      summary: List Worker Groups
+      operationId: listWorkerGroups
+      tags:
+      - config
+      responses:
+        '200':
+          description: a list of worker group configs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    config: {}
+                  required:
+                  - name
+                  - config
+  /configs/get/{name}:
+    get:
+      summary: Get Config
+      operationId: get config
+      tags:
+      - config
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: a config
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configs'
+  /configs/update/{name}:
+    post:
+      summary: Update Config
+      operationId: updateConfig
+      tags:
+      - config
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: worker group
+        required: true
+        content:
+          application/json:
+            schema: {}
+      responses:
+        '200':
+          description: Update a worker group
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete Config
+      operationId: deleteConfig
+      tags:
+      - config
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: Delete config
+          content:
+            text/plain:
+              schema:
+                type: string
+  /configs/list:
+    get:
+      summary: List Configs
+      operationId: listConfigs
+      tags:
+      - config
+      responses:
+        '200':
+          description: list of configs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Config'
+  /configs/list_autoscaling_events/{worker_group}:
+    get:
+      summary: List Autoscaling Events
+      operationId: listAutoscalingEvents
+      tags:
+      - config
+      parameters:
+      - name: worker_group
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: List of autoscaling events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AutoscalingEvent'
+  /configs/native_kubernetes_autoscaling_healthcheck:
+    get:
+      summary: Check Kubernetes Autoscaling Health for a Worker Group
+      operationId: nativeKubernetesAutoscalingHealthcheck
+      tags:
+      - config
+      responses:
+        '200':
+          description: Kubernetes autoscaling is healthy
+        '400':
+          description: Error
+          content:
+            text/plain:
+              schema:
+                type: string
+  /configs/list_available_python_versions:
+    get:
+      summary: Get Currently Available Python Versions Provided by UV.
+      operationId: listAvailablePythonVersions
+      tags:
+      - config
+      responses:
+        '200':
+          description: List of python versions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /configs/list_all_workspace_dependencies:
+    get:
+      summary: List All Workspace Dependencies
+      operationId: listAllWorkspaceDependencies
+      tags:
+      - config
+      responses:
+        '200':
+          description: a list of workspace dependency summaries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    workspace_id:
+                      type: string
+                    name:
+                      type: string
+                    language:
+                      $ref: '#/components/schemas/ScriptLang'
+                  required:
+                  - workspace_id
+                  - language
+  /configs/list_all_dedicated_with_deps:
+    get:
+      summary: List All Dedicated Scripts with Their Dependencies
+      operationId: listAllDedicatedWithDeps
+      tags:
+      - config
+      responses:
+        '200':
+          description: a list of dedicated scripts with workspace dependencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    workspace_id:
+                      type: string
+                    path:
+                      type: string
+                    language:
+                      $ref: '#/components/schemas/ScriptLang'
+                    workspace_dep_names:
+                      type: array
+                      items:
+                        type: string
+                  required:
+                  - workspace_id
+                  - path
+                  - language
+                  - workspace_dep_names
+components:
+  parameters:
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    Config:
+      type: object
+      properties:
+        name:
+          type: string
+        config:
+          type: object
+      required:
+      - name
+    Configs:
+      type: object
+      nullable: true
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+    Alert:
+      type: object
+      properties:
+        name:
+          type: string
+        tags_to_monitor:
+          type: array
+          items:
+            type: string
+        jobs_num_threshold:
+          type: integer
+        alert_cooldown_seconds:
+          type: integer
+        alert_time_threshold_seconds:
+          type: integer
+      required:
+      - name
+      - tags_to_monitor
+      - jobs_num_threshold
+      - alert_cooldown_seconds
+      - alert_time_threshold_seconds
+    AutoscalingEvent:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        worker_group:
+          type: string
+        event_type:
+          type: string
+        desired_workers:
+          type: integer
+        reason:
+          type: string
+        applied_at:
+          type: string
+          format: date-time
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

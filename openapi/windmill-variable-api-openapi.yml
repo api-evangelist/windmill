@@ -1,0 +1,436 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin variable API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: variable
+paths:
+  /w/{workspace}/variables/create:
+    post:
+      summary: Create Variable
+      operationId: createVariable
+      x-mcp-tool: true
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: already_encrypted
+        description: whether the variable is already encrypted (default false)
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: new variable
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateVariable'
+      responses:
+        '201':
+          description: variable created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/variables/encrypt:
+    post:
+      summary: Encrypt Value
+      operationId: encryptValue
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new variable
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: encrypted value
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/variables/delete/{path}:
+    delete:
+      summary: Delete Variable
+      operationId: deleteVariable
+      x-mcp-tool: true
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: variable deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/variables/delete_bulk:
+    delete:
+      summary: Delete Variables in Bulk
+      operationId: deleteVariablesBulk
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: paths to delete
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paths:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - paths
+      responses:
+        '200':
+          description: deleted paths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/variables/update/{path}:
+    post:
+      summary: Update Variable
+      operationId: updateVariable
+      x-mcp-tool: true
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: already_encrypted
+        description: whether the variable is already encrypted (default false)
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: updated variable
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditVariable'
+      responses:
+        '200':
+          description: variable updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/variables/get/{path}:
+    get:
+      summary: Get Variable
+      operationId: getVariable
+      x-mcp-tool: true
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: decrypt_secret
+        description: 'ask to decrypt secret if this variable is secret
+
+          (if not secret no effect, default: true)
+
+          '
+        in: query
+        schema:
+          type: boolean
+      - name: include_encrypted
+        description: 'ask to include the encrypted value if secret and decrypt secret is not true (default: false)
+
+          '
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: variable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListableVariable'
+  /w/{workspace}/variables/get_value/{path}:
+    get:
+      summary: Get Variable Value
+      operationId: getVariableValue
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: allow_cache
+        description: 'allow getting a cached value for improved performance
+
+          '
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: variable
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/variables/exists/{path}:
+    get:
+      summary: Does Variable Exists at Path
+      operationId: existsVariable
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: variable
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/variables/list:
+    get:
+      summary: List Variables
+      operationId: listVariable
+      x-mcp-tool: true
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: path_start
+        description: filter variables by path prefix
+        in: query
+        schema:
+          type: string
+      - name: path
+        description: exact path match filter
+        in: query
+        schema:
+          type: string
+      - name: description
+        description: pattern match filter for description field (case-insensitive)
+        in: query
+        schema:
+          type: string
+      - name: value
+        description: pattern match filter for non-secret variable values (case-insensitive)
+        in: query
+        schema:
+          type: string
+      - name: broad_filter
+        description: broad search across multiple fields (case-insensitive substring match)
+        in: query
+        schema:
+          type: string
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: label
+        description: Filter by label
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: variable list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListableVariable'
+  /w/{workspace}/variables/list_contextual:
+    get:
+      summary: List Contextual Variables
+      operationId: listContextualVariables
+      tags:
+      - variable
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: contextual variable list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContextualVariable'
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    EditVariable:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the variable
+        value:
+          type: string
+          description: The new value of the variable
+        is_secret:
+          type: boolean
+          description: Whether the variable is a secret
+        description:
+          type: string
+          description: The new description of the variable
+        labels:
+          type: array
+          items:
+            type: string
+    ContextualVariable:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        description:
+          type: string
+        is_custom:
+          type: boolean
+      required:
+      - name
+      - value
+      - description
+      - is_custom
+    CreateVariable:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the variable
+        value:
+          type: string
+          description: The value of the variable
+        is_secret:
+          type: boolean
+          description: Whether the variable is a secret
+        description:
+          type: string
+          description: The description of the variable
+        account:
+          type: integer
+          description: The account identifier
+        is_oauth:
+          type: boolean
+          description: Whether the variable is an OAuth variable
+        expires_at:
+          type: string
+          description: The expiration date of the variable
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - value
+      - is_secret
+      - description
+    ListableVariable:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        path:
+          type: string
+        value:
+          type: string
+        is_secret:
+          type: boolean
+        description:
+          type: string
+        account:
+          type: integer
+        is_oauth:
+          type: boolean
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        is_expired:
+          type: boolean
+        refresh_error:
+          type: string
+        is_linked:
+          type: boolean
+        is_refreshed:
+          type: boolean
+        expires_at:
+          type: string
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - workspace_id
+      - path
+      - is_secret
+      - extra_perms
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

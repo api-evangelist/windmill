@@ -1,0 +1,379 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: admin
+paths:
+  /w/{workspace}/users/get/{username}:
+    get:
+      summary: Get User (require Admin Privilege)
+      operationId: getUser
+      tags:
+      - admin
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: user created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /w/{workspace}/users/update/{username}:
+    post:
+      summary: Update User (require Admin Privilege)
+      operationId: updateUser
+      tags:
+      - admin
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: new user
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditWorkspaceUser'
+      responses:
+        '200':
+          description: edited user
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/users/delete/{username}:
+    delete:
+      summary: Delete User (require Admin Privilege)
+      operationId: deleteUser
+      tags:
+      - admin
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: delete user
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/users/offboard_preview/{username}:
+    get:
+      summary: Preview Offboarding for a Workspace User (require Admin Privilege)
+      operationId: offboardPreview
+      tags:
+      - admin
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: offboard preview with object counts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffboardPreview'
+  /w/{workspace}/users/offboard/{username}:
+    post:
+      summary: Offboard a Workspace User (reassign Objects, Optionally Delete User)
+      operationId: offboardWorkspaceUser
+      tags:
+      - admin
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OffboardRequest'
+      responses:
+        '200':
+          description: offboard response with conflicts or summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OffboardResponse'
+  /w/{workspace}/users/convert_to_group/{username}:
+    post:
+      summary: Convert Manual User to Group User (require Admin Privilege)
+      operationId: convertUserToGroup
+      tags:
+      - admin
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: convert user to group user
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    OffboardPreview:
+      type: object
+      properties:
+        owned:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects under u/{username}/ that will be reassigned
+        executing_on_behalf:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
+        referencing:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffboardTokenInfo'
+          description: Tokens owned by this user (will be deleted)
+        http_triggers:
+          type: integer
+          description: HTTP triggers under the user's path (webhook URLs will change)
+        email_triggers:
+          type: integer
+          description: Email triggers under the user's path (email addresses will change)
+      required:
+      - owned
+      - executing_on_behalf
+      - referencing
+      - tokens
+      - http_triggers
+      - email_triggers
+    EditWorkspaceUser:
+      type: object
+      properties:
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+    OffboardResponse:
+      type: object
+      properties:
+        conflicts:
+          type: array
+          items:
+            type: string
+          description: List of path conflicts that block the offboarding. Empty on success.
+        summary:
+          $ref: '#/components/schemas/OffboardSummary'
+    OffboardAffectedPaths:
+      type: object
+      properties:
+        scripts:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            type: string
+        apps:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        variables:
+          type: array
+          items:
+            type: string
+        schedules:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    UserSource:
+      type: object
+      properties:
+        source:
+          type: string
+          enum:
+          - domain
+          - instance_group
+          - manual
+          description: How the user was added to the workspace
+        domain:
+          type: string
+          description: The domain used for auto-invite (when source is 'domain')
+        group:
+          type: string
+          description: The instance group name (when source is 'instance_group')
+      required:
+      - source
+    OffboardTokenInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        expiration:
+          type: string
+      required:
+      - label
+      - scopes
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        is_admin:
+          type: boolean
+        name:
+          type: string
+        is_super_admin:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+        groups:
+          type: array
+          items:
+            type: string
+        folders:
+          type: array
+          items:
+            type: string
+        folders_owners:
+          type: array
+          items:
+            type: string
+        added_via:
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/UserSource'
+        is_service_account:
+          type: boolean
+      required:
+      - email
+      - username
+      - is_admin
+      - is_super_admin
+      - created_at
+      - operator
+      - disabled
+      - folders
+      - folders_owners
+    OffboardRequest:
+      type: object
+      properties:
+        reassign_to:
+          type: string
+          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
+        new_on_behalf_of_user:
+          type: string
+          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
+        delete_user:
+          type: boolean
+          default: true
+          description: Whether to also remove the user from the workspace
+      required:
+      - reassign_to
+    OffboardSummary:
+      type: object
+      properties:
+        scripts_reassigned:
+          type: integer
+        flows_reassigned:
+          type: integer
+        apps_reassigned:
+          type: integer
+        resources_reassigned:
+          type: integer
+        variables_reassigned:
+          type: integer
+        schedules_reassigned:
+          type: integer
+        triggers_reassigned:
+          type: integer
+        drafts_deleted:
+          type: integer
+      required:
+      - scripts_reassigned
+      - flows_reassigned
+      - apps_reassigned
+      - resources_reassigned
+      - variables_reassigned
+      - schedules_reassigned
+      - triggers_reassigned
+      - drafts_deleted
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

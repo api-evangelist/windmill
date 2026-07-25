@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin workspace_dependencies API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: workspace_dependencies
+paths:
+  /w/{workspace}/workspace_dependencies/create:
+    post:
+      summary: Create Workspace Dependencies
+      operationId: createWorkspaceDependencies
+      tags:
+      - workspace_dependencies
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: New workspace dependencies
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewWorkspaceDependencies'
+      responses:
+        '201':
+          description: workspace dependencies created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspace_dependencies/archive/{language}:
+    post:
+      summary: Archive Workspace Dependencies (require Admin)
+      operationId: archiveWorkspaceDependencies
+      tags:
+      - workspace_dependencies
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: language
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ScriptLang'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspace_dependencies/delete/{language}:
+    post:
+      summary: Delete Workspace Dependencies (require Admin)
+      operationId: deleteWorkspaceDependencies
+      tags:
+      - workspace_dependencies
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: language
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ScriptLang'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspace_dependencies/list:
+    get:
+      summary: List All Workspace Dependencies
+      operationId: listWorkspaceDependencies
+      tags:
+      - workspace_dependencies
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: All workspace dependencies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceDependencies'
+  /w/{workspace}/workspace_dependencies/get_latest/{language}:
+    get:
+      summary: Get Latest Workspace Dependencies by Language and Name
+      operationId: getLatestWorkspaceDependencies
+      tags:
+      - workspace_dependencies
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: language
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/ScriptLang'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Latest workspace dependencies
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceDependencies'
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    NewWorkspaceDependencies:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        name:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+      required:
+      - workspace_id
+      - language
+      - content
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
+    WorkspaceDependencies:
+      type: object
+      properties:
+        id:
+          type: integer
+        archived:
+          type: boolean
+        name:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        workspace_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - workspace_id
+      - language
+      - created_at
+      - content
+      - id
+      - archived
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

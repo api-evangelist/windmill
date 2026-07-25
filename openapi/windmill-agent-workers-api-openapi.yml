@@ -1,0 +1,170 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin agent_workers API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: agent_workers
+paths:
+  /agent_workers/create_agent_token:
+    post:
+      summary: Create Agent Token
+      operationId: createAgentToken
+      tags:
+      - agent_workers
+      requestBody:
+        description: agent token
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                worker_group:
+                  type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+                exp:
+                  type: integer
+              required:
+              - worker_group
+              - tags
+              - exp
+      responses:
+        '200':
+          description: agent token created
+          content:
+            application/json:
+              schema:
+                type: string
+  /agent_workers/blacklist_token:
+    post:
+      summary: Blacklist Agent Token (requires Super Admin)
+      operationId: blacklistAgentToken
+      tags:
+      - agent_workers
+      requestBody:
+        description: token to blacklist
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: The agent token to blacklist
+                expires_at:
+                  type: string
+                  format: date-time
+                  description: Optional expiration date for the blacklist entry
+              required:
+              - token
+      responses:
+        '200':
+          description: token blacklisted successfully
+  /agent_workers/remove_blacklist_token:
+    post:
+      summary: Remove Agent Token from Blacklist (requires Super Admin)
+      operationId: removeBlacklistAgentToken
+      tags:
+      - agent_workers
+      requestBody:
+        description: token to remove from blacklist
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: The agent token to remove from blacklist
+              required:
+              - token
+      responses:
+        '200':
+          description: token removed from blacklist successfully
+  /agent_workers/list_blacklisted_tokens:
+    get:
+      summary: List Blacklisted Agent Tokens (requires Super Admin)
+      operationId: listBlacklistedAgentTokens
+      tags:
+      - agent_workers
+      parameters:
+      - name: include_expired
+        in: query
+        description: Whether to include expired blacklisted tokens
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: list of blacklisted tokens
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      description: The blacklisted token (without prefix)
+                    expires_at:
+                      type: string
+                      format: date-time
+                      description: When the blacklist entry expires
+                    blacklisted_at:
+                      type: string
+                      format: date-time
+                      description: When the token was blacklisted
+                    blacklisted_by:
+                      type: string
+                      description: Email of the user who blacklisted the token
+                  required:
+                  - token
+                  - expires_at
+                  - blacklisted_at
+                  - blacklisted_by
+  /agent_workers/get_min_version:
+    get:
+      summary: Get Minimum Worker Version Across All Workers
+      operationId: getMinVersion
+      tags:
+      - agent_workers
+      responses:
+        '200':
+          description: minimum worker version
+          content:
+            application/json:
+              schema:
+                type: string
+                description: Minimum semantic version across all workers (e.g. "1.583.0")
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

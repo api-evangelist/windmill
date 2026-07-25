@@ -1,0 +1,759 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin resource API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: resource
+paths:
+  /w/{workspace}/resources/create:
+    post:
+      summary: Create Resource
+      operationId: createResource
+      x-mcp-tool: true
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: update_if_exists
+        description: update the resource if it already exists (default false)
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: new resource
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateResource'
+      responses:
+        '201':
+          description: resource created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/delete/{path}:
+    delete:
+      summary: Delete Resource
+      operationId: deleteResource
+      x-mcp-tool: true
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: resource deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/delete_bulk:
+    delete:
+      summary: Delete Resources in Bulk
+      operationId: deleteResourcesBulk
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: paths to delete
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paths:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - paths
+      responses:
+        '200':
+          description: deleted paths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/resources/update/{path}:
+    post:
+      summary: Update Resource
+      operationId: updateResource
+      x-mcp-tool: true
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated resource
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditResource'
+      responses:
+        '200':
+          description: resource updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/update_value/{path}:
+    post:
+      summary: Update Resource Value
+      operationId: updateResourceValue
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated resource
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value: {}
+      responses:
+        '200':
+          description: resource value updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/get/{path}:
+    get:
+      summary: Get Resource
+      operationId: getResource
+      x-mcp-tool: true
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+  /w/{workspace}/resources/get_value_interpolated/{path}:
+    get:
+      summary: Get Resource Interpolated (variables and Resources are Fully Unrolled)
+      operationId: getResourceValueInterpolated
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: job_id
+        description: job id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: allow_cache
+        description: allow getting a cached value for improved performance
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: resource value
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/resources/get_value/{path}:
+    get:
+      summary: Get Resource Value
+      operationId: getResourceValue
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: resource value
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/resources/git_commit_hash/{path}:
+    get:
+      summary: Get Git Repository Latest Commit Hash
+      operationId: getGitCommitHash
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: git_ssh_identity
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: git commit hash
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  commit_hash:
+                    type: string
+                    description: Latest commit hash from git ls-remote
+                required:
+                - commit_hash
+  /w/{workspace}/resources/exists/{path}:
+    get:
+      summary: Does Resource Exists
+      operationId: existsResource
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: does resource exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/resources/list:
+    get:
+      summary: List Resources
+      operationId: listResource
+      x-mcp-tool: true
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: resource_type
+        description: resource_types to list from, separated by ',',
+        in: query
+        schema:
+          type: string
+      - name: resource_type_exclude
+        description: resource_types to not list from, separated by ',',
+        in: query
+        schema:
+          type: string
+      - name: path_start
+        description: filter resources by path prefix
+        in: query
+        schema:
+          type: string
+      - name: path
+        description: exact path match filter
+        in: query
+        schema:
+          type: string
+      - name: description
+        description: pattern match filter for description field (case-insensitive)
+        in: query
+        schema:
+          type: string
+      - name: value
+        description: JSONB subset match filter using base64 encoded JSON
+        in: query
+        schema:
+          type: string
+      - name: broad_filter
+        description: broad search across multiple fields (case-insensitive substring match)
+        in: query
+        schema:
+          type: string
+      - name: label
+        description: Filter by label
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: resource list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListableResource'
+  /w/{workspace}/resources/list_search:
+    get:
+      summary: List Resources for Search
+      operationId: listSearchResource
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: resource list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                    value: {}
+                  required:
+                  - path
+                  - value
+  /w/{workspace}/resources/mcp_tools/{path}:
+    get:
+      summary: Get MCP Tools from Resource
+      operationId: getMcpTools
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: list of MCP tools
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    parameters:
+                      type: object
+                  required:
+                  - name
+                  - parameters
+  /w/{workspace}/resources/list_names/{name}:
+    get:
+      summary: List Resource Names
+      operationId: listResourceNames
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: resource list names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    path:
+                      type: string
+                  required:
+                  - name
+                  - path
+  /w/{workspace}/resources/type/create:
+    post:
+      summary: Create Resource_type
+      operationId: createResourceType
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new resource_type
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceType'
+      responses:
+        '201':
+          description: resource_type created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/file_resource_type_to_file_ext_map:
+    get:
+      summary: Get Map from Resource Type to Format Extension
+      operationId: fileResourceTypeToFileExtMap
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: map from resource type to file resource info
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    format_extension:
+                      type: string
+                      nullable: true
+                    is_fileset:
+                      type: boolean
+  /w/{workspace}/resources/type/delete/{path}:
+    delete:
+      summary: Delete Resource_type
+      operationId: deleteResourceType
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: resource_type deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/type/update/{path}:
+    post:
+      summary: Update Resource_type
+      operationId: updateResourceType
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated resource_type
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditResourceType'
+      responses:
+        '200':
+          description: resource_type updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/resources/type/get/{path}:
+    get:
+      summary: Get Resource_type
+      operationId: getResourceType
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: resource_type deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceType'
+  /w/{workspace}/resources/type/exists/{path}:
+    get:
+      summary: Does Resource_type Exists
+      operationId: existsResourceType
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: does resource_type exist
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/resources/type/list:
+    get:
+      summary: List Resource_types
+      operationId: listResourceType
+      x-mcp-tool: true
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: resource_type list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ResourceType'
+  /w/{workspace}/resources/type/listnames:
+    get:
+      summary: List Resource_types Names
+      operationId: listResourceTypeNames
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: resource_type list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/embeddings/query_resource_types:
+    get:
+      summary: Query Resource Types by Similarity
+      operationId: queryResourceTypes
+      tags:
+      - resource
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: text
+        description: query text
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: limit
+        description: query limit
+        in: query
+        required: false
+        schema:
+          type: number
+      responses:
+        '200':
+          description: resource type details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    score:
+                      type: number
+                    schema: {}
+                  required:
+                  - name
+                  - score
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    Resource:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        path:
+          type: string
+        description:
+          type: string
+        resource_type:
+          type: string
+        value: {}
+        is_oauth:
+          type: boolean
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - resource_type
+      - is_oauth
+    EditResourceType:
+      type: object
+      properties:
+        schema: {}
+        description:
+          type: string
+        is_fileset:
+          type: boolean
+    CreateResource:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the resource
+        value: {}
+        description:
+          type: string
+          description: The description of the resource
+        resource_type:
+          type: string
+          description: The resource_type associated with the resource
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - value
+      - resource_type
+    EditResource:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the resource
+        description:
+          type: string
+          description: The new description of the resource
+        value: {}
+        resource_type:
+          type: string
+          description: The new resource_type to be associated with the resource
+        labels:
+          type: array
+          items:
+            type: string
+    ResourceType:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        name:
+          type: string
+        schema: {}
+        description:
+          type: string
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        format_extension:
+          type: string
+        is_fileset:
+          type: boolean
+      required:
+      - name
+    ListableResource:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        path:
+          type: string
+        description:
+          type: string
+        resource_type:
+          type: string
+        value: {}
+        is_oauth:
+          type: boolean
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        is_expired:
+          type: boolean
+        refresh_error:
+          type: string
+        is_linked:
+          type: boolean
+        is_refreshed:
+          type: boolean
+        account:
+          type: number
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - resource_type
+      - is_oauth
+      - is_linked
+      - is_refreshed
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

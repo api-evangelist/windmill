@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: trigger
+paths:
+  /w/{workspace}/trigger/{trigger_kind}/resume_suspended_trigger_jobs/{trigger_path}:
+    post:
+      summary: Resume All Suspended Jobs for a Specific Trigger
+      operationId: resumeSuspendedTriggerJobs
+      tags:
+      - trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: trigger_kind
+        description: The kind of trigger
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/JobTriggerKind'
+      - name: trigger_path
+        description: The path of the trigger (can contain forward slashes)
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: Optional list of job IDs to reassign
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  description: Optional list of specific job UUIDs to reassign. If not provided, all suspended jobs for the trigger will be reassigned.
+      responses:
+        '200':
+          description: confirmation message
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/trigger/{trigger_kind}/cancel_suspended_trigger_jobs/{trigger_path}:
+    post:
+      summary: Cancel All Suspended Jobs for a Specific Trigger
+      operationId: cancelSuspendedTriggerJobs
+      tags:
+      - trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: trigger_kind
+        description: The kind of trigger
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/JobTriggerKind'
+      - name: trigger_path
+        description: The path of the trigger (can contain forward slashes)
+        in: path
+        required: true
+        schema:
+          type: string
+        style: simple
+        explode: false
+      requestBody:
+        description: Optional list of job IDs to cancel
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_ids:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  description: Optional list of specific job UUIDs to cancel. If not provided, all suspended jobs for the trigger will be canceled.
+      responses:
+        '200':
+          description: confirmation message
+          content:
+            application/json:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    JobTriggerKind:
+      description: job trigger kind (schedule, http, websocket...)
+      type: string
+      enum:
+      - webhook
+      - default_email
+      - email
+      - schedule
+      - http
+      - websocket
+      - postgres
+      - kafka
+      - nats
+      - mqtt
+      - sqs
+      - gcp
+      - azure
+      - google
+      - github
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

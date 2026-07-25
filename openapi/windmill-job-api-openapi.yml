@@ -1,0 +1,4055 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin job API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: job
+paths:
+  /w/{workspace}/jobs/list_selected_job_groups:
+    post:
+      summary: List Selected Jobs Script/flow Schemas Grouped by (kind, Path)
+      operationId: listSelectedJobGroups
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+      responses:
+        '200':
+          description: result
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    kind:
+                      type: string
+                      enum:
+                      - script
+                      - flow
+                    script_path:
+                      type: string
+                    latest_schema:
+                      type: object
+                    schemas:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          schema:
+                            type: object
+                          script_hash:
+                            type: string
+                          job_ids:
+                            type: array
+                            items:
+                              type: string
+                        required:
+                        - schema
+                        - script_hash
+                        - job_ids
+                  required:
+                  - kind
+                  - script_path
+                  - latest_schema
+                  - schemas
+  /w/{workspace}/jobs/run/p/{path}:
+    post:
+      summary: Run Script by Path
+      operationId: runScriptByPath
+      x-mcp-tool: true
+      x-mcp-instructions: You should first use getScriptByPath to retrieve the script's schema and understand what arguments are expected.
+      x-mcp-tool-include-query-params: []
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - name: scheduled_for
+        description: when to schedule this job (leave empty for immediate run)
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: scheduled_in_secs
+        description: schedule the script to execute in the number of seconds starting now
+        in: query
+        schema:
+          type: integer
+      - name: skip_preprocessor
+        description: skip the preprocessor
+        in: query
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - name: invisible_to_owner
+        description: make the run invisible to the the script owner (default false)
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run_wait_result/p/{path}:
+    post:
+      summary: Run Script by Path
+      operationId: runWaitResultScriptByPath
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+    get:
+      summary: Run Script by Path with Get
+      operationId: runWaitResultScriptByPathGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/Payload'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run_wait_result/f/{path}:
+    post:
+      summary: Run Flow by Path and Wait Until Completion
+      operationId: runWaitResultFlowByPath
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run_wait_result/fv/{version}:
+    post:
+      summary: Run Flow by Version and Wait Until Completion
+      operationId: runWaitResultFlowByVersion
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: version
+        description: flow version ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+    get:
+      summary: Run Flow by Version with GET and Wait Until Completion
+      operationId: runWaitResultFlowByVersionGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: version
+        description: flow version ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/Payload'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run_and_stream/f/{path}:
+    post:
+      summary: Run Flow by Path and Stream Updates via SSE
+      operationId: runAndStreamFlowByPath
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: flow args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+    get:
+      summary: Run Flow by Path with GET and Stream Updates via SSE
+      operationId: runAndStreamFlowByPathGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/Payload'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /w/{workspace}/jobs/run_and_stream/fv/{version}:
+    post:
+      summary: Run Flow by Version and Stream Updates via SSE
+      operationId: runAndStreamFlowByVersion
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: version
+        description: flow version ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: flow args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+    get:
+      summary: Run Flow by Version with GET and Stream Updates via SSE
+      operationId: runAndStreamFlowByVersionGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: version
+        description: flow version ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/Payload'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /w/{workspace}/jobs/run_and_stream/p/{path}:
+    post:
+      summary: Run Script by Path and Stream Updates via SSE
+      operationId: runAndStreamScriptByPath
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+    get:
+      summary: Run Script by Path with GET and Stream Updates via SSE
+      operationId: runAndStreamScriptByPathGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/Payload'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /w/{workspace}/jobs/run_and_stream/h/{hash}:
+    post:
+      summary: Run Script by Hash and Stream Updates via SSE
+      operationId: runAndStreamScriptByHash
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+    get:
+      summary: Run Script by Hash with GET and Stream Updates via SSE
+      operationId: runAndStreamScriptByHashGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: hash
+        in: path
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - $ref: '#/components/parameters/QueueLimit'
+      - $ref: '#/components/parameters/Payload'
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - name: poll_delay_ms
+        description: delay between polling for job updates in milliseconds
+        in: query
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /w/{workspace}/jobs/result_by_id/{flow_job_id}/{node_id}:
+    get:
+      summary: Get Job Result by Id
+      operationId: resultById
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: flow_job_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: node_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run/f/{path}:
+    post:
+      summary: Run Flow by Path
+      operationId: runFlowByPath
+      x-mcp-tool: true
+      x-mcp-instructions: You should first use getFlowByPath to retrieve the flow's schema and understand what arguments are expected.
+      x-mcp-tool-include-query-params: []
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - name: scheduled_for
+        description: when to schedule this job (leave empty for immediate run)
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: scheduled_in_secs
+        description: schedule the script to execute in the number of seconds starting now
+        in: query
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - name: invisible_to_owner
+        description: make the run invisible to the the flow owner (default false)
+        in: query
+        schema:
+          type: boolean
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: flow args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/fv/{version}:
+    post:
+      summary: Run Flow by Version
+      operationId: runFlowByVersion
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: version
+        description: flow version ID
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: scheduled_for
+        description: when to schedule this job (leave empty for immediate run)
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: scheduled_in_secs
+        description: schedule the script to execute in the number of seconds starting now
+        in: query
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - name: invisible_to_owner
+        description: make the run invisible to the the flow owner (default false)
+        in: query
+        schema:
+          type: boolean
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: flow args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScriptArgs'
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/batch_rerun_jobs:
+    post:
+      summary: Re-run Multiple Jobs
+      operationId: batchReRunJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: list of job ids to re run and arg tranforms
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - job_ids
+              - script_options_by_path
+              - flow_options_by_path
+              properties:
+                job_ids:
+                  type: array
+                  items:
+                    type: string
+                script_options_by_path:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      input_transforms:
+                        type: object
+                        additionalProperties:
+                          $ref: '#/components/schemas/InputTransform'
+                      use_latest_version:
+                        type: boolean
+                flow_options_by_path:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    properties:
+                      input_transforms:
+                        type: object
+                        additionalProperties:
+                          $ref: '#/components/schemas/InputTransform'
+                      use_latest_version:
+                        type: boolean
+      responses:
+        '201':
+          description: stream of created job uuids separated by \n. Lines may start with 'Error:'
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /w/{workspace}/jobs/restart/f/{id}:
+    post:
+      summary: Restart a Completed Flow at a Given Step
+      operationId: restartFlowAtStep
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: scheduled_for
+        description: when to schedule this job (leave empty for immediate run)
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: scheduled_in_secs
+        description: schedule the script to execute in the number of seconds starting now
+        in: query
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - name: invisible_to_owner
+        description: make the run invisible to the the flow owner (default false)
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: restart flow parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - step_id
+              properties:
+                step_id:
+                  type: string
+                  description: top-level step id to restart the flow from (or the outermost container when restarting at a nested step)
+                branch_or_iteration_n:
+                  type: integer
+                  description: for branchall or loop at the top level, the iteration at which the flow should restart (optional)
+                flow_version:
+                  type: integer
+                  description: specific flow version to use for restart (optional, uses current version if not specified)
+                nested_path:
+                  type: array
+                  description: path of additional steps to descend into AFTER `step_id`. Each entry represents one level of nesting inside the spawned child of the previous level's container (BranchOne / sequential ForLoop iteration / Subflow). When non-empty, the actual restart point is the LAST entry's step_id.
+                  items:
+                    type: object
+                    required:
+                    - step_id
+                    properties:
+                      step_id:
+                        type: string
+                        description: step id at this nesting level
+                      branch_or_iteration_n:
+                        type: integer
+                        description: for ForLoop containers, the iteration to restart at (0-based; iterations 0..n-1 are preserved)
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/h/{hash}:
+    post:
+      summary: Run Script by Hash
+      operationId: runScriptByHash
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptHash'
+      - name: scheduled_for
+        description: when to schedule this job (leave empty for immediate run)
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: scheduled_in_secs
+        description: schedule the script to execute in the number of seconds starting now
+        in: query
+        schema:
+          type: integer
+      - $ref: '#/components/parameters/SkipPreprocessor'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/WorkerTag'
+      - $ref: '#/components/parameters/CacheTtl'
+      - $ref: '#/components/parameters/NewJobId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - name: invisible_to_owner
+        description: make the run invisible to the the script owner (default false)
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: Partially filled args
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/preview:
+    post:
+      summary: Run Script Preview
+      operationId: runScriptPreview
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - name: invisible_to_owner
+        description: make the run invisible to the the script owner (default false)
+        in: query
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/NewJobId'
+      requestBody:
+        description: preview
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Preview'
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run_inline/preview:
+    post:
+      summary: Run Script Preview Without Starting a New Job
+      operationId: runScriptPreviewInline
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: preview
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PreviewInline'
+      responses:
+        '200':
+          description: script result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run_inline/p/{path}:
+    post:
+      summary: Run Script by Path Without Starting a New Job
+      operationId: runScriptByPathInline
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InlineScriptArgs'
+      responses:
+        '200':
+          description: script result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run_inline/h/{hash}:
+    post:
+      summary: Run Script by Hash Without Starting a New Job
+      operationId: runScriptByHashInline
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptHash'
+      requestBody:
+        description: script args
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InlineScriptArgs'
+      responses:
+        '200':
+          description: script result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run_wait_result/preview:
+    post:
+      summary: Run Script Preview and Wait for Result
+      operationId: runScriptPreviewAndWaitResult
+      x-mcp-tool: true
+      x-mcp-instructions: Allows testing a script before deploying it. For typescript code, the language to send is either bun or deno. By default, send bun if no deno specific code is detected.
+      x-mcp-required-fields:
+      - content
+      - language
+      - args
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: preview
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Preview'
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/workflow_as_code/{job_id}/{entrypoint}:
+    post:
+      summary: Run Code-workflow Task
+      operationId: runCodeWorkflowTask
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: entrypoint
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: preview
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkflowTask'
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/dependencies:
+    post:
+      summary: Run a One-off Dependencies Job
+      operationId: runRawScriptDependencies
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: raw script content
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                raw_scripts:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RawScriptForDependencies'
+                entrypoint:
+                  type: string
+              required:
+              - entrypoint
+              - raw_scripts
+      responses:
+        '201':
+          description: dependency job result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lock:
+                    type: string
+                required:
+                - lock
+  /w/{workspace}/jobs/run/dependencies_async:
+    post:
+      summary: Queue a One-off Dependencies Job and Return the Job Uuid
+      operationId: runRawScriptDependenciesAsync
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: raw script content
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                raw_scripts:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RawScriptForDependencies'
+                entrypoint:
+                  type: string
+              required:
+              - entrypoint
+              - raw_scripts
+      responses:
+        '201':
+          description: dependency job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/flow_dependencies_async:
+    post:
+      summary: Queue a One-off Flow Dependencies Job and Return the Job Uuid
+      operationId: runFlowDependenciesAsync
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: flow value and path
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                flow_value:
+                  $ref: '#/components/schemas/FlowValue'
+              required:
+              - path
+              - flow_value
+      responses:
+        '201':
+          description: flow dependencies job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run/preview_flow:
+    post:
+      summary: Run Flow Preview
+      operationId: runFlowPreview
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/IncludeHeader'
+      - name: invisible_to_owner
+        description: make the run invisible to the the script owner (default false)
+        in: query
+        schema:
+          type: boolean
+      - $ref: '#/components/parameters/NewJobId'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: preview
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlowPreview'
+      responses:
+        '201':
+          description: job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/run_wait_result/preview_flow:
+    post:
+      summary: Run Flow Preview and Wait for Result
+      operationId: runFlowPreviewAndWaitResult
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: memory_id
+        description: memory ID for chat-enabled flows
+        in: query
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: preview
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FlowPreview'
+      responses:
+        '200':
+          description: job result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/run/dynamic_select:
+    post:
+      summary: Run Dynamic Select Helper Function
+      operationId: runDynamicSelect
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: dynamic select request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DynamicInputData'
+      responses:
+        '201':
+          description: dynamic select job created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/jobs/queue/list:
+    get:
+      summary: List All Queued Jobs
+      operationId: listQueue
+      x-mcp-tool: true
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/OrderDesc'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/Worker'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/TriggerPath'
+      - $ref: '#/components/parameters/JobTriggerKind'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/Success'
+      - $ref: '#/components/parameters/ScheduledForBeforeNow'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/Suspended'
+      - $ref: '#/components/parameters/Running'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/AllowWildcards'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: All queued jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QueuedJob'
+  /w/{workspace}/jobs/queue/count:
+    get:
+      summary: Get Queue Count
+      operationId: getQueueCount
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: queue count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database_length:
+                    type: integer
+                  suspended:
+                    type: integer
+                required:
+                - database_length
+  /w/{workspace}/jobs/completed/count:
+    get:
+      summary: Get Completed Count
+      operationId: getCompletedCount
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: completed count
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  database_length:
+                    type: integer
+                required:
+                - database_length
+  /w/{workspace}/jobs/completed/count_jobs:
+    get:
+      summary: Count Number of Completed Jobs with Filter
+      operationId: countCompletedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: completed_after_s_ago
+        in: query
+        schema:
+          type: integer
+      - name: success
+        in: query
+        schema:
+          type: boolean
+      - name: tags
+        in: query
+        schema:
+          type: string
+      - name: all_workspaces
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Count of completed jobs
+          content:
+            application/json:
+              schema:
+                type: integer
+  /w/{workspace}/jobs/list_filtered_uuids:
+    get:
+      summary: Get the Ids of All Jobs Matching the Given Filters
+      operationId: listFilteredJobsUuids
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/Label'
+      - $ref: '#/components/parameters/Worker'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/CreatedBefore'
+      - $ref: '#/components/parameters/CreatedAfter'
+      - $ref: '#/components/parameters/CompletedBefore'
+      - $ref: '#/components/parameters/CompletedAfter'
+      - $ref: '#/components/parameters/CreatedBeforeQueue'
+      - $ref: '#/components/parameters/CreatedAfterQueue'
+      - $ref: '#/components/parameters/Running'
+      - $ref: '#/components/parameters/ScheduledForBeforeNow'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/Suspended'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: is_skipped
+        description: is the job skipped
+        in: query
+        schema:
+          type: boolean
+      - name: is_flow_step
+        description: is the job a flow step
+        in: query
+        schema:
+          type: boolean
+      - name: has_null_parent
+        description: has null parent
+        in: query
+        schema:
+          type: boolean
+      - name: success
+        description: filter on successful jobs
+        in: query
+        schema:
+          type: boolean
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: uuids of jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/jobs/queue/list_filtered_uuids:
+    get:
+      summary: Get the Ids of All Queued Jobs Matching the Given Filters
+      operationId: listFilteredQueueUuids
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/OrderDesc'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/Success'
+      - $ref: '#/components/parameters/ScheduledForBeforeNow'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/Suspended'
+      - $ref: '#/components/parameters/Running'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/AllowWildcards'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: concurrency_key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: uuids of jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/jobs/queue/cancel_selection:
+    post:
+      summary: Cancel Jobs Based on the Given Uuids
+      operationId: cancelSelection
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: force_cancel
+        in: query
+        schema:
+          type: boolean
+      - name: all_workspaces
+        in: query
+        schema:
+          type: boolean
+      requestBody:
+        description: uuids of the jobs to cancel
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: uuids of canceled jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/jobs/get_otel_traces/{id}:
+    get:
+      summary: Get OpenTelemetry Traces for a Job
+      operationId: getJobOtelTraces
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: list of OTEL Span objects (compatible with OpenTelemetry Span proto)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+  /w/{workspace}/jobs/completed/list:
+    get:
+      summary: List All Completed Jobs
+      operationId: listCompletedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/OrderDesc'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/Label'
+      - $ref: '#/components/parameters/Worker'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/Success'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/AllowWildcards'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: is_skipped
+        description: is the job skipped
+        in: query
+        schema:
+          type: boolean
+      - name: is_flow_step
+        description: is the job a flow step
+        in: query
+        schema:
+          type: boolean
+      - name: has_null_parent
+        description: has null parent
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: All completed jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompletedJob'
+  /w/{workspace}/jobs/completed/export:
+    get:
+      summary: Export All Completed Jobs for Backup/migration
+      operationId: exportCompletedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: All completed jobs exported
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExportableCompletedJob'
+  /w/{workspace}/jobs/completed/import:
+    post:
+      summary: Import Completed Jobs from Backup/migration
+      operationId: importCompletedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExportableCompletedJob'
+      responses:
+        '200':
+          description: Successfully imported completed jobs
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs/queue/export:
+    get:
+      summary: Export All Queued Jobs for Backup/migration
+      operationId: exportQueuedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: All queued jobs exported
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExportableQueuedJob'
+  /w/{workspace}/jobs/queue/import:
+    post:
+      summary: Import Queued Jobs from Backup/migration
+      operationId: importQueuedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExportableQueuedJob'
+      responses:
+        '200':
+          description: Successfully imported queued jobs
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs/delete:
+    post:
+      summary: Delete Jobs by IDs from All Related Tables
+      operationId: deleteJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                format: uuid
+              description: Array of job IDs to delete
+      responses:
+        '200':
+          description: Successfully deleted jobs
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Summary of deleted jobs and rows
+  /w/{workspace}/jobs/list:
+    get:
+      summary: List All Jobs
+      operationId: listJobs
+      x-mcp-tool: true
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/Label'
+      - $ref: '#/components/parameters/Worker'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/CreatedBefore'
+      - $ref: '#/components/parameters/CreatedAfter'
+      - $ref: '#/components/parameters/CompletedBefore'
+      - $ref: '#/components/parameters/CompletedAfter'
+      - $ref: '#/components/parameters/CreatedBeforeQueue'
+      - $ref: '#/components/parameters/CreatedAfterQueue'
+      - $ref: '#/components/parameters/Running'
+      - $ref: '#/components/parameters/ScheduledForBeforeNow'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/Suspended'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/AllowWildcards'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/JobTriggerKind'
+      - name: is_skipped
+        description: is the job skipped
+        in: query
+        schema:
+          type: boolean
+      - name: is_flow_step
+        description: is the job a flow step
+        in: query
+        schema:
+          type: boolean
+      - name: has_null_parent
+        description: has null parent
+        in: query
+        schema:
+          type: boolean
+      - name: success
+        description: filter on successful jobs
+        in: query
+        schema:
+          type: boolean
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      - name: broad_filter
+        description: broad search across multiple fields (case-insensitive substring match on path, tag, schedule path, trigger kind, label)
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: All jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Job'
+  /jobs/db_clock:
+    get:
+      summary: Get Db Clock
+      operationId: getDbClock
+      tags:
+      - job
+      responses:
+        '200':
+          description: the timestamp of the db that can be used to compute the drift
+          content:
+            application/json:
+              schema:
+                type: integer
+  /jobs/completed/count_by_tag:
+    get:
+      summary: Count Jobs by Tag
+      operationId: countJobsByTag
+      tags:
+      - job
+      parameters:
+      - name: horizon_secs
+        in: query
+        description: Past Time horizon in seconds (when to start the count = now - horizon) (default is 3600)
+        required: false
+        schema:
+          type: integer
+      - name: workspace_id
+        in: query
+        description: Specific workspace ID to filter results (optional)
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Job counts by tag
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    tag:
+                      type: string
+                    count:
+                      type: integer
+                  required:
+                  - tag
+                  - count
+  /w/{workspace}/jobs_u/get/{id}:
+    get:
+      summary: Get Job
+      operationId: getJob
+      x-mcp-tool: true
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: no_logs
+        in: query
+        schema:
+          type: boolean
+      - name: no_code
+        in: query
+        schema:
+          type: boolean
+      - name: approval_token
+        in: query
+        description: Approval token granting read access to the job when not logged in. The token must be the one issued for this job's flow (i.e. the flow id used when generating the approval URL).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+  /w/{workspace}/jobs_u/get_root_job_id/{id}:
+    get:
+      summary: Get Root Job Id
+      operationId: getRootJobId
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: get root job id
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_logs/{id}:
+    get:
+      summary: Get Job Logs
+      operationId: getJobLogs
+      x-mcp-tool: true
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: remove_ansi_warnings
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: job details
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_flow_all_logs/{id}:
+    get:
+      summary: Get All Logs for a Flow Job
+      operationId: getFlowAllLogs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: concatenated logs of all flow steps
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_completed_logs_tail/{id}:
+    get:
+      summary: Get Completed Job Logs Tail
+      operationId: getCompletedJobLogsTail
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: completed job logs tail
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_args/{id}:
+    get:
+      summary: Get Job Args
+      operationId: getJobArgs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: job args
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs_u/queue/get_started_at_by_ids:
+    post:
+      summary: Get Started at by Ids
+      operationId: getStartedAtByIds
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: ids
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: started at by ids
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: date-time
+  /w/{workspace}/jobs_u/getupdate/{id}:
+    get:
+      summary: Get Job Updates
+      operationId: getJobUpdates
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: running
+        in: query
+        schema:
+          type: boolean
+      - name: log_offset
+        in: query
+        schema:
+          type: integer
+      - name: stream_offset
+        in: query
+        schema:
+          type: integer
+      - name: get_progress
+        in: query
+        schema:
+          type: boolean
+      - name: no_logs
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: job details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  running:
+                    type: boolean
+                  completed:
+                    type: boolean
+                  new_logs:
+                    type: string
+                  log_offset:
+                    type: integer
+                  mem_peak:
+                    type: integer
+                  progress:
+                    type: integer
+                  stream_offset:
+                    type: integer
+                  new_result_stream:
+                    type: string
+                  flow_status:
+                    $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
+                  workflow_as_code_status:
+                    $ref: '#/components/schemas/WorkflowStatus'
+  /w/{workspace}/jobs_u/getupdate_sse/{id}:
+    get:
+      summary: Get Job Updates via Server-sent Events
+      operationId: getJobUpdatesSSE
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: running
+        in: query
+        schema:
+          type: boolean
+      - name: log_offset
+        in: query
+        schema:
+          type: integer
+      - name: stream_offset
+        in: query
+        schema:
+          type: integer
+      - name: get_progress
+        in: query
+        schema:
+          type: boolean
+      - name: only_result
+        in: query
+        schema:
+          type: boolean
+      - name: no_logs
+        in: query
+        schema:
+          type: boolean
+      - name: fast
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: server-sent events stream of job updates
+          content:
+            text/event-stream:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_log_file/{path}:
+    get:
+      summary: Get Log File from Object Store
+      operationId: getLogFileFromStore
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: path
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: job log
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_flow_debug_info/{id}:
+    get:
+      summary: Get Flow Debug Info
+      operationId: getFlowDebugInfo
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: flow debug info details
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs_u/completed/get/{id}:
+    get:
+      summary: Get Completed Job
+      operationId: getCompletedJob
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletedJob'
+  /w/{workspace}/jobs_u/completed/get_result/{id}:
+    get:
+      summary: Get Completed Job Result
+      operationId: getCompletedJobResult
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: suspended_job
+        in: query
+        schema:
+          type: string
+      - name: resume_id
+        in: query
+        schema:
+          type: integer
+      - name: secret
+        in: query
+        schema:
+          type: string
+      - name: approver
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs_u/completed/get_result_maybe/{id}:
+    get:
+      summary: Get Completed Job Result if Job is Completed
+      operationId: getCompletedJobResultMaybe
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - $ref: '#/components/parameters/GetStarted'
+      responses:
+        '200':
+          description: result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  completed:
+                    type: boolean
+                  result: {}
+                  success:
+                    type: boolean
+                  started:
+                    type: boolean
+                required:
+                - completed
+                - result
+  /w/{workspace}/jobs_u/completed/get_timing/{id}:
+    get:
+      summary: Get Completed Job Timing
+      operationId: getCompletedJobTiming
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: job timing details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  created_at:
+                    type: string
+                    format: date-time
+                  started_at:
+                    type: string
+                    format: date-time
+                  duration_ms:
+                    type: integer
+                required:
+                - created_at
+  /w/{workspace}/jobs/completed/delete/{id}:
+    post:
+      summary: Delete Completed Job (erase Content but Keep Run Id)
+      operationId: deleteCompletedJob
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompletedJob'
+  /w/{workspace}/jobs_u/queue/cancel/{id}:
+    post:
+      summary: Cancel Queued or Running Job
+      operationId: cancelQueuedJob
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      requestBody:
+        description: reason
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: job canceled
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/queue/cancel_persistent/{path}:
+    post:
+      summary: Cancel All Queued Jobs for Persistent Script
+      operationId: cancelPersistentQueuedJobs
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: reason
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: persistent job scaled down to zero
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/queue/force_cancel/{id}:
+    post:
+      summary: Force Cancel Queued Job
+      operationId: forceCancelQueuedJob
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      requestBody:
+        description: reason
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: job canceled
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs/queue/position/{scheduled_for}:
+    get:
+      summary: Get Queue Position for a Job
+      operationId: getQueuePosition
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: scheduled_for
+        in: path
+        required: true
+        schema:
+          type: integer
+          description: The scheduled for timestamp in milliseconds
+      responses:
+        '200':
+          description: queue position information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  position:
+                    type: integer
+                    description: The position in queue (1-based), null if not in queue or already running
+  /w/{workspace}/jobs/queue/scheduled_for/{id}:
+    get:
+      summary: Get Scheduled for Timestamp for a Job
+      operationId: getScheduledFor
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: scheduled for timestamp
+          content:
+            application/json:
+              schema:
+                type: integer
+  /w/{workspace}/jobs/job_signature/{id}/{resume_id}:
+    get:
+      summary: Create an HMac Signature Given a Job Id and a Resume Id
+      operationId: createJobSignature
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: approver
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: job signature
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs/resume_urls/{id}/{resume_id}:
+    get:
+      summary: Get Resume Urls Given a Job_id, Resume_id and a Nonce to Resume a Flow
+      operationId: getResumeUrls
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: approver
+        in: query
+        schema:
+          type: string
+      - name: flow_level
+        in: query
+        description: If true, generate resume URLs for the parent flow instead of the specific step. This allows pre-approvals that can be consumed by any later suspend step in the same flow.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: url endpoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  approvalPage:
+                    type: string
+                  resume:
+                    type: string
+                  cancel:
+                    type: string
+                required:
+                - approvalPage
+                - resume
+                - cancel
+  /w/{workspace}/jobs/slack_approval/{id}:
+    get:
+      summary: Generate Interactive Slack Approval for Suspended Job
+      operationId: getSlackApprovalPayload
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: approver
+        in: query
+        schema:
+          type: string
+      - name: message
+        in: query
+        schema:
+          type: string
+      - name: slack_resource_path
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: channel_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: flow_step_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: default_args_json
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dynamic_enums_json
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resume_button_text
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cancel_button_text
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interactive slack approval message sent successfully
+  /w/{workspace}/jobs/teams_approval/{id}:
+    get:
+      summary: Generate Interactive Teams Approval for Suspended Job
+      operationId: getTeamsApprovalPayload
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: approver
+        in: query
+        schema:
+          type: string
+      - name: message
+        in: query
+        schema:
+          type: string
+      - name: team_name
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: channel_name
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: flow_step_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: default_args_json
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: dynamic_enums_json
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resume_button_text
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: cancel_button_text
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interactive slack approval message sent successfully
+  /w/{workspace}/jobs_u/flow/resume_suspended/{job_id}:
+    post:
+      summary: Resume or Cancel a Suspended Flow/WAC Job
+      description: 'Resume or cancel a suspended flow/WAC job. Uses approval rules to determine authorization. Either a valid approval_token or an authenticated session is required.
+
+        '
+      operationId: resumeSuspended
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  description: payload to send to the resumed job
+                approval_token:
+                  type: string
+                  description: approval token for unauthenticated access
+                approved:
+                  type: boolean
+                  description: whether to approve (true) or cancel (false) the job
+                  default: true
+      responses:
+        '201':
+          description: job resumed
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/flow/approval_info/{job_id}:
+    get:
+      summary: Get Approval Info for a Suspended Flow/WAC Job
+      description: 'Get approval info for a suspended flow/WAC job. Returns form schema, approval rules, and whether the current user can approve. Either a valid token query parameter or an authenticated session is required.
+
+        '
+      operationId: getApprovalInfo
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: job_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: token
+        in: query
+        required: false
+        schema:
+          type: string
+        description: approval token for unauthenticated access
+      responses:
+        '200':
+          description: approval info
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - flow_id
+                - can_approve
+                - user_auth_required
+                - approvers
+                properties:
+                  flow_id:
+                    type: string
+                    format: uuid
+                  form_schema:
+                    description: form schema for the approval step
+                  description:
+                    description: description of the approval step
+                  approval_conditions:
+                    type: object
+                    properties:
+                      user_auth_required:
+                        type: boolean
+                      user_groups_required:
+                        type: array
+                        items:
+                          type: string
+                      self_approval_disabled:
+                        type: boolean
+                    required:
+                    - user_auth_required
+                    - user_groups_required
+                    - self_approval_disabled
+                  can_approve:
+                    type: boolean
+                    description: whether the current user/token holder can approve
+                  user_auth_required:
+                    type: boolean
+                    description: whether user authentication is required to approve
+                  hide_cancel:
+                    type: boolean
+                    description: whether to hide the cancel button in the UI
+                  approvers:
+                    type: array
+                    items:
+                      type: object
+                      required:
+                      - resume_id
+                      - approver
+                      properties:
+                        resume_id:
+                          type: integer
+                        approver:
+                          type: string
+  /w/{workspace}/jobs_u/resume/{id}/{resume_id}/{signature}:
+    get:
+      summary: Resume a Job for a Suspended Flow
+      operationId: resumeSuspendedJobGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - $ref: '#/components/parameters/Payload'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: signature
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: approver
+        in: query
+        schema:
+          type: string
+      responses:
+        '201':
+          description: job resumed
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Resume a Job for a Suspended Flow
+      operationId: resumeSuspendedJobPost
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: signature
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: approver
+        in: query
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: job resumed
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs/flow/user_states/{id}/{key}:
+    post:
+      summary: Set Flow User State at a Given Key
+      operationId: setFlowUserState
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: new value
+        required: true
+        content:
+          application/json:
+            schema: {}
+      responses:
+        '200':
+          description: flow user state updated
+          content:
+            text/plain:
+              schema:
+                type: string
+    get:
+      summary: Get Flow User State at a Given Key
+      operationId: getFlowUserState
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: flow user state updated
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/jobs/flow/resume/{id}:
+    post:
+      summary: Resume a Job for a Suspended Flow as an Owner
+      operationId: resumeSuspendedFlowAsOwner
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: job resumed
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/cancel/{id}/{resume_id}/{signature}:
+    get:
+      summary: Cancel a Job for a Suspended Flow
+      operationId: cancelSuspendedJobGet
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: signature
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: approver
+        in: query
+        schema:
+          type: string
+      responses:
+        '201':
+          description: job canceled
+          content:
+            text/plain:
+              schema:
+                type: string
+    post:
+      summary: Cancel a Job for a Suspended Flow
+      operationId: cancelSuspendedJobPost
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: signature
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: approver
+        in: query
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: job canceled
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/jobs_u/get_flow/{id}/{resume_id}/{signature}:
+    get:
+      summary: Get Parent Flow Job of Suspended Job
+      operationId: getSuspendedJobFlow
+      tags:
+      - job
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      - name: resume_id
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: signature
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: approver
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: parent flow details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job:
+                    $ref: '#/components/schemas/Job'
+                  approvers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        resume_id:
+                          type: integer
+                        approver:
+                          type: string
+                      required:
+                      - resume_id
+                      - approver
+                required:
+                - job
+                - approvers
+  /w/{workspace}/concurrency_groups/list_jobs:
+    get:
+      summary: Get Intervals of Job Runtime Concurrency
+      operationId: listExtendedJobs
+      tags:
+      - job
+      parameters:
+      - name: concurrency_key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: row_limit
+        in: query
+        required: false
+        schema:
+          type: number
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/Label'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/Running'
+      - $ref: '#/components/parameters/ScheduledForBeforeNow'
+      - $ref: '#/components/parameters/CompletedBefore'
+      - $ref: '#/components/parameters/CompletedAfter'
+      - $ref: '#/components/parameters/CreatedBeforeQueue'
+      - $ref: '#/components/parameters/CreatedAfterQueue'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/AllowWildcards'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/JobTriggerKind'
+      - name: is_skipped
+        description: is the job skipped
+        in: query
+        schema:
+          type: boolean
+      - name: is_flow_step
+        description: is the job a flow step
+        in: query
+        schema:
+          type: boolean
+      - name: has_null_parent
+        description: has null parent
+        in: query
+        schema:
+          type: boolean
+      - name: success
+        description: filter on successful jobs
+        in: query
+        schema:
+          type: boolean
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedJobs'
+components:
+  schemas:
+    FlowPreview:
+      type: object
+      properties:
+        value:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+        path:
+          type: string
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        tag:
+          type: string
+        restarted_from:
+          $ref: '#/components/schemas/RestartedFrom'
+      required:
+      - value
+      - content
+      - args
+    ObscuredJob:
+      type: object
+      properties:
+        typ:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
+    FlowValue:
+      $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+    RestartedFrom:
+      type: object
+      properties:
+        flow_job_id:
+          type: string
+          format: uuid
+        step_id:
+          type: string
+        branch_or_iteration_n:
+          type: integer
+          description: 0-based iteration index for ForLoop / branch index for BranchAll. Iterations 0..n-1 are preserved; iteration n is restarted.
+        flow_version:
+          type: integer
+        branch_chosen:
+          description: For BranchOne nested restart — the branch that was originally chosen, used to lock branch evaluation.
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - default
+              - branch
+            branch:
+              type: integer
+        nested:
+          $ref: '#/components/schemas/RestartedFrom'
+          description: When set, the worker spawns the child for `step_id` as a `RestartedFlow` against `nested.flow_job_id` instead of fresh-launching it.
+    Preview:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The code to run
+        path:
+          type: string
+          description: The path to the script
+        script_hash:
+          type: string
+          description: The hash of the script
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        tag:
+          type: string
+        kind:
+          type: string
+          enum:
+          - code
+          - identity
+          - http
+        dedicated_worker:
+          type: boolean
+        lock:
+          type: string
+        flow_path:
+          type: string
+        modules:
+          type: object
+          nullable: true
+          description: Additional script modules keyed by relative file path
+          additionalProperties:
+            $ref: '#/components/schemas/ScriptModule'
+      required:
+      - args
+    InputTransform:
+      $ref: ../../openflow.openapi.yaml#/components/schemas/InputTransform
+    ExportableCompletedJob:
+      type: object
+      description: Completed job with full data for export/import operations
+      properties:
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: integer
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          type: object
+          description: Full job arguments without size restrictions
+        result:
+          type: object
+          description: Full job result without size restrictions
+        logs:
+          type: string
+          description: Complete job logs from v2_job table
+        raw_code:
+          type: string
+        raw_lock:
+          type: string
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flow
+          - flowdependencies
+          - appdependencies
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        trigger:
+          type: string
+          description: Trigger path for the job (replaces schedule_path)
+        trigger_kind:
+          type: string
+          enum:
+          - webhook
+          - http
+          - websocket
+          - kafka
+          - email
+          - nats
+          - schedule
+          - app
+          - ui
+          - postgres
+          - sqs
+          - gcp
+        permissioned_as:
+          type: string
+        permissioned_as_email:
+          type: string
+        flow_status:
+          type: object
+          description: Flow status from v2_job_status table
+        workflow_as_code_status:
+          type: object
+        raw_flow:
+          type: object
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        is_skipped:
+          type: boolean
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        same_worker:
+          type: boolean
+        flow_step_id:
+          type: string
+        flow_innermost_root_job:
+          type: string
+          format: uuid
+        concurrent_limit:
+          type: integer
+        concurrency_time_window_s:
+          type: integer
+        timeout:
+          type: integer
+        cache_ttl:
+          type: integer
+        self_wait_time_ms:
+          type: integer
+        aggregate_wait_time_ms:
+          type: integer
+        preprocessed:
+          type: boolean
+        worker:
+          type: string
+        status:
+          type: string
+          description: Actual job status from database
+      required:
+      - id
+      - created_by
+      - created_at
+      - job_kind
+      - permissioned_as
+      - email
+      - visible_to_owner
+    DynamicInputData:
+      type: object
+      properties:
+        entrypoint_function:
+          type: string
+          description: Name of the function to execute for dynamic select
+        args:
+          type: object
+          description: Arguments to pass to the function
+        runnable_ref:
+          type: object
+          oneOf:
+          - type: object
+            properties:
+              source:
+                type: string
+                enum:
+                - deployed
+              path:
+                type: string
+                description: Path to the deployed script or flow
+              runnable_kind:
+                $ref: '#/components/schemas/RunnableKind'
+            required:
+            - source
+            - path
+            - runnable_kind
+          - type: object
+            properties:
+              source:
+                type: string
+                enum:
+                - inline
+              code:
+                type: string
+                description: Code content for inline execution
+              language:
+                $ref: '#/components/schemas/ScriptLang'
+            required:
+            - source
+            - code
+      required:
+      - entrypoint_function
+      - runnable_ref
+    Job:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/CompletedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - CompletedJob
+      - allOf:
+        - $ref: '#/components/schemas/QueuedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - QueuedJob
+      discriminator:
+        propertyName: type
+    PreviewInline:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The code to run
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+      required:
+      - content
+      - args
+      - language
+    RunnableKind:
+      type: string
+      enum:
+      - script
+      - flow
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    QueuedJob:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        scheduled_for:
+          type: string
+          format: date-time
+        running:
+          type: boolean
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        logs:
+          type: string
+        raw_code:
+          type: string
+        canceled:
+          type: boolean
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        last_ping:
+          type: string
+          format: date-time
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flowdependencies
+          - appdependencies
+          - flow
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        schedule_path:
+          type: string
+        permissioned_as:
+          type: string
+          description: 'The user (u/userfoo) or group (g/groupfoo) whom
+
+            the execution of this script will be permissioned_as and by extension its DT_TOKEN.
+
+            '
+        flow_status:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
+        workflow_as_code_status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        raw_flow:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        self_wait_time_ms:
+          type: number
+        aggregate_wait_time_ms:
+          type: number
+        suspend:
+          type: number
+        preprocessed:
+          type: boolean
+        worker:
+          type: string
+      required:
+      - id
+      - running
+      - canceled
+      - job_kind
+      - permissioned_as
+      - is_flow_step
+      - email
+      - visible_to_owner
+      - tag
+    ExportableQueuedJob:
+      type: object
+      description: Queued job with full data for export/import operations
+      properties:
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        scheduled_for:
+          type: string
+          format: date-time
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          type: object
+          description: Full job arguments without size restrictions
+        logs:
+          type: string
+          description: Complete job logs from v2_job table
+        raw_code:
+          type: string
+        raw_lock:
+          type: string
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flowdependencies
+          - appdependencies
+          - flow
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        trigger:
+          type: string
+          description: Trigger path for the job (replaces schedule_path)
+        trigger_kind:
+          type: string
+          enum:
+          - webhook
+          - http
+          - websocket
+          - kafka
+          - email
+          - nats
+          - schedule
+          - app
+          - ui
+          - postgres
+          - sqs
+          - gcp
+        permissioned_as:
+          type: string
+        permissioned_as_email:
+          type: string
+        flow_status:
+          type: object
+          description: Flow status from v2_job_status table
+        workflow_as_code_status:
+          type: object
+        raw_flow:
+          type: object
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        same_worker:
+          type: boolean
+        flow_step_id:
+          type: string
+        flow_innermost_root_job:
+          type: string
+          format: uuid
+        concurrent_limit:
+          type: integer
+        concurrency_time_window_s:
+          type: integer
+        timeout:
+          type: integer
+        cache_ttl:
+          type: integer
+        self_wait_time_ms:
+          type: integer
+        aggregate_wait_time_ms:
+          type: integer
+        preprocessed:
+          type: boolean
+        suspend:
+          type: integer
+        suspend_until:
+          type: string
+          format: date-time
+      required:
+      - id
+      - created_by
+      - created_at
+      - job_kind
+      - permissioned_as
+      - email
+      - visible_to_owner
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
+    WorkflowStatus:
+      type: object
+      properties:
+        scheduled_for:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
+        name:
+          type: string
+    CompletedJob:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: integer
+        success:
+          type: boolean
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        result: {}
+        logs:
+          type: string
+        deleted:
+          type: boolean
+        raw_code:
+          type: string
+        canceled:
+          type: boolean
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flow
+          - flowdependencies
+          - appdependencies
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        schedule_path:
+          type: string
+        permissioned_as:
+          type: string
+          description: 'The user (u/userfoo) or group (g/groupfoo) whom
+
+            the execution of this script will be permissioned_as and by extension its DT_TOKEN.
+
+            '
+        flow_status:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
+        workflow_as_code_status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        raw_flow:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        is_skipped:
+          type: boolean
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        self_wait_time_ms:
+          type: number
+        aggregate_wait_time_ms:
+          type: number
+        preprocessed:
+          type: boolean
+        worker:
+          type: string
+      required:
+      - id
+      - created_by
+      - duration_ms
+      - created_at
+      - started_at
+      - success
+      - canceled
+      - job_kind
+      - permissioned_as
+      - is_flow_step
+      - is_skipped
+      - email
+      - visible_to_owner
+      - tag
+    ExtendedJobs:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        obscured_jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObscuredJob'
+        omitted_obscured_jobs:
+          description: Obscured jobs omitted for security because of too specific filtering
+          type: boolean
+      required:
+      - jobs
+      - obscured_jobs
+    RawScriptForDependencies:
+      type: object
+      properties:
+        raw_code:
+          type: string
+        path:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+      required:
+      - raw_code
+      - path
+      - language
+    WorkflowTask:
+      type: object
+      properties:
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+      required:
+      - args
+    ScriptModule:
+      type: object
+      description: An additional module file associated with a script
+      properties:
+        content:
+          type: string
+          description: The source code content of this module
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        lock:
+          type: string
+          nullable: true
+          description: Lock file content for this module's dependencies
+      required:
+      - content
+      - language
+    InlineScriptArgs:
+      type: object
+      properties:
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+  parameters:
+    TriggerPath:
+      name: trigger_path
+      description: filter by trigger path. Supports comma-separated list (e.g. 'f/trigger1,f/trigger2') and negation by prefixing all values with '!' (e.g. '!f/trigger1,!f/trigger2')
+      in: query
+      schema:
+        type: string
+    CreatedBeforeQueue:
+      name: created_before_queue
+      description: filter on jobs created before X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    SkipPreprocessor:
+      name: skip_preprocessor
+      description: skip the preprocessor
+      in: query
+      schema:
+        type: boolean
+    NewJobId:
+      name: job_id
+      description: The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)
+      in: query
+      schema:
+        type: string
+        format: uuid
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    CacheTtl:
+      name: cache_ttl
+      description: Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl
+      in: query
+      schema:
+        type: string
+    Worker:
+      name: worker
+      description: filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')
+      in: query
+      schema:
+        type: string
+    ParentJob:
+      name: parent_job
+      description: The parent job that is at the origin and responsible for the execution of this script if any
+      in: query
+      schema:
+        type: string
+        format: uuid
+    ScriptStartPath:
+      name: script_path_start
+      description: filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')
+      in: query
+      schema:
+        type: string
+    QueueLimit:
+      name: queue_limit
+      description: 'The maximum size of the queue for which the request would get rejected if that job would push it above that limit
+
+        '
+      in: query
+      schema:
+        type: string
+    Suspended:
+      name: suspended
+      description: filter on suspended jobs
+      in: query
+      schema:
+        type: boolean
+    GetStarted:
+      name: get_started
+      in: query
+      schema:
+        type: boolean
+    CreatedAfterQueue:
+      name: created_after_queue
+      description: filter on jobs created after X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    CompletedAfter:
+      name: completed_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    Tag:
+      name: tag
+      description: filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')
+      in: query
+      schema:
+        type: string
+    StartedBefore:
+      name: started_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ScheduledForBeforeNow:
+      name: scheduled_for_before_now
+      description: filter on jobs scheduled_for before now (hence waitinf for a worker)
+      in: query
+      schema:
+        type: boolean
+    StartedAfter:
+      name: started_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Payload:
+      name: payload
+      description: 'The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent
+
+        `encodeURIComponent(btoa(JSON.stringify({a: 2})))`
+
+        '
+      in: query
+      schema:
+        type: string
+    ScriptExactPath:
+      name: script_path_exact
+      description: filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')
+      in: query
+      schema:
+        type: string
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    IncludeHeader:
+      name: include_header
+      description: 'List of headers''s keys (separated with '','') whove value are added to the args
+
+        Header''s key lowercased and ''-'''' replaced to ''_'' such that ''Content-Type'' becomes the ''content_type'' arg key
+
+        '
+      in: query
+      schema:
+        type: string
+    CompletedBefore:
+      name: completed_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    JobKinds:
+      name: job_kinds
+      description: filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')
+      in: query
+      schema:
+        type: string
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+    CreatedBefore:
+      name: created_before
+      description: filter on created before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ScriptHash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
+    ResultFilter:
+      name: result
+      description: filter on jobs containing those result as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    Success:
+      name: success
+      description: filter on successful jobs
+      in: query
+      schema:
+        type: boolean
+    Label:
+      name: label
+      description: filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')
+      in: query
+      schema:
+        type: string
+    WorkerTag:
+      name: tag
+      description: Override the tag to use
+      in: query
+      schema:
+        type: string
+    ScriptExactHash:
+      name: script_hash
+      description: mask to filter exact matching path
+      in: query
+      schema:
+        type: string
+    SchedulePath:
+      name: schedule_path
+      description: mask to filter by schedule path
+      in: query
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Running:
+      name: running
+      description: filter on running jobs
+      in: query
+      schema:
+        type: boolean
+    AllowWildcards:
+      name: allow_wildcards
+      description: allow wildcards (*) in the filter of label, tag, worker
+      in: query
+      schema:
+        type: boolean
+    JobTriggerKind:
+      name: trigger_kind
+      description: filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')
+      in: query
+      x-go-name: JobTriggerKindParam
+      schema:
+        type: string
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    CreatedAfter:
+      name: created_after
+      description: filter on created after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

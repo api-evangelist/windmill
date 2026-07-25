@@ -1,0 +1,628 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin http_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: http_trigger
+paths:
+  /w/{workspace}/http_triggers/create_many:
+    post:
+      summary: Create Many HTTP Triggers
+      operationId: createHttpTriggers
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new http trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/NewHttpTrigger'
+      responses:
+        '201':
+          description: http trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/http_triggers/create:
+    post:
+      summary: Create Http Trigger
+      operationId: createHttpTrigger
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new http trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewHttpTrigger'
+      responses:
+        '201':
+          description: http trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/http_triggers/update/{path}:
+    post:
+      summary: Update Http Trigger
+      operationId: updateHttpTrigger
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditHttpTrigger'
+      responses:
+        '200':
+          description: http trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/http_triggers/delete/{path}:
+    delete:
+      summary: Delete Http Trigger
+      operationId: deleteHttpTrigger
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: http trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/http_triggers/get/{path}:
+    get:
+      summary: Get Http Trigger
+      operationId: getHttpTrigger
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: http trigger deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpTrigger'
+  /w/{workspace}/http_triggers/list:
+    get:
+      summary: List Http Triggers
+      operationId: listHttpTriggers
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: http trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HttpTrigger'
+  /w/{workspace}/http_triggers/exists/{path}:
+    get:
+      summary: Does Http Trigger Exists
+      operationId: existsHttpTrigger
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: http trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/http_triggers/route_exists:
+    post:
+      summary: Does Route Exists
+      operationId: existsRoute
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: route exists request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                route_path:
+                  type: string
+                http_method:
+                  $ref: '#/components/schemas/HttpMethod'
+                trigger_path:
+                  type: string
+                workspaced_route:
+                  type: boolean
+              required:
+              - route_path
+              - http_method
+      responses:
+        '200':
+          description: route exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/http_triggers/setmode/{path}:
+    post:
+      summary: Enable/disable Http Trigger
+      operationId: setHttpTriggerMode
+      tags:
+      - http_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: http trigger enable/disable
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    HttpTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        route_path:
+          type: string
+          description: The URL route path that will trigger this endpoint (e.g., 'api/myendpoint'). Must NOT start with a /.
+        static_asset_config:
+          type: object
+          nullable: true
+          description: Configuration for serving static assets (s3 bucket, storage path, filename)
+          properties:
+            s3:
+              type: string
+              description: S3 bucket path for static assets
+            storage:
+              type: string
+              description: Storage path for static assets
+            filename:
+              type: string
+              description: Filename for the static asset
+          required:
+          - s3
+        http_method:
+          $ref: '#/components/schemas/HttpMethod'
+          description: HTTP method (get, post, put, delete, patch) that triggers this endpoint
+        authentication_resource_path:
+          type: string
+          nullable: true
+          description: Path to the resource containing authentication configuration (for api_key, basic_http, custom_script, signature methods)
+        summary:
+          type: string
+          nullable: true
+          description: Short summary describing the purpose of this trigger
+        description:
+          type: string
+          nullable: true
+          description: Detailed description of what this trigger does
+        request_type:
+          $ref: '#/components/schemas/HttpRequestType'
+          description: How the request is handled - 'sync' waits for result, 'async' returns job ID immediately, 'sync_sse' streams results via Server-Sent Events
+        authentication_method:
+          $ref: '#/components/schemas/AuthenticationMethod'
+          description: How requests are authenticated - 'none' (public), 'windmill' (Windmill token), 'api_key', 'basic_http', 'custom_script', 'signature'
+        is_static_website:
+          type: boolean
+          description: If true, serves static files from S3/storage instead of running a script
+        workspaced_route:
+          type: boolean
+          description: If true, the route includes the workspace ID in the path
+        wrap_body:
+          type: boolean
+          description: If true, wraps the request body in a 'body' parameter
+        raw_string:
+          type: boolean
+          description: If true, passes the request body as a raw string instead of parsing as JSON
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - route_path
+      - request_type
+      - authentication_method
+      - http_method
+      - is_static_website
+      - workspaced_route
+      - wrap_body
+      - raw_string
+    HttpMethod:
+      type: string
+      enum:
+      - get
+      - post
+      - put
+      - delete
+      - patch
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    HttpRequestType:
+      type: string
+      enum:
+      - sync
+      - async
+      - sync_sse
+    AuthenticationMethod:
+      type: string
+      enum:
+      - none
+      - windmill
+      - api_key
+      - basic_http
+      - custom_script
+      - signature
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    NewHttpTrigger:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        route_path:
+          type: string
+          description: The URL route path that will trigger this endpoint (e.g., 'api/myendpoint'). Must NOT start with a /.
+        workspaced_route:
+          type: boolean
+          description: If true, the route includes the workspace ID in the path
+        summary:
+          type: string
+          nullable: true
+          description: Short summary describing the purpose of this trigger
+        description:
+          type: string
+          nullable: true
+          description: Detailed description of what this trigger does
+        static_asset_config:
+          type: object
+          nullable: true
+          description: Configuration for serving static assets (s3 bucket, storage path, filename)
+          properties:
+            s3:
+              type: string
+              description: S3 bucket path for static assets
+            storage:
+              type: string
+              description: Storage path for static assets
+            filename:
+              type: string
+              description: Filename for the static asset
+          required:
+          - s3
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        http_method:
+          $ref: '#/components/schemas/HttpMethod'
+          description: HTTP method (get, post, put, delete, patch) that triggers this endpoint
+        authentication_resource_path:
+          type: string
+          nullable: true
+          description: Path to the resource containing authentication configuration (for api_key, basic_http, custom_script, signature methods)
+        is_async:
+          type: boolean
+          description: Deprecated, use request_type instead
+        request_type:
+          $ref: '#/components/schemas/HttpRequestType'
+          description: How the request is handled - 'sync' waits for result, 'async' returns job ID immediately, 'sync_sse' streams results via Server-Sent Events
+        authentication_method:
+          $ref: '#/components/schemas/AuthenticationMethod'
+          description: How requests are authenticated - 'none' (public), 'windmill' (Windmill token), 'api_key', 'basic_http', 'custom_script', 'signature'
+        is_static_website:
+          type: boolean
+          description: If true, serves static files from S3/storage instead of running a script
+        wrap_body:
+          type: boolean
+          description: If true, wraps the request body in a 'body' parameter
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        raw_string:
+          type: boolean
+          description: If true, passes the request body as a raw string instead of parsing as JSON
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - route_path
+      - is_flow
+      - authentication_method
+      - http_method
+      - is_static_website
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    EditHttpTrigger:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        route_path:
+          type: string
+          description: The URL route path that will trigger this endpoint (e.g., 'api/myendpoint'). Must NOT start with a /.
+        summary:
+          type: string
+          nullable: true
+          description: Short summary describing the purpose of this trigger
+        description:
+          type: string
+          nullable: true
+          description: Detailed description of what this trigger does
+        workspaced_route:
+          type: boolean
+          description: If true, the route includes the workspace ID in the path
+        static_asset_config:
+          type: object
+          nullable: true
+          description: Configuration for serving static assets (s3 bucket, storage path, filename)
+          properties:
+            s3:
+              type: string
+              description: S3 bucket path for static assets
+            storage:
+              type: string
+              description: Storage path for static assets
+            filename:
+              type: string
+              description: Filename for the static asset
+          required:
+          - s3
+        authentication_resource_path:
+          type: string
+          nullable: true
+          description: Path to the resource containing authentication configuration (for api_key, basic_http, custom_script, signature methods)
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        http_method:
+          $ref: '#/components/schemas/HttpMethod'
+          description: HTTP method (get, post, put, delete, patch) that triggers this endpoint
+        is_async:
+          type: boolean
+          description: Deprecated, use request_type instead
+        request_type:
+          $ref: '#/components/schemas/HttpRequestType'
+          description: How the request is handled - 'sync' waits for result, 'async' returns job ID immediately, 'sync_sse' streams results via Server-Sent Events
+        authentication_method:
+          $ref: '#/components/schemas/AuthenticationMethod'
+          description: How requests are authenticated - 'none' (public), 'windmill' (Windmill token), 'api_key', 'basic_http', 'custom_script', 'signature'
+        is_static_website:
+          type: boolean
+          description: If true, serves static files from S3/storage instead of running a script
+        wrap_body:
+          type: boolean
+          description: If true, wraps the request body in a 'body' parameter
+        raw_string:
+          type: boolean
+          description: If true, passes the request body as a raw string instead of parsing as JSON
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - kind
+      - authentication_method
+      - http_method
+      - is_static_website
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

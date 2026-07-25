@@ -1,0 +1,399 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin email_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: email_trigger
+paths:
+  /w/{workspace}/email_triggers/create:
+    post:
+      summary: Create Email Trigger
+      operationId: createEmailTrigger
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new email trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewEmailTrigger'
+      responses:
+        '201':
+          description: email trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/email_triggers/update/{path}:
+    post:
+      summary: Update Email Trigger
+      operationId: updateEmailTrigger
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditEmailTrigger'
+      responses:
+        '200':
+          description: email trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/email_triggers/delete/{path}:
+    delete:
+      summary: Delete Email Trigger
+      operationId: deleteEmailTrigger
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: email trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/email_triggers/get/{path}:
+    get:
+      summary: Get Email Trigger
+      operationId: getEmailTrigger
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: email trigger retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTrigger'
+  /w/{workspace}/email_triggers/list:
+    get:
+      summary: List Email Triggers
+      operationId: listEmailTriggers
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: email trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmailTrigger'
+  /w/{workspace}/email_triggers/exists/{path}:
+    get:
+      summary: Does Email Trigger Exists
+      operationId: existsEmailTrigger
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: email trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/email_triggers/local_part_exists:
+    post:
+      summary: Does Email Local Part Exists
+      operationId: existsEmailLocalPart
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: email local part exists request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                local_part:
+                  type: string
+                workspaced_local_part:
+                  type: boolean
+                trigger_path:
+                  type: string
+              required:
+              - local_part
+      responses:
+        '200':
+          description: email local part exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/email_triggers/setmode/{path}:
+    post:
+      summary: Enable/disable Email Trigger
+      operationId: setEmailTriggerMode
+      tags:
+      - email_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: email trigger enable/disable
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    EditEmailTrigger:
+      type: object
+      properties:
+        path:
+          type: string
+        script_path:
+          type: string
+        local_part:
+          type: string
+        workspaced_local_part:
+          type: boolean
+        is_flow:
+          type: boolean
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    NewEmailTrigger:
+      type: object
+      properties:
+        path:
+          type: string
+        script_path:
+          type: string
+        local_part:
+          type: string
+        workspaced_local_part:
+          type: boolean
+        is_flow:
+          type: boolean
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - local_part
+      - is_flow
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    EmailTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        local_part:
+          type: string
+        workspaced_local_part:
+          type: boolean
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+      required:
+      - local_part
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

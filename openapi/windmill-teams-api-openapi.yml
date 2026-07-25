@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin teams API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: teams
+paths:
+  /teams/activities:
+    post:
+      summary: Send Update to Microsoft Teams Activity
+      description: Respond to a Microsoft Teams activity after a workspace command is run
+      operationId: sendMessageToConversation
+      tags:
+      - teams
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - conversation_id
+              - text
+              properties:
+                conversation_id:
+                  type: string
+                  description: The ID of the Teams conversation/activity
+                success:
+                  type: boolean
+                  description: Used for styling the card conditionally
+                  default: true
+                text:
+                  type: string
+                  description: The message text to be sent in the Teams card
+                card_block:
+                  type: object
+                  description: The card block to be sent in the Teams card
+      responses:
+        '200':
+          description: Activity processed successfully
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

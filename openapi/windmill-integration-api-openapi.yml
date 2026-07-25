@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin integration API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: integration
+paths:
+  /integrations/hub/list:
+    get:
+      summary: List Hub Integrations
+      operationId: listHubIntegrations
+      tags:
+      - integration
+      parameters:
+      - name: kind
+        description: query integrations kind
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: integrations details
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

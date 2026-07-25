@@ -1,0 +1,436 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin oauth API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: oauth
+paths:
+  /w/{workspace}/oauth/connect_slack_callback:
+    post:
+      summary: Connect Slack Callback
+      operationId: connectSlackCallback
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: code endpoint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                state:
+                  type: string
+              required:
+              - code
+              - state
+      responses:
+        '200':
+          description: slack token
+          content:
+            text/plain:
+              schema:
+                type: string
+  /oauth/connect_slack_callback:
+    post:
+      summary: Connect Slack Callback Instance
+      operationId: connectSlackCallbackInstance
+      tags:
+      - oauth
+      requestBody:
+        description: code endpoint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                state:
+                  type: string
+              required:
+              - code
+              - state
+      responses:
+        '200':
+          description: success message
+          content:
+            text/plain:
+              schema:
+                type: string
+  /oauth/connect_slack_instance:
+    post:
+      summary: Connect Slack Instance (non-interactive; Pre-minted Bot Token)
+      operationId: connectSlackInstance
+      tags:
+      - oauth
+      requestBody:
+        description: connect slack at the instance level with a pre-minted bot token
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bot_token
+              - team_id
+              - team_name
+              properties:
+                bot_token:
+                  type: string
+                  description: xoxb-... bot token obtained at api.slack.com/apps
+                team_id:
+                  type: string
+                team_name:
+                  type: string
+      responses:
+        '200':
+          description: status
+  /oauth/connect_callback/{client_name}:
+    post:
+      summary: Connect Callback
+      operationId: connectCallback
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/ClientName'
+      requestBody:
+        description: code endpoint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                state:
+                  type: string
+              required:
+              - code
+              - state
+      responses:
+        '200':
+          description: oauth token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+  /w/{workspace}/oauth/create_account:
+    post:
+      summary: Create OAuth Account
+      operationId: createAccount
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: code endpoint
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+                  description: OAuth refresh token. For authorization_code flow, this contains the actual refresh token. For client_credentials flow, this must be set to an empty string.
+                expires_in:
+                  type: integer
+                client:
+                  type: string
+                grant_type:
+                  type: string
+                  default: authorization_code
+                cc_client_id:
+                  type: string
+                  description: OAuth client ID for resource-level credentials (client_credentials flow only)
+                cc_client_secret:
+                  type: string
+                  description: OAuth client secret for resource-level credentials (client_credentials flow only)
+                cc_token_url:
+                  type: string
+                  description: OAuth token URL override for resource-level authentication (client_credentials flow only)
+                mcp_server_url:
+                  type: string
+                  description: MCP server URL for MCP OAuth token refresh
+                scopes:
+                  type: array
+                  items:
+                    type: string
+                  description: OAuth scopes to use for token refresh. Overrides instance-level scopes.
+              required:
+              - refresh_token
+              - expires_in
+              - client
+      responses:
+        '200':
+          description: account set
+          content:
+            text/plain:
+              schema:
+                type: string
+  /oauth/connect_client_credentials/{client}:
+    post:
+      summary: Connect OAuth Using Client Credentials
+      operationId: connectClientCredentials
+      tags:
+      - oauth
+      parameters:
+      - name: client
+        in: path
+        description: OAuth client name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: client credentials flow parameters
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scopes:
+                  type: array
+                  items:
+                    type: string
+                cc_client_id:
+                  type: string
+                  description: OAuth client ID for resource-level authentication
+                cc_client_secret:
+                  type: string
+                  description: OAuth client secret for resource-level authentication
+                cc_token_url:
+                  type: string
+                  description: OAuth token URL override for resource-level authentication
+              required:
+              - cc_client_id
+              - cc_client_secret
+      responses:
+        '200':
+          description: OAuth token response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+  /w/{workspace}/oauth/refresh_token/{id}:
+    post:
+      summary: Refresh Token
+      operationId: refreshToken
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/AccountId'
+      requestBody:
+        description: variable path
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+              required:
+              - path
+      responses:
+        '200':
+          description: token refreshed
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/oauth/disconnect/{id}:
+    post:
+      summary: Disconnect Account
+      operationId: disconnectAccount
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: disconnected client
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/oauth/disconnect_slack:
+    post:
+      summary: Disconnect Slack
+      operationId: disconnectSlack
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: disconnected slack
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/oauth/disconnect_teams:
+    post:
+      summary: Disconnect Teams
+      operationId: disconnectTeams
+      tags:
+      - oauth
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: disconnected teams
+          content:
+            text/plain:
+              schema:
+                type: string
+  /oauth/list_logins:
+    get:
+      summary: List Oauth Logins
+      operationId: listOAuthLogins
+      tags:
+      - oauth
+      responses:
+        '200':
+          description: list of oauth and saml login clients
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  oauth:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        display_name:
+                          type: string
+                      required:
+                      - type
+                  saml:
+                    type: string
+                  auto_login:
+                    type: string
+                    description: provider type to auto-redirect to on login (oauth key or "saml")
+                required:
+                - oauth
+  /oauth/list_connects:
+    get:
+      summary: List Oauth Connects
+      operationId: listOAuthConnects
+      tags:
+      - oauth
+      responses:
+        '200':
+          description: list of oauth connects clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /oauth/get_connect/{client}:
+    get:
+      summary: Get Oauth Connect
+      operationId: getOAuthConnect
+      tags:
+      - oauth
+      parameters:
+      - name: client
+        description: client name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: get
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  extra_params:
+                    type: object
+                  scopes:
+                    type: array
+                    items:
+                      type: string
+                  grant_types:
+                    type: array
+                    items:
+                      type: string
+components:
+  parameters:
+    ClientName:
+      name: client_name
+      in: path
+      required: true
+      schema:
+        type: string
+    AccountId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+        refresh_token:
+          type: string
+        scope:
+          type: array
+          items:
+            type: string
+        grant_type:
+          type: string
+      required:
+      - access_token
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

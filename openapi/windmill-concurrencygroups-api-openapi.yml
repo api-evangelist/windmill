@@ -1,0 +1,662 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin concurrencyGroups API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: concurrencyGroups
+paths:
+  /concurrency_groups/list:
+    get:
+      summary: List All Concurrency Groups
+      operationId: listConcurrencyGroups
+      tags:
+      - concurrencyGroups
+      responses:
+        '200':
+          description: all concurrency groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConcurrencyGroup'
+  /concurrency_groups/prune/{concurrency_id}:
+    delete:
+      summary: Delete Concurrency Group
+      operationId: deleteConcurrencyGroup
+      tags:
+      - concurrencyGroups
+      parameters:
+      - $ref: '#/components/parameters/ConcurrencyId'
+      responses:
+        '200':
+          description: concurrency group removed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+  /concurrency_groups/{id}/key:
+    get:
+      summary: Get the Concurrency Key for a Job that has Concurrency Limits Enabled
+      operationId: getConcurrencyKey
+      tags:
+      - concurrencyGroups
+      parameters:
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: concurrency key for given job
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/concurrency_groups/list_jobs:
+    get:
+      summary: Get Intervals of Job Runtime Concurrency
+      operationId: listExtendedJobs
+      tags:
+      - concurrencyGroups
+      parameters:
+      - name: concurrency_key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: row_limit
+        in: query
+        required: false
+        schema:
+          type: number
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/CreatedBy'
+      - $ref: '#/components/parameters/Label'
+      - $ref: '#/components/parameters/ParentJob'
+      - $ref: '#/components/parameters/ScriptExactPath'
+      - $ref: '#/components/parameters/ScriptStartPath'
+      - $ref: '#/components/parameters/SchedulePath'
+      - $ref: '#/components/parameters/ScriptExactHash'
+      - $ref: '#/components/parameters/StartedBefore'
+      - $ref: '#/components/parameters/StartedAfter'
+      - $ref: '#/components/parameters/Running'
+      - $ref: '#/components/parameters/ScheduledForBeforeNow'
+      - $ref: '#/components/parameters/CompletedBefore'
+      - $ref: '#/components/parameters/CompletedAfter'
+      - $ref: '#/components/parameters/CreatedBeforeQueue'
+      - $ref: '#/components/parameters/CreatedAfterQueue'
+      - $ref: '#/components/parameters/JobKinds'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - $ref: '#/components/parameters/Tag'
+      - $ref: '#/components/parameters/ResultFilter'
+      - $ref: '#/components/parameters/AllowWildcards'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/JobTriggerKind'
+      - name: is_skipped
+        description: is the job skipped
+        in: query
+        schema:
+          type: boolean
+      - name: is_flow_step
+        description: is the job a flow step
+        in: query
+        schema:
+          type: boolean
+      - name: has_null_parent
+        description: has null parent
+        in: query
+        schema:
+          type: boolean
+      - name: success
+        description: filter on successful jobs
+        in: query
+        schema:
+          type: boolean
+      - name: all_workspaces
+        description: get jobs from all workspaces (only valid if request come from the `admins` workspace)
+        in: query
+        schema:
+          type: boolean
+      - name: is_not_schedule
+        description: is not a scheduled job
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: time
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendedJobs'
+components:
+  schemas:
+    ObscuredJob:
+      type: object
+      properties:
+        typ:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
+    ConcurrencyGroup:
+      type: object
+      properties:
+        concurrency_key:
+          type: string
+        total_running:
+          type: number
+      required:
+      - concurrency_key
+      - total_running
+    Job:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/CompletedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - CompletedJob
+      - allOf:
+        - $ref: '#/components/schemas/QueuedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - QueuedJob
+      discriminator:
+        propertyName: type
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    QueuedJob:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        scheduled_for:
+          type: string
+          format: date-time
+        running:
+          type: boolean
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        logs:
+          type: string
+        raw_code:
+          type: string
+        canceled:
+          type: boolean
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        last_ping:
+          type: string
+          format: date-time
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flowdependencies
+          - appdependencies
+          - flow
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        schedule_path:
+          type: string
+        permissioned_as:
+          type: string
+          description: 'The user (u/userfoo) or group (g/groupfoo) whom
+
+            the execution of this script will be permissioned_as and by extension its DT_TOKEN.
+
+            '
+        flow_status:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
+        workflow_as_code_status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        raw_flow:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        self_wait_time_ms:
+          type: number
+        aggregate_wait_time_ms:
+          type: number
+        suspend:
+          type: number
+        preprocessed:
+          type: boolean
+        worker:
+          type: string
+      required:
+      - id
+      - running
+      - canceled
+      - job_kind
+      - permissioned_as
+      - is_flow_step
+      - email
+      - visible_to_owner
+      - tag
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
+    WorkflowStatus:
+      type: object
+      properties:
+        scheduled_for:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
+        name:
+          type: string
+    CompletedJob:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        completed_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: integer
+        success:
+          type: boolean
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        result: {}
+        logs:
+          type: string
+        deleted:
+          type: boolean
+        raw_code:
+          type: string
+        canceled:
+          type: boolean
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flow
+          - flowdependencies
+          - appdependencies
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        schedule_path:
+          type: string
+        permissioned_as:
+          type: string
+          description: 'The user (u/userfoo) or group (g/groupfoo) whom
+
+            the execution of this script will be permissioned_as and by extension its DT_TOKEN.
+
+            '
+        flow_status:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
+        workflow_as_code_status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        raw_flow:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        is_skipped:
+          type: boolean
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        labels:
+          type: array
+          items:
+            type: string
+        self_wait_time_ms:
+          type: number
+        aggregate_wait_time_ms:
+          type: number
+        preprocessed:
+          type: boolean
+        worker:
+          type: string
+      required:
+      - id
+      - created_by
+      - duration_ms
+      - created_at
+      - started_at
+      - success
+      - canceled
+      - job_kind
+      - permissioned_as
+      - is_flow_step
+      - is_skipped
+      - email
+      - visible_to_owner
+      - tag
+    ExtendedJobs:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        obscured_jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObscuredJob'
+        omitted_obscured_jobs:
+          description: Obscured jobs omitted for security because of too specific filtering
+          type: boolean
+      required:
+      - jobs
+      - obscured_jobs
+  parameters:
+    CreatedBeforeQueue:
+      name: created_before_queue
+      description: filter on jobs created before X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    ParentJob:
+      name: parent_job
+      description: The parent job that is at the origin and responsible for the execution of this script if any
+      in: query
+      schema:
+        type: string
+        format: uuid
+    ScriptStartPath:
+      name: script_path_start
+      description: filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')
+      in: query
+      schema:
+        type: string
+    CreatedAfterQueue:
+      name: created_after_queue
+      description: filter on jobs created after X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    CompletedAfter:
+      name: completed_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    Tag:
+      name: tag
+      description: filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')
+      in: query
+      schema:
+        type: string
+    StartedBefore:
+      name: started_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ScheduledForBeforeNow:
+      name: scheduled_for_before_now
+      description: filter on jobs scheduled_for before now (hence waitinf for a worker)
+      in: query
+      schema:
+        type: boolean
+    StartedAfter:
+      name: started_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    ScriptExactPath:
+      name: script_path_exact
+      description: filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')
+      in: query
+      schema:
+        type: string
+    CompletedBefore:
+      name: completed_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    JobKinds:
+      name: job_kinds
+      description: filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')
+      in: query
+      schema:
+        type: string
+    ResultFilter:
+      name: result
+      description: filter on jobs containing those result as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    SchedulePath:
+      name: schedule_path
+      description: mask to filter by schedule path
+      in: query
+      schema:
+        type: string
+    ConcurrencyId:
+      name: concurrency_id
+      in: path
+      required: true
+      schema:
+        type: string
+    ScriptExactHash:
+      name: script_hash
+      description: mask to filter exact matching path
+      in: query
+      schema:
+        type: string
+    Label:
+      name: label
+      description: filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')
+      in: query
+      schema:
+        type: string
+    Running:
+      name: running
+      description: filter on running jobs
+      in: query
+      schema:
+        type: boolean
+    AllowWildcards:
+      name: allow_wildcards
+      description: allow wildcards (*) in the filter of label, tag, worker
+      in: query
+      schema:
+        type: boolean
+    JobTriggerKind:
+      name: trigger_kind
+      description: filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')
+      in: query
+      x-go-name: JobTriggerKindParam
+      schema:
+        type: string
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

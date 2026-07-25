@@ -1,0 +1,331 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin indexSearch API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: indexSearch
+paths:
+  /srch/w/{workspace}/index/search/job:
+    get:
+      summary: Search Through Jobs with a String Query
+      operationId: searchJobsIndex
+      tags:
+      - indexSearch
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: search_query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: pagination_offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query_parse_errors:
+                    description: a list of the terms that couldn't be parsed (and thus ignored)
+                    type: array
+                    items:
+                      type: string
+                  hits:
+                    description: the jobs that matched the query
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/JobSearchHit'
+                  hit_count:
+                    description: how many jobs matched in total
+                    type: number
+                  index_metadata:
+                    description: Metadata about the index current state
+                    type: object
+                    properties:
+                      indexed_until:
+                        description: Datetime of the most recently indexed job
+                        type: string
+                        format: date-time
+                      lost_lock_ownership:
+                        description: Is the current indexer service being replaced
+                        type: boolean
+                      max_index_time_window_secs:
+                        description: Maximum time window in seconds for indexing
+                        type: number
+  /srch/index/search/service_logs:
+    get:
+      summary: Search Through Service Logs with a String Query
+      operationId: searchLogsIndex
+      tags:
+      - indexSearch
+      parameters:
+      - name: search_query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: mode
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: worker_group
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: hostname
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: min_ts
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: max_ts
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query_parse_errors:
+                    description: a list of the terms that couldn't be parsed (and thus ignored)
+                    type: array
+                    items:
+                      type: string
+                  hits:
+                    description: log files that matched the query
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/LogSearchHit'
+  /srch/index/search/count_service_logs:
+    get:
+      summary: Search and Count the Log Line Hits on Every Provided Host
+      operationId: countSearchLogsIndex
+      tags:
+      - indexSearch
+      parameters:
+      - name: search_query
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: min_ts
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: max_ts
+        in: query
+        required: false
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  query_parse_errors:
+                    description: a list of the terms that couldn't be parsed (and thus ignored)
+                    type: array
+                    items:
+                      type: string
+                  count_per_host:
+                    description: count of log lines that matched the query per hostname
+                    type: object
+  /srch/index/storage/disk:
+    get:
+      summary: Get Index Disk Storage Sizes from the Indexer.
+      operationId: getIndexDiskStorageSizes
+      tags:
+      - indexSearch
+      responses:
+        '200':
+          description: disk storage sizes for each index
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_index_disk_size_bytes:
+                    type: integer
+                    nullable: true
+                  log_index_disk_size_bytes:
+                    type: integer
+                    nullable: true
+  /indexer/delete/{idx_name}:
+    delete:
+      summary: Clear an Index and Restart the Indexer.
+      operationId: clearIndex
+      tags:
+      - indexSearch
+      parameters:
+      - name: idx_name
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - JobIndex
+          - ServiceLogIndex
+      responses:
+        '200':
+          description: idx to be deleted and indexer restarting
+          content:
+            text/plain:
+              schema:
+                type: string
+  /indexer/storage:
+    get:
+      summary: Get Index Storage Sizes (disk and S3).
+      operationId: getIndexStorageSizes
+      tags:
+      - indexSearch
+      responses:
+        '200':
+          description: storage sizes for each index
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_index:
+                    type: object
+                    properties:
+                      disk_size_bytes:
+                        type: integer
+                        nullable: true
+                      s3_size_bytes:
+                        type: integer
+                        nullable: true
+                  service_log_index:
+                    type: object
+                    properties:
+                      disk_size_bytes:
+                        type: integer
+                        nullable: true
+                      s3_size_bytes:
+                        type: integer
+                        nullable: true
+  /indexer/status:
+    get:
+      summary: Get Indexer Status Including Liveness and Storage Sizes.
+      operationId: getIndexerStatus
+      tags:
+      - indexSearch
+      responses:
+        '200':
+          description: indexer status for each index
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_indexer:
+                    type: object
+                    properties:
+                      is_alive:
+                        type: boolean
+                      last_locked_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      owner:
+                        type: string
+                        nullable: true
+                      storage:
+                        type: object
+                        properties:
+                          disk_size_bytes:
+                            type: integer
+                            nullable: true
+                          s3_size_bytes:
+                            type: integer
+                            nullable: true
+                  log_indexer:
+                    type: object
+                    properties:
+                      is_alive:
+                        type: boolean
+                      last_locked_at:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      owner:
+                        type: string
+                        nullable: true
+                      storage:
+                        type: object
+                        properties:
+                          disk_size_bytes:
+                            type: integer
+                            nullable: true
+                          s3_size_bytes:
+                            type: integer
+                            nullable: true
+components:
+  schemas:
+    LogSearchHit:
+      type: object
+      properties:
+        dancer:
+          type: string
+    JobSearchHit:
+      type: object
+      properties:
+        dancer:
+          type: string
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

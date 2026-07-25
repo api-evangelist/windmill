@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin path_autocomplete API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: path_autocomplete
+paths:
+  /w/{workspace}/path_autocomplete/list_paths:
+    get:
+      summary: List All Paths in a Workspace for Client-side Autocomplete
+      description: 'Returns the flat list of all item paths visible to the caller across
+
+        scripts, flows, apps, raw apps, variables, and resources. Intended to
+
+        feed an entirely client-side path autocomplete UI: the frontend fetches
+
+        once (server caches per workspace for 60s) and performs all prefix/segment
+
+        computation locally. Capped at 20,000 paths (5,000 per table).
+
+        '
+      operationId: listPathAutocompletePaths
+      tags:
+      - path_autocomplete
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: deduplicated path list, sorted lexicographically
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paths:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - paths
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

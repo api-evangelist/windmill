@@ -1,0 +1,179 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin metrics API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: metrics
+paths:
+  /w/{workspace}/job_metrics/get/{id}:
+    post:
+      summary: Get Job Metrics
+      operationId: getJobMetrics
+      tags:
+      - metrics
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      requestBody:
+        description: parameters for statistics retrieval
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                timeseries_max_datapoints:
+                  type: integer
+                from_timestamp:
+                  type: string
+                  format: date-time
+                to_timestamp:
+                  type: string
+                  format: date-time
+      responses:
+        '200':
+          description: job details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metrics_metadata:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/MetricMetadata'
+                  scalar_metrics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ScalarMetric'
+                  timeseries_metrics:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimeseriesMetric'
+  /w/{workspace}/job_metrics/set_progress/{id}:
+    post:
+      summary: Set Job Metrics
+      operationId: setJobProgress
+      tags:
+      - metrics
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      requestBody:
+        description: parameters for statistics retrieval
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                percent:
+                  type: integer
+                flow_job_id:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: Job progress updated
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/job_metrics/get_progress/{id}:
+    get:
+      summary: Get Job Progress
+      operationId: getJobProgress
+      tags:
+      - metrics
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/JobId'
+      responses:
+        '200':
+          description: job progress between 0 and 99
+          content:
+            application/json:
+              schema:
+                type: integer
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    ScalarMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        value:
+          type: number
+      required:
+      - id
+      - value
+    TimeseriesMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+      required:
+      - id
+      - values
+    MetricDataPoint:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        value:
+          type: number
+      required:
+      - timestamp
+      - value
+    MetricMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

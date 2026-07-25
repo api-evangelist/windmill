@@ -1,0 +1,576 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin group API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: group
+paths:
+  /groups/list:
+    get:
+      summary: List Instance Groups
+      operationId: listInstanceGroups
+      tags:
+      - group
+      responses:
+        '200':
+          description: instance group list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstanceGroup'
+  /groups/list_with_workspaces:
+    get:
+      summary: List Instance Groups with Workspace Information
+      operationId: listInstanceGroupsWithWorkspaces
+      tags:
+      - group
+      responses:
+        '200':
+          description: instance group list with workspaces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/InstanceGroupWithWorkspaces'
+  /groups/get/{name}:
+    get:
+      summary: Get Instance Group
+      operationId: getInstanceGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: instance group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstanceGroupWithWorkspaces'
+  /groups/create:
+    post:
+      summary: Create Instance Group
+      operationId: createInstanceGroup
+      tags:
+      - group
+      requestBody:
+        description: create instance group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                summary:
+                  type: string
+              required:
+              - name
+      responses:
+        '200':
+          description: instance group created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /groups/update/{name}:
+    post:
+      summary: Update Instance Group
+      operationId: updateInstanceGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: update instance group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_summary:
+                  type: string
+                instance_role:
+                  type: string
+                  nullable: true
+                  description: Instance-level role for group members. 'superadmin', 'devops', 'user' or empty to clear.
+              required:
+              - new_summary
+      responses:
+        '200':
+          description: instance group updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /groups/delete/{name}:
+    delete:
+      summary: Delete Instance Group
+      operationId: deleteInstanceGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: instance group deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /groups/adduser/{name}:
+    post:
+      summary: Add User to Instance Group
+      operationId: addUserToInstanceGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: user to add to instance group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+      responses:
+        '200':
+          description: user added to instance group
+          content:
+            text/plain:
+              schema:
+                type: string
+  /groups/removeuser/{name}:
+    post:
+      summary: Remove User from Instance Group
+      operationId: removeUserFromInstanceGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: user to remove from instance group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+      responses:
+        '200':
+          description: user removed from instance group
+          content:
+            text/plain:
+              schema:
+                type: string
+  /groups/export:
+    get:
+      summary: Export Instance Groups
+      operationId: exportInstanceGroups
+      tags:
+      - group
+      responses:
+        '200':
+          description: exported instance groups
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExportedInstanceGroup'
+  /groups/overwrite:
+    post:
+      summary: Overwrite Instance Groups
+      operationId: overwriteInstanceGroups
+      tags:
+      - group
+      requestBody:
+        description: overwrite instance groups
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ExportedInstanceGroup'
+      responses:
+        '200':
+          description: success message
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/groups/list:
+    get:
+      summary: List Groups
+      operationId: listGroups
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: group list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+  /w/{workspace}/groups/listnames:
+    get:
+      summary: List Group Names
+      operationId: listGroupNames
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: only_member_of
+        in: query
+        description: only list the groups the user is member of (default false)
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: group list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/groups/create:
+    post:
+      summary: Create Group
+      operationId: createGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: create group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                summary:
+                  type: string
+              required:
+              - name
+      responses:
+        '200':
+          description: group created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/groups/update/{name}:
+    post:
+      summary: Update Group
+      operationId: updateGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: updated group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                summary:
+                  type: string
+      responses:
+        '200':
+          description: group updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/groups/delete/{name}:
+    delete:
+      summary: Delete Group
+      operationId: deleteGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: group deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/groups/get/{name}:
+    get:
+      summary: Get Group
+      operationId: getGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      responses:
+        '200':
+          description: group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+  /w/{workspace}/groups/adduser/{name}:
+    post:
+      summary: Add User to Group
+      operationId: addUserToGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: added user to group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses:
+        '200':
+          description: user added to group
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/groups/removeuser/{name}:
+    post:
+      summary: Remove User to Group
+      operationId: removeUserToGroup
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      requestBody:
+        description: added user to group
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+      responses:
+        '200':
+          description: user removed from group
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/groups_history/get/{name}:
+    get:
+      summary: Get Group Permission History
+      operationId: getGroupPermissionHistory
+      tags:
+      - group
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Name'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: group permission history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    changed_by:
+                      type: string
+                    changed_at:
+                      type: string
+                      format: date-time
+                    change_type:
+                      type: string
+                    member_affected:
+                      type: string
+                      nullable: true
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    InstanceGroupWithWorkspaces:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type: string
+          nullable: true
+          enum:
+          - superadmin
+          - devops
+        workspaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceInfo'
+    InstanceGroup:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type: string
+          nullable: true
+          enum:
+          - superadmin
+          - devops
+    WorkspaceInfo:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        workspace_name:
+          type: string
+        role:
+          type: string
+      required:
+      - name
+    Group:
+      type: object
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+      required:
+      - name
+    ExportedInstanceGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        scim_display_name:
+          type: string
+        external_id:
+          type: string
+        instance_role:
+          type: string
+          nullable: true
+          enum:
+          - superadmin
+          - devops
+      required:
+      - name
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

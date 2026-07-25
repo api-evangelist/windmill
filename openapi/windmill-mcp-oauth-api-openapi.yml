@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin mcp_oauth API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: mcp_oauth
+paths:
+  /mcp/oauth/discover:
+    post:
+      summary: Discover MCP Server OAuth Metadata
+      operationId: discoverMcpOAuth
+      tags:
+      - mcp_oauth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - mcp_server_url
+              properties:
+                mcp_server_url:
+                  type: string
+                  description: URL of the MCP server to discover OAuth metadata from
+      responses:
+        '200':
+          description: OAuth metadata from MCP server
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scopes_supported:
+                    type: array
+                    items:
+                      type: string
+                  authorization_endpoint:
+                    type: string
+                  token_endpoint:
+                    type: string
+                  registration_endpoint:
+                    type: string
+                  supports_dynamic_registration:
+                    type: boolean
+  /mcp/oauth/start:
+    get:
+      summary: Start MCP OAuth Popup Flow
+      description: Opens in a popup, discovers OAuth metadata, registers client, and redirects to OAuth provider
+      operationId: startMcpOAuthPopup
+      tags:
+      - mcp_oauth
+      parameters:
+      - name: mcp_server_url
+        in: query
+        required: true
+        schema:
+          type: string
+        description: URL of the MCP server to connect to
+      - name: scopes
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Comma-separated list of OAuth scopes to request
+      responses:
+        '302':
+          description: Redirect to OAuth provider authorization URL
+  /mcp/oauth/callback:
+    get:
+      security: []
+      summary: MCP OAuth Callback
+      description: Handles OAuth callback, exchanges code for tokens, returns HTML that posts message to opener
+      operationId: mcpOAuthCallback
+      tags:
+      - mcp_oauth
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+        description: OAuth authorization code
+      - name: state
+        in: query
+        required: true
+        schema:
+          type: string
+        description: CSRF state token
+      responses:
+        '200':
+          description: HTML page with JavaScript that posts tokens to opener window and closes
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

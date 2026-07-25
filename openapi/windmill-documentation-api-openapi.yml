@@ -1,0 +1,67 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin documentation API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: documentation
+paths:
+  /inkeep:
+    post:
+      summary: Query Windmill AI Documentation Assistant (EE Only)
+      operationId: queryDocumentation
+      x-mcp-tool: true
+      tags:
+      - documentation
+      requestBody:
+        description: query to send to the AI documentation assistant
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: The documentation query to send to the AI assistant
+              required:
+              - query
+      responses:
+        '200':
+          description: AI documentation assistant response
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Response from Inkeep service
+        '403':
+          description: Enterprise Edition required
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

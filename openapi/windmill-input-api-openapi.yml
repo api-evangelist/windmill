@@ -1,0 +1,267 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin input API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: input
+paths:
+  /w/{workspace}/inputs/history:
+    get:
+      summary: List Inputs Used in Previously Completed Jobs
+      operationId: getInputHistory
+      tags:
+      - input
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableId'
+      - $ref: '#/components/parameters/RunnableTypeQuery'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/ArgsFilter'
+      - name: include_preview
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Input history for completed jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Input'
+  /w/{workspace}/inputs/{jobOrInputId}/args:
+    get:
+      summary: Get Args from History or Saved Input
+      operationId: getArgsFromHistoryOrSavedInput
+      tags:
+      - input
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: jobOrInputId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: input
+        in: query
+        schema:
+          type: boolean
+      - name: allow_large
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: args
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/inputs/list:
+    get:
+      summary: List Saved Inputs for a Runnable
+      operationId: listInputs
+      tags:
+      - input
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableId'
+      - $ref: '#/components/parameters/RunnableTypeQuery'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: Saved Inputs for a Runnable
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Input'
+  /w/{workspace}/inputs/create:
+    post:
+      summary: Create an Input for Future Use in a Script or Flow
+      operationId: createInput
+      tags:
+      - input
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableId'
+      - $ref: '#/components/parameters/RunnableTypeQuery'
+      requestBody:
+        description: Input
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInput'
+      responses:
+        '201':
+          description: Input created
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/inputs/update:
+    post:
+      summary: Update an Input
+      operationId: updateInput
+      tags:
+      - input
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: UpdateInput
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInput'
+      responses:
+        '201':
+          description: Input updated
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+  /w/{workspace}/inputs/delete/{input}:
+    post:
+      summary: Delete a Saved Input
+      operationId: deleteInput
+      tags:
+      - input
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/InputId'
+      responses:
+        '200':
+          description: Input deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: uuid
+components:
+  schemas:
+    RunnableType:
+      type: string
+      enum:
+      - ScriptHash
+      - ScriptPath
+      - FlowPath
+    UpdateInput:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        is_public:
+          type: boolean
+      required:
+      - id
+      - name
+      - is_public
+    CreateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        args:
+          type: object
+      required:
+      - name
+      - args
+      - created_by
+    Input:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        is_public:
+          type: boolean
+        success:
+          type: boolean
+      required:
+      - id
+      - name
+      - args
+      - created_by
+      - created_at
+      - is_public
+  parameters:
+    RunnableId:
+      name: runnable_id
+      in: query
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    InputId:
+      name: input
+      in: path
+      required: true
+      schema:
+        type: string
+    RunnableTypeQuery:
+      name: runnable_type
+      in: query
+      schema:
+        $ref: '#/components/schemas/RunnableType'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

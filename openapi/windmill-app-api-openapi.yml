@@ -1,0 +1,1150 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin app API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: app
+paths:
+  /apps/hub/list:
+    get:
+      summary: List All Hub Apps
+      operationId: listHubApps
+      tags:
+      - app
+      responses:
+        '200':
+          description: hub apps list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  apps:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        app_id:
+                          type: number
+                        summary:
+                          type: string
+                        apps:
+                          type: array
+                          items:
+                            type: string
+                        approved:
+                          type: boolean
+                        votes:
+                          type: number
+                      required:
+                      - id
+                      - app_id
+                      - summary
+                      - apps
+                      - approved
+                      - votes
+  /apps/hub/get/{id}:
+    get:
+      summary: Get Hub App by Id
+      operationId: getHubAppById
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: app
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app:
+                    type: object
+                    properties:
+                      summary:
+                        type: string
+                      value: {}
+                    required:
+                    - summary
+                    - value
+                required:
+                - app
+  /apps/hub/get_raw/{id}:
+    get:
+      summary: Get Hub Raw App by Id
+      operationId: getHubRawAppById
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: raw app
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  app:
+                    type: object
+                    properties:
+                      summary:
+                        type: string
+                      value: {}
+                    required:
+                    - summary
+                    - value
+                required:
+                - app
+  /apps_u/public_app_by_custom_path/{custom_path}:
+    get:
+      summary: Get Public App by Custom Path
+      operationId: getPublicAppByCustomPath
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/CustomPath'
+      responses:
+        '200':
+          description: app details
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/AppWithLastVersion'
+                - type: object
+                  properties:
+                    workspace_id:
+                      type: string
+  /w/{workspace}/apps/get_data/v/{secretWithExtension}:
+    get:
+      summary: Get Raw App Data by
+      operationId: getRawAppData
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: secretWithExtension
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: app details
+          content:
+            text/javascript:
+              schema:
+                type: string
+  /w/{workspace}/apps/list_search:
+    get:
+      summary: List Apps for Search
+      operationId: listSearchApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: app list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                    value: {}
+                  required:
+                  - path
+                  - value
+  /w/{workspace}/apps/list:
+    get:
+      summary: List All Apps
+      operationId: listApps
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/OrderDesc'
+      - $ref: '#/components/parameters/CreatedBy'
+      - name: path_start
+        description: mask to filter matching starting path
+        in: query
+        schema:
+          type: string
+      - name: path_exact
+        description: mask to filter exact matching path
+        in: query
+        schema:
+          type: string
+      - name: starred_only
+        description: '(default false)
+
+          show only the starred items
+
+          '
+        in: query
+        schema:
+          type: boolean
+      - name: include_draft_only
+        description: '(default false)
+
+          include items that have no deployed version
+
+          '
+        in: query
+        schema:
+          type: boolean
+      - name: with_deployment_msg
+        description: '(default false)
+
+          include deployment message
+
+          '
+        in: query
+        schema:
+          type: boolean
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: All apps
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListableApp'
+  /w/{workspace}/apps/create:
+    post:
+      summary: Create App
+      operationId: createApp
+      x-mcp-tool: true
+      x-mcp-tool-include-fields:
+      - path
+      - value
+      - summary
+      - policy
+      - deployment_message
+      x-mcp-tool-opaque-fields:
+      - value
+      - policy
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new app
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                value: {}
+                summary:
+                  type: string
+                policy:
+                  $ref: '#/components/schemas/Policy'
+                draft_only:
+                  type: boolean
+                deployment_message:
+                  type: string
+                custom_path:
+                  type: string
+                preserve_on_behalf_of:
+                  type: boolean
+                  description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of value in the policy instead of overwriting it.
+                labels:
+                  type: array
+                  items:
+                    type: string
+              required:
+              - path
+              - value
+              - summary
+              - policy
+      responses:
+        '201':
+          description: app created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/create_raw:
+    post:
+      summary: Create App Raw
+      operationId: createAppRaw
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new app
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                app:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                    value: {}
+                    summary:
+                      type: string
+                    policy:
+                      $ref: '#/components/schemas/Policy'
+                    draft_only:
+                      type: boolean
+                    deployment_message:
+                      type: string
+                    custom_path:
+                      type: string
+                    preserve_on_behalf_of:
+                      type: boolean
+                      description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of value in the policy instead of overwriting it.
+                    labels:
+                      type: array
+                      items:
+                        type: string
+                  required:
+                  - path
+                  - value
+                  - summary
+                  - policy
+                js:
+                  type: string
+                css:
+                  type: string
+      responses:
+        '201':
+          description: app created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/exists/{path}:
+    get:
+      summary: Does an App Exisst at Path
+      operationId: existsApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: app exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/apps/get/p/{path}:
+    get:
+      summary: Get App by Path
+      operationId: getAppByPath
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      - name: with_starred_info
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: app details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppWithLastVersion'
+  /w/{workspace}/apps/get/lite/{path}:
+    get:
+      summary: Get App Lite by Path
+      operationId: getAppLiteByPath
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      responses:
+        '200':
+          description: app lite details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppWithLastVersion'
+  /w/{workspace}/apps/get/draft/{path}:
+    get:
+      summary: Get App by Path with Draft
+      operationId: getAppByPathWithDraft
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      responses:
+        '200':
+          description: app details with draft
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppWithLastVersionWDraft'
+  /w/{workspace}/apps/history/p/{path}:
+    get:
+      summary: Get App History by Path
+      operationId: getAppHistoryByPath
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      responses:
+        '200':
+          description: app history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppHistory'
+  /w/{workspace}/apps/get_latest_version/{path}:
+    get:
+      summary: Get Apps's Latest Version
+      operationId: getAppLatestVersion
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      tags:
+      - app
+      responses:
+        '200':
+          description: App version
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppHistory'
+  /w/{workspace}/apps/list_paths_from_workspace_runnable/{runnable_kind}/{path}:
+    get:
+      summary: List App Paths from Workspace Runnable
+      operationId: listAppPathsFromWorkspaceRunnable
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/RunnableKind'
+      - $ref: '#/components/parameters/ScriptPath'
+      responses:
+        '200':
+          description: list of app paths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/apps/history_update/a/{id}/v/{version}:
+    post:
+      summary: Update App History
+      operationId: updateAppHistory
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/PathId'
+      - $ref: '#/components/parameters/PathVersion'
+      requestBody:
+        description: App deployment message
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deployment_msg:
+                  type: string
+      responses:
+        '200':
+          description: success
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps_u/public_app/{path}:
+    get:
+      summary: Get Public App by Secret
+      operationId: getPublicAppBySecret
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: app details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppWithLastVersion'
+  /w/{workspace}/apps_u/public_resource/{path}:
+    get:
+      summary: Get Public Resource
+      operationId: get public resource
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: resource value
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/apps/secret_of/{path}:
+    get:
+      summary: Get Public Secret of App
+      operationId: getPublicSecretOfApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: app secret
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/secret_of_latest_version/{path}:
+    get:
+      summary: Get Public Secret of Latest Version of an App Bundle
+      operationId: getPublicSecretOfLatestVersionOfApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: app secret
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/get/v/{id}:
+    get:
+      summary: Get App by Version
+      operationId: getAppByVersion
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/PathId'
+      responses:
+        '200':
+          description: app details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppWithLastVersion'
+  /w/{workspace}/apps/delete/{path}:
+    delete:
+      summary: Delete App
+      operationId: deleteApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: app deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/update/{path}:
+    post:
+      summary: Update App
+      operationId: updateApp
+      x-mcp-tool: true
+      x-mcp-tool-include-fields:
+      - path
+      - value
+      - summary
+      - policy
+      - deployment_message
+      x-mcp-tool-opaque-fields:
+      - value
+      - policy
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      requestBody:
+        description: update app
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                summary:
+                  type: string
+                value: {}
+                policy:
+                  $ref: '#/components/schemas/Policy'
+                deployment_message:
+                  type: string
+                custom_path:
+                  type: string
+                preserve_on_behalf_of:
+                  type: boolean
+                  description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of value in the policy instead of overwriting it.
+                labels:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: app updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/update_raw/{path}:
+    post:
+      summary: Update App
+      operationId: updateAppRaw
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      requestBody:
+        description: update app
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                app:
+                  type: object
+                  properties:
+                    path:
+                      type: string
+                    summary:
+                      type: string
+                    value: {}
+                    policy:
+                      $ref: '#/components/schemas/Policy'
+                    deployment_message:
+                      type: string
+                    custom_path:
+                      type: string
+                    preserve_on_behalf_of:
+                      type: boolean
+                      description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of value in the policy instead of overwriting it.
+                    labels:
+                      type: array
+                      items:
+                        type: string
+                js:
+                  type: string
+                css:
+                  type: string
+      responses:
+        '200':
+          description: app updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps/custom_path_exists/{custom_path}:
+    get:
+      summary: Check if Custom Path Exists
+      operationId: customPathExists
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/CustomPath'
+      responses:
+        '200':
+          description: custom path exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/apps/sign_s3_objects:
+    post:
+      summary: Sign S3 Objects, to be Used by Anonymous Users in Public Apps
+      operationId: signS3Objects
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: s3 objects to sign
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                s3_objects:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/S3Object'
+              required:
+              - s3_objects
+      responses:
+        '200':
+          description: signed s3 objects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/S3Object'
+  /w/{workspace}/apps_u/execute_component/{path}:
+    post:
+      summary: ExecuteComponent
+      operationId: executeComponent
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/ScriptPath'
+      requestBody:
+        description: update app
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                component:
+                  type: string
+                path:
+                  type: string
+                version:
+                  type: integer
+                args: {}
+                raw_code:
+                  type: object
+                  properties:
+                    content:
+                      type: string
+                    language:
+                      type: string
+                    path:
+                      type: string
+                    lock:
+                      type: string
+                    cache_ttl:
+                      type: integer
+                    tag:
+                      type: string
+                  required:
+                  - content
+                  - language
+                id:
+                  type: integer
+                force_viewer_static_fields:
+                  type: object
+                force_viewer_one_of_fields:
+                  type: object
+                force_viewer_allow_user_resources:
+                  type: array
+                  items:
+                    type: string
+                force_viewer_sensitive_inputs:
+                  type: array
+                  items:
+                    type: string
+                force_viewer_delete_after_secs:
+                  type: integer
+                run_query_params:
+                  type: object
+                  description: Runnable query parameters
+              required:
+              - args
+              - component
+      responses:
+        '200':
+          description: job uuid
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/apps_u/upload_s3_file/{path}:
+    post:
+      summary: Upload S3 File from App
+      operationId: uploadS3FileFromApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: file_key
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: file_extension
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: s3_resource_path
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: resource_type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: storage
+        in: query
+        schema:
+          type: string
+      - name: content_type
+        in: query
+        schema:
+          type: string
+      - name: content_disposition
+        in: query
+        schema:
+          type: string
+      requestBody:
+        description: File content
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: file uploaded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  file_key:
+                    type: string
+                  delete_token:
+                    type: string
+                required:
+                - file_key
+                - delete_token
+  /w/{workspace}/apps_u/delete_s3_file:
+    delete:
+      summary: Delete S3 File from App
+      operationId: deleteS3FileFromApp
+      tags:
+      - app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: delete_token
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: file deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PathVersion:
+      name: version
+      in: path
+      required: true
+      schema:
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    RunnableKind:
+      name: runnable_kind
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - script
+        - flow
+    CustomPath:
+      name: custom_path
+      in: path
+      required: true
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+  schemas:
+    AppWithLastVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        workspace_id:
+          type: string
+        path:
+          type: string
+        summary:
+          type: string
+        versions:
+          type: array
+          items:
+            type: integer
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        value: {}
+        policy:
+          $ref: '#/components/schemas/Policy'
+        execution_mode:
+          type: string
+          enum:
+          - viewer
+          - publisher
+          - anonymous
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        custom_path:
+          type: string
+        raw_app:
+          type: boolean
+        bundle_secret:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - id
+      - workspace_id
+      - path
+      - summary
+      - versions
+      - created_by
+      - created_at
+      - value
+      - policy
+      - execution_mode
+      - extra_perms
+      - raw_app
+    ListableApp:
+      type: object
+      properties:
+        id:
+          type: integer
+        workspace_id:
+          type: string
+        path:
+          type: string
+        summary:
+          type: string
+        version:
+          type: integer
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        starred:
+          type: boolean
+        edited_at:
+          type: string
+          format: date-time
+        execution_mode:
+          type: string
+          enum:
+          - viewer
+          - publisher
+          - anonymous
+        raw_app:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - id
+      - workspace_id
+      - path
+      - summary
+      - version
+      - extra_perms
+      - edited_at
+      - execution_mode
+    S3Object:
+      type: object
+      properties:
+        s3:
+          type: string
+        filename:
+          type: string
+        storage:
+          type: string
+        presigned:
+          type: string
+      required:
+      - s3
+    AppHistory:
+      type: object
+      properties:
+        version:
+          type: integer
+        deployment_msg:
+          type: string
+      required:
+      - version
+    Policy:
+      type: object
+      properties:
+        triggerables:
+          type: object
+          additionalProperties:
+            type: object
+        triggerables_v2:
+          type: object
+          additionalProperties:
+            type: object
+        s3_inputs:
+          type: array
+          items:
+            type: object
+        allowed_s3_keys:
+          type: array
+          items:
+            type: object
+            properties:
+              s3_path:
+                type: string
+              resource:
+                type: string
+        execution_mode:
+          type: string
+          enum:
+          - viewer
+          - publisher
+          - anonymous
+        on_behalf_of:
+          type: string
+        on_behalf_of_email:
+          type: string
+    AppWithLastVersionWDraft:
+      allOf:
+      - $ref: '#/components/schemas/AppWithLastVersion'
+      - type: object
+        properties:
+          draft_only:
+            type: boolean
+          draft: {}
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

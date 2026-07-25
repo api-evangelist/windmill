@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin granular_acl API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: granular_acl
+paths:
+  /w/{workspace}/acls/get/{kind}/{path}:
+    get:
+      summary: Get Granular Acls
+      operationId: getGranularAcls
+      tags:
+      - granular_acl
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: kind
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - script
+          - group_
+          - resource
+          - schedule
+          - variable
+          - flow
+          - folder
+          - app
+          - raw_app
+          - http_trigger
+          - websocket_trigger
+          - kafka_trigger
+          - nats_trigger
+          - postgres_trigger
+          - mqtt_trigger
+          - gcp_trigger
+          - azure_trigger
+          - sqs_trigger
+          - email_trigger
+          - volume
+      responses:
+        '200':
+          description: acls
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: boolean
+  /w/{workspace}/acls/add/{kind}/{path}:
+    post:
+      summary: Add Granular Acls
+      operationId: addGranularAcls
+      tags:
+      - granular_acl
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: kind
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - script
+          - group_
+          - resource
+          - schedule
+          - variable
+          - flow
+          - folder
+          - app
+          - raw_app
+          - http_trigger
+          - websocket_trigger
+          - kafka_trigger
+          - nats_trigger
+          - postgres_trigger
+          - mqtt_trigger
+          - gcp_trigger
+          - azure_trigger
+          - sqs_trigger
+          - email_trigger
+          - volume
+      requestBody:
+        description: acl to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+                write:
+                  type: boolean
+              required:
+              - owner
+      responses:
+        '200':
+          description: granular acl added
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/acls/remove/{kind}/{path}:
+    post:
+      summary: Remove Granular Acls
+      operationId: removeGranularAcls
+      tags:
+      - granular_acl
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - name: kind
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - script
+          - group_
+          - resource
+          - schedule
+          - variable
+          - flow
+          - folder
+          - app
+          - raw_app
+          - http_trigger
+          - websocket_trigger
+          - kafka_trigger
+          - nats_trigger
+          - postgres_trigger
+          - mqtt_trigger
+          - gcp_trigger
+          - azure_trigger
+          - sqs_trigger
+          - email_trigger
+          - volume
+      requestBody:
+        description: acl to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  type: string
+              required:
+              - owner
+      responses:
+        '200':
+          description: granular acl removed
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

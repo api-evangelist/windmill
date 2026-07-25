@@ -1,0 +1,3717 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin workspace API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: workspace
+paths:
+  /workspaces/list:
+    get:
+      summary: List All Workspaces Visible to Me
+      operationId: listWorkspaces
+      tags:
+      - workspace
+      responses:
+        '200':
+          description: all workspaces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workspace'
+  /workspaces/allowed_domain_auto_invite:
+    get:
+      summary: Is Domain Allowed for Auto Invi
+      operationId: isDomainAllowed
+      tags:
+      - workspace
+      responses:
+        '200':
+          description: domain allowed or not
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /workspaces/users:
+    get:
+      summary: List All Workspaces Visible to Me with User Info
+      operationId: listUserWorkspaces
+      tags:
+      - workspace
+      responses:
+        '200':
+          description: workspace with associated username
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserWorkspaceList'
+  /w/{workspace}/workspaces/get_as_superadmin:
+    get:
+      summary: Get Workspace as Super Admin (require to be Super Admin)
+      operationId: getWorkspaceAsSuperAdmin
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: workspace
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /workspaces/list_as_superadmin:
+    get:
+      summary: List All Workspaces as Super Admin (require to be Super Admin)
+      operationId: listWorkspacesAsSuperAdmin
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: workspaces
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workspace'
+  /workspaces/create:
+    post:
+      summary: Create Workspace
+      operationId: createWorkspace
+      tags:
+      - workspace
+      requestBody:
+        description: new token
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspace'
+      responses:
+        '201':
+          description: token created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/create_workspace_fork_branch:
+    post:
+      summary: Create Forked Workspace Branch with Git Sync
+      operationId: createWorkspaceForkGitBranch
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new forked workspace
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceFork'
+      responses:
+        '201':
+          description: forked workspace branch created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  format: uuid
+  /w/{workspace}/workspaces/create_fork:
+    post:
+      summary: Create Forked Workspace
+      operationId: createWorkspaceFork
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new forked workspace
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceFork'
+      responses:
+        '201':
+          description: forked workspace created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /workspaces/exists:
+    post:
+      summary: Exists Workspace
+      operationId: existsWorkspace
+      tags:
+      - workspace
+      requestBody:
+        description: id of workspace
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+              required:
+              - id
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: boolean
+  /workspaces/exists_username:
+    post:
+      summary: Exists Username
+      operationId: existsUsername
+      tags:
+      - workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                username:
+                  type: string
+              required:
+              - id
+              - username
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: boolean
+  /w/{workspace}/github_app/token:
+    post:
+      summary: Get Github App Token
+      operationId: getGithubAppToken
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: jwt job token
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                job_token:
+                  type: string
+              required:
+              - job_token
+      responses:
+        '200':
+          description: github app token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                required:
+                - token
+  /w/{workspace}/workspaces/invite_user:
+    post:
+      summary: Invite User to Workspace
+      operationId: inviteUser
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceInvite
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                is_admin:
+                  type: boolean
+                operator:
+                  type: boolean
+                parent_workspace_id:
+                  type: string
+                  nullable: true
+              required:
+              - email
+              - is_admin
+              - operator
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/add_user:
+    post:
+      summary: Add User to Workspace
+      operationId: addUser
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceInvite
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                is_admin:
+                  type: boolean
+                username:
+                  type: string
+                operator:
+                  type: boolean
+              required:
+              - email
+              - is_admin
+              - operator
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/create_service_account:
+    post:
+      summary: Create a Service Account
+      operationId: createServiceAccount
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+              - username
+      responses:
+        '201':
+          description: service account created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/delete_invite:
+    post:
+      summary: Delete User Invite
+      operationId: delete invite
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceInvite
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                is_admin:
+                  type: boolean
+                operator:
+                  type: boolean
+              required:
+              - email
+              - is_admin
+              - operator
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/archive:
+    post:
+      summary: Archive Workspace
+      operationId: archiveWorkspace
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /workspaces/unarchive/{workspace}:
+    post:
+      summary: Unarchive Workspace
+      operationId: unarchiveWorkspace
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /workspaces/delete/{workspace}:
+    delete:
+      summary: Delete Workspace (require Super Admin)
+      operationId: deleteWorkspace
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: only_delete_forks
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/leave:
+    post:
+      summary: Leave Workspace
+      operationId: leaveWorkspace
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/get_workspace_name:
+    get:
+      summary: Get Workspace Name
+      operationId: getWorkspaceName
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/change_workspace_name:
+    post:
+      summary: Change Workspace Name
+      operationId: changeWorkspaceName
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+              required:
+              - username
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/change_workspace_id:
+    post:
+      summary: Change Workspace Id
+      operationId: changeWorkspaceId
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_id:
+                  type: string
+                new_name:
+                  type: string
+              required:
+              - username
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/change_workspace_color:
+    post:
+      summary: Change Workspace Id
+      operationId: changeWorkspaceColor
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                color:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/operator_settings:
+    post:
+      operationId: updateOperatorSettings
+      summary: Update Operator Settings for a Workspace
+      description: Updates the operator settings for a specific workspace. Requires workspace admin privileges.
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperatorSettings'
+      responses:
+        '200':
+          description: Operator settings updated successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/compare/{target_workspace_id}:
+    get:
+      operationId: compareWorkspaces
+      summary: Compare Two Workspaces
+      description: Compares the current workspace with a target workspace to find differences in scripts, flows, apps, resources, and variables. Returns information about items that are ahead, behind, or in conflict.
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: target_workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The ID of the workspace to compare with
+      responses:
+        '200':
+          description: Workspace comparison results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceComparison'
+  /w/{workspace}/workspaces/reset_diff_tally/{fork_workspace_id}:
+    post:
+      operationId: resetDiffTally
+      summary: Resets the Ahead and Behind Deployement Counter After a Deployement
+      description: This endpoint should be called after a fork deployement
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: fork_workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The ID of the workspace to compare with
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/list_pending_invites:
+    get:
+      summary: List Pending Invites for a Workspace
+      operationId: listPendingInvites
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkspaceInvite'
+  /w/{workspace}/workspaces/get_public_settings:
+    get:
+      summary: Get Public Settings
+      description: Returns the subset of workspace settings safe to expose to any workspace member. The full settings struct is admin-only via `getSettings`.
+      operationId: getPublicSettings
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workspace_id:
+                    type: string
+                  slack_name:
+                    type: string
+                  slack_team_id:
+                    type: string
+                  teams_team_id:
+                    type: string
+                  teams_team_name:
+                    type: string
+                  teams_team_guid:
+                    type: string
+                  large_file_storage:
+                    $ref: '#/components/schemas/LargeFileStorage'
+                  datatable:
+                    $ref: '#/components/schemas/DataTableSettings'
+                  deploy_ui:
+                    $ref: '#/components/schemas/WorkspaceDeployUISettings'
+                  mute_critical_alerts:
+                    type: boolean
+                required:
+                - workspace_id
+  /w/{workspace}/workspaces/get_settings:
+    get:
+      summary: Get Settings (admin Only)
+      description: Returns the full workspace settings including admin-managed integration credentials. Admin-only — non-admin callers should use `getPublicSettings`.
+      operationId: getSettings
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  workspace_id:
+                    type: string
+                  slack_name:
+                    type: string
+                  slack_team_id:
+                    type: string
+                  slack_command_script:
+                    type: string
+                  slack_oauth_client_id:
+                    type: string
+                  slack_oauth_client_secret:
+                    type: string
+                  teams_team_id:
+                    type: string
+                  teams_command_script:
+                    type: string
+                  teams_team_name:
+                    type: string
+                  teams_team_guid:
+                    type: string
+                  auto_invite:
+                    $ref: '#/components/schemas/AutoInviteConfig'
+                  plan:
+                    type: string
+                  customer_id:
+                    type: string
+                  webhook:
+                    type: string
+                  deploy_to:
+                    type: string
+                  ai_config:
+                    $ref: '#/components/schemas/AIConfig'
+                  error_handler:
+                    $ref: '#/components/schemas/ErrorHandlerConfig'
+                  success_handler:
+                    $ref: '#/components/schemas/SuccessHandlerConfig'
+                  large_file_storage:
+                    $ref: '#/components/schemas/LargeFileStorage'
+                  ducklake:
+                    $ref: '#/components/schemas/DucklakeSettings'
+                  datatable:
+                    $ref: '#/components/schemas/DataTableSettings'
+                  git_sync:
+                    $ref: '#/components/schemas/WorkspaceGitSyncSettings'
+                  deploy_ui:
+                    $ref: '#/components/schemas/WorkspaceDeployUISettings'
+                  default_app:
+                    type: string
+                  default_scripts:
+                    $ref: '#/components/schemas/WorkspaceDefaultScripts'
+                  mute_critical_alerts:
+                    type: boolean
+                  color:
+                    type: string
+                  operator_settings:
+                    $ref: '#/components/schemas/OperatorSettings'
+                  public_app_execution_limit_per_minute:
+                    type: integer
+                    description: Rate limit for public app executions per minute per server. NULL or 0 means disabled.
+  /w/{workspace}/workspaces/get_deploy_to:
+    get:
+      summary: Get Deploy to
+      operationId: getDeployTo
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deploy_to:
+                    type: string
+  /w/{workspace}/workspaces/is_premium:
+    get:
+      summary: Get if Workspace is Premium
+      operationId: getIsPremium
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/workspaces/premium_info:
+    get:
+      summary: Get Premium Info
+      operationId: getPremiumInfo
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: skip_subscription_fetch
+        in: query
+        description: skip fetching subscription status from stripe
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  premium:
+                    type: boolean
+                  usage:
+                    type: number
+                  owner:
+                    type: string
+                  status:
+                    type: string
+                  is_past_due:
+                    type: boolean
+                  max_tolerated_executions:
+                    type: number
+                required:
+                - premium
+                - owner
+                - is_past_due
+  /w/{workspace}/workspaces/threshold_alert:
+    get:
+      summary: Get Threshold Alert Info
+      operationId: getThresholdAlert
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  threshold_alert_amount:
+                    type: number
+                  last_alert_sent:
+                    type: string
+                    format: date-time
+    post:
+      summary: Set Threshold Alert Info
+      operationId: setThresholdAlert
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: threshold alert info
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                threshold_alert_amount:
+                  type: number
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/rebuild_dependency_map:
+    post:
+      summary: Rebuild Dependency Map
+      operationId: rebuildDependencyMap
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/get_dependents/{imported_path}:
+    get:
+      summary: Get Dependents of an Imported Path
+      operationId: getDependents
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: imported_path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The imported path to get dependents for
+      responses:
+        '200':
+          description: list of dependents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DependencyDependent'
+  /w/{workspace}/workspaces/get_imports/{importer_path}:
+    get:
+      summary: Get Script Imports for an Importer Path
+      operationId: getImports
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: importer_path
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The script path to get imports for
+      responses:
+        '200':
+          description: list of imported script paths
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/workspaces/get_dependents_amounts:
+    post:
+      summary: Get Dependents Amounts for Multiple Imported Paths
+      operationId: getDependentsAmounts
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: List of imported paths to get dependents counts for
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: list of dependents amounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DependentsAmount'
+  /w/{workspace}/workspaces/get_dependency_map:
+    get:
+      summary: Get Dependency Map
+      operationId: getDependencyMap
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: dmap
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DependencyMap'
+  /w/{workspace}/workspaces/edit_slack_command:
+    post:
+      summary: Edit Slack Command
+      operationId: editSlackCommand
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceInvite
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slack_command_script:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/slack_oauth_config:
+    get:
+      summary: Get Workspace Slack Oauth Config
+      operationId: getWorkspaceSlackOauthConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: slack oauth config
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  slack_oauth_client_id:
+                    type: string
+                    nullable: true
+                  slack_oauth_client_secret:
+                    type: string
+                    nullable: true
+                    description: Masked with *** if set
+    post:
+      summary: Set Workspace Slack Oauth Config
+      operationId: setWorkspaceSlackOauthConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Slack OAuth Configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - slack_oauth_client_id
+              - slack_oauth_client_secret
+              properties:
+                slack_oauth_client_id:
+                  type: string
+                slack_oauth_client_secret:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+    delete:
+      summary: Delete Workspace Slack Oauth Config
+      operationId: deleteWorkspaceSlackOauthConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_teams_command:
+    post:
+      summary: Edit Teams Command
+      operationId: editTeamsCommand
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceInvite
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slack_command_script:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/available_teams_ids:
+    get:
+      summary: List Available Teams Ids
+      operationId: listAvailableTeamsIds
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: search
+        in: query
+        description: Search teams by name. If omitted, returns first page of all teams.
+        required: false
+        schema:
+          type: string
+      - name: next_link
+        in: query
+        description: Pagination cursor URL from previous response. Pass this to fetch the next page of results.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teams:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        team_name:
+                          type: string
+                        team_id:
+                          type: string
+                  total_count:
+                    type: integer
+                    description: Total number of teams across all pages
+                  per_page:
+                    type: integer
+                    description: Number of teams per page (configurable via TEAMS_PER_PAGE env var)
+                  next_link:
+                    type: string
+                    nullable: true
+                    description: URL to fetch next page of results. Null if no more pages.
+  /w/{workspace}/workspaces/available_teams_channels:
+    get:
+      summary: List Available Channels for a Specific Team
+      operationId: listAvailableTeamsChannels
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: team_id
+        in: query
+        description: Microsoft Teams team ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of channels for the specified team
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  channels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        channel_name:
+                          type: string
+                        channel_id:
+                          type: string
+                  total_count:
+                    type: integer
+  /w/{workspace}/workspaces/connect_teams:
+    post:
+      summary: Connect Teams
+      operationId: connectTeams
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: connect teams
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                team_id:
+                  type: string
+                team_name:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/connect_slack:
+    post:
+      summary: Connect Slack (non-interactive; Pre-minted Bot Token)
+      operationId: connectSlack
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: connect slack with a pre-minted bot token
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bot_token
+              - team_id
+              - team_name
+              properties:
+                bot_token:
+                  type: string
+                  description: xoxb-... bot token obtained at api.slack.com/apps
+                team_id:
+                  type: string
+                team_name:
+                  type: string
+      responses:
+        '200':
+          description: status
+  /w/{workspace}/workspaces/run_slack_message_test_job:
+    post:
+      summary: Run a Job that Sends a Message to Slack
+      operationId: runSlackMessageTestJob
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: path to hub script to run and its corresponding args
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hub_script_path:
+                  type: string
+                channel:
+                  type: string
+                test_msg:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  job_uuid:
+                    type: string
+  /w/{workspace}/workspaces/run_teams_message_test_job:
+    post:
+      summary: Run a Job that Sends a Message to Teams
+      operationId: runTeamsMessageTestJob
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: path to hub script to run and its corresponding args
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hub_script_path:
+                  type: string
+                channel:
+                  type: string
+                test_msg:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/json:
+              schema:
+                type: object
+                properties:
+                  job_uuid:
+                    type: string
+  /w/{workspace}/workspaces/edit_deploy_to:
+    post:
+      summary: Edit Deploy to
+      operationId: editDeployTo
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deploy_to:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_auto_invite:
+    post:
+      summary: Edit Auto Invite
+      operationId: editAutoInvite
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceInvite
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                operator:
+                  type: boolean
+                invite_all:
+                  type: boolean
+                auto_add:
+                  type: boolean
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_instance_groups:
+    post:
+      summary: Edit Instance Groups
+      operationId: editInstanceGroups
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Instance Groups Configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groups:
+                  type: array
+                  items:
+                    type: string
+                roles:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_webhook:
+    post:
+      summary: Edit Webhook
+      operationId: editWebhook
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceWebhook
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                webhook:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_copilot_config:
+    post:
+      summary: Edit Copilot Config
+      operationId: editCopilotConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceCopilotConfig
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIConfig'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  effective_ai_config:
+                    $ref: '#/components/schemas/AIConfig'
+                  has_instance_ai_config:
+                    type: boolean
+                  uses_instance_ai_config:
+                    type: boolean
+                  instance_ai_summary:
+                    $ref: '#/components/schemas/InstanceAISummary'
+                required:
+                - effective_ai_config
+                - has_instance_ai_config
+                - uses_instance_ai_config
+  /w/{workspace}/workspaces/get_copilot_settings_state:
+    get:
+      summary: Get Copilot Settings State
+      operationId: getCopilotSettingsState
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  has_instance_ai_config:
+                    type: boolean
+                  uses_instance_ai_config:
+                    type: boolean
+                  instance_ai_summary:
+                    $ref: '#/components/schemas/InstanceAISummary'
+                required:
+                - has_instance_ai_config
+                - uses_instance_ai_config
+  /w/{workspace}/workspaces/get_copilot_info:
+    get:
+      summary: Get Copilot Info
+      operationId: getCopilotInfo
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIConfig'
+  /w/{workspace}/workspaces/edit_error_handler:
+    post:
+      summary: Edit Error Handler
+      operationId: editErrorHandler
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceErrorHandler
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditErrorHandler'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_success_handler:
+    post:
+      summary: Edit Success Handler
+      operationId: editSuccessHandler
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: WorkspaceSuccessHandler
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditSuccessHandler'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/edit_large_file_storage_config:
+    post:
+      summary: Edit Large File Storage Settings
+      operationId: editLargeFileStorageConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: LargeFileStorage info
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                large_file_storage:
+                  $ref: '#/components/schemas/LargeFileStorage'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/list_ducklakes:
+    get:
+      summary: List Ducklakes
+      operationId: listDucklakes
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/workspaces/list_datatables:
+    get:
+      summary: List Datatables
+      operationId: listDataTables
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                  - name
+                  - resource_type
+                  - resource_path
+                  properties:
+                    name:
+                      type: string
+                    resource_type:
+                      type: string
+                      enum:
+                      - postgres
+                      - instance
+                    resource_path:
+                      type: string
+  /w/{workspace}/workspaces/list_datatable_schemas:
+    get:
+      summary: List Schemas of All Connected Datatables
+      operationId: listDataTableSchemas
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: schemas of all datatables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataTableSchema'
+  /w/{workspace}/workspaces/list_datatable_tables:
+    get:
+      summary: List Tables of All Connected Datatables
+      operationId: listDataTableTables
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: table metadata of all datatables
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataTableTables'
+  /w/{workspace}/workspaces/get_datatable_table_schema:
+    get:
+      summary: Get One Datatable Table Schema
+      operationId: getDataTableTableSchema
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: datatable_name
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: schema_name
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: table_name
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: schema of one datatable table
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataTableTableSchema'
+  /w/{workspace}/workspaces/edit_ducklake_config:
+    post:
+      summary: Edit Ducklake Settings
+      operationId: editDucklakeConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Ducklake settings
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - settings
+              properties:
+                settings:
+                  $ref: '#/components/schemas/DucklakeSettings'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/edit_datatable_config:
+    post:
+      summary: Edit Datatable Settings
+      operationId: editDataTableConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: DataTable settings
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - settings
+              properties:
+                settings:
+                  $ref: '#/components/schemas/DataTableSettings'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/create_pg_database:
+    post:
+      summary: Create a New PostgreSQL Database for a Datatable
+      operationId: createPgDatabase
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Create pg database request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - source
+              - target_dbname
+              properties:
+                source:
+                  type: string
+                  description: 'Datatable source to determine connection info: ''datatable://name'' or ''$res:path'''
+                target_dbname:
+                  type: string
+                  description: Name for the new database
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/drop_forked_datatable_databases:
+    post:
+      summary: Drop Forked Datatable Databases
+      operationId: dropForkedDatatableDatabases
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - datatable_names
+              properties:
+                datatable_names:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: list of errors (empty if all succeeded)
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/workspaces/import_pg_database:
+    post:
+      summary: Import a PostgreSQL Database from Source to Target via Pg_dump
+      operationId: importPgDatabase
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Import pg database request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - source
+              - target
+              - fork_behavior
+              properties:
+                source:
+                  type: string
+                  description: 'Source database: ''datatable://name'' or ''$res:path'''
+                target:
+                  type: string
+                  description: 'Target database: ''datatable://name'' or ''$res:path'''
+                target_dbname_override:
+                  type: string
+                  description: Override the target database name
+                fork_behavior:
+                  type: string
+                  enum:
+                  - schema_only
+                  - schema_and_data
+                  - keep_original
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/export_pg_schema:
+    post:
+      summary: Export the Schema of a PostgreSQL Database
+      operationId: exportPgSchema
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Export pg schema request
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - source
+              properties:
+                source:
+                  type: string
+                  description: 'Source database: ''datatable://name'' or ''$res:path'''
+      responses:
+        '200':
+          description: schema dump
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/get_datatable_full_schema:
+    post:
+      summary: Get the Full Schema of a Datatable Database as TableEditorValues
+      operationId: getDatatableFullSchema
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - source
+              properties:
+                source:
+                  type: string
+                  description: Source datatable, e.g. 'datatable://main'
+      responses:
+        '200':
+          description: 'Schema as { schema_name: { table_name: TableEditorValues } }'
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: object
+                    required:
+                    - name
+                    - columns
+                    - foreign_keys
+                    properties:
+                      name:
+                        type: string
+                      columns:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - name
+                          - datatype
+                          properties:
+                            name:
+                              type: string
+                            datatype:
+                              type: string
+                            primary_key:
+                              type: boolean
+                            default_value:
+                              type: string
+                            nullable:
+                              type: boolean
+                      foreign_keys:
+                        type: array
+                        items:
+                          type: object
+                          required:
+                          - columns
+                          - on_delete
+                          - on_update
+                          properties:
+                            target_table:
+                              type: string
+                            columns:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  source_column:
+                                    type: string
+                                  target_column:
+                                    type: string
+                            on_delete:
+                              type: string
+                            on_update:
+                              type: string
+                            fk_constraint_name:
+                              type: string
+                      pk_constraint_name:
+                        type: string
+  /w/{workspace}/workspaces/git_sync_enabled:
+    get:
+      summary: Check if Git Sync is Available for this Workspace
+      operationId: getGitSyncEnabled
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Git sync availability status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                  reason:
+                    type: string
+                    nullable: true
+                  max_repos:
+                    type: integer
+                    nullable: true
+                  user_count:
+                    type: integer
+                    nullable: true
+                  max_users:
+                    type: integer
+                    nullable: true
+  /w/{workspace}/workspaces/edit_git_sync_config:
+    post:
+      summary: Edit Workspace Git Sync Settings
+      operationId: editWorkspaceGitSyncConfig
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Workspace Git sync settings
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                git_sync_settings:
+                  $ref: '#/components/schemas/WorkspaceGitSyncSettings'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/edit_git_sync_repository:
+    post:
+      summary: Add or Update Individual Git Sync Repository
+      operationId: editGitSyncRepository
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Git sync repository settings to add or update
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                git_repo_resource_path:
+                  type: string
+                  description: The resource path of the git repository to update
+                repository:
+                  $ref: '#/components/schemas/GitRepositorySettings'
+              required:
+              - git_repo_resource_path
+              - repository
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/delete_git_sync_repository:
+    delete:
+      summary: Delete Individual Git Sync Repository
+      operationId: deleteGitSyncRepository
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Git sync repository to delete
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                git_repo_resource_path:
+                  type: string
+                  description: The resource path of the git repository to delete
+              required:
+              - git_repo_resource_path
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/edit_deploy_ui_config:
+    post:
+      summary: Edit Workspace Deploy Ui Settings
+      operationId: editWorkspaceDeployUISettings
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Workspace deploy UI settings
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                deploy_ui_settings:
+                  $ref: '#/components/schemas/WorkspaceDeployUISettings'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema: {}
+  /w/{workspace}/workspaces/edit_default_app:
+    post:
+      summary: Edit Default App for Workspace
+      operationId: editWorkspaceDefaultApp
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Workspace default app
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                default_app_path:
+                  type: string
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/default_scripts:
+    post:
+      summary: Edit Default Scripts for Workspace
+      operationId: editDefaultScripts
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Workspace default app
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WorkspaceDefaultScripts'
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+    get:
+      summary: Get Default Scripts for Workspace
+      operationId: get default scripts
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceDefaultScripts'
+  /w/{workspace}/workspaces/set_environment_variable:
+    post:
+      summary: Set Environment Variable
+      operationId: setEnvironmentVariable
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: Workspace default app
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+              required:
+              - name
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/encryption_key:
+    get:
+      summary: Retrieves the Encryption Key for this Workspace
+      operationId: getWorkspaceEncryptionKey
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+                required:
+                - key
+    post:
+      summary: Update the Encryption Key for this Workspace
+      operationId: setWorkspaceEncryptionKey
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: New encryption key
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_key:
+                  type: string
+                skip_reencrypt:
+                  type: boolean
+              required:
+              - new_key
+      responses:
+        '200':
+          description: status
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/workspaces/default_app:
+    get:
+      summary: Get Default App for Workspace
+      operationId: getWorkspaceDefaultApp
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  default_app_path:
+                    type: string
+                  default_app_raw:
+                    type: boolean
+  /w/{workspace}/workspaces/usage:
+    get:
+      summary: Get Usage
+      operationId: getWorkspaceUsage
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: usage
+          content:
+            text/plain:
+              schema:
+                type: number
+  /w/{workspace}/workspaces/used_triggers:
+    get:
+      summary: Get Used Triggers
+      operationId: getUsedTriggers
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  http_routes_used:
+                    type: boolean
+                  websocket_used:
+                    type: boolean
+                  kafka_used:
+                    type: boolean
+                  nats_used:
+                    type: boolean
+                  postgres_used:
+                    type: boolean
+                  mqtt_used:
+                    type: boolean
+                  gcp_used:
+                    type: boolean
+                  azure_used:
+                    type: boolean
+                  sqs_used:
+                    type: boolean
+                  email_used:
+                    type: boolean
+                  nextcloud_used:
+                    type: boolean
+                  google_used:
+                    type: boolean
+                  github_used:
+                    type: boolean
+                required:
+                - http_routes_used
+                - websocket_used
+                - kafka_used
+                - nats_used
+                - postgres_used
+                - mqtt_used
+                - gcp_used
+                - azure_used
+                - sqs_used
+                - email_used
+                - nextcloud_used
+                - google_used
+                - github_used
+  /w/{workspace}/workspaces/protection_rules:
+    get:
+      summary: List All Protection Rules for a Workspace
+      operationId: listProtectionRules
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: list of protection rules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProtectionRuleset'
+    post:
+      summary: Create a New Protection Rule
+      operationId: createProtectionRule
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: New protection rule configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - rules
+              - bypass_groups
+              - bypass_users
+              properties:
+                name:
+                  type: string
+                  description: Unique name for the protection rule
+                  example: Production Protection
+                rules:
+                  $ref: '#/components/schemas/ProtectionRules'
+                bypass_groups:
+                  $ref: '#/components/schemas/RuleBypasserGroups'
+                bypass_users:
+                  $ref: '#/components/schemas/RuleBypasserUsers'
+      responses:
+        '200':
+          description: protection rule created successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: rule with this name already exists
+  /w/{workspace}/workspaces/protection_rules/{rule_name}:
+    post:
+      summary: Update an Existing Protection Rule
+      operationId: updateProtectionRule
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: rule_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the protection rule to update
+      requestBody:
+        description: Updated protection rule configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - rules
+              - bypass_groups
+              - bypass_users
+              properties:
+                rules:
+                  $ref: '#/components/schemas/ProtectionRules'
+                bypass_groups:
+                  $ref: '#/components/schemas/RuleBypasserGroups'
+                bypass_users:
+                  $ref: '#/components/schemas/RuleBypasserUsers'
+      responses:
+        '200':
+          description: protection rule updated successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: protection rule not found
+    delete:
+      summary: Delete a Protection Rule
+      operationId: deleteProtectionRule
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: rule_name
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Name of the protection rule to delete
+      responses:
+        '200':
+          description: protection rule deleted successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: protection rule not found
+  /w/{workspace}/deployment_request/eligible_deployers:
+    get:
+      summary: List Users Eligible to be Deployment Request Assignees
+      description: Returns admins and members of wm_deployers in the parent workspace of the fork at `{workspace}`.
+      operationId: listDeploymentRequestEligibleDeployers
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: list of eligible deployers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeploymentRequestEligibleDeployer'
+  /w/{workspace}/deployment_request/open:
+    get:
+      summary: Get the Currently Open Deployment Request for this Fork
+      operationId: getOpenDeploymentRequest
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: the open request or null if none exists
+          content:
+            application/json:
+              schema:
+                nullable: true
+                allOf:
+                - $ref: '#/components/schemas/DeploymentRequest'
+  /w/{workspace}/deployment_request:
+    post:
+      summary: Create a New Deployment Request
+      operationId: createDeploymentRequest
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - assignees
+              properties:
+                assignees:
+                  type: array
+                  items:
+                    type: string
+                  description: Usernames in the parent workspace. Must be admin or wm_deployers.
+      responses:
+        '200':
+          description: request created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRequest'
+        '400':
+          description: invalid assignees
+        '409':
+          description: a deployment request is already open for this fork
+  /w/{workspace}/deployment_request/{id}/cancel:
+    post:
+      summary: Cancel an Open Deployment Request
+      operationId: cancelDeploymentRequest
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: cancelled
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/deployment_request/{id}/close_merged:
+    post:
+      summary: Close a Deployment Request After a Successful Merge
+      description: Called by the UI after the deploy loop completes. Closes the request and marks every comment obsolete. Idempotent.
+      operationId: closeDeploymentRequestMerged
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: closed
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/deployment_request/{id}/comment:
+    post:
+      summary: Append a Comment to an Open Deployment Request
+      operationId: createDeploymentRequestComment
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - body
+              properties:
+                body:
+                  type: string
+                parent_id:
+                  type: integer
+                  format: int64
+                  nullable: true
+                anchor_kind:
+                  type: string
+                  nullable: true
+                anchor_path:
+                  type: string
+                  nullable: true
+      responses:
+        '200':
+          description: comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeploymentRequestComment'
+        '400':
+          description: invalid input or request closed
+  /w/{workspace}/workspaces/log_chat:
+    post:
+      summary: Log AI Chat Message
+      operationId: logAiChat
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - session_id
+              - provider
+              - model
+              - mode
+              properties:
+                session_id:
+                  type: string
+                provider:
+                  type: string
+                model:
+                  type: string
+                mode:
+                  type: string
+      responses:
+        '204':
+          description: logged
+  /w/{workspace}/workspaces/cloud_quotas:
+    get:
+      summary: Get Cloud Quota Usage and Limits for Workspace
+      operationId: getCloudQuotas
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: cloud quota usage and limits
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scripts:
+                    $ref: '#/components/schemas/QuotaInfo'
+                  flows:
+                    $ref: '#/components/schemas/QuotaInfo'
+                  apps:
+                    $ref: '#/components/schemas/QuotaInfo'
+                  variables:
+                    $ref: '#/components/schemas/QuotaInfo'
+                  resources:
+                    $ref: '#/components/schemas/QuotaInfo'
+                required:
+                - scripts
+                - flows
+                - apps
+                - variables
+                - resources
+  /w/{workspace}/workspaces/prune_versions:
+    post:
+      summary: Prune Old Versions of Scripts, Flows, or Apps
+      operationId: pruneVersions
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource_type:
+                  type: string
+                  enum:
+                  - scripts
+                  - flows
+                  - apps
+              required:
+              - resource_type
+      responses:
+        '200':
+          description: number of pruned versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pruned:
+                    type: integer
+                required:
+                - pruned
+  /w/{workspace}/shared_ui/get:
+    get:
+      summary: Get the Workspace Shared UI Folder (full Content)
+      operationId: getSharedUi
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: shared UI content
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - files
+                - version
+                - edited_at
+                - edited_by
+                properties:
+                  files:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  version:
+                    type: integer
+                    format: int64
+                  edited_at:
+                    type: string
+                    format: date-time
+                  edited_by:
+                    type: string
+  /w/{workspace}/shared_ui/list:
+    get:
+      summary: List Paths/sizes of the Workspace Shared UI Folder
+      operationId: listSharedUi
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: shared UI listing
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - paths
+                - sizes
+                - version
+                - edited_at
+                - edited_by
+                properties:
+                  paths:
+                    type: array
+                    items:
+                      type: string
+                  sizes:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                      format: int64
+                  version:
+                    type: integer
+                    format: int64
+                  edited_at:
+                    type: string
+                    format: date-time
+                  edited_by:
+                    type: string
+  /w/{workspace}/shared_ui/version:
+    get:
+      summary: Get the Current Version of the Workspace Shared UI Folder
+      operationId: getSharedUiVersion
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: shared UI version
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - version
+                properties:
+                  version:
+                    type: integer
+                    format: int64
+  /w/{workspace}/shared_ui:
+    put:
+      summary: Replace the Workspace Shared UI Folder (admin Only)
+      operationId: updateSharedUi
+      tags:
+      - workspace
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - files
+              properties:
+                files:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: updated
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    GitRepositorySettings:
+      type: object
+      properties:
+        script_path:
+          type: string
+        git_repo_resource_path:
+          type: string
+        use_individual_branch:
+          type: boolean
+        group_by_folder:
+          type: boolean
+        collapsed:
+          type: boolean
+        settings:
+          type: object
+          properties:
+            include_path:
+              type: array
+              items:
+                type: string
+            include_type:
+              type: array
+              items:
+                $ref: '#/components/schemas/GitSyncObjectType'
+            exclude_path:
+              type: array
+              items:
+                type: string
+            extra_include_path:
+              type: array
+              items:
+                type: string
+        exclude_types_override:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitSyncObjectType'
+      required:
+      - git_repo_resource_path
+    WorkspaceGitSyncSettings:
+      type: object
+      properties:
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitRepositorySettings'
+    WorkspaceItemDiff:
+      type: object
+      required:
+      - kind
+      - path
+      - ahead
+      - behind
+      - has_changes
+      - exists_in_source
+      - exists_in_fork
+      properties:
+        kind:
+          type: string
+          enum:
+          - script
+          - flow
+          - app
+          - raw_app
+          - resource
+          - variable
+          - resource_type
+          description: Type of the item
+        path:
+          type: string
+          description: Path of the item in the workspace
+        ahead:
+          type: integer
+          description: Number of versions source is ahead of target
+        behind:
+          type: integer
+          description: Number of versions source is behind target
+        has_changes:
+          type: boolean
+          description: Whether the item has any differences
+        exists_in_source:
+          type: boolean
+          description: If the item exists in the source workspace
+        exists_in_fork:
+          type: boolean
+          description: If the item exists in the fork workspace
+    WorkspaceComparison:
+      type: object
+      required:
+      - all_ahead_items_visible
+      - all_behind_items_visible
+      - skipped_comparison
+      - diffs
+      - summary
+      properties:
+        all_ahead_items_visible:
+          type: boolean
+          description: All items with changes ahead are visible by the user of the request.
+        all_behind_items_visible:
+          type: boolean
+          description: All items with changes behind are visible by the user of the request.
+        skipped_comparison:
+          type: boolean
+          description: Whether the comparison was skipped. This happens with old forks that where not being kept track of
+        diffs:
+          type: array
+          description: List of differences found between workspaces
+          items:
+            $ref: '#/components/schemas/WorkspaceItemDiff'
+        summary:
+          $ref: '#/components/schemas/CompareSummary'
+          description: Summary statistics of the comparison
+    RuleBypasserUsers:
+      type: array
+      description: Users that can bypass this ruleset
+      items:
+        type: string
+    ErrorHandlerConfig:
+      type: object
+      description: Configuration for the workspace error handler
+      properties:
+        path:
+          type: string
+          description: Path to the error handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        muted_on_cancel:
+          type: boolean
+          default: false
+        muted_on_user_path:
+          type: boolean
+          default: false
+    DataTableSchema:
+      type: object
+      required:
+      - datatable_name
+      - schemas
+      properties:
+        datatable_name:
+          type: string
+        schemas:
+          type: object
+          description: 'Hierarchical schema: schema_name -> table_name -> column_name -> compact_type (e.g. ''int4'', ''text?'', ''int4?=0'')'
+          additionalProperties:
+            type: object
+            description: Tables in this schema
+            additionalProperties:
+              type: object
+              description: Columns in this table
+              additionalProperties:
+                type: string
+                description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+        error:
+          type: string
+    ProtectionRules:
+      type: array
+      description: Configuration of protection restrictions
+      items:
+        $ref: '#/components/schemas/ProtectionRuleKind'
+    SuccessHandlerConfig:
+      type: object
+      description: Configuration for the workspace success handler
+      properties:
+        path:
+          type: string
+          description: Path to the success handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    CreateWorkspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        color:
+          type: string
+      required:
+      - id
+      - name
+    EditSuccessHandler:
+      description: Request body for editing the workspace success handler. Accepts both new grouped format and legacy flat format for backward compatibility.
+      oneOf:
+      - $ref: '#/components/schemas/EditSuccessHandlerNew'
+      - $ref: '#/components/schemas/EditSuccessHandlerLegacy'
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        domain:
+          type: string
+        color:
+          type: string
+        parent_workspace_id:
+          type: string
+          nullable: true
+      required:
+      - id
+      - name
+      - owner
+      - created_at
+    WorkspaceDeployUISettings:
+      type: object
+      properties:
+        include_path:
+          type: array
+          items:
+            type: string
+        include_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitSyncObjectType'
+    DataTableTableSchema:
+      type: object
+      required:
+      - datatable_name
+      - schema_name
+      - table_name
+      - columns
+      properties:
+        datatable_name:
+          type: string
+        schema_name:
+          type: string
+        table_name:
+          type: string
+        columns:
+          type: object
+          description: 'Columns in this table: column_name -> compact_type'
+          additionalProperties:
+            type: string
+            description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+    CompareSummary:
+      type: object
+      required:
+      - total_diffs
+      - total_ahead
+      - total_behind
+      - scripts_changed
+      - flows_changed
+      - apps_changed
+      - resources_changed
+      - variables_changed
+      - resource_types_changed
+      - folders_changed
+      - conflicts
+      properties:
+        total_diffs:
+          type: integer
+          description: Total number of items with differences
+        total_ahead:
+          type: integer
+          description: Total number of ahead changes
+        total_behind:
+          type: integer
+          description: Total number of behind changes
+        scripts_changed:
+          type: integer
+          description: Number of scripts with differences
+        flows_changed:
+          type: integer
+          description: Number of flows with differences
+        apps_changed:
+          type: integer
+          description: Number of apps with differences
+        resources_changed:
+          type: integer
+          description: Number of resources with differences
+        variables_changed:
+          type: integer
+          description: Number of variables with differences
+        resource_types_changed:
+          type: integer
+          description: Number of resource types with differences
+        folders_changed:
+          type: integer
+          description: Number of folders with differences
+        conflicts:
+          type: integer
+          description: Number of items that are both ahead and behind (conflicts)
+    EditSuccessHandlerLegacy:
+      type: object
+      description: Legacy flat format for editing success handler (deprecated, use new format)
+      properties:
+        success_handler:
+          type: string
+          description: Path to the success handler script or flow
+        success_handler_extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    InstanceAIProviderSummary:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/AIProvider'
+        models:
+          type: array
+          items:
+            type: string
+      required:
+      - provider
+      - models
+    DependencyMap:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+          nullable: true
+        importer_path:
+          type: string
+          nullable: true
+        importer_kind:
+          type: string
+          nullable: true
+        imported_path:
+          type: string
+          nullable: true
+        importer_node_id:
+          type: string
+          nullable: true
+    DeploymentRequestAssignee:
+      type: object
+      required:
+      - username
+      - email
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+    LargeFileStorage:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - S3Storage
+          - AzureBlobStorage
+          - AzureWorkloadIdentity
+          - S3AwsOidc
+          - GoogleCloudStorage
+        s3_resource_path:
+          type: string
+        azure_blob_resource_path:
+          type: string
+        gcs_resource_path:
+          type: string
+        public_resource:
+          type: boolean
+        advanced_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/S3PermissionRule'
+        secondary_storage:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                - S3Storage
+                - AzureBlobStorage
+                - AzureWorkloadIdentity
+                - S3AwsOidc
+                - GoogleCloudStorage
+              s3_resource_path:
+                type: string
+              azure_blob_resource_path:
+                type: string
+              gcs_resource_path:
+                type: string
+              public_resource:
+                type: boolean
+    DataTableSettings:
+      type: object
+      required:
+      - datatables
+      properties:
+        datatables:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+            - database
+            properties:
+              database:
+                type: object
+                properties:
+                  resource_type:
+                    type: string
+                    enum:
+                    - postgresql
+                    - instance
+                  resource_path:
+                    type: string
+                required:
+                - resource_type
+              forked_from:
+                type: object
+                description: Fork origin info with schema snapshot
+                properties:
+                  schema:
+                    type: object
+                    description: Schema snapshot at fork time
+                    additionalProperties: true
+    QuotaInfo:
+      type: object
+      properties:
+        used:
+          type: integer
+        limit:
+          type: integer
+        prunable:
+          type: integer
+      required:
+      - used
+      - limit
+      - prunable
+    DeploymentRequestEligibleDeployer:
+      type: object
+      required:
+      - username
+      - email
+      - is_admin
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        is_admin:
+          type: boolean
+    DependencyDependent:
+      type: object
+      properties:
+        importer_path:
+          type: string
+        importer_kind:
+          type: string
+          enum:
+          - script
+          - flow
+          - app
+        importer_node_ids:
+          type: array
+          items:
+            type: string
+          nullable: true
+      required:
+      - importer_path
+      - importer_kind
+    EditErrorHandlerLegacy:
+      type: object
+      description: Legacy flat format for editing error handler (deprecated, use new format)
+      properties:
+        error_handler:
+          type: string
+          description: Path to the error handler script or flow
+        error_handler_extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        error_handler_muted_on_cancel:
+          type: boolean
+          default: false
+    DeploymentRequest:
+      type: object
+      required:
+      - id
+      - source_workspace_id
+      - fork_workspace_id
+      - requested_by
+      - requested_by_email
+      - requested_at
+      - assignees
+      - comments
+      properties:
+        id:
+          type: integer
+          format: int64
+        source_workspace_id:
+          type: string
+        fork_workspace_id:
+          type: string
+        requested_by:
+          type: string
+        requested_by_email:
+          type: string
+        requested_at:
+          type: string
+          format: date-time
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentRequestAssignee'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentRequestComment'
+    ProtectionRuleKind:
+      type: string
+      enum:
+      - DisableDirectDeployment
+      - DisableWorkspaceForking
+      - RestrictDeployToDeployers
+    AIConfig:
+      type: object
+      properties:
+        providers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AIProviderConfig'
+        default_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        code_completion_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        custom_prompts:
+          type: object
+          additionalProperties:
+            type: string
+        max_tokens_per_model:
+          type: object
+          additionalProperties:
+            type: integer
+            minimum: 1
+            maximum: 2000000
+    DeploymentRequestComment:
+      type: object
+      required:
+      - id
+      - author
+      - author_email
+      - body
+      - obsolete
+      - created_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        parent_id:
+          type: integer
+          format: int64
+          nullable: true
+        author:
+          type: string
+        author_email:
+          type: string
+        body:
+          type: string
+        anchor_kind:
+          type: string
+          nullable: true
+        anchor_path:
+          type: string
+          nullable: true
+        obsolete:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    AIProvider:
+      type: string
+      enum:
+      - openai
+      - azure_openai
+      - anthropic
+      - mistral
+      - deepseek
+      - googleai
+      - groq
+      - openrouter
+      - togetherai
+      - aws_bedrock
+      - customai
+    CreateWorkspaceFork:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        color:
+          type: string
+        forked_datatables:
+          type: array
+          items:
+            type: object
+            required:
+            - name
+            - new_dbname
+            properties:
+              name:
+                type: string
+                description: Datatable name
+              new_dbname:
+                type: string
+                description: New database name for the fork
+      required:
+      - id
+      - name
+      - parent_workspace_id
+    AIProviderModel:
+      type: object
+      properties:
+        model:
+          type: string
+        provider:
+          $ref: '#/components/schemas/AIProvider'
+      required:
+      - model
+      - provider
+    ProtectionRuleset:
+      type: object
+      description: A workspace protection rule defining restrictions and bypass permissions
+      required:
+      - name
+      - rules
+      - bypass_groups
+      - bypass_users
+      properties:
+        name:
+          type: string
+          description: Unique name for the protection rule
+          example: Production Protection
+        workspace_id:
+          type: string
+        rules:
+          $ref: '#/components/schemas/ProtectionRules'
+        bypass_groups:
+          $ref: '#/components/schemas/RuleBypasserGroups'
+        bypass_users:
+          $ref: '#/components/schemas/RuleBypasserUsers'
+    DucklakeSettings:
+      type: object
+      required:
+      - ducklakes
+      properties:
+        ducklakes:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+            - catalog
+            - storage
+            properties:
+              catalog:
+                type: object
+                properties:
+                  resource_type:
+                    type: string
+                    enum:
+                    - postgresql
+                    - mysql
+                    - instance
+                  resource_path:
+                    type: string
+                required:
+                - resource_type
+              storage:
+                type: object
+                properties:
+                  storage:
+                    type: string
+                  path:
+                    type: string
+                required:
+                - path
+              extra_args:
+                type: string
+    OperatorSettings:
+      nullable: true
+      type: object
+      required:
+      - runs
+      - schedules
+      - resources
+      - assets
+      - variables
+      - triggers
+      - audit_logs
+      - groups
+      - folders
+      - workers
+      properties:
+        runs:
+          type: boolean
+          description: Whether operators can view runs
+        schedules:
+          type: boolean
+          description: Whether operators can view schedules
+        resources:
+          type: boolean
+          description: Whether operators can view resources
+        variables:
+          type: boolean
+          description: Whether operators can view variables
+        assets:
+          type: boolean
+          description: Whether operators can view assets
+        audit_logs:
+          type: boolean
+          description: Whether operators can view audit logs
+        triggers:
+          type: boolean
+          description: Whether operators can view triggers
+        groups:
+          type: boolean
+          description: Whether operators can view groups page
+        folders:
+          type: boolean
+          description: Whether operators can view folders page
+        workers:
+          type: boolean
+          description: Whether operators can view workers page
+    WorkspaceInvite:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        email:
+          type: string
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        parent_workspace_id:
+          type: string
+          nullable: true
+      required:
+      - workspace_id
+      - email
+      - is_admin
+      - operator
+    AutoInviteConfig:
+      type: object
+      description: Configuration for auto-inviting users to the workspace
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        domain:
+          type: string
+        operator:
+          type: boolean
+          default: false
+          description: If true, auto-invited users are added as operators. If false, they are added as developers.
+        mode:
+          type: string
+          enum:
+          - invite
+          - add
+          default: invite
+        instance_groups:
+          type: array
+          items:
+            type: string
+        instance_groups_roles:
+          type: object
+          additionalProperties:
+            type: string
+    S3PermissionRule:
+      type: object
+      properties:
+        pattern:
+          type: string
+        allow:
+          type: string
+      required:
+      - pattern
+      - allow
+    WorkspaceDefaultScripts:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        hidden:
+          type: array
+          items:
+            type: string
+        default_script_content:
+          additionalProperties:
+            type: string
+    EditErrorHandler:
+      description: Request body for editing the workspace error handler. Accepts both new grouped format and legacy flat format for backward compatibility.
+      oneOf:
+      - $ref: '#/components/schemas/EditErrorHandlerNew'
+      - $ref: '#/components/schemas/EditErrorHandlerLegacy'
+    DependentsAmount:
+      type: object
+      properties:
+        imported_path:
+          type: string
+        count:
+          type: integer
+          format: int64
+      required:
+      - imported_path
+      - count
+    DataTableTables:
+      type: object
+      required:
+      - datatable_name
+      - schemas
+      properties:
+        datatable_name:
+          type: string
+        schemas:
+          type: object
+          description: 'Hierarchical metadata: schema_name -> table_names'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        error:
+          type: string
+    GitSyncObjectType:
+      type: string
+      enum:
+      - script
+      - flow
+      - app
+      - folder
+      - resource
+      - variable
+      - secret
+      - resourcetype
+      - schedule
+      - user
+      - group
+      - trigger
+      - settings
+      - key
+      - workspacedependencies
+    InstanceAISummary:
+      type: object
+      properties:
+        providers:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstanceAIProviderSummary'
+        default_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        code_completion_model:
+          $ref: '#/components/schemas/AIProviderModel'
+      required:
+      - providers
+    EditSuccessHandlerNew:
+      type: object
+      description: New grouped format for editing success handler
+      properties:
+        path:
+          type: string
+          description: Path to the success handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    AIProviderConfig:
+      type: object
+      properties:
+        resource_path:
+          type: string
+        models:
+          type: array
+          items:
+            type: string
+      required:
+      - resource_path
+      - models
+    RuleBypasserGroups:
+      type: array
+      description: Groups that can bypass this ruleset
+      items:
+        type: string
+    UserWorkspaceList:
+      type: object
+      properties:
+        email:
+          type: string
+        workspaces:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              username:
+                type: string
+              color:
+                type: string
+              operator_settings:
+                $ref: '#/components/schemas/OperatorSettings'
+              parent_workspace_id:
+                type: string
+                nullable: true
+              created_by:
+                type: string
+                nullable: true
+              disabled:
+                type: boolean
+            required:
+            - id
+            - name
+            - username
+            - color
+            - disabled
+      required:
+      - email
+      - workspaces
+    EditErrorHandlerNew:
+      type: object
+      description: New grouped format for editing error handler
+      properties:
+        path:
+          type: string
+          description: Path to the error handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        muted_on_cancel:
+          type: boolean
+          default: false
+        muted_on_user_path:
+          type: boolean
+          default: false
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

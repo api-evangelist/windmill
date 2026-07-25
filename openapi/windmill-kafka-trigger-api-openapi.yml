@@ -1,0 +1,583 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin kafka_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: kafka_trigger
+paths:
+  /w/{workspace}/kafka_triggers/create:
+    post:
+      summary: Create Kafka Trigger
+      operationId: createKafkaTrigger
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new kafka trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewKafkaTrigger'
+      responses:
+        '201':
+          description: kafka trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/kafka_triggers/update/{path}:
+    post:
+      summary: Update Kafka Trigger
+      operationId: updateKafkaTrigger
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditKafkaTrigger'
+      responses:
+        '200':
+          description: kafka trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/kafka_triggers/delete/{path}:
+    delete:
+      summary: Delete Kafka Trigger
+      operationId: deleteKafkaTrigger
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: kafka trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/kafka_triggers/get/{path}:
+    get:
+      summary: Get Kafka Trigger
+      operationId: getKafkaTrigger
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: kafka trigger deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KafkaTrigger'
+  /w/{workspace}/kafka_triggers/list:
+    get:
+      summary: List Kafka Triggers
+      operationId: listKafkaTriggers
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: kafka trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KafkaTrigger'
+  /w/{workspace}/kafka_triggers/exists/{path}:
+    get:
+      summary: Does Kafka Trigger Exists
+      operationId: existsKafkaTrigger
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: kafka trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/kafka_triggers/setmode/{path}:
+    post:
+      summary: Set Enabled Kafka Trigger
+      operationId: setKafkaTriggerMode
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated kafka trigger enable
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: kafka trigger enabled set
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/kafka_triggers/test:
+    post:
+      summary: Test Kafka Connection
+      operationId: testKafkaConnection
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: test kafka connection
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connection:
+                  type: object
+              required:
+              - connection
+      responses:
+        '200':
+          description: successfuly connected to kafka brokers
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/kafka_triggers/reset_offsets/{path}:
+    post:
+      summary: Reset Kafka Trigger Offsets to Earliest
+      operationId: resetKafkaOffsets
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: kafka trigger offsets reset successfully
+  /w/{workspace}/kafka_triggers/commit_offsets/{path}:
+    post:
+      summary: Commit Kafka Offsets for a Specific Trigger
+      operationId: commitKafkaOffsets
+      tags:
+      - kafka_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: offsets to commit
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                partition:
+                  type: integer
+                  format: int32
+                offset:
+                  type: integer
+                  format: int64
+              required:
+              - topic
+              - partition
+              - offset
+      responses:
+        '200':
+          description: kafka offsets committed successfully
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    NewKafkaTrigger:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        kafka_resource_path:
+          type: string
+          description: Path to the Kafka resource containing connection configuration
+        group_id:
+          type: string
+          description: Kafka consumer group ID for this trigger
+        topics:
+          type: array
+          items:
+            type: string
+          description: Array of Kafka topic names to subscribe to
+        filters:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value: {}
+            required:
+            - key
+            - value
+        filter_logic:
+          type: string
+          enum:
+          - and
+          - or
+          default: and
+          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
+        auto_offset_reset:
+          type: string
+          enum:
+          - latest
+          - earliest
+          default: latest
+          description: Initial offset behavior when consumer group has no committed offset.
+        auto_commit:
+          type: boolean
+          default: true
+          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - kafka_resource_path
+      - group_id
+      - topics
+      - filters
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    KafkaTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        kafka_resource_path:
+          type: string
+          description: Path to the Kafka resource containing connection configuration
+        group_id:
+          type: string
+          description: Kafka consumer group ID for this trigger
+        topics:
+          type: array
+          items:
+            type: string
+          description: Array of Kafka topic names to subscribe to
+        filters:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value: {}
+            required:
+            - key
+            - value
+        filter_logic:
+          type: string
+          enum:
+          - and
+          - or
+          default: and
+          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
+        auto_offset_reset:
+          type: string
+          enum:
+          - latest
+          - earliest
+          default: latest
+          description: Initial offset behavior when consumer group has no committed offset. 'latest' starts from new messages only, 'earliest' starts from the beginning.
+        auto_commit:
+          type: boolean
+          default: true
+          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - kafka_resource_path
+      - group_id
+      - topics
+      - filters
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    EditKafkaTrigger:
+      type: object
+      properties:
+        kafka_resource_path:
+          type: string
+          description: Path to the Kafka resource containing connection configuration
+        group_id:
+          type: string
+          description: Kafka consumer group ID for this trigger
+        topics:
+          type: array
+          items:
+            type: string
+          description: Array of Kafka topic names to subscribe to
+        filters:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value: {}
+            required:
+            - key
+            - value
+        filter_logic:
+          type: string
+          enum:
+          - and
+          - or
+          default: and
+          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
+        auto_offset_reset:
+          type: string
+          enum:
+          - latest
+          - earliest
+          default: latest
+          description: Initial offset behavior when consumer group has no committed offset.
+        auto_commit:
+          type: boolean
+          default: true
+          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - kafka_resource_path
+      - group_id
+      - topics
+      - filters
+      - is_flow
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

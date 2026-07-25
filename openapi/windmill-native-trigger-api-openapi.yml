@@ -1,0 +1,634 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin native_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: native_trigger
+paths:
+  /w/{workspace}/native_triggers/{service_name}/create:
+    post:
+      summary: Create Native Trigger
+      description: 'Creates a new native trigger for the specified service.
+
+        Requires write access to the script or flow that the trigger will be associated with.
+
+        '
+      operationId: createNativeTrigger
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      requestBody:
+        description: new native trigger configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NativeTriggerData'
+      responses:
+        '201':
+          description: native trigger created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTriggerResponse'
+  /w/{workspace}/native_triggers/{service_name}/update/{external_id}:
+    post:
+      summary: Update Native Trigger
+      description: 'Updates an existing native trigger.
+
+        Requires write access to the script or flow that the trigger is associated with.
+
+        '
+      operationId: updateNativeTrigger
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      - name: external_id
+        in: path
+        required: true
+        description: The external ID of the trigger from the external service
+        schema:
+          type: string
+      requestBody:
+        description: updated native trigger configuration
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NativeTriggerData'
+      responses:
+        '200':
+          description: native trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/native_triggers/{service_name}/get/{external_id}:
+    get:
+      summary: Get Native Trigger
+      description: 'Retrieves a native trigger by its external ID.
+
+        Requires write access to the script or flow that the trigger is associated with.
+
+        '
+      operationId: getNativeTrigger
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      - name: external_id
+        in: path
+        required: true
+        description: The external ID of the trigger from the external service
+        schema:
+          type: string
+      responses:
+        '200':
+          description: native trigger with external configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NativeTriggerWithExternal'
+  /w/{workspace}/native_triggers/{service_name}/delete/{external_id}:
+    delete:
+      summary: Delete Native Trigger
+      description: 'Deletes a native trigger by its external ID.
+
+        Requires write access to the script or flow that the trigger is associated with.
+
+        '
+      operationId: deleteNativeTrigger
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      - name: external_id
+        in: path
+        required: true
+        description: The external ID of the trigger from the external service
+        schema:
+          type: string
+      responses:
+        '200':
+          description: native trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/native_triggers/{service_name}/list:
+    get:
+      summary: List Native Triggers
+      description: Lists all native triggers for the specified service in the workspace.
+      operationId: listNativeTriggers
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by script path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        description: filter by is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: native triggers list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NativeTrigger'
+  /w/{workspace}/native_triggers/{service_name}/exists/{external_id}:
+    get:
+      summary: Check if Native Trigger Exists
+      description: Checks if a native trigger with the given external ID exists.
+      operationId: existsNativeTrigger
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      - name: external_id
+        in: path
+        required: true
+        description: The external ID of the trigger from the external service
+        schema:
+          type: string
+      responses:
+        '200':
+          description: whether the native trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/native_triggers/{service_name}/sync:
+    post:
+      summary: Sync Native Triggers with External Service
+      operationId: syncNativeTriggers
+      tags:
+      - native_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      responses:
+        '200':
+          description: sync completed successfully
+  /w/{workspace}/native_triggers/nextcloud/events:
+    get:
+      summary: List Available NextCloud Events
+      operationId: listNextCloudEvents
+      tags:
+      - native_trigger
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of available NextCloud events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/NextCloudEventType'
+  /w/{workspace}/native_triggers/google/calendars:
+    get:
+      summary: List Google Calendars for the Authenticated User
+      operationId: listGoogleCalendars
+      tags:
+      - native_trigger
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of Google Calendars
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GoogleCalendarEntry'
+  /w/{workspace}/native_triggers/google/drive/files:
+    get:
+      summary: List or Search Google Drive Files
+      operationId: listGoogleDriveFiles
+      tags:
+      - native_trigger
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: search query to filter files by name
+        schema:
+          type: string
+      - name: parent_id
+        in: query
+        description: folder ID to list children of
+        schema:
+          type: string
+      - name: page_token
+        in: query
+        description: token for next page of results
+        schema:
+          type: string
+      - name: shared_with_me
+        in: query
+        description: if true, list files shared with the user
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: list of Google Drive files
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoogleDriveFilesResponse'
+  /w/{workspace}/native_triggers/google/drive/shared_drives:
+    get:
+      summary: List Shared Drives Accessible to the User
+      operationId: listGoogleSharedDrives
+      tags:
+      - native_trigger
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of shared drives
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SharedDriveEntry'
+  /w/{workspace}/native_triggers/github/repos:
+    get:
+      summary: List GitHub Repositories Accessible to the User
+      operationId: listGithubRepos
+      tags:
+      - native_trigger
+      parameters:
+      - name: workspace
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: list of GitHub repositories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GithubRepoEntry'
+  /native_triggers/{service_name}/w/{workspace_id}/webhook/{internal_id}:
+    post:
+      summary: Receive Webhook from External Native Trigger Service
+      operationId: nativeTriggerWebhook
+      tags:
+      - native_trigger
+      parameters:
+      - name: service_name
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/NativeServiceName'
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: internal_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: The internal database ID of the trigger
+      requestBody:
+        description: webhook payload from external service
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+          text/plain:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: webhook received successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    NextCloudEventType:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        path:
+          type: string
+      required:
+      - id
+      - name
+      - path
+    NativeTriggerWithExternal:
+      type: object
+      description: Full trigger response containing both Windmill data and external service data
+      properties:
+        external_id:
+          type: string
+          description: The unique identifier from the external service
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        service_name:
+          $ref: '#/components/schemas/NativeServiceName'
+        script_path:
+          type: string
+          description: The path to the script or flow that will be triggered
+        is_flow:
+          type: boolean
+          description: Whether the trigger targets a flow (true) or a script (false)
+        service_config:
+          type: object
+          description: Configuration for the trigger including event_type and service_config
+          additionalProperties: true
+        error:
+          type: string
+          nullable: true
+          description: Error message if the trigger is in an error state
+        summary:
+          type: string
+          nullable: true
+          description: Short summary to be displayed when listed
+        external_data:
+          type: object
+          description: Configuration data from the external service
+          additionalProperties: true
+      required:
+      - external_id
+      - workspace_id
+      - service_name
+      - script_path
+      - is_flow
+      - service_config
+      - external_data
+    NativeTrigger:
+      type: object
+      description: A native trigger stored in Windmill
+      properties:
+        external_id:
+          type: string
+          description: The unique identifier from the external service
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        service_name:
+          $ref: '#/components/schemas/NativeServiceName'
+        script_path:
+          type: string
+          description: The path to the script or flow that will be triggered
+        is_flow:
+          type: boolean
+          description: Whether the trigger targets a flow (true) or a script (false)
+        service_config:
+          type: object
+          description: Configuration for the trigger including event_type and service_config
+          additionalProperties: true
+        error:
+          type: string
+          nullable: true
+          description: Error message if the trigger is in an error state
+        summary:
+          type: string
+          nullable: true
+          description: Short summary to be displayed when listed
+      required:
+      - external_id
+      - workspace_id
+      - service_name
+      - script_path
+      - is_flow
+      - service_config
+    GoogleDriveFilesResponse:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoogleDriveFile'
+        next_page_token:
+          type: string
+      required:
+      - files
+    CreateTriggerResponse:
+      type: object
+      description: Response returned when a native trigger is created
+      properties:
+        external_id:
+          type: string
+          description: The external ID of the created trigger from the external service
+      required:
+      - external_id
+    GoogleCalendarEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        summary:
+          type: string
+        primary:
+          type: boolean
+          default: false
+      required:
+      - id
+      - summary
+    GoogleDriveFile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        mime_type:
+          type: string
+        is_folder:
+          type: boolean
+          default: false
+      required:
+      - id
+      - name
+      - mime_type
+    NativeTriggerData:
+      type: object
+      description: Data for creating or updating a native trigger
+      properties:
+        script_path:
+          type: string
+          description: The path to the script or flow that will be triggered
+        is_flow:
+          type: boolean
+          description: Whether the trigger targets a flow (true) or a script (false)
+        service_config:
+          type: object
+          description: Service-specific configuration (e.g., event types, filters)
+          additionalProperties: true
+        summary:
+          type: string
+          nullable: true
+          description: Short summary to be displayed when listed
+      required:
+      - script_path
+      - is_flow
+      - service_config
+    GithubRepoEntry:
+      type: object
+      properties:
+        full_name:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        private:
+          type: boolean
+      required:
+      - full_name
+      - name
+      - owner
+      - private
+    SharedDriveEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
+    NativeServiceName:
+      type: string
+      enum:
+      - nextcloud
+      - google
+      - github
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

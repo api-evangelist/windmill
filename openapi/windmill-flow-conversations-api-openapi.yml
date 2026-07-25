@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin flow_conversations API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: flow_conversations
+paths:
+  /w/{workspace}/flow_conversations/list:
+    get:
+      summary: List Flow Conversations
+      operationId: listFlowConversations
+      tags:
+      - flow_conversations
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: flow_path
+        description: filter conversations by flow path
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: flow conversations list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowConversation'
+  /w/{workspace}/flow_conversations/delete/{conversation_id}:
+    delete:
+      summary: Delete Flow Conversation
+      operationId: deleteFlowConversation
+      tags:
+      - flow_conversations
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - name: conversation_id
+        description: conversation id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: flow conversation deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/flow_conversations/{conversation_id}/messages:
+    get:
+      summary: List Conversation Messages
+      operationId: listConversationMessages
+      tags:
+      - flow_conversations
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: conversation_id
+        description: conversation id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: after_seq
+        description: Message sequence cursor to fetch only the messages after that cursor
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: conversation messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FlowConversationMessage'
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    FlowConversation:
+      type: object
+      required:
+      - id
+      - workspace_id
+      - flow_path
+      - created_at
+      - updated_at
+      - created_by
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the conversation
+        workspace_id:
+          type: string
+          description: The workspace ID where the conversation belongs
+        flow_path:
+          type: string
+          description: Path of the flow this conversation is for
+        title:
+          type: string
+          description: Optional title for the conversation
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          description: When the conversation was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the conversation was last updated
+        created_by:
+          type: string
+          description: Username who created the conversation
+    FlowConversationMessage:
+      type: object
+      required:
+      - id
+      - conversation_id
+      - message_type
+      - content
+      - created_at
+      - created_seq
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the message
+        conversation_id:
+          type: string
+          format: uuid
+          description: The conversation this message belongs to
+        message_type:
+          type: string
+          enum:
+          - user
+          - assistant
+          - system
+          - tool
+          description: Type of the message
+        content:
+          type: string
+          description: The message content
+        job_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Associated job ID if this message came from a flow run
+        created_at:
+          type: string
+          format: date-time
+          description: When the message was created
+        created_seq:
+          type: integer
+          format: int64
+          description: Monotonic cursor assigned when the message is inserted
+        step_name:
+          type: string
+          description: The step name that produced that message
+        success:
+          type: boolean
+          description: Whether the message is a success
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

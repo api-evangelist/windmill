@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin raw_app API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: raw_app
+paths:
+  /w/{workspace}/raw_apps/list:
+    get:
+      summary: List All Raw Apps
+      operationId: listRawApps
+      tags:
+      - raw_app
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - $ref: '#/components/parameters/OrderDesc'
+      - $ref: '#/components/parameters/CreatedBy'
+      - name: path_start
+        description: mask to filter matching starting path
+        in: query
+        schema:
+          type: string
+      - name: path_exact
+        description: mask to filter exact matching path
+        in: query
+        schema:
+          type: string
+      - name: starred_only
+        description: '(default false)
+
+          show only the starred items
+
+          '
+        in: query
+        schema:
+          type: boolean
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: All raw apps
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ListableRawApp'
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    ListableRawApp:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        path:
+          type: string
+        summary:
+          type: string
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        starred:
+          type: boolean
+        version:
+          type: number
+        edited_at:
+          type: string
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - workspace_id
+      - path
+      - summary
+      - extra_perms
+      - version
+      - edited_at
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

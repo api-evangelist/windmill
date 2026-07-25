@@ -1,0 +1,523 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin mqtt_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: mqtt_trigger
+paths:
+  /w/{workspace}/mqtt_triggers/create:
+    post:
+      summary: Create Mqtt Trigger
+      operationId: createMqttTrigger
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new mqtt trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewMqttTrigger'
+      responses:
+        '201':
+          description: mqtt trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/mqtt_triggers/update/{path}:
+    post:
+      summary: Update Mqtt Trigger
+      operationId: updateMqttTrigger
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditMqttTrigger'
+      responses:
+        '200':
+          description: mqtt trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/mqtt_triggers/delete/{path}:
+    delete:
+      summary: Delete Mqtt Trigger
+      operationId: deleteMqttTrigger
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: mqtt trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/mqtt_triggers/get/{path}:
+    get:
+      summary: Get Mqtt Trigger
+      operationId: getMqttTrigger
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: mqtt trigger deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MqttTrigger'
+  /w/{workspace}/mqtt_triggers/list:
+    get:
+      summary: List Mqtt Triggers
+      operationId: listMqttTriggers
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: mqtt trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MqttTrigger'
+  /w/{workspace}/mqtt_triggers/exists/{path}:
+    get:
+      summary: Does Mqtt Trigger Exists
+      operationId: existsMqttTrigger
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: mqtt trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/mqtt_triggers/setmode/{path}:
+    post:
+      summary: Set Enabled Mqtt Trigger
+      operationId: setMqttTriggerMode
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated mqtt trigger enable
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: mqtt trigger enabled set
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/mqtt_triggers/test:
+    post:
+      summary: Test Mqtt Connection
+      operationId: testMqttConnection
+      tags:
+      - mqtt_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: test mqtt connection
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connection:
+                  type: object
+              required:
+              - connection
+      responses:
+        '200':
+          description: successfully connected to mqtt
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  schemas:
+    MqttClientVersion:
+      type: string
+      enum:
+      - v3
+      - v5
+    MqttSubscribeTopic:
+      type: object
+      properties:
+        qos:
+          $ref: '#/components/schemas/MqttQoS'
+        topic:
+          type: string
+      required:
+      - qos
+      - topic
+    EditMqttTrigger:
+      type: object
+      properties:
+        mqtt_resource_path:
+          type: string
+          description: Path to the MQTT resource containing broker connection configuration
+        subscribe_topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/MqttSubscribeTopic'
+          description: Array of MQTT topics to subscribe to, each with topic name and QoS level
+        client_id:
+          type: string
+          nullable: true
+          description: MQTT client ID for this connection
+        v3_config:
+          nullable: true
+          $ref: '#/components/schemas/MqttV3Config'
+          description: MQTT v3 specific configuration (clean_session)
+        v5_config:
+          nullable: true
+          $ref: '#/components/schemas/MqttV5Config'
+          description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
+        client_version:
+          nullable: true
+          $ref: '#/components/schemas/MqttClientVersion'
+          description: MQTT protocol version ('v3' or 'v5')
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - enabled
+      - subscribe_topics
+      - mqtt_resource_path
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    MqttV3Config:
+      type: object
+      properties:
+        clean_session:
+          type: boolean
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    MqttQoS:
+      type: string
+      enum:
+      - qos0
+      - qos1
+      - qos2
+    MqttTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        mqtt_resource_path:
+          type: string
+          description: Path to the MQTT resource containing broker connection configuration
+        subscribe_topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/MqttSubscribeTopic'
+          description: Array of MQTT topics to subscribe to, each with topic name and QoS level
+        v3_config:
+          $ref: '#/components/schemas/MqttV3Config'
+          nullable: true
+          description: MQTT v3 specific configuration (clean_session)
+        v5_config:
+          $ref: '#/components/schemas/MqttV5Config'
+          nullable: true
+          description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
+        client_id:
+          type: string
+          nullable: true
+          description: MQTT client ID for this connection
+        client_version:
+          $ref: '#/components/schemas/MqttClientVersion'
+          nullable: true
+          description: MQTT protocol version ('v3' or 'v5')
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - subscribe_topics
+      - mqtt_resource_path
+    MqttV5Config:
+      type: object
+      properties:
+        clean_start:
+          type: boolean
+        topic_alias_maximum:
+          type: number
+        session_expiry_interval:
+          type: number
+    NewMqttTrigger:
+      type: object
+      properties:
+        mqtt_resource_path:
+          type: string
+          description: Path to the MQTT resource containing broker connection configuration
+        subscribe_topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/MqttSubscribeTopic'
+          description: Array of MQTT topics to subscribe to, each with topic name and QoS level
+        client_id:
+          type: string
+          nullable: true
+          description: MQTT client ID for this connection
+        v3_config:
+          nullable: true
+          $ref: '#/components/schemas/MqttV3Config'
+          description: MQTT v3 specific configuration (clean_session)
+        v5_config:
+          nullable: true
+          $ref: '#/components/schemas/MqttV5Config'
+          description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
+        client_version:
+          nullable: true
+          $ref: '#/components/schemas/MqttClientVersion'
+          description: MQTT protocol version ('v3' or 'v5')
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - subscribe_topics
+      - mqtt_resource_path
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

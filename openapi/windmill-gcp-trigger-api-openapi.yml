@@ -1,0 +1,531 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin gcp_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: gcp_trigger
+paths:
+  /w/{workspace}/gcp_triggers/create:
+    post:
+      summary: Create Gcp Trigger
+      operationId: createGcpTrigger
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new gcp trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcpTriggerData'
+      responses:
+        '201':
+          description: gcp trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/gcp_triggers/update/{path}:
+    post:
+      summary: Update Gcp Trigger
+      operationId: updateGcpTrigger
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcpTriggerData'
+      responses:
+        '200':
+          description: gcp trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/gcp_triggers/delete/{path}:
+    delete:
+      summary: Delete Gcp Trigger
+      operationId: deleteGcpTrigger
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: gcp trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/gcp_triggers/get/{path}:
+    get:
+      summary: Get Gcp Trigger
+      operationId: getGcpTrigger
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: gcp trigger deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcpTrigger'
+  /w/{workspace}/gcp_triggers/list:
+    get:
+      summary: List Gcp Triggers
+      operationId: listGcpTriggers
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: gcp trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GcpTrigger'
+  /w/{workspace}/gcp_triggers/exists/{path}:
+    get:
+      summary: Does Gcp Trigger Exists
+      operationId: existsGcpTrigger
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: gcp trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/gcp_triggers/setmode/{path}:
+    post:
+      summary: Set Enabled Gcp Trigger
+      operationId: setGcpTriggerMode
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated gcp trigger enable
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: gcp trigger enabled set
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/gcp_triggers/test:
+    post:
+      summary: Test Gcp Connection
+      operationId: testGcpConnection
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: test gcp connection
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                connection:
+                  type: object
+              required:
+              - connection
+      responses:
+        '200':
+          description: try to connect to a gcp broker
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/gcp_triggers/subscriptions/delete/{path}:
+    delete:
+      summary: Delete Gcp Trigger
+      operationId: deleteGcpSubscription
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: args to delete subscription from google cloud
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteGcpSubscription'
+      responses:
+        '200':
+          description: gcp trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/gcp_triggers/topics/list/{path}:
+    get:
+      summary: List All Topics of Google Cloud Service
+      operationId: listGoogleTopics
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: get all google topics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/gcp_triggers/subscriptions/list/{path}:
+    post:
+      summary: List All Subscription of a Give Topic from Google Cloud Service
+      operationId: listAllTGoogleTopicSubscriptions
+      tags:
+      - gcp_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: args to get subscription's topic from google cloud
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAllTopicSubscription'
+      responses:
+        '200':
+          description: get all google topic subscriptions name
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    GcpTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      description: A Google Cloud Pub/Sub trigger that executes a script or flow when messages are received.
+      properties:
+        gcp_resource_path:
+          type: string
+          description: Path to the GCP resource containing service account credentials for authentication.
+        topic_id:
+          type: string
+          description: Google Cloud Pub/Sub topic ID to subscribe to.
+        subscription_id:
+          type: string
+          description: Google Cloud Pub/Sub subscription ID.
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal use).
+        delivery_type:
+          $ref: '#/components/schemas/DeliveryType'
+        delivery_config:
+          $ref: '#/components/schemas/PushConfig'
+          nullable: true
+        subscription_mode:
+          $ref: '#/components/schemas/SubscriptionMode'
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal use).
+        error:
+          type: string
+          description: Last error message if the trigger failed.
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails.
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler.
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions.
+      required:
+      - gcp_resource_path
+      - topic_id
+      - subscription_id
+      - delivery_type
+      - subscription_mode
+    DeliveryType:
+      type: string
+      enum:
+      - push
+      - pull
+      description: Delivery mode for messages. 'push' for HTTP push delivery where messages are sent to a webhook endpoint, 'pull' for polling where the trigger actively fetches messages.
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    SubscriptionMode:
+      type: string
+      enum:
+      - existing
+      - create_update
+      description: The mode of subscription. 'existing' means using an existing GCP subscription, while 'create_update' involves creating or updating a new subscription.
+    DeleteGcpSubscription:
+      type: object
+      properties:
+        subscription_id:
+          type: string
+      required:
+      - subscription_id
+    GetAllTopicSubscription:
+      type: object
+      properties:
+        topic_id:
+          type: string
+      required:
+      - topic_id
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    GcpTriggerData:
+      type: object
+      description: Data for creating or updating a Google Cloud Pub/Sub trigger.
+      properties:
+        gcp_resource_path:
+          type: string
+          description: Path to the GCP resource containing service account credentials for authentication.
+        subscription_mode:
+          $ref: '#/components/schemas/SubscriptionMode'
+        topic_id:
+          type: string
+          description: Google Cloud Pub/Sub topic ID to subscribe to.
+        subscription_id:
+          type: string
+          description: Google Cloud Pub/Sub subscription ID.
+        base_endpoint:
+          type: string
+          description: Base URL for push delivery endpoint.
+        delivery_type:
+          $ref: '#/components/schemas/DeliveryType'
+        delivery_config:
+          nullable: true
+          $ref: '#/components/schemas/PushConfig'
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received.
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script.
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        auto_acknowledge_msg:
+          type: boolean
+          description: If true, automatically acknowledge messages after processing.
+        ack_deadline:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 600
+          description: Time in seconds within which the message must be acknowledged. If not provided, defaults to the subscription's acknowledgment deadline (600 seconds).
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails.
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler.
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions.
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - gcp_resource_path
+      - topic_id
+      - subscription_mode
+    PushConfig:
+      type: object
+      description: Configuration for push delivery mode.
+      properties:
+        audience:
+          type: string
+          description: The audience claim for OIDC tokens used in push authentication.
+        authenticate:
+          type: boolean
+          description: If true, push messages will include OIDC authentication tokens.
+      required:
+      - authenticate
+      - base_endpoint
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin openapi API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: openapi
+paths:
+  /w/{workspace}/openapi/generate:
+    post:
+      summary: Generate Openapi Spec from Http Routes/webhook
+      operationId: generateOpenapiSpec
+      tags:
+      - openapi
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: openapi spec info and url
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateOpenapiSpec'
+      responses:
+        '200':
+          description: openapi spec
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/openapi/download:
+    post:
+      summary: Download the OpenAPI V3.1 Spec as a File
+      operationId: DownloadOpenapiSpec
+      tags:
+      - openapi
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: openapi spec info and url
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateOpenapiSpec'
+      responses:
+        '200':
+          description: Downloaded OpenAPI spec
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    RunnableKind:
+      type: string
+      enum:
+      - script
+      - flow
+    GenerateOpenapiSpec:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/OpenapiV3Info'
+        url:
+          type: string
+        openapi_spec_format:
+          $ref: '#/components/schemas/OpenapiSpecFormat'
+        http_route_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
+        webhook_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilters'
+    OpenapiV3Info:
+      type: object
+      properties:
+        title:
+          type: string
+        version:
+          type: string
+        description:
+          type: string
+        terms_of_service:
+          type: string
+        contact:
+          type: object
+          properties:
+            name:
+              type: string
+            url:
+              type: string
+            email:
+              type: string
+        license:
+          type: object
+          properties:
+            name:
+              type: string
+            identifier:
+              type: string
+            url:
+              type: string
+          required:
+          - name
+      required:
+      - title
+      - version
+    WebhookFilters:
+      type: object
+      properties:
+        user_or_folder_regex:
+          type: string
+          enum:
+          - '*'
+          - u
+          - f
+        user_or_folder_regex_value:
+          type: string
+        path:
+          type: string
+        runnable_kind:
+          $ref: '#/components/schemas/RunnableKind'
+      required:
+      - user_or_folder_regex
+      - user_or_folder_regex_value
+      - path
+      - runnable_kind
+    OpenapiHttpRouteFilters:
+      type: object
+      properties:
+        folder_regex:
+          type: string
+        path_regex:
+          type: string
+        route_path_regex:
+          type: string
+      required:
+      - folder_regex
+      - path_regex
+      - route_path_regex
+    OpenapiSpecFormat:
+      type: string
+      enum:
+      - yaml
+      - json
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin token API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: token
+paths:
+  /tokens/list/scopes:
+    get:
+      summary: List of Available Scopes
+      operationId: ListAvailableScopes
+      tags:
+      - token
+      responses:
+        '200':
+          description: list of available scopes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScopeDomain'
+components:
+  schemas:
+    ScopeDefinition:
+      type: object
+      properties:
+        value:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+          nullable: true
+        requires_resource_path:
+          type: boolean
+      required:
+      - value
+      - label
+      - requires_resource_path
+    ScopeDomain:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScopeDefinition'
+      required:
+      - name
+      - scopes
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev

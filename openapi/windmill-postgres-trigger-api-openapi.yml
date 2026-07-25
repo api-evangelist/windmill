@@ -1,0 +1,767 @@
+openapi: 3.0.3
+info:
+  version: 1.694.0
+  title: Windmill admin postgres_trigger API
+  contact:
+    name: Windmill Team
+    email: contact@windmill.dev
+    url: https://windmill.dev
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://windmill.dev/img/windmill.svg
+servers:
+- url: /api
+security:
+- bearerAuth: []
+- cookieAuth: []
+tags:
+- name: postgres_trigger
+paths:
+  /w/{workspace}/postgres_triggers/postgres/version/{path}:
+    get:
+      summary: Get Postgres Version
+      operationId: getPostgresVersion
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: postgres version
+          content:
+            application/json:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/is_valid_postgres_configuration/{path}:
+    get:
+      summary: Check if Postgres Configuration is Set to Logical
+      operationId: isValidPostgresConfiguration
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: boolean that indicates if postgres is set to logical level or not
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/postgres_triggers/create_template_script:
+    post:
+      summary: Create Template Script
+      operationId: createTemplateScript
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: template script
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateScript'
+      responses:
+        '200':
+          description: custom id to retrieve template script
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/get_template_script/{id}:
+    get:
+      summary: Get Template Script
+      operationId: getTemplateScript
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: template script
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/slot/list/{path}:
+    get:
+      summary: List Postgres Replication Slot
+      operationId: listPostgresReplicationSlot
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: list postgres slot
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SlotList'
+  /w/{workspace}/postgres_triggers/slot/create/{path}:
+    post:
+      summary: Create Replication Slot for Postgres
+      operationId: createPostgresReplicationSlot
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: new slot for postgres
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Slot'
+      responses:
+        '201':
+          description: slot created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/slot/delete/{path}:
+    delete:
+      summary: Delete Postgres Replication Slot
+      operationId: deletePostgresReplicationSlot
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: replication slot of postgres
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Slot'
+      responses:
+        '200':
+          description: postgres replication slot deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/publication/list/{path}:
+    get:
+      summary: List Postgres Publication
+      operationId: listPostgresPublication
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: database publication list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /w/{workspace}/postgres_triggers/publication/get/{publication}/{path}:
+    get:
+      summary: Get Postgres Publication
+      operationId: getPostgresPublication
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - $ref: '#/components/parameters/PublicationName'
+      responses:
+        '200':
+          description: postgres publication get
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicationData'
+  /w/{workspace}/postgres_triggers/publication/create/{publication}/{path}:
+    post:
+      summary: Create Publication for Postgres
+      operationId: createPostgresPublication
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - $ref: '#/components/parameters/PublicationName'
+      requestBody:
+        description: new publication for postgres
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicationData'
+      responses:
+        '201':
+          description: publication created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/publication/update/{publication}/{path}:
+    post:
+      summary: Update Publication for Postgres
+      operationId: updatePostgresPublication
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - $ref: '#/components/parameters/PublicationName'
+      requestBody:
+        description: update publication for postgres
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PublicationData'
+      responses:
+        '201':
+          description: publication updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/publication/delete/{publication}/{path}:
+    delete:
+      summary: Delete Postgres Publication
+      operationId: deletePostgresPublication
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      - $ref: '#/components/parameters/PublicationName'
+      responses:
+        '200':
+          description: postgres publication deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/create:
+    post:
+      summary: Create Postgres Trigger
+      operationId: createPostgresTrigger
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: new postgres trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewPostgresTrigger'
+      responses:
+        '201':
+          description: postgres trigger created
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/update/{path}:
+    post:
+      summary: Update Postgres Trigger
+      operationId: updatePostgresTrigger
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated trigger
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditPostgresTrigger'
+      responses:
+        '200':
+          description: postgres trigger updated
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/delete/{path}:
+    delete:
+      summary: Delete Postgres Trigger
+      operationId: deletePostgresTrigger
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: postgres trigger deleted
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/get/{path}:
+    get:
+      summary: Get Postgres Trigger
+      operationId: getPostgresTrigger
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: get postgres trigger
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostgresTrigger'
+  /w/{workspace}/postgres_triggers/list:
+    get:
+      summary: List Postgres Triggers
+      operationId: listPostgresTriggers
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+        required: true
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/PerPage'
+      - name: path
+        description: filter by path
+        in: query
+        schema:
+          type: string
+      - name: is_flow
+        in: query
+        schema:
+          type: boolean
+      - name: path_start
+        in: query
+        schema:
+          type: string
+      - name: label
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Filter by label
+      responses:
+        '200':
+          description: postgres trigger list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostgresTrigger'
+  /w/{workspace}/postgres_triggers/exists/{path}:
+    get:
+      summary: Does Postgres Trigger Exists
+      operationId: existsPostgresTrigger
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      responses:
+        '200':
+          description: postgres trigger exists
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /w/{workspace}/postgres_triggers/setmode/{path}:
+    post:
+      summary: Set Enabled Postgres Trigger
+      operationId: setPostgresTriggerMode
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      - $ref: '#/components/parameters/Path'
+      requestBody:
+        description: updated postgres trigger enable
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  $ref: '#/components/schemas/TriggerMode'
+                force:
+                  type: boolean
+                  description: 'Bypass the parent-state conflict warning when enabling a trigger in a fork whose parent has the same path enabled.
+
+                    '
+              required:
+              - mode
+      responses:
+        '200':
+          description: postgres trigger enabled set
+          content:
+            text/plain:
+              schema:
+                type: string
+  /w/{workspace}/postgres_triggers/test:
+    post:
+      summary: Test Postgres Connection
+      operationId: testPostgresConnection
+      tags:
+      - postgres_trigger
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        description: test postgres connection
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                database:
+                  type: string
+              required:
+              - database
+      responses:
+        '200':
+          description: successfuly connected to postgres
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Relations:
+      type: object
+      properties:
+        schema_name:
+          type: string
+        table_to_track:
+          $ref: '#/components/schemas/TableToTrack'
+      required:
+      - schema_name
+      - table_to_track
+    TemplateScript:
+      type: object
+      properties:
+        postgres_resource_path:
+          type: string
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relations'
+        language:
+          $ref: '#/components/schemas/Language'
+      required:
+      - postgres_resource_path
+      - relations
+      - language
+    TableToTrack:
+      type: array
+      items:
+        type: object
+        properties:
+          table_name:
+            type: string
+          columns_name:
+            type: array
+            items:
+              type: string
+          where_clause:
+            type: string
+        required:
+        - table_name
+    NewPostgresTrigger:
+      type: object
+      properties:
+        replication_slot_name:
+          type: string
+          description: Name of the PostgreSQL logical replication slot to use
+        publication_name:
+          type: string
+          description: Name of the PostgreSQL publication to subscribe to for change data capture
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when database changes are detected
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        postgres_resource_path:
+          type: string
+          description: Path to the PostgreSQL resource containing connection configuration
+        publication:
+          $ref: '#/components/schemas/PublicationData'
+          description: Configuration for creating/managing the publication (tables, operations)
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - enabled
+      - postgres_resource_path
+    PublicationData:
+      type: object
+      properties:
+        table_to_track:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relations'
+        transaction_to_track:
+          type: array
+          items:
+            type: string
+      required:
+      - transaction_to_track
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    PostgresTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        postgres_resource_path:
+          type: string
+          description: Path to the PostgreSQL resource containing connection configuration
+        publication_name:
+          type: string
+          description: Name of the PostgreSQL publication to subscribe to for change data capture
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        replication_slot_name:
+          type: string
+          description: Name of the PostgreSQL logical replication slot to use
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - postgres_resource_path
+      - replication_slot_name
+      - publication_name
+    EditPostgresTrigger:
+      type: object
+      properties:
+        replication_slot_name:
+          type: string
+          description: Name of the PostgreSQL logical replication slot to use
+        publication_name:
+          type: string
+          description: Name of the PostgreSQL publication to subscribe to for change data capture
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when database changes are detected
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        postgres_resource_path:
+          type: string
+          description: Path to the PostgreSQL resource containing connection configuration
+        publication:
+          $ref: '#/components/schemas/PublicationData'
+          description: Configuration for creating/managing the publication (tables, operations)
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - enabled
+      - postgres_resource_path
+      - publication_name
+      - replication_slot_name
+    Slot:
+      type: object
+      properties:
+        name:
+          type: string
+    SlotList:
+      type: object
+      properties:
+        slot_name:
+          type: string
+        active:
+          type: boolean
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    Language:
+      type: string
+      enum:
+      - Typescript
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PublicationName:
+      name: publication
+      in: path
+      required: true
+      description: The name of the publication
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: token
+externalDocs:
+  description: documentation portal
+  url: https://windmill.dev
