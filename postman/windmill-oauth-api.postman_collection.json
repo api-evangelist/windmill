@@ -1,0 +1,1542 @@
+{
+  "info": {
+    "_postman_id": "838be995-67e3-4c64-885c-0896521ca1e8",
+    "name": "Windmill admin oauth API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:26.000Z",
+    "updatedAt": "2026-07-28T03:31:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-838be995-67e3-4c64-885c-0896521ca1e8"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "oauth",
+              "item": [
+                {
+                  "name": "connect_slack_callback",
+                  "item": [
+                    {
+                      "name": "Connect Slack Callback",
+                      "id": "0067ba63-e861-4266-a894-a2e32bdc0884",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/oauth/connect_slack_callback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "oauth",
+                            "connect_slack_callback"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d3843f8a-7f52-4902-9975-d8dcc0411807",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "60f09ee3-1349-480e-b539-e83a3ca76e61",
+                          "name": "slack token",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oauth/connect_slack_callback",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oauth",
+                                "connect_slack_callback"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:26.000Z",
+                          "updatedAt": "2026-07-28T03:31:26.000Z",
+                          "uid": "35240-60f09ee3-1349-480e-b539-e83a3ca76e61"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-0067ba63-e861-4266-a894-a2e32bdc0884"
+                    }
+                  ],
+                  "id": "3820368e-569e-4633-ad88-a462661d8cd1",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-3820368e-569e-4633-ad88-a462661d8cd1"
+                },
+                {
+                  "name": "create_account",
+                  "item": [
+                    {
+                      "name": "Create OAuth Account",
+                      "id": "31c63ddb-8097-4d1a-b812-c04c082bd152",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"refresh_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"client\": \"<string>\",\n  \"grant_type\": \"authorization_code\",\n  \"cc_client_id\": \"<string>\",\n  \"cc_client_secret\": \"<string>\",\n  \"cc_token_url\": \"<string>\",\n  \"mcp_server_url\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/oauth/create_account",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "oauth",
+                            "create_account"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e99d2137-d793-45ee-a3e2-584d9643f205",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "f53d7d2a-fd18-4005-827e-3531238528a5",
+                          "name": "account set",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"refresh_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"client\": \"<string>\",\n  \"grant_type\": \"authorization_code\",\n  \"cc_client_id\": \"<string>\",\n  \"cc_client_secret\": \"<string>\",\n  \"cc_token_url\": \"<string>\",\n  \"mcp_server_url\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oauth/create_account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oauth",
+                                "create_account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:26.000Z",
+                          "updatedAt": "2026-07-28T03:31:26.000Z",
+                          "uid": "35240-f53d7d2a-fd18-4005-827e-3531238528a5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-31c63ddb-8097-4d1a-b812-c04c082bd152"
+                    }
+                  ],
+                  "id": "0a3bf2f9-7861-4624-acf0-9eeec8dbdcb4",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-0a3bf2f9-7861-4624-acf0-9eeec8dbdcb4"
+                },
+                {
+                  "name": "refresh_token",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Refresh Token",
+                          "id": "ce5dfd38-d18f-448d-9f87-ceeca39ffd0b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oauth/refresh_token/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oauth",
+                                "refresh_token",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "02658c83-b0ea-433d-a9e5-b8ca966d1e87",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "d9af53d7-afc5-4647-b410-1c051ddb64b3",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "34d83d15-2941-4479-93b7-b59762c0c843",
+                              "name": "token refreshed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/oauth/refresh_token/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "oauth",
+                                    "refresh_token",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:26.000Z",
+                              "updatedAt": "2026-07-28T03:31:26.000Z",
+                              "uid": "35240-34d83d15-2941-4479-93b7-b59762c0c843"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:26.000Z",
+                          "updatedAt": "2026-07-28T03:31:26.000Z",
+                          "uid": "35240-ce5dfd38-d18f-448d-9f87-ceeca39ffd0b"
+                        }
+                      ],
+                      "id": "b56e000d-2a7a-4f0d-af13-c46568225214",
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-b56e000d-2a7a-4f0d-af13-c46568225214"
+                    }
+                  ],
+                  "id": "516912d8-f14e-495e-a8c7-77bd3283767a",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-516912d8-f14e-495e-a8c7-77bd3283767a"
+                },
+                {
+                  "name": "disconnect",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Disconnect Account",
+                          "id": "c613c844-57dc-4960-b66e-61bad5037f22",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oauth/disconnect/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oauth",
+                                "disconnect",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3a067b39-89e1-41ef-8fdb-e1580ecafd02",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "cdb1c390-49bd-48ac-9b84-7f96b721a5d0",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b5d91218-4eb7-4bd6-8135-af469263534e",
+                              "name": "disconnected client",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/oauth/disconnect/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "oauth",
+                                    "disconnect",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:26.000Z",
+                              "updatedAt": "2026-07-28T03:31:26.000Z",
+                              "uid": "35240-b5d91218-4eb7-4bd6-8135-af469263534e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:26.000Z",
+                          "updatedAt": "2026-07-28T03:31:26.000Z",
+                          "uid": "35240-c613c844-57dc-4960-b66e-61bad5037f22"
+                        }
+                      ],
+                      "id": "9b2ea24b-696c-47c6-ac53-0fd5371f2c19",
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-9b2ea24b-696c-47c6-ac53-0fd5371f2c19"
+                    }
+                  ],
+                  "id": "50ae88b8-f97a-4182-ac41-1a0007fad810",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-50ae88b8-f97a-4182-ac41-1a0007fad810"
+                },
+                {
+                  "name": "disconnect_slack",
+                  "item": [
+                    {
+                      "name": "Disconnect Slack",
+                      "id": "a4aacae7-8a35-41f1-a931-8111b0d6f6da",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/oauth/disconnect_slack",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "oauth",
+                            "disconnect_slack"
+                          ],
+                          "variable": [
+                            {
+                              "id": "caa9fd54-b819-4d84-b30c-0feb18cac2ce",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "0209fcee-fc99-46b1-b64a-95221e95380a",
+                          "name": "disconnected slack",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oauth/disconnect_slack",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oauth",
+                                "disconnect_slack"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:26.000Z",
+                          "updatedAt": "2026-07-28T03:31:26.000Z",
+                          "uid": "35240-0209fcee-fc99-46b1-b64a-95221e95380a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-a4aacae7-8a35-41f1-a931-8111b0d6f6da"
+                    }
+                  ],
+                  "id": "8c81b7fc-fce0-4ea6-80ef-7ca8487794d6",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-8c81b7fc-fce0-4ea6-80ef-7ca8487794d6"
+                },
+                {
+                  "name": "disconnect_teams",
+                  "item": [
+                    {
+                      "name": "Disconnect Teams",
+                      "id": "1d4b23e5-177d-4f64-8ac4-a22600271d6a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/oauth/disconnect_teams",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "oauth",
+                            "disconnect_teams"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fcb1bf9e-d32f-4a07-8bb9-2bf40a063b97",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "fc8589c3-8111-4050-ab8d-178802685f97",
+                          "name": "disconnected teams",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oauth/disconnect_teams",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oauth",
+                                "disconnect_teams"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:26.000Z",
+                          "updatedAt": "2026-07-28T03:31:26.000Z",
+                          "uid": "35240-fc8589c3-8111-4050-ab8d-178802685f97"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-1d4b23e5-177d-4f64-8ac4-a22600271d6a"
+                    }
+                  ],
+                  "id": "817b40ae-c387-4d76-b88d-3b6bb6ffdf9b",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-817b40ae-c387-4d76-b88d-3b6bb6ffdf9b"
+                }
+              ],
+              "id": "40d17f65-b17b-4d42-a3da-ce4a0ee1d1b5",
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-40d17f65-b17b-4d42-a3da-ce4a0ee1d1b5"
+            }
+          ],
+          "id": "5d5f7956-aea4-4d5c-bd9d-a2316792bf1c",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-5d5f7956-aea4-4d5c-bd9d-a2316792bf1c"
+        }
+      ],
+      "id": "415a3ce9-f309-4a53-848c-f175bc908d9c",
+      "createdAt": "2026-07-28T03:31:26.000Z",
+      "updatedAt": "2026-07-28T03:31:26.000Z",
+      "uid": "35240-415a3ce9-f309-4a53-848c-f175bc908d9c"
+    },
+    {
+      "name": "oauth",
+      "item": [
+        {
+          "name": "connect_slack_callback",
+          "item": [
+            {
+              "name": "Connect Slack Callback Instance",
+              "id": "4dc67017-e65c-468a-b5ba-c7a5b9673d68",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/connect_slack_callback",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "connect_slack_callback"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1dbf5e0d-2111-4333-83a9-2ddf5322f9d2",
+                  "name": "success message",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/connect_slack_callback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "connect_slack_callback"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-1dbf5e0d-2111-4333-83a9-2ddf5322f9d2"
+                }
+              ],
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-4dc67017-e65c-468a-b5ba-c7a5b9673d68"
+            }
+          ],
+          "id": "27f522b0-fbb2-4b65-979d-2cfd7f16a25a",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-27f522b0-fbb2-4b65-979d-2cfd7f16a25a"
+        },
+        {
+          "name": "connect_slack_instance",
+          "item": [
+            {
+              "name": "Connect Slack Instance (non-interactive; Pre-minted Bot Token)",
+              "id": "5553848a-8a3c-4fac-8808-bc05a8efc4ed",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bot_token\": \"<string>\",\n  \"team_id\": \"<string>\",\n  \"team_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/connect_slack_instance",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "connect_slack_instance"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "39a5f7d1-b264-4c86-b75d-4456d8b55f8b",
+                  "name": "status",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"bot_token\": \"<string>\",\n  \"team_id\": \"<string>\",\n  \"team_name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/connect_slack_instance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "connect_slack_instance"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-39a5f7d1-b264-4c86-b75d-4456d8b55f8b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-5553848a-8a3c-4fac-8808-bc05a8efc4ed"
+            }
+          ],
+          "id": "3a27476a-761e-41f4-99ff-a880af7ebc02",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-3a27476a-761e-41f4-99ff-a880af7ebc02"
+        },
+        {
+          "name": "connect_callback",
+          "item": [
+            {
+              "name": "{client_name}",
+              "item": [
+                {
+                  "name": "Connect Callback",
+                  "id": "831b741b-0b93-45f1-8159-6488f41ca138",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/connect_callback/:client_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "connect_callback",
+                        ":client_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e6bb4ba4-fc84-441c-aeff-aa9ec640bb76",
+                          "key": "client_name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "62de6b48-82be-4cb7-add3-b4514f84af31",
+                      "name": "oauth token",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/oauth/connect_callback/:client_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "oauth",
+                            "connect_callback",
+                            ":client_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "client_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"access_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"scope\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"grant_type\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-62de6b48-82be-4cb7-add3-b4514f84af31"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-831b741b-0b93-45f1-8159-6488f41ca138"
+                }
+              ],
+              "id": "5fa8103e-0c9c-49c3-aa99-8c81300a2bcd",
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-5fa8103e-0c9c-49c3-aa99-8c81300a2bcd"
+            }
+          ],
+          "id": "c8986d47-2bee-4f8b-8f25-4e5dc533f4de",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-c8986d47-2bee-4f8b-8f25-4e5dc533f4de"
+        },
+        {
+          "name": "connect_client_credentials",
+          "item": [
+            {
+              "name": "{client}",
+              "item": [
+                {
+                  "name": "Connect OAuth Using Client Credentials",
+                  "id": "9eed7062-4572-4879-8bf7-9e675f28446e",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"cc_client_id\": \"<string>\",\n  \"cc_client_secret\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cc_token_url\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/connect_client_credentials/:client",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "connect_client_credentials",
+                        ":client"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f18e4e37-9116-4910-9ecc-5a522c5b940b",
+                          "key": "client",
+                          "value": "<string>",
+                          "description": "(Required) OAuth client name"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "03f9e79e-b869-4c86-8bf8-b77006bf82b4",
+                      "name": "OAuth token response",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"cc_client_id\": \"<string>\",\n  \"cc_client_secret\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cc_token_url\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/oauth/connect_client_credentials/:client",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "oauth",
+                            "connect_client_credentials",
+                            ":client"
+                          ],
+                          "variable": [
+                            {
+                              "key": "client"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"access_token\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"scope\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"grant_type\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-03f9e79e-b869-4c86-8bf8-b77006bf82b4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-9eed7062-4572-4879-8bf7-9e675f28446e"
+                }
+              ],
+              "id": "a6369f9e-1454-4577-abee-657e58e0127b",
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-a6369f9e-1454-4577-abee-657e58e0127b"
+            }
+          ],
+          "id": "cf4f034a-58bb-408a-bff6-bb37386185f8",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-cf4f034a-58bb-408a-bff6-bb37386185f8"
+        },
+        {
+          "name": "list_logins",
+          "item": [
+            {
+              "name": "List Oauth Logins",
+              "id": "3d17fb19-eb48-46ab-af25-f80648ac6146",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/list_logins",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "list_logins"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9f440682-1958-4700-ae8a-7f41e1a18930",
+                  "name": "list of oauth and saml login clients",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/list_logins",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "list_logins"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"oauth\": [\n    {\n      \"type\": \"<string>\",\n      \"display_name\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"display_name\": \"<string>\"\n    }\n  ],\n  \"saml\": \"<string>\",\n  \"auto_login\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-9f440682-1958-4700-ae8a-7f41e1a18930"
+                }
+              ],
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-3d17fb19-eb48-46ab-af25-f80648ac6146"
+            }
+          ],
+          "id": "c1df1ccd-b1a5-4f3b-bfdb-c6190e4672de",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-c1df1ccd-b1a5-4f3b-bfdb-c6190e4672de"
+        },
+        {
+          "name": "list_connects",
+          "item": [
+            {
+              "name": "List Oauth Connects",
+              "id": "8e43c0e7-0f2e-44ae-a3db-53fbd334579d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oauth/list_connects",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oauth",
+                    "list_connects"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c218baca-b1c0-42f1-8946-4c553ddd091e",
+                  "name": "list of oauth connects clients",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/list_connects",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "list_connects"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-c218baca-b1c0-42f1-8946-4c553ddd091e"
+                }
+              ],
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-8e43c0e7-0f2e-44ae-a3db-53fbd334579d"
+            }
+          ],
+          "id": "1e136075-4a89-4584-9e0e-09e0eecfe824",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-1e136075-4a89-4584-9e0e-09e0eecfe824"
+        },
+        {
+          "name": "get_connect",
+          "item": [
+            {
+              "name": "{client}",
+              "item": [
+                {
+                  "name": "Get Oauth Connect",
+                  "id": "128b75e9-3379-4d56-8ecb-93133d93570c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/oauth/get_connect/:client",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "oauth",
+                        "get_connect",
+                        ":client"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4a972aa7-e25e-4927-8b89-af93adb50791",
+                          "key": "client",
+                          "value": "<string>",
+                          "description": "(Required) client name"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "2c1afb18-05bd-48ab-b73c-d0e68e4090f6",
+                      "name": "get",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/oauth/get_connect/:client",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "oauth",
+                            "get_connect",
+                            ":client"
+                          ],
+                          "variable": [
+                            {
+                              "key": "client"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"extra_params\": {},\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"grant_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "createdAt": "2026-07-28T03:31:26.000Z",
+                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                      "uid": "35240-2c1afb18-05bd-48ab-b73c-d0e68e4090f6"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:26.000Z",
+                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                  "uid": "35240-128b75e9-3379-4d56-8ecb-93133d93570c"
+                }
+              ],
+              "id": "e9ce720b-69f1-4030-875a-6c6b17a63265",
+              "createdAt": "2026-07-28T03:31:26.000Z",
+              "updatedAt": "2026-07-28T03:31:26.000Z",
+              "uid": "35240-e9ce720b-69f1-4030-875a-6c6b17a63265"
+            }
+          ],
+          "id": "697e0bde-f651-4171-90d0-e7be0a4b1e2a",
+          "createdAt": "2026-07-28T03:31:26.000Z",
+          "updatedAt": "2026-07-28T03:31:26.000Z",
+          "uid": "35240-697e0bde-f651-4171-90d0-e7be0a4b1e2a"
+        }
+      ],
+      "id": "6720d624-2c5d-40e2-bcab-777d0d916816",
+      "createdAt": "2026-07-28T03:31:26.000Z",
+      "updatedAt": "2026-07-28T03:31:26.000Z",
+      "uid": "35240-6720d624-2c5d-40e2-bcab-777d0d916816"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

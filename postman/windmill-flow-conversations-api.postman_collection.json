@@ -1,0 +1,465 @@
+{
+  "info": {
+    "_postman_id": "5332344d-1d2b-4f3d-90b0-8d5cf692d136",
+    "name": "Windmill admin flow_conversations API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:40.000Z",
+    "updatedAt": "2026-07-28T03:30:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5332344d-1d2b-4f3d-90b0-8d5cf692d136"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "flow_conversations",
+              "item": [
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Flow Conversations",
+                      "id": "365b2aa0-1faf-41d4-b2ac-cc68a20750eb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/flow_conversations/list?page=<integer>&per_page=<integer>&flow_path=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "flow_conversations",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "filter conversations by flow path",
+                              "key": "flow_path",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "73b2bdba-33c5-434f-a90b-af3a8932aa8e",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "4b5e126f-d25c-42f8-b03b-f753370232ec",
+                          "name": "flow conversations list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flow_conversations/list?page=<integer>&per_page=<integer>&flow_path=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flow_conversations",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "filter conversations by flow path",
+                                  "key": "flow_path",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"workspace_id\": \"<string>\",\n    \"flow_path\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"created_by\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"workspace_id\": \"<string>\",\n    \"flow_path\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"updated_at\": \"<dateTime>\",\n    \"created_by\": \"<string>\",\n    \"title\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:40.000Z",
+                          "updatedAt": "2026-07-28T03:30:40.000Z",
+                          "uid": "35240-4b5e126f-d25c-42f8-b03b-f753370232ec"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:40.000Z",
+                      "updatedAt": "2026-07-28T03:30:40.000Z",
+                      "uid": "35240-365b2aa0-1faf-41d4-b2ac-cc68a20750eb"
+                    }
+                  ],
+                  "id": "5f7191b3-c42d-45f6-8c0f-aae89978b810",
+                  "createdAt": "2026-07-28T03:30:40.000Z",
+                  "updatedAt": "2026-07-28T03:30:40.000Z",
+                  "uid": "35240-5f7191b3-c42d-45f6-8c0f-aae89978b810"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{conversation_id}",
+                      "item": [
+                        {
+                          "name": "Delete Flow Conversation",
+                          "id": "1afff24d-2a8c-47e4-ad38-bd1b7d8ab70a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flow_conversations/delete/:conversation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flow_conversations",
+                                "delete",
+                                ":conversation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9c1c4a49-f319-4639-b0b1-f874ce2c70d0",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9df8c69e-af16-492d-8c34-d02f303563fb",
+                                  "key": "conversation_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) conversation id"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "a2e47440-124d-46db-8d1c-0633a3c49953",
+                              "name": "flow conversation deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flow_conversations/delete/:conversation_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flow_conversations",
+                                    "delete",
+                                    ":conversation_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "conversation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:40.000Z",
+                              "updatedAt": "2026-07-28T03:30:40.000Z",
+                              "uid": "35240-a2e47440-124d-46db-8d1c-0633a3c49953"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:40.000Z",
+                          "updatedAt": "2026-07-28T03:30:40.000Z",
+                          "uid": "35240-1afff24d-2a8c-47e4-ad38-bd1b7d8ab70a"
+                        }
+                      ],
+                      "id": "1499d1e9-228a-4335-822b-3040a2734079",
+                      "createdAt": "2026-07-28T03:30:40.000Z",
+                      "updatedAt": "2026-07-28T03:30:40.000Z",
+                      "uid": "35240-1499d1e9-228a-4335-822b-3040a2734079"
+                    }
+                  ],
+                  "id": "eefcf2b5-c92a-4c03-a6ec-f2feee57b4fe",
+                  "createdAt": "2026-07-28T03:30:40.000Z",
+                  "updatedAt": "2026-07-28T03:30:40.000Z",
+                  "uid": "35240-eefcf2b5-c92a-4c03-a6ec-f2feee57b4fe"
+                },
+                {
+                  "name": "{conversation_id}",
+                  "item": [
+                    {
+                      "name": "messages",
+                      "item": [
+                        {
+                          "name": "List Conversation Messages",
+                          "id": "4a2caede-0802-47b1-8aa4-555b78157da4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flow_conversations/:conversation_id/messages?page=<integer>&per_page=<integer>&after_seq=<long>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flow_conversations",
+                                ":conversation_id",
+                                "messages"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Message sequence cursor to fetch only the messages after that cursor",
+                                  "key": "after_seq",
+                                  "value": "<long>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5ebd1a20-a549-4d9f-8318-a36920270d8b",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "5f941427-dde3-4ce1-950f-05c2576f0ca0",
+                                  "key": "conversation_id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) conversation id"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "47469428-ccac-42bc-b85d-7073ad2d3b49",
+                              "name": "conversation messages",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flow_conversations/:conversation_id/messages?page=<integer>&per_page=<integer>&after_seq=<long>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flow_conversations",
+                                    ":conversation_id",
+                                    "messages"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "which page to return (start at 1, default 1)",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "number of items to return for a given page (default 30, max 100)",
+                                      "key": "per_page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Message sequence cursor to fetch only the messages after that cursor",
+                                      "key": "after_seq",
+                                      "value": "<long>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "conversation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"conversation_id\": \"<uuid>\",\n    \"message_type\": \"user\",\n    \"content\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"created_seq\": \"<long>\",\n    \"job_id\": \"<uuid>\",\n    \"step_name\": \"<string>\",\n    \"success\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"conversation_id\": \"<uuid>\",\n    \"message_type\": \"assistant\",\n    \"content\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"created_seq\": \"<long>\",\n    \"job_id\": \"<uuid>\",\n    \"step_name\": \"<string>\",\n    \"success\": \"<boolean>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:30:40.000Z",
+                              "updatedAt": "2026-07-28T03:30:40.000Z",
+                              "uid": "35240-47469428-ccac-42bc-b85d-7073ad2d3b49"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:40.000Z",
+                          "updatedAt": "2026-07-28T03:30:40.000Z",
+                          "uid": "35240-4a2caede-0802-47b1-8aa4-555b78157da4"
+                        }
+                      ],
+                      "id": "c6f81cf0-da35-41a2-b574-dd8974d9c40e",
+                      "createdAt": "2026-07-28T03:30:40.000Z",
+                      "updatedAt": "2026-07-28T03:30:40.000Z",
+                      "uid": "35240-c6f81cf0-da35-41a2-b574-dd8974d9c40e"
+                    }
+                  ],
+                  "id": "e103baa9-4b45-42fa-94a2-451e0c284371",
+                  "createdAt": "2026-07-28T03:30:40.000Z",
+                  "updatedAt": "2026-07-28T03:30:40.000Z",
+                  "uid": "35240-e103baa9-4b45-42fa-94a2-451e0c284371"
+                }
+              ],
+              "id": "38000c56-2b8b-417e-bc52-6f952d287f2d",
+              "createdAt": "2026-07-28T03:30:40.000Z",
+              "updatedAt": "2026-07-28T03:30:40.000Z",
+              "uid": "35240-38000c56-2b8b-417e-bc52-6f952d287f2d"
+            }
+          ],
+          "id": "90836b4f-8532-4c11-bec1-050824e5f7cd",
+          "createdAt": "2026-07-28T03:30:40.000Z",
+          "updatedAt": "2026-07-28T03:30:40.000Z",
+          "uid": "35240-90836b4f-8532-4c11-bec1-050824e5f7cd"
+        }
+      ],
+      "id": "3c9dee54-ba48-44c0-b137-bdc3bcba6414",
+      "createdAt": "2026-07-28T03:30:40.000Z",
+      "updatedAt": "2026-07-28T03:30:40.000Z",
+      "uid": "35240-3c9dee54-ba48-44c0-b137-bdc3bcba6414"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

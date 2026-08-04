@@ -1,0 +1,2359 @@
+{
+  "info": {
+    "_postman_id": "32bc45be-5d9e-415a-9c40-1c25c843446e",
+    "name": "Windmill admin group API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:45.000Z",
+    "updatedAt": "2026-07-28T03:30:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-32bc45be-5d9e-415a-9c40-1c25c843446e"
+  },
+  "item": [
+    {
+      "name": "groups",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "List Instance Groups",
+              "id": "ef9bd890-011b-4ad8-9163-51cfed66bfb8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/list",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    "list"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "5015c881-d06c-4705-820f-9b5206d08127",
+                  "name": "instance group list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"instance_role\": \"superadmin\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"instance_role\": \"superadmin\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-5015c881-d06c-4705-820f-9b5206d08127"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-ef9bd890-011b-4ad8-9163-51cfed66bfb8"
+            }
+          ],
+          "id": "1163c0fe-4c3c-4f2b-9d03-93aea304d524",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-1163c0fe-4c3c-4f2b-9d03-93aea304d524"
+        },
+        {
+          "name": "list_with_workspaces",
+          "item": [
+            {
+              "name": "List Instance Groups with Workspace Information",
+              "id": "278d574b-da8a-4c87-b389-b432bf9d4a4e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/list_with_workspaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    "list_with_workspaces"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1d7df9c8-7d92-4fa1-9cfd-d60b7a372831",
+                  "name": "instance group list with workspaces",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/list_with_workspaces",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "list_with_workspaces"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"instance_role\": \"superadmin\",\n    \"workspaces\": [\n      {\n        \"workspace_id\": \"<string>\",\n        \"workspace_name\": \"<string>\",\n        \"role\": \"<string>\"\n      },\n      {\n        \"workspace_id\": \"<string>\",\n        \"workspace_name\": \"<string>\",\n        \"role\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"instance_role\": \"devops\",\n    \"workspaces\": [\n      {\n        \"workspace_id\": \"<string>\",\n        \"workspace_name\": \"<string>\",\n        \"role\": \"<string>\"\n      },\n      {\n        \"workspace_id\": \"<string>\",\n        \"workspace_name\": \"<string>\",\n        \"role\": \"<string>\"\n      }\n    ]\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-1d7df9c8-7d92-4fa1-9cfd-d60b7a372831"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-278d574b-da8a-4c87-b389-b432bf9d4a4e"
+            }
+          ],
+          "id": "ad0ff8c5-1f40-4153-bb0a-69929a013d80",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-ad0ff8c5-1f40-4153-bb0a-69929a013d80"
+        },
+        {
+          "name": "get",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Get Instance Group",
+                  "id": "e74e4b72-d532-4fa1-ae38-7da12f7033de",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/get/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "get",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7825685f-0c64-485c-a02f-5cb6646913d5",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "60c4b828-3877-4035-b4c2-2fd0c3d81199",
+                      "name": "instance group",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/get/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            "get",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"instance_role\": \"devops\",\n  \"workspaces\": [\n    {\n      \"workspace_id\": \"<string>\",\n      \"workspace_name\": \"<string>\",\n      \"role\": \"<string>\"\n    },\n    {\n      \"workspace_id\": \"<string>\",\n      \"workspace_name\": \"<string>\",\n      \"role\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-60c4b828-3877-4035-b4c2-2fd0c3d81199"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-e74e4b72-d532-4fa1-ae38-7da12f7033de"
+                }
+              ],
+              "id": "18fb5514-e1d4-49b6-87ce-96c291f96aea",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-18fb5514-e1d4-49b6-87ce-96c291f96aea"
+            }
+          ],
+          "id": "a35d1039-b013-4e17-aebc-3a4dc5f7fcf4",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-a35d1039-b013-4e17-aebc-3a4dc5f7fcf4"
+        },
+        {
+          "name": "create",
+          "item": [
+            {
+              "name": "Create Instance Group",
+              "id": "e0f3a67b-980e-445e-9e74-479a596d3e36",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups/create",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    "create"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b7f32a73-d985-4fc5-8e64-caaed38869df",
+                  "name": "instance group created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/create",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "create"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-b7f32a73-d985-4fc5-8e64-caaed38869df"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-e0f3a67b-980e-445e-9e74-479a596d3e36"
+            }
+          ],
+          "id": "fed00d33-69f8-47be-bc5d-096d4b81d64a",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-fed00d33-69f8-47be-bc5d-096d4b81d64a"
+        },
+        {
+          "name": "update",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Update Instance Group",
+                  "id": "1a67f983-fd50-4924-af30-a3715f90ef87",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"new_summary\": \"<string>\",\n  \"instance_role\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/update/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "update",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "00a5d58d-6d4a-4e56-93f9-d21a564cb45e",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a6de691d-f145-43b1-95b3-68b68b9011de",
+                      "name": "instance group updated",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"new_summary\": \"<string>\",\n  \"instance_role\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/update/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            "update",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-a6de691d-f145-43b1-95b3-68b68b9011de"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-1a67f983-fd50-4924-af30-a3715f90ef87"
+                }
+              ],
+              "id": "edcbce8d-0c33-43c5-b559-a32e1f108156",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-edcbce8d-0c33-43c5-b559-a32e1f108156"
+            }
+          ],
+          "id": "17ab89fb-7f48-46f4-9649-a8527ed4fabd",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-17ab89fb-7f48-46f4-9649-a8527ed4fabd"
+        },
+        {
+          "name": "delete",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Delete Instance Group",
+                  "id": "d4220862-5968-4749-873d-030117835066",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/delete/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "delete",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cf1a0b9b-0950-48f1-be92-36e61628076d",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "9f72ccdc-0e2c-47c8-88c9-b91c833713c8",
+                      "name": "instance group deleted",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/delete/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            "delete",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-9f72ccdc-0e2c-47c8-88c9-b91c833713c8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-d4220862-5968-4749-873d-030117835066"
+                }
+              ],
+              "id": "48a291c7-4884-4257-b226-dc94d7923751",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-48a291c7-4884-4257-b226-dc94d7923751"
+            }
+          ],
+          "id": "ecc62e19-d3cf-46e5-9f49-77f988520f6d",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-ecc62e19-d3cf-46e5-9f49-77f988520f6d"
+        },
+        {
+          "name": "adduser",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Add User to Instance Group",
+                  "id": "57ab897e-b0f9-4925-8777-3a134e03f2a4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/adduser/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "adduser",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ead837a1-75ae-4c80-beb6-82dfc51634a2",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "bec8ef8a-252a-4913-a784-b463d7ef7606",
+                      "name": "user added to instance group",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/adduser/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            "adduser",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-bec8ef8a-252a-4913-a784-b463d7ef7606"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-57ab897e-b0f9-4925-8777-3a134e03f2a4"
+                }
+              ],
+              "id": "32654769-f593-44c2-9eaa-47dcc66390c6",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-32654769-f593-44c2-9eaa-47dcc66390c6"
+            }
+          ],
+          "id": "432b4fab-bd0a-4e01-b87a-54f08171b484",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-432b4fab-bd0a-4e01-b87a-54f08171b484"
+        },
+        {
+          "name": "removeuser",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Remove User from Instance Group",
+                  "id": "adffb56c-72f3-46fa-b7aa-2340a154b723",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/removeuser/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "removeuser",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "a50beb1a-8e9f-48e0-9841-b2aa215fe286",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b71cba7f-4492-49f0-b6a5-b65c74c791f5",
+                      "name": "user removed from instance group",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"email\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/groups/removeuser/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "groups",
+                            "removeuser",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-b71cba7f-4492-49f0-b6a5-b65c74c791f5"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-adffb56c-72f3-46fa-b7aa-2340a154b723"
+                }
+              ],
+              "id": "2cb7056b-d90a-4727-85cb-0ea5e1d153dc",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-2cb7056b-d90a-4727-85cb-0ea5e1d153dc"
+            }
+          ],
+          "id": "c800881c-d793-4296-b07c-a2328acab7a4",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-c800881c-d793-4296-b07c-a2328acab7a4"
+        },
+        {
+          "name": "export",
+          "item": [
+            {
+              "name": "Export Instance Groups",
+              "id": "1a948b6c-94b2-4467-ba7b-2aba38158dca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups/export",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    "export"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "472a2c6c-e93a-43b4-b9f0-061dd9fcefa1",
+                  "name": "exported instance groups",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/export",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "export"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"scim_display_name\": \"<string>\",\n    \"external_id\": \"<string>\",\n    \"instance_role\": \"superadmin\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"scim_display_name\": \"<string>\",\n    \"external_id\": \"<string>\",\n    \"instance_role\": \"devops\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-472a2c6c-e93a-43b4-b9f0-061dd9fcefa1"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-1a948b6c-94b2-4467-ba7b-2aba38158dca"
+            }
+          ],
+          "id": "e53c92ac-fec8-4991-a44b-6891a9fe1b6a",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-e53c92ac-fec8-4991-a44b-6891a9fe1b6a"
+        },
+        {
+          "name": "overwrite",
+          "item": [
+            {
+              "name": "Overwrite Instance Groups",
+              "id": "e86f8745-e255-47be-87b0-1216ffa3b82c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"scim_display_name\": \"<string>\",\n    \"external_id\": \"<string>\",\n    \"instance_role\": \"superadmin\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"scim_display_name\": \"<string>\",\n    \"external_id\": \"<string>\",\n    \"instance_role\": \"devops\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups/overwrite",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups",
+                    "overwrite"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "39983208-840f-4d39-acb1-ca0510fd35b9",
+                  "name": "success message",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"scim_display_name\": \"<string>\",\n    \"external_id\": \"<string>\",\n    \"instance_role\": \"superadmin\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"emails\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"id\": \"<string>\",\n    \"scim_display_name\": \"<string>\",\n    \"external_id\": \"<string>\",\n    \"instance_role\": \"devops\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/groups/overwrite",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "groups",
+                        "overwrite"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-39983208-840f-4d39-acb1-ca0510fd35b9"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-e86f8745-e255-47be-87b0-1216ffa3b82c"
+            }
+          ],
+          "id": "34983b42-56e3-44b2-848e-bd0fec17ecd8",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-34983b42-56e3-44b2-848e-bd0fec17ecd8"
+        }
+      ],
+      "id": "054058c4-f293-4b24-b5f3-91143990cf97",
+      "createdAt": "2026-07-28T03:30:45.000Z",
+      "updatedAt": "2026-07-28T03:30:45.000Z",
+      "uid": "35240-054058c4-f293-4b24-b5f3-91143990cf97"
+    },
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "groups",
+              "item": [
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Groups",
+                      "id": "896cbcb9-b2f8-4dd0-ab82-a85eaa969e3a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/groups/list?page=<integer>&per_page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "groups",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "cccad762-767d-46cb-85db-673e4f78b901",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "46eea443-40ad-496a-8340-2bf363639f9c",
+                          "name": "group list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/list?page=<integer>&per_page=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_perms\": {\n      \"aliquipe_\": \"<boolean>\"\n    }\n  },\n  {\n    \"name\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"members\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_perms\": {\n      \"commodo32_\": \"<boolean>\",\n      \"enim_3\": \"<boolean>\",\n      \"cillum05\": \"<boolean>\",\n      \"animc\": \"<boolean>\"\n    }\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-46eea443-40ad-496a-8340-2bf363639f9c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-896cbcb9-b2f8-4dd0-ab82-a85eaa969e3a"
+                    }
+                  ],
+                  "id": "f5d23a10-e022-461e-b57b-01a3838e03ed",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-f5d23a10-e022-461e-b57b-01a3838e03ed"
+                },
+                {
+                  "name": "listnames",
+                  "item": [
+                    {
+                      "name": "List Group Names",
+                      "id": "86a46ce0-bf4c-44f6-8b69-248b182eb004",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/groups/listnames?only_member_of=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "groups",
+                            "listnames"
+                          ],
+                          "query": [
+                            {
+                              "description": "only list the groups the user is member of (default false)",
+                              "key": "only_member_of",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d9b2bbc6-1cfd-42a8-99df-9a6a3452700f",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "79807b0f-b1ff-4731-93fe-7a525ae5a877",
+                          "name": "group list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/listnames?only_member_of=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "listnames"
+                              ],
+                              "query": [
+                                {
+                                  "description": "only list the groups the user is member of (default false)",
+                                  "key": "only_member_of",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-79807b0f-b1ff-4731-93fe-7a525ae5a877"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-86a46ce0-bf4c-44f6-8b69-248b182eb004"
+                    }
+                  ],
+                  "id": "b63c48b4-5372-4fff-bd17-286bac2feb96",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-b63c48b4-5372-4fff-bd17-286bac2feb96"
+                },
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Group",
+                      "id": "deccce8e-8e32-4990-9508-d455844ada7a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/groups/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "groups",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1b0b27cb-b341-4201-8828-f720180a466f",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1860f4ee-47ff-4d41-8cb5-22a29ac7ae54",
+                          "name": "group created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-1860f4ee-47ff-4d41-8cb5-22a29ac7ae54"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-deccce8e-8e32-4990-9508-d455844ada7a"
+                    }
+                  ],
+                  "id": "cbfe7152-a311-4d1f-856c-5536734dfd13",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-cbfe7152-a311-4d1f-856c-5536734dfd13"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Update Group",
+                          "id": "bd6e739f-4193-4835-9cd0-f4a0765c5f8a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"summary\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/update/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "update",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2a513b88-b8a0-4b12-9ba5-5bd10b0bd37f",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "0c29dc84-a28a-43fa-bbe4-f16f790135ea",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "9d1de2bd-f791-4b42-8d7f-f8458c71242c",
+                              "name": "group updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"summary\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/groups/update/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "groups",
+                                    "update",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:45.000Z",
+                              "updatedAt": "2026-07-28T03:30:45.000Z",
+                              "uid": "35240-9d1de2bd-f791-4b42-8d7f-f8458c71242c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-bd6e739f-4193-4835-9cd0-f4a0765c5f8a"
+                        }
+                      ],
+                      "id": "6e347bb6-eb09-4183-a5bc-39c4378a60c6",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-6e347bb6-eb09-4183-a5bc-39c4378a60c6"
+                    }
+                  ],
+                  "id": "a0a8d364-228e-4a31-b309-38ef951eda05",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-a0a8d364-228e-4a31-b309-38ef951eda05"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Delete Group",
+                          "id": "5e5f5406-00bf-4d83-bc59-016abbb7903c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/delete/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "delete",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "18f36bb4-d48e-464c-a22d-2a472cd6274e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "ceef261f-62ca-42f5-ac34-72e748fe6566",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "71be25fc-207a-48e5-a834-8edc17490d0a",
+                              "name": "group deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/groups/delete/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "groups",
+                                    "delete",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:45.000Z",
+                              "updatedAt": "2026-07-28T03:30:45.000Z",
+                              "uid": "35240-71be25fc-207a-48e5-a834-8edc17490d0a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-5e5f5406-00bf-4d83-bc59-016abbb7903c"
+                        }
+                      ],
+                      "id": "32baa6d3-6786-4a57-bf72-94de854ad879",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-32baa6d3-6786-4a57-bf72-94de854ad879"
+                    }
+                  ],
+                  "id": "0ab28833-0640-43af-b850-4a533fca155f",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-0ab28833-0640-43af-b850-4a533fca155f"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Get Group",
+                          "id": "4d30f787-86ee-4974-b948-bdf87b598b13",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/get/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "get",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b5c9bf4e-4511-42c0-870b-72a784b63a47",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "2cdc8f84-0584-4299-8997-53274336fbc0",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6c254e5b-36f2-4649-8f95-3fbb40b56068",
+                              "name": "group",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/groups/get/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "groups",
+                                    "get",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"members\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_perms\": {\n    \"eaac\": \"<boolean>\",\n    \"sed70\": \"<boolean>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:30:45.000Z",
+                              "updatedAt": "2026-07-28T03:30:45.000Z",
+                              "uid": "35240-6c254e5b-36f2-4649-8f95-3fbb40b56068"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-4d30f787-86ee-4974-b948-bdf87b598b13"
+                        }
+                      ],
+                      "id": "19ccf938-bc4e-4f7c-b11f-a4f6faf36f39",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-19ccf938-bc4e-4f7c-b11f-a4f6faf36f39"
+                    }
+                  ],
+                  "id": "9a5f1038-e2d2-4f1e-9a96-32d960c0beb8",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-9a5f1038-e2d2-4f1e-9a96-32d960c0beb8"
+                },
+                {
+                  "name": "adduser",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Add User to Group",
+                          "id": "f1a940bf-e00b-4389-87a5-d19ec5957499",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/adduser/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "adduser",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7c09eb3d-d468-42f5-9ee3-9a41cc885b67",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "ff1ad936-2cc2-4d64-bade-a3aed2eb74c8",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "82e26e52-7d46-4f69-956a-894ede0e3bba",
+                              "name": "user added to group",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"username\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/groups/adduser/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "groups",
+                                    "adduser",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:45.000Z",
+                              "updatedAt": "2026-07-28T03:30:45.000Z",
+                              "uid": "35240-82e26e52-7d46-4f69-956a-894ede0e3bba"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-f1a940bf-e00b-4389-87a5-d19ec5957499"
+                        }
+                      ],
+                      "id": "2e363e41-d02a-44f2-90d8-8f52532f8d19",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-2e363e41-d02a-44f2-90d8-8f52532f8d19"
+                    }
+                  ],
+                  "id": "8db243ce-adb3-4c4f-b166-e97869c82339",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-8db243ce-adb3-4c4f-b166-e97869c82339"
+                },
+                {
+                  "name": "removeuser",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Remove User to Group",
+                          "id": "1e915ec4-f198-4bf0-9b65-a26ea0e19869",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"username\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups/removeuser/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups",
+                                "removeuser",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d0488040-ba3c-41eb-9917-555ac0d2fd69",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "b02bbb44-e532-4e99-98e2-44ba4e4391ea",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d05158d5-2746-40c4-b719-ac5e085b5ce9",
+                              "name": "user removed from group",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"username\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/groups/removeuser/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "groups",
+                                    "removeuser",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:45.000Z",
+                              "updatedAt": "2026-07-28T03:30:45.000Z",
+                              "uid": "35240-d05158d5-2746-40c4-b719-ac5e085b5ce9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-1e915ec4-f198-4bf0-9b65-a26ea0e19869"
+                        }
+                      ],
+                      "id": "696c60e5-3661-4628-ad5a-9b1664ca0f07",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-696c60e5-3661-4628-ad5a-9b1664ca0f07"
+                    }
+                  ],
+                  "id": "019270b5-a63f-4903-9ecb-75370c142acc",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-019270b5-a63f-4903-9ecb-75370c142acc"
+                }
+              ],
+              "id": "b45f3f09-9e96-4686-8d29-bbb208ff5516",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-b45f3f09-9e96-4686-8d29-bbb208ff5516"
+            },
+            {
+              "name": "groups_history",
+              "item": [
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Get Group Permission History",
+                          "id": "8dbf6934-799e-46ae-8ca8-6f65dc98d6b1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/groups_history/get/:name?page=<integer>&per_page=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "groups_history",
+                                "get",
+                                ":name"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3f3dd69f-9530-4479-ac45-9d66b5d92ec2",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "0c527d59-6783-48c9-885b-9ce0b3e74e1b",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6fd6de67-3ae9-4961-99bb-ddeb1ac463ae",
+                              "name": "group permission history",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/groups_history/get/:name?page=<integer>&per_page=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "groups_history",
+                                    "get",
+                                    ":name"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "which page to return (start at 1, default 1)",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "number of items to return for a given page (default 30, max 100)",
+                                      "key": "per_page",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"changed_by\": \"<string>\",\n    \"changed_at\": \"<dateTime>\",\n    \"change_type\": \"<string>\",\n    \"member_affected\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"changed_by\": \"<string>\",\n    \"changed_at\": \"<dateTime>\",\n    \"change_type\": \"<string>\",\n    \"member_affected\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:30:45.000Z",
+                              "updatedAt": "2026-07-28T03:30:45.000Z",
+                              "uid": "35240-6fd6de67-3ae9-4961-99bb-ddeb1ac463ae"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:45.000Z",
+                          "updatedAt": "2026-07-28T03:30:45.000Z",
+                          "uid": "35240-8dbf6934-799e-46ae-8ca8-6f65dc98d6b1"
+                        }
+                      ],
+                      "id": "60c8c677-7ad6-431b-99d0-77c2925f9e17",
+                      "createdAt": "2026-07-28T03:30:45.000Z",
+                      "updatedAt": "2026-07-28T03:30:45.000Z",
+                      "uid": "35240-60c8c677-7ad6-431b-99d0-77c2925f9e17"
+                    }
+                  ],
+                  "id": "5a52b0aa-566f-4d68-b0c3-8702a7224857",
+                  "createdAt": "2026-07-28T03:30:45.000Z",
+                  "updatedAt": "2026-07-28T03:30:45.000Z",
+                  "uid": "35240-5a52b0aa-566f-4d68-b0c3-8702a7224857"
+                }
+              ],
+              "id": "5fd8132a-8a80-4024-a391-f73468d03b24",
+              "createdAt": "2026-07-28T03:30:45.000Z",
+              "updatedAt": "2026-07-28T03:30:45.000Z",
+              "uid": "35240-5fd8132a-8a80-4024-a391-f73468d03b24"
+            }
+          ],
+          "id": "02c99b11-cc18-4619-b43a-c6670a7d7196",
+          "createdAt": "2026-07-28T03:30:45.000Z",
+          "updatedAt": "2026-07-28T03:30:45.000Z",
+          "uid": "35240-02c99b11-cc18-4619-b43a-c6670a7d7196"
+        }
+      ],
+      "id": "d03dbf49-4405-49f9-8521-339d46d58839",
+      "createdAt": "2026-07-28T03:30:45.000Z",
+      "updatedAt": "2026-07-28T03:30:45.000Z",
+      "uid": "35240-d03dbf49-4405-49f9-8521-339d46d58839"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

@@ -1,0 +1,1080 @@
+{
+  "info": {
+    "_postman_id": "b450bf2a-ff46-4a1e-8576-e351cecd7b3d",
+    "name": "Windmill admin workspace_integration API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:59.000Z",
+    "updatedAt": "2026-07-28T03:31:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b450bf2a-ff46-4a1e-8576-e351cecd7b3d"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "native_triggers",
+              "item": [
+                {
+                  "name": "integrations",
+                  "item": [
+                    {
+                      "name": "list",
+                      "item": [
+                        {
+                          "name": "List Available Native Trigger Services",
+                          "id": "9a5ce852-f3e9-447e-8918-bbd52b1219e8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/list",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "native_triggers",
+                                "integrations",
+                                "list"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7c94c71b-a795-4d99-8356-6dd96222998e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "890de7a7-0869-4501-938e-93db5a93ee36",
+                              "name": "native trigger services list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/list",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    "list"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"service_name\": \"google\",\n    \"oauth_data\": {\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"base_url\": \"<uri>\",\n      \"redirect_uri\": \"<uri>\"\n    },\n    \"resource_path\": \"<string>\"\n  },\n  {\n    \"service_name\": \"github\",\n    \"oauth_data\": {\n      \"client_id\": \"<string>\",\n      \"client_secret\": \"<string>\",\n      \"base_url\": \"<uri>\",\n      \"redirect_uri\": \"<uri>\"\n    },\n    \"resource_path\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-890de7a7-0869-4501-938e-93db5a93ee36"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-9a5ce852-f3e9-447e-8918-bbd52b1219e8"
+                        }
+                      ],
+                      "id": "c572c999-acc3-48ce-95a5-713a3360e0a5",
+                      "createdAt": "2026-07-28T03:31:59.000Z",
+                      "updatedAt": "2026-07-28T03:31:59.000Z",
+                      "uid": "35240-c572c999-acc3-48ce-95a5-713a3360e0a5"
+                    },
+                    {
+                      "name": "{service_name}",
+                      "item": [
+                        {
+                          "name": "exists",
+                          "item": [
+                            {
+                              "name": "Check if Integrations for a Particular Service Exists",
+                              "id": "e537d72c-4ca4-4177-a4e1-0030395ce1ec",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/exists",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "exists"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "39f871a0-5ce6-4b7c-b793-f574e84f95c5",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "6c0b5204-dbff-4c15-9e23-0bc3328086c3",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "0730d3f0-8dd3-4c42-8a53-ec9541c5b2e3",
+                                  "name": "integration exists",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/exists",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "exists"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<boolean>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-0730d3f0-8dd3-4c42-8a53-ec9541c5b2e3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-e537d72c-4ca4-4177-a4e1-0030395ce1ec"
+                            }
+                          ],
+                          "id": "7496496a-7611-42e6-a312-ce72e40b8cc4",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-7496496a-7611-42e6-a312-ce72e40b8cc4"
+                        },
+                        {
+                          "name": "create",
+                          "item": [
+                            {
+                              "name": "Create Native Trigger Service",
+                              "id": "f90de50f-1f47-4fef-a518-6d37b7a0f771",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"base_url\": \"<uri>\",\n  \"redirect_uri\": \"<uri>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/create",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "create"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "95b060c9-c37b-4f18-9b12-2120d194ac6a",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "3592cd67-abf1-45db-ab1b-a43512ee6e0f",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "c68a752b-38d7-4821-a0e1-dd866a235aa3",
+                                  "name": "native trigger service created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"base_url\": \"<uri>\",\n  \"redirect_uri\": \"<uri>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/create",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "create"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-c68a752b-38d7-4821-a0e1-dd866a235aa3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-f90de50f-1f47-4fef-a518-6d37b7a0f771"
+                            }
+                          ],
+                          "id": "3a612cf7-0e23-4a29-b000-4bc5fe2de094",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-3a612cf7-0e23-4a29-b000-4bc5fe2de094"
+                        },
+                        {
+                          "name": "generate_connect_url",
+                          "item": [
+                            {
+                              "name": "Generate Connect Url for Native Trigger Service",
+                              "id": "d70b75f7-89d2-4542-8b84-205b1f1cc599",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"redirect_uri\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/generate_connect_url",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "generate_connect_url"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "4ea6ead6-4edf-4093-969c-7890bfeedd05",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "5af16f42-af49-4346-b7a8-c8349809dade",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "1084ca18-15d7-4e6f-8eaa-b0df1a7fa547",
+                                  "name": "native trigger service connect url",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"redirect_uri\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/generate_connect_url",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "generate_connect_url"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-1084ca18-15d7-4e6f-8eaa-b0df1a7fa547"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-d70b75f7-89d2-4542-8b84-205b1f1cc599"
+                            }
+                          ],
+                          "id": "780d7fd3-857e-4bf5-bf24-746d7cd1610c",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-780d7fd3-857e-4bf5-bf24-746d7cd1610c"
+                        },
+                        {
+                          "name": "instance_sharing_available",
+                          "item": [
+                            {
+                              "name": "Check if Instance-level Credential Sharing is Available for a Service",
+                              "id": "8725b606-aa14-41d0-abd0-483e27a42c05",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/instance_sharing_available",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "instance_sharing_available"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "e6832df5-910e-4e51-995a-8c81003ec4d5",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "bb321e13-8c63-4168-bef7-422f20d2c4eb",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "bd085bf4-fa21-48f2-b3b8-29f6c9527a6a",
+                                  "name": "whether instance sharing is available",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/instance_sharing_available",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "instance_sharing_available"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<boolean>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-bd085bf4-fa21-48f2-b3b8-29f6c9527a6a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-8725b606-aa14-41d0-abd0-483e27a42c05"
+                            }
+                          ],
+                          "id": "d04233ac-f3b0-41c9-bbea-6896dcef6cf5",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-d04233ac-f3b0-41c9-bbea-6896dcef6cf5"
+                        },
+                        {
+                          "name": "generate_instance_connect_url",
+                          "item": [
+                            {
+                              "name": "Generate Connect Url Using Instance-level Credentials",
+                              "id": "f587224a-5915-4af2-99ec-36c5e5c581f4",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"redirect_uri\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/generate_instance_connect_url",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "generate_instance_connect_url"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "62c7961d-9a5d-4206-8e6e-2d5199abcee1",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "fe9789bf-c396-48ec-a8e9-fc8a7f1f5320",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "986acf05-41cc-4d73-96ec-1fb31b0288f6",
+                                  "name": "authorization URL using instance credentials",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"redirect_uri\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/generate_instance_connect_url",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "generate_instance_connect_url"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-986acf05-41cc-4d73-96ec-1fb31b0288f6"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-f587224a-5915-4af2-99ec-36c5e5c581f4"
+                            }
+                          ],
+                          "id": "104a9853-eef1-4119-ba5c-e23d2441ddd5",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-104a9853-eef1-4119-ba5c-e23d2441ddd5"
+                        },
+                        {
+                          "name": "delete",
+                          "item": [
+                            {
+                              "name": "Delete Native Trigger Service",
+                              "id": "0afaf4a4-04e0-41f2-80eb-b77a477fbc07",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "delete"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2e70564f-377c-4e44-9883-04f7abe0715b",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "456d7161-fd55-4599-99e0-bb568f0bf241",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "9ef1c4a9-d56b-4adf-81d8-af30096397d7",
+                                  "name": "native trigger service deleted",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/delete",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "delete"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-9ef1c4a9-d56b-4adf-81d8-af30096397d7"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-0afaf4a4-04e0-41f2-80eb-b77a477fbc07"
+                            }
+                          ],
+                          "id": "57bacb89-9a2c-4348-b5a3-718254d0aaa8",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-57bacb89-9a2c-4348-b5a3-718254d0aaa8"
+                        },
+                        {
+                          "name": "callback",
+                          "item": [
+                            {
+                              "name": "Native Trigger Service Oauth Callback",
+                              "id": "200209db-2d46-480a-972b-d219c8016204",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"resource_path\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/callback",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "native_triggers",
+                                    "integrations",
+                                    ":service_name",
+                                    "callback"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "c53aa607-8899-44f8-bfe2-3ece366cae86",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "80b5fbca-3e73-4139-9c8a-d34ce2f3edfb",
+                                      "key": "service_name",
+                                      "value": "github",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "9d65700b-5d73-4be1-8037-a6f72e525a38",
+                                  "name": "native trigger service oauth completed",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"code\": \"<string>\",\n  \"state\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"resource_path\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/native_triggers/integrations/:service_name/callback",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "native_triggers",
+                                        "integrations",
+                                        ":service_name",
+                                        "callback"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "service_name"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:59.000Z",
+                                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                                  "uid": "35240-9d65700b-5d73-4be1-8037-a6f72e525a38"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:59.000Z",
+                              "updatedAt": "2026-07-28T03:31:59.000Z",
+                              "uid": "35240-200209db-2d46-480a-972b-d219c8016204"
+                            }
+                          ],
+                          "id": "98bf37f2-dade-4955-9678-5c4130bc01a3",
+                          "createdAt": "2026-07-28T03:31:59.000Z",
+                          "updatedAt": "2026-07-28T03:31:59.000Z",
+                          "uid": "35240-98bf37f2-dade-4955-9678-5c4130bc01a3"
+                        }
+                      ],
+                      "id": "b7063bd0-eb5c-4486-8660-51edafaebd9e",
+                      "createdAt": "2026-07-28T03:31:59.000Z",
+                      "updatedAt": "2026-07-28T03:31:59.000Z",
+                      "uid": "35240-b7063bd0-eb5c-4486-8660-51edafaebd9e"
+                    }
+                  ],
+                  "id": "c3b6f169-3d49-40fd-95d3-9ec8e028d2ba",
+                  "createdAt": "2026-07-28T03:31:59.000Z",
+                  "updatedAt": "2026-07-28T03:31:59.000Z",
+                  "uid": "35240-c3b6f169-3d49-40fd-95d3-9ec8e028d2ba"
+                }
+              ],
+              "id": "65593690-6666-4f88-9c40-86b74604130a",
+              "createdAt": "2026-07-28T03:31:59.000Z",
+              "updatedAt": "2026-07-28T03:31:59.000Z",
+              "uid": "35240-65593690-6666-4f88-9c40-86b74604130a"
+            }
+          ],
+          "id": "9eda2287-463e-4a07-b4a1-21c016a7fdb1",
+          "createdAt": "2026-07-28T03:31:59.000Z",
+          "updatedAt": "2026-07-28T03:31:59.000Z",
+          "uid": "35240-9eda2287-463e-4a07-b4a1-21c016a7fdb1"
+        }
+      ],
+      "id": "583b795a-1fd6-4c0c-8c4a-06899c5cde6b",
+      "createdAt": "2026-07-28T03:31:59.000Z",
+      "updatedAt": "2026-07-28T03:31:59.000Z",
+      "uid": "35240-583b795a-1fd6-4c0c-8c4a-06899c5cde6b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

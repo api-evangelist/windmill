@@ -1,0 +1,391 @@
+{
+  "info": {
+    "_postman_id": "faa8e5c5-019b-495f-a1c4-1240387f8f05",
+    "name": "Windmill admin audit API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:25.000Z",
+    "updatedAt": "2026-07-28T03:30:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-faa8e5c5-019b-495f-a1c4-1240387f8f05"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "audit",
+              "item": [
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Get Audit Log (requires Admin Privilege)",
+                          "id": "cde3f586-980f-49e1-9bad-4d060b10a478",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/audit/get/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "audit",
+                                "get",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "12ae58d8-1da0-4d05-9cea-5eb1f36b1b93",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "95b4e0c7-70b7-4c66-b419-8d7355d4dc62",
+                                  "key": "id",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "3e6f0d7d-a9c5-4f2f-8a5c-28a64deba74d",
+                              "name": "an audit log",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/audit/get/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "audit",
+                                    "get",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"workspace_id\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"timestamp\": \"<dateTime>\",\n  \"username\": \"<string>\",\n  \"operation\": \"workspaces.edit_error_handler\",\n  \"action_kind\": \"Delete\",\n  \"resource\": \"<string>\",\n  \"parameters\": {},\n  \"span\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:30:26.000Z",
+                              "updatedAt": "2026-07-28T03:30:26.000Z",
+                              "uid": "35240-3e6f0d7d-a9c5-4f2f-8a5c-28a64deba74d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:26.000Z",
+                          "updatedAt": "2026-07-28T03:30:26.000Z",
+                          "uid": "35240-cde3f586-980f-49e1-9bad-4d060b10a478"
+                        }
+                      ],
+                      "id": "cbbdac83-8ccc-4bc4-b15d-b3fdc4820957",
+                      "createdAt": "2026-07-28T03:30:26.000Z",
+                      "updatedAt": "2026-07-28T03:30:26.000Z",
+                      "uid": "35240-cbbdac83-8ccc-4bc4-b15d-b3fdc4820957"
+                    }
+                  ],
+                  "id": "3318083a-b82d-4b7a-995d-454771b0757f",
+                  "createdAt": "2026-07-28T03:30:26.000Z",
+                  "updatedAt": "2026-07-28T03:30:26.000Z",
+                  "uid": "35240-3318083a-b82d-4b7a-995d-454771b0757f"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Audit Logs (requires Admin Privilege)",
+                      "id": "b3a43691-1d34-4548-85e5-b1cb9fa85077",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/audit/list?page=<integer>&per_page=<integer>&before=<dateTime>&after=<dateTime>&username=<string>&operation=<string>&operations=<string>&exclude_operations=<string>&resource=<string>&action_kind=Delete&all_workspaces=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "audit",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "filter on started before (inclusive) timestamp",
+                              "key": "before",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "filter on created after (exclusive) timestamp",
+                              "key": "after",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "filter on exact username of user",
+                              "key": "username",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "filter on exact or prefix name of operation",
+                              "key": "operation",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "comma separated list of exact operations to include",
+                              "key": "operations",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "comma separated list of operations to exclude",
+                              "key": "exclude_operations",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "filter on exact or prefix name of resource",
+                              "key": "resource",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "filter on type of operation",
+                              "key": "action_kind",
+                              "value": "Delete"
+                            },
+                            {
+                              "description": "get audit logs for all workspaces",
+                              "key": "all_workspaces",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5db79c9a-5d32-4bc2-b3e6-7c99c47a6315",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e8d1d88d-2240-42ed-8a6c-c8212aab74e7",
+                          "name": "a list of audit logs",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/audit/list?page=<integer>&per_page=<integer>&before=<dateTime>&after=<dateTime>&username=<string>&operation=<string>&operations=<string>&exclude_operations=<string>&resource=<string>&action_kind=Delete&all_workspaces=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "audit",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "filter on started before (inclusive) timestamp",
+                                  "key": "before",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "filter on created after (exclusive) timestamp",
+                                  "key": "after",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "description": "filter on exact username of user",
+                                  "key": "username",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "filter on exact or prefix name of operation",
+                                  "key": "operation",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "comma separated list of exact operations to include",
+                                  "key": "operations",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "comma separated list of operations to exclude",
+                                  "key": "exclude_operations",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "filter on exact or prefix name of resource",
+                                  "key": "resource",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "filter on type of operation",
+                                  "key": "action_kind",
+                                  "value": "Delete"
+                                },
+                                {
+                                  "description": "get audit logs for all workspaces",
+                                  "key": "all_workspaces",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"workspace_id\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"timestamp\": \"<dateTime>\",\n    \"username\": \"<string>\",\n    \"operation\": \"users.delete\",\n    \"action_kind\": \"Delete\",\n    \"resource\": \"<string>\",\n    \"parameters\": {},\n    \"span\": \"<string>\"\n  },\n  {\n    \"workspace_id\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"timestamp\": \"<dateTime>\",\n    \"username\": \"<string>\",\n    \"operation\": \"variables.update\",\n    \"action_kind\": \"Created\",\n    \"resource\": \"<string>\",\n    \"parameters\": {},\n    \"span\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:26.000Z",
+                          "updatedAt": "2026-07-28T03:30:26.000Z",
+                          "uid": "35240-e8d1d88d-2240-42ed-8a6c-c8212aab74e7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:26.000Z",
+                      "updatedAt": "2026-07-28T03:30:26.000Z",
+                      "uid": "35240-b3a43691-1d34-4548-85e5-b1cb9fa85077"
+                    }
+                  ],
+                  "id": "6ef782e9-395e-4a05-ab12-a21741f706eb",
+                  "createdAt": "2026-07-28T03:30:26.000Z",
+                  "updatedAt": "2026-07-28T03:30:26.000Z",
+                  "uid": "35240-6ef782e9-395e-4a05-ab12-a21741f706eb"
+                }
+              ],
+              "id": "b4b923e4-d1fd-4c54-a60b-18f80b5e4d9c",
+              "createdAt": "2026-07-28T03:30:26.000Z",
+              "updatedAt": "2026-07-28T03:30:26.000Z",
+              "uid": "35240-b4b923e4-d1fd-4c54-a60b-18f80b5e4d9c"
+            }
+          ],
+          "id": "edcf9748-301a-4f46-ab78-32adc748dacd",
+          "createdAt": "2026-07-28T03:30:26.000Z",
+          "updatedAt": "2026-07-28T03:30:26.000Z",
+          "uid": "35240-edcf9748-301a-4f46-ab78-32adc748dacd"
+        }
+      ],
+      "id": "ffe3acfd-f43c-4ac2-981e-99d334efed4f",
+      "createdAt": "2026-07-28T03:30:26.000Z",
+      "updatedAt": "2026-07-28T03:30:26.000Z",
+      "uid": "35240-ffe3acfd-f43c-4ac2-981e-99d334efed4f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

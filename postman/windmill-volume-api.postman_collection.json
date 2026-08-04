@@ -1,0 +1,505 @@
+{
+  "info": {
+    "_postman_id": "f1f67f75-3c08-44b6-9e57-65a744341834",
+    "name": "Windmill admin volume API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:46.000Z",
+    "updatedAt": "2026-07-28T03:31:46.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f1f67f75-3c08-44b6-9e57-65a744341834"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "volumes",
+              "item": [
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List All Volumes in the Workspace",
+                      "id": "2607ed61-7876-4c75-b3e0-3a3076578b1e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/volumes/list",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "volumes",
+                            "list"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4192b77e-4a59-4a77-949d-e3090a879c8b",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1daa43d5-984e-4fb9-a51e-cbd094c99393",
+                          "name": "list of volumes",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/volumes/list",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "volumes",
+                                "list"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"name\": \"<string>\",\n    \"size_bytes\": \"<long>\",\n    \"file_count\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"created_by\": \"<string>\",\n    \"updated_at\": \"<dateTime>\",\n    \"last_used_at\": \"<dateTime>\",\n    \"extra_perms\": {\n      \"consequat_2\": false,\n      \"irure9cc\": -23085246.74963577\n    }\n  },\n  {\n    \"name\": \"<string>\",\n    \"size_bytes\": \"<long>\",\n    \"file_count\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"created_by\": \"<string>\",\n    \"updated_at\": \"<dateTime>\",\n    \"last_used_at\": \"<dateTime>\",\n    \"extra_perms\": {\n      \"labore_a0\": \"voluptate ad laboris\"\n    }\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:46.000Z",
+                          "updatedAt": "2026-07-28T03:31:46.000Z",
+                          "uid": "35240-1daa43d5-984e-4fb9-a51e-cbd094c99393"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:46.000Z",
+                      "updatedAt": "2026-07-28T03:31:46.000Z",
+                      "uid": "35240-2607ed61-7876-4c75-b3e0-3a3076578b1e"
+                    }
+                  ],
+                  "id": "48910075-2241-41c0-860c-2013cb59cfcb",
+                  "createdAt": "2026-07-28T03:31:46.000Z",
+                  "updatedAt": "2026-07-28T03:31:46.000Z",
+                  "uid": "35240-48910075-2241-41c0-860c-2013cb59cfcb"
+                },
+                {
+                  "name": "storage",
+                  "item": [
+                    {
+                      "name": "Get the Volume Storage Name (secondary Storage) or Null for Primary",
+                      "id": "b5792845-3e8f-4968-a56c-bac791394452",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/volumes/storage",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "volumes",
+                            "storage"
+                          ],
+                          "variable": [
+                            {
+                              "id": "de083323-f06a-4d5d-8d5e-c7a35deeb3a3",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "82b8035a-4206-475c-b436-e3796a6fba9f",
+                          "name": "volume storage name or null",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/volumes/storage",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "volumes",
+                                "storage"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:46.000Z",
+                          "updatedAt": "2026-07-28T03:31:46.000Z",
+                          "uid": "35240-82b8035a-4206-475c-b436-e3796a6fba9f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:46.000Z",
+                      "updatedAt": "2026-07-28T03:31:46.000Z",
+                      "uid": "35240-b5792845-3e8f-4968-a56c-bac791394452"
+                    }
+                  ],
+                  "id": "f818e075-9ce0-4208-a3a8-5a0e0a0490c7",
+                  "createdAt": "2026-07-28T03:31:46.000Z",
+                  "updatedAt": "2026-07-28T03:31:46.000Z",
+                  "uid": "35240-f818e075-9ce0-4208-a3a8-5a0e0a0490c7"
+                },
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create a New Volume",
+                      "id": "8c02c318-e914-4737-942c-148e85f4da72",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/volumes/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "volumes",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3bf59e2c-bebb-4798-a3fa-b0241e6af274",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "32c6e812-8ee2-49c2-9a42-a8ee62fc37d3",
+                          "name": "volume created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/volumes/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "volumes",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:46.000Z",
+                          "updatedAt": "2026-07-28T03:31:46.000Z",
+                          "uid": "35240-32c6e812-8ee2-49c2-9a42-a8ee62fc37d3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:46.000Z",
+                      "updatedAt": "2026-07-28T03:31:46.000Z",
+                      "uid": "35240-8c02c318-e914-4737-942c-148e85f4da72"
+                    }
+                  ],
+                  "id": "008ec1f0-bbf9-4d14-9bd3-8ece4f662195",
+                  "createdAt": "2026-07-28T03:31:46.000Z",
+                  "updatedAt": "2026-07-28T03:31:46.000Z",
+                  "uid": "35240-008ec1f0-bbf9-4d14-9bd3-8ece4f662195"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Delete a Volume (admin Only)",
+                          "id": "27783620-6114-4034-a79d-8a402665def5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/volumes/delete/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "volumes",
+                                "delete",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b1b6a48c-8459-45d6-9dde-b2f439433f3d",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "c6decb7a-79da-4e4a-963f-57cfbc89e86b",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b8f9c1ca-7491-4b14-af87-507c3d881b59",
+                              "name": "volume deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/volumes/delete/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "volumes",
+                                    "delete",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:46.000Z",
+                              "updatedAt": "2026-07-28T03:31:46.000Z",
+                              "uid": "35240-b8f9c1ca-7491-4b14-af87-507c3d881b59"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:46.000Z",
+                          "updatedAt": "2026-07-28T03:31:46.000Z",
+                          "uid": "35240-27783620-6114-4034-a79d-8a402665def5"
+                        }
+                      ],
+                      "id": "39596bcd-57c9-4775-87f0-58c2461c4676",
+                      "createdAt": "2026-07-28T03:31:46.000Z",
+                      "updatedAt": "2026-07-28T03:31:46.000Z",
+                      "uid": "35240-39596bcd-57c9-4775-87f0-58c2461c4676"
+                    }
+                  ],
+                  "id": "935f3c58-22fc-4edd-a202-d858ff837876",
+                  "createdAt": "2026-07-28T03:31:46.000Z",
+                  "updatedAt": "2026-07-28T03:31:46.000Z",
+                  "uid": "35240-935f3c58-22fc-4edd-a202-d858ff837876"
+                }
+              ],
+              "id": "102217c3-7fdc-4e31-bf5b-5e1282c9c0c6",
+              "createdAt": "2026-07-28T03:31:46.000Z",
+              "updatedAt": "2026-07-28T03:31:46.000Z",
+              "uid": "35240-102217c3-7fdc-4e31-bf5b-5e1282c9c0c6"
+            }
+          ],
+          "id": "65cdf1df-8050-4b8a-9aae-e398fb6cd467",
+          "createdAt": "2026-07-28T03:31:46.000Z",
+          "updatedAt": "2026-07-28T03:31:46.000Z",
+          "uid": "35240-65cdf1df-8050-4b8a-9aae-e398fb6cd467"
+        }
+      ],
+      "id": "1cad2129-8003-4d95-a7c1-d413309fc390",
+      "createdAt": "2026-07-28T03:31:46.000Z",
+      "updatedAt": "2026-07-28T03:31:46.000Z",
+      "uid": "35240-1cad2129-8003-4d95-a7c1-d413309fc390"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

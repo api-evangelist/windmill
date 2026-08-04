@@ -1,0 +1,1006 @@
+{
+  "info": {
+    "_postman_id": "5ba1c3d6-f380-4a29-a0bf-1d5c33b4b836",
+    "name": "Windmill admin capture API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:27.000Z",
+    "updatedAt": "2026-07-28T03:30:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5ba1c3d6-f380-4a29-a0bf-1d5c33b4b836"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "capture",
+              "item": [
+                {
+                  "name": "set_config",
+                  "item": [
+                    {
+                      "name": "Set Capture Config",
+                      "id": "5f326e2a-04d5-4321-b560-e72268f72103",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"trigger_kind\": \"gcp\",\n  \"path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"trigger_config\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/capture/set_config",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "capture",
+                            "set_config"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fc60984a-1466-44df-b2e7-a6ce03370b86",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "19b8c02f-ef98-4a36-a2b3-57640dfd0347",
+                          "name": "capture config set",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"trigger_kind\": \"gcp\",\n  \"path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"trigger_config\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/capture/set_config",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "capture",
+                                "set_config"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-19b8c02f-ef98-4a36-a2b3-57640dfd0347"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-5f326e2a-04d5-4321-b560-e72268f72103"
+                    }
+                  ],
+                  "id": "c7ae30cf-a763-4a20-b32a-bd8de0b8ebb2",
+                  "createdAt": "2026-07-28T03:30:28.000Z",
+                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                  "uid": "35240-c7ae30cf-a763-4a20-b32a-bd8de0b8ebb2"
+                },
+                {
+                  "name": "ping_config",
+                  "item": [
+                    {
+                      "name": "{trigger_kind}",
+                      "item": [
+                        {
+                          "name": "{runnable_kind}",
+                          "item": [
+                            {
+                              "name": "{path}",
+                              "item": [
+                                {
+                                  "name": "Ping Capture Config",
+                                  "id": "fd4f7f5f-8b38-463b-ad08-6fd4c8b8f5b7",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/capture/ping_config/:trigger_kind/:runnable_kind/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "capture",
+                                        "ping_config",
+                                        ":trigger_kind",
+                                        ":runnable_kind",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "4fe124a0-8a57-4680-a169-7ce8322582d2",
+                                          "key": "workspace",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "916b4d60-4baa-4cd7-ad46-4d01d6507cf8",
+                                          "key": "trigger_kind",
+                                          "value": "webhook",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "21c18764-5d01-463b-b8db-743c4a670ef9",
+                                          "key": "runnable_kind",
+                                          "value": "flow",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "19b95f02-a88a-4542-bc39-c4e4422aec5c",
+                                          "key": "path",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "cb200c43-a8b1-41c6-9903-a2b148aea20b",
+                                      "name": "capture config pinged",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/w/:workspace/capture/ping_config/:trigger_kind/:runnable_kind/:path",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "w",
+                                            ":workspace",
+                                            "capture",
+                                            "ping_config",
+                                            ":trigger_kind",
+                                            ":runnable_kind",
+                                            ":path"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspace"
+                                            },
+                                            {
+                                              "key": "trigger_kind"
+                                            },
+                                            {
+                                              "key": "runnable_kind"
+                                            },
+                                            {
+                                              "key": "path"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": null,
+                                      "createdAt": "2026-07-28T03:30:28.000Z",
+                                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                                      "uid": "35240-cb200c43-a8b1-41c6-9903-a2b148aea20b"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:30:28.000Z",
+                                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                                  "uid": "35240-fd4f7f5f-8b38-463b-ad08-6fd4c8b8f5b7"
+                                }
+                              ],
+                              "id": "6faaac44-a9d8-4407-940b-dfbfd03d6375",
+                              "createdAt": "2026-07-28T03:30:28.000Z",
+                              "updatedAt": "2026-07-28T03:30:28.000Z",
+                              "uid": "35240-6faaac44-a9d8-4407-940b-dfbfd03d6375"
+                            }
+                          ],
+                          "id": "5f41513b-e974-42e1-ac49-1fc45c6da378",
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-5f41513b-e974-42e1-ac49-1fc45c6da378"
+                        }
+                      ],
+                      "id": "ed028252-7eea-4b30-9d16-5fa2017cd3fd",
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-ed028252-7eea-4b30-9d16-5fa2017cd3fd"
+                    }
+                  ],
+                  "id": "60c070c8-9df6-4c49-b494-656bad2e17ca",
+                  "createdAt": "2026-07-28T03:30:28.000Z",
+                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                  "uid": "35240-60c070c8-9df6-4c49-b494-656bad2e17ca"
+                },
+                {
+                  "name": "get_configs",
+                  "item": [
+                    {
+                      "name": "{runnable_kind}",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Get Capture Configs for a Script or Flow",
+                              "id": "62e7df5d-4abe-4c3b-9c6b-7c3176ea4825",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/capture/get_configs/:runnable_kind/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "capture",
+                                    "get_configs",
+                                    ":runnable_kind",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "00b0f9c1-0669-4863-8a7c-df248bcdef39",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "20c1d53a-8786-4689-9fb5-dc904f2f422b",
+                                      "key": "runnable_kind",
+                                      "value": "flow",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "de97e529-cbce-408a-84d3-a6a4a8de9ecb",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "f9e2934f-5128-4b84-ad30-2082223d3ca4",
+                                  "name": "capture configs for a script or flow",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/capture/get_configs/:runnable_kind/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "capture",
+                                        "get_configs",
+                                        ":runnable_kind",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "runnable_kind"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"trigger_kind\": \"default_email\",\n    \"trigger_config\": {},\n    \"error\": \"<string>\",\n    \"last_server_ping\": \"<dateTime>\"\n  },\n  {\n    \"trigger_kind\": \"azure\",\n    \"trigger_config\": {},\n    \"error\": \"<string>\",\n    \"last_server_ping\": \"<dateTime>\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:30:28.000Z",
+                                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                                  "uid": "35240-f9e2934f-5128-4b84-ad30-2082223d3ca4"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:28.000Z",
+                              "updatedAt": "2026-07-28T03:30:28.000Z",
+                              "uid": "35240-62e7df5d-4abe-4c3b-9c6b-7c3176ea4825"
+                            }
+                          ],
+                          "id": "cda84ca3-69e5-4bb5-9761-d52baede54ad",
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-cda84ca3-69e5-4bb5-9761-d52baede54ad"
+                        }
+                      ],
+                      "id": "4292bd29-109d-4ae4-947b-a3647a358b2e",
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-4292bd29-109d-4ae4-947b-a3647a358b2e"
+                    }
+                  ],
+                  "id": "5408b4e8-d201-49f1-8142-c660b7796d80",
+                  "createdAt": "2026-07-28T03:30:28.000Z",
+                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                  "uid": "35240-5408b4e8-d201-49f1-8142-c660b7796d80"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "{runnable_kind}",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "List Captures for a Script or Flow",
+                              "id": "078ca041-3fe8-4375-beb1-5ac8bf965534",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/capture/list/:runnable_kind/:path?trigger_kind=webhook&page=<integer>&per_page=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "capture",
+                                    "list",
+                                    ":runnable_kind",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "trigger_kind",
+                                      "value": "webhook"
+                                    },
+                                    {
+                                      "description": "which page to return (start at 1, default 1)",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "number of items to return for a given page (default 30, max 100)",
+                                      "key": "per_page",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "58ebc5ed-bc5a-4288-ac07-c0c4fd2c7a65",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "58c05f8c-e1fa-4646-9db6-b2461f0f725e",
+                                      "key": "runnable_kind",
+                                      "value": "flow",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "5633ee93-1ee2-4ddc-a7a8-f1c91364ad5a",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "e66d4490-53b9-4754-ac96-276c059869d9",
+                                  "name": "list of captures for a script or flow",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/capture/list/:runnable_kind/:path?trigger_kind=webhook&page=<integer>&per_page=<integer>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "capture",
+                                        "list",
+                                        ":runnable_kind",
+                                        ":path"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "trigger_kind",
+                                          "value": "webhook"
+                                        },
+                                        {
+                                          "description": "which page to return (start at 1, default 1)",
+                                          "key": "page",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "number of items to return for a given page (default 30, max 100)",
+                                          "key": "per_page",
+                                          "value": "<integer>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "runnable_kind"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"trigger_kind\": \"nats\",\n    \"main_args\": {},\n    \"preprocessor_args\": {},\n    \"id\": \"<integer>\",\n    \"created_at\": \"<dateTime>\"\n  },\n  {\n    \"trigger_kind\": \"webhook\",\n    \"main_args\": {},\n    \"preprocessor_args\": {},\n    \"id\": \"<integer>\",\n    \"created_at\": \"<dateTime>\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:30:28.000Z",
+                                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                                  "uid": "35240-e66d4490-53b9-4754-ac96-276c059869d9"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:28.000Z",
+                              "updatedAt": "2026-07-28T03:30:28.000Z",
+                              "uid": "35240-078ca041-3fe8-4375-beb1-5ac8bf965534"
+                            }
+                          ],
+                          "id": "80c599c5-a41d-4785-9e12-ecc9b583e2bc",
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-80c599c5-a41d-4785-9e12-ecc9b583e2bc"
+                        }
+                      ],
+                      "id": "23f129b6-38d3-4f13-900e-a564bf3df9ab",
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-23f129b6-38d3-4f13-900e-a564bf3df9ab"
+                    }
+                  ],
+                  "id": "8a144089-ca7c-447a-a820-84b5ffcf5769",
+                  "createdAt": "2026-07-28T03:30:28.000Z",
+                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                  "uid": "35240-8a144089-ca7c-447a-a820-84b5ffcf5769"
+                },
+                {
+                  "name": "move",
+                  "item": [
+                    {
+                      "name": "{runnable_kind}",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Move Captures and Configs for a Script or Flow",
+                              "id": "5ddbb861-c7a2-4a12-852c-8595752a1b76",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"new_path\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/capture/move/:runnable_kind/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "capture",
+                                    "move",
+                                    ":runnable_kind",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "f7af50f1-16d4-40a3-8556-2b14fcf6eb48",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "b1706c04-98fa-43ed-b422-9232ecc65c28",
+                                      "key": "runnable_kind",
+                                      "value": "flow",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "2c0c75af-bed8-4536-9e97-6c23006e8727",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "853b6223-f3e1-4a77-ac71-a15efdd01ab6",
+                                  "name": "captures and configs moved",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"new_path\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/capture/move/:runnable_kind/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "capture",
+                                        "move",
+                                        ":runnable_kind",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "runnable_kind"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:30:28.000Z",
+                                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                                  "uid": "35240-853b6223-f3e1-4a77-ac71-a15efdd01ab6"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:28.000Z",
+                              "updatedAt": "2026-07-28T03:30:28.000Z",
+                              "uid": "35240-5ddbb861-c7a2-4a12-852c-8595752a1b76"
+                            }
+                          ],
+                          "id": "f9f735cc-6452-485c-9b00-00d5f882c3b6",
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-f9f735cc-6452-485c-9b00-00d5f882c3b6"
+                        }
+                      ],
+                      "id": "9462bb6f-e0d1-41b7-ad1c-88b2ee43192c",
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-9462bb6f-e0d1-41b7-ad1c-88b2ee43192c"
+                    }
+                  ],
+                  "id": "56b43652-d1e6-4bbd-8e96-43d59214feee",
+                  "createdAt": "2026-07-28T03:30:28.000Z",
+                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                  "uid": "35240-56b43652-d1e6-4bbd-8e96-43d59214feee"
+                },
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get a Capture",
+                      "id": "26df7676-134e-49b7-a7f6-3dda871b93a4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/capture/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "capture",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "76e671cf-c1ec-4d53-be95-465d27e7802b",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "15d32249-e3dc-46f0-9223-62b025aa0678",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "92c76bd5-c2f2-4979-9a0c-40df218c622e",
+                          "name": "capture",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/capture/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "capture",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"trigger_kind\": \"webhook\",\n  \"main_args\": {},\n  \"preprocessor_args\": {},\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-92c76bd5-c2f2-4979-9a0c-40df218c622e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-26df7676-134e-49b7-a7f6-3dda871b93a4"
+                    },
+                    {
+                      "name": "Delete a Capture",
+                      "id": "a8424000-0f8b-40ed-93b3-747e40873553",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/capture/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "capture",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "43ddd405-8611-46f3-8b4f-e93258ff1318",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "eb3fbc74-6690-4d65-ab81-bb1e59d03c47",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1fbafe3d-fb90-4d08-a579-ea753e031eaf",
+                          "name": "capture deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/capture/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "capture",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                },
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:30:28.000Z",
+                          "updatedAt": "2026-07-28T03:30:28.000Z",
+                          "uid": "35240-1fbafe3d-fb90-4d08-a579-ea753e031eaf"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:28.000Z",
+                      "updatedAt": "2026-07-28T03:30:28.000Z",
+                      "uid": "35240-a8424000-0f8b-40ed-93b3-747e40873553"
+                    }
+                  ],
+                  "id": "13cbf2fe-924e-46f9-9004-6db6fe01f547",
+                  "createdAt": "2026-07-28T03:30:28.000Z",
+                  "updatedAt": "2026-07-28T03:30:28.000Z",
+                  "uid": "35240-13cbf2fe-924e-46f9-9004-6db6fe01f547"
+                }
+              ],
+              "id": "98a7395e-1297-431d-8bfc-e7e175bde91a",
+              "createdAt": "2026-07-28T03:30:28.000Z",
+              "updatedAt": "2026-07-28T03:30:28.000Z",
+              "uid": "35240-98a7395e-1297-431d-8bfc-e7e175bde91a"
+            }
+          ],
+          "id": "75387eb2-f873-4bc1-adde-229d84963005",
+          "createdAt": "2026-07-28T03:30:28.000Z",
+          "updatedAt": "2026-07-28T03:30:28.000Z",
+          "uid": "35240-75387eb2-f873-4bc1-adde-229d84963005"
+        }
+      ],
+      "id": "628c8f8f-5e6e-4fd4-a38e-73b39436d3bb",
+      "createdAt": "2026-07-28T03:30:28.000Z",
+      "updatedAt": "2026-07-28T03:30:28.000Z",
+      "uid": "35240-628c8f8f-5e6e-4fd4-a38e-73b39436d3bb"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

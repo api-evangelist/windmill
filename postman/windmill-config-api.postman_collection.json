@@ -1,0 +1,1033 @@
+{
+  "info": {
+    "_postman_id": "86efd788-cbb2-4ef6-9cd3-df097bac7f18",
+    "name": "Windmill admin config API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:29.000Z",
+    "updatedAt": "2026-07-28T03:30:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-86efd788-cbb2-4ef6-9cd3-df097bac7f18"
+  },
+  "item": [
+    {
+      "name": "configs",
+      "item": [
+        {
+          "name": "list_worker_groups",
+          "item": [
+            {
+              "name": "List Worker Groups",
+              "id": "cb0f54fb-5763-4558-86c7-a0df48074569",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configs/list_worker_groups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configs",
+                    "list_worker_groups"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1096b0cd-4312-42e2-8096-217886fa9253",
+                  "name": "a list of worker group configs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/list_worker_groups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "list_worker_groups"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"config\": {}\n  },\n  {\n    \"name\": \"<string>\",\n    \"config\": {}\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-1096b0cd-4312-42e2-8096-217886fa9253"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-cb0f54fb-5763-4558-86c7-a0df48074569"
+            }
+          ],
+          "id": "79dba78f-846e-4c7b-80ef-76359e50d01e",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-79dba78f-846e-4c7b-80ef-76359e50d01e"
+        },
+        {
+          "name": "get",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Get Config",
+                  "id": "3d4e9544-1a17-402d-9432-74ea2050dc35",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/get/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "get",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "280dd29f-d9ae-4437-868e-1dff67c8904f",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e3cf66a5-3b99-46f8-8f96-0c17b9f92d67",
+                      "name": "a config",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/configs/get/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "configs",
+                            "get",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"alerts\": [\n    {\n      \"name\": \"<string>\",\n      \"tags_to_monitor\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"jobs_num_threshold\": \"<integer>\",\n      \"alert_cooldown_seconds\": \"<integer>\",\n      \"alert_time_threshold_seconds\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tags_to_monitor\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"jobs_num_threshold\": \"<integer>\",\n      \"alert_cooldown_seconds\": \"<integer>\",\n      \"alert_time_threshold_seconds\": \"<integer>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:30:30.000Z",
+                      "updatedAt": "2026-07-28T03:30:30.000Z",
+                      "uid": "35240-e3cf66a5-3b99-46f8-8f96-0c17b9f92d67"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-3d4e9544-1a17-402d-9432-74ea2050dc35"
+                }
+              ],
+              "id": "07f4c40b-3b9c-433b-a0a0-1b168248e001",
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-07f4c40b-3b9c-433b-a0a0-1b168248e001"
+            }
+          ],
+          "id": "e0bd7069-8f2f-4a07-b113-77e11ba0c81e",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-e0bd7069-8f2f-4a07-b113-77e11ba0c81e"
+        },
+        {
+          "name": "update",
+          "item": [
+            {
+              "name": "{name}",
+              "item": [
+                {
+                  "name": "Update Config",
+                  "id": "d174fe48-ba23-4198-a9fb-4ff470467866",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/update/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "update",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "f0e170da-ad42-4295-b435-b3e447c4fcc9",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "89f47f6d-47c3-4c0c-a2eb-a10a1fd15b19",
+                      "name": "Update a worker group",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/configs/update/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "configs",
+                            "update",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:30.000Z",
+                      "updatedAt": "2026-07-28T03:30:30.000Z",
+                      "uid": "35240-89f47f6d-47c3-4c0c-a2eb-a10a1fd15b19"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-d174fe48-ba23-4198-a9fb-4ff470467866"
+                },
+                {
+                  "name": "Delete Config",
+                  "id": "ab2d60cc-74cc-4db2-ad36-f7af83800be5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/update/:name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "update",
+                        ":name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2faad654-4abb-4d67-abac-abbbad39081d",
+                          "key": "name",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "89d056bb-4581-4c66-86eb-096792a130dc",
+                      "name": "Delete config",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/configs/update/:name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "configs",
+                            "update",
+                            ":name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:30.000Z",
+                      "updatedAt": "2026-07-28T03:30:30.000Z",
+                      "uid": "35240-89d056bb-4581-4c66-86eb-096792a130dc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-ab2d60cc-74cc-4db2-ad36-f7af83800be5"
+                }
+              ],
+              "id": "af4ac26d-682f-43be-9515-09e5ec478375",
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-af4ac26d-682f-43be-9515-09e5ec478375"
+            }
+          ],
+          "id": "203eeef8-5a43-4d4c-bb6b-34b605a2a441",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-203eeef8-5a43-4d4c-bb6b-34b605a2a441"
+        },
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "List Configs",
+              "id": "807371cb-a1b5-43a5-8e83-a13eab127c68",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configs/list",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configs",
+                    "list"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "07e1a486-0a1c-435a-8a19-3af3c26f0efa",
+                  "name": "list of configs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "list"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"config\": {}\n  },\n  {\n    \"name\": \"<string>\",\n    \"config\": {}\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-07e1a486-0a1c-435a-8a19-3af3c26f0efa"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-807371cb-a1b5-43a5-8e83-a13eab127c68"
+            }
+          ],
+          "id": "d7ec849c-82f9-467d-abdd-ffc4c52d2d4b",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-d7ec849c-82f9-467d-abdd-ffc4c52d2d4b"
+        },
+        {
+          "name": "list_autoscaling_events",
+          "item": [
+            {
+              "name": "{worker_group}",
+              "item": [
+                {
+                  "name": "List Autoscaling Events",
+                  "id": "703067f3-16df-4741-b7af-eef6e67c19e4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/list_autoscaling_events/:worker_group?page=<integer>&per_page=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "list_autoscaling_events",
+                        ":worker_group"
+                      ],
+                      "query": [
+                        {
+                          "description": "which page to return (start at 1, default 1)",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "number of items to return for a given page (default 30, max 100)",
+                          "key": "per_page",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "20bbdbb6-5485-492e-8832-24373a134b6a",
+                          "key": "worker_group",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d65cc603-6494-4406-93ba-082853583802",
+                      "name": "List of autoscaling events",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/configs/list_autoscaling_events/:worker_group?page=<integer>&per_page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "configs",
+                            "list_autoscaling_events",
+                            ":worker_group"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "worker_group"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<long>\",\n    \"worker_group\": \"<string>\",\n    \"event_type\": \"<string>\",\n    \"desired_workers\": \"<integer>\",\n    \"reason\": \"<string>\",\n    \"applied_at\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<long>\",\n    \"worker_group\": \"<string>\",\n    \"event_type\": \"<string>\",\n    \"desired_workers\": \"<integer>\",\n    \"reason\": \"<string>\",\n    \"applied_at\": \"<dateTime>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:30:30.000Z",
+                      "updatedAt": "2026-07-28T03:30:30.000Z",
+                      "uid": "35240-d65cc603-6494-4406-93ba-082853583802"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-703067f3-16df-4741-b7af-eef6e67c19e4"
+                }
+              ],
+              "id": "51d55030-e2a2-4140-a9c3-f698883c19c3",
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-51d55030-e2a2-4140-a9c3-f698883c19c3"
+            }
+          ],
+          "id": "f87fe091-dc9e-4fd9-80f5-a242a724abda",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-f87fe091-dc9e-4fd9-80f5-a242a724abda"
+        },
+        {
+          "name": "native_kubernetes_autoscaling_healthcheck",
+          "item": [
+            {
+              "name": "Check Kubernetes Autoscaling Health for a Worker Group",
+              "id": "88d1e630-a2f6-4af8-bc0a-86fbfe926c1c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configs/native_kubernetes_autoscaling_healthcheck",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configs",
+                    "native_kubernetes_autoscaling_healthcheck"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "8d89f38a-4060-4775-80a6-9b75d8a40907",
+                  "name": "Kubernetes autoscaling is healthy",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/native_kubernetes_autoscaling_healthcheck",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "native_kubernetes_autoscaling_healthcheck"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-8d89f38a-4060-4775-80a6-9b75d8a40907"
+                },
+                {
+                  "id": "97c59a8a-7d9f-47f4-b78c-69ee06078a64",
+                  "name": "Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/native_kubernetes_autoscaling_healthcheck",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "native_kubernetes_autoscaling_healthcheck"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "text/plain"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-97c59a8a-7d9f-47f4-b78c-69ee06078a64"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-88d1e630-a2f6-4af8-bc0a-86fbfe926c1c"
+            }
+          ],
+          "id": "99ed6667-d3ed-45cf-abe0-2c3c477760fa",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-99ed6667-d3ed-45cf-abe0-2c3c477760fa"
+        },
+        {
+          "name": "list_available_python_versions",
+          "item": [
+            {
+              "name": "Get Currently Available Python Versions Provided by UV.",
+              "id": "e56263a7-3d69-4418-b55f-7ead40683706",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configs/list_available_python_versions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configs",
+                    "list_available_python_versions"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "e94d99b2-83f8-4214-9c35-921cb44185e1",
+                  "name": "List of python versions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/list_available_python_versions",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "list_available_python_versions"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-e94d99b2-83f8-4214-9c35-921cb44185e1"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-e56263a7-3d69-4418-b55f-7ead40683706"
+            }
+          ],
+          "id": "d56ea9c4-5cb6-45ec-a242-764953ed5802",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-d56ea9c4-5cb6-45ec-a242-764953ed5802"
+        },
+        {
+          "name": "list_all_workspace_dependencies",
+          "item": [
+            {
+              "name": "List All Workspace Dependencies",
+              "id": "96d55f44-b253-46a2-8f9b-5bb5d4f3f633",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configs/list_all_workspace_dependencies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configs",
+                    "list_all_workspace_dependencies"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4e299a2a-f853-47a7-8601-63eb50cb3474",
+                  "name": "a list of workspace dependency summaries",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/list_all_workspace_dependencies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "list_all_workspace_dependencies"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"workspace_id\": \"<string>\",\n    \"language\": \"nativets\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"workspace_id\": \"<string>\",\n    \"language\": \"deno\",\n    \"name\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-4e299a2a-f853-47a7-8601-63eb50cb3474"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-96d55f44-b253-46a2-8f9b-5bb5d4f3f633"
+            }
+          ],
+          "id": "6a515039-eb4a-4073-ac0f-4c80cac34699",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-6a515039-eb4a-4073-ac0f-4c80cac34699"
+        },
+        {
+          "name": "list_all_dedicated_with_deps",
+          "item": [
+            {
+              "name": "List All Dedicated Scripts with Their Dependencies",
+              "id": "a4e4f543-3c3f-4d14-893d-39a4e072e5e4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/configs/list_all_dedicated_with_deps",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "configs",
+                    "list_all_dedicated_with_deps"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "0ad718b0-a293-48a6-8744-13b06a295c8d",
+                  "name": "a list of dedicated scripts with workspace dependencies",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/configs/list_all_dedicated_with_deps",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "configs",
+                        "list_all_dedicated_with_deps"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"workspace_id\": \"<string>\",\n    \"path\": \"<string>\",\n    \"language\": \"oracledb\",\n    \"workspace_dep_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"workspace_id\": \"<string>\",\n    \"path\": \"<string>\",\n    \"language\": \"ansible\",\n    \"workspace_dep_names\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:30.000Z",
+                  "updatedAt": "2026-07-28T03:30:30.000Z",
+                  "uid": "35240-0ad718b0-a293-48a6-8744-13b06a295c8d"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:30.000Z",
+              "updatedAt": "2026-07-28T03:30:30.000Z",
+              "uid": "35240-a4e4f543-3c3f-4d14-893d-39a4e072e5e4"
+            }
+          ],
+          "id": "b1de9b63-21da-4784-9336-3c20c303746b",
+          "createdAt": "2026-07-28T03:30:30.000Z",
+          "updatedAt": "2026-07-28T03:30:30.000Z",
+          "uid": "35240-b1de9b63-21da-4784-9336-3c20c303746b"
+        }
+      ],
+      "id": "c93ff356-b1c8-4675-a633-720c692f0d2f",
+      "createdAt": "2026-07-28T03:30:30.000Z",
+      "updatedAt": "2026-07-28T03:30:30.000Z",
+      "uid": "35240-c93ff356-b1c8-4675-a633-720c692f0d2f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

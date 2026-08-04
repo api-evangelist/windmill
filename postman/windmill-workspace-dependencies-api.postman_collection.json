@@ -1,0 +1,681 @@
+{
+  "info": {
+    "_postman_id": "0fc16612-0316-45ba-8aa3-e469162e61d0",
+    "name": "Windmill admin workspace_dependencies API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:57.000Z",
+    "updatedAt": "2026-07-28T03:31:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0fc16612-0316-45ba-8aa3-e469162e61d0"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "workspace_dependencies",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Workspace Dependencies",
+                      "id": "bbf46261-66af-4092-bc9c-4f7b1d0e43f5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"workspace_id\": \"<string>\",\n  \"language\": \"bigquery\",\n  \"content\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "workspace_dependencies",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e6745637-970b-4846-897a-f1511a2fe2b6",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "f8826235-bb81-4974-bfe5-0c33777bc7a5",
+                          "name": "workspace dependencies created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"workspace_id\": \"<string>\",\n  \"language\": \"bigquery\",\n  \"content\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "workspace_dependencies",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:58.000Z",
+                          "updatedAt": "2026-07-28T03:31:58.000Z",
+                          "uid": "35240-f8826235-bb81-4974-bfe5-0c33777bc7a5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:58.000Z",
+                      "updatedAt": "2026-07-28T03:31:58.000Z",
+                      "uid": "35240-bbf46261-66af-4092-bc9c-4f7b1d0e43f5"
+                    }
+                  ],
+                  "id": "93554d09-430f-47f3-a14e-f6777c82cf80",
+                  "createdAt": "2026-07-28T03:31:58.000Z",
+                  "updatedAt": "2026-07-28T03:31:58.000Z",
+                  "uid": "35240-93554d09-430f-47f3-a14e-f6777c82cf80"
+                },
+                {
+                  "name": "archive",
+                  "item": [
+                    {
+                      "name": "{language}",
+                      "item": [
+                        {
+                          "name": "Archive Workspace Dependencies (require Admin)",
+                          "id": "9665dace-8ee8-460f-9df3-5ba3d036bba4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/archive/:language?name=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "workspace_dependencies",
+                                "archive",
+                                ":language"
+                              ],
+                              "query": [
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "15671c5b-e7a6-41e5-b23c-b64fbfde55ce",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9dd25a8c-0a21-4626-995d-acea75a38e48",
+                                  "key": "language",
+                                  "value": "oracledb",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "dcd35316-db47-4dc5-a2d5-68eb58eca0ff",
+                              "name": "result",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/archive/:language?name=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "workspace_dependencies",
+                                    "archive",
+                                    ":language"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "name",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "language"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T03:31:58.000Z",
+                              "updatedAt": "2026-07-28T03:31:58.000Z",
+                              "uid": "35240-dcd35316-db47-4dc5-a2d5-68eb58eca0ff"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:58.000Z",
+                          "updatedAt": "2026-07-28T03:31:58.000Z",
+                          "uid": "35240-9665dace-8ee8-460f-9df3-5ba3d036bba4"
+                        }
+                      ],
+                      "id": "2a29059b-1035-447b-add1-51ebd04284e7",
+                      "createdAt": "2026-07-28T03:31:58.000Z",
+                      "updatedAt": "2026-07-28T03:31:58.000Z",
+                      "uid": "35240-2a29059b-1035-447b-add1-51ebd04284e7"
+                    }
+                  ],
+                  "id": "5d1b965b-4e1a-4344-ad93-9023d2196c57",
+                  "createdAt": "2026-07-28T03:31:58.000Z",
+                  "updatedAt": "2026-07-28T03:31:58.000Z",
+                  "uid": "35240-5d1b965b-4e1a-4344-ad93-9023d2196c57"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{language}",
+                      "item": [
+                        {
+                          "name": "Delete Workspace Dependencies (require Admin)",
+                          "id": "24843a20-c6a8-452e-9c42-ee74314b532e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/delete/:language?name=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "workspace_dependencies",
+                                "delete",
+                                ":language"
+                              ],
+                              "query": [
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a4c02ee7-fe52-4313-8132-bbec409aa13e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6d9f4579-d5c2-4277-9e3c-df0c67002963",
+                                  "key": "language",
+                                  "value": "oracledb",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "7f935420-5fb9-48c0-a900-322ff4ccccb9",
+                              "name": "result",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/delete/:language?name=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "workspace_dependencies",
+                                    "delete",
+                                    ":language"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "name",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "language"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T03:31:58.000Z",
+                              "updatedAt": "2026-07-28T03:31:58.000Z",
+                              "uid": "35240-7f935420-5fb9-48c0-a900-322ff4ccccb9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:58.000Z",
+                          "updatedAt": "2026-07-28T03:31:58.000Z",
+                          "uid": "35240-24843a20-c6a8-452e-9c42-ee74314b532e"
+                        }
+                      ],
+                      "id": "608326b9-7cd4-46cb-864e-d96ea53ed10c",
+                      "createdAt": "2026-07-28T03:31:58.000Z",
+                      "updatedAt": "2026-07-28T03:31:58.000Z",
+                      "uid": "35240-608326b9-7cd4-46cb-864e-d96ea53ed10c"
+                    }
+                  ],
+                  "id": "70be17ae-28ae-4b56-9759-2d467a628662",
+                  "createdAt": "2026-07-28T03:31:58.000Z",
+                  "updatedAt": "2026-07-28T03:31:58.000Z",
+                  "uid": "35240-70be17ae-28ae-4b56-9759-2d467a628662"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List All Workspace Dependencies",
+                      "id": "aa67fa38-81f5-4d47-950f-55794427090c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/list",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "workspace_dependencies",
+                            "list"
+                          ],
+                          "variable": [
+                            {
+                              "id": "71cb5b21-134c-486e-beab-96e44663f79a",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "560e7948-d15d-42ef-bb22-e96f78aa6cb9",
+                          "name": "All workspace dependencies",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/list",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "workspace_dependencies",
+                                "list"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"workspace_id\": \"<string>\",\n    \"language\": \"php\",\n    \"created_at\": \"<dateTime>\",\n    \"content\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"archived\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"workspace_id\": \"<string>\",\n    \"language\": \"nu\",\n    \"created_at\": \"<dateTime>\",\n    \"content\": \"<string>\",\n    \"id\": \"<integer>\",\n    \"archived\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:58.000Z",
+                          "updatedAt": "2026-07-28T03:31:58.000Z",
+                          "uid": "35240-560e7948-d15d-42ef-bb22-e96f78aa6cb9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:58.000Z",
+                      "updatedAt": "2026-07-28T03:31:58.000Z",
+                      "uid": "35240-aa67fa38-81f5-4d47-950f-55794427090c"
+                    }
+                  ],
+                  "id": "a3a3b1ad-d1ee-4bba-937e-df04fe18bc21",
+                  "createdAt": "2026-07-28T03:31:58.000Z",
+                  "updatedAt": "2026-07-28T03:31:58.000Z",
+                  "uid": "35240-a3a3b1ad-d1ee-4bba-937e-df04fe18bc21"
+                },
+                {
+                  "name": "get_latest",
+                  "item": [
+                    {
+                      "name": "{language}",
+                      "item": [
+                        {
+                          "name": "Get Latest Workspace Dependencies by Language and Name",
+                          "id": "a7fde49c-023e-4ea6-9c4f-75c5864260a5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/get_latest/:language?name=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "workspace_dependencies",
+                                "get_latest",
+                                ":language"
+                              ],
+                              "query": [
+                                {
+                                  "key": "name",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4963b405-9ae3-4e95-b786-164a8edd83a8",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "ffa790a2-cce5-4cb7-8275-cc7e252b9a4a",
+                                  "key": "language",
+                                  "value": "oracledb",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "339cb6db-02a4-4652-9e54-bf3cc7ed8107",
+                              "name": "Latest workspace dependencies",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/workspace_dependencies/get_latest/:language?name=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "workspace_dependencies",
+                                    "get_latest",
+                                    ":language"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "name",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "language"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"workspace_id\": \"<string>\",\n  \"language\": \"mysql\",\n  \"created_at\": \"<dateTime>\",\n  \"content\": \"<string>\",\n  \"id\": \"<integer>\",\n  \"archived\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:31:58.000Z",
+                              "updatedAt": "2026-07-28T03:31:58.000Z",
+                              "uid": "35240-339cb6db-02a4-4652-9e54-bf3cc7ed8107"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:58.000Z",
+                          "updatedAt": "2026-07-28T03:31:58.000Z",
+                          "uid": "35240-a7fde49c-023e-4ea6-9c4f-75c5864260a5"
+                        }
+                      ],
+                      "id": "8df02da2-1127-4060-9d5f-f24f366b723b",
+                      "createdAt": "2026-07-28T03:31:58.000Z",
+                      "updatedAt": "2026-07-28T03:31:58.000Z",
+                      "uid": "35240-8df02da2-1127-4060-9d5f-f24f366b723b"
+                    }
+                  ],
+                  "id": "537aea19-4f91-4880-84c1-43418f4d15e2",
+                  "createdAt": "2026-07-28T03:31:58.000Z",
+                  "updatedAt": "2026-07-28T03:31:58.000Z",
+                  "uid": "35240-537aea19-4f91-4880-84c1-43418f4d15e2"
+                }
+              ],
+              "id": "a1998cc0-ab9a-4c25-b94f-b55627d73832",
+              "createdAt": "2026-07-28T03:31:58.000Z",
+              "updatedAt": "2026-07-28T03:31:58.000Z",
+              "uid": "35240-a1998cc0-ab9a-4c25-b94f-b55627d73832"
+            }
+          ],
+          "id": "f3094a41-8a62-4c6c-af08-c34fb27679b7",
+          "createdAt": "2026-07-28T03:31:58.000Z",
+          "updatedAt": "2026-07-28T03:31:58.000Z",
+          "uid": "35240-f3094a41-8a62-4c6c-af08-c34fb27679b7"
+        }
+      ],
+      "id": "4a794a87-fce7-4f8f-bd9c-2c5b3fe1be31",
+      "createdAt": "2026-07-28T03:31:58.000Z",
+      "updatedAt": "2026-07-28T03:31:58.000Z",
+      "uid": "35240-4a794a87-fce7-4f8f-bd9c-2c5b3fe1be31"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

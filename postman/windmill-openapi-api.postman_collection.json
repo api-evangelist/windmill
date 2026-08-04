@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "c9f992be-8057-430e-b1c6-cf02c6b829d8",
+    "name": "Windmill admin openapi API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:28.000Z",
+    "updatedAt": "2026-07-28T03:31:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c9f992be-8057-430e-b1c6-cf02c6b829d8"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "openapi",
+              "item": [
+                {
+                  "name": "generate",
+                  "item": [
+                    {
+                      "name": "Generate Openapi Spec from Http Routes/webhook",
+                      "id": "2d28d4b3-a568-4a11-a1c7-5cf0319be387",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"info\": {\n    \"title\": \"<string>\",\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"terms_of_service\": \"<string>\",\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"license\": {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  },\n  \"url\": \"<string>\",\n  \"openapi_spec_format\": \"yaml\",\n  \"http_route_filters\": [\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    },\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    }\n  ],\n  \"webhook_filters\": [\n    {\n      \"user_or_folder_regex\": \"u\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"script\"\n    },\n    {\n      \"user_or_folder_regex\": \"f\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"flow\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/openapi/generate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "openapi",
+                            "generate"
+                          ],
+                          "variable": [
+                            {
+                              "id": "016010d7-c806-42e7-bd45-331526fc209b",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "86e68ea5-94bc-48c5-904a-65773ca5b2b2",
+                          "name": "openapi spec",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"info\": {\n    \"title\": \"<string>\",\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"terms_of_service\": \"<string>\",\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"license\": {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  },\n  \"url\": \"<string>\",\n  \"openapi_spec_format\": \"yaml\",\n  \"http_route_filters\": [\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    },\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    }\n  ],\n  \"webhook_filters\": [\n    {\n      \"user_or_folder_regex\": \"u\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"script\"\n    },\n    {\n      \"user_or_folder_regex\": \"f\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"flow\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/openapi/generate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "openapi",
+                                "generate"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:28.000Z",
+                          "updatedAt": "2026-07-28T03:31:28.000Z",
+                          "uid": "35240-86e68ea5-94bc-48c5-904a-65773ca5b2b2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:28.000Z",
+                      "updatedAt": "2026-07-28T03:31:28.000Z",
+                      "uid": "35240-2d28d4b3-a568-4a11-a1c7-5cf0319be387"
+                    }
+                  ],
+                  "id": "b5f7a357-57cb-4185-a4f4-c90a2ddb4323",
+                  "createdAt": "2026-07-28T03:31:28.000Z",
+                  "updatedAt": "2026-07-28T03:31:28.000Z",
+                  "uid": "35240-b5f7a357-57cb-4185-a4f4-c90a2ddb4323"
+                },
+                {
+                  "name": "download",
+                  "item": [
+                    {
+                      "name": "Download the OpenAPI V3.1 Spec as a File",
+                      "id": "b96574b7-7ae4-4d0a-991b-9b28e594da8a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/octet-stream"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"info\": {\n    \"title\": \"<string>\",\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"terms_of_service\": \"<string>\",\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"license\": {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  },\n  \"url\": \"<string>\",\n  \"openapi_spec_format\": \"yaml\",\n  \"http_route_filters\": [\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    },\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    }\n  ],\n  \"webhook_filters\": [\n    {\n      \"user_or_folder_regex\": \"u\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"script\"\n    },\n    {\n      \"user_or_folder_regex\": \"f\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"flow\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/openapi/download",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "openapi",
+                            "download"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4c6b3ce3-c5e7-4fb0-bf47-c2220563b7ee",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2b2c9f77-5e56-409a-bc71-1a0e8b7c92e6",
+                          "name": "Downloaded OpenAPI spec",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/octet-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"info\": {\n    \"title\": \"<string>\",\n    \"version\": \"<string>\",\n    \"description\": \"<string>\",\n    \"terms_of_service\": \"<string>\",\n    \"contact\": {\n      \"name\": \"<string>\",\n      \"url\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"license\": {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  },\n  \"url\": \"<string>\",\n  \"openapi_spec_format\": \"yaml\",\n  \"http_route_filters\": [\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    },\n    {\n      \"folder_regex\": \"<string>\",\n      \"path_regex\": \"<string>\",\n      \"route_path_regex\": \"<string>\"\n    }\n  ],\n  \"webhook_filters\": [\n    {\n      \"user_or_folder_regex\": \"u\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"script\"\n    },\n    {\n      \"user_or_folder_regex\": \"f\",\n      \"user_or_folder_regex_value\": \"<string>\",\n      \"path\": \"<string>\",\n      \"runnable_kind\": \"flow\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/openapi/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "openapi",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/octet-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-07-28T03:31:28.000Z",
+                          "updatedAt": "2026-07-28T03:31:28.000Z",
+                          "uid": "35240-2b2c9f77-5e56-409a-bc71-1a0e8b7c92e6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:28.000Z",
+                      "updatedAt": "2026-07-28T03:31:28.000Z",
+                      "uid": "35240-b96574b7-7ae4-4d0a-991b-9b28e594da8a"
+                    }
+                  ],
+                  "id": "b382ffdc-eefe-4cb0-bd4d-2ada27c6c4de",
+                  "createdAt": "2026-07-28T03:31:28.000Z",
+                  "updatedAt": "2026-07-28T03:31:28.000Z",
+                  "uid": "35240-b382ffdc-eefe-4cb0-bd4d-2ada27c6c4de"
+                }
+              ],
+              "id": "771a9197-6653-444d-b248-83d15e371181",
+              "createdAt": "2026-07-28T03:31:28.000Z",
+              "updatedAt": "2026-07-28T03:31:28.000Z",
+              "uid": "35240-771a9197-6653-444d-b248-83d15e371181"
+            }
+          ],
+          "id": "58ae6954-a96f-4d74-ac5b-5df8e0f38dd6",
+          "createdAt": "2026-07-28T03:31:28.000Z",
+          "updatedAt": "2026-07-28T03:31:28.000Z",
+          "uid": "35240-58ae6954-a96f-4d74-ac5b-5df8e0f38dd6"
+        }
+      ],
+      "id": "272a0b47-91d8-4644-901d-dce62aba13d5",
+      "createdAt": "2026-07-28T03:31:28.000Z",
+      "updatedAt": "2026-07-28T03:31:28.000Z",
+      "uid": "35240-272a0b47-91d8-4644-901d-dce62aba13d5"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

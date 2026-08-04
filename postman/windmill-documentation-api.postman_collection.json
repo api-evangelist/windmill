@@ -1,0 +1,195 @@
+{
+  "info": {
+    "_postman_id": "4e373e5c-311d-4366-8acc-1dbbede7823c",
+    "name": "Windmill admin documentation API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:30.000Z",
+    "updatedAt": "2026-07-28T03:30:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4e373e5c-311d-4366-8acc-1dbbede7823c"
+  },
+  "item": [
+    {
+      "name": "inkeep",
+      "item": [
+        {
+          "name": "Query Windmill AI Documentation Assistant (EE Only)",
+          "id": "2216b09b-0c4a-4142-95bd-479cb26a4448",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/inkeep",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "inkeep"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f644d679-e95a-47bb-8453-6e27d77201c4",
+              "name": "AI documentation assistant response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/inkeep",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inkeep"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{}",
+              "createdAt": "2026-07-28T03:30:31.000Z",
+              "updatedAt": "2026-07-28T03:30:31.000Z",
+              "uid": "35240-f644d679-e95a-47bb-8453-6e27d77201c4"
+            },
+            {
+              "id": "864bb387-de1f-483e-ba32-25d33031abe4",
+              "name": "Enterprise Edition required",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/inkeep",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "inkeep"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "<string>",
+              "createdAt": "2026-07-28T03:30:31.000Z",
+              "updatedAt": "2026-07-28T03:30:31.000Z",
+              "uid": "35240-864bb387-de1f-483e-ba32-25d33031abe4"
+            }
+          ],
+          "createdAt": "2026-07-28T03:30:31.000Z",
+          "updatedAt": "2026-07-28T03:30:31.000Z",
+          "uid": "35240-2216b09b-0c4a-4142-95bd-479cb26a4448"
+        }
+      ],
+      "id": "9d5a3a98-0ad4-4a48-b6ed-7717b21a1b4b",
+      "createdAt": "2026-07-28T03:30:31.000Z",
+      "updatedAt": "2026-07-28T03:30:31.000Z",
+      "uid": "35240-9d5a3a98-0ad4-4a48-b6ed-7717b21a1b4b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

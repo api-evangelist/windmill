@@ -1,0 +1,2838 @@
+{
+  "info": {
+    "_postman_id": "d11cdab1-30b9-4619-bedc-5c7d7698853a",
+    "name": "Windmill admin flow API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:34.000Z",
+    "updatedAt": "2026-07-28T03:30:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d11cdab1-30b9-4619-bedc-5c7d7698853a"
+  },
+  "item": [
+    {
+      "name": "flows",
+      "item": [
+        {
+          "name": "hub",
+          "item": [
+            {
+              "name": "list",
+              "item": [
+                {
+                  "name": "List All Hub Flows",
+                  "id": "856a3fa8-67c1-4efb-9ce0-b60462deb66c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/flows/hub/list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "flows",
+                        "hub",
+                        "list"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c97f657c-7003-4a5e-a624-4a8e77d55485",
+                      "name": "hub flows list",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/flows/hub/list",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "flows",
+                            "hub",
+                            "list"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"flows\": [\n    {\n      \"id\": \"<number>\",\n      \"flow_id\": \"<number>\",\n      \"summary\": \"<string>\",\n      \"apps\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"approved\": \"<boolean>\",\n      \"votes\": \"<number>\"\n    },\n    {\n      \"id\": \"<number>\",\n      \"flow_id\": \"<number>\",\n      \"summary\": \"<string>\",\n      \"apps\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"approved\": \"<boolean>\",\n      \"votes\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-c97f657c-7003-4a5e-a624-4a8e77d55485"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-856a3fa8-67c1-4efb-9ce0-b60462deb66c"
+                }
+              ],
+              "id": "8ccd4558-ac6a-41c7-a8d1-4010e90b8fcb",
+              "createdAt": "2026-07-28T03:30:35.000Z",
+              "updatedAt": "2026-07-28T03:30:35.000Z",
+              "uid": "35240-8ccd4558-ac6a-41c7-a8d1-4010e90b8fcb"
+            },
+            {
+              "name": "get",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get Hub Flow by Id",
+                      "id": "aab38ef4-9ab9-4254-95eb-4e71a9495df0",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/flows/hub/get/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "flows",
+                            "hub",
+                            "get",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "id": "71ba5ac1-aa1a-4f3b-bfc3-7250841db92c",
+                              "key": "id",
+                              "value": "<integer>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c3578dc3-ac04-4fcb-997d-e4057ab6bd0a",
+                          "name": "flow",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/flows/hub/get/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "flows",
+                                "hub",
+                                "get",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"flow\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/OpenFlow not found in the OpenAPI spec\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-c3578dc3-ac04-4fcb-997d-e4057ab6bd0a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-aab38ef4-9ab9-4254-95eb-4e71a9495df0"
+                    }
+                  ],
+                  "id": "b4826e62-d5a5-4095-b3b1-88a0f81b1a81",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-b4826e62-d5a5-4095-b3b1-88a0f81b1a81"
+                }
+              ],
+              "id": "79b91d7d-3915-4556-98fd-d5c309f7240a",
+              "createdAt": "2026-07-28T03:30:35.000Z",
+              "updatedAt": "2026-07-28T03:30:35.000Z",
+              "uid": "35240-79b91d7d-3915-4556-98fd-d5c309f7240a"
+            }
+          ],
+          "id": "c6af279d-63bb-4c64-a608-4607c4f14ac3",
+          "createdAt": "2026-07-28T03:30:35.000Z",
+          "updatedAt": "2026-07-28T03:30:35.000Z",
+          "uid": "35240-c6af279d-63bb-4c64-a608-4607c4f14ac3"
+        }
+      ],
+      "id": "b238f089-97c6-4589-8d9a-b01a7d78a80b",
+      "createdAt": "2026-07-28T03:30:35.000Z",
+      "updatedAt": "2026-07-28T03:30:35.000Z",
+      "uid": "35240-b238f089-97c6-4589-8d9a-b01a7d78a80b"
+    },
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "flows",
+              "item": [
+                {
+                  "name": "list_paths",
+                  "item": [
+                    {
+                      "name": "List All Flow Paths",
+                      "id": "a42958d3-40f7-4705-8c21-da52ff2f1230",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/flows/list_paths",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "flows",
+                            "list_paths"
+                          ],
+                          "variable": [
+                            {
+                              "id": "92cec8e3-1180-4438-9840-7fcfbc4c7564",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "313fb95c-2ec8-4d4e-833a-212da92e9f16",
+                          "name": "list of flow paths",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/list_paths",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "list_paths"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-313fb95c-2ec8-4d4e-833a-212da92e9f16"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-a42958d3-40f7-4705-8c21-da52ff2f1230"
+                    }
+                  ],
+                  "id": "1ccf15a0-a9e0-4574-9851-7790d1ae6b52",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-1ccf15a0-a9e0-4574-9851-7790d1ae6b52"
+                },
+                {
+                  "name": "list_search",
+                  "item": [
+                    {
+                      "name": "List Flows for Search",
+                      "id": "67e30b3f-a394-443f-ae7e-2dadacf55361",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/flows/list_search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "flows",
+                            "list_search"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1ea5abef-020a-44c4-b8fa-898ab99fc797",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "297a8e29-48e5-44cd-bee8-5b7e0e57d783",
+                          "name": "flow list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/list_search",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "list_search"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"path\": \"<string>\",\n    \"value\": {}\n  },\n  {\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-297a8e29-48e5-44cd-bee8-5b7e0e57d783"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-67e30b3f-a394-443f-ae7e-2dadacf55361"
+                    }
+                  ],
+                  "id": "f9786408-ef0d-478b-956d-4c5be204bf01",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-f9786408-ef0d-478b-956d-4c5be204bf01"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List All Flows",
+                      "id": "8fcb0ce6-ba22-4078-ac3e-1a3e69d8c431",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/flows/list?page=<integer>&per_page=<integer>&order_desc=<boolean>&created_by=<string>&path_start=<string>&path_exact=<string>&show_archived=<boolean>&starred_only=<boolean>&include_draft_only=<boolean>&with_deployment_msg=<boolean>&without_description=<boolean>&dedicated_worker=<boolean>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "flows",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "order by desc order (default true)",
+                              "key": "order_desc",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')",
+                              "key": "created_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "mask to filter matching starting path",
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "mask to filter exact matching path",
+                              "key": "path_exact",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(default false)\nshow only the archived files.\nwhen multiple archived hash share the same path, only the ones with the latest create_at\nare displayed.\n",
+                              "key": "show_archived",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(default false)\nshow only the starred items\n",
+                              "key": "starred_only",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(default false)\ninclude items that have no deployed version\n",
+                              "key": "include_draft_only",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(default false)\ninclude deployment message\n",
+                              "key": "with_deployment_msg",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(default false)\nIf true, the description field will be omitted from the response.\n",
+                              "key": "without_description",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(default regardless)\nIf true, show only flows with dedicated_worker enabled.\nIf false, show only flows with dedicated_worker disabled.\n",
+                              "key": "dedicated_worker",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "3fa2164a-9290-43cf-a13f-f40e7ed99a37",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "24746b9f-5803-4a40-ac31-4d9bdb2688c2",
+                          "name": "All flow",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/list?page=<integer>&per_page=<integer>&order_desc=<boolean>&created_by=<string>&path_start=<string>&path_exact=<string>&show_archived=<boolean>&starred_only=<boolean>&include_draft_only=<boolean>&with_deployment_msg=<boolean>&without_description=<boolean>&dedicated_worker=<boolean>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "order by desc order (default true)",
+                                  "key": "order_desc",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')",
+                                  "key": "created_by",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "mask to filter matching starting path",
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "mask to filter exact matching path",
+                                  "key": "path_exact",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(default false)\nshow only the archived files.\nwhen multiple archived hash share the same path, only the ones with the latest create_at\nare displayed.\n",
+                                  "key": "show_archived",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "(default false)\nshow only the starred items\n",
+                                  "key": "starred_only",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "(default false)\ninclude items that have no deployed version\n",
+                                  "key": "include_draft_only",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "(default false)\ninclude deployment message\n",
+                                  "key": "with_deployment_msg",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "(default false)\nIf true, the description field will be omitted from the response.\n",
+                                  "key": "without_description",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "(default regardless)\nIf true, show only flows with dedicated_worker enabled.\nIf false, show only flows with dedicated_worker disabled.\n",
+                                  "key": "dedicated_worker",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"path\": \"<string>\",\n    \"edited_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"archived\": \"<boolean>\",\n    \"extra_perms\": {\n      \"ad_f8\": \"<boolean>\",\n      \"ametdb\": \"<boolean>\",\n      \"consectetur58\": \"<boolean>\"\n    },\n    \"workspace_id\": \"<string>\",\n    \"starred\": \"<boolean>\",\n    \"draft_only\": \"<boolean>\",\n    \"tag\": \"<string>\",\n    \"ws_error_handler_muted\": \"<boolean>\",\n    \"priority\": \"<integer>\",\n    \"dedicated_worker\": \"<boolean>\",\n    \"timeout\": \"<number>\",\n    \"visible_to_runner_only\": \"<boolean>\",\n    \"on_behalf_of_email\": \"<string>\",\n    \"lock_error_logs\": \"<string>\",\n    \"version_id\": \"<number>\",\n    \"has_draft\": \"<boolean>\"\n  },\n  {\n    \"path\": \"<string>\",\n    \"edited_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"archived\": \"<boolean>\",\n    \"extra_perms\": {\n      \"enim__00\": \"<boolean>\",\n      \"aute_0\": \"<boolean>\",\n      \"cupidatatb\": \"<boolean>\"\n    },\n    \"workspace_id\": \"<string>\",\n    \"starred\": \"<boolean>\",\n    \"draft_only\": \"<boolean>\",\n    \"tag\": \"<string>\",\n    \"ws_error_handler_muted\": \"<boolean>\",\n    \"priority\": \"<integer>\",\n    \"dedicated_worker\": \"<boolean>\",\n    \"timeout\": \"<number>\",\n    \"visible_to_runner_only\": \"<boolean>\",\n    \"on_behalf_of_email\": \"<string>\",\n    \"lock_error_logs\": \"<string>\",\n    \"version_id\": \"<number>\",\n    \"has_draft\": \"<boolean>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-24746b9f-5803-4a40-ac31-4d9bdb2688c2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-8fcb0ce6-ba22-4078-ac3e-1a3e69d8c431"
+                    }
+                  ],
+                  "id": "80725ad2-8380-4968-bb7c-22436a03888c",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-80725ad2-8380-4968-bb7c-22436a03888c"
+                },
+                {
+                  "name": "history",
+                  "item": [
+                    {
+                      "name": "p",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Get Flow History by Path",
+                              "id": "64a0af5d-81f0-4495-a5df-954ba3fcba07",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/history/p/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "history",
+                                    "p",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "58675251-c959-45a9-93e0-29d3cd2eac0e",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "b3ccb506-284f-4a42-bfad-21a551861c80",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "f6bbf50f-c6c1-41ad-930c-3ffde8178739",
+                                  "name": "Flow history",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/flows/history/p/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "flows",
+                                        "history",
+                                        "p",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"deployment_msg\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"created_at\": \"<dateTime>\",\n    \"deployment_msg\": \"<string>\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:30:35.000Z",
+                                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                                  "uid": "35240-f6bbf50f-c6c1-41ad-930c-3ffde8178739"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-64a0af5d-81f0-4495-a5df-954ba3fcba07"
+                            }
+                          ],
+                          "id": "ee7f45d4-d77b-4878-a1a4-a76d149ba9fb",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-ee7f45d4-d77b-4878-a1a4-a76d149ba9fb"
+                        }
+                      ],
+                      "id": "83bcb420-d07d-4aa6-8cbe-2c91b2783f3c",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-83bcb420-d07d-4aa6-8cbe-2c91b2783f3c"
+                    }
+                  ],
+                  "id": "4ee7f426-bf83-4c96-bda7-6e675e6b356b",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-4ee7f426-bf83-4c96-bda7-6e675e6b356b"
+                },
+                {
+                  "name": "get_latest_version",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Flow's Latest Version",
+                          "id": "cef95e74-aa5c-4921-9ec7-a66729b775d1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/get_latest_version/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "get_latest_version",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "40322846-10cc-4ff4-801f-2d2d8475ffc5",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "3e3fdd26-013b-492d-a61c-230e68753df4",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b6703d15-987b-4b39-9522-ffbbefa99aba",
+                              "name": "Flow version",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/get_latest_version/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "get_latest_version",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<integer>\",\n  \"created_at\": \"<dateTime>\",\n  \"deployment_msg\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-b6703d15-987b-4b39-9522-ffbbefa99aba"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-cef95e74-aa5c-4921-9ec7-a66729b775d1"
+                        }
+                      ],
+                      "id": "366eddcd-0bbe-440c-9779-d752b0d7efe3",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-366eddcd-0bbe-440c-9779-d752b0d7efe3"
+                    }
+                  ],
+                  "id": "74846275-0ee3-419d-9067-2ed1a7e44c15",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-74846275-0ee3-419d-9067-2ed1a7e44c15"
+                },
+                {
+                  "name": "list_paths_from_workspace_runnable",
+                  "item": [
+                    {
+                      "name": "{runnable_kind}",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "List Flow Paths from Workspace Runnable",
+                              "id": "eeb81760-fec1-42dd-bb71-b8686e6b50be",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/list_paths_from_workspace_runnable/:runnable_kind/:path?match_path_start=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "list_paths_from_workspace_runnable",
+                                    ":runnable_kind",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "match_path_start",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "d7281ae6-3caa-41f1-9c02-b40dceea1b73",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "4ef11e3e-b5d7-47bd-9e5f-1de2a0870bd5",
+                                      "key": "runnable_kind",
+                                      "value": "script",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "cfd8f0cc-9ddc-400a-98b1-a7d3a8092b1c",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "4746dfa1-df65-45e5-b7e9-524b3c3fdf71",
+                                  "name": "list of flow paths",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/flows/list_paths_from_workspace_runnable/:runnable_kind/:path?match_path_start=<boolean>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "flows",
+                                        "list_paths_from_workspace_runnable",
+                                        ":runnable_kind",
+                                        ":path"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "match_path_start",
+                                          "value": "<boolean>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "runnable_kind"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "createdAt": "2026-07-28T03:30:35.000Z",
+                                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                                  "uid": "35240-4746dfa1-df65-45e5-b7e9-524b3c3fdf71"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-eeb81760-fec1-42dd-bb71-b8686e6b50be"
+                            }
+                          ],
+                          "id": "ca1d6ba7-30d4-44e5-83bf-09d7243c33aa",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-ca1d6ba7-30d4-44e5-83bf-09d7243c33aa"
+                        }
+                      ],
+                      "id": "81dc167c-0032-4d96-8e7d-e6b657367a28",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-81dc167c-0032-4d96-8e7d-e6b657367a28"
+                    }
+                  ],
+                  "id": "94f7c475-7ff2-4342-88e4-9bbbe205bc3f",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-94f7c475-7ff2-4342-88e4-9bbbe205bc3f"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "v",
+                      "item": [
+                        {
+                          "name": "{version}",
+                          "item": [
+                            {
+                              "name": "Get Flow Version",
+                              "id": "d94260bc-b72b-4fd9-a53f-da97e309dab8",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/get/v/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "get",
+                                    "v",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1098f36a-0999-4aa2-9235-69f2573a2ff7",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "44de9979-320b-493a-8eef-daea8844fc19",
+                                      "key": "version",
+                                      "value": "<number>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "fe68be83-3247-45c0-86af-d309575e1019",
+                                  "name": "flow details",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/flows/get/v/:version",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "flows",
+                                        "get",
+                                        "v",
+                                        ":version"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"path\": \"<string>\",\n  \"edited_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"archived\": \"<boolean>\",\n  \"extra_perms\": {\n    \"qui1\": \"<boolean>\"\n  },\n  \"workspace_id\": \"<string>\",\n  \"starred\": \"<boolean>\",\n  \"draft_only\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"lock_error_logs\": \"<string>\",\n  \"version_id\": \"<number>\"\n}",
+                                  "createdAt": "2026-07-28T03:30:35.000Z",
+                                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                                  "uid": "35240-fe68be83-3247-45c0-86af-d309575e1019"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-d94260bc-b72b-4fd9-a53f-da97e309dab8"
+                            }
+                          ],
+                          "id": "ba6ee625-fc9a-45cc-bdbc-48d8c393cff6",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-ba6ee625-fc9a-45cc-bdbc-48d8c393cff6"
+                        }
+                      ],
+                      "id": "50ca3c9a-4409-46ef-a582-5dd258424bcb",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-50ca3c9a-4409-46ef-a582-5dd258424bcb"
+                    },
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Flow by Path",
+                          "id": "d9b29a54-b357-49a0-be2d-c64f6d73148c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/get/:path?with_starred_info=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "get",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "key": "with_starred_info",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "da785203-70bb-4199-a411-25674b576b3d",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "ad092437-ad0d-441d-829d-1127066a2b09",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "9a59a29f-13cb-4a3c-a132-f172aa9f64f8",
+                              "name": "flow details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/get/:path?with_starred_info=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "with_starred_info",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"path\": \"<string>\",\n  \"edited_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"archived\": \"<boolean>\",\n  \"extra_perms\": {\n    \"qui1\": \"<boolean>\"\n  },\n  \"workspace_id\": \"<string>\",\n  \"starred\": \"<boolean>\",\n  \"draft_only\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"lock_error_logs\": \"<string>\",\n  \"version_id\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-9a59a29f-13cb-4a3c-a132-f172aa9f64f8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-d9b29a54-b357-49a0-be2d-c64f6d73148c"
+                        }
+                      ],
+                      "id": "0f021549-c35e-43a0-a942-cf2d7ccbd26f",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-0f021549-c35e-43a0-a942-cf2d7ccbd26f"
+                    },
+                    {
+                      "name": "draft",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Get Flow by Path with Draft",
+                              "id": "c70791f8-01be-4e6f-b732-e61466eb283f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/get/draft/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "get",
+                                    "draft",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "749342f6-e4e1-4b93-a26a-bca786836e43",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "b5d7ba7c-629f-44ad-8e75-65a91c58f82f",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "39c6f12c-0095-46b3-a6ad-2ec6efb7a873",
+                                  "name": "flow details with draft",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/flows/get/draft/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "flows",
+                                        "get",
+                                        "draft",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"path\": \"<string>\",\n  \"edited_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"archived\": \"<boolean>\",\n  \"extra_perms\": {\n    \"laborum12\": \"<boolean>\",\n    \"elit_4\": \"<boolean>\",\n    \"Lorem_35e\": \"<boolean>\"\n  },\n  \"workspace_id\": \"<string>\",\n  \"starred\": \"<boolean>\",\n  \"draft_only\": \"<boolean>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"lock_error_logs\": \"<string>\",\n  \"version_id\": \"<number>\",\n  \"draft\": {\n    \"path\": \"<string>\",\n    \"edited_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"archived\": \"<boolean>\",\n    \"extra_perms\": {\n      \"velit_63_\": \"<boolean>\",\n      \"nona06\": \"<boolean>\"\n    },\n    \"workspace_id\": \"<string>\",\n    \"starred\": \"<boolean>\",\n    \"draft_only\": \"<boolean>\",\n    \"tag\": \"<string>\",\n    \"ws_error_handler_muted\": \"<boolean>\",\n    \"priority\": \"<integer>\",\n    \"dedicated_worker\": \"<boolean>\",\n    \"timeout\": \"<number>\",\n    \"visible_to_runner_only\": \"<boolean>\",\n    \"on_behalf_of_email\": \"<string>\",\n    \"lock_error_logs\": \"<string>\",\n    \"version_id\": \"<number>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:30:35.000Z",
+                                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                                  "uid": "35240-39c6f12c-0095-46b3-a6ad-2ec6efb7a873"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-c70791f8-01be-4e6f-b732-e61466eb283f"
+                            }
+                          ],
+                          "id": "13eefb71-8273-488f-a11a-e62a67975f2f",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-13eefb71-8273-488f-a11a-e62a67975f2f"
+                        }
+                      ],
+                      "id": "b0bee3c7-b830-4a67-9e62-83a816fa15e3",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-b0bee3c7-b830-4a67-9e62-83a816fa15e3"
+                    }
+                  ],
+                  "id": "0558e5d7-c573-4927-aca5-53d27c1600f3",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-0558e5d7-c573-4927-aca5-53d27c1600f3"
+                },
+                {
+                  "name": "history_update",
+                  "item": [
+                    {
+                      "name": "v",
+                      "item": [
+                        {
+                          "name": "{version}",
+                          "item": [
+                            {
+                              "name": "Update Flow History",
+                              "id": "d3e24c0b-6853-4ad9-9948-e2c8f6a235c6",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"deployment_msg\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/history_update/v/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "history_update",
+                                    "v",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0d9c00ec-2928-4850-a09e-3d6ab944af07",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "0f6779b3-af4f-403f-a45a-5c1bfb69af87",
+                                      "key": "version",
+                                      "value": "<number>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "c7bce0a9-e2b3-46f5-8170-4eee0d6c497c",
+                                  "name": "success",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"deployment_msg\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/flows/history_update/v/:version",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "flows",
+                                        "history_update",
+                                        "v",
+                                        ":version"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:30:35.000Z",
+                                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                                  "uid": "35240-c7bce0a9-e2b3-46f5-8170-4eee0d6c497c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-d3e24c0b-6853-4ad9-9948-e2c8f6a235c6"
+                            }
+                          ],
+                          "id": "faf6aac3-62ba-4df5-867f-55708578f1df",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-faf6aac3-62ba-4df5-867f-55708578f1df"
+                        }
+                      ],
+                      "id": "e4582ac3-f756-4c03-8a8a-a13703eb82b4",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-e4582ac3-f756-4c03-8a8a-a13703eb82b4"
+                    }
+                  ],
+                  "id": "98c10e67-6025-495a-85d1-989dc653bd7f",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-98c10e67-6025-495a-85d1-989dc653bd7f"
+                },
+                {
+                  "name": "deployment_status",
+                  "item": [
+                    {
+                      "name": "p",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Get Flow Deployment Status",
+                              "id": "088afcc9-a6b4-43c6-bddb-891fb1867c5e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/deployment_status/p/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "deployment_status",
+                                    "p",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "b4555a09-ee0e-468e-84c9-ab49e48fd4f4",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "7ba32957-992d-4722-b580-09dee3d21671",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "73c68f3c-9060-413a-b378-ab0eabfd1202",
+                                  "name": "flow status",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/flows/deployment_status/p/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "flows",
+                                        "deployment_status",
+                                        "p",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"lock_error_logs\": \"<string>\",\n  \"job_id\": \"<uuid>\"\n}",
+                                  "createdAt": "2026-07-28T03:30:35.000Z",
+                                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                                  "uid": "35240-73c68f3c-9060-413a-b378-ab0eabfd1202"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-088afcc9-a6b4-43c6-bddb-891fb1867c5e"
+                            }
+                          ],
+                          "id": "c695dd35-f393-40ae-bda2-e3f2ca0cc477",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-c695dd35-f393-40ae-bda2-e3f2ca0cc477"
+                        }
+                      ],
+                      "id": "da5a902a-ae23-431e-aa06-b754b6b7b43d",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-da5a902a-ae23-431e-aa06-b754b6b7b43d"
+                    }
+                  ],
+                  "id": "240bbf20-f7fe-46b3-838b-78e8a6741518",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-240bbf20-f7fe-46b3-838b-78e8a6741518"
+                },
+                {
+                  "name": "get_triggers_count",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Triggers Count of Flow",
+                          "id": "ad3ec753-89f4-4bdf-907e-243226b89f3a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/get_triggers_count/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "get_triggers_count",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "be551e79-d717-40b1-9657-08a562815dc3",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "d052473d-4a75-41ad-85a6-9a9674ec6af3",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "427dcec4-e894-46e1-8473-44b39fc8fcda",
+                              "name": "triggers count",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/get_triggers_count/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "get_triggers_count",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"primary_schedule\": {\n    \"schedule\": \"<string>\"\n  },\n  \"schedule_count\": \"<number>\",\n  \"http_routes_count\": \"<number>\",\n  \"webhook_count\": \"<number>\",\n  \"email_count\": \"<number>\",\n  \"default_email_count\": \"<number>\",\n  \"websocket_count\": \"<number>\",\n  \"postgres_count\": \"<number>\",\n  \"kafka_count\": \"<number>\",\n  \"nats_count\": \"<number>\",\n  \"mqtt_count\": \"<number>\",\n  \"gcp_count\": \"<number>\",\n  \"azure_count\": \"<number>\",\n  \"sqs_count\": \"<number>\",\n  \"nextcloud_count\": \"<number>\",\n  \"google_count\": \"<number>\",\n  \"github_count\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-427dcec4-e894-46e1-8473-44b39fc8fcda"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-ad3ec753-89f4-4bdf-907e-243226b89f3a"
+                        }
+                      ],
+                      "id": "16e90d48-8a84-4ad1-a2a0-509428e4b62e",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-16e90d48-8a84-4ad1-a2a0-509428e4b62e"
+                    }
+                  ],
+                  "id": "b210c9d6-6d75-4ac5-8342-bc514fb03afd",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-b210c9d6-6d75-4ac5-8342-bc514fb03afd"
+                },
+                {
+                  "name": "list_tokens",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Tokens with Flow Scope",
+                          "id": "2cece845-1b50-4c85-a1fb-8befe4c7374d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/list_tokens/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "list_tokens",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0f4bffb7-b839-424a-8418-973a4db9d65b",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "343313dc-8dca-43d5-b1d1-953e5d4432e8",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "065ff658-6a21-437c-9ad8-34754ddfb8fd",
+                              "name": "tokens list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/list_tokens/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "list_tokens",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"token_prefix\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"last_used_at\": \"<dateTime>\",\n    \"label\": \"<string>\",\n    \"expiration\": \"<dateTime>\",\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"email\": \"<string>\",\n    \"workspace_id\": \"<string>\"\n  },\n  {\n    \"token_prefix\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"last_used_at\": \"<dateTime>\",\n    \"label\": \"<string>\",\n    \"expiration\": \"<dateTime>\",\n    \"scopes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"email\": \"<string>\",\n    \"workspace_id\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-065ff658-6a21-437c-9ad8-34754ddfb8fd"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-2cece845-1b50-4c85-a1fb-8befe4c7374d"
+                        }
+                      ],
+                      "id": "d72095d8-087d-4b34-9d4f-4a66e939c32e",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-d72095d8-087d-4b34-9d4f-4a66e939c32e"
+                    }
+                  ],
+                  "id": "b2919c5c-4e74-44b8-bc25-c34e475208e9",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-b2919c5c-4e74-44b8-bc25-c34e475208e9"
+                },
+                {
+                  "name": "toggle_workspace_error_handler",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Toggle ON and OFF the Workspace Error Handler for a Given Flow",
+                          "id": "43bb3e06-ae86-42a2-9d23-f699958f880e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"muted\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/toggle_workspace_error_handler/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "toggle_workspace_error_handler",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e44b66c9-5478-4a3c-a7a7-da67a91a3e30",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9925b91a-fc8d-4ff2-a31a-4f8e21651e80",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "f1e8a42b-2815-4d4e-9131-12e36789b82d",
+                              "name": "error handler toggled",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"muted\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/toggle_workspace_error_handler/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "toggle_workspace_error_handler",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-f1e8a42b-2815-4d4e-9131-12e36789b82d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-43bb3e06-ae86-42a2-9d23-f699958f880e"
+                        }
+                      ],
+                      "id": "de512bf1-c070-40fc-9b15-90feb3855133",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-de512bf1-c070-40fc-9b15-90feb3855133"
+                    }
+                  ],
+                  "id": "2319d080-fbb5-4f0c-9213-06e435cdb912",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-2319d080-fbb5-4f0c-9213-06e435cdb912"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Exists Flow by Path",
+                          "id": "a9e0e300-954a-41b2-9ddf-0fcd0edde6bd",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/exists/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "exists",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "180b58da-d1ea-4d1f-a488-d32ae1ce84e4",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "781f7f68-fa5d-4720-82a4-c26c7c1d14f5",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d80c7c55-cd58-42a5-ad34-a88366b19255",
+                              "name": "flow details",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-d80c7c55-cd58-42a5-ad34-a88366b19255"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-a9e0e300-954a-41b2-9ddf-0fcd0edde6bd"
+                        }
+                      ],
+                      "id": "c6e67393-f1f2-41f9-a561-80a627e57654",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-c6e67393-f1f2-41f9-a561-80a627e57654"
+                    }
+                  ],
+                  "id": "40a39828-ad9b-4219-8838-c4fa78c29733",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-40a39828-ad9b-4219-8838-c4fa78c29733"
+                },
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Flow",
+                      "id": "5b7e6ed5-bd11-4bef-9ec6-2063f52777b4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"preserve_on_behalf_of\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"draft_only\": \"<boolean>\",\n  \"deployment_message\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/flows/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "flows",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "50c5f96b-c917-4f70-88de-6937256c98cc",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2f2ac371-f4f4-468c-8428-bbd856818549",
+                          "name": "flow created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"preserve_on_behalf_of\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"draft_only\": \"<boolean>\",\n  \"deployment_message\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-2f2ac371-f4f4-468c-8428-bbd856818549"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-5b7e6ed5-bd11-4bef-9ec6-2063f52777b4"
+                    }
+                  ],
+                  "id": "765d926f-6575-4a77-bd06-b8649b5641df",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-765d926f-6575-4a77-bd06-b8649b5641df"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Flow",
+                          "id": "cd25807f-9769-40f1-8ca3-44427bee0377",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"preserve_on_behalf_of\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deployment_message\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/update/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "update",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "04c4dfa2-2b3c-47fe-b582-79cb4bfd343e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "8ca5a7b9-f77d-42eb-9a08-ea0d56bfe79a",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1b65db8d-0e69-488a-bb2e-7666690009aa",
+                              "name": "flow updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"priority\": \"<integer>\",\n  \"dedicated_worker\": \"<boolean>\",\n  \"timeout\": \"<number>\",\n  \"visible_to_runner_only\": \"<boolean>\",\n  \"on_behalf_of_email\": \"<string>\",\n  \"preserve_on_behalf_of\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"deployment_message\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/update/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-1b65db8d-0e69-488a-bb2e-7666690009aa"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-cd25807f-9769-40f1-8ca3-44427bee0377"
+                        }
+                      ],
+                      "id": "eae060a0-45ad-4a27-bcfc-ef18e9661867",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-eae060a0-45ad-4a27-bcfc-ef18e9661867"
+                    }
+                  ],
+                  "id": "c0fd4b59-ab4e-43c9-8ca4-c11c8a32eb41",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-c0fd4b59-ab4e-43c9-8ca4-c11c8a32eb41"
+                },
+                {
+                  "name": "archive",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Archive Flow by Path",
+                          "id": "1a3146a1-d1fc-406b-ad71-337be0a3e7ee",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"archived\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/archive/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "archive",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "821f285f-60b0-412e-9468-3e1a3efc3619",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "2ec9ded6-3e1d-4b4b-83f4-234f24c37d32",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d2c2a6e0-a8d2-4a20-8df0-70f0737a28db",
+                              "name": "flow archived",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"archived\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/archive/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "archive",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-d2c2a6e0-a8d2-4a20-8df0-70f0737a28db"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-1a3146a1-d1fc-406b-ad71-337be0a3e7ee"
+                        }
+                      ],
+                      "id": "0965ed82-d319-4c72-9ed7-43bc0d1c97c3",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-0965ed82-d319-4c72-9ed7-43bc0d1c97c3"
+                    }
+                  ],
+                  "id": "3359191f-ca57-4def-aa49-960475ef1db5",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-3359191f-ca57-4def-aa49-960475ef1db5"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Delete Flow by Path",
+                          "id": "812f34fe-fe2f-4150-8551-635bb376679d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/flows/delete/:path?keep_captures=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "flows",
+                                "delete",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "description": "keep captures",
+                                  "key": "keep_captures",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0f380981-5e53-4f57-acaf-c2e3eb246835",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "1628fad6-b749-4050-9589-069039b404f6",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "5822e1ec-a7b4-4fe5-ab24-055ab7b70a14",
+                              "name": "flow delete",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/flows/delete/:path?keep_captures=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "flows",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "keep captures",
+                                      "key": "keep_captures",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:35.000Z",
+                              "updatedAt": "2026-07-28T03:30:35.000Z",
+                              "uid": "35240-5822e1ec-a7b4-4fe5-ab24-055ab7b70a14"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:35.000Z",
+                          "updatedAt": "2026-07-28T03:30:35.000Z",
+                          "uid": "35240-812f34fe-fe2f-4150-8551-635bb376679d"
+                        }
+                      ],
+                      "id": "dc395924-7677-4456-af55-9a05218f1643",
+                      "createdAt": "2026-07-28T03:30:35.000Z",
+                      "updatedAt": "2026-07-28T03:30:35.000Z",
+                      "uid": "35240-dc395924-7677-4456-af55-9a05218f1643"
+                    }
+                  ],
+                  "id": "86418877-7c1f-4ae4-b97e-03ac509a775c",
+                  "createdAt": "2026-07-28T03:30:35.000Z",
+                  "updatedAt": "2026-07-28T03:30:35.000Z",
+                  "uid": "35240-86418877-7c1f-4ae4-b97e-03ac509a775c"
+                }
+              ],
+              "id": "fd14f1a6-d220-49c7-9adb-976ed2cb9385",
+              "createdAt": "2026-07-28T03:30:35.000Z",
+              "updatedAt": "2026-07-28T03:30:35.000Z",
+              "uid": "35240-fd14f1a6-d220-49c7-9adb-976ed2cb9385"
+            }
+          ],
+          "id": "b02aa67a-3f09-45c3-90e2-0b0b9ecb2166",
+          "createdAt": "2026-07-28T03:30:35.000Z",
+          "updatedAt": "2026-07-28T03:30:35.000Z",
+          "uid": "35240-b02aa67a-3f09-45c3-90e2-0b0b9ecb2166"
+        }
+      ],
+      "id": "e130a71f-c0f3-4ee8-a050-6f439dc9588d",
+      "createdAt": "2026-07-28T03:30:35.000Z",
+      "updatedAt": "2026-07-28T03:30:35.000Z",
+      "uid": "35240-e130a71f-c0f3-4ee8-a050-6f439dc9588d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

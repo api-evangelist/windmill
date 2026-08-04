@@ -1,0 +1,261 @@
+{
+  "info": {
+    "_postman_id": "9355025a-24f2-412b-a3f5-7901e9e029ca",
+    "name": "Windmill admin service_logs API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:35.000Z",
+    "updatedAt": "2026-07-28T03:31:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9355025a-24f2-412b-a3f5-7901e9e029ca"
+  },
+  "item": [
+    {
+      "name": "service_logs",
+      "item": [
+        {
+          "name": "list_files",
+          "item": [
+            {
+              "name": "List Log Files Ordered by Timestamp",
+              "id": "07facb17-66af-4b47-a462-d87971f84317",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/service_logs/list_files?before=<dateTime>&after=<dateTime>&with_error=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "service_logs",
+                    "list_files"
+                  ],
+                  "query": [
+                    {
+                      "description": "filter on started before (inclusive) timestamp",
+                      "key": "before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "description": "filter on created after (exclusive) timestamp",
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "with_error",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "9ab4524b-7113-4d8a-b120-7fe9eecc4bcb",
+                  "name": "time",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service_logs/list_files?before=<dateTime>&after=<dateTime>&with_error=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_logs",
+                        "list_files"
+                      ],
+                      "query": [
+                        {
+                          "description": "filter on started before (inclusive) timestamp",
+                          "key": "before",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "filter on created after (exclusive) timestamp",
+                          "key": "after",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "with_error",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"hostname\": \"<string>\",\n    \"mode\": \"<string>\",\n    \"log_ts\": \"<dateTime>\",\n    \"file_path\": \"<string>\",\n    \"json_fmt\": \"<boolean>\",\n    \"worker_group\": \"<string>\",\n    \"ok_lines\": \"<integer>\",\n    \"err_lines\": \"<integer>\"\n  },\n  {\n    \"hostname\": \"<string>\",\n    \"mode\": \"<string>\",\n    \"log_ts\": \"<dateTime>\",\n    \"file_path\": \"<string>\",\n    \"json_fmt\": \"<boolean>\",\n    \"worker_group\": \"<string>\",\n    \"ok_lines\": \"<integer>\",\n    \"err_lines\": \"<integer>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:31:36.000Z",
+                  "updatedAt": "2026-07-28T03:31:36.000Z",
+                  "uid": "35240-9ab4524b-7113-4d8a-b120-7fe9eecc4bcb"
+                }
+              ],
+              "createdAt": "2026-07-28T03:31:36.000Z",
+              "updatedAt": "2026-07-28T03:31:36.000Z",
+              "uid": "35240-07facb17-66af-4b47-a462-d87971f84317"
+            }
+          ],
+          "id": "c8df1555-ca46-4cd6-8e34-acbd99912b34",
+          "createdAt": "2026-07-28T03:31:36.000Z",
+          "updatedAt": "2026-07-28T03:31:36.000Z",
+          "uid": "35240-c8df1555-ca46-4cd6-8e34-acbd99912b34"
+        },
+        {
+          "name": "get_log_file",
+          "item": [
+            {
+              "name": "{path}",
+              "item": [
+                {
+                  "name": "Get Log File by Path",
+                  "id": "6853b7a1-feb3-4aa1-b2eb-ea3a01f0886a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/service_logs/get_log_file/:path",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "service_logs",
+                        "get_log_file",
+                        ":path"
+                      ],
+                      "variable": [
+                        {
+                          "id": "83dad50b-bf10-490a-b516-6f33927cf280",
+                          "key": "path",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cffd53f8-2be7-494d-bd14-b55f0cc3fea4",
+                      "name": "log stream",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/service_logs/get_log_file/:path",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "service_logs",
+                            "get_log_file",
+                            ":path"
+                          ],
+                          "variable": [
+                            {
+                              "key": "path"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:31:36.000Z",
+                      "updatedAt": "2026-07-28T03:31:36.000Z",
+                      "uid": "35240-cffd53f8-2be7-494d-bd14-b55f0cc3fea4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:36.000Z",
+                  "updatedAt": "2026-07-28T03:31:36.000Z",
+                  "uid": "35240-6853b7a1-feb3-4aa1-b2eb-ea3a01f0886a"
+                }
+              ],
+              "id": "d419daa3-6097-43ce-85bd-7dff1be6caeb",
+              "createdAt": "2026-07-28T03:31:36.000Z",
+              "updatedAt": "2026-07-28T03:31:36.000Z",
+              "uid": "35240-d419daa3-6097-43ce-85bd-7dff1be6caeb"
+            }
+          ],
+          "id": "b820b392-1584-442c-a46c-9bc14a5e7fab",
+          "createdAt": "2026-07-28T03:31:36.000Z",
+          "updatedAt": "2026-07-28T03:31:36.000Z",
+          "uid": "35240-b820b392-1584-442c-a46c-9bc14a5e7fab"
+        }
+      ],
+      "id": "6d03e696-2c20-4970-b44c-8c120ddf20c6",
+      "createdAt": "2026-07-28T03:31:36.000Z",
+      "updatedAt": "2026-07-28T03:31:36.000Z",
+      "uid": "35240-6d03e696-2c20-4970-b44c-8c120ddf20c6"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

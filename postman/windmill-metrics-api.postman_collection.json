@@ -1,0 +1,473 @@
+{
+  "info": {
+    "_postman_id": "02442a85-577e-4c00-b74e-0585e8f942d5",
+    "name": "Windmill admin metrics API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:21.000Z",
+    "updatedAt": "2026-07-28T03:31:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-02442a85-577e-4c00-b74e-0585e8f942d5"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "job_metrics",
+              "item": [
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Get Job Metrics",
+                          "id": "b754cb4d-90ea-44f5-9621-72767db1321b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"timeseries_max_datapoints\": \"<integer>\",\n  \"from_timestamp\": \"<dateTime>\",\n  \"to_timestamp\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_metrics/get/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_metrics",
+                                "get",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e5938da9-eb17-4d05-8df2-5af3aa759c65",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "32f5c7d4-de8b-4198-9d96-b86e0d68fc42",
+                                  "key": "id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d2ebfdd5-1895-42ce-af0a-c8442a35674e",
+                              "name": "job details",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"timeseries_max_datapoints\": \"<integer>\",\n  \"from_timestamp\": \"<dateTime>\",\n  \"to_timestamp\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_metrics/get/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_metrics",
+                                    "get",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"metrics_metadata\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"scalar_metrics\": [\n    {\n      \"value\": \"<number>\",\n      \"metric_id\": \"<string>\"\n    },\n    {\n      \"value\": \"<number>\",\n      \"metric_id\": \"<string>\"\n    }\n  ],\n  \"timeseries_metrics\": [\n    {\n      \"values\": [\n        {\n          \"timestamp\": \"<dateTime>\",\n          \"value\": \"<number>\"\n        },\n        {\n          \"timestamp\": \"<dateTime>\",\n          \"value\": \"<number>\"\n        }\n      ],\n      \"metric_id\": \"<string>\"\n    },\n    {\n      \"values\": [\n        {\n          \"timestamp\": \"<dateTime>\",\n          \"value\": \"<number>\"\n        },\n        {\n          \"timestamp\": \"<dateTime>\",\n          \"value\": \"<number>\"\n        }\n      ],\n      \"metric_id\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:31:21.000Z",
+                              "updatedAt": "2026-07-28T03:31:21.000Z",
+                              "uid": "35240-d2ebfdd5-1895-42ce-af0a-c8442a35674e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:21.000Z",
+                          "updatedAt": "2026-07-28T03:31:21.000Z",
+                          "uid": "35240-b754cb4d-90ea-44f5-9621-72767db1321b"
+                        }
+                      ],
+                      "id": "8d32e190-caab-4f80-9c60-fdff3ce15970",
+                      "createdAt": "2026-07-28T03:31:21.000Z",
+                      "updatedAt": "2026-07-28T03:31:21.000Z",
+                      "uid": "35240-8d32e190-caab-4f80-9c60-fdff3ce15970"
+                    }
+                  ],
+                  "id": "10be63c8-4c17-4a89-b01d-4d62eb758c8f",
+                  "createdAt": "2026-07-28T03:31:21.000Z",
+                  "updatedAt": "2026-07-28T03:31:21.000Z",
+                  "uid": "35240-10be63c8-4c17-4a89-b01d-4d62eb758c8f"
+                },
+                {
+                  "name": "set_progress",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Set Job Metrics",
+                          "id": "8da28f04-8c65-44ed-89f9-acfd2f566532",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"percent\": \"<integer>\",\n  \"flow_job_id\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_metrics/set_progress/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_metrics",
+                                "set_progress",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c6e558ed-bd4c-444a-b401-97bdfa21b101",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "12ca098c-26c1-434e-ae5d-6b285976e170",
+                                  "key": "id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "c91431f4-51a4-42fc-8dba-ad1dbaf35c2f",
+                              "name": "Job progress updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"percent\": \"<integer>\",\n  \"flow_job_id\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_metrics/set_progress/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_metrics",
+                                    "set_progress",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T03:31:21.000Z",
+                              "updatedAt": "2026-07-28T03:31:21.000Z",
+                              "uid": "35240-c91431f4-51a4-42fc-8dba-ad1dbaf35c2f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:21.000Z",
+                          "updatedAt": "2026-07-28T03:31:21.000Z",
+                          "uid": "35240-8da28f04-8c65-44ed-89f9-acfd2f566532"
+                        }
+                      ],
+                      "id": "7af9ecff-9683-4407-b492-91fac6b2e638",
+                      "createdAt": "2026-07-28T03:31:21.000Z",
+                      "updatedAt": "2026-07-28T03:31:21.000Z",
+                      "uid": "35240-7af9ecff-9683-4407-b492-91fac6b2e638"
+                    }
+                  ],
+                  "id": "98956555-560c-4df2-818c-b18b20d44643",
+                  "createdAt": "2026-07-28T03:31:21.000Z",
+                  "updatedAt": "2026-07-28T03:31:21.000Z",
+                  "uid": "35240-98956555-560c-4df2-818c-b18b20d44643"
+                },
+                {
+                  "name": "get_progress",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Get Job Progress",
+                          "id": "6e6d05df-2413-4241-ab42-90dd6d958b48",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_metrics/get_progress/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_metrics",
+                                "get_progress",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1d959dd8-947d-4fe1-94e8-95cc17c04ec1",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "7ec107bd-cbe6-4f15-a1a0-b16b0bbaa4ef",
+                                  "key": "id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1ad7922d-3235-489c-b821-577df0d787a0",
+                              "name": "job progress between 0 and 99",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_metrics/get_progress/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_metrics",
+                                    "get_progress",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<integer>",
+                              "createdAt": "2026-07-28T03:31:21.000Z",
+                              "updatedAt": "2026-07-28T03:31:21.000Z",
+                              "uid": "35240-1ad7922d-3235-489c-b821-577df0d787a0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:21.000Z",
+                          "updatedAt": "2026-07-28T03:31:21.000Z",
+                          "uid": "35240-6e6d05df-2413-4241-ab42-90dd6d958b48"
+                        }
+                      ],
+                      "id": "612a747b-52a3-4308-bd29-279be42dc1e3",
+                      "createdAt": "2026-07-28T03:31:21.000Z",
+                      "updatedAt": "2026-07-28T03:31:21.000Z",
+                      "uid": "35240-612a747b-52a3-4308-bd29-279be42dc1e3"
+                    }
+                  ],
+                  "id": "d3717e96-a72e-4dc9-977b-673cdcdf871b",
+                  "createdAt": "2026-07-28T03:31:21.000Z",
+                  "updatedAt": "2026-07-28T03:31:21.000Z",
+                  "uid": "35240-d3717e96-a72e-4dc9-977b-673cdcdf871b"
+                }
+              ],
+              "id": "6fd1933c-2e4d-4d8a-8364-553ab0c63984",
+              "createdAt": "2026-07-28T03:31:21.000Z",
+              "updatedAt": "2026-07-28T03:31:21.000Z",
+              "uid": "35240-6fd1933c-2e4d-4d8a-8364-553ab0c63984"
+            }
+          ],
+          "id": "dd94d7c0-bb35-4123-aab5-832db7a0fed3",
+          "createdAt": "2026-07-28T03:31:21.000Z",
+          "updatedAt": "2026-07-28T03:31:21.000Z",
+          "uid": "35240-dd94d7c0-bb35-4123-aab5-832db7a0fed3"
+        }
+      ],
+      "id": "d3168484-4fb6-40fe-97ce-d5f5dfa0c343",
+      "createdAt": "2026-07-28T03:31:21.000Z",
+      "updatedAt": "2026-07-28T03:31:21.000Z",
+      "uid": "35240-d3168484-4fb6-40fe-97ce-d5f5dfa0c343"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

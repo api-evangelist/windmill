@@ -1,0 +1,822 @@
+{
+  "info": {
+    "_postman_id": "8bb30483-da72-42ea-b233-08541f72676d",
+    "name": "Windmill admin Git Sync API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:43.000Z",
+    "updatedAt": "2026-07-28T03:30:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8bb30483-da72-42ea-b233-08541f72676d"
+  },
+  "item": [
+    {
+      "name": "github_app",
+      "item": [
+        {
+          "name": "connected_repositories",
+          "item": [
+            {
+              "name": "Get Connected Repositories",
+              "id": "4418730d-697c-4b7d-8942-697307f0819e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/github_app/connected_repositories?page=1",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "github_app",
+                    "connected_repositories"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number for pagination (default 1)",
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "78e61858-02e9-4880-b5d8-b369f5c2cb40",
+                  "name": "connected repositories",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/github_app/connected_repositories?page=1",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "github_app",
+                        "connected_repositories"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination (default 1)",
+                          "key": "page",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"installation_id\": \"<number>\",\n    \"account_id\": \"<string>\",\n    \"repositories\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<number>\",\n    \"per_page\": \"<number>\",\n    \"workspace_id\": \"<string>\",\n    \"error\": \"<string>\"\n  },\n  {\n    \"installation_id\": \"<number>\",\n    \"account_id\": \"<string>\",\n    \"repositories\": [\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"url\": \"<string>\"\n      }\n    ],\n    \"total_count\": \"<number>\",\n    \"per_page\": \"<number>\",\n    \"workspace_id\": \"<string>\",\n    \"error\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-78e61858-02e9-4880-b5d8-b369f5c2cb40"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:43.000Z",
+              "updatedAt": "2026-07-28T03:30:43.000Z",
+              "uid": "35240-4418730d-697c-4b7d-8942-697307f0819e"
+            }
+          ],
+          "id": "33cae62c-0b92-410e-a795-d61f0e34611b",
+          "createdAt": "2026-07-28T03:30:43.000Z",
+          "updatedAt": "2026-07-28T03:30:43.000Z",
+          "uid": "35240-33cae62c-0b92-410e-a795-d61f0e34611b"
+        },
+        {
+          "name": "ghes_config",
+          "item": [
+            {
+              "name": "Get GHES App Config",
+              "id": "85622ee2-0ebe-4125-a5e5-d76ac9974905",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/github_app/ghes_config",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "github_app",
+                    "ghes_config"
+                  ]
+                },
+                "description": "Returns the GitHub Enterprise Server app configuration (without private key) for constructing the installation URL"
+              },
+              "response": [
+                {
+                  "id": "d6ce7d05-baa7-4497-a530-69af15581d8b",
+                  "name": "GHES app configuration",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/github_app/ghes_config",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "github_app",
+                        "ghes_config"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"base_url\": \"<string>\",\n  \"app_slug\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"app_owner\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-d6ce7d05-baa7-4497-a530-69af15581d8b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:43.000Z",
+              "updatedAt": "2026-07-28T03:30:43.000Z",
+              "uid": "35240-85622ee2-0ebe-4125-a5e5-d76ac9974905"
+            }
+          ],
+          "id": "bc291bfa-a2db-41f9-8255-4f4b1b493d6f",
+          "createdAt": "2026-07-28T03:30:43.000Z",
+          "updatedAt": "2026-07-28T03:30:43.000Z",
+          "uid": "35240-bc291bfa-a2db-41f9-8255-4f4b1b493d6f"
+        }
+      ],
+      "id": "f5853db0-24e3-4e7a-8bf5-c87852ce4db2",
+      "createdAt": "2026-07-28T03:30:43.000Z",
+      "updatedAt": "2026-07-28T03:30:43.000Z",
+      "uid": "35240-f5853db0-24e3-4e7a-8bf5-c87852ce4db2"
+    },
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "github_app",
+              "item": [
+                {
+                  "name": "install_from_workspace",
+                  "item": [
+                    {
+                      "name": "Install a GitHub Installation from Another Workspace",
+                      "id": "8bbb0c33-9d5d-4cc0-a911-aeeb6d94e0a1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"source_workspace_id\": \"<string>\",\n  \"installation_id\": \"<number>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/github_app/install_from_workspace",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "github_app",
+                            "install_from_workspace"
+                          ],
+                          "variable": [
+                            {
+                              "id": "9f7724f7-92f2-4cdd-be4d-ad8f6b6f6995",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "270ef287-cc7d-4f1b-ab65-c5b887a0bd5a",
+                          "name": "Installation successfully copied",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"source_workspace_id\": \"<string>\",\n  \"installation_id\": \"<number>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/github_app/install_from_workspace",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "github_app",
+                                "install_from_workspace"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:30:43.000Z",
+                          "updatedAt": "2026-07-28T03:30:43.000Z",
+                          "uid": "35240-270ef287-cc7d-4f1b-ab65-c5b887a0bd5a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:43.000Z",
+                      "updatedAt": "2026-07-28T03:30:43.000Z",
+                      "uid": "35240-8bbb0c33-9d5d-4cc0-a911-aeeb6d94e0a1"
+                    }
+                  ],
+                  "id": "b0e4b8fa-408e-4938-b32f-b8fa2ee3f5a1",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-b0e4b8fa-408e-4938-b32f-b8fa2ee3f5a1"
+                },
+                {
+                  "name": "installation",
+                  "item": [
+                    {
+                      "name": "{installation_id}",
+                      "item": [
+                        {
+                          "name": "Delete a GitHub Installation from a Workspace",
+                          "id": "78d8dfb9-b79a-499b-9516-88a7c5bb9403",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/github_app/installation/:installation_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "github_app",
+                                "installation",
+                                ":installation_id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "dd4cec5d-a820-4119-b247-2e2c43ae28f6",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "5e403013-f5bb-453c-9f84-7ff646f0ad35",
+                                  "key": "installation_id",
+                                  "value": "<long>",
+                                  "description": "(Required) The ID of the GitHub installation to delete"
+                                }
+                              ]
+                            },
+                            "description": "Removes a GitHub installation from the specified workspace. Requires admin privileges."
+                          },
+                          "response": [
+                            {
+                              "id": "646f153e-e1f9-41db-90ed-447db454b46e",
+                              "name": "Installation successfully deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/github_app/installation/:installation_id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "github_app",
+                                    "installation",
+                                    ":installation_id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "installation_id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:30:43.000Z",
+                              "updatedAt": "2026-07-28T03:30:43.000Z",
+                              "uid": "35240-646f153e-e1f9-41db-90ed-447db454b46e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:43.000Z",
+                          "updatedAt": "2026-07-28T03:30:43.000Z",
+                          "uid": "35240-78d8dfb9-b79a-499b-9516-88a7c5bb9403"
+                        }
+                      ],
+                      "id": "608d9aac-f456-417f-a7fe-f954c45fa529",
+                      "createdAt": "2026-07-28T03:30:43.000Z",
+                      "updatedAt": "2026-07-28T03:30:43.000Z",
+                      "uid": "35240-608d9aac-f456-417f-a7fe-f954c45fa529"
+                    }
+                  ],
+                  "id": "e56b1859-424a-4236-bdce-66072c7e28be",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-e56b1859-424a-4236-bdce-66072c7e28be"
+                },
+                {
+                  "name": "export",
+                  "item": [
+                    {
+                      "name": "{installationId}",
+                      "item": [
+                        {
+                          "name": "Export GitHub Installation JWT Token",
+                          "id": "5615d1f1-579e-4b1e-9054-f1b19ce51baa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/github_app/export/:installationId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "github_app",
+                                "export",
+                                ":installationId"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "67c59aba-9587-48cd-8f40-b340b6605f12",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "b4f8b85b-121a-43eb-9a02-5719058ad83b",
+                                  "key": "installationId",
+                                  "value": "<integer>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Exports the JWT token for a specific GitHub installation in the workspace"
+                          },
+                          "response": [
+                            {
+                              "id": "d6f7621c-103f-4928-b154-6197b5ab040b",
+                              "name": "Successfully exported the JWT token",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/github_app/export/:installationId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "github_app",
+                                    "export",
+                                    ":installationId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "installationId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"jwt_token\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:30:43.000Z",
+                              "updatedAt": "2026-07-28T03:30:43.000Z",
+                              "uid": "35240-d6f7621c-103f-4928-b154-6197b5ab040b"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:43.000Z",
+                          "updatedAt": "2026-07-28T03:30:43.000Z",
+                          "uid": "35240-5615d1f1-579e-4b1e-9054-f1b19ce51baa"
+                        }
+                      ],
+                      "id": "b81a8133-62dc-4929-b057-6a605b1700ac",
+                      "createdAt": "2026-07-28T03:30:43.000Z",
+                      "updatedAt": "2026-07-28T03:30:43.000Z",
+                      "uid": "35240-b81a8133-62dc-4929-b057-6a605b1700ac"
+                    }
+                  ],
+                  "id": "7b5146b4-4808-4433-9cf4-742db6d7ca99",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-7b5146b4-4808-4433-9cf4-742db6d7ca99"
+                },
+                {
+                  "name": "import",
+                  "item": [
+                    {
+                      "name": "Import GitHub Installation from JWT Token",
+                      "id": "d0df5d40-0fc7-4968-b7b3-fcd76ec6189d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"jwt_token\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/github_app/import",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "github_app",
+                            "import"
+                          ],
+                          "variable": [
+                            {
+                              "id": "71e17b84-b7f4-407f-8e91-845ff0d5d328",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Imports a GitHub installation from a JWT token exported from another instance"
+                      },
+                      "response": [
+                        {
+                          "id": "901b92a7-31cb-4301-89e8-125a7aa728ac",
+                          "name": "Successfully imported the installation",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"jwt_token\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/github_app/import",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "github_app",
+                                "import"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:30:43.000Z",
+                          "updatedAt": "2026-07-28T03:30:43.000Z",
+                          "uid": "35240-901b92a7-31cb-4301-89e8-125a7aa728ac"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:43.000Z",
+                      "updatedAt": "2026-07-28T03:30:43.000Z",
+                      "uid": "35240-d0df5d40-0fc7-4968-b7b3-fcd76ec6189d"
+                    }
+                  ],
+                  "id": "fb8761fc-378b-4c8a-b0b6-15e684789024",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-fb8761fc-378b-4c8a-b0b6-15e684789024"
+                },
+                {
+                  "name": "ghes_installation_callback",
+                  "item": [
+                    {
+                      "name": "GHES Installation Callback",
+                      "id": "a3f19e72-3ddd-4398-8dd9-99e0c0b82cd8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"installation_id\": \"<long>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/github_app/ghes_installation_callback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "github_app",
+                            "ghes_installation_callback"
+                          ],
+                          "variable": [
+                            {
+                              "id": "feb72b29-0638-48e1-a867-423dc5fef2ef",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Register a self-managed GitHub App installation from GitHub Enterprise Server"
+                      },
+                      "response": [
+                        {
+                          "id": "ebab1eea-a96e-4352-8a16-36d4e681102d",
+                          "name": "GHES installation registered successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"installation_id\": \"<long>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/github_app/ghes_installation_callback",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "github_app",
+                                "ghes_installation_callback"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:30:43.000Z",
+                          "updatedAt": "2026-07-28T03:30:43.000Z",
+                          "uid": "35240-ebab1eea-a96e-4352-8a16-36d4e681102d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:43.000Z",
+                      "updatedAt": "2026-07-28T03:30:43.000Z",
+                      "uid": "35240-a3f19e72-3ddd-4398-8dd9-99e0c0b82cd8"
+                    }
+                  ],
+                  "id": "a7f2bbd2-494c-49fb-bdee-ccef9ad103a8",
+                  "createdAt": "2026-07-28T03:30:43.000Z",
+                  "updatedAt": "2026-07-28T03:30:43.000Z",
+                  "uid": "35240-a7f2bbd2-494c-49fb-bdee-ccef9ad103a8"
+                }
+              ],
+              "id": "1085952d-5ac4-4f8e-a8ce-9131f01528c6",
+              "createdAt": "2026-07-28T03:30:43.000Z",
+              "updatedAt": "2026-07-28T03:30:43.000Z",
+              "uid": "35240-1085952d-5ac4-4f8e-a8ce-9131f01528c6"
+            }
+          ],
+          "id": "b98cc983-e7f4-4190-af98-dfa25de3b56f",
+          "createdAt": "2026-07-28T03:30:43.000Z",
+          "updatedAt": "2026-07-28T03:30:43.000Z",
+          "uid": "35240-b98cc983-e7f4-4190-af98-dfa25de3b56f"
+        }
+      ],
+      "id": "8ace1e57-3bb3-4640-8cbc-b273477b2c47",
+      "createdAt": "2026-07-28T03:30:43.000Z",
+      "updatedAt": "2026-07-28T03:30:43.000Z",
+      "uid": "35240-8ace1e57-3bb3-4640-8cbc-b273477b2c47"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "info": {
+    "_postman_id": "f9efada1-64c5-42ea-9050-9adab3997467",
+    "name": "Windmill admin token API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:41.000Z",
+    "updatedAt": "2026-07-28T03:31:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f9efada1-64c5-42ea-9050-9adab3997467"
+  },
+  "item": [
+    {
+      "name": "tokens",
+      "item": [
+        {
+          "name": "list",
+          "item": [
+            {
+              "name": "scopes",
+              "item": [
+                {
+                  "name": "List of Available Scopes",
+                  "id": "1c42cdf7-f7c8-4e1b-bc8e-6dcadff89098",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/list/scopes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        "list",
+                        "scopes"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "f20a8dc4-49df-4191-ae92-53bc478adf07",
+                      "name": "list of available scopes",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/tokens/list/scopes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "tokens",
+                            "list",
+                            "scopes"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"name\": \"<string>\",\n    \"scopes\": [\n      {\n        \"value\": \"<string>\",\n        \"label\": \"<string>\",\n        \"requires_resource_path\": \"<boolean>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\",\n        \"label\": \"<string>\",\n        \"requires_resource_path\": \"<boolean>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"scopes\": [\n      {\n        \"value\": \"<string>\",\n        \"label\": \"<string>\",\n        \"requires_resource_path\": \"<boolean>\",\n        \"description\": \"<string>\"\n      },\n      {\n        \"value\": \"<string>\",\n        \"label\": \"<string>\",\n        \"requires_resource_path\": \"<boolean>\",\n        \"description\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:31:41.000Z",
+                      "updatedAt": "2026-07-28T03:31:41.000Z",
+                      "uid": "35240-f20a8dc4-49df-4191-ae92-53bc478adf07"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:41.000Z",
+                  "updatedAt": "2026-07-28T03:31:41.000Z",
+                  "uid": "35240-1c42cdf7-f7c8-4e1b-bc8e-6dcadff89098"
+                }
+              ],
+              "id": "0305d0e0-1fda-4b0c-826e-7eafe4606419",
+              "createdAt": "2026-07-28T03:31:41.000Z",
+              "updatedAt": "2026-07-28T03:31:41.000Z",
+              "uid": "35240-0305d0e0-1fda-4b0c-826e-7eafe4606419"
+            }
+          ],
+          "id": "53338c8b-7af3-4332-93ab-c790ee5998b7",
+          "createdAt": "2026-07-28T03:31:41.000Z",
+          "updatedAt": "2026-07-28T03:31:41.000Z",
+          "uid": "35240-53338c8b-7af3-4332-93ab-c790ee5998b7"
+        }
+      ],
+      "id": "4bd95b14-c189-4bd1-ae3a-027c05851f5c",
+      "createdAt": "2026-07-28T03:31:41.000Z",
+      "updatedAt": "2026-07-28T03:31:41.000Z",
+      "uid": "35240-4bd95b14-c189-4bd1-ae3a-027c05851f5c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

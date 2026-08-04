@@ -1,0 +1,147 @@
+{
+  "info": {
+    "_postman_id": "c81a341d-8a16-4fee-8d27-be120ec8f066",
+    "name": "Windmill admin integration API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:59.000Z",
+    "updatedAt": "2026-07-28T03:30:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c81a341d-8a16-4fee-8d27-be120ec8f066"
+  },
+  "item": [
+    {
+      "name": "integrations",
+      "item": [
+        {
+          "name": "hub",
+          "item": [
+            {
+              "name": "list",
+              "item": [
+                {
+                  "name": "List Hub Integrations",
+                  "id": "c14d1309-688c-4c85-bd8c-fee98c5a88c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/integrations/hub/list?kind=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "integrations",
+                        "hub",
+                        "list"
+                      ],
+                      "query": [
+                        {
+                          "description": "query integrations kind",
+                          "key": "kind",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "d36cf5e2-ecb1-4e89-bd44-c270c7adf97d",
+                      "name": "integrations details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/integrations/hub/list?kind=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "integrations",
+                            "hub",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "query integrations kind",
+                              "key": "kind",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"name\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\"\n  }\n]",
+                      "createdAt": "2026-07-28T03:31:00.000Z",
+                      "updatedAt": "2026-07-28T03:31:00.000Z",
+                      "uid": "35240-d36cf5e2-ecb1-4e89-bd44-c270c7adf97d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:00.000Z",
+                  "updatedAt": "2026-07-28T03:31:00.000Z",
+                  "uid": "35240-c14d1309-688c-4c85-bd8c-fee98c5a88c5"
+                }
+              ],
+              "id": "e2dd7a0d-a349-488a-b60a-af554da892f7",
+              "createdAt": "2026-07-28T03:31:00.000Z",
+              "updatedAt": "2026-07-28T03:31:00.000Z",
+              "uid": "35240-e2dd7a0d-a349-488a-b60a-af554da892f7"
+            }
+          ],
+          "id": "9d707656-0de6-4a49-85f8-0a8d2ad7aa8b",
+          "createdAt": "2026-07-28T03:31:00.000Z",
+          "updatedAt": "2026-07-28T03:31:00.000Z",
+          "uid": "35240-9d707656-0de6-4a49-85f8-0a8d2ad7aa8b"
+        }
+      ],
+      "id": "dcae15c3-8a68-4aed-a756-e15494abd698",
+      "createdAt": "2026-07-28T03:31:00.000Z",
+      "updatedAt": "2026-07-28T03:31:00.000Z",
+      "uid": "35240-dcae15c3-8a68-4aed-a756-e15494abd698"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

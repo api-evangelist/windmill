@@ -1,0 +1,138 @@
+{
+  "info": {
+    "_postman_id": "2df6e3e3-eac2-4b31-91bf-915a8c76f9c6",
+    "name": "Windmill admin teams API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:40.000Z",
+    "updatedAt": "2026-07-28T03:31:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2df6e3e3-eac2-4b31-91bf-915a8c76f9c6"
+  },
+  "item": [
+    {
+      "name": "teams",
+      "item": [
+        {
+          "name": "activities",
+          "item": [
+            {
+              "name": "Send Update to Microsoft Teams Activity",
+              "id": "d2934436-58d2-435d-af9a-a8adad6e915c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"conversation_id\": \"<string>\",\n  \"text\": \"<string>\",\n  \"success\": true,\n  \"card_block\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/teams/activities",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "teams",
+                    "activities"
+                  ]
+                },
+                "description": "Respond to a Microsoft Teams activity after a workspace command is run"
+              },
+              "response": [
+                {
+                  "id": "b3ab2bdb-6243-4678-ad00-f460fe0f202b",
+                  "name": "Activity processed successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"conversation_id\": \"<string>\",\n  \"text\": \"<string>\",\n  \"success\": true,\n  \"card_block\": {}\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/teams/activities",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "teams",
+                        "activities"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:31:41.000Z",
+                  "updatedAt": "2026-07-28T03:31:41.000Z",
+                  "uid": "35240-b3ab2bdb-6243-4678-ad00-f460fe0f202b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:31:41.000Z",
+              "updatedAt": "2026-07-28T03:31:41.000Z",
+              "uid": "35240-d2934436-58d2-435d-af9a-a8adad6e915c"
+            }
+          ],
+          "id": "32798932-06f8-4ca0-a40f-5c53e46e7572",
+          "createdAt": "2026-07-28T03:31:41.000Z",
+          "updatedAt": "2026-07-28T03:31:41.000Z",
+          "uid": "35240-32798932-06f8-4ca0-a40f-5c53e46e7572"
+        }
+      ],
+      "id": "cf5221a7-bf1e-4f75-a636-2a30b9ff868f",
+      "createdAt": "2026-07-28T03:31:41.000Z",
+      "updatedAt": "2026-07-28T03:31:41.000Z",
+      "uid": "35240-cf5221a7-bf1e-4f75-a636-2a30b9ff868f"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

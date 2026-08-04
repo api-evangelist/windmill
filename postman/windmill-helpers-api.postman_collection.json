@@ -1,0 +1,3198 @@
+{
+  "info": {
+    "_postman_id": "c7fd3d37-6694-4bd7-a2e7-3ec1aabc7090",
+    "name": "Windmill admin helpers API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:47.000Z",
+    "updatedAt": "2026-07-28T03:30:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7fd3d37-6694-4bd7-a2e7-3ec1aabc7090"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "job_helpers",
+              "item": [
+                {
+                  "name": "duckdb_connection_settings",
+                  "item": [
+                    {
+                      "name": "Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket",
+                      "id": "40a1d26c-b1cf-4f1f-a47b-19d9061fd2ff",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"s3_resource\": {\n    \"bucket\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endPoint\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"pathStyle\": \"<boolean>\",\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/duckdb_connection_settings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "duckdb_connection_settings"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ece092ae-bc33-45f9-a06c-d5cef5a0ae63",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "d8c7e90f-f081-4a40-b10a-71492e4a5cc5",
+                          "name": "Connection settings",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"s3_resource\": {\n    \"bucket\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endPoint\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"pathStyle\": \"<boolean>\",\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/duckdb_connection_settings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "duckdb_connection_settings"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"connection_settings_str\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-d8c7e90f-f081-4a40-b10a-71492e4a5cc5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-40a1d26c-b1cf-4f1f-a47b-19d9061fd2ff"
+                    }
+                  ],
+                  "id": "6c3df99e-2a5d-4468-912a-d3f9eec76bdf",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-6c3df99e-2a5d-4468-912a-d3f9eec76bdf"
+                },
+                {
+                  "name": "v2",
+                  "item": [
+                    {
+                      "name": "duckdb_connection_settings",
+                      "item": [
+                        {
+                          "name": "Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket",
+                          "id": "516c353b-a453-4daa-8935-f06f3f2533e2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"s3_resource_path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/v2/duckdb_connection_settings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "v2",
+                                "duckdb_connection_settings"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "629c759c-afca-4056-b3b3-3dfdd308d256",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1f3a21fc-16db-4a10-a876-3851e86ba452",
+                              "name": "Connection settings",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"s3_resource_path\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_helpers/v2/duckdb_connection_settings",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_helpers",
+                                    "v2",
+                                    "duckdb_connection_settings"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"connection_settings_str\": \"<string>\",\n  \"azure_container_path\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:30:48.000Z",
+                              "updatedAt": "2026-07-28T03:30:48.000Z",
+                              "uid": "35240-1f3a21fc-16db-4a10-a876-3851e86ba452"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-516c353b-a453-4daa-8935-f06f3f2533e2"
+                        }
+                      ],
+                      "id": "c3c044ec-8623-41dd-8393-6020a6d84ef1",
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-c3c044ec-8623-41dd-8393-6020a6d84ef1"
+                    },
+                    {
+                      "name": "polars_connection_settings",
+                      "item": [
+                        {
+                          "name": "Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket",
+                          "id": "2d7e517c-c228-4501-b22c-2ae6c5d0680e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"s3_resource_path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/v2/polars_connection_settings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "v2",
+                                "polars_connection_settings"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "0cb95cb1-39e4-4cdc-9f96-eea70e896ce7",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "8ffdb28d-38a5-4bc1-bfc0-4cd536e804c1",
+                              "name": "Connection settings",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"s3_resource_path\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_helpers/v2/polars_connection_settings",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_helpers",
+                                    "v2",
+                                    "polars_connection_settings"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"s3fs_args\": {\n    \"endpoint_url\": \"<string>\",\n    \"use_ssl\": \"<boolean>\",\n    \"cache_regions\": \"<boolean>\",\n    \"client_kwargs\": {\n      \"region_name\": \"<string>\"\n    },\n    \"key\": \"<string>\",\n    \"secret\": \"<string>\"\n  },\n  \"storage_options\": {\n    \"aws_endpoint_url\": \"<string>\",\n    \"aws_region\": \"<string>\",\n    \"aws_allow_http\": \"<string>\",\n    \"aws_access_key_id\": \"<string>\",\n    \"aws_secret_access_key\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:30:48.000Z",
+                              "updatedAt": "2026-07-28T03:30:48.000Z",
+                              "uid": "35240-8ffdb28d-38a5-4bc1-bfc0-4cd536e804c1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-2d7e517c-c228-4501-b22c-2ae6c5d0680e"
+                        }
+                      ],
+                      "id": "fe593dee-7550-4ac5-b3f2-0c289c19851f",
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-fe593dee-7550-4ac5-b3f2-0c289c19851f"
+                    },
+                    {
+                      "name": "s3_resource_info",
+                      "item": [
+                        {
+                          "name": "Returns the S3 Resource Associated to the Provided Path, or the workspace default S3 resource",
+                          "id": "c3cd074a-8bb3-4d1c-af3d-8867eb34ff7b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"s3_resource_path\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/v2/s3_resource_info",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "v2",
+                                "s3_resource_info"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a2e587d4-9eda-4465-8ad0-dbf978ec2364",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d8015456-d9cf-4097-a8ba-806ad7ee7d6c",
+                              "name": "Connection settings",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"s3_resource_path\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_helpers/v2/s3_resource_info",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_helpers",
+                                    "v2",
+                                    "s3_resource_info"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"bucket\": \"<string>\",\n  \"region\": \"<string>\",\n  \"endPoint\": \"<string>\",\n  \"useSSL\": \"<boolean>\",\n  \"pathStyle\": \"<boolean>\",\n  \"accessKey\": \"<string>\",\n  \"secretKey\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:30:48.000Z",
+                              "updatedAt": "2026-07-28T03:30:48.000Z",
+                              "uid": "35240-d8015456-d9cf-4097-a8ba-806ad7ee7d6c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-c3cd074a-8bb3-4d1c-af3d-8867eb34ff7b"
+                        }
+                      ],
+                      "id": "4be8ac6c-4a6a-4bff-987c-b16b2a8629ff",
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-4be8ac6c-4a6a-4bff-987c-b16b2a8629ff"
+                    }
+                  ],
+                  "id": "24f1545d-9718-4c10-8c4f-91702ae330e1",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-24f1545d-9718-4c10-8c4f-91702ae330e1"
+                },
+                {
+                  "name": "polars_connection_settings",
+                  "item": [
+                    {
+                      "name": "Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket",
+                      "id": "365baf47-de3e-4c8a-9afb-8964f09877bd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"s3_resource\": {\n    \"bucket\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endPoint\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"pathStyle\": \"<boolean>\",\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/polars_connection_settings",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "polars_connection_settings"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3c94d137-af27-4b5b-82ca-61289817369a",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ee2fe931-e1aa-4efe-8650-b7ba4912193a",
+                          "name": "Connection settings",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"s3_resource\": {\n    \"bucket\": \"<string>\",\n    \"region\": \"<string>\",\n    \"endPoint\": \"<string>\",\n    \"useSSL\": \"<boolean>\",\n    \"pathStyle\": \"<boolean>\",\n    \"accessKey\": \"<string>\",\n    \"secretKey\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/polars_connection_settings",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "polars_connection_settings"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"endpoint_url\": \"<string>\",\n  \"use_ssl\": \"<boolean>\",\n  \"cache_regions\": \"<boolean>\",\n  \"client_kwargs\": {\n    \"region_name\": \"<string>\"\n  },\n  \"key\": \"<string>\",\n  \"secret\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-ee2fe931-e1aa-4efe-8650-b7ba4912193a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-365baf47-de3e-4c8a-9afb-8964f09877bd"
+                    }
+                  ],
+                  "id": "56306145-6ea8-47d8-837b-c12cbd618df6",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-56306145-6ea8-47d8-837b-c12cbd618df6"
+                },
+                {
+                  "name": "test_connection",
+                  "item": [
+                    {
+                      "name": "Test Connection to the Workspace Object Storage",
+                      "id": "0d258d7e-7acd-484d-a8c5-1bf25a62c7aa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/test_connection?storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "test_connection"
+                          ],
+                          "query": [
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d21a8106-da5a-425d-ae64-fd56aaf5a0c3",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "cad9ba3e-5233-4b3b-b20f-ddd8391526b0",
+                          "name": "Connection settings",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/test_connection?storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "test_connection"
+                              ],
+                              "query": [
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-cad9ba3e-5233-4b3b-b20f-ddd8391526b0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-0d258d7e-7acd-484d-a8c5-1bf25a62c7aa"
+                    }
+                  ],
+                  "id": "16f98a62-088e-466a-bafc-c8e69513434c",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-16f98a62-088e-466a-bafc-c8e69513434c"
+                },
+                {
+                  "name": "list_stored_files",
+                  "item": [
+                    {
+                      "name": "List the File Keys Available in a Workspace Object Storage",
+                      "id": "bc0d3e73-d392-44b2-9bd2-e4101821799a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/list_stored_files?max_keys=<integer>&marker=<string>&prefix=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "list_stored_files"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "max_keys",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "marker",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "prefix",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "ffc066a1-e679-4e09-a57b-28583a9b8416",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "89e94e09-7efc-43f4-91b1-67ae7a241b89",
+                          "name": "List of file keys",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/list_stored_files?max_keys=<integer>&marker=<string>&prefix=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "list_stored_files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "max_keys",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "marker",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "prefix",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"windmill_large_files\": [\n    {\n      \"s3\": \"<string>\"\n    },\n    {\n      \"s3\": \"<string>\"\n    }\n  ],\n  \"next_marker\": \"<string>\",\n  \"restricted_access\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-89e94e09-7efc-43f4-91b1-67ae7a241b89"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-bc0d3e73-d392-44b2-9bd2-e4101821799a"
+                    }
+                  ],
+                  "id": "9fb4819b-3bd5-4bea-8f85-7c19a3b08f1d",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-9fb4819b-3bd5-4bea-8f85-7c19a3b08f1d"
+                },
+                {
+                  "name": "load_file_metadata",
+                  "item": [
+                    {
+                      "name": "Load Metadata of the File",
+                      "id": "a7bc5f3d-18fb-41f5-b488-f87a52e5488e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_file_metadata?file_key=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "load_file_metadata"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "9b8ab808-2c84-40ef-a87a-f0188a957639",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e6b1bd7b-2470-4613-a4ec-8dab2fd571f4",
+                          "name": "FileMetadata",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_file_metadata?file_key=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_file_metadata"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"mime_type\": \"<string>\",\n  \"size_in_bytes\": \"<integer>\",\n  \"last_modified\": \"<dateTime>\",\n  \"expires\": \"<dateTime>\",\n  \"version_id\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-e6b1bd7b-2470-4613-a4ec-8dab2fd571f4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-a7bc5f3d-18fb-41f5-b488-f87a52e5488e"
+                    }
+                  ],
+                  "id": "0700a00b-c5a1-4353-8d30-281df7116a8f",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-0700a00b-c5a1-4353-8d30-281df7116a8f"
+                },
+                {
+                  "name": "load_file_preview",
+                  "item": [
+                    {
+                      "name": "Load a Preview of the File",
+                      "id": "b7ab8514-ea7b-46a8-a823-ffef9120a604",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_file_preview?file_key=<string>&file_size_in_bytes=<integer>&file_mime_type=<string>&csv_separator=<string>&csv_has_header=<boolean>&read_bytes_from=<integer>&read_bytes_length=<integer>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "load_file_preview"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "file_size_in_bytes",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "file_mime_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "csv_separator",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "csv_has_header",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "read_bytes_from",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "read_bytes_length",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1e0d8c7f-316a-4c98-929b-f1d856a71222",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c5934fcc-8b12-444a-bfaf-e7306a96fb5c",
+                          "name": "FilePreview",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_file_preview?file_key=<string>&file_size_in_bytes=<integer>&file_mime_type=<string>&csv_separator=<string>&csv_has_header=<boolean>&read_bytes_from=<integer>&read_bytes_length=<integer>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_file_preview"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "file_size_in_bytes",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "file_mime_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "csv_separator",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "csv_has_header",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "read_bytes_from",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "read_bytes_length",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"content_type\": \"Unknown\",\n  \"msg\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-c5934fcc-8b12-444a-bfaf-e7306a96fb5c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-b7ab8514-ea7b-46a8-a823-ffef9120a604"
+                    }
+                  ],
+                  "id": "a1fef749-e1e7-4069-8865-ac5412e5a14d",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-a1fef749-e1e7-4069-8865-ac5412e5a14d"
+                },
+                {
+                  "name": "list_git_repo_files",
+                  "item": [
+                    {
+                      "name": "List the File Keys Available in Instance Object Storage with Resource-based Access Control",
+                      "id": "133440be-2987-4917-9ac8-3e5b5a1e5fe9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/list_git_repo_files?max_keys=<integer>&marker=<string>&prefix=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "list_git_repo_files"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "max_keys",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "marker",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "prefix",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1d29b9cd-8864-42aa-adc2-a8c949dac3c3",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "990aa4dd-6cf6-49e1-81cd-4db7ab2cdd79",
+                          "name": "List of file keys",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/list_git_repo_files?max_keys=<integer>&marker=<string>&prefix=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "list_git_repo_files"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "max_keys",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "marker",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "prefix",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"windmill_large_files\": [\n    {\n      \"s3\": \"<string>\"\n    },\n    {\n      \"s3\": \"<string>\"\n    }\n  ],\n  \"next_marker\": \"<string>\",\n  \"restricted_access\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-990aa4dd-6cf6-49e1-81cd-4db7ab2cdd79"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-133440be-2987-4917-9ac8-3e5b5a1e5fe9"
+                    }
+                  ],
+                  "id": "cb8b9d98-2b65-4f57-838b-b6af26a02213",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-cb8b9d98-2b65-4f57-838b-b6af26a02213"
+                },
+                {
+                  "name": "load_git_repo_file_preview",
+                  "item": [
+                    {
+                      "name": "Load a Preview of a File from Instance Storage with Resource-based Access Control",
+                      "id": "61f9da76-422a-4d2a-a778-c19105bc7ad3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_git_repo_file_preview?file_key=<string>&file_size_in_bytes=<integer>&file_mime_type=<string>&csv_separator=<string>&csv_has_header=<boolean>&read_bytes_from=<integer>&read_bytes_length=<integer>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "load_git_repo_file_preview"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "file_size_in_bytes",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "file_mime_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "csv_separator",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "csv_has_header",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "read_bytes_from",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "read_bytes_length",
+                              "value": "<integer>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "0b533dd5-9484-481c-9ede-ec74ecc2dddb",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "0aa116b7-bfd7-485a-9a06-74bc930c4bca",
+                          "name": "FilePreview",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_git_repo_file_preview?file_key=<string>&file_size_in_bytes=<integer>&file_mime_type=<string>&csv_separator=<string>&csv_has_header=<boolean>&read_bytes_from=<integer>&read_bytes_length=<integer>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_git_repo_file_preview"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "file_size_in_bytes",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "file_mime_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "csv_separator",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "csv_has_header",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "read_bytes_from",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "read_bytes_length",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"content_type\": \"Unknown\",\n  \"msg\": \"<string>\",\n  \"content\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-0aa116b7-bfd7-485a-9a06-74bc930c4bca"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-61f9da76-422a-4d2a-a778-c19105bc7ad3"
+                    }
+                  ],
+                  "id": "8bf31737-e7a9-43d3-b43e-82b6953364ae",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-8bf31737-e7a9-43d3-b43e-82b6953364ae"
+                },
+                {
+                  "name": "load_git_repo_file_metadata",
+                  "item": [
+                    {
+                      "name": "Load File Metadata from Instance Storage with Resource-based Access Control",
+                      "id": "65141c78-55e9-45e3-b0ed-b881e6b24129",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_git_repo_file_metadata?file_key=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "load_git_repo_file_metadata"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "91d473e4-df3e-4b62-b30f-94c44463967b",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "5eeb085b-130c-4405-a2a6-95f55a29a130",
+                          "name": "FileMetadata",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_git_repo_file_metadata?file_key=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_git_repo_file_metadata"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"mime_type\": \"<string>\",\n  \"size_in_bytes\": \"<integer>\",\n  \"last_modified\": \"<dateTime>\",\n  \"expires\": \"<dateTime>\",\n  \"version_id\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-5eeb085b-130c-4405-a2a6-95f55a29a130"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-65141c78-55e9-45e3-b0ed-b881e6b24129"
+                    }
+                  ],
+                  "id": "4d77fea6-fc55-40f6-84c0-8f4ede136ba3",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-4d77fea6-fc55-40f6-84c0-8f4ede136ba3"
+                },
+                {
+                  "name": "check_s3_folder_exists",
+                  "item": [
+                    {
+                      "name": "Check if S3 Path Exists and is a Folder",
+                      "id": "e0c1005d-1a4d-40c6-a86d-a3da467af57e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/check_s3_folder_exists?file_key=<string>&marker_file=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "check_s3_folder_exists"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) S3 file key to check (e.g., gitrepos/{workspace_id}/u/user/resource/{commit_hash})",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "If provided, the folder is only considered to exist when this exact\nsentinel file is present under file_key. Lets callers distinguish a\nfully populated folder from a partial upload.\n",
+                              "key": "marker_file",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "fa8e0046-b051-426f-bcb9-b8e0d18c2348",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "494f5e19-b07a-4e54-bb5f-ce5d23353c6d",
+                          "name": "S3 folder existence check result",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/check_s3_folder_exists?file_key=<string>&marker_file=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "check_s3_folder_exists"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) S3 file key to check (e.g., gitrepos/{workspace_id}/u/user/resource/{commit_hash})",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "If provided, the folder is only considered to exist when this exact\nsentinel file is present under file_key. Lets callers distinguish a\nfully populated folder from a partial upload.\n",
+                                  "key": "marker_file",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"exists\": \"<boolean>\",\n  \"is_folder\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-494f5e19-b07a-4e54-bb5f-ce5d23353c6d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-e0c1005d-1a4d-40c6-a86d-a3da467af57e"
+                    }
+                  ],
+                  "id": "5d589bab-602e-4f13-b904-a902a245263c",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-5d589bab-602e-4f13-b904-a902a245263c"
+                },
+                {
+                  "name": "load_parquet_preview",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Load a Preview of a Parquet File",
+                          "id": "f0ae96fc-ae81-412f-a55d-51516f51a514",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_parquet_preview/:path?offset=<number>&limit=<number>&sort_col=<string>&sort_desc=<boolean>&search_col=<string>&search_term=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_parquet_preview",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "key": "sort_col",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "sort_desc",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "search_col",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "search_term",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c8d9f5e2-4d77-43f2-a63c-06df21a4e493",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "89dbde20-47ef-4c6c-b2e2-d90de407875c",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "3ae18718-347e-4c7a-8072-68de3dbcf772",
+                              "name": "Parquet Preview",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_parquet_preview/:path?offset=<number>&limit=<number>&sort_col=<string>&sort_desc=<boolean>&search_col=<string>&search_term=<string>&storage=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_helpers",
+                                    "load_parquet_preview",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "offset",
+                                      "value": "<number>"
+                                    },
+                                    {
+                                      "key": "limit",
+                                      "value": "<number>"
+                                    },
+                                    {
+                                      "key": "sort_col",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "sort_desc",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "key": "search_col",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "search_term",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "storage",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "",
+                              "createdAt": "2026-07-28T03:30:48.000Z",
+                              "updatedAt": "2026-07-28T03:30:48.000Z",
+                              "uid": "35240-3ae18718-347e-4c7a-8072-68de3dbcf772"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-f0ae96fc-ae81-412f-a55d-51516f51a514"
+                        }
+                      ],
+                      "id": "e2cb3940-9b0d-4a23-87ae-87d3e20ed9f5",
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-e2cb3940-9b0d-4a23-87ae-87d3e20ed9f5"
+                    }
+                  ],
+                  "id": "4c33b874-c0e8-4534-bd8b-ce2977c8f4b1",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-4c33b874-c0e8-4534-bd8b-ce2977c8f4b1"
+                },
+                {
+                  "name": "load_table_count",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Load the Table Row Count",
+                          "id": "c4988163-b278-482a-9caa-5e11f0ed48f4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_table_count/:path?search_col=<string>&search_term=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_table_count",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "key": "search_col",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "search_term",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "66136be0-36de-4a0c-b3db-c301becfed16",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9040d412-8dda-477b-89a7-0689bed51aa2",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b0d69402-8062-4a31-b138-f2291414104a",
+                              "name": "Table count",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_table_count/:path?search_col=<string>&search_term=<string>&storage=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_helpers",
+                                    "load_table_count",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "search_col",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "search_term",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "storage",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"count\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T03:30:48.000Z",
+                              "updatedAt": "2026-07-28T03:30:48.000Z",
+                              "uid": "35240-b0d69402-8062-4a31-b138-f2291414104a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-c4988163-b278-482a-9caa-5e11f0ed48f4"
+                        }
+                      ],
+                      "id": "62a1d94d-b689-481a-a37b-760580477c70",
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-62a1d94d-b689-481a-a37b-760580477c70"
+                    }
+                  ],
+                  "id": "7fc8ba73-3117-4c75-9cde-63b8b4e0cdd2",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-7fc8ba73-3117-4c75-9cde-63b8b4e0cdd2"
+                },
+                {
+                  "name": "load_csv_preview",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Load a Preview of a Csv File",
+                          "id": "1c2e21df-7cc7-4dea-9804-66039f6439a8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_csv_preview/:path?offset=<number>&limit=<number>&sort_col=<string>&sort_desc=<boolean>&search_col=<string>&search_term=<string>&storage=<string>&csv_separator=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "load_csv_preview",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "key": "offset",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "key": "limit",
+                                  "value": "<number>"
+                                },
+                                {
+                                  "key": "sort_col",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "sort_desc",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "search_col",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "search_term",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "csv_separator",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c2e7fc59-cb06-43a9-a65c-ab04633011fb",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "2554faea-cd0c-4dfc-9e30-91d56a6575f6",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "36369443-a857-4fc5-afac-df7ca9e6ad23",
+                              "name": "Csv Preview",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/job_helpers/load_csv_preview/:path?offset=<number>&limit=<number>&sort_col=<string>&sort_desc=<boolean>&search_col=<string>&search_term=<string>&storage=<string>&csv_separator=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "job_helpers",
+                                    "load_csv_preview",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "offset",
+                                      "value": "<number>"
+                                    },
+                                    {
+                                      "key": "limit",
+                                      "value": "<number>"
+                                    },
+                                    {
+                                      "key": "sort_col",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "sort_desc",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "key": "search_col",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "search_term",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "storage",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "csv_separator",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "",
+                              "createdAt": "2026-07-28T03:30:48.000Z",
+                              "updatedAt": "2026-07-28T03:30:48.000Z",
+                              "uid": "35240-36369443-a857-4fc5-afac-df7ca9e6ad23"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-1c2e21df-7cc7-4dea-9804-66039f6439a8"
+                        }
+                      ],
+                      "id": "c904076d-b9ee-4b42-92de-01b98b522822",
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-c904076d-b9ee-4b42-92de-01b98b522822"
+                    }
+                  ],
+                  "id": "dd89ea92-c311-4719-abf0-2d550eb236ac",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-dd89ea92-c311-4719-abf0-2d550eb236ac"
+                },
+                {
+                  "name": "delete_s3_file",
+                  "item": [
+                    {
+                      "name": "Permanently Delete File from S3",
+                      "id": "5d738eb2-a6a8-4f68-b75f-a0d30344451a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/delete_s3_file?file_key=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "delete_s3_file"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e32bdd67-4152-4dfe-9096-9add86d2ead9",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "eb64b005-5ae6-4541-b3ea-e80440c70195",
+                          "name": "Confirmation",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/delete_s3_file?file_key=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "delete_s3_file"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-eb64b005-5ae6-4541-b3ea-e80440c70195"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-5d738eb2-a6a8-4f68-b75f-a0d30344451a"
+                    }
+                  ],
+                  "id": "b311f887-5a94-41d2-8d36-bc4cdcda2dd7",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-b311f887-5a94-41d2-8d36-bc4cdcda2dd7"
+                },
+                {
+                  "name": "move_s3_file",
+                  "item": [
+                    {
+                      "name": "Move a S3 File from One Path to the Other Within the Same Bucket",
+                      "id": "d30e5904-77b9-4296-a31e-44e3edd7d956",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/move_s3_file?src_file_key=<string>&dest_file_key=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "move_s3_file"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "src_file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "dest_file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "11cc1391-820e-45d2-bfbe-359d48b57bc2",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "382f76e2-c34e-49dc-a530-8584bb9df3c6",
+                          "name": "Confirmation",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/move_s3_file?src_file_key=<string>&dest_file_key=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "move_s3_file"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "src_file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "dest_file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-382f76e2-c34e-49dc-a530-8584bb9df3c6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-d30e5904-77b9-4296-a31e-44e3edd7d956"
+                    }
+                  ],
+                  "id": "47010982-6e79-45e1-80f6-4e04de57f199",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-47010982-6e79-45e1-80f6-4e04de57f199"
+                },
+                {
+                  "name": "upload_s3_file",
+                  "item": [
+                    {
+                      "name": "Upload File to S3 Bucket",
+                      "id": "aaf7c354-b14f-4280-9ae1-92b44ddb05c8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/upload_s3_file?file_key=<string>&file_extension=<string>&s3_resource_path=<string>&resource_type=<string>&storage=<string>&content_type=<string>&content_disposition=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "upload_s3_file"
+                          ],
+                          "query": [
+                            {
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "file_extension",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "s3_resource_path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "resource_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "content_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "content_disposition",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "94494beb-20cb-4276-96bc-ca83f9d530ac",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "f1a31c87-8224-429f-a9ed-256b64aca19d",
+                          "name": "File upload status",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/octet-stream"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "file",
+                              "file": {}
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/upload_s3_file?file_key=<string>&file_extension=<string>&s3_resource_path=<string>&resource_type=<string>&storage=<string>&content_type=<string>&content_disposition=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "upload_s3_file"
+                              ],
+                              "query": [
+                                {
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "file_extension",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "s3_resource_path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "resource_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "content_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "content_disposition",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"file_key\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-f1a31c87-8224-429f-a9ed-256b64aca19d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-aaf7c354-b14f-4280-9ae1-92b44ddb05c8"
+                    }
+                  ],
+                  "id": "1f2bd106-e2ff-4d29-8278-68c879497fc3",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-1f2bd106-e2ff-4d29-8278-68c879497fc3"
+                },
+                {
+                  "name": "upload_git_repo_file_to_instance_storage",
+                  "item": [
+                    {
+                      "name": "Upload a File to the Instance Storage Gitrepos Section for Viewing",
+                      "id": "d2e41597-9ef2-48ee-b6e1-25718aad3801",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/octet-stream"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "file",
+                          "file": {}
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/upload_git_repo_file_to_instance_storage?file_key=<string>&file_extension=<string>&s3_resource_path=<string>&resource_type=<string>&storage=<string>&content_type=<string>&content_disposition=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "upload_git_repo_file_to_instance_storage"
+                          ],
+                          "query": [
+                            {
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "file_extension",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "s3_resource_path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "resource_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "content_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "content_disposition",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "b1a9ea46-4459-4a15-8f9f-43429eafea99",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "88a830df-1900-479e-87fd-6d81aa3d383a",
+                          "name": "File upload status",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/octet-stream"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "file",
+                              "file": {}
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/upload_git_repo_file_to_instance_storage?file_key=<string>&file_extension=<string>&s3_resource_path=<string>&resource_type=<string>&storage=<string>&content_type=<string>&content_disposition=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "upload_git_repo_file_to_instance_storage"
+                              ],
+                              "query": [
+                                {
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "file_extension",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "s3_resource_path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "resource_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "content_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "content_disposition",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"file_key\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-88a830df-1900-479e-87fd-6d81aa3d383a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-d2e41597-9ef2-48ee-b6e1-25718aad3801"
+                    }
+                  ],
+                  "id": "c0d3ca76-8665-4310-9985-0f1599c8838d",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-c0d3ca76-8665-4310-9985-0f1599c8838d"
+                },
+                {
+                  "name": "download_s3_file",
+                  "item": [
+                    {
+                      "name": "Download File from S3 Bucket",
+                      "id": "c55e911d-6fce-416c-a47e-f29d94707726",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/octet-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/download_s3_file?file_key=<string>&s3_resource_path=<string>&resource_type=<string>&storage=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "download_s3_file"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "s3_resource_path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "resource_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "storage",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "51e4ebd3-cf50-4d2f-b4ad-00074855c3e8",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "4e7fc440-6880-43a5-939d-e19891f28f5b",
+                          "name": "Chunk of the downloaded file",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/octet-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/download_s3_file?file_key=<string>&s3_resource_path=<string>&resource_type=<string>&storage=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "download_s3_file"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "s3_resource_path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "resource_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "storage",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/octet-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-4e7fc440-6880-43a5-939d-e19891f28f5b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-c55e911d-6fce-416c-a47e-f29d94707726"
+                    }
+                  ],
+                  "id": "88ecec1c-5d5f-4ca9-b473-1e6d12958163",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-88ecec1c-5d5f-4ca9-b473-1e6d12958163"
+                },
+                {
+                  "name": "download_s3_parquet_file_as_csv",
+                  "item": [
+                    {
+                      "name": "Download File to S3 Bucket",
+                      "id": "5bfa932e-447a-4db1-b90d-5f985ed4800f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/csv"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/job_helpers/download_s3_parquet_file_as_csv?file_key=<string>&s3_resource_path=<string>&resource_type=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "job_helpers",
+                            "download_s3_parquet_file_as_csv"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "file_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "s3_resource_path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "resource_type",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "1d4b48d8-3ece-4aba-be23-c93281831a38",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "bba9fb4b-eb7a-4dd2-9fbf-d3019850c0f4",
+                          "name": "The downloaded file",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/csv"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/job_helpers/download_s3_parquet_file_as_csv?file_key=<string>&s3_resource_path=<string>&resource_type=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "job_helpers",
+                                "download_s3_parquet_file_as_csv"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "file_key",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "s3_resource_path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "resource_type",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/csv"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:30:48.000Z",
+                          "updatedAt": "2026-07-28T03:30:48.000Z",
+                          "uid": "35240-bba9fb4b-eb7a-4dd2-9fbf-d3019850c0f4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:48.000Z",
+                      "updatedAt": "2026-07-28T03:30:48.000Z",
+                      "uid": "35240-5bfa932e-447a-4db1-b90d-5f985ed4800f"
+                    }
+                  ],
+                  "id": "88ca0720-f1d0-4ed8-8d49-3f30c3586692",
+                  "createdAt": "2026-07-28T03:30:48.000Z",
+                  "updatedAt": "2026-07-28T03:30:48.000Z",
+                  "uid": "35240-88ca0720-f1d0-4ed8-8d49-3f30c3586692"
+                }
+              ],
+              "id": "84f7c118-7c1e-4986-a86d-70e76ac131ca",
+              "createdAt": "2026-07-28T03:30:48.000Z",
+              "updatedAt": "2026-07-28T03:30:48.000Z",
+              "uid": "35240-84f7c118-7c1e-4986-a86d-70e76ac131ca"
+            }
+          ],
+          "id": "bd65f2df-6216-41e2-8002-b1d48e4cd26d",
+          "createdAt": "2026-07-28T03:30:48.000Z",
+          "updatedAt": "2026-07-28T03:30:48.000Z",
+          "uid": "35240-bd65f2df-6216-41e2-8002-b1d48e4cd26d"
+        }
+      ],
+      "id": "577e4d1a-d111-450c-89b7-32911635d2a2",
+      "createdAt": "2026-07-28T03:30:48.000Z",
+      "updatedAt": "2026-07-28T03:30:48.000Z",
+      "uid": "35240-577e4d1a-d111-450c-89b7-32911635d2a2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

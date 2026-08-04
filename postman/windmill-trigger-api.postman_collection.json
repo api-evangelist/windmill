@@ -1,0 +1,384 @@
+{
+  "info": {
+    "_postman_id": "659cdf33-d471-40da-a5f5-d24a558798be",
+    "name": "Windmill admin trigger API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:42.000Z",
+    "updatedAt": "2026-07-28T03:31:42.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-659cdf33-d471-40da-a5f5-d24a558798be"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "trigger",
+              "item": [
+                {
+                  "name": "{trigger_kind}",
+                  "item": [
+                    {
+                      "name": "resume_suspended_trigger_jobs",
+                      "item": [
+                        {
+                          "name": "{trigger_path}",
+                          "item": [
+                            {
+                              "name": "Resume All Suspended Jobs for a Specific Trigger",
+                              "id": "99d0a206-2222-4269-a736-86bf7558682c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/trigger/:trigger_kind/resume_suspended_trigger_jobs/:trigger_path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "trigger",
+                                    ":trigger_kind",
+                                    "resume_suspended_trigger_jobs",
+                                    ":trigger_path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "957375ab-f565-425d-bb94-30bc137b1dac",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "47487747-956c-4277-ae49-cfac2def37f4",
+                                      "key": "trigger_kind",
+                                      "value": "azure",
+                                      "description": "(Required) The kind of trigger"
+                                    },
+                                    {
+                                      "id": "f3f2a8bd-0c70-4bb7-8124-8365359ea50a",
+                                      "key": "trigger_path",
+                                      "value": "<string>",
+                                      "description": "(Required) The path of the trigger (can contain forward slashes)"
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "33b6feb2-7bb7-4a28-ac2a-3ae4807e9c45",
+                                  "name": "confirmation message",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/trigger/:trigger_kind/resume_suspended_trigger_jobs/:trigger_path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "trigger",
+                                        ":trigger_kind",
+                                        "resume_suspended_trigger_jobs",
+                                        ":trigger_path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "trigger_kind"
+                                        },
+                                        {
+                                          "key": "trigger_path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:42.000Z",
+                                  "updatedAt": "2026-07-28T03:31:42.000Z",
+                                  "uid": "35240-33b6feb2-7bb7-4a28-ac2a-3ae4807e9c45"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:42.000Z",
+                              "updatedAt": "2026-07-28T03:31:42.000Z",
+                              "uid": "35240-99d0a206-2222-4269-a736-86bf7558682c"
+                            }
+                          ],
+                          "id": "596623be-6395-49db-a932-111aaa753263",
+                          "createdAt": "2026-07-28T03:31:42.000Z",
+                          "updatedAt": "2026-07-28T03:31:42.000Z",
+                          "uid": "35240-596623be-6395-49db-a932-111aaa753263"
+                        }
+                      ],
+                      "id": "ae5b1f0b-9cb8-44a0-bc3b-96598e6c6d69",
+                      "createdAt": "2026-07-28T03:31:42.000Z",
+                      "updatedAt": "2026-07-28T03:31:42.000Z",
+                      "uid": "35240-ae5b1f0b-9cb8-44a0-bc3b-96598e6c6d69"
+                    },
+                    {
+                      "name": "cancel_suspended_trigger_jobs",
+                      "item": [
+                        {
+                          "name": "{trigger_path}",
+                          "item": [
+                            {
+                              "name": "Cancel All Suspended Jobs for a Specific Trigger",
+                              "id": "16f93650-6a25-4a45-82fe-e70b962e515c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/trigger/:trigger_kind/cancel_suspended_trigger_jobs/:trigger_path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "trigger",
+                                    ":trigger_kind",
+                                    "cancel_suspended_trigger_jobs",
+                                    ":trigger_path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "85237331-ff2e-4447-b929-cebcc0c55f36",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "cd6579a3-ce01-4aa2-a4bc-bcc1467a3e82",
+                                      "key": "trigger_kind",
+                                      "value": "azure",
+                                      "description": "(Required) The kind of trigger"
+                                    },
+                                    {
+                                      "id": "271aed7e-ac97-43de-b2a0-c47789532a32",
+                                      "key": "trigger_path",
+                                      "value": "<string>",
+                                      "description": "(Required) The path of the trigger (can contain forward slashes)"
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "e1488d39-1976-4bf0-acd5-26de785c9e0a",
+                                  "name": "confirmation message",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/trigger/:trigger_kind/cancel_suspended_trigger_jobs/:trigger_path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "trigger",
+                                        ":trigger_kind",
+                                        "cancel_suspended_trigger_jobs",
+                                        ":trigger_path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "trigger_kind"
+                                        },
+                                        {
+                                          "key": "trigger_path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:42.000Z",
+                                  "updatedAt": "2026-07-28T03:31:42.000Z",
+                                  "uid": "35240-e1488d39-1976-4bf0-acd5-26de785c9e0a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:42.000Z",
+                              "updatedAt": "2026-07-28T03:31:42.000Z",
+                              "uid": "35240-16f93650-6a25-4a45-82fe-e70b962e515c"
+                            }
+                          ],
+                          "id": "36ac66e3-c1c3-4f3f-8c49-e23e24ac114a",
+                          "createdAt": "2026-07-28T03:31:42.000Z",
+                          "updatedAt": "2026-07-28T03:31:42.000Z",
+                          "uid": "35240-36ac66e3-c1c3-4f3f-8c49-e23e24ac114a"
+                        }
+                      ],
+                      "id": "1e238acb-0d90-4abc-beeb-0202dd19fa9c",
+                      "createdAt": "2026-07-28T03:31:42.000Z",
+                      "updatedAt": "2026-07-28T03:31:42.000Z",
+                      "uid": "35240-1e238acb-0d90-4abc-beeb-0202dd19fa9c"
+                    }
+                  ],
+                  "id": "b95edd75-6a39-414e-9a7a-e33fcfcba087",
+                  "createdAt": "2026-07-28T03:31:42.000Z",
+                  "updatedAt": "2026-07-28T03:31:42.000Z",
+                  "uid": "35240-b95edd75-6a39-414e-9a7a-e33fcfcba087"
+                }
+              ],
+              "id": "4e665351-ab80-4434-b094-420ace36f1cd",
+              "createdAt": "2026-07-28T03:31:42.000Z",
+              "updatedAt": "2026-07-28T03:31:42.000Z",
+              "uid": "35240-4e665351-ab80-4434-b094-420ace36f1cd"
+            }
+          ],
+          "id": "327f7f64-1f8c-40f6-b42c-40e532fad1b5",
+          "createdAt": "2026-07-28T03:31:42.000Z",
+          "updatedAt": "2026-07-28T03:31:42.000Z",
+          "uid": "35240-327f7f64-1f8c-40f6-b42c-40e532fad1b5"
+        }
+      ],
+      "id": "e5b7511a-b03e-440f-81ba-a7ae55041970",
+      "createdAt": "2026-07-28T03:31:42.000Z",
+      "updatedAt": "2026-07-28T03:31:42.000Z",
+      "uid": "35240-e5b7511a-b03e-440f-81ba-a7ae55041970"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

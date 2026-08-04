@@ -1,0 +1,859 @@
+{
+  "info": {
+    "_postman_id": "9e79149a-2b5c-4f5e-afce-682e963da450",
+    "name": "Windmill admin indexSearch API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:50.000Z",
+    "updatedAt": "2026-07-28T03:30:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9e79149a-2b5c-4f5e-afce-682e963da450"
+  },
+  "item": [
+    {
+      "name": "srch",
+      "item": [
+        {
+          "name": "w",
+          "item": [
+            {
+              "name": "{workspace}",
+              "item": [
+                {
+                  "name": "index",
+                  "item": [
+                    {
+                      "name": "search",
+                      "item": [
+                        {
+                          "name": "job",
+                          "item": [
+                            {
+                              "name": "Search Through Jobs with a String Query",
+                              "id": "d01010e0-51ab-45d6-994c-3aecd9fdec5e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/srch/w/:workspace/index/search/job?search_query=<string>&pagination_offset=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "srch",
+                                    "w",
+                                    ":workspace",
+                                    "index",
+                                    "search",
+                                    "job"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "search_query",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "pagination_offset",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "5fa9e3d0-5e76-4270-a33a-d606ad791fdd",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "9c6e30a2-6d47-47aa-8edd-86765ce2e823",
+                                  "name": "search results",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/srch/w/:workspace/index/search/job?search_query=<string>&pagination_offset=<integer>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "srch",
+                                        "w",
+                                        ":workspace",
+                                        "index",
+                                        "search",
+                                        "job"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "(Required) ",
+                                          "key": "search_query",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "key": "pagination_offset",
+                                          "value": "<integer>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"query_parse_errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hits\": [\n    {\n      \"dancer\": \"<string>\"\n    },\n    {\n      \"dancer\": \"<string>\"\n    }\n  ],\n  \"hit_count\": \"<number>\",\n  \"index_metadata\": {\n    \"indexed_until\": \"<dateTime>\",\n    \"lost_lock_ownership\": \"<boolean>\",\n    \"max_index_time_window_secs\": \"<number>\"\n  }\n}",
+                                  "createdAt": "2026-07-28T03:30:50.000Z",
+                                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                                  "uid": "35240-9c6e30a2-6d47-47aa-8edd-86765ce2e823"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:50.000Z",
+                              "updatedAt": "2026-07-28T03:30:50.000Z",
+                              "uid": "35240-d01010e0-51ab-45d6-994c-3aecd9fdec5e"
+                            }
+                          ],
+                          "id": "f092b0f8-c27e-43d1-8006-6450428f0820",
+                          "createdAt": "2026-07-28T03:30:50.000Z",
+                          "updatedAt": "2026-07-28T03:30:50.000Z",
+                          "uid": "35240-f092b0f8-c27e-43d1-8006-6450428f0820"
+                        }
+                      ],
+                      "id": "59d4254b-a1d7-4eac-8250-4bd12d49c0bd",
+                      "createdAt": "2026-07-28T03:30:50.000Z",
+                      "updatedAt": "2026-07-28T03:30:50.000Z",
+                      "uid": "35240-59d4254b-a1d7-4eac-8250-4bd12d49c0bd"
+                    }
+                  ],
+                  "id": "420742c3-6e9d-4d84-9885-8b432aa17615",
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-420742c3-6e9d-4d84-9885-8b432aa17615"
+                }
+              ],
+              "id": "ffa2b4b3-401f-41a6-b506-fbadf9672d15",
+              "createdAt": "2026-07-28T03:30:50.000Z",
+              "updatedAt": "2026-07-28T03:30:50.000Z",
+              "uid": "35240-ffa2b4b3-401f-41a6-b506-fbadf9672d15"
+            }
+          ],
+          "id": "6b0f9094-e04d-4152-b2fe-931479f72b44",
+          "createdAt": "2026-07-28T03:30:50.000Z",
+          "updatedAt": "2026-07-28T03:30:50.000Z",
+          "uid": "35240-6b0f9094-e04d-4152-b2fe-931479f72b44"
+        },
+        {
+          "name": "index",
+          "item": [
+            {
+              "name": "search",
+              "item": [
+                {
+                  "name": "service_logs",
+                  "item": [
+                    {
+                      "name": "Search Through Service Logs with a String Query",
+                      "id": "edd64271-211f-4c6e-b442-c9b965792b53",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/srch/index/search/service_logs?search_query=<string>&mode=<string>&worker_group=<string>&hostname=<string>&min_ts=<dateTime>&max_ts=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "srch",
+                            "index",
+                            "search",
+                            "service_logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "search_query",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "mode",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "worker_group",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) ",
+                              "key": "hostname",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "min_ts",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "max_ts",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "402dffda-dda5-43d5-8b0b-f215b38539ab",
+                          "name": "search results",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/srch/index/search/service_logs?search_query=<string>&mode=<string>&worker_group=<string>&hostname=<string>&min_ts=<dateTime>&max_ts=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "srch",
+                                "index",
+                                "search",
+                                "service_logs"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "search_query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "mode",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "worker_group",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "hostname",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "min_ts",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "key": "max_ts",
+                                  "value": "<dateTime>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"query_parse_errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hits\": [\n    {\n      \"dancer\": \"<string>\"\n    },\n    {\n      \"dancer\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:30:50.000Z",
+                          "updatedAt": "2026-07-28T03:30:50.000Z",
+                          "uid": "35240-402dffda-dda5-43d5-8b0b-f215b38539ab"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:50.000Z",
+                      "updatedAt": "2026-07-28T03:30:50.000Z",
+                      "uid": "35240-edd64271-211f-4c6e-b442-c9b965792b53"
+                    }
+                  ],
+                  "id": "aff32252-468c-44f8-ba13-c5fcf3370676",
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-aff32252-468c-44f8-ba13-c5fcf3370676"
+                },
+                {
+                  "name": "count_service_logs",
+                  "item": [
+                    {
+                      "name": "Search and Count the Log Line Hits on Every Provided Host",
+                      "id": "6f0b08ff-e5fe-41f8-bf2b-5aef57954214",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/srch/index/search/count_service_logs?search_query=<string>&min_ts=<dateTime>&max_ts=<dateTime>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "srch",
+                            "index",
+                            "search",
+                            "count_service_logs"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "search_query",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "min_ts",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "key": "max_ts",
+                              "value": "<dateTime>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a2c89982-26f3-4635-bf30-2b0a4c32ef82",
+                          "name": "search results",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/srch/index/search/count_service_logs?search_query=<string>&min_ts=<dateTime>&max_ts=<dateTime>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "srch",
+                                "index",
+                                "search",
+                                "count_service_logs"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "search_query",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "min_ts",
+                                  "value": "<dateTime>"
+                                },
+                                {
+                                  "key": "max_ts",
+                                  "value": "<dateTime>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"query_parse_errors\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"count_per_host\": {}\n}",
+                          "createdAt": "2026-07-28T03:30:50.000Z",
+                          "updatedAt": "2026-07-28T03:30:50.000Z",
+                          "uid": "35240-a2c89982-26f3-4635-bf30-2b0a4c32ef82"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:50.000Z",
+                      "updatedAt": "2026-07-28T03:30:50.000Z",
+                      "uid": "35240-6f0b08ff-e5fe-41f8-bf2b-5aef57954214"
+                    }
+                  ],
+                  "id": "c5a2a2d0-f576-483c-80f8-737631e38f23",
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-c5a2a2d0-f576-483c-80f8-737631e38f23"
+                }
+              ],
+              "id": "246bc9f4-cf5d-4e03-bbad-f3a0b43f6bde",
+              "createdAt": "2026-07-28T03:30:50.000Z",
+              "updatedAt": "2026-07-28T03:30:50.000Z",
+              "uid": "35240-246bc9f4-cf5d-4e03-bbad-f3a0b43f6bde"
+            },
+            {
+              "name": "storage",
+              "item": [
+                {
+                  "name": "disk",
+                  "item": [
+                    {
+                      "name": "Get Index Disk Storage Sizes from the Indexer.",
+                      "id": "81d807bc-9601-4580-9d4c-baa82ca9eaf5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/srch/index/storage/disk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "srch",
+                            "index",
+                            "storage",
+                            "disk"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "78261ed5-e52e-4ad1-938c-74229a520283",
+                          "name": "disk storage sizes for each index",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/srch/index/storage/disk",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "srch",
+                                "index",
+                                "storage",
+                                "disk"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"job_index_disk_size_bytes\": \"<integer>\",\n  \"log_index_disk_size_bytes\": \"<integer>\"\n}",
+                          "createdAt": "2026-07-28T03:30:50.000Z",
+                          "updatedAt": "2026-07-28T03:30:50.000Z",
+                          "uid": "35240-78261ed5-e52e-4ad1-938c-74229a520283"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:50.000Z",
+                      "updatedAt": "2026-07-28T03:30:50.000Z",
+                      "uid": "35240-81d807bc-9601-4580-9d4c-baa82ca9eaf5"
+                    }
+                  ],
+                  "id": "1ef5de57-2858-46f5-a5f0-af3dcd023866",
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-1ef5de57-2858-46f5-a5f0-af3dcd023866"
+                }
+              ],
+              "id": "48bc3814-aa06-4810-ba76-ca96d1598521",
+              "createdAt": "2026-07-28T03:30:50.000Z",
+              "updatedAt": "2026-07-28T03:30:50.000Z",
+              "uid": "35240-48bc3814-aa06-4810-ba76-ca96d1598521"
+            }
+          ],
+          "id": "1892c481-6fdf-46a7-a531-705431ee9df0",
+          "createdAt": "2026-07-28T03:30:50.000Z",
+          "updatedAt": "2026-07-28T03:30:50.000Z",
+          "uid": "35240-1892c481-6fdf-46a7-a531-705431ee9df0"
+        }
+      ],
+      "id": "3d1823e3-7984-42e2-ba80-24fdf04a31ba",
+      "createdAt": "2026-07-28T03:30:50.000Z",
+      "updatedAt": "2026-07-28T03:30:50.000Z",
+      "uid": "35240-3d1823e3-7984-42e2-ba80-24fdf04a31ba"
+    },
+    {
+      "name": "indexer",
+      "item": [
+        {
+          "name": "delete",
+          "item": [
+            {
+              "name": "{idx_name}",
+              "item": [
+                {
+                  "name": "Clear an Index and Restart the Indexer.",
+                  "id": "e92deda5-96c2-4c74-a7d6-27b45b5fddfc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/indexer/delete/:idx_name",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "indexer",
+                        "delete",
+                        ":idx_name"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ea36c19a-b37d-4a59-9cf6-abe32715f2f4",
+                          "key": "idx_name",
+                          "value": "ServiceLogIndex",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "12b5bd5e-ca55-4c19-a180-b45e6ce029b3",
+                      "name": "idx to be deleted and indexer restarting",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/indexer/delete/:idx_name",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "indexer",
+                            "delete",
+                            ":idx_name"
+                          ],
+                          "variable": [
+                            {
+                              "key": "idx_name"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/plain"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:30:50.000Z",
+                      "updatedAt": "2026-07-28T03:30:50.000Z",
+                      "uid": "35240-12b5bd5e-ca55-4c19-a180-b45e6ce029b3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-e92deda5-96c2-4c74-a7d6-27b45b5fddfc"
+                }
+              ],
+              "id": "566ae914-297f-42f9-a558-640b65deee72",
+              "createdAt": "2026-07-28T03:30:50.000Z",
+              "updatedAt": "2026-07-28T03:30:50.000Z",
+              "uid": "35240-566ae914-297f-42f9-a558-640b65deee72"
+            }
+          ],
+          "id": "ffbe59b3-ab7e-4df3-a3db-7a30d6c7a797",
+          "createdAt": "2026-07-28T03:30:50.000Z",
+          "updatedAt": "2026-07-28T03:30:50.000Z",
+          "uid": "35240-ffbe59b3-ab7e-4df3-a3db-7a30d6c7a797"
+        },
+        {
+          "name": "storage",
+          "item": [
+            {
+              "name": "Get Index Storage Sizes (disk and S3).",
+              "id": "95f708fa-c903-409d-8598-af4883bf6c9a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/indexer/storage",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "indexer",
+                    "storage"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f39e1aec-f365-43f4-8233-be4672cb3078",
+                  "name": "storage sizes for each index",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/indexer/storage",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "indexer",
+                        "storage"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"job_index\": {\n    \"disk_size_bytes\": \"<integer>\",\n    \"s3_size_bytes\": \"<integer>\"\n  },\n  \"service_log_index\": {\n    \"disk_size_bytes\": \"<integer>\",\n    \"s3_size_bytes\": \"<integer>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-f39e1aec-f365-43f4-8233-be4672cb3078"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:50.000Z",
+              "updatedAt": "2026-07-28T03:30:50.000Z",
+              "uid": "35240-95f708fa-c903-409d-8598-af4883bf6c9a"
+            }
+          ],
+          "id": "1a5fa89b-f402-4f94-83d1-ce9ac7203d6a",
+          "createdAt": "2026-07-28T03:30:50.000Z",
+          "updatedAt": "2026-07-28T03:30:50.000Z",
+          "uid": "35240-1a5fa89b-f402-4f94-83d1-ce9ac7203d6a"
+        },
+        {
+          "name": "status",
+          "item": [
+            {
+              "name": "Get Indexer Status Including Liveness and Storage Sizes.",
+              "id": "5886d3f2-5bb1-43f2-83a9-eaa2728f00e1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/indexer/status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "indexer",
+                    "status"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "04bb5404-5a72-4fbe-a6be-907372218bac",
+                  "name": "indexer status for each index",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/indexer/status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "indexer",
+                        "status"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"job_indexer\": {\n    \"is_alive\": \"<boolean>\",\n    \"last_locked_at\": \"<dateTime>\",\n    \"owner\": \"<string>\",\n    \"storage\": {\n      \"disk_size_bytes\": \"<integer>\",\n      \"s3_size_bytes\": \"<integer>\"\n    }\n  },\n  \"log_indexer\": {\n    \"is_alive\": \"<boolean>\",\n    \"last_locked_at\": \"<dateTime>\",\n    \"owner\": \"<string>\",\n    \"storage\": {\n      \"disk_size_bytes\": \"<integer>\",\n      \"s3_size_bytes\": \"<integer>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T03:30:50.000Z",
+                  "updatedAt": "2026-07-28T03:30:50.000Z",
+                  "uid": "35240-04bb5404-5a72-4fbe-a6be-907372218bac"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:50.000Z",
+              "updatedAt": "2026-07-28T03:30:50.000Z",
+              "uid": "35240-5886d3f2-5bb1-43f2-83a9-eaa2728f00e1"
+            }
+          ],
+          "id": "cfc17e13-25ef-497e-9cfd-56cbf5fce74f",
+          "createdAt": "2026-07-28T03:30:50.000Z",
+          "updatedAt": "2026-07-28T03:30:50.000Z",
+          "uid": "35240-cfc17e13-25ef-497e-9cfd-56cbf5fce74f"
+        }
+      ],
+      "id": "982b9d6c-05e4-4ba0-ad68-555a91e0dc95",
+      "createdAt": "2026-07-28T03:30:50.000Z",
+      "updatedAt": "2026-07-28T03:30:50.000Z",
+      "uid": "35240-982b9d6c-05e4-4ba0-ad68-555a91e0dc95"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

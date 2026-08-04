@@ -1,0 +1,2814 @@
+{
+  "info": {
+    "_postman_id": "b3356a89-301f-4cb8-9398-29fb47ac3cfb",
+    "name": "Windmill admin postgres_trigger API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:30.000Z",
+    "updatedAt": "2026-07-28T03:31:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b3356a89-301f-4cb8-9398-29fb47ac3cfb"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "postgres_triggers",
+              "item": [
+                {
+                  "name": "postgres",
+                  "item": [
+                    {
+                      "name": "version",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Get Postgres Version",
+                              "id": "42c484e6-83c7-483d-90d3-8bd0694c54d9",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/postgres/version/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "postgres",
+                                    "version",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "1d55ae7a-6b65-40a9-9e9b-eb0dd46102a1",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "0a4102d7-929a-46ef-9f6c-42345cf8a971",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "594f996a-ade3-4246-834f-9dba0a5b99ce",
+                                  "name": "postgres version",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/postgres/version/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "postgres",
+                                        "version",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-594f996a-ade3-4246-834f-9dba0a5b99ce"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-42c484e6-83c7-483d-90d3-8bd0694c54d9"
+                            }
+                          ],
+                          "id": "356fb37f-aa75-4f33-8c79-3795a99f9c2d",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-356fb37f-aa75-4f33-8c79-3795a99f9c2d"
+                        }
+                      ],
+                      "id": "3e9246c0-805b-4259-9b11-58ea114f5c2a",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-3e9246c0-805b-4259-9b11-58ea114f5c2a"
+                    }
+                  ],
+                  "id": "6a4c2048-c082-4eb5-9d8a-0cbfb22366cd",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-6a4c2048-c082-4eb5-9d8a-0cbfb22366cd"
+                },
+                {
+                  "name": "is_valid_postgres_configuration",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Check if Postgres Configuration is Set to Logical",
+                          "id": "fd3435a6-96a9-4c44-86c1-fff73254c179",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/is_valid_postgres_configuration/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "is_valid_postgres_configuration",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d9e286a5-697e-41bc-ab64-faee3f8e833c",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a04edde3-0f83-4b3c-8d22-c6fe213668e1",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "d2945426-2b07-4098-a8f3-8a732616b112",
+                              "name": "boolean that indicates if postgres is set to logical level or not",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/is_valid_postgres_configuration/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "is_valid_postgres_configuration",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-d2945426-2b07-4098-a8f3-8a732616b112"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-fd3435a6-96a9-4c44-86c1-fff73254c179"
+                        }
+                      ],
+                      "id": "e0578c71-8afe-45fd-8b46-f3228eeae541",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-e0578c71-8afe-45fd-8b46-f3228eeae541"
+                    }
+                  ],
+                  "id": "8a1ccc0e-ab05-40ef-855d-1ab5a98775e6",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-8a1ccc0e-ab05-40ef-855d-1ab5a98775e6"
+                },
+                {
+                  "name": "create_template_script",
+                  "item": [
+                    {
+                      "name": "Create Template Script",
+                      "id": "9a590790-39c8-4e63-b198-cdf1c677f6b1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"postgres_resource_path\": \"<string>\",\n  \"relations\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"language\": \"Typescript\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/create_template_script",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "postgres_triggers",
+                            "create_template_script"
+                          ],
+                          "variable": [
+                            {
+                              "id": "59d6b5aa-0ac7-497c-afb8-76ba95d21aad",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "b1d40b67-6156-4866-b82d-220b860e149d",
+                          "name": "custom id to retrieve template script",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"postgres_resource_path\": \"<string>\",\n  \"relations\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"language\": \"Typescript\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/create_template_script",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "create_template_script"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-b1d40b67-6156-4866-b82d-220b860e149d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-9a590790-39c8-4e63-b198-cdf1c677f6b1"
+                    }
+                  ],
+                  "id": "e3cc03cf-c9da-4672-bd0a-f12cb01770f3",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-e3cc03cf-c9da-4672-bd0a-f12cb01770f3"
+                },
+                {
+                  "name": "get_template_script",
+                  "item": [
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Get Template Script",
+                          "id": "8627124f-4ed7-4d6e-abae-73c62e2c5e89",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/get_template_script/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "get_template_script",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e0e6f1c8-1713-433e-a90f-d4058b2e7806",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6e2c7ecf-d8d5-4191-91b7-61facdea27a6",
+                                  "key": "id",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1a78dcc5-11da-4e82-b4b5-6a55143685b9",
+                              "name": "template script",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/get_template_script/:id",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "get_template_script",
+                                    ":id"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-1a78dcc5-11da-4e82-b4b5-6a55143685b9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-8627124f-4ed7-4d6e-abae-73c62e2c5e89"
+                        }
+                      ],
+                      "id": "2fd2750f-15b1-4838-af85-c3b1191b8481",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-2fd2750f-15b1-4838-af85-c3b1191b8481"
+                    }
+                  ],
+                  "id": "0202caa8-eba5-40ae-93f4-3793eda40f43",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-0202caa8-eba5-40ae-93f4-3793eda40f43"
+                },
+                {
+                  "name": "slot",
+                  "item": [
+                    {
+                      "name": "list",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "List Postgres Replication Slot",
+                              "id": "2841cfac-15b6-4ef8-8b0f-ae67ba4a6e1e",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/slot/list/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "slot",
+                                    "list",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "182806f3-585f-42e2-8a40-c53aa3e60f84",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "2d38ea80-9afc-48f2-89c8-1fb669a57e39",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "04ca020d-1880-4d66-8660-2c1dcf7b8c23",
+                                  "name": "list postgres slot",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/slot/list/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "slot",
+                                        "list",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  {\n    \"slot_name\": \"<string>\",\n    \"active\": \"<boolean>\"\n  },\n  {\n    \"slot_name\": \"<string>\",\n    \"active\": \"<boolean>\"\n  }\n]",
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-04ca020d-1880-4d66-8660-2c1dcf7b8c23"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-2841cfac-15b6-4ef8-8b0f-ae67ba4a6e1e"
+                            }
+                          ],
+                          "id": "c1d77104-ea0c-43af-acc0-6e672e9bf90e",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-c1d77104-ea0c-43af-acc0-6e672e9bf90e"
+                        }
+                      ],
+                      "id": "1b38f1f0-f357-4a4c-81e6-8dfa22d9e621",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-1b38f1f0-f357-4a4c-81e6-8dfa22d9e621"
+                    },
+                    {
+                      "name": "create",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Create Replication Slot for Postgres",
+                              "id": "f2ddc645-329b-4f86-8092-c151defc6038",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/slot/create/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "slot",
+                                    "create",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "2d9dbe02-926a-4e48-b587-98afd5742bd2",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "98ef8fd6-4620-444d-965a-7c7a3581d387",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "383f15c0-e75c-40d1-a477-85c5335f1ea3",
+                                  "name": "slot created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/slot/create/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "slot",
+                                        "create",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-383f15c0-e75c-40d1-a477-85c5335f1ea3"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-f2ddc645-329b-4f86-8092-c151defc6038"
+                            }
+                          ],
+                          "id": "9d280a8e-29e0-4011-9601-c7cbecff51e4",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-9d280a8e-29e0-4011-9601-c7cbecff51e4"
+                        }
+                      ],
+                      "id": "92268b44-6075-4e1c-885a-6726cbb9f380",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-92268b44-6075-4e1c-885a-6726cbb9f380"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Delete Postgres Replication Slot",
+                              "id": "e977feb8-5a19-405a-abaf-ffa6dc2ab623",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/slot/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "slot",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "8a07c721-026f-4387-a618-a5eb828542ad",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "9ac310f1-b520-4b00-9606-fac897836d12",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "95f69ca3-e4b0-4d01-b840-d2f407b3f118",
+                                  "name": "postgres replication slot deleted",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/slot/delete/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "slot",
+                                        "delete",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-95f69ca3-e4b0-4d01-b840-d2f407b3f118"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-e977feb8-5a19-405a-abaf-ffa6dc2ab623"
+                            }
+                          ],
+                          "id": "c36145fa-3177-43f8-8e1c-3fb83fcdabd0",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-c36145fa-3177-43f8-8e1c-3fb83fcdabd0"
+                        }
+                      ],
+                      "id": "6d25c07d-52c3-46b7-85dc-14d5fedddb34",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-6d25c07d-52c3-46b7-85dc-14d5fedddb34"
+                    }
+                  ],
+                  "id": "e15a022a-574b-47fe-9eef-4bc089256d62",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-e15a022a-574b-47fe-9eef-4bc089256d62"
+                },
+                {
+                  "name": "publication",
+                  "item": [
+                    {
+                      "name": "list",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "List Postgres Publication",
+                              "id": "8f85f7e0-6d0a-4d37-8ba5-e864cf25be0a",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/list/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "publication",
+                                    "list",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "3fecb9ad-aa27-45c3-b7e2-6f998f50e5b6",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "f97e4572-d867-4045-8ece-f08438954396",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "be2bd9bf-ad63-4285-ad7d-e1ca48474e7c",
+                                  "name": "database publication list",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/list/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "publication",
+                                        "list",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-be2bd9bf-ad63-4285-ad7d-e1ca48474e7c"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-8f85f7e0-6d0a-4d37-8ba5-e864cf25be0a"
+                            }
+                          ],
+                          "id": "82f7fd8b-b40b-48a9-9bc8-2873117bb255",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-82f7fd8b-b40b-48a9-9bc8-2873117bb255"
+                        }
+                      ],
+                      "id": "ac12b3d9-be55-4397-9ec5-d9f773ab4214",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-ac12b3d9-be55-4397-9ec5-d9f773ab4214"
+                    },
+                    {
+                      "name": "get",
+                      "item": [
+                        {
+                          "name": "{publication}",
+                          "item": [
+                            {
+                              "name": "{path}",
+                              "item": [
+                                {
+                                  "name": "Get Postgres Publication",
+                                  "id": "4bfd3958-2016-48c0-aa07-d57b7785a387",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/get/:publication/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "publication",
+                                        "get",
+                                        ":publication",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "283943fa-e65b-4b2a-b09e-c3234b0e3f0d",
+                                          "key": "workspace",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "8c9b2643-7408-40b5-a5d8-0e515fd6df45",
+                                          "key": "publication",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the publication"
+                                        },
+                                        {
+                                          "id": "e59c4091-6db5-4d5c-81a6-9defd3e12e2c",
+                                          "key": "path",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "0ea80c2f-6684-47d3-b318-5df667feeda9",
+                                      "name": "postgres publication get",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/get/:publication/:path",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "w",
+                                            ":workspace",
+                                            "postgres_triggers",
+                                            "publication",
+                                            "get",
+                                            ":publication",
+                                            ":path"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspace"
+                                            },
+                                            {
+                                              "key": "publication"
+                                            },
+                                            {
+                                              "key": "path"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                                      "createdAt": "2026-07-28T03:31:30.000Z",
+                                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                                      "uid": "35240-0ea80c2f-6684-47d3-b318-5df667feeda9"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-4bfd3958-2016-48c0-aa07-d57b7785a387"
+                                }
+                              ],
+                              "id": "7e80662a-b22f-4a37-9a78-9309e7e25aaf",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-7e80662a-b22f-4a37-9a78-9309e7e25aaf"
+                            }
+                          ],
+                          "id": "c69347c2-815b-4e34-92cc-f1683df8ef37",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-c69347c2-815b-4e34-92cc-f1683df8ef37"
+                        }
+                      ],
+                      "id": "feabc83a-c56f-4305-82c5-7103e272fa5f",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-feabc83a-c56f-4305-82c5-7103e272fa5f"
+                    },
+                    {
+                      "name": "create",
+                      "item": [
+                        {
+                          "name": "{publication}",
+                          "item": [
+                            {
+                              "name": "{path}",
+                              "item": [
+                                {
+                                  "name": "Create Publication for Postgres",
+                                  "id": "f63cc3f4-a3c6-406a-a158-3c1e03fac9bd",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/create/:publication/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "publication",
+                                        "create",
+                                        ":publication",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "3c5bee7d-4bfd-43b5-b70f-f8bfae62b3f9",
+                                          "key": "workspace",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "84fac45d-5f54-4f84-8075-0cce3592135e",
+                                          "key": "publication",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the publication"
+                                        },
+                                        {
+                                          "id": "b56f2ae6-170e-4238-89af-2b679cc99881",
+                                          "key": "path",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "a4f2eb5d-02e4-42fa-8d1f-195eabae1623",
+                                      "name": "publication created",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "text/plain"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/create/:publication/:path",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "w",
+                                            ":workspace",
+                                            "postgres_triggers",
+                                            "publication",
+                                            "create",
+                                            ":publication",
+                                            ":path"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspace"
+                                            },
+                                            {
+                                              "key": "publication"
+                                            },
+                                            {
+                                              "key": "path"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "text/plain"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "<string>",
+                                      "createdAt": "2026-07-28T03:31:30.000Z",
+                                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                                      "uid": "35240-a4f2eb5d-02e4-42fa-8d1f-195eabae1623"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-f63cc3f4-a3c6-406a-a158-3c1e03fac9bd"
+                                }
+                              ],
+                              "id": "d796be55-48a7-498d-95ae-0cea3614c708",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-d796be55-48a7-498d-95ae-0cea3614c708"
+                            }
+                          ],
+                          "id": "9ed26426-2b48-4219-89f6-58b454b625e1",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-9ed26426-2b48-4219-89f6-58b454b625e1"
+                        }
+                      ],
+                      "id": "45954c70-3058-41cc-83db-987e8b566a0d",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-45954c70-3058-41cc-83db-987e8b566a0d"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "{publication}",
+                          "item": [
+                            {
+                              "name": "{path}",
+                              "item": [
+                                {
+                                  "name": "Update Publication for Postgres",
+                                  "id": "401eae0a-d0fe-461c-b46c-4ab3b9a20484",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/update/:publication/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "publication",
+                                        "update",
+                                        ":publication",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "5a731c02-ae9a-4a22-8dd6-a5ae98b91a0d",
+                                          "key": "workspace",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "aed3fd11-837d-4c2b-b504-4b1179766826",
+                                          "key": "publication",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the publication"
+                                        },
+                                        {
+                                          "id": "e4a13796-1c5e-404f-9d23-7d8531169079",
+                                          "key": "path",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "c272f146-89c3-4c1b-a86a-54509f433709",
+                                      "name": "publication updated",
+                                      "originalRequest": {
+                                        "method": "POST",
+                                        "header": [
+                                          {
+                                            "key": "Content-Type",
+                                            "value": "application/json"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "text/plain"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "body": {
+                                          "mode": "raw",
+                                          "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                                          "options": {
+                                            "raw": {
+                                              "headerFamily": "json",
+                                              "language": "json"
+                                            }
+                                          }
+                                        },
+                                        "url": {
+                                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/update/:publication/:path",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "w",
+                                            ":workspace",
+                                            "postgres_triggers",
+                                            "publication",
+                                            "update",
+                                            ":publication",
+                                            ":path"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspace"
+                                            },
+                                            {
+                                              "key": "publication"
+                                            },
+                                            {
+                                              "key": "path"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Created",
+                                      "code": 201,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "text/plain"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "<string>",
+                                      "createdAt": "2026-07-28T03:31:30.000Z",
+                                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                                      "uid": "35240-c272f146-89c3-4c1b-a86a-54509f433709"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-401eae0a-d0fe-461c-b46c-4ab3b9a20484"
+                                }
+                              ],
+                              "id": "03d4badb-8338-4630-b471-7f3e05ee4ed8",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-03d4badb-8338-4630-b471-7f3e05ee4ed8"
+                            }
+                          ],
+                          "id": "12f5c3ae-25a9-4307-b648-07845e0427dd",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-12f5c3ae-25a9-4307-b648-07845e0427dd"
+                        }
+                      ],
+                      "id": "1c146d4e-b57a-41f9-8c75-616ba6e7ba5e",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-1c146d4e-b57a-41f9-8c75-616ba6e7ba5e"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "{publication}",
+                          "item": [
+                            {
+                              "name": "{path}",
+                              "item": [
+                                {
+                                  "name": "Delete Postgres Publication",
+                                  "id": "55a2a73e-cb0d-4e2d-b15c-1d4559d7d9c4",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/delete/:publication/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "postgres_triggers",
+                                        "publication",
+                                        "delete",
+                                        ":publication",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "1cf5d198-3689-4045-a6ee-6078896e0021",
+                                          "key": "workspace",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "743e4f9d-9a7b-4e8e-a58b-a8fc0fbcf9f6",
+                                          "key": "publication",
+                                          "value": "<string>",
+                                          "description": "(Required) The name of the publication"
+                                        },
+                                        {
+                                          "id": "51809697-b77e-4944-9c0d-c01cf21d1722",
+                                          "key": "path",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "66054d72-f5f6-45fb-a36b-f8d0695c018e",
+                                      "name": "postgres publication deleted",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "text/plain"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/publication/delete/:publication/:path",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "w",
+                                            ":workspace",
+                                            "postgres_triggers",
+                                            "publication",
+                                            "delete",
+                                            ":publication",
+                                            ":path"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspace"
+                                            },
+                                            {
+                                              "key": "publication"
+                                            },
+                                            {
+                                              "key": "path"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "text/plain"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "<string>",
+                                      "createdAt": "2026-07-28T03:31:30.000Z",
+                                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                                      "uid": "35240-66054d72-f5f6-45fb-a36b-f8d0695c018e"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:31:30.000Z",
+                                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                                  "uid": "35240-55a2a73e-cb0d-4e2d-b15c-1d4559d7d9c4"
+                                }
+                              ],
+                              "id": "7de3191a-6445-498b-bdf6-4e71e8303860",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-7de3191a-6445-498b-bdf6-4e71e8303860"
+                            }
+                          ],
+                          "id": "2f4d2f95-7ca1-474a-9f77-d50c8031643c",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-2f4d2f95-7ca1-474a-9f77-d50c8031643c"
+                        }
+                      ],
+                      "id": "1cc149c0-4182-4cb3-9e67-60b75012911f",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-1cc149c0-4182-4cb3-9e67-60b75012911f"
+                    }
+                  ],
+                  "id": "ab1bb1fb-08b5-44e5-9663-74bb44cdf6ea",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-ab1bb1fb-08b5-44e5-9663-74bb44cdf6ea"
+                },
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Postgres Trigger",
+                      "id": "b51f37ff-2207-4634-a3fe-3fbf00654e13",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"mode\": \"suspended\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"cillum_1\": -31619994.60909292\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "postgres_triggers",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "30deb7f1-8c69-4125-ad13-8d068c6e3f2b",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "de4aa08e-2fa9-40b2-86ac-da0d21521857",
+                          "name": "postgres trigger created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"mode\": \"suspended\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"cillum_1\": -31619994.60909292\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-de4aa08e-2fa9-40b2-86ac-da0d21521857"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-b51f37ff-2207-4634-a3fe-3fbf00654e13"
+                    }
+                  ],
+                  "id": "2c153bcd-79db-47ea-84a1-a90520fd43e6",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-2c153bcd-79db-47ea-84a1-a90520fd43e6"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Postgres Trigger",
+                          "id": "3a31a0b9-8f72-4d06-9faf-a0d9faf7050a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"mode\": \"enabled\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"deseruntc\": -70534383.26985928,\n    \"voluptate9\": false\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/update/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "update",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7566a4ae-42ab-4d75-8c4d-cc3cd45f3a14",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "86bef4c2-aa44-4598-ac52-ce756a2bf7b2",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "cc6abb1d-9718-49f1-98dd-6bb149273348",
+                              "name": "postgres trigger updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"mode\": \"enabled\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"deseruntc\": -70534383.26985928,\n    \"voluptate9\": false\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/update/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-cc6abb1d-9718-49f1-98dd-6bb149273348"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-3a31a0b9-8f72-4d06-9faf-a0d9faf7050a"
+                        }
+                      ],
+                      "id": "bcc5ab2b-22ee-4391-a600-1e460b712350",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-bcc5ab2b-22ee-4391-a600-1e460b712350"
+                    }
+                  ],
+                  "id": "b896760b-a161-44ac-96ae-0fdd60a53bab",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-b896760b-a161-44ac-96ae-0fdd60a53bab"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Delete Postgres Trigger",
+                          "id": "933aebff-c695-47bc-a2fb-152b77c81f28",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/delete/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "delete",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "40952178-11f4-45c6-8711-119eb2660e73",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a2cdcae5-34bf-49fe-9724-a4942992d325",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "416d9b35-0da7-45ac-8001-c1ccc80e555f",
+                              "name": "postgres trigger deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-416d9b35-0da7-45ac-8001-c1ccc80e555f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-933aebff-c695-47bc-a2fb-152b77c81f28"
+                        }
+                      ],
+                      "id": "3c4f7583-c960-45e0-82f2-809caaae5f81",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-3c4f7583-c960-45e0-82f2-809caaae5f81"
+                    }
+                  ],
+                  "id": "472faf6e-6055-490b-91d3-231d4a25cd84",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-472faf6e-6055-490b-91d3-231d4a25cd84"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Postgres Trigger",
+                          "id": "4e0a5fe0-8cc3-4e49-ba0c-e3cc4319488d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/get/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "get",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "df199ec8-ebbd-4646-8f5a-95203d701e40",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "4ef3aef5-8a02-440b-9bdd-f40860cbfce5",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "189013a5-6f2a-42f5-9b42-97c857659b42",
+                              "name": "get postgres trigger",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/get/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "null",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-189013a5-6f2a-42f5-9b42-97c857659b42"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-4e0a5fe0-8cc3-4e49-ba0c-e3cc4319488d"
+                        }
+                      ],
+                      "id": "fe21851e-5498-413a-b6fa-1fddfaed220c",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-fe21851e-5498-413a-b6fa-1fddfaed220c"
+                    }
+                  ],
+                  "id": "e64d597c-39c4-4366-985d-70ea61585a46",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-e64d597c-39c4-4366-985d-70ea61585a46"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Postgres Triggers",
+                      "id": "7c6df0ec-cad2-445b-bf54-06f0db4d8ccd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/list?page=<integer>&per_page=<integer>&path=<string>&is_flow=<boolean>&path_start=<string>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "postgres_triggers",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "filter by path",
+                              "key": "path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "is_flow",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "0275e2ee-c84b-4372-982a-c5ca5787e0b3",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "72c00ae8-3da4-4f02-a867-9c6cd8ad870e",
+                          "name": "postgres trigger list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/list?page=<integer>&per_page=<integer>&path=<string>&is_flow=<boolean>&path_start=<string>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "filter by path",
+                                  "key": "path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "is_flow",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "null",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-72c00ae8-3da4-4f02-a867-9c6cd8ad870e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-7c6df0ec-cad2-445b-bf54-06f0db4d8ccd"
+                    }
+                  ],
+                  "id": "79e9d90a-9e14-4d1a-8901-a551d7939ba2",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-79e9d90a-9e14-4d1a-8901-a551d7939ba2"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Does Postgres Trigger Exists",
+                          "id": "1a6a2c2f-ab10-47eb-8ed0-9598075398b5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/exists/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "exists",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ff59d8dd-4f08-4bd8-bd06-959461dd705e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "850aebd6-ab06-4391-b102-7d25c183d56f",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "08876226-c9f1-47ce-a662-53c9a1e4865f",
+                              "name": "postgres trigger exists",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-08876226-c9f1-47ce-a662-53c9a1e4865f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-1a6a2c2f-ab10-47eb-8ed0-9598075398b5"
+                        }
+                      ],
+                      "id": "d2c512a1-3748-4325-b5e5-8d7550f403bd",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-d2c512a1-3748-4325-b5e5-8d7550f403bd"
+                    }
+                  ],
+                  "id": "2f6f9707-812e-4e97-b6bf-8933b8967b9e",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-2f6f9707-812e-4e97-b6bf-8933b8967b9e"
+                },
+                {
+                  "name": "setmode",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Set Enabled Postgres Trigger",
+                          "id": "4ae6610e-8f18-4b1c-adf9-4d177f8d6a7b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"mode\": \"disabled\",\n  \"force\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/setmode/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "setmode",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5fe32adc-c621-4d7c-b0bb-b583df9b5ed3",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a2a6a0f9-346c-4cb9-a638-5731cc87d66e",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1a8ab288-804b-4e2a-a924-7c826e3ed2a0",
+                              "name": "postgres trigger enabled set",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"mode\": \"disabled\",\n  \"force\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/setmode/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "postgres_triggers",
+                                    "setmode",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:30.000Z",
+                              "updatedAt": "2026-07-28T03:31:30.000Z",
+                              "uid": "35240-1a8ab288-804b-4e2a-a924-7c826e3ed2a0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-4ae6610e-8f18-4b1c-adf9-4d177f8d6a7b"
+                        }
+                      ],
+                      "id": "053e632a-68c2-4639-917b-5e2ac273c4b2",
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-053e632a-68c2-4639-917b-5e2ac273c4b2"
+                    }
+                  ],
+                  "id": "be77f7a9-f78a-4541-8be1-ef4efe77022e",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-be77f7a9-f78a-4541-8be1-ef4efe77022e"
+                },
+                {
+                  "name": "test",
+                  "item": [
+                    {
+                      "name": "Test Postgres Connection",
+                      "id": "a34c1b96-738f-4f4a-8f55-f5a5173ca70c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"database\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/test",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "postgres_triggers",
+                            "test"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7ddf9290-da2c-4307-a684-b9543e959ad8",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "176c8aba-7d74-4f7b-9a89-6f583850390f",
+                          "name": "successfuly connected to postgres",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"database\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/postgres_triggers/test",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "postgres_triggers",
+                                "test"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:30.000Z",
+                          "updatedAt": "2026-07-28T03:31:30.000Z",
+                          "uid": "35240-176c8aba-7d74-4f7b-9a89-6f583850390f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:30.000Z",
+                      "updatedAt": "2026-07-28T03:31:30.000Z",
+                      "uid": "35240-a34c1b96-738f-4f4a-8f55-f5a5173ca70c"
+                    }
+                  ],
+                  "id": "5bb0bb33-6665-42ca-ad9f-5f1806c7b504",
+                  "createdAt": "2026-07-28T03:31:30.000Z",
+                  "updatedAt": "2026-07-28T03:31:30.000Z",
+                  "uid": "35240-5bb0bb33-6665-42ca-ad9f-5f1806c7b504"
+                }
+              ],
+              "id": "2a8b5373-1156-48ab-8200-f098c499440a",
+              "createdAt": "2026-07-28T03:31:30.000Z",
+              "updatedAt": "2026-07-28T03:31:30.000Z",
+              "uid": "35240-2a8b5373-1156-48ab-8200-f098c499440a"
+            }
+          ],
+          "id": "b5e0825f-2701-487a-b5c5-16f956f2f9aa",
+          "createdAt": "2026-07-28T03:31:30.000Z",
+          "updatedAt": "2026-07-28T03:31:30.000Z",
+          "uid": "35240-b5e0825f-2701-487a-b5c5-16f956f2f9aa"
+        }
+      ],
+      "id": "e9a845d6-7b6a-4fd4-b66a-346c8da08349",
+      "createdAt": "2026-07-28T03:31:30.000Z",
+      "updatedAt": "2026-07-28T03:31:30.000Z",
+      "uid": "35240-e9a845d6-7b6a-4fd4-b66a-346c8da08349"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

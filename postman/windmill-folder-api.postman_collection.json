@@ -1,0 +1,1500 @@
+{
+  "info": {
+    "_postman_id": "6c629f0d-79c7-4285-87b6-94af1a4c9635",
+    "name": "Windmill admin folder API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:41.000Z",
+    "updatedAt": "2026-07-28T03:30:41.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6c629f0d-79c7-4285-87b6-94af1a4c9635"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "folders",
+              "item": [
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Folders",
+                      "id": "6da84a48-9641-4a0f-8597-d68e1af07e48",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/folders/list?page=<integer>&per_page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "folders",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5c1f959e-8b5f-435c-82d3-3db4d72cea30",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "7d87d6f1-7a23-4967-937b-2050d333f2f8",
+                          "name": "folder list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/list?page=<integer>&per_page=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"name\": \"<string>\",\n    \"owners\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_perms\": {\n      \"ut767\": \"<boolean>\"\n    },\n    \"summary\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"default_permissioned_as\": [\n      {\n        \"path_glob\": \"<string>\",\n        \"permissioned_as\": \"<string>\"\n      },\n      {\n        \"path_glob\": \"<string>\",\n        \"permissioned_as\": \"<string>\"\n      }\n    ]\n  },\n  {\n    \"name\": \"<string>\",\n    \"owners\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"extra_perms\": {\n      \"anim6\": \"<boolean>\",\n      \"sint__\": \"<boolean>\"\n    },\n    \"summary\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"default_permissioned_as\": [\n      {\n        \"path_glob\": \"<string>\",\n        \"permissioned_as\": \"<string>\"\n      },\n      {\n        \"path_glob\": \"<string>\",\n        \"permissioned_as\": \"<string>\"\n      }\n    ]\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-7d87d6f1-7a23-4967-937b-2050d333f2f8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-6da84a48-9641-4a0f-8597-d68e1af07e48"
+                    }
+                  ],
+                  "id": "39482050-6780-49d3-894a-1ed6e80f5934",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-39482050-6780-49d3-894a-1ed6e80f5934"
+                },
+                {
+                  "name": "listnames",
+                  "item": [
+                    {
+                      "name": "List Folder Names",
+                      "id": "846181e1-b0f0-4fdc-82e7-068ea5b9545d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/folders/listnames?only_member_of=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "folders",
+                            "listnames"
+                          ],
+                          "query": [
+                            {
+                              "description": "only list the folders the user is member of (default false)",
+                              "key": "only_member_of",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5450090a-1511-44db-9a65-56948b1e36b9",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "cbd2dc9f-b9ad-4be7-b0ce-8eabdcdc342c",
+                          "name": "folder list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/listnames?only_member_of=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "listnames"
+                              ],
+                              "query": [
+                                {
+                                  "description": "only list the folders the user is member of (default false)",
+                                  "key": "only_member_of",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-cbd2dc9f-b9ad-4be7-b0ce-8eabdcdc342c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-846181e1-b0f0-4fdc-82e7-068ea5b9545d"
+                    }
+                  ],
+                  "id": "7b6a95a6-f07f-44bf-b43c-46c878776654",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-7b6a95a6-f07f-44bf-b43c-46c878776654"
+                },
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Folder",
+                      "id": "0d6f61f7-809d-46cf-a5b9-83bccf1737c3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"owners\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_perms\": {\n    \"officia2\": \"<boolean>\"\n  },\n  \"default_permissioned_as\": [\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    },\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/folders/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "folders",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "90d354ad-3d8a-480e-807e-bb2b485fe968",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e015865c-e916-404f-ba19-b1ea30f1e9c9",
+                          "name": "folder created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"summary\": \"<string>\",\n  \"owners\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_perms\": {\n    \"officia2\": \"<boolean>\"\n  },\n  \"default_permissioned_as\": [\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    },\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-e015865c-e916-404f-ba19-b1ea30f1e9c9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-0d6f61f7-809d-46cf-a5b9-83bccf1737c3"
+                    }
+                  ],
+                  "id": "44197ccd-08d3-46c9-88df-ed5d30dfad86",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-44197ccd-08d3-46c9-88df-ed5d30dfad86"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Update Folder",
+                          "id": "c026f6a4-4846-41cf-9685-a59cd7725ff3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"summary\": \"<string>\",\n  \"owners\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_perms\": {\n    \"tempor2\": \"<boolean>\"\n  },\n  \"default_permissioned_as\": [\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    },\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/update/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "update",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "2f0dbf44-25c1-452c-a4e9-0906a8c87b8a",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "301e69a7-a2dc-4d1c-a95f-27bf41552411",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "01db366e-4507-4811-9975-837eb2b02b59",
+                              "name": "folder updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"summary\": \"<string>\",\n  \"owners\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_perms\": {\n    \"tempor2\": \"<boolean>\"\n  },\n  \"default_permissioned_as\": [\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    },\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/update/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "update",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-01db366e-4507-4811-9975-837eb2b02b59"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-c026f6a4-4846-41cf-9685-a59cd7725ff3"
+                        }
+                      ],
+                      "id": "e6bc8664-8d7d-4e1e-b421-181b77a97e5e",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-e6bc8664-8d7d-4e1e-b421-181b77a97e5e"
+                    }
+                  ],
+                  "id": "e9703e23-cb02-4a98-9ed9-c7283390e516",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-e9703e23-cb02-4a98-9ed9-c7283390e516"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Delete Folder",
+                          "id": "f52d1965-2810-419d-9795-8b6d9fda39be",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/delete/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "delete",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ac8135f3-8a4f-469e-a2d2-0629ba32908d",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "ed691702-3867-4a34-8a3e-89157a95950c",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6f8f1d72-93eb-438b-ac64-ab50b20f1916",
+                              "name": "folder deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/delete/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "delete",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-6f8f1d72-93eb-438b-ac64-ab50b20f1916"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-f52d1965-2810-419d-9795-8b6d9fda39be"
+                        }
+                      ],
+                      "id": "d2583432-7e43-406d-8672-f8148ecf88a1",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-d2583432-7e43-406d-8672-f8148ecf88a1"
+                    }
+                  ],
+                  "id": "0ca3fb63-7332-490c-b343-189657493a94",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-0ca3fb63-7332-490c-b343-189657493a94"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Get Folder",
+                          "id": "e10fb7e4-9710-4561-a293-ab65a4cbfb05",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/get/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "get",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4a43507a-e447-4321-b17c-e2888cb41550",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a0f6e1ef-c31d-48e3-bce1-f74c75826290",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "47396f19-bb3b-45ac-affb-361633960280",
+                              "name": "folder",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/get/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "get",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"owners\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_perms\": {\n    \"id103\": \"<boolean>\",\n    \"in1ef\": \"<boolean>\",\n    \"dolor_8\": \"<boolean>\",\n    \"esse0\": \"<boolean>\"\n  },\n  \"summary\": \"<string>\",\n  \"created_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"default_permissioned_as\": [\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    },\n    {\n      \"path_glob\": \"<string>\",\n      \"permissioned_as\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-47396f19-bb3b-45ac-affb-361633960280"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-e10fb7e4-9710-4561-a293-ab65a4cbfb05"
+                        }
+                      ],
+                      "id": "5d18ed8a-a2c4-4f12-97d2-9516816dbe91",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-5d18ed8a-a2c4-4f12-97d2-9516816dbe91"
+                    }
+                  ],
+                  "id": "acd5963e-ed87-417a-abb9-7960d722e9c7",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-acd5963e-ed87-417a-abb9-7960d722e9c7"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Exists Folder",
+                          "id": "5548a873-79c1-4f6a-9565-831e15433a64",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/exists/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "exists",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6539b706-6c04-4edc-9f3e-3ed88e9b2949",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "e571ac66-2d4b-485f-b449-1ef86e48d7a6",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "ff7e2be6-836b-4892-bf4f-63ed362864a4",
+                              "name": "folder exists",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/exists/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "exists",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-ff7e2be6-836b-4892-bf4f-63ed362864a4"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-5548a873-79c1-4f6a-9565-831e15433a64"
+                        }
+                      ],
+                      "id": "1cc64f1e-41b8-4684-9ff5-43bdc3901fd4",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-1cc64f1e-41b8-4684-9ff5-43bdc3901fd4"
+                    }
+                  ],
+                  "id": "9f7694d5-0b5c-4467-9b7b-496bd8a7b7d2",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-9f7694d5-0b5c-4467-9b7b-496bd8a7b7d2"
+                },
+                {
+                  "name": "getusage",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Get Folder Usage",
+                          "id": "d384b807-8ec9-4174-81b5-5c0c64edb547",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/getusage/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "getusage",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9074998d-da6d-48ad-bbc7-03dd3f526834",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "4debb877-ca65-48ac-a964-025c49a1cca3",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "87a7bd78-c2de-4a3a-a7f8-53cc39e4133b",
+                              "name": "folder",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/getusage/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "getusage",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"scripts\": \"<number>\",\n  \"flows\": \"<number>\",\n  \"apps\": \"<number>\",\n  \"resources\": \"<number>\",\n  \"variables\": \"<number>\",\n  \"schedules\": \"<number>\"\n}",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-87a7bd78-c2de-4a3a-a7f8-53cc39e4133b"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-d384b807-8ec9-4174-81b5-5c0c64edb547"
+                        }
+                      ],
+                      "id": "c486f0c1-6ac6-4752-8d73-ae82073b7354",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-c486f0c1-6ac6-4752-8d73-ae82073b7354"
+                    }
+                  ],
+                  "id": "a57587d2-610c-4e41-b8ed-98950aa9b271",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-a57587d2-610c-4e41-b8ed-98950aa9b271"
+                },
+                {
+                  "name": "addowner",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Add Owner to Folder",
+                          "id": "555601e1-0796-4452-8312-caa4b05fa4db",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"owner\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/addowner/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "addowner",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "60954f14-d55f-4f7a-aee2-29f970b24408",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "0ef9b6c3-0e0f-49eb-9bca-3c54f1aa54ec",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "0e0956b0-adac-4609-ad66-f91eb1b8a351",
+                              "name": "owner added to folder",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"owner\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/addowner/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "addowner",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-0e0956b0-adac-4609-ad66-f91eb1b8a351"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-555601e1-0796-4452-8312-caa4b05fa4db"
+                        }
+                      ],
+                      "id": "b681e815-ca9f-4cd6-96d3-32e95609a5a2",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-b681e815-ca9f-4cd6-96d3-32e95609a5a2"
+                    }
+                  ],
+                  "id": "26c72817-50f2-4cf8-b7c9-73669c47f6e6",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-26c72817-50f2-4cf8-b7c9-73669c47f6e6"
+                },
+                {
+                  "name": "removeowner",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Remove Owner to Folder",
+                          "id": "36dcec3b-db49-4d08-9515-880b2757fa25",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"owner\": \"<string>\",\n  \"write\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders/removeowner/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders",
+                                "removeowner",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1af3fe00-d26f-40c6-9276-57438602556d",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "097721dc-9235-4372-8a70-ff31eedf82ee",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b1137121-9202-42ab-99f7-684d8cee41c3",
+                              "name": "owner removed from folder",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"owner\": \"<string>\",\n  \"write\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders/removeowner/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders",
+                                    "removeowner",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-b1137121-9202-42ab-99f7-684d8cee41c3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-36dcec3b-db49-4d08-9515-880b2757fa25"
+                        }
+                      ],
+                      "id": "2e1461ca-dfae-4125-a250-6dc19546056a",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-2e1461ca-dfae-4125-a250-6dc19546056a"
+                    }
+                  ],
+                  "id": "bef6cfe4-cc9d-44e7-bcc7-bb5d90a864ac",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-bef6cfe4-cc9d-44e7-bcc7-bb5d90a864ac"
+                }
+              ],
+              "id": "c8a36b9c-7151-4219-b6b7-116f7ea1c7b1",
+              "createdAt": "2026-07-28T03:30:41.000Z",
+              "updatedAt": "2026-07-28T03:30:41.000Z",
+              "uid": "35240-c8a36b9c-7151-4219-b6b7-116f7ea1c7b1"
+            },
+            {
+              "name": "folders_history",
+              "item": [
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "Get Folder Permission History",
+                          "id": "35b26f98-4bb4-4c0e-8004-467e579f7bbb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/folders_history/get/:name?page=<integer>&per_page=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "folders_history",
+                                "get",
+                                ":name"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7f40be61-b0c6-477d-9656-f50e0c8a4543",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "847afa19-3f5a-43ec-b9c0-0d347af00ace",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "67146191-0784-4377-8dce-faad8520e843",
+                              "name": "folder permission history",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/folders_history/get/:name?page=<integer>&per_page=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "folders_history",
+                                    "get",
+                                    ":name"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "which page to return (start at 1, default 1)",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "number of items to return for a given page (default 30, max 100)",
+                                      "key": "per_page",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"changed_by\": \"<string>\",\n    \"changed_at\": \"<dateTime>\",\n    \"change_type\": \"<string>\",\n    \"affected\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"changed_by\": \"<string>\",\n    \"changed_at\": \"<dateTime>\",\n    \"change_type\": \"<string>\",\n    \"affected\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:30:41.000Z",
+                              "updatedAt": "2026-07-28T03:30:41.000Z",
+                              "uid": "35240-67146191-0784-4377-8dce-faad8520e843"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:41.000Z",
+                          "updatedAt": "2026-07-28T03:30:41.000Z",
+                          "uid": "35240-35b26f98-4bb4-4c0e-8004-467e579f7bbb"
+                        }
+                      ],
+                      "id": "e0d56f2d-c6c5-4a4b-94ff-a1b6e7890718",
+                      "createdAt": "2026-07-28T03:30:41.000Z",
+                      "updatedAt": "2026-07-28T03:30:41.000Z",
+                      "uid": "35240-e0d56f2d-c6c5-4a4b-94ff-a1b6e7890718"
+                    }
+                  ],
+                  "id": "121dd65a-4fc3-4c61-8485-3e99e02e8e0c",
+                  "createdAt": "2026-07-28T03:30:41.000Z",
+                  "updatedAt": "2026-07-28T03:30:41.000Z",
+                  "uid": "35240-121dd65a-4fc3-4c61-8485-3e99e02e8e0c"
+                }
+              ],
+              "id": "b11e228d-0131-4fb1-a74f-a45675e5a811",
+              "createdAt": "2026-07-28T03:30:41.000Z",
+              "updatedAt": "2026-07-28T03:30:41.000Z",
+              "uid": "35240-b11e228d-0131-4fb1-a74f-a45675e5a811"
+            }
+          ],
+          "id": "06642de8-8495-4b94-a618-778efd1ab654",
+          "createdAt": "2026-07-28T03:30:41.000Z",
+          "updatedAt": "2026-07-28T03:30:41.000Z",
+          "uid": "35240-06642de8-8495-4b94-a618-778efd1ab654"
+        }
+      ],
+      "id": "02a453e4-5c87-4a27-9ce4-07449bae0034",
+      "createdAt": "2026-07-28T03:30:41.000Z",
+      "updatedAt": "2026-07-28T03:30:41.000Z",
+      "uid": "35240-02a453e4-5c87-4a27-9ce4-07449bae0034"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

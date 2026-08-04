@@ -1,0 +1,1419 @@
+{
+  "info": {
+    "_postman_id": "441d8472-e973-4252-b629-7abd787defc1",
+    "name": "Windmill admin variable API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:44.000Z",
+    "updatedAt": "2026-07-28T03:31:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-441d8472-e973-4252-b629-7abd787defc1"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "variables",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Variable",
+                      "id": "7d06b497-ce34-436d-ba2b-8de2c1d8a2b7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"value\": \"<string>\",\n  \"is_secret\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"account\": \"<integer>\",\n  \"is_oauth\": \"<boolean>\",\n  \"expires_at\": \"<dateTime>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/variables/create?already_encrypted=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "variables",
+                            "create"
+                          ],
+                          "query": [
+                            {
+                              "description": "whether the variable is already encrypted (default false)",
+                              "key": "already_encrypted",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "36c68755-9233-43cf-b191-56fa5848da43",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "06b673dc-1a97-492d-bd37-6c949ef8171f",
+                          "name": "variable created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"value\": \"<string>\",\n  \"is_secret\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"account\": \"<integer>\",\n  \"is_oauth\": \"<boolean>\",\n  \"expires_at\": \"<dateTime>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/create?already_encrypted=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "create"
+                              ],
+                              "query": [
+                                {
+                                  "description": "whether the variable is already encrypted (default false)",
+                                  "key": "already_encrypted",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-06b673dc-1a97-492d-bd37-6c949ef8171f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-7d06b497-ce34-436d-ba2b-8de2c1d8a2b7"
+                    }
+                  ],
+                  "id": "a341f1a7-375c-4e08-b440-5db160fb94ac",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-a341f1a7-375c-4e08-b440-5db160fb94ac"
+                },
+                {
+                  "name": "encrypt",
+                  "item": [
+                    {
+                      "name": "Encrypt Value",
+                      "id": "777df396-aa2b-418d-a381-b285ca8e7ea3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "<string>",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/variables/encrypt",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "variables",
+                            "encrypt"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1ebe6140-d3f1-4d4b-a64d-4ec358122f9a",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "285bb5d8-7aec-42bf-89ed-c77ca7c48737",
+                          "name": "encrypted value",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "<string>",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/encrypt",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "encrypt"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-285bb5d8-7aec-42bf-89ed-c77ca7c48737"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-777df396-aa2b-418d-a381-b285ca8e7ea3"
+                    }
+                  ],
+                  "id": "7f6b7b44-4430-4ab3-943f-062a9d889f05",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-7f6b7b44-4430-4ab3-943f-062a9d889f05"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Delete Variable",
+                          "id": "0db8d47c-182a-4468-bf3d-f22426e8ba1e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/delete/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "delete",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5067b9de-e6e4-4a65-83d4-77131712a013",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "25dc6bc9-3443-49c9-a944-bba21c78f564",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "cf1ac28a-2bf5-49a6-a24e-5aa3c4496c2d",
+                              "name": "variable deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/variables/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "variables",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:45.000Z",
+                              "updatedAt": "2026-07-28T03:31:45.000Z",
+                              "uid": "35240-cf1ac28a-2bf5-49a6-a24e-5aa3c4496c2d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-0db8d47c-182a-4468-bf3d-f22426e8ba1e"
+                        }
+                      ],
+                      "id": "9ae76d5d-99bc-4598-bad2-67a45e47ed00",
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-9ae76d5d-99bc-4598-bad2-67a45e47ed00"
+                    }
+                  ],
+                  "id": "b6437d29-6b8d-46b3-b995-13d3afd957ae",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-b6437d29-6b8d-46b3-b995-13d3afd957ae"
+                },
+                {
+                  "name": "delete_bulk",
+                  "item": [
+                    {
+                      "name": "Delete Variables in Bulk",
+                      "id": "5e215a92-62c0-4c7b-8c5b-30f8e2668812",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/variables/delete_bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "variables",
+                            "delete_bulk"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2526c3cd-8a41-4ec4-89e7-03b85ce20c4a",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c2f193cc-1bd0-4497-944b-a117fa1f3064",
+                          "name": "deleted paths",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/delete_bulk",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "delete_bulk"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-c2f193cc-1bd0-4497-944b-a117fa1f3064"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-5e215a92-62c0-4c7b-8c5b-30f8e2668812"
+                    }
+                  ],
+                  "id": "51a222d1-d882-496c-a79b-802540a4c40f",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-51a222d1-d882-496c-a79b-802540a4c40f"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Variable",
+                          "id": "d169b7ae-843f-467e-9ca3-dc825d4335d4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"value\": \"<string>\",\n  \"is_secret\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/update/:path?already_encrypted=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "update",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "description": "whether the variable is already encrypted (default false)",
+                                  "key": "already_encrypted",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ee0d3a9b-3352-463a-9d4e-c4e51cb8fb74",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "13cc77d8-4c61-4d37-8741-48aedc4c55de",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "0413cc94-f2a7-4f0c-8a57-99a5589f5375",
+                              "name": "variable updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\",\n  \"value\": \"<string>\",\n  \"is_secret\": \"<boolean>\",\n  \"description\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/variables/update/:path?already_encrypted=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "variables",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "whether the variable is already encrypted (default false)",
+                                      "key": "already_encrypted",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:45.000Z",
+                              "updatedAt": "2026-07-28T03:31:45.000Z",
+                              "uid": "35240-0413cc94-f2a7-4f0c-8a57-99a5589f5375"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-d169b7ae-843f-467e-9ca3-dc825d4335d4"
+                        }
+                      ],
+                      "id": "8638faf1-43a6-4ff7-8c38-c491ab2de217",
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-8638faf1-43a6-4ff7-8c38-c491ab2de217"
+                    }
+                  ],
+                  "id": "344f9b20-0084-4b13-920e-b5cd0005883b",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-344f9b20-0084-4b13-920e-b5cd0005883b"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Variable",
+                          "id": "6b0eb5f7-0f62-441e-badb-6d3ed54bfd4f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/get/:path?decrypt_secret=<boolean>&include_encrypted=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "get",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "description": "ask to decrypt secret if this variable is secret\n(if not secret no effect, default: true)\n",
+                                  "key": "decrypt_secret",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "ask to include the encrypted value if secret and decrypt secret is not true (default: false)\n",
+                                  "key": "include_encrypted",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "c7459c98-8cce-430f-8cb1-3334cc05d8ca",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "0f92449e-34d7-41fb-a5d1-325984088bb2",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6b502dc0-1c5e-47b4-a179-9ed6836d0c26",
+                              "name": "variable",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/variables/get/:path?decrypt_secret=<boolean>&include_encrypted=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "variables",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "ask to decrypt secret if this variable is secret\n(if not secret no effect, default: true)\n",
+                                      "key": "decrypt_secret",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "description": "ask to include the encrypted value if secret and decrypt secret is not true (default: false)\n",
+                                      "key": "include_encrypted",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"workspace_id\": \"<string>\",\n  \"path\": \"<string>\",\n  \"is_secret\": \"<boolean>\",\n  \"extra_perms\": {\n    \"eiusmod_54\": \"<boolean>\"\n  },\n  \"value\": \"<string>\",\n  \"description\": \"<string>\",\n  \"account\": \"<integer>\",\n  \"is_oauth\": \"<boolean>\",\n  \"is_expired\": \"<boolean>\",\n  \"refresh_error\": \"<string>\",\n  \"is_linked\": \"<boolean>\",\n  \"is_refreshed\": \"<boolean>\",\n  \"expires_at\": \"<dateTime>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T03:31:45.000Z",
+                              "updatedAt": "2026-07-28T03:31:45.000Z",
+                              "uid": "35240-6b502dc0-1c5e-47b4-a179-9ed6836d0c26"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-6b0eb5f7-0f62-441e-badb-6d3ed54bfd4f"
+                        }
+                      ],
+                      "id": "f3fdf887-a4e8-4447-bde5-85d0cd94576b",
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-f3fdf887-a4e8-4447-bde5-85d0cd94576b"
+                    }
+                  ],
+                  "id": "aa404f60-3454-4660-870c-c3e0103b739f",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-aa404f60-3454-4660-870c-c3e0103b739f"
+                },
+                {
+                  "name": "get_value",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Variable Value",
+                          "id": "9ae178d5-9f76-4bb5-9ce7-638c03d52010",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/get_value/:path?allow_cache=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "get_value",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "description": "allow getting a cached value for improved performance\n",
+                                  "key": "allow_cache",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "cf6c5984-b493-435e-b77f-7928190c28bb",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9fa5163d-df99-43ab-8fcb-c98f15278fcc",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "dc3e24bb-7405-46af-9dd8-b0d7783467ab",
+                              "name": "variable",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/variables/get_value/:path?allow_cache=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "variables",
+                                    "get_value",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "allow getting a cached value for improved performance\n",
+                                      "key": "allow_cache",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:45.000Z",
+                              "updatedAt": "2026-07-28T03:31:45.000Z",
+                              "uid": "35240-dc3e24bb-7405-46af-9dd8-b0d7783467ab"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-9ae178d5-9f76-4bb5-9ce7-638c03d52010"
+                        }
+                      ],
+                      "id": "3bdfb7b6-38dc-4f5a-82c6-68bbe12f3b46",
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-3bdfb7b6-38dc-4f5a-82c6-68bbe12f3b46"
+                    }
+                  ],
+                  "id": "a699cd3d-54e7-4c31-921b-b48493634af6",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-a699cd3d-54e7-4c31-921b-b48493634af6"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Does Variable Exists at Path",
+                          "id": "07a1633c-430f-4de9-80e5-508cfc0c1955",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/exists/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "exists",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "b983c706-ce58-478d-9c7b-c6fcd60ca020",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "7323fff2-c0b5-4659-9d27-5c41188935c4",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "fcb5d9b0-bc4b-4526-bc29-bb50e12a1adc",
+                              "name": "variable",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/variables/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "variables",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:31:45.000Z",
+                              "updatedAt": "2026-07-28T03:31:45.000Z",
+                              "uid": "35240-fcb5d9b0-bc4b-4526-bc29-bb50e12a1adc"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-07a1633c-430f-4de9-80e5-508cfc0c1955"
+                        }
+                      ],
+                      "id": "51de61ab-cdca-45ca-8736-3bfbfe6ea1e9",
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-51de61ab-cdca-45ca-8736-3bfbfe6ea1e9"
+                    }
+                  ],
+                  "id": "7aa8eaeb-562d-469e-90f2-490b721e1564",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-7aa8eaeb-562d-469e-90f2-490b721e1564"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Variables",
+                      "id": "bdc4e330-86c7-4036-915f-57dc2cdc7384",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/variables/list?path_start=<string>&path=<string>&description=<string>&value=<string>&broad_filter=<string>&page=<integer>&per_page=<integer>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "variables",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "filter variables by path prefix",
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "exact path match filter",
+                              "key": "path",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "pattern match filter for description field (case-insensitive)",
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "pattern match filter for non-secret variable values (case-insensitive)",
+                              "key": "value",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "broad search across multiple fields (case-insensitive substring match)",
+                              "key": "broad_filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "7c3daf8f-7a05-4819-a072-40064f4a033f",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "cdcbe54c-3b5d-45d6-afa3-9bad33ac9fd7",
+                          "name": "variable list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/list?path_start=<string>&path=<string>&description=<string>&value=<string>&broad_filter=<string>&page=<integer>&per_page=<integer>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "filter variables by path prefix",
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "exact path match filter",
+                                  "key": "path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "pattern match filter for description field (case-insensitive)",
+                                  "key": "description",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "pattern match filter for non-secret variable values (case-insensitive)",
+                                  "key": "value",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "broad search across multiple fields (case-insensitive substring match)",
+                                  "key": "broad_filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"workspace_id\": \"<string>\",\n    \"path\": \"<string>\",\n    \"is_secret\": \"<boolean>\",\n    \"extra_perms\": {\n      \"aute_6\": \"<boolean>\",\n      \"anim5e8\": \"<boolean>\"\n    },\n    \"value\": \"<string>\",\n    \"description\": \"<string>\",\n    \"account\": \"<integer>\",\n    \"is_oauth\": \"<boolean>\",\n    \"is_expired\": \"<boolean>\",\n    \"refresh_error\": \"<string>\",\n    \"is_linked\": \"<boolean>\",\n    \"is_refreshed\": \"<boolean>\",\n    \"expires_at\": \"<dateTime>\",\n    \"labels\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"workspace_id\": \"<string>\",\n    \"path\": \"<string>\",\n    \"is_secret\": \"<boolean>\",\n    \"extra_perms\": {\n      \"veniam_5\": \"<boolean>\"\n    },\n    \"value\": \"<string>\",\n    \"description\": \"<string>\",\n    \"account\": \"<integer>\",\n    \"is_oauth\": \"<boolean>\",\n    \"is_expired\": \"<boolean>\",\n    \"refresh_error\": \"<string>\",\n    \"is_linked\": \"<boolean>\",\n    \"is_refreshed\": \"<boolean>\",\n    \"expires_at\": \"<dateTime>\",\n    \"labels\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-cdcbe54c-3b5d-45d6-afa3-9bad33ac9fd7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-bdc4e330-86c7-4036-915f-57dc2cdc7384"
+                    }
+                  ],
+                  "id": "a96463a2-c7bb-40e4-9a39-4c908bd748a5",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-a96463a2-c7bb-40e4-9a39-4c908bd748a5"
+                },
+                {
+                  "name": "list_contextual",
+                  "item": [
+                    {
+                      "name": "List Contextual Variables",
+                      "id": "dc6e23fa-87ff-4751-ab79-91aa809c2e69",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/variables/list_contextual",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "variables",
+                            "list_contextual"
+                          ],
+                          "variable": [
+                            {
+                              "id": "00c8dbeb-8260-4ca2-bdaa-b4d65716a310",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "3e86c927-8e68-4972-b82b-05dc3a999ca6",
+                          "name": "contextual variable list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/variables/list_contextual",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "variables",
+                                "list_contextual"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"name\": \"<string>\",\n    \"value\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_custom\": \"<boolean>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"value\": \"<string>\",\n    \"description\": \"<string>\",\n    \"is_custom\": \"<boolean>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:45.000Z",
+                          "updatedAt": "2026-07-28T03:31:45.000Z",
+                          "uid": "35240-3e86c927-8e68-4972-b82b-05dc3a999ca6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:45.000Z",
+                      "updatedAt": "2026-07-28T03:31:45.000Z",
+                      "uid": "35240-dc6e23fa-87ff-4751-ab79-91aa809c2e69"
+                    }
+                  ],
+                  "id": "87ffb02a-b9b1-41ca-b0d7-68415577f108",
+                  "createdAt": "2026-07-28T03:31:45.000Z",
+                  "updatedAt": "2026-07-28T03:31:45.000Z",
+                  "uid": "35240-87ffb02a-b9b1-41ca-b0d7-68415577f108"
+                }
+              ],
+              "id": "dfdc4822-8e98-49ae-b2e0-6274fd4754c0",
+              "createdAt": "2026-07-28T03:31:45.000Z",
+              "updatedAt": "2026-07-28T03:31:45.000Z",
+              "uid": "35240-dfdc4822-8e98-49ae-b2e0-6274fd4754c0"
+            }
+          ],
+          "id": "ddce09f0-6b5e-4e78-ad38-a0f5a5812e2e",
+          "createdAt": "2026-07-28T03:31:45.000Z",
+          "updatedAt": "2026-07-28T03:31:45.000Z",
+          "uid": "35240-ddce09f0-6b5e-4e78-ad38-a0f5a5812e2e"
+        }
+      ],
+      "id": "4b210c3d-5c83-4c13-ad3d-f50b31c0d838",
+      "createdAt": "2026-07-28T03:31:45.000Z",
+      "updatedAt": "2026-07-28T03:31:45.000Z",
+      "uid": "35240-4b210c3d-5c83-4c13-ad3d-f50b31c0d838"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

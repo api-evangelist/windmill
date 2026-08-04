@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "62402fb3-f559-4ef4-858d-6e0b94d95cb1",
+    "name": "Windmill admin oidc API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:27.000Z",
+    "updatedAt": "2026-07-28T03:31:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-62402fb3-f559-4ef4-858d-6e0b94d95cb1"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "oidc",
+              "item": [
+                {
+                  "name": "token",
+                  "item": [
+                    {
+                      "name": "{audience}",
+                      "item": [
+                        {
+                          "name": "Get OIDC Token (ee Only)",
+                          "id": "e555da75-3b9b-4e7d-8b1f-3af451cf8a32",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/oidc/token/:audience?expires_in=<number>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "oidc",
+                                "token",
+                                ":audience"
+                              ],
+                              "query": [
+                                {
+                                  "key": "expires_in",
+                                  "value": "<number>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d7906306-b515-4dd3-ba91-aa5935f7ab6e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "5b4efbc6-1f23-4397-ba82-74ae90856c07",
+                                  "key": "audience",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "e916da28-18ee-476f-bef6-f320c16c8f0c",
+                              "name": "new oidc token",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/oidc/token/:audience?expires_in=<number>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "oidc",
+                                    "token",
+                                    ":audience"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "expires_in",
+                                      "value": "<number>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "audience"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:27.000Z",
+                              "updatedAt": "2026-07-28T03:31:27.000Z",
+                              "uid": "35240-e916da28-18ee-476f-bef6-f320c16c8f0c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:27.000Z",
+                          "updatedAt": "2026-07-28T03:31:27.000Z",
+                          "uid": "35240-e555da75-3b9b-4e7d-8b1f-3af451cf8a32"
+                        }
+                      ],
+                      "id": "7f01353b-1da3-427e-9ce4-6988bce20d72",
+                      "createdAt": "2026-07-28T03:31:27.000Z",
+                      "updatedAt": "2026-07-28T03:31:27.000Z",
+                      "uid": "35240-7f01353b-1da3-427e-9ce4-6988bce20d72"
+                    }
+                  ],
+                  "id": "c4ef1a93-8eb8-4c19-81eb-2295bf282b50",
+                  "createdAt": "2026-07-28T03:31:27.000Z",
+                  "updatedAt": "2026-07-28T03:31:27.000Z",
+                  "uid": "35240-c4ef1a93-8eb8-4c19-81eb-2295bf282b50"
+                }
+              ],
+              "id": "bf201796-706b-4524-8a5b-a8507f61db7e",
+              "createdAt": "2026-07-28T03:31:27.000Z",
+              "updatedAt": "2026-07-28T03:31:27.000Z",
+              "uid": "35240-bf201796-706b-4524-8a5b-a8507f61db7e"
+            }
+          ],
+          "id": "2760fef8-7f0d-4cb4-8be7-6b3e6570d1e9",
+          "createdAt": "2026-07-28T03:31:27.000Z",
+          "updatedAt": "2026-07-28T03:31:27.000Z",
+          "uid": "35240-2760fef8-7f0d-4cb4-8be7-6b3e6570d1e9"
+        }
+      ],
+      "id": "200463f6-146b-4c07-ace4-9a2cf402f73b",
+      "createdAt": "2026-07-28T03:31:27.000Z",
+      "updatedAt": "2026-07-28T03:31:27.000Z",
+      "uid": "35240-200463f6-146b-4c07-ace4-9a2cf402f73b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

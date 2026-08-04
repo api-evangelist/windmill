@@ -1,0 +1,325 @@
+{
+  "info": {
+    "_postman_id": "764ac2e8-01ce-45b7-849b-15dffaa1d9f4",
+    "name": "Windmill admin draft API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:31.000Z",
+    "updatedAt": "2026-07-28T03:30:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-764ac2e8-01ce-45b7-849b-15dffaa1d9f4"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "drafts",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Draft",
+                      "id": "d624dcef-da15-488a-9f94-abb48c3c3f6c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"typ\": \"flow\",\n  \"value\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/drafts/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "drafts",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6418c479-a1e4-45be-a22f-7bbf93cd0009",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "19cdd829-60e5-4714-a79a-3328861a4282",
+                          "name": "draft created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"typ\": \"flow\",\n  \"value\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/drafts/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "drafts",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:30:32.000Z",
+                          "updatedAt": "2026-07-28T03:30:32.000Z",
+                          "uid": "35240-19cdd829-60e5-4714-a79a-3328861a4282"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:32.000Z",
+                      "updatedAt": "2026-07-28T03:30:32.000Z",
+                      "uid": "35240-d624dcef-da15-488a-9f94-abb48c3c3f6c"
+                    }
+                  ],
+                  "id": "70a8f155-d44a-4996-a279-80aea99ecb0b",
+                  "createdAt": "2026-07-28T03:30:32.000Z",
+                  "updatedAt": "2026-07-28T03:30:32.000Z",
+                  "uid": "35240-70a8f155-d44a-4996-a279-80aea99ecb0b"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{kind}",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Delete Draft",
+                              "id": "88ed6b69-85be-4bc9-8ab7-be7ee17686d8",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/drafts/delete/:kind/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "drafts",
+                                    "delete",
+                                    ":kind",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "bdc9e75f-9a96-4081-a0a7-7c15dd8a7497",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "cb991bc7-7194-4dc4-ba90-deec38fc017a",
+                                      "key": "kind",
+                                      "value": "flow",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "40de2403-c6c6-4d8c-a25c-fe9aff4ca1a8",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "14427b80-3b42-4615-ba04-6997b031fa77",
+                                  "name": "draft deleted",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/drafts/delete/:kind/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "drafts",
+                                        "delete",
+                                        ":kind",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "kind"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:30:32.000Z",
+                                  "updatedAt": "2026-07-28T03:30:32.000Z",
+                                  "uid": "35240-14427b80-3b42-4615-ba04-6997b031fa77"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:30:32.000Z",
+                              "updatedAt": "2026-07-28T03:30:32.000Z",
+                              "uid": "35240-88ed6b69-85be-4bc9-8ab7-be7ee17686d8"
+                            }
+                          ],
+                          "id": "684f0f45-de7c-42f4-b937-f52e93592ca3",
+                          "createdAt": "2026-07-28T03:30:32.000Z",
+                          "updatedAt": "2026-07-28T03:30:32.000Z",
+                          "uid": "35240-684f0f45-de7c-42f4-b937-f52e93592ca3"
+                        }
+                      ],
+                      "id": "0b99a074-b041-4301-aabb-a895d5c51ba8",
+                      "createdAt": "2026-07-28T03:30:32.000Z",
+                      "updatedAt": "2026-07-28T03:30:32.000Z",
+                      "uid": "35240-0b99a074-b041-4301-aabb-a895d5c51ba8"
+                    }
+                  ],
+                  "id": "3f43fba2-5931-48ed-b28a-e0672de48d59",
+                  "createdAt": "2026-07-28T03:30:32.000Z",
+                  "updatedAt": "2026-07-28T03:30:32.000Z",
+                  "uid": "35240-3f43fba2-5931-48ed-b28a-e0672de48d59"
+                }
+              ],
+              "id": "38d17b35-4bbe-4740-a91c-fda20e77e03b",
+              "createdAt": "2026-07-28T03:30:32.000Z",
+              "updatedAt": "2026-07-28T03:30:32.000Z",
+              "uid": "35240-38d17b35-4bbe-4740-a91c-fda20e77e03b"
+            }
+          ],
+          "id": "14f1e385-c6d8-477b-b21a-c8a5284132dd",
+          "createdAt": "2026-07-28T03:30:32.000Z",
+          "updatedAt": "2026-07-28T03:30:32.000Z",
+          "uid": "35240-14f1e385-c6d8-477b-b21a-c8a5284132dd"
+        }
+      ],
+      "id": "7004b02e-b47a-4af8-84d6-44948995499b",
+      "createdAt": "2026-07-28T03:30:32.000Z",
+      "updatedAt": "2026-07-28T03:30:32.000Z",
+      "uid": "35240-7004b02e-b47a-4af8-84d6-44948995499b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

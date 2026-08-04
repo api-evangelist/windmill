@@ -1,0 +1,526 @@
+{
+  "info": {
+    "_postman_id": "3997c335-09c9-48bd-b2e8-b0814773edb3",
+    "name": "Windmill admin agent_workers API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:22.000Z",
+    "updatedAt": "2026-07-28T03:30:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3997c335-09c9-48bd-b2e8-b0814773edb3"
+  },
+  "item": [
+    {
+      "name": "agent_workers",
+      "item": [
+        {
+          "name": "create_agent_token",
+          "item": [
+            {
+              "name": "Create Agent Token",
+              "id": "7befba87-167a-49c8-8b52-0fd4817de364",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"worker_group\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exp\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent_workers/create_agent_token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent_workers",
+                    "create_agent_token"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "82984c92-35e1-4c87-a8ca-53d92d0a48c8",
+                  "name": "agent token created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"worker_group\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"exp\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent_workers/create_agent_token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent_workers",
+                        "create_agent_token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T03:30:23.000Z",
+                  "updatedAt": "2026-07-28T03:30:23.000Z",
+                  "uid": "35240-82984c92-35e1-4c87-a8ca-53d92d0a48c8"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:23.000Z",
+              "updatedAt": "2026-07-28T03:30:23.000Z",
+              "uid": "35240-7befba87-167a-49c8-8b52-0fd4817de364"
+            }
+          ],
+          "id": "547c0b07-4dc4-4fd1-af37-4d5697adc92e",
+          "createdAt": "2026-07-28T03:30:23.000Z",
+          "updatedAt": "2026-07-28T03:30:23.000Z",
+          "uid": "35240-547c0b07-4dc4-4fd1-af37-4d5697adc92e"
+        },
+        {
+          "name": "blacklist_token",
+          "item": [
+            {
+              "name": "Blacklist Agent Token (requires Super Admin)",
+              "id": "52fe04ef-65d6-4574-8e6e-ae10fbecf40c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent_workers/blacklist_token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent_workers",
+                    "blacklist_token"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "42e1fd36-e105-4585-8e79-440313a2dad0",
+                  "name": "token blacklisted successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\",\n  \"expires_at\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent_workers/blacklist_token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent_workers",
+                        "blacklist_token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:30:23.000Z",
+                  "updatedAt": "2026-07-28T03:30:23.000Z",
+                  "uid": "35240-42e1fd36-e105-4585-8e79-440313a2dad0"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:23.000Z",
+              "updatedAt": "2026-07-28T03:30:23.000Z",
+              "uid": "35240-52fe04ef-65d6-4574-8e6e-ae10fbecf40c"
+            }
+          ],
+          "id": "3e6f3bea-3a9b-48bb-8a39-f62cad16f2ab",
+          "createdAt": "2026-07-28T03:30:23.000Z",
+          "updatedAt": "2026-07-28T03:30:23.000Z",
+          "uid": "35240-3e6f3bea-3a9b-48bb-8a39-f62cad16f2ab"
+        },
+        {
+          "name": "remove_blacklist_token",
+          "item": [
+            {
+              "name": "Remove Agent Token from Blacklist (requires Super Admin)",
+              "id": "66bbd71e-2b7f-43ec-b13b-b11a835a92a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agent_workers/remove_blacklist_token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent_workers",
+                    "remove_blacklist_token"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "641a2fda-ad04-45f5-b2f6-e767333c6668",
+                  "name": "token removed from blacklist successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agent_workers/remove_blacklist_token",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent_workers",
+                        "remove_blacklist_token"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:30:23.000Z",
+                  "updatedAt": "2026-07-28T03:30:23.000Z",
+                  "uid": "35240-641a2fda-ad04-45f5-b2f6-e767333c6668"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:23.000Z",
+              "updatedAt": "2026-07-28T03:30:23.000Z",
+              "uid": "35240-66bbd71e-2b7f-43ec-b13b-b11a835a92a3"
+            }
+          ],
+          "id": "9e931d56-3d16-482b-8ce3-6ea02a9427bc",
+          "createdAt": "2026-07-28T03:30:23.000Z",
+          "updatedAt": "2026-07-28T03:30:23.000Z",
+          "uid": "35240-9e931d56-3d16-482b-8ce3-6ea02a9427bc"
+        },
+        {
+          "name": "list_blacklisted_tokens",
+          "item": [
+            {
+              "name": "List Blacklisted Agent Tokens (requires Super Admin)",
+              "id": "1ec22b80-6f97-43fe-8547-9bdefd358477",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent_workers/list_blacklisted_tokens?include_expired=false",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent_workers",
+                    "list_blacklisted_tokens"
+                  ],
+                  "query": [
+                    {
+                      "description": "Whether to include expired blacklisted tokens",
+                      "key": "include_expired",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "178ae603-b71f-46a1-85d7-4ba54564d1ba",
+                  "name": "list of blacklisted tokens",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent_workers/list_blacklisted_tokens?include_expired=false",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent_workers",
+                        "list_blacklisted_tokens"
+                      ],
+                      "query": [
+                        {
+                          "description": "Whether to include expired blacklisted tokens",
+                          "key": "include_expired",
+                          "value": "false"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"token\": \"<string>\",\n    \"expires_at\": \"<dateTime>\",\n    \"blacklisted_at\": \"<dateTime>\",\n    \"blacklisted_by\": \"<string>\"\n  },\n  {\n    \"token\": \"<string>\",\n    \"expires_at\": \"<dateTime>\",\n    \"blacklisted_at\": \"<dateTime>\",\n    \"blacklisted_by\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:30:23.000Z",
+                  "updatedAt": "2026-07-28T03:30:23.000Z",
+                  "uid": "35240-178ae603-b71f-46a1-85d7-4ba54564d1ba"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:23.000Z",
+              "updatedAt": "2026-07-28T03:30:23.000Z",
+              "uid": "35240-1ec22b80-6f97-43fe-8547-9bdefd358477"
+            }
+          ],
+          "id": "5099d67d-6504-48d8-9695-7394b8e72f9d",
+          "createdAt": "2026-07-28T03:30:23.000Z",
+          "updatedAt": "2026-07-28T03:30:23.000Z",
+          "uid": "35240-5099d67d-6504-48d8-9695-7394b8e72f9d"
+        },
+        {
+          "name": "get_min_version",
+          "item": [
+            {
+              "name": "Get Minimum Worker Version Across All Workers",
+              "id": "875389ae-68b1-4b1f-bd7b-18516ec1ba89",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agent_workers/get_min_version",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agent_workers",
+                    "get_min_version"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c8d1ca9e-e3f9-41c4-9138-48904b1c4a06",
+                  "name": "minimum worker version",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agent_workers/get_min_version",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agent_workers",
+                        "get_min_version"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<string>",
+                  "createdAt": "2026-07-28T03:30:23.000Z",
+                  "updatedAt": "2026-07-28T03:30:23.000Z",
+                  "uid": "35240-c8d1ca9e-e3f9-41c4-9138-48904b1c4a06"
+                }
+              ],
+              "createdAt": "2026-07-28T03:30:23.000Z",
+              "updatedAt": "2026-07-28T03:30:23.000Z",
+              "uid": "35240-875389ae-68b1-4b1f-bd7b-18516ec1ba89"
+            }
+          ],
+          "id": "0277712f-25f0-457c-8b0f-04f8589bea44",
+          "createdAt": "2026-07-28T03:30:23.000Z",
+          "updatedAt": "2026-07-28T03:30:23.000Z",
+          "uid": "35240-0277712f-25f0-457c-8b0f-04f8589bea44"
+        }
+      ],
+      "id": "76d40dee-6361-4ec1-90c8-0daee4f8ed1c",
+      "createdAt": "2026-07-28T03:30:23.000Z",
+      "updatedAt": "2026-07-28T03:30:23.000Z",
+      "uid": "35240-76d40dee-6361-4ec1-90c8-0daee4f8ed1c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

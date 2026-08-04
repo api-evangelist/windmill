@@ -1,0 +1,611 @@
+{
+  "info": {
+    "_postman_id": "e0d81650-fb47-4b29-96d6-4b47e040e9a8",
+    "name": "Windmill admin npm_proxy API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:25.000Z",
+    "updatedAt": "2026-07-28T03:31:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e0d81650-fb47-4b29-96d6-4b47e040e9a8"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "npm_proxy",
+              "item": [
+                {
+                  "name": "metadata",
+                  "item": [
+                    {
+                      "name": "{package}",
+                      "item": [
+                        {
+                          "name": "Get Npm Package Metadata from Private Registry",
+                          "id": "afd70005-dae1-4273-a565-4f66f1f5ec3f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/npm_proxy/metadata/:package",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "npm_proxy",
+                                "metadata",
+                                ":package"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "87ffda96-459d-4ef1-8d28-bc52528080e7",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "ab875a4b-324b-414f-b612-ec92b5b0a0b9",
+                                  "key": "package",
+                                  "value": "<string>",
+                                  "description": "(Required) npm package name"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "f906c75b-556d-479c-9146-d6adbf4ceefa",
+                              "name": "package metadata",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/npm_proxy/metadata/:package",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "npm_proxy",
+                                    "metadata",
+                                    ":package"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "package"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"tags\": {\n    \"irure3\": \"<string>\"\n  },\n  \"versions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T03:31:26.000Z",
+                              "updatedAt": "2026-07-28T03:31:26.000Z",
+                              "uid": "35240-f906c75b-556d-479c-9146-d6adbf4ceefa"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:25.000Z",
+                          "updatedAt": "2026-07-28T03:31:25.000Z",
+                          "uid": "35240-afd70005-dae1-4273-a565-4f66f1f5ec3f"
+                        }
+                      ],
+                      "id": "7ad31305-402c-4633-ba4d-7b286275d4d5",
+                      "createdAt": "2026-07-28T03:31:25.000Z",
+                      "updatedAt": "2026-07-28T03:31:25.000Z",
+                      "uid": "35240-7ad31305-402c-4633-ba4d-7b286275d4d5"
+                    }
+                  ],
+                  "id": "fe0eb75b-8dac-4ea2-8373-8a4e4adde547",
+                  "createdAt": "2026-07-28T03:31:25.000Z",
+                  "updatedAt": "2026-07-28T03:31:25.000Z",
+                  "uid": "35240-fe0eb75b-8dac-4ea2-8373-8a4e4adde547"
+                },
+                {
+                  "name": "resolve",
+                  "item": [
+                    {
+                      "name": "{package}",
+                      "item": [
+                        {
+                          "name": "Resolve Npm Package Version from Private Registry",
+                          "id": "febf94e4-7b53-43cd-b462-294734b1fe38",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/npm_proxy/resolve/:package?tag=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "npm_proxy",
+                                "resolve",
+                                ":package"
+                              ],
+                              "query": [
+                                {
+                                  "description": "version tag or reference",
+                                  "key": "tag",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7ada5497-5625-4a95-aa34-8b71bb70dc31",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "e7d5c0f7-d1a4-4ec1-aaeb-70f56b1e9a38",
+                                  "key": "package",
+                                  "value": "<string>",
+                                  "description": "(Required) npm package name"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "94488912-9d0e-4ea2-81dc-ba509a15aac1",
+                              "name": "resolved version",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/npm_proxy/resolve/:package?tag=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "npm_proxy",
+                                    "resolve",
+                                    ":package"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "version tag or reference",
+                                      "key": "tag",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "package"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"version\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:31:26.000Z",
+                              "updatedAt": "2026-07-28T03:31:26.000Z",
+                              "uid": "35240-94488912-9d0e-4ea2-81dc-ba509a15aac1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:25.000Z",
+                          "updatedAt": "2026-07-28T03:31:25.000Z",
+                          "uid": "35240-febf94e4-7b53-43cd-b462-294734b1fe38"
+                        }
+                      ],
+                      "id": "512f3190-19d1-4247-ba52-83a69786d8be",
+                      "createdAt": "2026-07-28T03:31:25.000Z",
+                      "updatedAt": "2026-07-28T03:31:25.000Z",
+                      "uid": "35240-512f3190-19d1-4247-ba52-83a69786d8be"
+                    }
+                  ],
+                  "id": "9e8a1fc4-cca3-42b3-b8e1-ae06fa3d5141",
+                  "createdAt": "2026-07-28T03:31:25.000Z",
+                  "updatedAt": "2026-07-28T03:31:25.000Z",
+                  "uid": "35240-9e8a1fc4-cca3-42b3-b8e1-ae06fa3d5141"
+                },
+                {
+                  "name": "filetree",
+                  "item": [
+                    {
+                      "name": "{package}",
+                      "item": [
+                        {
+                          "name": "{version}",
+                          "item": [
+                            {
+                              "name": "Get Npm Package File Tree from Private Registry",
+                              "id": "32da9a0b-0dfe-4e99-90c1-d644322d5163",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/npm_proxy/filetree/:package/:version",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "npm_proxy",
+                                    "filetree",
+                                    ":package",
+                                    ":version"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "577217e4-e6a5-486d-a47d-354438e3ec57",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "4c68fd8c-0b1f-42f6-a6be-057dd5c8c263",
+                                      "key": "package",
+                                      "value": "<string>",
+                                      "description": "(Required) npm package name"
+                                    },
+                                    {
+                                      "id": "6aea736f-8dae-4d34-9ed9-daf81a26511d",
+                                      "key": "version",
+                                      "value": "<string>",
+                                      "description": "(Required) package version"
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "fb6352f2-2de1-4a0a-8bfd-70370bdd4ce7",
+                                  "name": "package file tree",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/npm_proxy/filetree/:package/:version",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "npm_proxy",
+                                        "filetree",
+                                        ":package",
+                                        ":version"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "package"
+                                        },
+                                        {
+                                          "key": "version"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"default\": \"<string>\",\n  \"files\": [\n    {\n      \"name\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T03:31:26.000Z",
+                                  "updatedAt": "2026-07-28T03:31:26.000Z",
+                                  "uid": "35240-fb6352f2-2de1-4a0a-8bfd-70370bdd4ce7"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:25.000Z",
+                              "updatedAt": "2026-07-28T03:31:25.000Z",
+                              "uid": "35240-32da9a0b-0dfe-4e99-90c1-d644322d5163"
+                            }
+                          ],
+                          "id": "e7b6d66a-4747-4d9d-86c9-b349af3322d8",
+                          "createdAt": "2026-07-28T03:31:25.000Z",
+                          "updatedAt": "2026-07-28T03:31:25.000Z",
+                          "uid": "35240-e7b6d66a-4747-4d9d-86c9-b349af3322d8"
+                        }
+                      ],
+                      "id": "b1fe60b8-3f69-42d4-8f5b-791446a0aab5",
+                      "createdAt": "2026-07-28T03:31:25.000Z",
+                      "updatedAt": "2026-07-28T03:31:25.000Z",
+                      "uid": "35240-b1fe60b8-3f69-42d4-8f5b-791446a0aab5"
+                    }
+                  ],
+                  "id": "497a0335-147e-46d5-bc68-d041d0779931",
+                  "createdAt": "2026-07-28T03:31:25.000Z",
+                  "updatedAt": "2026-07-28T03:31:25.000Z",
+                  "uid": "35240-497a0335-147e-46d5-bc68-d041d0779931"
+                },
+                {
+                  "name": "file",
+                  "item": [
+                    {
+                      "name": "{package}",
+                      "item": [
+                        {
+                          "name": "{version}",
+                          "item": [
+                            {
+                              "name": "{filepath}",
+                              "item": [
+                                {
+                                  "name": "Get Specific File from Npm Package in Private Registry",
+                                  "id": "e161b532-9d45-464a-bc0f-98ac1a7c594f",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/npm_proxy/file/:package/:version/:filepath",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "npm_proxy",
+                                        "file",
+                                        ":package",
+                                        ":version",
+                                        ":filepath"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "2eef4866-ab78-4704-8f5b-5950a5583ab8",
+                                          "key": "workspace",
+                                          "value": "<string>",
+                                          "description": "(Required) "
+                                        },
+                                        {
+                                          "id": "3e4f312e-2f78-4f81-89b3-ebca6c6711b4",
+                                          "key": "package",
+                                          "value": "<string>",
+                                          "description": "(Required) npm package name"
+                                        },
+                                        {
+                                          "id": "5a9e10e0-70d5-49b2-b770-aea97156c33f",
+                                          "key": "version",
+                                          "value": "<string>",
+                                          "description": "(Required) package version"
+                                        },
+                                        {
+                                          "id": "08ef8b45-a98a-4e2d-9bc8-4a73708502f0",
+                                          "key": "filepath",
+                                          "value": "<string>",
+                                          "description": "(Required) file path within package"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "74fbf5e3-d624-4f9b-8826-0483caad217a",
+                                      "name": "file content",
+                                      "originalRequest": {
+                                        "method": "GET",
+                                        "header": [
+                                          {
+                                            "key": "Accept",
+                                            "value": "text/plain"
+                                          },
+                                          {
+                                            "description": "Added as a part of security scheme: bearer",
+                                            "key": "Authorization",
+                                            "value": "Bearer <token>"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/w/:workspace/npm_proxy/file/:package/:version/:filepath",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "w",
+                                            ":workspace",
+                                            "npm_proxy",
+                                            "file",
+                                            ":package",
+                                            ":version",
+                                            ":filepath"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "workspace"
+                                            },
+                                            {
+                                              "key": "package"
+                                            },
+                                            {
+                                              "key": "version"
+                                            },
+                                            {
+                                              "key": "filepath"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "text",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "text/plain"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "<string>",
+                                      "createdAt": "2026-07-28T03:31:26.000Z",
+                                      "updatedAt": "2026-07-28T03:31:26.000Z",
+                                      "uid": "35240-74fbf5e3-d624-4f9b-8826-0483caad217a"
+                                    }
+                                  ],
+                                  "createdAt": "2026-07-28T03:31:25.000Z",
+                                  "updatedAt": "2026-07-28T03:31:25.000Z",
+                                  "uid": "35240-e161b532-9d45-464a-bc0f-98ac1a7c594f"
+                                }
+                              ],
+                              "id": "8d6183d1-fa5f-4d7c-8eee-e1f9c24ea843",
+                              "createdAt": "2026-07-28T03:31:25.000Z",
+                              "updatedAt": "2026-07-28T03:31:25.000Z",
+                              "uid": "35240-8d6183d1-fa5f-4d7c-8eee-e1f9c24ea843"
+                            }
+                          ],
+                          "id": "9b27564c-1ae0-47ef-95b7-0c74ca406924",
+                          "createdAt": "2026-07-28T03:31:25.000Z",
+                          "updatedAt": "2026-07-28T03:31:25.000Z",
+                          "uid": "35240-9b27564c-1ae0-47ef-95b7-0c74ca406924"
+                        }
+                      ],
+                      "id": "a88752da-d7a6-4a14-8eb0-23e63dc491cb",
+                      "createdAt": "2026-07-28T03:31:25.000Z",
+                      "updatedAt": "2026-07-28T03:31:25.000Z",
+                      "uid": "35240-a88752da-d7a6-4a14-8eb0-23e63dc491cb"
+                    }
+                  ],
+                  "id": "f3767b61-6924-4634-81a0-8160eb8ea3f8",
+                  "createdAt": "2026-07-28T03:31:25.000Z",
+                  "updatedAt": "2026-07-28T03:31:25.000Z",
+                  "uid": "35240-f3767b61-6924-4634-81a0-8160eb8ea3f8"
+                }
+              ],
+              "id": "d993b23e-f753-46c9-be11-7275b21b2e4e",
+              "createdAt": "2026-07-28T03:31:25.000Z",
+              "updatedAt": "2026-07-28T03:31:25.000Z",
+              "uid": "35240-d993b23e-f753-46c9-be11-7275b21b2e4e"
+            }
+          ],
+          "id": "29c2faa5-d60f-4e64-968c-c97044022fe6",
+          "createdAt": "2026-07-28T03:31:25.000Z",
+          "updatedAt": "2026-07-28T03:31:25.000Z",
+          "uid": "35240-29c2faa5-d60f-4e64-968c-c97044022fe6"
+        }
+      ],
+      "id": "c35379fd-b252-4caf-ab3e-a1989961301d",
+      "createdAt": "2026-07-28T03:31:25.000Z",
+      "updatedAt": "2026-07-28T03:31:25.000Z",
+      "uid": "35240-c35379fd-b252-4caf-ab3e-a1989961301d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

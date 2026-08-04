@@ -1,0 +1,1129 @@
+{
+  "info": {
+    "_postman_id": "55d35b11-bdf6-4c7b-8548-b6f03978c10a",
+    "name": "Windmill admin mqtt_trigger API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:22.000Z",
+    "updatedAt": "2026-07-28T03:31:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-55d35b11-bdf6-4c7b-8548-b6f03978c10a"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "mqtt_triggers",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Mqtt Trigger",
+                      "id": "70f0fa41-99e5-4c9d-8f09-aeb8e8b863b2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"subscribe_topics\": [\n    {\n      \"qos\": \"qos1\",\n      \"topic\": \"<string>\"\n    },\n    {\n      \"qos\": \"qos1\",\n      \"topic\": \"<string>\"\n    }\n  ],\n  \"mqtt_resource_path\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"v3_config\": {\n    \"clean_session\": \"<boolean>\"\n  },\n  \"v5_config\": {\n    \"clean_start\": \"<boolean>\",\n    \"topic_alias_maximum\": \"<number>\",\n    \"session_expiry_interval\": \"<number>\"\n  },\n  \"client_version\": \"v5\",\n  \"mode\": \"suspended\",\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"laborum_0\": \"cillum esse minim\"\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "mqtt_triggers",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "fc710d63-88ab-4266-aaf2-cc8bdd602af8",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "09b50580-40ff-4468-bcb8-d6f12a524ccc",
+                          "name": "mqtt trigger created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"subscribe_topics\": [\n    {\n      \"qos\": \"qos1\",\n      \"topic\": \"<string>\"\n    },\n    {\n      \"qos\": \"qos1\",\n      \"topic\": \"<string>\"\n    }\n  ],\n  \"mqtt_resource_path\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"v3_config\": {\n    \"clean_session\": \"<boolean>\"\n  },\n  \"v5_config\": {\n    \"clean_start\": \"<boolean>\",\n    \"topic_alias_maximum\": \"<number>\",\n    \"session_expiry_interval\": \"<number>\"\n  },\n  \"client_version\": \"v5\",\n  \"mode\": \"suspended\",\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"laborum_0\": \"cillum esse minim\"\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-09b50580-40ff-4468-bcb8-d6f12a524ccc"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-70f0fa41-99e5-4c9d-8f09-aeb8e8b863b2"
+                    }
+                  ],
+                  "id": "20aef773-3f2c-4429-8aa3-293d96967350",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-20aef773-3f2c-4429-8aa3-293d96967350"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Mqtt Trigger",
+                          "id": "a482868f-1b27-4568-a81e-1d0f7049de23",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"subscribe_topics\": [\n    {\n      \"qos\": \"qos2\",\n      \"topic\": \"<string>\"\n    },\n    {\n      \"qos\": \"qos0\",\n      \"topic\": \"<string>\"\n    }\n  ],\n  \"mqtt_resource_path\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"v3_config\": {\n    \"clean_session\": \"<boolean>\"\n  },\n  \"v5_config\": {\n    \"clean_start\": \"<boolean>\",\n    \"topic_alias_maximum\": \"<number>\",\n    \"session_expiry_interval\": \"<number>\"\n  },\n  \"client_version\": \"v3\",\n  \"mode\": \"disabled\",\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"ex_9d9\": false\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/update/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "update",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e8bc8f5c-ac8f-4315-bb7f-9d1955f56ff4",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9808f623-6476-49cc-a9ab-6df027c65bc5",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b2b9d044-498c-46dd-a075-d8a1c4212dae",
+                              "name": "mqtt trigger updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"subscribe_topics\": [\n    {\n      \"qos\": \"qos2\",\n      \"topic\": \"<string>\"\n    },\n    {\n      \"qos\": \"qos0\",\n      \"topic\": \"<string>\"\n    }\n  ],\n  \"mqtt_resource_path\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"v3_config\": {\n    \"clean_session\": \"<boolean>\"\n  },\n  \"v5_config\": {\n    \"clean_start\": \"<boolean>\",\n    \"topic_alias_maximum\": \"<number>\",\n    \"session_expiry_interval\": \"<number>\"\n  },\n  \"client_version\": \"v3\",\n  \"mode\": \"disabled\",\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"ex_9d9\": false\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/update/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "mqtt_triggers",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:22.000Z",
+                              "updatedAt": "2026-07-28T03:31:22.000Z",
+                              "uid": "35240-b2b9d044-498c-46dd-a075-d8a1c4212dae"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-a482868f-1b27-4568-a81e-1d0f7049de23"
+                        }
+                      ],
+                      "id": "36a98330-d419-43c9-a990-e6904e12ab51",
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-36a98330-d419-43c9-a990-e6904e12ab51"
+                    }
+                  ],
+                  "id": "704943f6-5ff5-49f3-9e92-e7ec694180a5",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-704943f6-5ff5-49f3-9e92-e7ec694180a5"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Delete Mqtt Trigger",
+                          "id": "bf152bd1-798a-4734-9c18-badb5598b2be",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/delete/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "delete",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1708893a-fdae-4a32-a93a-72a883eeb082",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "15e546ef-9827-476d-8de5-a78e62c01c07",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "93ae2c8c-9da5-46a6-96f8-a32d55f77a35",
+                              "name": "mqtt trigger deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "mqtt_triggers",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:22.000Z",
+                              "updatedAt": "2026-07-28T03:31:22.000Z",
+                              "uid": "35240-93ae2c8c-9da5-46a6-96f8-a32d55f77a35"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-bf152bd1-798a-4734-9c18-badb5598b2be"
+                        }
+                      ],
+                      "id": "1a19deb5-f204-42d8-bdd0-12bd1a940725",
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-1a19deb5-f204-42d8-bdd0-12bd1a940725"
+                    }
+                  ],
+                  "id": "95a32055-db68-432c-92d6-05e49eb3f6f1",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-95a32055-db68-432c-92d6-05e49eb3f6f1"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Mqtt Trigger",
+                          "id": "84177f44-d27d-42dc-b0c4-a8930642449a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/get/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "get",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "20fe020b-1a97-45a1-95d6-276d1a63f72d",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "68e407bb-2001-40d1-86d1-fc72e7e195f3",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "71d00d4c-1281-47b0-b2da-5f3d9acad746",
+                              "name": "mqtt trigger deleted",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/get/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "mqtt_triggers",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "null",
+                              "createdAt": "2026-07-28T03:31:22.000Z",
+                              "updatedAt": "2026-07-28T03:31:22.000Z",
+                              "uid": "35240-71d00d4c-1281-47b0-b2da-5f3d9acad746"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-84177f44-d27d-42dc-b0c4-a8930642449a"
+                        }
+                      ],
+                      "id": "b2d39a26-d2d3-421c-9839-aebd3526e7b9",
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-b2d39a26-d2d3-421c-9839-aebd3526e7b9"
+                    }
+                  ],
+                  "id": "c1a25139-15f7-46ea-98a8-5a845433f634",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-c1a25139-15f7-46ea-98a8-5a845433f634"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Mqtt Triggers",
+                      "id": "11548d19-0c9c-47f0-9213-97c89627d69c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/list?page=<integer>&per_page=<integer>&path=<string>&is_flow=<boolean>&path_start=<string>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "mqtt_triggers",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "filter by path",
+                              "key": "path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "is_flow",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "85196927-f7a8-43bc-9540-6330d82c3c97",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "0fefd75c-5a98-4d76-9073-c0a81a2ebc33",
+                          "name": "mqtt trigger list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/list?page=<integer>&per_page=<integer>&path=<string>&is_flow=<boolean>&path_start=<string>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "filter by path",
+                                  "key": "path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "is_flow",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "null",
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-0fefd75c-5a98-4d76-9073-c0a81a2ebc33"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-11548d19-0c9c-47f0-9213-97c89627d69c"
+                    }
+                  ],
+                  "id": "062b0068-3e81-434c-b4b2-e8b17cf68b66",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-062b0068-3e81-434c-b4b2-e8b17cf68b66"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Does Mqtt Trigger Exists",
+                          "id": "eff37d66-1a0a-40fc-ad34-a53f05ed83ce",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/exists/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "exists",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7bece288-1d89-4b3f-b35f-5e0d6e7780ee",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "6e55e2ff-fa51-4b52-b962-41200c0419b6",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "a2177036-8639-407d-85b2-94a18d874ba0",
+                              "name": "mqtt trigger exists",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "mqtt_triggers",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:31:22.000Z",
+                              "updatedAt": "2026-07-28T03:31:22.000Z",
+                              "uid": "35240-a2177036-8639-407d-85b2-94a18d874ba0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-eff37d66-1a0a-40fc-ad34-a53f05ed83ce"
+                        }
+                      ],
+                      "id": "1a6b99cd-a595-4f7e-8939-a680ee9e62eb",
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-1a6b99cd-a595-4f7e-8939-a680ee9e62eb"
+                    }
+                  ],
+                  "id": "91ea8c0e-59d2-4173-902d-b06850bf8672",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-91ea8c0e-59d2-4173-902d-b06850bf8672"
+                },
+                {
+                  "name": "setmode",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Set Enabled Mqtt Trigger",
+                          "id": "e98bd47b-8f24-4217-9fea-b727352c36a1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"mode\": \"suspended\",\n  \"force\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/setmode/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "setmode",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "daf20e86-effb-4685-8fae-d09ad946843c",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "dc41541b-d533-4de9-923d-8d92e1770c51",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "f7caa891-6ed5-4fd7-93c6-d7ffcf808487",
+                              "name": "mqtt trigger enabled set",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"mode\": \"suspended\",\n  \"force\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/setmode/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "mqtt_triggers",
+                                    "setmode",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:22.000Z",
+                              "updatedAt": "2026-07-28T03:31:22.000Z",
+                              "uid": "35240-f7caa891-6ed5-4fd7-93c6-d7ffcf808487"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-e98bd47b-8f24-4217-9fea-b727352c36a1"
+                        }
+                      ],
+                      "id": "e1470e58-c461-4db2-821f-add8fc2da753",
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-e1470e58-c461-4db2-821f-add8fc2da753"
+                    }
+                  ],
+                  "id": "ca492ed5-6043-4d7c-afbd-5bfb64a31ffc",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-ca492ed5-6043-4d7c-afbd-5bfb64a31ffc"
+                },
+                {
+                  "name": "test",
+                  "item": [
+                    {
+                      "name": "Test Mqtt Connection",
+                      "id": "c5a7b5f6-af54-40c5-93da-747a3b57aa4b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"connection\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/test",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "mqtt_triggers",
+                            "test"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d2e64765-2e1a-4e61-a398-1ce4d7c04e72",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "fe6241f6-c0d3-484e-9fff-c717bf2d5345",
+                          "name": "successfully connected to mqtt",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"connection\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/mqtt_triggers/test",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "mqtt_triggers",
+                                "test"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:22.000Z",
+                          "updatedAt": "2026-07-28T03:31:22.000Z",
+                          "uid": "35240-fe6241f6-c0d3-484e-9fff-c717bf2d5345"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:22.000Z",
+                      "updatedAt": "2026-07-28T03:31:22.000Z",
+                      "uid": "35240-c5a7b5f6-af54-40c5-93da-747a3b57aa4b"
+                    }
+                  ],
+                  "id": "31ce8c48-540a-4135-a599-6848ec8a9012",
+                  "createdAt": "2026-07-28T03:31:22.000Z",
+                  "updatedAt": "2026-07-28T03:31:22.000Z",
+                  "uid": "35240-31ce8c48-540a-4135-a599-6848ec8a9012"
+                }
+              ],
+              "id": "41153bf9-6e22-4611-a59d-12060e248fc3",
+              "createdAt": "2026-07-28T03:31:22.000Z",
+              "updatedAt": "2026-07-28T03:31:22.000Z",
+              "uid": "35240-41153bf9-6e22-4611-a59d-12060e248fc3"
+            }
+          ],
+          "id": "10882505-2f07-4cea-9a1f-2da4009f23bf",
+          "createdAt": "2026-07-28T03:31:22.000Z",
+          "updatedAt": "2026-07-28T03:31:22.000Z",
+          "uid": "35240-10882505-2f07-4cea-9a1f-2da4009f23bf"
+        }
+      ],
+      "id": "30ee0d73-c08f-4541-baf5-de8d307449df",
+      "createdAt": "2026-07-28T03:31:22.000Z",
+      "updatedAt": "2026-07-28T03:31:22.000Z",
+      "uid": "35240-30ee0d73-c08f-4541-baf5-de8d307449df"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

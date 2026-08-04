@@ -1,0 +1,891 @@
+{
+  "info": {
+    "_postman_id": "abe7226e-432e-4b33-a803-5c0d286d03b0",
+    "name": "Windmill admin input API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:58.000Z",
+    "updatedAt": "2026-07-28T03:30:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-abe7226e-432e-4b33-a803-5c0d286d03b0"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "inputs",
+              "item": [
+                {
+                  "name": "history",
+                  "item": [
+                    {
+                      "name": "List Inputs Used in Previously Completed Jobs",
+                      "id": "0c04b196-0d74-407c-89b9-434792e15b54",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/inputs/history?runnable_id=<string>&runnable_type=FlowPath&page=<integer>&per_page=<integer>&args=<string>&include_preview=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "inputs",
+                            "history"
+                          ],
+                          "query": [
+                            {
+                              "key": "runnable_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "runnable_type",
+                              "value": "FlowPath"
+                            },
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "filter on jobs containing those args as a json subset (@> in postgres)",
+                              "key": "args",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "include_preview",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "21a1c24e-a12c-4051-a21b-0de055437b1a",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "19642530-de0b-47fb-a1d4-010b06821e92",
+                          "name": "Input history for completed jobs",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/inputs/history?runnable_id=<string>&runnable_type=FlowPath&page=<integer>&per_page=<integer>&args=<string>&include_preview=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "inputs",
+                                "history"
+                              ],
+                              "query": [
+                                {
+                                  "key": "runnable_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "runnable_type",
+                                  "value": "FlowPath"
+                                },
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "filter on jobs containing those args as a json subset (@> in postgres)",
+                                  "key": "args",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "include_preview",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"is_public\": \"<boolean>\",\n    \"success\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"is_public\": \"<boolean>\",\n    \"success\": \"<boolean>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:59.000Z",
+                          "updatedAt": "2026-07-28T03:30:59.000Z",
+                          "uid": "35240-19642530-de0b-47fb-a1d4-010b06821e92"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:59.000Z",
+                      "updatedAt": "2026-07-28T03:30:59.000Z",
+                      "uid": "35240-0c04b196-0d74-407c-89b9-434792e15b54"
+                    }
+                  ],
+                  "id": "dc156cb1-1ce8-418b-8c99-4866dfee3c1b",
+                  "createdAt": "2026-07-28T03:30:59.000Z",
+                  "updatedAt": "2026-07-28T03:30:59.000Z",
+                  "uid": "35240-dc156cb1-1ce8-418b-8c99-4866dfee3c1b"
+                },
+                {
+                  "name": "{jobOrInputId}",
+                  "item": [
+                    {
+                      "name": "args",
+                      "item": [
+                        {
+                          "name": "Get Args from History or Saved Input",
+                          "id": "d240fc55-8db7-4220-b455-60425a64d411",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/inputs/:jobOrInputId/args?input=<boolean>&allow_large=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "inputs",
+                                ":jobOrInputId",
+                                "args"
+                              ],
+                              "query": [
+                                {
+                                  "key": "input",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "allow_large",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "3e4b7a37-95c9-4c8f-8ab6-2967ece5e009",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "10461e36-1345-4da7-8753-be77b1a1c59f",
+                                  "key": "jobOrInputId",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1006c7db-6980-4d77-8d3f-0b6bdd13ba0c",
+                              "name": "args",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/inputs/:jobOrInputId/args?input=<boolean>&allow_large=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "inputs",
+                                    ":jobOrInputId",
+                                    "args"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "input",
+                                      "value": "<boolean>"
+                                    },
+                                    {
+                                      "key": "allow_large",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "jobOrInputId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T03:30:59.000Z",
+                              "updatedAt": "2026-07-28T03:30:59.000Z",
+                              "uid": "35240-1006c7db-6980-4d77-8d3f-0b6bdd13ba0c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:59.000Z",
+                          "updatedAt": "2026-07-28T03:30:59.000Z",
+                          "uid": "35240-d240fc55-8db7-4220-b455-60425a64d411"
+                        }
+                      ],
+                      "id": "3d65768d-5006-4a95-8503-257f9ffcf118",
+                      "createdAt": "2026-07-28T03:30:59.000Z",
+                      "updatedAt": "2026-07-28T03:30:59.000Z",
+                      "uid": "35240-3d65768d-5006-4a95-8503-257f9ffcf118"
+                    }
+                  ],
+                  "id": "8309180c-31ba-4f0f-a4a3-ef984338a5ea",
+                  "createdAt": "2026-07-28T03:30:59.000Z",
+                  "updatedAt": "2026-07-28T03:30:59.000Z",
+                  "uid": "35240-8309180c-31ba-4f0f-a4a3-ef984338a5ea"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Saved Inputs for a Runnable",
+                      "id": "fbc5fae4-be41-409b-82c2-1b8a9dadfec7",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/inputs/list?runnable_id=<string>&runnable_type=FlowPath&page=<integer>&per_page=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "inputs",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "key": "runnable_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "runnable_type",
+                              "value": "FlowPath"
+                            },
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "0df5282c-541c-4f0d-b69f-4d3cf9cda865",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "520e712a-beb2-41bb-9af0-8b3d81029979",
+                          "name": "Saved Inputs for a Runnable",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/inputs/list?runnable_id=<string>&runnable_type=FlowPath&page=<integer>&per_page=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "inputs",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "key": "runnable_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "runnable_type",
+                                  "value": "FlowPath"
+                                },
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"is_public\": \"<boolean>\",\n    \"success\": \"<boolean>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"created_at\": \"<dateTime>\",\n    \"is_public\": \"<boolean>\",\n    \"success\": \"<boolean>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:30:59.000Z",
+                          "updatedAt": "2026-07-28T03:30:59.000Z",
+                          "uid": "35240-520e712a-beb2-41bb-9af0-8b3d81029979"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:59.000Z",
+                      "updatedAt": "2026-07-28T03:30:59.000Z",
+                      "uid": "35240-fbc5fae4-be41-409b-82c2-1b8a9dadfec7"
+                    }
+                  ],
+                  "id": "fb390e36-2d29-457d-8574-9c83f6454fc1",
+                  "createdAt": "2026-07-28T03:30:59.000Z",
+                  "updatedAt": "2026-07-28T03:30:59.000Z",
+                  "uid": "35240-fb390e36-2d29-457d-8574-9c83f6454fc1"
+                },
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create an Input for Future Use in a Script or Flow",
+                      "id": "343a8366-9791-4326-87d4-77257b49c30a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"args\": {},\n  \"created_by\": 57705964.511592746\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/inputs/create?runnable_id=<string>&runnable_type=FlowPath",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "inputs",
+                            "create"
+                          ],
+                          "query": [
+                            {
+                              "key": "runnable_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "runnable_type",
+                              "value": "FlowPath"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "f44a551b-f73d-4e4c-a0ed-35d00cbfc61a",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "b27a5c64-b6f4-4959-acfa-6bc8329c3946",
+                          "name": "Input created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"args\": {},\n  \"created_by\": 57705964.511592746\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/inputs/create?runnable_id=<string>&runnable_type=FlowPath",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "inputs",
+                                "create"
+                              ],
+                              "query": [
+                                {
+                                  "key": "runnable_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "runnable_type",
+                                  "value": "FlowPath"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<uuid>",
+                          "createdAt": "2026-07-28T03:30:59.000Z",
+                          "updatedAt": "2026-07-28T03:30:59.000Z",
+                          "uid": "35240-b27a5c64-b6f4-4959-acfa-6bc8329c3946"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:59.000Z",
+                      "updatedAt": "2026-07-28T03:30:59.000Z",
+                      "uid": "35240-343a8366-9791-4326-87d4-77257b49c30a"
+                    }
+                  ],
+                  "id": "bc04e392-eb0d-4436-91c2-fd3fc7546524",
+                  "createdAt": "2026-07-28T03:30:59.000Z",
+                  "updatedAt": "2026-07-28T03:30:59.000Z",
+                  "uid": "35240-bc04e392-eb0d-4436-91c2-fd3fc7546524"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "Update an Input",
+                      "id": "89d72f12-abbe-4b45-81a1-0c9c927f5262",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"is_public\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/inputs/update",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "inputs",
+                            "update"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d9dd8a57-c7ab-4cc5-9468-d562f123c461",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ebfe6983-4ad5-4ac4-baa1-fe3fbcbac52c",
+                          "name": "Input updated",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"is_public\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/inputs/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "inputs",
+                                "update"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<uuid>",
+                          "createdAt": "2026-07-28T03:30:59.000Z",
+                          "updatedAt": "2026-07-28T03:30:59.000Z",
+                          "uid": "35240-ebfe6983-4ad5-4ac4-baa1-fe3fbcbac52c"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:30:59.000Z",
+                      "updatedAt": "2026-07-28T03:30:59.000Z",
+                      "uid": "35240-89d72f12-abbe-4b45-81a1-0c9c927f5262"
+                    }
+                  ],
+                  "id": "2c73dc11-5959-4aac-8157-1778fb32ab72",
+                  "createdAt": "2026-07-28T03:30:59.000Z",
+                  "updatedAt": "2026-07-28T03:30:59.000Z",
+                  "uid": "35240-2c73dc11-5959-4aac-8157-1778fb32ab72"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{input}",
+                      "item": [
+                        {
+                          "name": "Delete a Saved Input",
+                          "id": "1fbbd378-fc47-4d1f-aeed-014513f9cd36",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/inputs/delete/:input",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "inputs",
+                                "delete",
+                                ":input"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d532368f-dba5-4286-b3e4-e92c9522d1ce",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "38fcaf9e-d150-4b62-863e-31c7cac9b74a",
+                                  "key": "input",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "f8a377e3-f79e-4c83-8508-579d1f46de1a",
+                              "name": "Input deleted",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/inputs/delete/:input",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "inputs",
+                                    "delete",
+                                    ":input"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "input"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<uuid>",
+                              "createdAt": "2026-07-28T03:30:59.000Z",
+                              "updatedAt": "2026-07-28T03:30:59.000Z",
+                              "uid": "35240-f8a377e3-f79e-4c83-8508-579d1f46de1a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:59.000Z",
+                          "updatedAt": "2026-07-28T03:30:59.000Z",
+                          "uid": "35240-1fbbd378-fc47-4d1f-aeed-014513f9cd36"
+                        }
+                      ],
+                      "id": "0824360d-b5c4-4591-be0a-7f63fb2548ed",
+                      "createdAt": "2026-07-28T03:30:59.000Z",
+                      "updatedAt": "2026-07-28T03:30:59.000Z",
+                      "uid": "35240-0824360d-b5c4-4591-be0a-7f63fb2548ed"
+                    }
+                  ],
+                  "id": "c26d3a0a-d767-4658-8b8c-687e42905c15",
+                  "createdAt": "2026-07-28T03:30:59.000Z",
+                  "updatedAt": "2026-07-28T03:30:59.000Z",
+                  "uid": "35240-c26d3a0a-d767-4658-8b8c-687e42905c15"
+                }
+              ],
+              "id": "fdfa3037-46e0-48ee-b8b5-9e4d3d54337f",
+              "createdAt": "2026-07-28T03:30:59.000Z",
+              "updatedAt": "2026-07-28T03:30:59.000Z",
+              "uid": "35240-fdfa3037-46e0-48ee-b8b5-9e4d3d54337f"
+            }
+          ],
+          "id": "e0f8c130-c88d-4f44-b0d4-6ebbee43c96c",
+          "createdAt": "2026-07-28T03:30:59.000Z",
+          "updatedAt": "2026-07-28T03:30:59.000Z",
+          "uid": "35240-e0f8c130-c88d-4f44-b0d4-6ebbee43c96c"
+        }
+      ],
+      "id": "eed1624a-5ecc-4f3c-90d6-a61f9e48a1eb",
+      "createdAt": "2026-07-28T03:30:59.000Z",
+      "updatedAt": "2026-07-28T03:30:59.000Z",
+      "uid": "35240-eed1624a-5ecc-4f3c-90d6-a61f9e48a1eb"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

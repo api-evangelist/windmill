@@ -1,0 +1,367 @@
+{
+  "info": {
+    "_postman_id": "23bc037b-147d-40cd-98d2-212698887efa",
+    "name": "Windmill admin mcp_oauth API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:05.000Z",
+    "updatedAt": "2026-07-28T03:31:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-23bc037b-147d-40cd-98d2-212698887efa"
+  },
+  "item": [
+    {
+      "name": "mcp",
+      "item": [
+        {
+          "name": "oauth",
+          "item": [
+            {
+              "name": "discover",
+              "item": [
+                {
+                  "name": "Discover MCP Server OAuth Metadata",
+                  "id": "5d0c08bf-9221-4a81-a563-ec4644512cf6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"mcp_server_url\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/mcp/oauth/discover",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "mcp",
+                        "oauth",
+                        "discover"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "1be25f35-87c9-42de-9172-3892a5abd976",
+                      "name": "OAuth metadata from MCP server",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mcp_server_url\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/mcp/oauth/discover",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mcp",
+                            "oauth",
+                            "discover"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"scopes_supported\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authorization_endpoint\": \"<string>\",\n  \"token_endpoint\": \"<string>\",\n  \"registration_endpoint\": \"<string>\",\n  \"supports_dynamic_registration\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:31:06.000Z",
+                      "updatedAt": "2026-07-28T03:31:06.000Z",
+                      "uid": "35240-1be25f35-87c9-42de-9172-3892a5abd976"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:06.000Z",
+                  "updatedAt": "2026-07-28T03:31:06.000Z",
+                  "uid": "35240-5d0c08bf-9221-4a81-a563-ec4644512cf6"
+                }
+              ],
+              "id": "ac0832d0-9e2c-46e7-91f2-798364c6193e",
+              "createdAt": "2026-07-28T03:31:05.000Z",
+              "updatedAt": "2026-07-28T03:31:05.000Z",
+              "uid": "35240-ac0832d0-9e2c-46e7-91f2-798364c6193e"
+            },
+            {
+              "name": "start",
+              "item": [
+                {
+                  "name": "Start MCP OAuth Popup Flow",
+                  "id": "94efcafd-edc5-46bb-8c63-e66b7fc41c89",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/mcp/oauth/start?mcp_server_url=<string>&scopes=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "mcp",
+                        "oauth",
+                        "start"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) URL of the MCP server to connect to",
+                          "key": "mcp_server_url",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Comma-separated list of OAuth scopes to request",
+                          "key": "scopes",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Opens in a popup, discovers OAuth metadata, registers client, and redirects to OAuth provider"
+                  },
+                  "response": [
+                    {
+                      "id": "d3e7b41e-9ed4-4fb6-ac2d-f3fa16b29906",
+                      "name": "Redirect to OAuth provider authorization URL",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/mcp/oauth/start?mcp_server_url=<string>&scopes=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mcp",
+                            "oauth",
+                            "start"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) URL of the MCP server to connect to",
+                              "key": "mcp_server_url",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Comma-separated list of OAuth scopes to request",
+                              "key": "scopes",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Found",
+                      "code": 302,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:31:06.000Z",
+                      "updatedAt": "2026-07-28T03:31:06.000Z",
+                      "uid": "35240-d3e7b41e-9ed4-4fb6-ac2d-f3fa16b29906"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:06.000Z",
+                  "updatedAt": "2026-07-28T03:31:06.000Z",
+                  "uid": "35240-94efcafd-edc5-46bb-8c63-e66b7fc41c89"
+                }
+              ],
+              "id": "6baa58a6-9801-4d2a-9e75-1148a301e06f",
+              "createdAt": "2026-07-28T03:31:05.000Z",
+              "updatedAt": "2026-07-28T03:31:05.000Z",
+              "uid": "35240-6baa58a6-9801-4d2a-9e75-1148a301e06f"
+            },
+            {
+              "name": "callback",
+              "item": [
+                {
+                  "name": "MCP OAuth Callback",
+                  "id": "43f19ff8-42bf-4527-9fb2-e28663ad2c71",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/html"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/mcp/oauth/callback?code=<string>&state=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "mcp",
+                        "oauth",
+                        "callback"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) OAuth authorization code",
+                          "key": "code",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) CSRF state token",
+                          "key": "state",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "description": "Handles OAuth callback, exchanges code for tokens, returns HTML that posts message to opener"
+                  },
+                  "response": [
+                    {
+                      "id": "93d39f86-6e2c-4a7a-9e26-cd84e894d45a",
+                      "name": "HTML page with JavaScript that posts tokens to opener window and closes",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "text/html"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/mcp/oauth/callback?code=<string>&state=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "mcp",
+                            "oauth",
+                            "callback"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) OAuth authorization code",
+                              "key": "code",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) CSRF state token",
+                              "key": "state",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "text/html"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "<string>",
+                      "createdAt": "2026-07-28T03:31:06.000Z",
+                      "updatedAt": "2026-07-28T03:31:06.000Z",
+                      "uid": "35240-93d39f86-6e2c-4a7a-9e26-cd84e894d45a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:31:06.000Z",
+                  "updatedAt": "2026-07-28T03:31:06.000Z",
+                  "uid": "35240-43f19ff8-42bf-4527-9fb2-e28663ad2c71"
+                }
+              ],
+              "id": "f67c2997-b3ae-48d7-a9e2-3a1335a08608",
+              "createdAt": "2026-07-28T03:31:05.000Z",
+              "updatedAt": "2026-07-28T03:31:05.000Z",
+              "uid": "35240-f67c2997-b3ae-48d7-a9e2-3a1335a08608"
+            }
+          ],
+          "id": "e71dc6ef-6f16-4868-adc9-a7583e116dc1",
+          "createdAt": "2026-07-28T03:31:05.000Z",
+          "updatedAt": "2026-07-28T03:31:05.000Z",
+          "uid": "35240-e71dc6ef-6f16-4868-adc9-a7583e116dc1"
+        }
+      ],
+      "id": "b7475b21-d4f8-4d48-82b6-5fb4db1f793a",
+      "createdAt": "2026-07-28T03:31:05.000Z",
+      "updatedAt": "2026-07-28T03:31:05.000Z",
+      "uid": "35240-b7475b21-d4f8-4d48-82b6-5fb4db1f793a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

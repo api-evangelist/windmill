@@ -1,0 +1,1370 @@
+{
+  "info": {
+    "_postman_id": "a36850fa-78ac-47f6-a4f5-19a68a5d1233",
+    "name": "Windmill admin kafka_trigger API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:03.000Z",
+    "updatedAt": "2026-07-28T03:31:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a36850fa-78ac-47f6-a4f5-19a68a5d1233"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "kafka_triggers",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Kafka Trigger",
+                      "id": "716ecdfc-c595-4bfa-af86-73c729bebe97",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"kafka_resource_path\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"topics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"filter_logic\": \"and\",\n  \"auto_offset_reset\": \"latest\",\n  \"auto_commit\": true,\n  \"mode\": \"disabled\",\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"fugiat64\": false\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/create",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "kafka_triggers",
+                            "create"
+                          ],
+                          "variable": [
+                            {
+                              "id": "da3aae59-3d50-4f50-9a11-c23c054ad465",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a0778766-e7cd-4f4e-9bc1-a060c2bc2b9f",
+                          "name": "kafka trigger created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"kafka_resource_path\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"topics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"filter_logic\": \"and\",\n  \"auto_offset_reset\": \"latest\",\n  \"auto_commit\": true,\n  \"mode\": \"disabled\",\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"fugiat64\": false\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-a0778766-e7cd-4f4e-9bc1-a060c2bc2b9f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-716ecdfc-c595-4bfa-af86-73c729bebe97"
+                    }
+                  ],
+                  "id": "1a819608-25dd-4967-9a8d-0ec1e7140b15",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-1a819608-25dd-4967-9a8d-0ec1e7140b15"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Kafka Trigger",
+                          "id": "bcc8451b-b230-45d4-980b-8a144c7a01d7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"kafka_resource_path\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"topics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"is_flow\": \"<boolean>\",\n  \"filter_logic\": \"and\",\n  \"auto_offset_reset\": \"latest\",\n  \"auto_commit\": true,\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"nonf6\": 14728161.290509507,\n    \"commodo7\": 59937228.282034546\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/update/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "update",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fa2dc9ff-6a16-4a88-99cc-1d6391b74087",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "bf4b2964-16a5-4b46-9aba-caf4cc340efd",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "781e5bc4-f4f9-4f22-9bef-bb57cad62ff6",
+                              "name": "kafka trigger updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"kafka_resource_path\": \"<string>\",\n  \"group_id\": \"<string>\",\n  \"topics\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filters\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": {}\n    }\n  ],\n  \"is_flow\": \"<boolean>\",\n  \"filter_logic\": \"and\",\n  \"auto_offset_reset\": \"latest\",\n  \"auto_commit\": true,\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"nonf6\": 14728161.290509507,\n    \"commodo7\": 59937228.282034546\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/update/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-781e5bc4-f4f9-4f22-9bef-bb57cad62ff6"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-bcc8451b-b230-45d4-980b-8a144c7a01d7"
+                        }
+                      ],
+                      "id": "9b171566-2da8-4322-bb3d-ae19ef70b162",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-9b171566-2da8-4322-bb3d-ae19ef70b162"
+                    }
+                  ],
+                  "id": "1000feac-4e0c-4196-896c-a93b4a9ee402",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-1000feac-4e0c-4196-896c-a93b4a9ee402"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Delete Kafka Trigger",
+                          "id": "e3080145-c164-47b8-b706-b0de6d8afb60",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/delete/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "delete",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8bfc5408-e75b-437d-937d-b0f133c5979d",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "1f0f064a-e37b-4ae5-b1be-48de8d262a2f",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "dd11fb8c-1843-456a-9c3e-261238654df0",
+                              "name": "kafka trigger deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-dd11fb8c-1843-456a-9c3e-261238654df0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-e3080145-c164-47b8-b706-b0de6d8afb60"
+                        }
+                      ],
+                      "id": "ad6bb69e-1259-4cf1-af01-fc556ed9a3ea",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-ad6bb69e-1259-4cf1-af01-fc556ed9a3ea"
+                    }
+                  ],
+                  "id": "cbf248ec-d5c8-4315-a2c9-578296a79196",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-cbf248ec-d5c8-4315-a2c9-578296a79196"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Kafka Trigger",
+                          "id": "4d26e519-7f9b-40c4-93cf-a6541a7cfeb3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/get/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "get",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a745396f-04f8-4bf0-bb1f-c8144ca81016",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a8e1f0a9-bb3a-496e-83e5-f17989c23a06",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "a5c6090d-86f0-42a1-ae8d-0befda47ff4e",
+                              "name": "kafka trigger deleted",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/get/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "null",
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-a5c6090d-86f0-42a1-ae8d-0befda47ff4e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-4d26e519-7f9b-40c4-93cf-a6541a7cfeb3"
+                        }
+                      ],
+                      "id": "6919e827-06d6-4fe0-a694-2392959cb413",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-6919e827-06d6-4fe0-a694-2392959cb413"
+                    }
+                  ],
+                  "id": "82061a49-4834-4fd5-9741-50d5edebcccc",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-82061a49-4834-4fd5-9741-50d5edebcccc"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Kafka Triggers",
+                      "id": "414364c9-40f2-48e3-9a08-b84c96f75341",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/list?page=<integer>&per_page=<integer>&path=<string>&is_flow=<boolean>&path_start=<string>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "kafka_triggers",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "filter by path",
+                              "key": "path",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "is_flow",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d15966b7-18ef-452d-97a4-100b6f7b9017",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6b1e8d98-1a3c-48b0-8781-22e138b78a74",
+                          "name": "kafka trigger list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/list?page=<integer>&per_page=<integer>&path=<string>&is_flow=<boolean>&path_start=<string>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "filter by path",
+                                  "key": "path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "is_flow",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "null",
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-6b1e8d98-1a3c-48b0-8781-22e138b78a74"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-414364c9-40f2-48e3-9a08-b84c96f75341"
+                    }
+                  ],
+                  "id": "aeaab3a7-822c-4c9d-8546-632260fcae88",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-aeaab3a7-822c-4c9d-8546-632260fcae88"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Does Kafka Trigger Exists",
+                          "id": "d4458953-ea0d-4aa6-b9fc-f7730e4fa120",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/exists/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "exists",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7e92a00e-2250-475a-a015-fc629a4923ae",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "62f8d4c8-5544-4466-a4d4-f98591cc1f23",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "65ee25a4-848e-4185-b651-e3fc078b5797",
+                              "name": "kafka trigger exists",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-65ee25a4-848e-4185-b651-e3fc078b5797"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-d4458953-ea0d-4aa6-b9fc-f7730e4fa120"
+                        }
+                      ],
+                      "id": "2ce38587-6dc1-4fc0-a297-c1abb5acc800",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-2ce38587-6dc1-4fc0-a297-c1abb5acc800"
+                    }
+                  ],
+                  "id": "e36a0952-57d3-4dfe-8d6b-84247bf7c363",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-e36a0952-57d3-4dfe-8d6b-84247bf7c363"
+                },
+                {
+                  "name": "setmode",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Set Enabled Kafka Trigger",
+                          "id": "29d4eff3-2846-4a89-a332-311637b4da3d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"mode\": \"disabled\",\n  \"force\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/setmode/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "setmode",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "667e501e-05a6-477e-8510-df46642ec6c8",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "96a91d3a-5723-46a1-8e73-484941875400",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "009ccecc-916a-42a5-ac9b-e2f1279881e0",
+                              "name": "kafka trigger enabled set",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"mode\": \"disabled\",\n  \"force\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/setmode/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "setmode",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-009ccecc-916a-42a5-ac9b-e2f1279881e0"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-29d4eff3-2846-4a89-a332-311637b4da3d"
+                        }
+                      ],
+                      "id": "5c7b17cb-6223-461a-a041-cf22f19b0d1a",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-5c7b17cb-6223-461a-a041-cf22f19b0d1a"
+                    }
+                  ],
+                  "id": "2796766c-ec8b-4ae1-ac80-ed5a72f326d1",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-2796766c-ec8b-4ae1-ac80-ed5a72f326d1"
+                },
+                {
+                  "name": "test",
+                  "item": [
+                    {
+                      "name": "Test Kafka Connection",
+                      "id": "50ebc6b7-a49e-46ab-aa18-0a4ada852343",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"connection\": {}\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/test",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "kafka_triggers",
+                            "test"
+                          ],
+                          "variable": [
+                            {
+                              "id": "deb052d0-269b-4aae-974b-78274d15919c",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "1d174e6e-ba7d-48aa-9aeb-86c56e949ea5",
+                          "name": "successfuly connected to kafka brokers",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"connection\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/test",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "test"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-1d174e6e-ba7d-48aa-9aeb-86c56e949ea5"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-50ebc6b7-a49e-46ab-aa18-0a4ada852343"
+                    }
+                  ],
+                  "id": "caa13c97-a29b-4a7c-99b3-5cd123a50b95",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-caa13c97-a29b-4a7c-99b3-5cd123a50b95"
+                },
+                {
+                  "name": "reset_offsets",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Reset Kafka Trigger Offsets to Earliest",
+                          "id": "22d09e83-d0c4-4cf7-b667-c3edf146810e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/reset_offsets/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "reset_offsets",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a0c48987-0ce5-4667-87c1-167e4be72121",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "01133d54-24c2-4d74-bf53-8eb2d299c433",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6a751917-4d49-4c36-8366-6761a07ef2b3",
+                              "name": "kafka trigger offsets reset successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/reset_offsets/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "reset_offsets",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-6a751917-4d49-4c36-8366-6761a07ef2b3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-22d09e83-d0c4-4cf7-b667-c3edf146810e"
+                        }
+                      ],
+                      "id": "30bb1f7a-48ab-40b9-a033-b2fb99ee05a8",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-30bb1f7a-48ab-40b9-a033-b2fb99ee05a8"
+                    }
+                  ],
+                  "id": "e57cd857-632c-425e-a395-73a265632d51",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-e57cd857-632c-425e-a395-73a265632d51"
+                },
+                {
+                  "name": "commit_offsets",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Commit Kafka Offsets for a Specific Trigger",
+                          "id": "a0a4a6e0-8a15-49d1-840a-a01112db6758",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"topic\": \"<string>\",\n  \"partition\": \"<integer>\",\n  \"offset\": \"<long>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/commit_offsets/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "kafka_triggers",
+                                "commit_offsets",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "77788fc3-9725-465c-9e06-9f1e76f5f5fb",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "822242be-c774-49df-b544-6a05bd9767cf",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "9c15bca6-9c3d-48fa-8e7f-1a238cd7ee6a",
+                              "name": "kafka offsets committed successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"topic\": \"<string>\",\n  \"partition\": \"<integer>\",\n  \"offset\": \"<long>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/kafka_triggers/commit_offsets/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "kafka_triggers",
+                                    "commit_offsets",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:31:04.000Z",
+                              "updatedAt": "2026-07-28T03:31:04.000Z",
+                              "uid": "35240-9c15bca6-9c3d-48fa-8e7f-1a238cd7ee6a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:04.000Z",
+                          "updatedAt": "2026-07-28T03:31:04.000Z",
+                          "uid": "35240-a0a4a6e0-8a15-49d1-840a-a01112db6758"
+                        }
+                      ],
+                      "id": "db989a83-84c4-47b4-9407-89fc22ea4546",
+                      "createdAt": "2026-07-28T03:31:04.000Z",
+                      "updatedAt": "2026-07-28T03:31:04.000Z",
+                      "uid": "35240-db989a83-84c4-47b4-9407-89fc22ea4546"
+                    }
+                  ],
+                  "id": "cf21ed68-a68a-4e77-a1f6-23b5d5c833eb",
+                  "createdAt": "2026-07-28T03:31:04.000Z",
+                  "updatedAt": "2026-07-28T03:31:04.000Z",
+                  "uid": "35240-cf21ed68-a68a-4e77-a1f6-23b5d5c833eb"
+                }
+              ],
+              "id": "e1eb2790-8078-4a4d-993b-7ed6392517e2",
+              "createdAt": "2026-07-28T03:31:04.000Z",
+              "updatedAt": "2026-07-28T03:31:04.000Z",
+              "uid": "35240-e1eb2790-8078-4a4d-993b-7ed6392517e2"
+            }
+          ],
+          "id": "a713a0ba-c8a0-445a-a31f-6aaaa0a27088",
+          "createdAt": "2026-07-28T03:31:04.000Z",
+          "updatedAt": "2026-07-28T03:31:04.000Z",
+          "uid": "35240-a713a0ba-c8a0-445a-a31f-6aaaa0a27088"
+        }
+      ],
+      "id": "824ff8c7-01c3-405d-a2da-1debd1abc2ff",
+      "createdAt": "2026-07-28T03:31:04.000Z",
+      "updatedAt": "2026-07-28T03:31:04.000Z",
+      "uid": "35240-824ff8c7-01c3-405d-a2da-1debd1abc2ff"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

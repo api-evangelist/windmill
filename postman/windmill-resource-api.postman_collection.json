@@ -1,0 +1,3015 @@
+{
+  "info": {
+    "_postman_id": "25f92cc3-566e-4016-b734-230884f83110",
+    "name": "Windmill admin resource API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:32.000Z",
+    "updatedAt": "2026-07-28T03:31:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-25f92cc3-566e-4016-b734-230884f83110"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "resources",
+              "item": [
+                {
+                  "name": "create",
+                  "item": [
+                    {
+                      "name": "Create Resource",
+                      "id": "c0813309-9c61-4b9e-8618-55dd1a1fd65f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "text/plain"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"path\": \"<string>\",\n  \"value\": {},\n  \"resource_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/resources/create?update_if_exists=<boolean>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "resources",
+                            "create"
+                          ],
+                          "query": [
+                            {
+                              "description": "update the resource if it already exists (default false)",
+                              "key": "update_if_exists",
+                              "value": "<boolean>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "a59ccd52-87c4-4895-9a7f-f87a7c238791",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "e3aea373-6eb8-44ac-82f3-6badddc562fd",
+                          "name": "resource created",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"value\": {},\n  \"resource_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/create?update_if_exists=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "create"
+                              ],
+                              "query": [
+                                {
+                                  "description": "update the resource if it already exists (default false)",
+                                  "key": "update_if_exists",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Created",
+                          "code": 201,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "text/plain"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<string>",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-e3aea373-6eb8-44ac-82f3-6badddc562fd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-c0813309-9c61-4b9e-8618-55dd1a1fd65f"
+                    }
+                  ],
+                  "id": "394e94a2-4b39-418f-ae21-07f873075503",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-394e94a2-4b39-418f-ae21-07f873075503"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Delete Resource",
+                          "id": "a279ad15-5209-4673-abe2-cd67b6ea8eaa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/delete/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "delete",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "92f5da81-e056-4a99-ae11-9684fd10b3d0",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "91f91d93-a3cc-4d30-94a8-f9d3bd6ef18e",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "19341e2c-b909-451c-a3ec-e98662a70c34",
+                              "name": "resource deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-19341e2c-b909-451c-a3ec-e98662a70c34"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-a279ad15-5209-4673-abe2-cd67b6ea8eaa"
+                        }
+                      ],
+                      "id": "87c52c68-c6b5-4d7a-b621-16d5bc3aec91",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-87c52c68-c6b5-4d7a-b621-16d5bc3aec91"
+                    }
+                  ],
+                  "id": "c08aae4e-3e0d-4b4f-9594-8c767f91b0bc",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-c08aae4e-3e0d-4b4f-9594-8c767f91b0bc"
+                },
+                {
+                  "name": "delete_bulk",
+                  "item": [
+                    {
+                      "name": "Delete Resources in Bulk",
+                      "id": "9fc72ea6-ffdc-4812-9b51-6ea60e9e09f5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/resources/delete_bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "resources",
+                            "delete_bulk"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2c316f15-aec5-45a6-84a0-038ced72b720",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "3a34c081-44bf-4a49-88b3-ee70ffbaad7a",
+                          "name": "deleted paths",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"paths\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/delete_bulk",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "delete_bulk"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-3a34c081-44bf-4a49-88b3-ee70ffbaad7a"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-9fc72ea6-ffdc-4812-9b51-6ea60e9e09f5"
+                    }
+                  ],
+                  "id": "53a3c756-0c66-4777-9bb5-9b622fac3321",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-53a3c756-0c66-4777-9bb5-9b622fac3321"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Resource",
+                          "id": "f02925fe-0a66-475d-a398-a796bce0d847",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"value\": {},\n  \"resource_type\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/update/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "update",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5f9e5c2a-7ded-4673-b45d-4e292441c103",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "d5a52f05-ec34-4642-9ac8-5ba7b930b16b",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "c8434cb2-bb0e-409e-8131-e3410c17eaba",
+                              "name": "resource updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"path\": \"<string>\",\n  \"description\": \"<string>\",\n  \"value\": {},\n  \"resource_type\": \"<string>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/update/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-c8434cb2-bb0e-409e-8131-e3410c17eaba"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-f02925fe-0a66-475d-a398-a796bce0d847"
+                        }
+                      ],
+                      "id": "8ee3f1a7-3cf7-4229-812c-cd4a6bddaaf9",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-8ee3f1a7-3cf7-4229-812c-cd4a6bddaaf9"
+                    }
+                  ],
+                  "id": "1e54ac03-5431-4fe8-beba-d335ec554f18",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-1e54ac03-5431-4fe8-beba-d335ec554f18"
+                },
+                {
+                  "name": "update_value",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Update Resource Value",
+                          "id": "b4b4cae8-f93b-4bc9-bf7b-4d21f1032f0d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"value\": {}\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/update_value/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "update_value",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f2fd3b25-97ba-495f-b4ed-8e8005aeacfd",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "97796bac-622e-40dc-a199-03c69cf33b51",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "74ed249e-9924-4914-8c68-1359caa4f4ca",
+                              "name": "resource value updated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"value\": {}\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/update_value/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "update_value",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-74ed249e-9924-4914-8c68-1359caa4f4ca"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-b4b4cae8-f93b-4bc9-bf7b-4d21f1032f0d"
+                        }
+                      ],
+                      "id": "03259ab8-b976-4aa6-96d5-a3e42d88fc53",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-03259ab8-b976-4aa6-96d5-a3e42d88fc53"
+                    }
+                  ],
+                  "id": "0b91fcd3-6272-4dda-b7c2-0ce8cbbb00a7",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-0b91fcd3-6272-4dda-b7c2-0ce8cbbb00a7"
+                },
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Resource",
+                          "id": "6156e467-bdc4-4987-81c6-14c0e0244eba",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/get/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "get",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9bef1f4d-c710-4eff-b9dd-372962916e90",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "9911cf42-9346-4a0e-b880-8a8f1bcaf8b0",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "b0a917f3-22cc-4d56-bf4b-88438541244c",
+                              "name": "resource",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/get/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"path\": \"<string>\",\n  \"resource_type\": \"<string>\",\n  \"is_oauth\": \"<boolean>\",\n  \"workspace_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"value\": {},\n  \"extra_perms\": {\n    \"dolore50d\": \"<boolean>\",\n    \"dolore_3\": \"<boolean>\",\n    \"sed46\": \"<boolean>\",\n    \"do892\": \"<boolean>\"\n  },\n  \"created_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-b0a917f3-22cc-4d56-bf4b-88438541244c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-6156e467-bdc4-4987-81c6-14c0e0244eba"
+                        }
+                      ],
+                      "id": "29c2bd04-fe0f-4501-ae07-92abd3e1486e",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-29c2bd04-fe0f-4501-ae07-92abd3e1486e"
+                    }
+                  ],
+                  "id": "2a0faf09-5b9e-445f-b77d-6f21f93422dd",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-2a0faf09-5b9e-445f-b77d-6f21f93422dd"
+                },
+                {
+                  "name": "get_value_interpolated",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Resource Interpolated (variables and Resources are Fully Unrolled)",
+                          "id": "5a94e25d-799e-4c19-a518-6f387dcf0377",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/get_value_interpolated/:path?job_id=<uuid>&allow_cache=<boolean>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "get_value_interpolated",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "description": "job id",
+                                  "key": "job_id",
+                                  "value": "<uuid>"
+                                },
+                                {
+                                  "description": "allow getting a cached value for improved performance",
+                                  "key": "allow_cache",
+                                  "value": "<boolean>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d94c128a-20b1-4a98-9396-18b5fb4d0358",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "a022accb-5542-48ff-b83a-a0a13ceac173",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "2c5a8d6c-60aa-47d3-b2ca-59350d545361",
+                              "name": "resource value",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/get_value_interpolated/:path?job_id=<uuid>&allow_cache=<boolean>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "get_value_interpolated",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "job id",
+                                      "key": "job_id",
+                                      "value": "<uuid>"
+                                    },
+                                    {
+                                      "description": "allow getting a cached value for improved performance",
+                                      "key": "allow_cache",
+                                      "value": "<boolean>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-2c5a8d6c-60aa-47d3-b2ca-59350d545361"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-5a94e25d-799e-4c19-a518-6f387dcf0377"
+                        }
+                      ],
+                      "id": "d428ef6e-247b-4eee-80a9-343fd0bed4e0",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-d428ef6e-247b-4eee-80a9-343fd0bed4e0"
+                    }
+                  ],
+                  "id": "4481dc33-0c47-49bc-bb1a-041b7778c73f",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-4481dc33-0c47-49bc-bb1a-041b7778c73f"
+                },
+                {
+                  "name": "get_value",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Resource Value",
+                          "id": "19afcead-87af-40a7-9209-31ac51a3e54c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/get_value/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "get_value",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "bb7f0a68-1ccf-4ff3-a0c8-c48eab8c87db",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "3915010d-3327-40be-a94b-efd163443127",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "39d7e022-1dcb-4b3e-84d7-1bc81d80d765",
+                              "name": "resource value",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/get_value/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "get_value",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-39d7e022-1dcb-4b3e-84d7-1bc81d80d765"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-19afcead-87af-40a7-9209-31ac51a3e54c"
+                        }
+                      ],
+                      "id": "1a7b02c2-2432-4a29-a982-83157c1cb885",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-1a7b02c2-2432-4a29-a982-83157c1cb885"
+                    }
+                  ],
+                  "id": "23143214-be22-4b64-a582-a9c40f8618d4",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-23143214-be22-4b64-a582-a9c40f8618d4"
+                },
+                {
+                  "name": "git_commit_hash",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get Git Repository Latest Commit Hash",
+                          "id": "4f0cc2eb-d482-4033-bb51-92169d144f75",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/git_commit_hash/:path?git_ssh_identity=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "git_commit_hash",
+                                ":path"
+                              ],
+                              "query": [
+                                {
+                                  "key": "git_ssh_identity",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "5aa1116a-d417-4402-99d4-23ac37dc152e",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "57ff1e4d-6754-4ed1-acfc-366b77001ab2",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "573a90c1-fe37-42a6-9ab3-4cd6ab07b3b6",
+                              "name": "git commit hash",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/git_commit_hash/:path?git_ssh_identity=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "git_commit_hash",
+                                    ":path"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "git_ssh_identity",
+                                      "value": "<string>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"commit_hash\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-573a90c1-fe37-42a6-9ab3-4cd6ab07b3b6"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-4f0cc2eb-d482-4033-bb51-92169d144f75"
+                        }
+                      ],
+                      "id": "6d3697eb-fd4a-408e-91e0-7223fadc02d1",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-6d3697eb-fd4a-408e-91e0-7223fadc02d1"
+                    }
+                  ],
+                  "id": "daa9dd15-cb93-40fa-826e-27538ec78444",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-daa9dd15-cb93-40fa-826e-27538ec78444"
+                },
+                {
+                  "name": "exists",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Does Resource Exists",
+                          "id": "9d6c35f9-ac64-408d-af5b-6655f74ef242",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/exists/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "exists",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7c3d8baf-0a5f-4cbc-ad52-f2613e22ae39",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "0b22c5e2-f845-4e65-9cec-1f78ca7a16f9",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "a3ffe3da-8f6b-4cf0-bcf1-ec1905b65d34",
+                              "name": "does resource exists",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<boolean>",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-a3ffe3da-8f6b-4cf0-bcf1-ec1905b65d34"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-9d6c35f9-ac64-408d-af5b-6655f74ef242"
+                        }
+                      ],
+                      "id": "3336d34f-60db-4100-8b3f-c904f3ae45ca",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-3336d34f-60db-4100-8b3f-c904f3ae45ca"
+                    }
+                  ],
+                  "id": "9ee641e4-5208-499e-8895-dd284f7c00da",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-9ee641e4-5208-499e-8895-dd284f7c00da"
+                },
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List Resources",
+                      "id": "3d35054d-3934-4ecd-8a59-aacd5bcb9cfe",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/resources/list?page=<integer>&per_page=<integer>&resource_type=<string>&resource_type_exclude=<string>&path_start=<string>&path=<string>&description=<string>&value=<string>&broad_filter=<string>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "resources",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "resource_types to list from, separated by ',',",
+                              "key": "resource_type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "resource_types to not list from, separated by ',',",
+                              "key": "resource_type_exclude",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "filter resources by path prefix",
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "exact path match filter",
+                              "key": "path",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "pattern match filter for description field (case-insensitive)",
+                              "key": "description",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "JSONB subset match filter using base64 encoded JSON",
+                              "key": "value",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "broad search across multiple fields (case-insensitive substring match)",
+                              "key": "broad_filter",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "19948011-0c92-4cba-a782-42417d583eb2",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "70ad5794-9529-4982-9f57-e60c8c1322b2",
+                          "name": "resource list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/list?page=<integer>&per_page=<integer>&resource_type=<string>&resource_type_exclude=<string>&path_start=<string>&path=<string>&description=<string>&value=<string>&broad_filter=<string>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "resource_types to list from, separated by ',',",
+                                  "key": "resource_type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "resource_types to not list from, separated by ',',",
+                                  "key": "resource_type_exclude",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "filter resources by path prefix",
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "exact path match filter",
+                                  "key": "path",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "pattern match filter for description field (case-insensitive)",
+                                  "key": "description",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "JSONB subset match filter using base64 encoded JSON",
+                                  "key": "value",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "broad search across multiple fields (case-insensitive substring match)",
+                                  "key": "broad_filter",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"path\": \"<string>\",\n    \"resource_type\": \"<string>\",\n    \"is_oauth\": \"<boolean>\",\n    \"is_linked\": \"<boolean>\",\n    \"is_refreshed\": \"<boolean>\",\n    \"workspace_id\": \"<string>\",\n    \"description\": \"<string>\",\n    \"value\": {},\n    \"extra_perms\": {\n      \"cillum7\": \"<boolean>\"\n    },\n    \"is_expired\": \"<boolean>\",\n    \"refresh_error\": \"<string>\",\n    \"account\": \"<number>\",\n    \"created_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"labels\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  {\n    \"path\": \"<string>\",\n    \"resource_type\": \"<string>\",\n    \"is_oauth\": \"<boolean>\",\n    \"is_linked\": \"<boolean>\",\n    \"is_refreshed\": \"<boolean>\",\n    \"workspace_id\": \"<string>\",\n    \"description\": \"<string>\",\n    \"value\": {},\n    \"extra_perms\": {\n      \"nostrudd\": \"<boolean>\",\n      \"aliqua_359\": \"<boolean>\"\n    },\n    \"is_expired\": \"<boolean>\",\n    \"refresh_error\": \"<string>\",\n    \"account\": \"<number>\",\n    \"created_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"labels\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-70ad5794-9529-4982-9f57-e60c8c1322b2"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-3d35054d-3934-4ecd-8a59-aacd5bcb9cfe"
+                    }
+                  ],
+                  "id": "9ba9f712-af79-4ef0-8d8f-fe50ec14fc8a",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-9ba9f712-af79-4ef0-8d8f-fe50ec14fc8a"
+                },
+                {
+                  "name": "list_search",
+                  "item": [
+                    {
+                      "name": "List Resources for Search",
+                      "id": "cd3128a5-a89c-4032-925c-d7cf75fc8ce4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/resources/list_search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "resources",
+                            "list_search"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8651da8b-410c-4911-8302-e73177cdcb4d",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "6c37acf1-fcea-4f5c-a815-1295d447aff8",
+                          "name": "resource list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/list_search",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "list_search"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"path\": \"<string>\",\n    \"value\": {}\n  },\n  {\n    \"path\": \"<string>\",\n    \"value\": {}\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-6c37acf1-fcea-4f5c-a815-1295d447aff8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-cd3128a5-a89c-4032-925c-d7cf75fc8ce4"
+                    }
+                  ],
+                  "id": "153b5949-bf1c-4ec5-9d49-a9507037bc8a",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-153b5949-bf1c-4ec5-9d49-a9507037bc8a"
+                },
+                {
+                  "name": "mcp_tools",
+                  "item": [
+                    {
+                      "name": "{path}",
+                      "item": [
+                        {
+                          "name": "Get MCP Tools from Resource",
+                          "id": "a1afc962-070a-4592-ae65-a1dfa4029895",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/mcp_tools/:path",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "mcp_tools",
+                                ":path"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "405a1336-260a-49fa-b17e-5b3b7d97c763",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "be0ce81d-5cae-4a3a-af48-fad444a1712c",
+                                  "key": "path",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "c8411391-433c-414e-b8c4-f4ce91eb00ae",
+                              "name": "list of MCP tools",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/mcp_tools/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "mcp_tools",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "path"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"parameters\": {},\n    \"description\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"parameters\": {},\n    \"description\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-c8411391-433c-414e-b8c4-f4ce91eb00ae"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-a1afc962-070a-4592-ae65-a1dfa4029895"
+                        }
+                      ],
+                      "id": "86f6b2a2-239e-4476-a1cd-57402c0c0a87",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-86f6b2a2-239e-4476-a1cd-57402c0c0a87"
+                    }
+                  ],
+                  "id": "3520b79a-c5c1-4954-b647-a1ebd2f7844a",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-3520b79a-c5c1-4954-b647-a1ebd2f7844a"
+                },
+                {
+                  "name": "list_names",
+                  "item": [
+                    {
+                      "name": "{name}",
+                      "item": [
+                        {
+                          "name": "List Resource Names",
+                          "id": "f8e52d30-d136-40e4-84dd-fcf1e28cea4b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/list_names/:name",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "list_names",
+                                ":name"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "bfe3e613-36c8-45ec-8e37-f6b28284ce58",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "5c8e1167-482f-4fe3-9c77-3eabfaa91cc4",
+                                  "key": "name",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "31041083-c5be-41e2-8569-42c7c7667b7d",
+                              "name": "resource list names",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/list_names/:name",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "list_names",
+                                    ":name"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "name"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"path\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"path\": \"<string>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-31041083-c5be-41e2-8569-42c7c7667b7d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-f8e52d30-d136-40e4-84dd-fcf1e28cea4b"
+                        }
+                      ],
+                      "id": "122d0114-84e5-419c-bc07-ed19352858ba",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-122d0114-84e5-419c-bc07-ed19352858ba"
+                    }
+                  ],
+                  "id": "3bd76928-ebf8-4479-9ba0-9f62de28a283",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-3bd76928-ebf8-4479-9ba0-9f62de28a283"
+                },
+                {
+                  "name": "type",
+                  "item": [
+                    {
+                      "name": "create",
+                      "item": [
+                        {
+                          "name": "Create Resource_type",
+                          "id": "c91d6349-21d5-4e65-a0be-9cc9d2ea14b5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"workspace_id\": \"<string>\",\n  \"schema\": {},\n  \"description\": \"<string>\",\n  \"created_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"format_extension\": \"<string>\",\n  \"is_fileset\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/type/create",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "type",
+                                "create"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "64cfc8e9-b6aa-4740-a078-dfa69e0596d5",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "dc3f8a03-565b-43fe-a1f9-1f4501babd89",
+                              "name": "resource_type created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\",\n  \"workspace_id\": \"<string>\",\n  \"schema\": {},\n  \"description\": \"<string>\",\n  \"created_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"format_extension\": \"<string>\",\n  \"is_fileset\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/create",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "create"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-dc3f8a03-565b-43fe-a1f9-1f4501babd89"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-c91d6349-21d5-4e65-a0be-9cc9d2ea14b5"
+                        }
+                      ],
+                      "id": "80ae61d4-416c-479f-8f6d-87786f4b3154",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-80ae61d4-416c-479f-8f6d-87786f4b3154"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Delete Resource_type",
+                              "id": "d5fa62ea-caeb-4380-85ef-265917b94775",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/delete/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "delete",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "82b78fc4-1782-41ba-b451-f07066ac6e18",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "0e1ae8c9-9a49-4178-9423-62c5d1104615",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "419f2d44-88bd-4a8c-b64c-25124c934e91",
+                                  "name": "resource_type deleted",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/resources/type/delete/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "resources",
+                                        "type",
+                                        "delete",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:32.000Z",
+                                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                                  "uid": "35240-419f2d44-88bd-4a8c-b64c-25124c934e91"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-d5fa62ea-caeb-4380-85ef-265917b94775"
+                            }
+                          ],
+                          "id": "76258aea-65a9-403d-b387-79e0c7ef02c7",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-76258aea-65a9-403d-b387-79e0c7ef02c7"
+                        }
+                      ],
+                      "id": "59201a59-e424-40ad-a30b-2f30437ac6d5",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-59201a59-e424-40ad-a30b-2f30437ac6d5"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Update Resource_type",
+                              "id": "f0d97fe7-6ddb-4195-b8c1-e59e0a4c9c26",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"schema\": {},\n  \"description\": \"<string>\",\n  \"is_fileset\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/update/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "update",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "34e7a4d4-bbf3-4b52-828d-1074173a7be4",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "329700eb-e19e-4b3e-9310-4da6dffe2573",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "4b032ff2-9460-4fb7-9acf-47ef94bdfd66",
+                                  "name": "resource_type updated",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "text/plain"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"schema\": {},\n  \"description\": \"<string>\",\n  \"is_fileset\": \"<boolean>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/resources/type/update/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "resources",
+                                        "type",
+                                        "update",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "text/plain"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<string>",
+                                  "createdAt": "2026-07-28T03:31:32.000Z",
+                                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                                  "uid": "35240-4b032ff2-9460-4fb7-9acf-47ef94bdfd66"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-f0d97fe7-6ddb-4195-b8c1-e59e0a4c9c26"
+                            }
+                          ],
+                          "id": "4f6fd908-b1af-47e6-8e0f-c396b55ed083",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-4f6fd908-b1af-47e6-8e0f-c396b55ed083"
+                        }
+                      ],
+                      "id": "573cf08d-0c69-4d26-a8bb-0a33604be8d8",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-573cf08d-0c69-4d26-a8bb-0a33604be8d8"
+                    },
+                    {
+                      "name": "get",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Get Resource_type",
+                              "id": "2b1969cc-7ad9-415b-8a61-580039bb160c",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/get/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "get",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "fd0f4186-07df-4d1d-b983-888aff4574d7",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "390a74c1-0ed7-46a8-9ecc-00ca11af1312",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "f92d51f9-6bce-4e2f-b1c9-ad0c6b564a63",
+                                  "name": "resource_type deleted",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/resources/type/get/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "resources",
+                                        "type",
+                                        "get",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"name\": \"<string>\",\n  \"workspace_id\": \"<string>\",\n  \"schema\": {},\n  \"description\": \"<string>\",\n  \"created_by\": \"<string>\",\n  \"edited_at\": \"<dateTime>\",\n  \"format_extension\": \"<string>\",\n  \"is_fileset\": \"<boolean>\"\n}",
+                                  "createdAt": "2026-07-28T03:31:32.000Z",
+                                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                                  "uid": "35240-f92d51f9-6bce-4e2f-b1c9-ad0c6b564a63"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-2b1969cc-7ad9-415b-8a61-580039bb160c"
+                            }
+                          ],
+                          "id": "fbdbe5fc-ab09-4661-8040-a7fe28f50e89",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-fbdbe5fc-ab09-4661-8040-a7fe28f50e89"
+                        }
+                      ],
+                      "id": "bd037861-2dc6-4553-99fb-30a617a87e7c",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-bd037861-2dc6-4553-99fb-30a617a87e7c"
+                    },
+                    {
+                      "name": "exists",
+                      "item": [
+                        {
+                          "name": "{path}",
+                          "item": [
+                            {
+                              "name": "Does Resource_type Exists",
+                              "id": "a3047241-b5c0-453c-9210-9423226816fa",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/exists/:path",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "exists",
+                                    ":path"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "89c54015-b9bc-4e7a-9edd-315d7e7de13d",
+                                      "key": "workspace",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    },
+                                    {
+                                      "id": "0d6b88fe-251e-48aa-9315-ef31e6499296",
+                                      "key": "path",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "7abcab71-d2f1-4d04-9add-3599ad4d24cc",
+                                  "name": "does resource_type exist",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/w/:workspace/resources/type/exists/:path",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "w",
+                                        ":workspace",
+                                        "resources",
+                                        "type",
+                                        "exists",
+                                        ":path"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "workspace"
+                                        },
+                                        {
+                                          "key": "path"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "<boolean>",
+                                  "createdAt": "2026-07-28T03:31:32.000Z",
+                                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                                  "uid": "35240-7abcab71-d2f1-4d04-9add-3599ad4d24cc"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-a3047241-b5c0-453c-9210-9423226816fa"
+                            }
+                          ],
+                          "id": "d44dd8c5-d2b8-4258-9f9b-7be220521840",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-d44dd8c5-d2b8-4258-9f9b-7be220521840"
+                        }
+                      ],
+                      "id": "731c9d5a-2ac2-44bc-a519-a4210a9784ac",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-731c9d5a-2ac2-44bc-a519-a4210a9784ac"
+                    },
+                    {
+                      "name": "list",
+                      "item": [
+                        {
+                          "name": "List Resource_types",
+                          "id": "0752d7fd-71cd-4702-84fc-11290dea76eb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/type/list",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "type",
+                                "list"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "1f63a120-e9bd-47cc-b68d-271798d80a00",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "9292ce59-b16c-4b19-a2e4-7f7737e5ee4d",
+                              "name": "resource_type list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/list",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "list"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  {\n    \"name\": \"<string>\",\n    \"workspace_id\": \"<string>\",\n    \"schema\": {},\n    \"description\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"format_extension\": \"<string>\",\n    \"is_fileset\": \"<boolean>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"workspace_id\": \"<string>\",\n    \"schema\": {},\n    \"description\": \"<string>\",\n    \"created_by\": \"<string>\",\n    \"edited_at\": \"<dateTime>\",\n    \"format_extension\": \"<string>\",\n    \"is_fileset\": \"<boolean>\"\n  }\n]",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-9292ce59-b16c-4b19-a2e4-7f7737e5ee4d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-0752d7fd-71cd-4702-84fc-11290dea76eb"
+                        }
+                      ],
+                      "id": "92390375-5e59-4b30-af2b-d3197ef1eebc",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-92390375-5e59-4b30-af2b-d3197ef1eebc"
+                    },
+                    {
+                      "name": "listnames",
+                      "item": [
+                        {
+                          "name": "List Resource_types Names",
+                          "id": "000afb87-72e4-4416-a34a-9568bed23049",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/type/listnames",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "type",
+                                "listnames"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ee40883e-bdb1-427c-9d7b-2ef8b781376a",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "81dd9428-8d97-4bc9-a645-4107a976a331",
+                              "name": "resource_type list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/resources/type/listnames",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "resources",
+                                    "type",
+                                    "listnames"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                              "createdAt": "2026-07-28T03:31:32.000Z",
+                              "updatedAt": "2026-07-28T03:31:32.000Z",
+                              "uid": "35240-81dd9428-8d97-4bc9-a645-4107a976a331"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-000afb87-72e4-4416-a34a-9568bed23049"
+                        }
+                      ],
+                      "id": "b0c599ac-cafa-4059-9b3b-d5c8b286afb8",
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-b0c599ac-cafa-4059-9b3b-d5c8b286afb8"
+                    }
+                  ],
+                  "id": "00cbb1e3-b8f6-468d-8dc1-64c012e29122",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-00cbb1e3-b8f6-468d-8dc1-64c012e29122"
+                },
+                {
+                  "name": "file_resource_type_to_file_ext_map",
+                  "item": [
+                    {
+                      "name": "Get Map from Resource Type to Format Extension",
+                      "id": "7194ae31-56d6-4e18-b107-c11b0ed5fd55",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/resources/file_resource_type_to_file_ext_map",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "resources",
+                            "file_resource_type_to_file_ext_map"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c972cbe1-74c3-4f39-a953-64fe684d8479",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "2afb3326-53f5-47ca-a379-9b2a35a2407b",
+                          "name": "map from resource type to file resource info",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/resources/file_resource_type_to_file_ext_map",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "resources",
+                                "file_resource_type_to_file_ext_map"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"irure_87\": {\n    \"format_extension\": \"<string>\",\n    \"is_fileset\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-2afb3326-53f5-47ca-a379-9b2a35a2407b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-7194ae31-56d6-4e18-b107-c11b0ed5fd55"
+                    }
+                  ],
+                  "id": "c8e56a45-716b-449c-bef7-037316078530",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-c8e56a45-716b-449c-bef7-037316078530"
+                }
+              ],
+              "id": "1086d575-6f41-4dad-8880-59b97dc93648",
+              "createdAt": "2026-07-28T03:31:32.000Z",
+              "updatedAt": "2026-07-28T03:31:32.000Z",
+              "uid": "35240-1086d575-6f41-4dad-8880-59b97dc93648"
+            },
+            {
+              "name": "embeddings",
+              "item": [
+                {
+                  "name": "query_resource_types",
+                  "item": [
+                    {
+                      "name": "Query Resource Types by Similarity",
+                      "id": "9bd1cbcf-7179-42de-bb05-4c7e8fea62ae",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/embeddings/query_resource_types?text=<string>&limit=<number>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "embeddings",
+                            "query_resource_types"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) query text",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "query limit",
+                              "key": "limit",
+                              "value": "<number>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "e2425063-5eb1-4cee-9f21-45c797d7f09f",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "8c735989-d829-49f5-a13c-f6195c820908",
+                          "name": "resource type details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/embeddings/query_resource_types?text=<string>&limit=<number>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "embeddings",
+                                "query_resource_types"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) query text",
+                                  "key": "text",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "query limit",
+                                  "key": "limit",
+                                  "value": "<number>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"name\": \"<string>\",\n    \"score\": \"<number>\",\n    \"schema\": {}\n  },\n  {\n    \"name\": \"<string>\",\n    \"score\": \"<number>\",\n    \"schema\": {}\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:32.000Z",
+                          "updatedAt": "2026-07-28T03:31:32.000Z",
+                          "uid": "35240-8c735989-d829-49f5-a13c-f6195c820908"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:32.000Z",
+                      "updatedAt": "2026-07-28T03:31:32.000Z",
+                      "uid": "35240-9bd1cbcf-7179-42de-bb05-4c7e8fea62ae"
+                    }
+                  ],
+                  "id": "5abe92a2-6c69-44d5-ab1f-ddc1b0b34341",
+                  "createdAt": "2026-07-28T03:31:32.000Z",
+                  "updatedAt": "2026-07-28T03:31:32.000Z",
+                  "uid": "35240-5abe92a2-6c69-44d5-ab1f-ddc1b0b34341"
+                }
+              ],
+              "id": "e4190704-ffa6-4dd8-a1af-a7aa1d74b0d3",
+              "createdAt": "2026-07-28T03:31:32.000Z",
+              "updatedAt": "2026-07-28T03:31:32.000Z",
+              "uid": "35240-e4190704-ffa6-4dd8-a1af-a7aa1d74b0d3"
+            }
+          ],
+          "id": "02da974a-94d2-47a7-b8c9-c937350c2ee3",
+          "createdAt": "2026-07-28T03:31:32.000Z",
+          "updatedAt": "2026-07-28T03:31:32.000Z",
+          "uid": "35240-02da974a-94d2-47a7-b8c9-c937350c2ee3"
+        }
+      ],
+      "id": "cb472a43-8ad4-4f51-bc94-7d9cc905d61e",
+      "createdAt": "2026-07-28T03:31:32.000Z",
+      "updatedAt": "2026-07-28T03:31:32.000Z",
+      "uid": "35240-cb472a43-8ad4-4f51-bc94-7d9cc905d61e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

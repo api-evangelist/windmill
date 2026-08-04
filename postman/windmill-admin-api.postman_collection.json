@@ -1,0 +1,833 @@
+{
+  "info": {
+    "_postman_id": "4bf9159a-5473-44a1-b62c-77854880c5dc",
+    "name": "Windmill admin API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:30:21.000Z",
+    "updatedAt": "2026-07-28T03:30:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4bf9159a-5473-44a1-b62c-77854880c5dc"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "users",
+              "item": [
+                {
+                  "name": "get",
+                  "item": [
+                    {
+                      "name": "{username}",
+                      "item": [
+                        {
+                          "name": "Get User (require Admin Privilege)",
+                          "id": "69d06efc-e27d-46bb-95a4-05acea149cf6",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/users/get/:username",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "users",
+                                "get",
+                                ":username"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "65b80e9a-6222-44eb-a9aa-e6e712b332d9",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "37ab8e60-f340-4428-8eaa-689dea597993",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "eeb3298e-f4d1-4261-a6e2-8ed16d7a4037",
+                              "name": "user created",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/users/get/:username",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "users",
+                                    "get",
+                                    ":username"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "username"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"email\": \"<string>\",\n  \"username\": \"<string>\",\n  \"is_admin\": \"<boolean>\",\n  \"is_super_admin\": \"<boolean>\",\n  \"created_at\": \"<dateTime>\",\n  \"operator\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"folders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"folders_owners\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"name\": \"<string>\",\n  \"groups\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"added_via\": {\n    \"source\": \"domain\",\n    \"domain\": \"<string>\",\n    \"group\": \"<string>\"\n  },\n  \"is_service_account\": \"<boolean>\"\n}",
+                              "createdAt": "2026-07-28T03:30:22.000Z",
+                              "updatedAt": "2026-07-28T03:30:22.000Z",
+                              "uid": "35240-eeb3298e-f4d1-4261-a6e2-8ed16d7a4037"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:22.000Z",
+                          "updatedAt": "2026-07-28T03:30:22.000Z",
+                          "uid": "35240-69d06efc-e27d-46bb-95a4-05acea149cf6"
+                        }
+                      ],
+                      "id": "a626eb48-58bc-4380-9d22-c73839895885",
+                      "createdAt": "2026-07-28T03:30:22.000Z",
+                      "updatedAt": "2026-07-28T03:30:22.000Z",
+                      "uid": "35240-a626eb48-58bc-4380-9d22-c73839895885"
+                    }
+                  ],
+                  "id": "3761806e-245f-4d2e-afa7-998b62e4ad85",
+                  "createdAt": "2026-07-28T03:30:22.000Z",
+                  "updatedAt": "2026-07-28T03:30:22.000Z",
+                  "uid": "35240-3761806e-245f-4d2e-afa7-998b62e4ad85"
+                },
+                {
+                  "name": "update",
+                  "item": [
+                    {
+                      "name": "{username}",
+                      "item": [
+                        {
+                          "name": "Update User (require Admin Privilege)",
+                          "id": "97ae73ca-2d0a-473f-8c20-a5658a8130e8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"is_admin\": \"<boolean>\",\n  \"operator\": \"<boolean>\",\n  \"disabled\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/users/update/:username",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "users",
+                                "update",
+                                ":username"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "79b5c4de-9d68-4d9e-86f4-2cf851249ab6",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "7c9b051e-3074-4a7a-886a-658521e4f81f",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "9c00db39-09ad-4837-a069-f42ad0424178",
+                              "name": "edited user",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"is_admin\": \"<boolean>\",\n  \"operator\": \"<boolean>\",\n  \"disabled\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/users/update/:username",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "users",
+                                    "update",
+                                    ":username"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "username"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:22.000Z",
+                              "updatedAt": "2026-07-28T03:30:22.000Z",
+                              "uid": "35240-9c00db39-09ad-4837-a069-f42ad0424178"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:22.000Z",
+                          "updatedAt": "2026-07-28T03:30:22.000Z",
+                          "uid": "35240-97ae73ca-2d0a-473f-8c20-a5658a8130e8"
+                        }
+                      ],
+                      "id": "3038f264-22c0-43a4-87b8-7d971e381c82",
+                      "createdAt": "2026-07-28T03:30:22.000Z",
+                      "updatedAt": "2026-07-28T03:30:22.000Z",
+                      "uid": "35240-3038f264-22c0-43a4-87b8-7d971e381c82"
+                    }
+                  ],
+                  "id": "f6326354-8c99-4476-b087-4e66fca05b3b",
+                  "createdAt": "2026-07-28T03:30:22.000Z",
+                  "updatedAt": "2026-07-28T03:30:22.000Z",
+                  "uid": "35240-f6326354-8c99-4476-b087-4e66fca05b3b"
+                },
+                {
+                  "name": "delete",
+                  "item": [
+                    {
+                      "name": "{username}",
+                      "item": [
+                        {
+                          "name": "Delete User (require Admin Privilege)",
+                          "id": "25f81909-429d-47f3-930f-fc9daffae953",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/users/delete/:username",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "users",
+                                "delete",
+                                ":username"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ae4035af-1293-4d7c-8625-c5eeccd92bf2",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "cfc4d47e-87aa-4ab2-94d7-48392d5d08af",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "cb421a51-ba95-4eec-b80c-dc8d37d69b26",
+                              "name": "delete user",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/users/delete/:username",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "users",
+                                    "delete",
+                                    ":username"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "username"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:22.000Z",
+                              "updatedAt": "2026-07-28T03:30:22.000Z",
+                              "uid": "35240-cb421a51-ba95-4eec-b80c-dc8d37d69b26"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:22.000Z",
+                          "updatedAt": "2026-07-28T03:30:22.000Z",
+                          "uid": "35240-25f81909-429d-47f3-930f-fc9daffae953"
+                        }
+                      ],
+                      "id": "5da58aea-816b-46bb-92ee-a3e2cf310884",
+                      "createdAt": "2026-07-28T03:30:22.000Z",
+                      "updatedAt": "2026-07-28T03:30:22.000Z",
+                      "uid": "35240-5da58aea-816b-46bb-92ee-a3e2cf310884"
+                    }
+                  ],
+                  "id": "7c5eee3a-a62e-4825-bb2c-c9ec428d204d",
+                  "createdAt": "2026-07-28T03:30:22.000Z",
+                  "updatedAt": "2026-07-28T03:30:22.000Z",
+                  "uid": "35240-7c5eee3a-a62e-4825-bb2c-c9ec428d204d"
+                },
+                {
+                  "name": "offboard_preview",
+                  "item": [
+                    {
+                      "name": "{username}",
+                      "item": [
+                        {
+                          "name": "Preview Offboarding for a Workspace User (require Admin Privilege)",
+                          "id": "48ea3207-65b9-462a-ac78-897613349f6c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/users/offboard_preview/:username",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "users",
+                                "offboard_preview",
+                                ":username"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fff0b277-471a-4872-ae20-576c8795cb41",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "022c295f-16fb-4e44-8376-865648ad2d51",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "4a1cce51-b1df-4bfa-a210-3afdd3fdec6a",
+                              "name": "offboard preview with object counts",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/users/offboard_preview/:username",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "users",
+                                    "offboard_preview",
+                                    ":username"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "username"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"owned\": {\n    \"scripts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"flows\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"apps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"resources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"variables\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schedules\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"triggers\": {\n      \"quis_22\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"executing_on_behalf\": {\n    \"scripts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"flows\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"apps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"resources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"variables\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schedules\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"triggers\": {\n      \"exercitatione\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"referencing\": {\n    \"scripts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"flows\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"apps\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"resources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"variables\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schedules\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"triggers\": {\n      \"occaecat5e\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"proidentfb\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"tokens\": [\n    {\n      \"label\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"expiration\": \"<string>\"\n    },\n    {\n      \"label\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"expiration\": \"<string>\"\n    }\n  ],\n  \"http_triggers\": \"<integer>\",\n  \"email_triggers\": \"<integer>\"\n}",
+                              "createdAt": "2026-07-28T03:30:22.000Z",
+                              "updatedAt": "2026-07-28T03:30:22.000Z",
+                              "uid": "35240-4a1cce51-b1df-4bfa-a210-3afdd3fdec6a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:22.000Z",
+                          "updatedAt": "2026-07-28T03:30:22.000Z",
+                          "uid": "35240-48ea3207-65b9-462a-ac78-897613349f6c"
+                        }
+                      ],
+                      "id": "f0564178-f2c2-4d0e-ae1c-884da5ca3971",
+                      "createdAt": "2026-07-28T03:30:22.000Z",
+                      "updatedAt": "2026-07-28T03:30:22.000Z",
+                      "uid": "35240-f0564178-f2c2-4d0e-ae1c-884da5ca3971"
+                    }
+                  ],
+                  "id": "3a533906-24dc-4dba-9aab-46e8ccdb4e92",
+                  "createdAt": "2026-07-28T03:30:22.000Z",
+                  "updatedAt": "2026-07-28T03:30:22.000Z",
+                  "uid": "35240-3a533906-24dc-4dba-9aab-46e8ccdb4e92"
+                },
+                {
+                  "name": "offboard",
+                  "item": [
+                    {
+                      "name": "{username}",
+                      "item": [
+                        {
+                          "name": "Offboard a Workspace User (reassign Objects, Optionally Delete User)",
+                          "id": "2ba8f808-6f63-4229-8cbb-cae07e701c49",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"reassign_to\": \"<string>\",\n  \"new_on_behalf_of_user\": \"<string>\",\n  \"delete_user\": true\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/users/offboard/:username",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "users",
+                                "offboard",
+                                ":username"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "41e99b06-c5d0-47bd-bbbc-b0aecbf805ba",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "c40d8596-231a-495f-881d-cce112433aaa",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "1f2c8a77-6c28-4481-8a6a-004a1a820416",
+                              "name": "offboard response with conflicts or summary",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reassign_to\": \"<string>\",\n  \"new_on_behalf_of_user\": \"<string>\",\n  \"delete_user\": true\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/users/offboard/:username",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "users",
+                                    "offboard",
+                                    ":username"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "username"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"conflicts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"summary\": {\n    \"scripts_reassigned\": \"<integer>\",\n    \"flows_reassigned\": \"<integer>\",\n    \"apps_reassigned\": \"<integer>\",\n    \"resources_reassigned\": \"<integer>\",\n    \"variables_reassigned\": \"<integer>\",\n    \"schedules_reassigned\": \"<integer>\",\n    \"triggers_reassigned\": \"<integer>\",\n    \"drafts_deleted\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-07-28T03:30:22.000Z",
+                              "updatedAt": "2026-07-28T03:30:22.000Z",
+                              "uid": "35240-1f2c8a77-6c28-4481-8a6a-004a1a820416"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:22.000Z",
+                          "updatedAt": "2026-07-28T03:30:22.000Z",
+                          "uid": "35240-2ba8f808-6f63-4229-8cbb-cae07e701c49"
+                        }
+                      ],
+                      "id": "9144913a-e25e-4882-b8e2-ba7be85ca1a1",
+                      "createdAt": "2026-07-28T03:30:22.000Z",
+                      "updatedAt": "2026-07-28T03:30:22.000Z",
+                      "uid": "35240-9144913a-e25e-4882-b8e2-ba7be85ca1a1"
+                    }
+                  ],
+                  "id": "81e6c76d-a496-4421-9ca7-ed9e6abcc557",
+                  "createdAt": "2026-07-28T03:30:22.000Z",
+                  "updatedAt": "2026-07-28T03:30:22.000Z",
+                  "uid": "35240-81e6c76d-a496-4421-9ca7-ed9e6abcc557"
+                },
+                {
+                  "name": "convert_to_group",
+                  "item": [
+                    {
+                      "name": "{username}",
+                      "item": [
+                        {
+                          "name": "Convert Manual User to Group User (require Admin Privilege)",
+                          "id": "5fdf4c2f-2e75-48da-8f12-d6025871e6b0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "text/plain"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/users/convert_to_group/:username",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "users",
+                                "convert_to_group",
+                                ":username"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "355155a8-9304-4b46-babb-3797fc8a71f1",
+                                  "key": "workspace",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                },
+                                {
+                                  "id": "7789fae4-464c-426e-baae-ba874f1e5b4c",
+                                  "key": "username",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "7474dc27-15b6-48e3-a915-4d1bf26561c1",
+                              "name": "convert user to group user",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "text/plain"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/w/:workspace/users/convert_to_group/:username",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "w",
+                                    ":workspace",
+                                    "users",
+                                    "convert_to_group",
+                                    ":username"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "workspace"
+                                    },
+                                    {
+                                      "key": "username"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "text/plain"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<string>",
+                              "createdAt": "2026-07-28T03:30:22.000Z",
+                              "updatedAt": "2026-07-28T03:30:22.000Z",
+                              "uid": "35240-7474dc27-15b6-48e3-a915-4d1bf26561c1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:30:22.000Z",
+                          "updatedAt": "2026-07-28T03:30:22.000Z",
+                          "uid": "35240-5fdf4c2f-2e75-48da-8f12-d6025871e6b0"
+                        }
+                      ],
+                      "id": "dc253c28-0d39-4094-b438-3af39e04575c",
+                      "createdAt": "2026-07-28T03:30:22.000Z",
+                      "updatedAt": "2026-07-28T03:30:22.000Z",
+                      "uid": "35240-dc253c28-0d39-4094-b438-3af39e04575c"
+                    }
+                  ],
+                  "id": "c910ec78-4afd-4e96-8771-00802fa7f2fa",
+                  "createdAt": "2026-07-28T03:30:22.000Z",
+                  "updatedAt": "2026-07-28T03:30:22.000Z",
+                  "uid": "35240-c910ec78-4afd-4e96-8771-00802fa7f2fa"
+                }
+              ],
+              "id": "422a4650-4afe-46a7-922f-4a322420fc8d",
+              "createdAt": "2026-07-28T03:30:22.000Z",
+              "updatedAt": "2026-07-28T03:30:22.000Z",
+              "uid": "35240-422a4650-4afe-46a7-922f-4a322420fc8d"
+            }
+          ],
+          "id": "f1739f12-bed9-4a6e-b48a-e43aca53e169",
+          "createdAt": "2026-07-28T03:30:22.000Z",
+          "updatedAt": "2026-07-28T03:30:22.000Z",
+          "uid": "35240-f1739f12-bed9-4a6e-b48a-e43aca53e169"
+        }
+      ],
+      "id": "fb58cde2-300b-4a5e-bdb3-1242f01b539c",
+      "createdAt": "2026-07-28T03:30:22.000Z",
+      "updatedAt": "2026-07-28T03:30:22.000Z",
+      "uid": "35240-fb58cde2-300b-4a5e-bdb3-1242f01b539c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}

@@ -1,0 +1,241 @@
+{
+  "info": {
+    "_postman_id": "1cf9656c-e772-4a9f-9cf9-3fc7d824215c",
+    "name": "Windmill admin raw_app API",
+    "description": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:31:31.000Z",
+    "updatedAt": "2026-07-28T03:31:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1cf9656c-e772-4a9f-9cf9-3fc7d824215c"
+  },
+  "item": [
+    {
+      "name": "w",
+      "item": [
+        {
+          "name": "{workspace}",
+          "item": [
+            {
+              "name": "raw_apps",
+              "item": [
+                {
+                  "name": "list",
+                  "item": [
+                    {
+                      "name": "List All Raw Apps",
+                      "id": "7f5688c9-8ae4-4d4a-bb11-3cd579769c48",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/w/:workspace/raw_apps/list?page=<integer>&per_page=<integer>&order_desc=<boolean>&created_by=<string>&path_start=<string>&path_exact=<string>&starred_only=<boolean>&label=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "w",
+                            ":workspace",
+                            "raw_apps",
+                            "list"
+                          ],
+                          "query": [
+                            {
+                              "description": "which page to return (start at 1, default 1)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "number of items to return for a given page (default 30, max 100)",
+                              "key": "per_page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "order by desc order (default true)",
+                              "key": "order_desc",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')",
+                              "key": "created_by",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "mask to filter matching starting path",
+                              "key": "path_start",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "mask to filter exact matching path",
+                              "key": "path_exact",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(default false)\nshow only the starred items\n",
+                              "key": "starred_only",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Filter by label",
+                              "key": "label",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "850ba86b-e7a0-4d8c-936f-872917666fc3",
+                              "key": "workspace",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "b725b07c-2a4e-4c57-a70d-40c190e31061",
+                          "name": "All raw apps",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/w/:workspace/raw_apps/list?page=<integer>&per_page=<integer>&order_desc=<boolean>&created_by=<string>&path_start=<string>&path_exact=<string>&starred_only=<boolean>&label=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "w",
+                                ":workspace",
+                                "raw_apps",
+                                "list"
+                              ],
+                              "query": [
+                                {
+                                  "description": "which page to return (start at 1, default 1)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "number of items to return for a given page (default 30, max 100)",
+                                  "key": "per_page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "order by desc order (default true)",
+                                  "key": "order_desc",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')",
+                                  "key": "created_by",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "mask to filter matching starting path",
+                                  "key": "path_start",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "mask to filter exact matching path",
+                                  "key": "path_exact",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(default false)\nshow only the starred items\n",
+                                  "key": "starred_only",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Filter by label",
+                                  "key": "label",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "workspace"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"workspace_id\": \"<string>\",\n    \"path\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"extra_perms\": {\n      \"do_b6\": \"<boolean>\",\n      \"dolore44\": \"<boolean>\"\n    },\n    \"version\": \"<number>\",\n    \"edited_at\": \"<dateTime>\",\n    \"starred\": \"<boolean>\"\n  },\n  {\n    \"workspace_id\": \"<string>\",\n    \"path\": \"<string>\",\n    \"summary\": \"<string>\",\n    \"extra_perms\": {\n      \"deserunt_f9\": \"<boolean>\"\n    },\n    \"version\": \"<number>\",\n    \"edited_at\": \"<dateTime>\",\n    \"starred\": \"<boolean>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:31:31.000Z",
+                          "updatedAt": "2026-07-28T03:31:31.000Z",
+                          "uid": "35240-b725b07c-2a4e-4c57-a70d-40c190e31061"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:31:31.000Z",
+                      "updatedAt": "2026-07-28T03:31:31.000Z",
+                      "uid": "35240-7f5688c9-8ae4-4d4a-bb11-3cd579769c48"
+                    }
+                  ],
+                  "id": "5499c255-c614-4431-a08d-357464e25345",
+                  "createdAt": "2026-07-28T03:31:31.000Z",
+                  "updatedAt": "2026-07-28T03:31:31.000Z",
+                  "uid": "35240-5499c255-c614-4431-a08d-357464e25345"
+                }
+              ],
+              "id": "9b673a17-67d3-4919-8f1f-d55b892c9dc4",
+              "createdAt": "2026-07-28T03:31:31.000Z",
+              "updatedAt": "2026-07-28T03:31:31.000Z",
+              "uid": "35240-9b673a17-67d3-4919-8f1f-d55b892c9dc4"
+            }
+          ],
+          "id": "cb6b4a68-c8fa-4e2d-9052-d4ce1abe7e45",
+          "createdAt": "2026-07-28T03:31:31.000Z",
+          "updatedAt": "2026-07-28T03:31:31.000Z",
+          "uid": "35240-cb6b4a68-c8fa-4e2d-9052-d4ce1abe7e45"
+        }
+      ],
+      "id": "b860fb1d-9cf0-4628-8665-7a437314b01a",
+      "createdAt": "2026-07-28T03:31:31.000Z",
+      "updatedAt": "2026-07-28T03:31:31.000Z",
+      "uid": "35240-b860fb1d-9cf0-4628-8665-7a437314b01a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/api"
+    }
+  ]
+}
