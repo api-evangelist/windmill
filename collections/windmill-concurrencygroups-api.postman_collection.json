@@ -1,0 +1,715 @@
+{
+  "item": [
+    {
+      "id": "f2f16859-1c45-4361-872f-5ac10370956d",
+      "name": "concurrencyGroups",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb739216-f16b-4f5e-a248-4b437465d3bd",
+          "name": "List All Concurrency Groups",
+          "request": {
+            "name": "List All Concurrency Groups",
+            "description": {},
+            "url": {
+              "path": [
+                "concurrency_groups",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37f37728-c223-4b52-bf97-b6e9c4241d86",
+              "name": "all concurrency groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "concurrency_groups",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"concurrency_key\": \"string\",\n    \"total_running\": 3148.0354836090264\n  },\n  {\n    \"concurrency_key\": \"string\",\n    \"total_running\": 7111.194687648292\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "734e40c4-20ac-4535-86d9-1929a262c26d",
+          "name": "Delete Concurrency Group",
+          "request": {
+            "name": "Delete Concurrency Group",
+            "description": {},
+            "url": {
+              "path": [
+                "concurrency_groups",
+                "prune",
+                ":concurrency_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "concurrency_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3f879e2-ef51-4284-be96-211e6edbe454",
+              "name": "concurrency group removed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "concurrency_groups",
+                    "prune",
+                    ":concurrency_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "concurrency_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1ee9dd9-ab59-46d5-959d-55027258049a",
+          "name": "Get the Concurrency Key for a Job that has Concurrency Limits Enabled",
+          "request": {
+            "name": "Get the Concurrency Key for a Job that has Concurrency Limits Enabled",
+            "description": {},
+            "url": {
+              "path": [
+                "concurrency_groups",
+                ":id",
+                "key"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64e340a7-4ba8-4f89-a1a2-15a6f990694d",
+              "name": "concurrency key for given job",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "concurrency_groups",
+                    ":id",
+                    "key"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c44e88b-b0ed-4114-86ac-f0d6f7cd152d",
+          "name": "Get Intervals of Job Runtime Concurrency",
+          "request": {
+            "name": "Get Intervals of Job Runtime Concurrency",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "concurrency_groups",
+                "list_jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "concurrency_key",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "row_limit",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_job",
+                  "value": "<uuid>",
+                  "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+                },
+                {
+                  "disabled": false,
+                  "key": "script_path_exact",
+                  "value": "<string>",
+                  "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+                },
+                {
+                  "disabled": false,
+                  "key": "script_path_start",
+                  "value": "<string>",
+                  "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+                },
+                {
+                  "disabled": false,
+                  "key": "schedule_path",
+                  "value": "<string>",
+                  "description": "mask to filter by schedule path"
+                },
+                {
+                  "disabled": false,
+                  "key": "script_hash",
+                  "value": "<string>",
+                  "description": "mask to filter exact matching path"
+                },
+                {
+                  "disabled": false,
+                  "key": "started_before",
+                  "value": "<dateTime>",
+                  "description": "filter on started before (inclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "started_after",
+                  "value": "<dateTime>",
+                  "description": "filter on started after (exclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "running",
+                  "value": "<boolean>",
+                  "description": "filter on running jobs"
+                },
+                {
+                  "disabled": false,
+                  "key": "scheduled_for_before_now",
+                  "value": "<boolean>",
+                  "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+                },
+                {
+                  "disabled": false,
+                  "key": "completed_before",
+                  "value": "<dateTime>",
+                  "description": "filter on started before (inclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "completed_after",
+                  "value": "<dateTime>",
+                  "description": "filter on started after (exclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_before_queue",
+                  "value": "<dateTime>",
+                  "description": "filter on jobs created before X for jobs in the queue only"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_after_queue",
+                  "value": "<dateTime>",
+                  "description": "filter on jobs created after X for jobs in the queue only"
+                },
+                {
+                  "disabled": false,
+                  "key": "job_kinds",
+                  "value": "<string>",
+                  "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+                },
+                {
+                  "disabled": false,
+                  "key": "args",
+                  "value": "<string>",
+                  "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+                },
+                {
+                  "disabled": false,
+                  "key": "result",
+                  "value": "<string>",
+                  "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_wildcards",
+                  "value": "<boolean>",
+                  "description": "allow wildcards (*) in the filter of label, tag, worker"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "trigger_kind",
+                  "value": "<string>",
+                  "description": "filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_skipped",
+                  "value": "<boolean>",
+                  "description": "is the job skipped"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_flow_step",
+                  "value": "<boolean>",
+                  "description": "is the job a flow step"
+                },
+                {
+                  "disabled": false,
+                  "key": "has_null_parent",
+                  "value": "<boolean>",
+                  "description": "has null parent"
+                },
+                {
+                  "disabled": false,
+                  "key": "success",
+                  "value": "<boolean>",
+                  "description": "filter on successful jobs"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_workspaces",
+                  "value": "<boolean>",
+                  "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_not_schedule",
+                  "value": "<boolean>",
+                  "description": "is not a scheduled job"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fbd8751-714a-47e0-b076-3665ae4b294b",
+              "name": "time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "concurrency_groups",
+                    "list_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "concurrency_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "row_limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "parent_job",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "script_path_exact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "script_path_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "script_hash",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "started_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "started_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "running",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "scheduled_for_before_now",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "completed_before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "completed_after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_before_queue",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "created_after_queue",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "job_kinds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "args",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "result",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "allow_wildcards",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "trigger_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_skipped",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_flow_step",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "has_null_parent",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "success",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "all_workspaces",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "is_not_schedule",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobs\": [\n    {\n      \"id\": \"7cf15d7d-88e6-7ce3-e98e-7c04712df0d6\",\n      \"created_by\": \"string\",\n      \"duration_ms\": 8295,\n      \"created_at\": \"1958-08-12T08:02:57.794Z\",\n      \"started_at\": \"1949-03-09T00:06:57.609Z\",\n      \"success\": true,\n      \"canceled\": true,\n      \"job_kind\": \"aiagent\",\n      \"permissioned_as\": \"string\",\n      \"is_flow_step\": true,\n      \"is_skipped\": false,\n      \"email\": \"string\",\n      \"visible_to_owner\": false,\n      \"tag\": \"string\",\n      \"workspace_id\": \"string\",\n      \"parent_job\": \"61d30548-9450-fb40-6fd3-7fa1f7c95f3b\",\n      \"completed_at\": \"2004-07-24T23:59:46.449Z\",\n      \"script_path\": \"string\",\n      \"script_hash\": \"string\",\n      \"args\": {\n        \"key_0\": true\n      },\n      \"result\": \"\",\n      \"logs\": \"string\",\n      \"deleted\": true,\n      \"raw_code\": \"string\",\n      \"canceled_by\": \"string\",\n      \"canceled_reason\": \"string\",\n      \"schedule_path\": \"string\",\n      \"flow_status\": {\n        \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/FlowStatus not found in the OpenAPI spec\"\n      },\n      \"workflow_as_code_status\": {\n        \"scheduled_for\": \"2008-05-10T04:24:32.601Z\",\n        \"started_at\": \"2000-12-07T22:41:03.376Z\",\n        \"duration_ms\": 3492.496061290622,\n        \"name\": \"string\"\n      },\n      \"raw_flow\": {\n        \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/FlowValue not found in the OpenAPI spec\"\n      },\n      \"language\": \"ruby\",\n      \"mem_peak\": 3827,\n      \"priority\": 856,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"self_wait_time_ms\": 6200.646270577934,\n      \"aggregate_wait_time_ms\": 7468.9551331270995,\n      \"preprocessed\": false,\n      \"worker\": \"string\",\n      \"type\": \"CompletedJob\"\n    },\n    {\n      \"id\": \"28ec584f-1ab3-6b6f-90e4-3d59a5f6e5c6\",\n      \"created_by\": \"string\",\n      \"duration_ms\": 9827,\n      \"created_at\": \"1975-05-17T16:43:07.951Z\",\n      \"started_at\": \"1981-04-18T16:53:45.634Z\",\n      \"success\": false,\n      \"canceled\": false,\n      \"job_kind\": \"deploymentcallback\",\n      \"permissioned_as\": \"string\",\n      \"is_flow_step\": true,\n      \"is_skipped\": false,\n      \"email\": \"string\",\n      \"visible_to_owner\": false,\n      \"tag\": \"string\",\n      \"workspace_id\": \"string\",\n      \"parent_job\": \"99d25563-ada5-6d3e-5169-92b28b4b0cca\",\n      \"completed_at\": \"2020-11-27T02:40:41.564Z\",\n      \"script_path\": \"string\",\n      \"script_hash\": \"string\",\n      \"args\": {\n        \"key_0\": 4236.8220595427965,\n        \"key_1\": 5553.900589378704\n      },\n      \"result\": \"\",\n      \"logs\": \"string\",\n      \"deleted\": false,\n      \"raw_code\": \"string\",\n      \"canceled_by\": \"string\",\n      \"canceled_reason\": \"string\",\n      \"schedule_path\": \"string\",\n      \"flow_status\": {\n        \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/FlowStatus not found in the OpenAPI spec\"\n      },\n      \"workflow_as_code_status\": {\n        \"scheduled_for\": \"1982-08-14T22:29:50.459Z\",\n        \"started_at\": \"2015-05-29T20:21:12.382Z\",\n        \"duration_ms\": 2893.9593048057045,\n        \"name\": \"string\"\n      },\n      \"raw_flow\": {\n        \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/FlowValue not found in the OpenAPI spec\"\n      },\n      \"language\": \"mysql\",\n      \"mem_peak\": 5928,\n      \"priority\": 160,\n      \"labels\": [\n        \"string\",\n        \"string\"\n      ],\n      \"self_wait_time_ms\": 9455.721768055328,\n      \"aggregate_wait_time_ms\": 6917.401507608879,\n      \"preprocessed\": false,\n      \"worker\": \"string\",\n      \"type\": \"CompletedJob\"\n    }\n  ],\n  \"obscured_jobs\": [\n    {\n      \"typ\": \"string\",\n      \"started_at\": \"1988-04-27T05:05:19.637Z\",\n      \"duration_ms\": 8488.721288634075\n    },\n    {\n      \"typ\": \"string\",\n      \"started_at\": \"1967-12-19T06:24:27.599Z\",\n      \"duration_ms\": 6815.818284175584\n    }\n  ],\n  \"omitted_obscured_jobs\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e4f4f42c-e659-4531-9474-34eb795a1aae",
+    "name": "Windmill admin concurrencyGroups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

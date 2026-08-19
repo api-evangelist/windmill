@@ -1,0 +1,2568 @@
+{
+  "item": [
+    {
+      "id": "db829876-9418-45ba-823d-d91b2a75af7d",
+      "name": "postgres_trigger",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "692eb1fe-1598-4a8f-8388-5619b5ed18ef",
+          "name": "Get Postgres Version",
+          "request": {
+            "name": "Get Postgres Version",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "postgres",
+                "version",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df760e62-336b-4076-8826-3ff7d58f1a3d",
+              "name": "postgres version",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "postgres",
+                    "version",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"string\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47ad134f-92a5-438e-ad4f-fbab9d5d8266",
+          "name": "Check if Postgres Configuration is Set to Logical",
+          "request": {
+            "name": "Check if Postgres Configuration is Set to Logical",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "is_valid_postgres_configuration",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ce384a7-6e2f-4ddd-a3cb-64afd71d4325",
+              "name": "boolean that indicates if postgres is set to logical level or not",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "is_valid_postgres_configuration",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "false",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c909b133-3fec-406d-96fb-2b6f1719e4a0",
+          "name": "Create Template Script",
+          "request": {
+            "name": "Create Template Script",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "create_template_script"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"postgres_resource_path\": \"<string>\",\n  \"relations\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4b57963f-8a52-4e92-9115-6c872e705c64",
+              "name": "custom id to retrieve template script",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "create_template_script"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"postgres_resource_path\": \"<string>\",\n  \"relations\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46a9ce0a-b2fb-4369-88d2-c0ede41aded3",
+          "name": "Get Template Script",
+          "request": {
+            "name": "Get Template Script",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "get_template_script",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "938ea4b8-fa9d-4b5a-9057-beb80a848944",
+              "name": "template script",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "get_template_script",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31dc6f9f-0042-4e27-86fe-afd743bc8dc8",
+          "name": "List Postgres Replication Slot",
+          "request": {
+            "name": "List Postgres Replication Slot",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "slot",
+                "list",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bab1586-89d4-4e26-81e6-c756db358508",
+              "name": "list postgres slot",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "slot",
+                    "list",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"slot_name\": \"string\",\n    \"active\": false\n  },\n  {\n    \"slot_name\": \"string\",\n    \"active\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8193462f-81a0-4e98-ad40-485ae0e9b5ca",
+          "name": "Create Replication Slot for Postgres",
+          "request": {
+            "name": "Create Replication Slot for Postgres",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "slot",
+                "create",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f21ea1ee-7ef8-4bcc-bcca-1a5dcaf21c94",
+              "name": "slot created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "slot",
+                    "create",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "452429bc-da86-4ae4-a79a-3e95969a67e9",
+          "name": "Delete Postgres Replication Slot",
+          "request": {
+            "name": "Delete Postgres Replication Slot",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "slot",
+                "delete",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ebf547cf-54e7-4d70-a339-24efb4542dbf",
+              "name": "postgres replication slot deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "slot",
+                    "delete",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe13d82f-f44e-4a27-8a55-d19a028977b1",
+          "name": "List Postgres Publication",
+          "request": {
+            "name": "List Postgres Publication",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "publication",
+                "list",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9c5a1774-68f0-4059-9cdf-825bb92ae14a",
+              "name": "database publication list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "publication",
+                    "list",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0242edca-1744-445d-bd72-4e6cb1523dcb",
+          "name": "Get Postgres Publication",
+          "request": {
+            "name": "Get Postgres Publication",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "publication",
+                "get",
+                ":publication",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publication",
+                  "description": "(Required) The name of the publication"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf3a45c1-25bb-4bed-8139-c6d3919616d6",
+              "name": "postgres publication get",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "publication",
+                    "get",
+                    ":publication",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publication",
+                      "description": "(Required) The name of the publication"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transaction_to_track\": [\n    \"string\",\n    \"string\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "585dcd37-3d09-41e0-9a6d-656e881d1863",
+          "name": "Create Publication for Postgres",
+          "request": {
+            "name": "Create Publication for Postgres",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "publication",
+                "create",
+                ":publication",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publication",
+                  "description": "(Required) The name of the publication"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "afe8441e-0c4e-4673-8751-ee2655aadc4b",
+              "name": "publication created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "publication",
+                    "create",
+                    ":publication",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publication",
+                      "description": "(Required) The name of the publication"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abc6069a-573a-4ca3-8a49-3c63628a4fea",
+          "name": "Update Publication for Postgres",
+          "request": {
+            "name": "Update Publication for Postgres",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "publication",
+                "update",
+                ":publication",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publication",
+                  "description": "(Required) The name of the publication"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23a9f5ed-2226-4b5f-b8f4-ec0cabf600a9",
+              "name": "publication updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "publication",
+                    "update",
+                    ":publication",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publication",
+                      "description": "(Required) The name of the publication"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transaction_to_track\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"table_to_track\": [\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"schema_name\": \"<string>\",\n      \"table_to_track\": [\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        },\n        {\n          \"table_name\": \"<string>\",\n          \"columns_name\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"where_clause\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c51124f5-b556-43a8-b2e5-e82775380a81",
+          "name": "Delete Postgres Publication",
+          "request": {
+            "name": "Delete Postgres Publication",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "publication",
+                "delete",
+                ":publication",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publication",
+                  "description": "(Required) The name of the publication"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "300aa289-f9c0-4e76-b9a6-beb57cecc746",
+              "name": "postgres publication deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "publication",
+                    "delete",
+                    ":publication",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publication",
+                      "description": "(Required) The name of the publication"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ad2e081-20df-4963-ba2e-f89b1a3ab8c6",
+          "name": "Create Postgres Trigger",
+          "request": {
+            "name": "Create Postgres Trigger",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"key_0\": \"string\"\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f0b03db-5c03-4473-9ebd-c1dc15049de4",
+              "name": "postgres trigger created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"key_0\": 575,\n    \"key_1\": false,\n    \"key_2\": false,\n    \"key_3\": 8780.586183588954\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e411cc92-3af9-450f-8ebf-d920d0530d45",
+          "name": "Update Postgres Trigger",
+          "request": {
+            "name": "Update Postgres Trigger",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "update",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"key_0\": 5717.772932031612,\n    \"key_1\": 712.0322034619908,\n    \"key_2\": \"string\"\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b2a1597-79ef-44e3-9106-389039219fb9",
+              "name": "postgres trigger updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "update",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"postgres_resource_path\": \"<string>\",\n  \"publication_name\": \"<string>\",\n  \"replication_slot_name\": \"<string>\",\n  \"mode\": \"<string>\",\n  \"publication\": {\n    \"transaction_to_track\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"table_to_track\": [\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"schema_name\": \"<string>\",\n        \"table_to_track\": [\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          },\n          {\n            \"table_name\": \"<string>\",\n            \"columns_name\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"where_clause\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"error_handler_path\": \"<string>\",\n  \"error_handler_args\": {\n    \"key_0\": 5772.726910011381\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ce61f4e-6073-40b1-b23e-894464871677",
+          "name": "Delete Postgres Trigger",
+          "request": {
+            "name": "Delete Postgres Trigger",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "delete",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2afc5b7f-a092-4d21-93db-fc8eab9d06b0",
+              "name": "postgres trigger deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "delete",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd653ad8-fc03-4159-9dc6-099e0ede2094",
+          "name": "Get Postgres Trigger",
+          "request": {
+            "name": "Get Postgres Trigger",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "get",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b47ec1a0-efb3-4784-a73c-92f202f94242",
+              "name": "get postgres trigger",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "get",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"edited_at\": \"2008-03-27T06:01:49.384Z\",\n  \"edited_by\": \"string\",\n  \"extra_perms\": {\n    \"key_0\": true\n  },\n  \"is_flow\": false,\n  \"mode\": \"<string>\",\n  \"path\": \"string\",\n  \"permissioned_as\": \"string\",\n  \"postgres_resource_path\": \"string\",\n  \"publication_name\": \"string\",\n  \"replication_slot_name\": \"string\",\n  \"script_path\": \"string\",\n  \"workspace_id\": \"string\",\n  \"server_id\": \"string\",\n  \"error\": \"string\",\n  \"last_server_ping\": \"2008-05-07T00:53:18.351Z\",\n  \"error_handler_path\": \"string\",\n  \"error_handler_args\": {\n    \"key_0\": 4118.71218587598,\n    \"key_1\": 4923.665341283402\n  },\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5edb1c22-1f47-49b6-b683-6d1bf2fabb9f",
+          "name": "List Postgres Triggers",
+          "request": {
+            "name": "List Postgres Triggers",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "filter by path"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_flow",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "path_start",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Filter by label"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e8f20926-9a41-40c7-a83e-cdfd8f5421af",
+              "name": "postgres trigger list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_flow",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "path_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"edited_at\": \"1958-02-12T11:46:37.609Z\",\n    \"edited_by\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    \"is_flow\": true,\n    \"mode\": \"<string>\",\n    \"path\": \"string\",\n    \"permissioned_as\": \"string\",\n    \"postgres_resource_path\": \"string\",\n    \"publication_name\": \"string\",\n    \"replication_slot_name\": \"string\",\n    \"script_path\": \"string\",\n    \"workspace_id\": \"string\",\n    \"server_id\": \"string\",\n    \"error\": \"string\",\n    \"last_server_ping\": \"2016-12-29T21:34:05.664Z\",\n    \"error_handler_path\": \"string\",\n    \"error_handler_args\": {\n      \"key_0\": true\n    },\n    \"retry\": {\n      \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n    }\n  },\n  {\n    \"edited_at\": \"1991-06-11T00:35:59.860Z\",\n    \"edited_by\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": true\n    },\n    \"is_flow\": false,\n    \"mode\": \"<string>\",\n    \"path\": \"string\",\n    \"permissioned_as\": \"string\",\n    \"postgres_resource_path\": \"string\",\n    \"publication_name\": \"string\",\n    \"replication_slot_name\": \"string\",\n    \"script_path\": \"string\",\n    \"workspace_id\": \"string\",\n    \"server_id\": \"string\",\n    \"error\": \"string\",\n    \"last_server_ping\": \"1999-02-17T05:25:19.033Z\",\n    \"error_handler_path\": \"string\",\n    \"error_handler_args\": {\n      \"key_0\": 926,\n      \"key_1\": 7880,\n      \"key_2\": false,\n      \"key_3\": 2370.1811040488506,\n      \"key_4\": \"string\"\n    },\n    \"retry\": {\n      \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cab5c1c-701d-45c1-8597-e3da302000c1",
+          "name": "Does Postgres Trigger Exists",
+          "request": {
+            "name": "Does Postgres Trigger Exists",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "exists",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e45dc913-a5d3-4272-bfa7-c95037b7335e",
+              "name": "postgres trigger exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "exists",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "true",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8929de58-8abf-4498-8d1c-907bfaa9c29a",
+          "name": "Set Enabled Postgres Trigger",
+          "request": {
+            "name": "Set Enabled Postgres Trigger",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "setmode",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mode\": \"<string>\",\n  \"force\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62ff91fc-a287-4fe2-9481-d1ab70292656",
+              "name": "postgres trigger enabled set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "setmode",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mode\": \"<string>\",\n  \"force\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3860f0e5-5967-4b7f-b056-9e13c933edf5",
+          "name": "Test Postgres Connection",
+          "request": {
+            "name": "Test Postgres Connection",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "postgres_triggers",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"database\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5b29297-d276-40e7-8075-9f24277da519",
+              "name": "successfuly connected to postgres",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "postgres_triggers",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"database\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "49775ad8-7381-497c-90d9-9716f847bc93",
+    "name": "Windmill admin postgres_trigger API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

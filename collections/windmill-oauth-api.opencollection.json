@@ -1,0 +1,270 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin oauth API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "oauth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Connect Slack Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oauth/connect_slack_callback",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect Slack Callback"
+        },
+        {
+          "info": {
+            "name": "Connect Slack Callback Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/oauth/connect_slack_callback",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect Slack Callback Instance"
+        },
+        {
+          "info": {
+            "name": "Connect Slack Instance (non-interactive; Pre-minted Bot Token)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/oauth/connect_slack_instance",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect Slack Instance (non-interactive; Pre-minted Bot Token)"
+        },
+        {
+          "info": {
+            "name": "Connect Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/oauth/connect_callback/:client_name",
+            "params": [
+              {
+                "name": "client_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect Callback"
+        },
+        {
+          "info": {
+            "name": "Create OAuth Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oauth/create_account",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create OAuth Account"
+        },
+        {
+          "info": {
+            "name": "Connect OAuth Using Client Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/oauth/connect_client_credentials/:client",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "OAuth client name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect OAuth Using Client Credentials"
+        },
+        {
+          "info": {
+            "name": "Refresh Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oauth/refresh_token/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refresh Token"
+        },
+        {
+          "info": {
+            "name": "Disconnect Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oauth/disconnect/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disconnect Account"
+        },
+        {
+          "info": {
+            "name": "Disconnect Slack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oauth/disconnect_slack",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disconnect Slack"
+        },
+        {
+          "info": {
+            "name": "Disconnect Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oauth/disconnect_teams",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disconnect Teams"
+        },
+        {
+          "info": {
+            "name": "List Oauth Logins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/oauth/list_logins"
+          },
+          "docs": "List Oauth Logins"
+        },
+        {
+          "info": {
+            "name": "List Oauth Connects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/oauth/list_connects"
+          },
+          "docs": "List Oauth Connects"
+        },
+        {
+          "info": {
+            "name": "Get Oauth Connect",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/oauth/get_connect/:client",
+            "params": [
+              {
+                "name": "client",
+                "value": "",
+                "type": "path",
+                "description": "client name"
+              }
+            ]
+          },
+          "docs": "Get Oauth Connect"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

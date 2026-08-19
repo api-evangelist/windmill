@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin oidc API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "oidc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get OIDC Token (ee Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/oidc/token/:audience",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "audience",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "expires_in",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get OIDC Token (ee Only)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

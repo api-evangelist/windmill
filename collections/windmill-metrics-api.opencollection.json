@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin metrics API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Job Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_metrics/get/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Job Metrics"
+        },
+        {
+          "info": {
+            "name": "Set Job Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_metrics/set_progress/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Job Metrics"
+        },
+        {
+          "info": {
+            "name": "Get Job Progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_metrics/get_progress/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Job Progress"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

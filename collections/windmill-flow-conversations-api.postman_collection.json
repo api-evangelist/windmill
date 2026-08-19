@@ -1,0 +1,428 @@
+{
+  "item": [
+    {
+      "id": "a8e9ea5b-f6c0-45dd-8ee2-b16ce42b9ed0",
+      "name": "flow_conversations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6d29a73a-fda6-4ebe-aa98-c8f5e58d530b",
+          "name": "List Flow Conversations",
+          "request": {
+            "name": "List Flow Conversations",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "flow_conversations",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "flow_path",
+                  "value": "<string>",
+                  "description": "filter conversations by flow path"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "240d7d81-9c03-4a8a-a8c9-f5b2fcdfeb44",
+              "name": "flow conversations list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "flow_conversations",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "flow_path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"f5597495-9681-8429-3f9d-d6f65103d0db\",\n    \"workspace_id\": \"string\",\n    \"flow_path\": \"string\",\n    \"created_at\": \"1981-04-21T10:01:28.219Z\",\n    \"updated_at\": \"1977-03-23T10:28:16.847Z\",\n    \"created_by\": \"string\",\n    \"title\": \"string\"\n  },\n  {\n    \"id\": \"b5787884-718e-5d50-68cb-4511947bb1d9\",\n    \"workspace_id\": \"string\",\n    \"flow_path\": \"string\",\n    \"created_at\": \"1954-03-23T09:21:50.428Z\",\n    \"updated_at\": \"2013-03-18T04:21:11.264Z\",\n    \"created_by\": \"string\",\n    \"title\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74d6d55c-ab49-40ad-b5c1-56990685b217",
+          "name": "Delete Flow Conversation",
+          "request": {
+            "name": "Delete Flow Conversation",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "flow_conversations",
+                "delete",
+                ":conversation_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "conversation_id",
+                  "description": "(Required) conversation id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5691b0e9-e7a1-44fa-8094-aacade223229",
+              "name": "flow conversation deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "flow_conversations",
+                    "delete",
+                    ":conversation_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "conversation_id",
+                      "description": "(Required) conversation id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77764e7a-057c-441a-9b3f-0ea3a64025b2",
+          "name": "List Conversation Messages",
+          "request": {
+            "name": "List Conversation Messages",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "flow_conversations",
+                ":conversation_id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "after_seq",
+                  "value": "<long>",
+                  "description": "Message sequence cursor to fetch only the messages after that cursor"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "conversation_id",
+                  "description": "(Required) conversation id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "859e7ea3-09aa-4f0e-b9eb-2b41c0ee00eb",
+              "name": "conversation messages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "flow_conversations",
+                    ":conversation_id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "after_seq",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "conversation_id",
+                      "description": "(Required) conversation id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"b2564ef5-ed69-23d1-ca82-4ebcc27df328\",\n    \"conversation_id\": \"999436e3-817e-82bc-613e-5acc3f948eea\",\n    \"message_type\": \"system\",\n    \"content\": \"string\",\n    \"created_at\": \"1976-02-22T09:22:57.206Z\",\n    \"created_seq\": 1889,\n    \"job_id\": \"1d2bd924-0310-edd7-1f98-34ed3622750e\",\n    \"step_name\": \"string\",\n    \"success\": true\n  },\n  {\n    \"id\": \"23f30309-f806-26a5-bc7b-cbdf3c3025b9\",\n    \"conversation_id\": \"e742baf5-2873-57aa-402b-433f5e90b9a6\",\n    \"message_type\": \"assistant\",\n    \"content\": \"string\",\n    \"created_at\": \"1972-09-12T18:00:44.878Z\",\n    \"created_seq\": 1502,\n    \"job_id\": \"53f1f89b-796e-f1c8-9c9d-57f9a8af06b4\",\n    \"step_name\": \"string\",\n    \"success\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a846ef4-e6cf-412d-99b6-da9d47ca2c3a",
+    "name": "Windmill admin flow_conversations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

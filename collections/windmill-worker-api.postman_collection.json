@@ -1,0 +1,819 @@
+{
+  "item": [
+    {
+      "id": "40017e0d-91f7-4141-a360-d0ee0bf62601",
+      "name": "worker",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc6408fc-e3d2-4096-8d51-50ca18d282e2",
+          "name": "Get All Instance Custom Tags (tags are Used to Dispatch Jobs to different worker groups)",
+          "request": {
+            "name": "Get All Instance Custom Tags (tags are Used to Dispatch Jobs to different worker groups)",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "custom_tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show_workspace_restriction",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95b85785-3fce-4115-bcf5-0bcc151ecd85",
+              "name": "list of custom tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "custom_tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show_workspace_restriction",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08337c0a-6a49-43f6-b745-1cffd1e27b10",
+          "name": "Get Custom Tags Available for this Workspace",
+          "request": {
+            "name": "Get Custom Tags Available for this Workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "workers",
+                "custom_tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fd6e970-7839-4715-8420-366c4ceddf9b",
+              "name": "list of custom tags for workspace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "workers",
+                    "custom_tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d74846eb-1368-4811-8bb7-ead53d2eb06c",
+          "name": "Get All Instance Default Tags",
+          "request": {
+            "name": "Get All Instance Default Tags",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "get_default_tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc7dcf83-2289-48c6-9c6d-c2953102723a",
+              "name": "list of default tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "get_default_tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c0f5b73-d512-4eaa-aff1-8f2c4a380652",
+          "name": "Is Default Tags Per Workspace",
+          "request": {
+            "name": "Is Default Tags Per Workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "is_default_tags_per_workspace"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70f72788-e08a-4fcf-9026-64a0d95656e3",
+              "name": "is the default tags per workspace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "is_default_tags_per_workspace"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "false",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "243d4ec2-4bcf-486c-9a60-11d5103d4191",
+          "name": "List Workers",
+          "request": {
+            "name": "List Workers",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "ping_since",
+                  "value": "<integer>",
+                  "description": "number of seconds the worker must have had a last ping more recent of (default to 300)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57fc9cdc-eecf-4816-a037-8b3b9ab940f7",
+              "name": "a list of workers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "ping_since",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"worker\": \"string\",\n    \"worker_instance\": \"string\",\n    \"started_at\": \"2023-08-09T00:28:35.000Z\",\n    \"ip\": \"string\",\n    \"jobs_executed\": 6222,\n    \"worker_group\": \"string\",\n    \"wm_version\": \"string\",\n    \"last_ping\": 8386.700563539942,\n    \"custom_tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"last_job_id\": \"string\",\n    \"last_job_workspace_id\": \"string\",\n    \"occupancy_rate\": 1612.197568524757,\n    \"occupancy_rate_15s\": 3079.912906032954,\n    \"occupancy_rate_5m\": 2576.527871061044,\n    \"occupancy_rate_30m\": 2258.2399185287904,\n    \"memory\": 2774.4379945287333,\n    \"vcpus\": 2897.2806131304505,\n    \"memory_usage\": 8614.899404237813,\n    \"wm_memory_usage\": 7684.059928886646,\n    \"job_isolation\": \"string\",\n    \"native_mode\": true\n  },\n  {\n    \"worker\": \"string\",\n    \"worker_instance\": \"string\",\n    \"started_at\": \"1994-05-23T03:02:28.045Z\",\n    \"ip\": \"string\",\n    \"jobs_executed\": 4437,\n    \"worker_group\": \"string\",\n    \"wm_version\": \"string\",\n    \"last_ping\": 7375.5308808098725,\n    \"custom_tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"last_job_id\": \"string\",\n    \"last_job_workspace_id\": \"string\",\n    \"occupancy_rate\": 9510.352523680176,\n    \"occupancy_rate_15s\": 4408.836817849235,\n    \"occupancy_rate_5m\": 8281.767667355422,\n    \"occupancy_rate_30m\": 1676.1540557865285,\n    \"memory\": 3465.869690078539,\n    \"vcpus\": 2842.669523405588,\n    \"memory_usage\": 1976.8239557659883,\n    \"wm_memory_usage\": 7652.62326875729,\n    \"job_isolation\": \"string\",\n    \"native_mode\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4462ca00-9179-4c23-8ead-eef1f94bc657",
+          "name": "Exists Workers with Tags",
+          "request": {
+            "name": "Exists Workers with Tags",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "exists_workers_with_tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "<string>",
+                  "description": "(Required) comma separated list of tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace",
+                  "value": "<string>",
+                  "description": "workspace to filter tags visibility (required when TAGS_ARE_SENSITIVE is enabled for non-superadmins)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a2b900b-278a-4da6-b679-29c49a865fc8",
+              "name": "map of tags to whether at least one worker with the tag exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "exists_workers_with_tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b96f775-5388-4ea1-896d-735ee4f43248",
+          "name": "Get Queue Metrics",
+          "request": {
+            "name": "Get Queue Metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "queue_metrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "910458fd-c596-4961-9349-b08acf1acf96",
+              "name": "metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "queue_metrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"values\": [\n      {\n        \"created_at\": \"string\",\n        \"value\": 9611.157222845794\n      },\n      {\n        \"created_at\": \"string\",\n        \"value\": 4965.064040087805\n      }\n    ]\n  },\n  {\n    \"id\": \"string\",\n    \"values\": [\n      {\n        \"created_at\": \"string\",\n        \"value\": 5125.989797551045\n      },\n      {\n        \"created_at\": \"string\",\n        \"value\": 6152.509135092424\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "792c2402-c9ce-4a43-bef7-3fa9d47c1681",
+          "name": "Get Counts of Jobs Waiting for an Executor Per Tag",
+          "request": {
+            "name": "Get Counts of Jobs Waiting for an Executor Per Tag",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "queue_counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "433665b6-9b66-45de-822d-7c9549793b6f",
+              "name": "queue counts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "queue_counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 4082\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b03952f7-8422-4e43-8b08-28baaa98ebc4",
+          "name": "Get Counts of Currently Running Jobs Per Tag",
+          "request": {
+            "name": "Get Counts of Currently Running Jobs Per Tag",
+            "description": {},
+            "url": {
+              "path": [
+                "workers",
+                "queue_running_counts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e25d93ad-072f-41da-8015-8cfd30d0d064",
+              "name": "queue running counts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "workers",
+                    "queue_running_counts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": 4082\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4354bc40-ecc5-4c72-9370-a0e92c54e3b8",
+    "name": "Windmill admin worker API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

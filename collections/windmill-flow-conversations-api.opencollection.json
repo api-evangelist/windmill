@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin flow_conversations API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "flow_conversations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Flow Conversations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flow_conversations/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "flow_path",
+                "value": "",
+                "type": "query",
+                "description": "filter conversations by flow path"
+              }
+            ]
+          },
+          "docs": "List Flow Conversations"
+        },
+        {
+          "info": {
+            "name": "Delete Flow Conversation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/flow_conversations/delete/:conversation_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "conversation id"
+              }
+            ]
+          },
+          "docs": "Delete Flow Conversation"
+        },
+        {
+          "info": {
+            "name": "List Conversation Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flow_conversations/:conversation_id/messages",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "conversation_id",
+                "value": "",
+                "type": "path",
+                "description": "conversation id"
+              },
+              {
+                "name": "after_seq",
+                "value": "",
+                "type": "query",
+                "description": "Message sequence cursor to fetch only the messages after that cursor"
+              }
+            ]
+          },
+          "docs": "List Conversation Messages"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

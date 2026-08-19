@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin teams API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send Update to Microsoft Teams Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/teams/activities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Respond to a Microsoft Teams activity after a workspace command is run"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

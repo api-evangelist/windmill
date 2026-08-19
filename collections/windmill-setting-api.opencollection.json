@@ -1,0 +1,752 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin setting API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "setting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Refreshes the Password for the Custom_instance_user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/refresh_custom_instance_user_pwd"
+          },
+          "docs": "Refreshes the Password for the Custom_instance_user"
+        },
+        {
+          "info": {
+            "name": "Returns the Set-up Statuses of Custom Instance Pg Databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/list_custom_instance_pg_databases"
+          },
+          "docs": "Returns the Set-up Statuses of Custom Instance Pg Databases"
+        },
+        {
+          "info": {
+            "name": "Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/setup_custom_instance_pg_database/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database to create"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user"
+        },
+        {
+          "info": {
+            "name": "Drops a Custom Instance Database (superadmin Only, Irreversible)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/drop_custom_instance_pg_database/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The name of the database to drop"
+              }
+            ]
+          },
+          "docs": "Drops a Custom Instance Database (superadmin Only, Irreversible)"
+        },
+        {
+          "info": {
+            "name": "Get Global Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/global/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Global Settings"
+        },
+        {
+          "info": {
+            "name": "Post Global Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/global/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post Global Settings"
+        },
+        {
+          "info": {
+            "name": "Get Instance Ruff Config (unauthenticated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings_u/ruff_config"
+          },
+          "docs": "Returns the instance-level ruff.toml content as plain text.\nIntentionally unauthenticated so the LSP extra container can poll it\nacross any deployment topology. Responds with an empty body when the\ninstance config is unset. Ruff configuration is lint/format policy,\nnot a credential.\n"
+        },
+        {
+          "info": {
+            "name": "Get Local Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/local"
+          },
+          "docs": "Get Local Settings"
+        },
+        {
+          "info": {
+            "name": "Test Smtp",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_smtp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Smtp"
+        },
+        {
+          "info": {
+            "name": "Test Critical Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_critical_channels",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Critical Channels"
+        },
+        {
+          "info": {
+            "name": "Get All Critical Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/critical_alerts",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "acknowledged",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get All Critical Alerts"
+        },
+        {
+          "info": {
+            "name": "Acknowledge a Critical Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/critical_alerts/:id/acknowledge",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the critical alert to acknowledge"
+              }
+            ]
+          },
+          "docs": "Acknowledge a Critical Alert"
+        },
+        {
+          "info": {
+            "name": "Acknowledge All Unacknowledged Critical Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/critical_alerts/acknowledge_all"
+          },
+          "docs": "Acknowledge All Unacknowledged Critical Alerts"
+        },
+        {
+          "info": {
+            "name": "Test License Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_license_key",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test License Key"
+        },
+        {
+          "info": {
+            "name": "Test Object Storage Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_object_storage_config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Object Storage Config"
+        },
+        {
+          "info": {
+            "name": "Get Current or Last Object Storage Usage Computation (null if Never Run)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/object_storage_usage"
+          },
+          "docs": "Get Current or Last Object Storage Usage Computation (null if Never Run)"
+        },
+        {
+          "info": {
+            "name": "Start a Background Computation of Object Storage Usage by Top-level Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/object_storage_usage"
+          },
+          "docs": "Start a Background Computation of Object Storage Usage by Top-level Folder"
+        },
+        {
+          "info": {
+            "name": "Start a Manual Cleanup of Expired Logs from Object Storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/run_log_cleanup"
+          },
+          "docs": "Start a Manual Cleanup of Expired Logs from Object Storage"
+        },
+        {
+          "info": {
+            "name": "Get Status of the Manual Log Cleanup Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/log_cleanup_status"
+          },
+          "docs": "Get Status of the Manual Log Cleanup Task"
+        },
+        {
+          "info": {
+            "name": "Send Stats",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/send_stats"
+          },
+          "docs": "Send Stats"
+        },
+        {
+          "info": {
+            "name": "Restart Worker Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/restart_worker_group/:worker_group",
+            "params": [
+              {
+                "name": "worker_group",
+                "value": "",
+                "type": "path",
+                "description": "the name of the worker group to restart"
+              }
+            ]
+          },
+          "docs": "Send a restart signal to all workers in the specified worker group. Workers will gracefully shut down and are expected to be restarted by their supervisor. Requires devops role."
+        },
+        {
+          "info": {
+            "name": "Get Telemetry Stats with HMAC Signature (EE Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/get_stats"
+          },
+          "docs": "Get Telemetry Stats with HMAC Signature (EE Only)"
+        },
+        {
+          "info": {
+            "name": "Get Latest Key Renewal Attempt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/latest_key_renewal_attempt"
+          },
+          "docs": "Get Latest Key Renewal Attempt"
+        },
+        {
+          "info": {
+            "name": "Renew License Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/renew_license_key",
+            "params": [
+              {
+                "name": "license_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Renew License Key"
+        },
+        {
+          "info": {
+            "name": "Create Customer Portal Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/customer_portal",
+            "params": [
+              {
+                "name": "license_key",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create Customer Portal Session"
+        },
+        {
+          "info": {
+            "name": "Test Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/saml/test_metadata",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Metadata"
+        },
+        {
+          "info": {
+            "name": "List Global Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/list_global"
+          },
+          "docs": "List Global Settings"
+        },
+        {
+          "info": {
+            "name": "Get Full Instance Config (global Settings + Worker Configs)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/settings/instance_config"
+          },
+          "docs": "Get Full Instance Config (global Settings + Worker Configs)"
+        },
+        {
+          "info": {
+            "name": "Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are Skipped.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/settings/instance_config",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are Skipped."
+        },
+        {
+          "info": {
+            "name": "Get Minimum Worker Versions Required to Stay Alive",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/min_keep_alive_version"
+          },
+          "docs": "Get Minimum Worker Versions Required to Stay Alive"
+        },
+        {
+          "info": {
+            "name": "Get JWKS for Vault JWT Authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/.well-known/jwks.json"
+          },
+          "docs": "Get JWKS for Vault JWT Authentication"
+        },
+        {
+          "info": {
+            "name": "Test Secret Backend Connection (HashiCorp Vault)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_secret_backend",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Secret Backend Connection (HashiCorp Vault)"
+        },
+        {
+          "info": {
+            "name": "Migrate Secrets from Database to HashiCorp Vault",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/migrate_secrets_to_vault",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrate Secrets from Database to HashiCorp Vault"
+        },
+        {
+          "info": {
+            "name": "Migrate Secrets from HashiCorp Vault to Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/migrate_secrets_to_database",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrate Secrets from HashiCorp Vault to Database"
+        },
+        {
+          "info": {
+            "name": "Test Azure Key Vault Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_azure_kv_backend",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Azure Key Vault Connection"
+        },
+        {
+          "info": {
+            "name": "Migrate Secrets from Database to Azure Key Vault",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/migrate_secrets_to_azure_kv",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrate Secrets from Database to Azure Key Vault"
+        },
+        {
+          "info": {
+            "name": "Migrate Secrets from Azure Key Vault to Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/migrate_secrets_from_azure_kv",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrate Secrets from Azure Key Vault to Database"
+        },
+        {
+          "info": {
+            "name": "Test Connection to AWS Secrets Manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/test_aws_sm_backend",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Connection to AWS Secrets Manager"
+        },
+        {
+          "info": {
+            "name": "Migrate Secrets from Database to AWS Secrets Manager",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/migrate_secrets_to_aws_sm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrate Secrets from Database to AWS Secrets Manager"
+        },
+        {
+          "info": {
+            "name": "Migrate Secrets from AWS Secrets Manager to Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/settings/migrate_secrets_from_aws_sm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Migrate Secrets from AWS Secrets Manager to Database"
+        },
+        {
+          "info": {
+            "name": "Get Secondary Storage Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_secondary_storage_names",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_default",
+                "value": "",
+                "type": "query",
+                "description": "If true, include \"_default_\" in the list if primary workspace storage is set"
+              }
+            ]
+          },
+          "docs": "Get Secondary Storage Names"
+        },
+        {
+          "info": {
+            "name": "Get All Critical Alerts for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/critical_alerts",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "acknowledged",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get All Critical Alerts for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Acknowledge a Critical Alert for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/critical_alerts/:id/acknowledge",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the critical alert to acknowledge"
+              }
+            ]
+          },
+          "docs": "Acknowledge a Critical Alert for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Acknowledge All Unacknowledged Critical Alerts for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/critical_alerts/acknowledge_all",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Acknowledge All Unacknowledged Critical Alerts for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Mute Critical Alert UI for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/critical_alerts/mute",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mute Critical Alert UI for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Set Public App Rate Limit for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/public_app_rate_limit",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Public App Rate Limit for this Workspace"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

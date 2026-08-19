@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin agent_workers API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agent_workers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Agent Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/agent_workers/create_agent_token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Agent Token"
+        },
+        {
+          "info": {
+            "name": "Blacklist Agent Token (requires Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/agent_workers/blacklist_token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Blacklist Agent Token (requires Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Remove Agent Token from Blacklist (requires Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/agent_workers/remove_blacklist_token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove Agent Token from Blacklist (requires Super Admin)"
+        },
+        {
+          "info": {
+            "name": "List Blacklisted Agent Tokens (requires Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/agent_workers/list_blacklisted_tokens",
+            "params": [
+              {
+                "name": "include_expired",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include expired blacklisted tokens"
+              }
+            ]
+          },
+          "docs": "List Blacklisted Agent Tokens (requires Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Get Minimum Worker Version Across All Workers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/agent_workers/get_min_version"
+          },
+          "docs": "Get Minimum Worker Version Across All Workers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,243 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin websocket_trigger API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "websocket_trigger",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Websocket Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/websocket_triggers/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Websocket Trigger"
+        },
+        {
+          "info": {
+            "name": "Update Websocket Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/websocket_triggers/update/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Websocket Trigger"
+        },
+        {
+          "info": {
+            "name": "Delete Websocket Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/websocket_triggers/delete/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Websocket Trigger"
+        },
+        {
+          "info": {
+            "name": "Get Websocket Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/websocket_triggers/get/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Websocket Trigger"
+        },
+        {
+          "info": {
+            "name": "List Websocket Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/websocket_triggers/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "filter by path"
+              },
+              {
+                "name": "is_flow",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "path_start",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label"
+              }
+            ]
+          },
+          "docs": "List Websocket Triggers"
+        },
+        {
+          "info": {
+            "name": "Does Websocket Trigger Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/websocket_triggers/exists/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Does Websocket Trigger Exists"
+        },
+        {
+          "info": {
+            "name": "Set Enabled Websocket Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/websocket_triggers/setmode/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Enabled Websocket Trigger"
+        },
+        {
+          "info": {
+            "name": "Test Websocket Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/websocket_triggers/test",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Test Websocket Connection"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

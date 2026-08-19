@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin path_autocomplete API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "path_autocomplete",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Paths in a Workspace for Client-side Autocomplete",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/path_autocomplete/list_paths",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the flat list of all item paths visible to the caller across\nscripts, flows, apps, raw apps, variables, and resources. Intended to\nfeed an entirely client-side path autocomplete UI: the frontend fetches\nonce (server caches per workspace for 60s) and performs all prefix/segment\ncomputation locally. Capped at 20,000 paths (5,000 per table).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

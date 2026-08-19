@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "6b02ae64-26e4-4535-b622-c446dd00efec",
+      "name": "raw_app",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "427235da-8525-4c16-8c65-e70cfd896171",
+          "name": "List All Raw Apps",
+          "request": {
+            "name": "List All Raw Apps",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "raw_apps",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "order_desc",
+                  "value": "<boolean>",
+                  "description": "order by desc order (default true)"
+                },
+                {
+                  "disabled": false,
+                  "key": "created_by",
+                  "value": "<string>",
+                  "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+                },
+                {
+                  "disabled": false,
+                  "key": "path_start",
+                  "value": "<string>",
+                  "description": "mask to filter matching starting path"
+                },
+                {
+                  "disabled": false,
+                  "key": "path_exact",
+                  "value": "<string>",
+                  "description": "mask to filter exact matching path"
+                },
+                {
+                  "disabled": false,
+                  "key": "starred_only",
+                  "value": "<boolean>",
+                  "description": "(default false)\nshow only the starred items\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Filter by label"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3190d3bf-60a8-4e8b-822f-ca8b9f1e0cc9",
+              "name": "All raw apps",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "raw_apps",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order_desc",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "created_by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path_exact",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "starred_only",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"workspace_id\": \"string\",\n    \"path\": \"string\",\n    \"summary\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": true,\n      \"key_1\": true\n    },\n    \"version\": 5305.793018996045,\n    \"edited_at\": \"2022-12-16T17:43:13.178Z\",\n    \"starred\": true\n  },\n  {\n    \"workspace_id\": \"string\",\n    \"path\": \"string\",\n    \"summary\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": true,\n      \"key_1\": true\n    },\n    \"version\": 8373.499939641606,\n    \"edited_at\": \"1983-07-19T06:13:26.438Z\",\n    \"starred\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4f6d69a4-ab2f-4b23-b9ae-de5535259aa2",
+    "name": "Windmill admin raw_app API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

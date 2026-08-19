@@ -1,0 +1,42 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin mcp API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "mcp",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available MCP Tools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/mcp/w/:workspace/list_tools",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Available MCP Tools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

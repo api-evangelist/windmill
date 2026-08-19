@@ -1,0 +1,394 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin native_trigger API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "native_trigger",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Native Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/:service_name/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new native trigger for the specified service.\nRequires write access to the script or flow that the trigger will be associated with.\n"
+        },
+        {
+          "info": {
+            "name": "Update Native Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/:service_name/update/:external_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the trigger from the external service"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing native trigger.\nRequires write access to the script or flow that the trigger is associated with.\n"
+        },
+        {
+          "info": {
+            "name": "Get Native Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/:service_name/get/:external_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the trigger from the external service"
+              }
+            ]
+          },
+          "docs": "Retrieves a native trigger by its external ID.\nRequires write access to the script or flow that the trigger is associated with.\n"
+        },
+        {
+          "info": {
+            "name": "Delete Native Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/native_triggers/:service_name/delete/:external_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the trigger from the external service"
+              }
+            ]
+          },
+          "docs": "Deletes a native trigger by its external ID.\nRequires write access to the script or flow that the trigger is associated with.\n"
+        },
+        {
+          "info": {
+            "name": "List Native Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/:service_name/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path"
+              },
+              {
+                "name": "is_flow",
+                "value": "",
+                "type": "query",
+                "description": "filter by is_flow"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label"
+              }
+            ]
+          },
+          "docs": "Lists all native triggers for the specified service in the workspace."
+        },
+        {
+          "info": {
+            "name": "Check if Native Trigger Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/:service_name/exists/:external_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path",
+                "description": "The external ID of the trigger from the external service"
+              }
+            ]
+          },
+          "docs": "Checks if a native trigger with the given external ID exists."
+        },
+        {
+          "info": {
+            "name": "Sync Native Triggers with External Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/:service_name/sync",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sync Native Triggers with External Service"
+        },
+        {
+          "info": {
+            "name": "List Available NextCloud Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/nextcloud/events",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Available NextCloud Events"
+        },
+        {
+          "info": {
+            "name": "List Google Calendars for the Authenticated User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/google/calendars",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Google Calendars for the Authenticated User"
+        },
+        {
+          "info": {
+            "name": "List or Search Google Drive Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/google/drive/files",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "search query to filter files by name"
+              },
+              {
+                "name": "parent_id",
+                "value": "",
+                "type": "query",
+                "description": "folder ID to list children of"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "token for next page of results"
+              },
+              {
+                "name": "shared_with_me",
+                "value": "",
+                "type": "query",
+                "description": "if true, list files shared with the user"
+              }
+            ]
+          },
+          "docs": "List or Search Google Drive Files"
+        },
+        {
+          "info": {
+            "name": "List Shared Drives Accessible to the User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/google/drive/shared_drives",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Shared Drives Accessible to the User"
+        },
+        {
+          "info": {
+            "name": "List GitHub Repositories Accessible to the User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/github/repos",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List GitHub Repositories Accessible to the User"
+        },
+        {
+          "info": {
+            "name": "Receive Webhook from External Native Trigger Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/native_triggers/:service_name/w/:workspace_id/webhook/:internal_id",
+            "params": [
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "internal_id",
+                "value": "",
+                "type": "path",
+                "description": "The internal database ID of the trigger"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receive Webhook from External Native Trigger Service"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

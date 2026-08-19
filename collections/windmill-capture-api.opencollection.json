@@ -1,0 +1,230 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin capture API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "capture",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set Capture Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/capture/set_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Capture Config"
+        },
+        {
+          "info": {
+            "name": "Ping Capture Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/capture/ping_config/:trigger_kind/:runnable_kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Ping Capture Config"
+        },
+        {
+          "info": {
+            "name": "Get Capture Configs for a Script or Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/capture/get_configs/:runnable_kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Capture Configs for a Script or Flow"
+        },
+        {
+          "info": {
+            "name": "List Captures for a Script or Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/capture/list/:runnable_kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List Captures for a Script or Flow"
+        },
+        {
+          "info": {
+            "name": "Move Captures and Configs for a Script or Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/capture/move/:runnable_kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Move Captures and Configs for a Script or Flow"
+        },
+        {
+          "info": {
+            "name": "Get a Capture",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/capture/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a Capture"
+        },
+        {
+          "info": {
+            "name": "Delete a Capture",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/capture/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Capture"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

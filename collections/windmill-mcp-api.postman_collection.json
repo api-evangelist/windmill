@@ -1,0 +1,138 @@
+{
+  "item": [
+    {
+      "id": "99847d5c-db88-45e0-9646-99e0f3a94ea1",
+      "name": "mcp",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ccf77d08-d0fd-48e6-ac4f-10945f061c10",
+          "name": "List Available MCP Tools",
+          "request": {
+            "name": "List Available MCP Tools",
+            "description": {},
+            "url": {
+              "path": [
+                "mcp",
+                "w",
+                ":workspace",
+                "list_tools"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3cbcb665-2ce5-443c-b8ec-9b641387b397",
+              "name": "list of MCP tools available for the workspace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "mcp",
+                    "w",
+                    ":workspace",
+                    "list_tools"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"instructions\": \"string\",\n    \"path\": \"string\",\n    \"method\": \"string\",\n    \"path_params_schema\": {},\n    \"query_params_schema\": {},\n    \"body_schema\": {}\n  },\n  {\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"instructions\": \"string\",\n    \"path\": \"string\",\n    \"method\": \"string\",\n    \"path_params_schema\": {},\n    \"query_params_schema\": {},\n    \"body_schema\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c3547717-704f-4ae9-9db4-eca99570478c",
+    "name": "Windmill admin mcp API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

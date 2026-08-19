@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin health API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/health/status",
+            "params": [
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force a fresh check, bypassing the cache"
+              }
+            ]
+          },
+          "docs": "Health status endpoint. Returns cached health status (database connectivity, worker count).\nCache TTL is fixed at 5 seconds. Use force=true query parameter to bypass cache.\nNote: This endpoint is intentionally different from Kubernetes probes to avoid confusion.\nFor k8s liveness/readiness probes, use /version endpoint.\n"
+        },
+        {
+          "info": {
+            "name": "Detailed Health Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/health/detailed"
+          },
+          "docs": "Returns detailed health information including database pool stats, worker details, and queue status.\nRequires authentication. Use for monitoring dashboards and debugging.\nThis endpoint always returns fresh data (no caching).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

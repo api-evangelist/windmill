@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin config API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Worker Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/list_worker_groups"
+          },
+          "docs": "List Worker Groups"
+        },
+        {
+          "info": {
+            "name": "Get Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/get/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Config"
+        },
+        {
+          "info": {
+            "name": "Update Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/configs/update/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Config"
+        },
+        {
+          "info": {
+            "name": "Delete Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/configs/update/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Config"
+        },
+        {
+          "info": {
+            "name": "List Configs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/list"
+          },
+          "docs": "List Configs"
+        },
+        {
+          "info": {
+            "name": "List Autoscaling Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/list_autoscaling_events/:worker_group",
+            "params": [
+              {
+                "name": "worker_group",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List Autoscaling Events"
+        },
+        {
+          "info": {
+            "name": "Check Kubernetes Autoscaling Health for a Worker Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/native_kubernetes_autoscaling_healthcheck"
+          },
+          "docs": "Check Kubernetes Autoscaling Health for a Worker Group"
+        },
+        {
+          "info": {
+            "name": "Get Currently Available Python Versions Provided by UV.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/list_available_python_versions"
+          },
+          "docs": "Get Currently Available Python Versions Provided by UV."
+        },
+        {
+          "info": {
+            "name": "List All Workspace Dependencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/list_all_workspace_dependencies"
+          },
+          "docs": "List All Workspace Dependencies"
+        },
+        {
+          "info": {
+            "name": "List All Dedicated Scripts with Their Dependencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/configs/list_all_dedicated_with_deps"
+          },
+          "docs": "List All Dedicated Scripts with Their Dependencies"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

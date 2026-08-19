@@ -1,0 +1,744 @@
+{
+  "item": [
+    {
+      "id": "914e0fc9-7a86-4756-ba47-16d3fe38568e",
+      "name": "indexSearch",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cbb5acfb-3d17-4f4d-942b-917b667346fe",
+          "name": "Search Through Jobs with a String Query",
+          "request": {
+            "name": "Search Through Jobs with a String Query",
+            "description": {},
+            "url": {
+              "path": [
+                "srch",
+                "w",
+                ":workspace",
+                "index",
+                "search",
+                "job"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_query",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "pagination_offset",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6482dc34-9abb-479f-821d-15bb3c6cc1b1",
+              "name": "search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "srch",
+                    "w",
+                    ":workspace",
+                    "index",
+                    "search",
+                    "job"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pagination_offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"query_parse_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"hits\": [\n    {\n      \"dancer\": \"string\"\n    },\n    {\n      \"dancer\": \"string\"\n    }\n  ],\n  \"hit_count\": 3742.102555552116,\n  \"index_metadata\": {\n    \"indexed_until\": \"1992-11-22T12:44:33.661Z\",\n    \"lost_lock_ownership\": true,\n    \"max_index_time_window_secs\": 1883.2723885175162\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01038f1c-2222-4903-b34e-278227fe8d4c",
+          "name": "Search Through Service Logs with a String Query",
+          "request": {
+            "name": "Search Through Service Logs with a String Query",
+            "description": {},
+            "url": {
+              "path": [
+                "srch",
+                "index",
+                "search",
+                "service_logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_query",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "mode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "worker_group",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hostname",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "min_ts",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_ts",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe8d1b2a-38c5-4ed0-98c3-c5cf0c8f4995",
+              "name": "search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "srch",
+                    "index",
+                    "search",
+                    "service_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "worker_group",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hostname",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_ts",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_ts",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"query_parse_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"hits\": [\n    {\n      \"dancer\": \"string\"\n    },\n    {\n      \"dancer\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fef498e0-51c0-474d-a3ee-c6340299668c",
+          "name": "Search and Count the Log Line Hits on Every Provided Host",
+          "request": {
+            "name": "Search and Count the Log Line Hits on Every Provided Host",
+            "description": {},
+            "url": {
+              "path": [
+                "srch",
+                "index",
+                "search",
+                "count_service_logs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_query",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "min_ts",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_ts",
+                  "value": "<dateTime>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e9f97797-9e34-4419-91b3-174ec05160c2",
+              "name": "search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "srch",
+                    "index",
+                    "search",
+                    "count_service_logs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_query",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_ts",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "max_ts",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"query_parse_errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"count_per_host\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aabb81a7-a3c2-47fc-9b04-f6265f03040d",
+          "name": "Get Index Disk Storage Sizes from the Indexer.",
+          "request": {
+            "name": "Get Index Disk Storage Sizes from the Indexer.",
+            "description": {},
+            "url": {
+              "path": [
+                "srch",
+                "index",
+                "storage",
+                "disk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b0c16981-49bb-4584-8ccf-3728351cec30",
+              "name": "disk storage sizes for each index",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "srch",
+                    "index",
+                    "storage",
+                    "disk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_index_disk_size_bytes\": 8870,\n  \"log_index_disk_size_bytes\": 371\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "913ee524-1141-4974-96c6-8bc5cdbef55d",
+          "name": "Clear an Index and Restart the Indexer.",
+          "request": {
+            "name": "Clear an Index and Restart the Indexer.",
+            "description": {},
+            "url": {
+              "path": [
+                "indexer",
+                "delete",
+                ":idx_name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "idx_name",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "33a284e1-d4f8-4df4-b1f6-ad77f1e9a281",
+              "name": "idx to be deleted and indexer restarting",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexer",
+                    "delete",
+                    ":idx_name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "idx_name",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3d1d225-267c-42df-ba9d-a6e3daad3bcb",
+          "name": "Get Index Storage Sizes (disk and S3).",
+          "request": {
+            "name": "Get Index Storage Sizes (disk and S3).",
+            "description": {},
+            "url": {
+              "path": [
+                "indexer",
+                "storage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "467015b8-fe00-4cf6-a4f4-74cbdf2b6732",
+              "name": "storage sizes for each index",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexer",
+                    "storage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_index\": {\n    \"disk_size_bytes\": 5710,\n    \"s3_size_bytes\": 2532\n  },\n  \"service_log_index\": {\n    \"disk_size_bytes\": 7948,\n    \"s3_size_bytes\": 5447\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "705f6c79-7441-46cb-b286-0b677a168b0e",
+          "name": "Get Indexer Status Including Liveness and Storage Sizes.",
+          "request": {
+            "name": "Get Indexer Status Including Liveness and Storage Sizes.",
+            "description": {},
+            "url": {
+              "path": [
+                "indexer",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdfdc8fd-1e24-4a59-bd00-169ae29d2fed",
+              "name": "indexer status for each index",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "indexer",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_indexer\": {\n    \"is_alive\": false,\n    \"last_locked_at\": \"1967-11-08T12:03:34.947Z\",\n    \"owner\": \"string\",\n    \"storage\": {\n      \"disk_size_bytes\": 8802,\n      \"s3_size_bytes\": 5093\n    }\n  },\n  \"log_indexer\": {\n    \"is_alive\": true,\n    \"last_locked_at\": \"2005-10-15T07:46:57.929Z\",\n    \"owner\": \"string\",\n    \"storage\": {\n      \"disk_size_bytes\": 9405,\n      \"s3_size_bytes\": 5064\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "655d7a51-b7f6-40ed-b2d6-8ee24fed7fa9",
+    "name": "Windmill admin indexSearch API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

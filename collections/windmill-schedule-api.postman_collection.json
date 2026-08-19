@@ -1,0 +1,1302 @@
+{
+  "item": [
+    {
+      "id": "cf7e9d49-6e7a-43d9-96a3-fd5540f5bd74",
+      "name": "schedule",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "118c8848-b921-489c-8612-93c56f4fda47",
+          "name": "Preview Schedule",
+          "request": {
+            "name": "Preview Schedule",
+            "description": {},
+            "url": {
+              "path": [
+                "schedules",
+                "preview"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedule\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"cron_version\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6a972e0-445d-4834-9da3-abb64ce3168b",
+              "name": "List of 5 estimated upcoming execution events (in UTC)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "schedules",
+                    "preview"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"cron_version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"1981-07-03T08:38:44.700Z\",\n  \"1976-02-06T03:10:45.342Z\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7bcd930a-befd-4af0-8157-74a768ffd383",
+          "name": "Create Schedule",
+          "request": {
+            "name": "Create Schedule",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"args\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  },\n  \"enabled\": \"<boolean>\",\n  \"on_failure\": \"<string>\",\n  \"on_failure_times\": \"<number>\",\n  \"on_failure_exact\": \"<boolean>\",\n  \"on_failure_extra_args\": {\n    \"key_0\": \"string\",\n    \"key_1\": 221\n  },\n  \"on_recovery\": \"<string>\",\n  \"on_recovery_times\": \"<number>\",\n  \"on_recovery_extra_args\": {\n    \"key_0\": 8288\n  },\n  \"on_success\": \"<string>\",\n  \"on_success_extra_args\": {\n    \"key_0\": \"string\"\n  },\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"no_flow_overlap\": \"<boolean>\",\n  \"summary\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"paused_until\": \"<dateTime>\",\n  \"cron_version\": \"<string>\",\n  \"dynamic_skip\": \"<string>\",\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db52d560-aca0-48c2-949f-4a8577ebd721",
+              "name": "schedule created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"schedule\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"script_path\": \"<string>\",\n  \"is_flow\": \"<boolean>\",\n  \"args\": {\n    \"key_0\": 8088.109746731542\n  },\n  \"enabled\": \"<boolean>\",\n  \"on_failure\": \"<string>\",\n  \"on_failure_times\": \"<number>\",\n  \"on_failure_exact\": \"<boolean>\",\n  \"on_failure_extra_args\": {\n    \"key_0\": 3401,\n    \"key_1\": 8757.545857357796\n  },\n  \"on_recovery\": \"<string>\",\n  \"on_recovery_times\": \"<number>\",\n  \"on_recovery_extra_args\": {\n    \"key_0\": true,\n    \"key_1\": 3474\n  },\n  \"on_success\": \"<string>\",\n  \"on_success_extra_args\": {\n    \"key_0\": 6816.175087182252\n  },\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"no_flow_overlap\": \"<boolean>\",\n  \"summary\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"paused_until\": \"<dateTime>\",\n  \"cron_version\": \"<string>\",\n  \"dynamic_skip\": \"<string>\",\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b53dc99-fb67-4970-96b1-6b59405186bb",
+          "name": "Update Schedule",
+          "request": {
+            "name": "Update Schedule",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "update",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedule\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"args\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"on_failure\": \"<string>\",\n  \"on_failure_times\": \"<number>\",\n  \"on_failure_exact\": \"<boolean>\",\n  \"on_failure_extra_args\": {\n    \"key_0\": \"string\",\n    \"key_1\": 5741,\n    \"key_2\": \"string\"\n  },\n  \"on_recovery\": \"<string>\",\n  \"on_recovery_times\": \"<number>\",\n  \"on_recovery_extra_args\": {\n    \"key_0\": \"string\"\n  },\n  \"on_success\": \"<string>\",\n  \"on_success_extra_args\": {\n    \"key_0\": 4433,\n    \"key_1\": \"string\"\n  },\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"no_flow_overlap\": \"<boolean>\",\n  \"summary\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"paused_until\": \"<dateTime>\",\n  \"cron_version\": \"<string>\",\n  \"dynamic_skip\": \"<string>\",\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3f7835bb-d1b3-489d-b088-6f6bf2456c29",
+              "name": "schedule updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "update",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule\": \"<string>\",\n  \"timezone\": \"<string>\",\n  \"args\": {\n    \"key_0\": 6838,\n    \"key_1\": false\n  },\n  \"on_failure\": \"<string>\",\n  \"on_failure_times\": \"<number>\",\n  \"on_failure_exact\": \"<boolean>\",\n  \"on_failure_extra_args\": {\n    \"key_0\": 3848\n  },\n  \"on_recovery\": \"<string>\",\n  \"on_recovery_times\": \"<number>\",\n  \"on_recovery_extra_args\": {\n    \"key_0\": 853.5623453710816,\n    \"key_1\": 2108.9563781207066,\n    \"key_2\": 1663,\n    \"key_3\": false\n  },\n  \"on_success\": \"<string>\",\n  \"on_success_extra_args\": {\n    \"key_0\": 4707,\n    \"key_1\": 2730.9925602655026\n  },\n  \"ws_error_handler_muted\": \"<boolean>\",\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"no_flow_overlap\": \"<boolean>\",\n  \"summary\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tag\": \"<string>\",\n  \"paused_until\": \"<dateTime>\",\n  \"cron_version\": \"<string>\",\n  \"dynamic_skip\": \"<string>\",\n  \"permissioned_as\": \"<string>\",\n  \"preserve_permissioned_as\": \"<boolean>\",\n  \"labels\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5e57683-a9af-452f-bce8-3f7c87f9c4be",
+          "name": "Set Enabled Schedule",
+          "request": {
+            "name": "Set Enabled Schedule",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "setenabled",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"force\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "add7a98f-f490-41b4-9dc8-a3a84a0a684a",
+              "name": "schedule enabled set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "setenabled",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"force\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5548910-0808-4cfd-abf2-85992d903af6",
+          "name": "Delete Schedule",
+          "request": {
+            "name": "Delete Schedule",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "delete",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9bb924a6-1c49-4c51-bdfd-73cf16f0e232",
+              "name": "schedule deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "delete",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4c5c7f4-3a7e-4781-ae61-4d594e14d863",
+          "name": "Get Schedule",
+          "request": {
+            "name": "Get Schedule",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "get",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2509ee67-239a-49e3-89da-5be80df5024e",
+              "name": "schedule deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "get",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"path\": \"string\",\n  \"edited_by\": \"string\",\n  \"edited_at\": \"2021-03-24T10:19:28.460Z\",\n  \"schedule\": \"string\",\n  \"script_path\": \"string\",\n  \"timezone\": \"string\",\n  \"extra_perms\": {\n    \"key_0\": true,\n    \"key_1\": true\n  },\n  \"is_flow\": false,\n  \"enabled\": false,\n  \"email\": \"string\",\n  \"permissioned_as\": \"string\",\n  \"args\": {\n    \"key_0\": false,\n    \"key_1\": \"string\"\n  },\n  \"error\": \"string\",\n  \"on_failure\": \"string\",\n  \"on_failure_times\": 9705.348578906154,\n  \"on_failure_exact\": false,\n  \"on_failure_extra_args\": {\n    \"key_0\": false,\n    \"key_1\": \"string\",\n    \"key_2\": \"string\"\n  },\n  \"on_recovery\": \"string\",\n  \"on_recovery_times\": 3192.2249406869328,\n  \"on_recovery_extra_args\": {\n    \"key_0\": false,\n    \"key_1\": false\n  },\n  \"on_success\": \"string\",\n  \"on_success_extra_args\": {\n    \"key_0\": false,\n    \"key_1\": 412.44480805403214\n  },\n  \"ws_error_handler_muted\": false,\n  \"retry\": {\n    \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n  },\n  \"summary\": \"string\",\n  \"description\": \"string\",\n  \"no_flow_overlap\": false,\n  \"tag\": \"string\",\n  \"paused_until\": \"1958-06-06T20:38:44.921Z\",\n  \"cron_version\": \"string\",\n  \"dynamic_skip\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34e35c03-05f8-480d-a06b-4002f0b5abe8",
+          "name": "Does Schedule Exists",
+          "request": {
+            "name": "Does Schedule Exists",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "exists",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79df69a7-9ea7-4bcb-a30c-5f10abe7c82f",
+              "name": "schedule exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "exists",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "true",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ffc3d50-0069-481a-808d-ac5b2b8849ee",
+          "name": "List Schedules",
+          "request": {
+            "name": "List Schedules",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "args",
+                  "value": "<string>",
+                  "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "filter by path (script path)"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_flow",
+                  "value": "<boolean>",
+                  "description": "filter schedules by whether they target a flow"
+                },
+                {
+                  "disabled": false,
+                  "key": "path_start",
+                  "value": "<string>",
+                  "description": "filter schedules by path prefix"
+                },
+                {
+                  "disabled": false,
+                  "key": "schedule_path",
+                  "value": "<string>",
+                  "description": "exact match on the schedule's path"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "pattern match filter for description field (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "summary",
+                  "value": "<string>",
+                  "description": "pattern match filter for summary field (case-insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "broad_filter",
+                  "value": "<string>",
+                  "description": "broad search across multiple fields (case-insensitive substring match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Filter by label"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4465880-380b-42a2-85ea-7915c705620b",
+              "name": "schedule list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "args",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_flow",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "path_start",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schedule_path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "summary",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broad_filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "label",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"path\": \"string\",\n    \"edited_by\": \"string\",\n    \"edited_at\": \"2012-01-22T23:25:20.627Z\",\n    \"schedule\": \"string\",\n    \"script_path\": \"string\",\n    \"timezone\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": false,\n      \"key_3\": false\n    },\n    \"is_flow\": true,\n    \"enabled\": true,\n    \"email\": \"string\",\n    \"permissioned_as\": \"string\",\n    \"args\": {\n      \"key_0\": false,\n      \"key_1\": true,\n      \"key_2\": true\n    },\n    \"error\": \"string\",\n    \"on_failure\": \"string\",\n    \"on_failure_times\": 9755.92129819144,\n    \"on_failure_exact\": true,\n    \"on_failure_extra_args\": {\n      \"key_0\": 1513\n    },\n    \"on_recovery\": \"string\",\n    \"on_recovery_times\": 992.265640278418,\n    \"on_recovery_extra_args\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": false\n    },\n    \"on_success\": \"string\",\n    \"on_success_extra_args\": {\n      \"key_0\": 7110,\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"ws_error_handler_muted\": true,\n    \"retry\": {\n      \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n    },\n    \"summary\": \"string\",\n    \"description\": \"string\",\n    \"no_flow_overlap\": false,\n    \"tag\": \"string\",\n    \"paused_until\": \"2021-08-23T23:58:40.193Z\",\n    \"cron_version\": \"string\",\n    \"dynamic_skip\": \"string\"\n  },\n  {\n    \"path\": \"string\",\n    \"edited_by\": \"string\",\n    \"edited_at\": \"2009-02-27T03:20:27.145Z\",\n    \"schedule\": \"string\",\n    \"script_path\": \"string\",\n    \"timezone\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"is_flow\": true,\n    \"enabled\": false,\n    \"email\": \"string\",\n    \"permissioned_as\": \"string\",\n    \"args\": {\n      \"key_0\": true,\n      \"key_1\": 7674.099075288518\n    },\n    \"error\": \"string\",\n    \"on_failure\": \"string\",\n    \"on_failure_times\": 2380.6142166597556,\n    \"on_failure_exact\": true,\n    \"on_failure_extra_args\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"on_recovery\": \"string\",\n    \"on_recovery_times\": 6036.2572419446105,\n    \"on_recovery_extra_args\": {\n      \"key_0\": true\n    },\n    \"on_success\": \"string\",\n    \"on_success_extra_args\": {\n      \"key_0\": 6543,\n      \"key_1\": 6907.461775409084\n    },\n    \"ws_error_handler_muted\": true,\n    \"retry\": {\n      \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n    },\n    \"summary\": \"string\",\n    \"description\": \"string\",\n    \"no_flow_overlap\": true,\n    \"tag\": \"string\",\n    \"paused_until\": \"2017-02-08T23:49:18.175Z\",\n    \"cron_version\": \"string\",\n    \"dynamic_skip\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ca6482e-697f-4ae4-9513-9866eb6da342",
+          "name": "List Schedules with Last 20 Jobs",
+          "request": {
+            "name": "List Schedules with Last 20 Jobs",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "list_with_jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "21a046b8-87a9-4de8-8dc3-b96656d81db9",
+              "name": "schedule list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "list_with_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"path\": \"string\",\n    \"edited_by\": \"string\",\n    \"edited_at\": \"1988-08-05T11:24:30.553Z\",\n    \"schedule\": \"string\",\n    \"script_path\": \"string\",\n    \"timezone\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": true,\n      \"key_1\": false,\n      \"key_2\": false\n    },\n    \"is_flow\": false,\n    \"enabled\": false,\n    \"email\": \"string\",\n    \"permissioned_as\": \"string\",\n    \"args\": {\n      \"key_0\": \"string\"\n    },\n    \"error\": \"string\",\n    \"on_failure\": \"string\",\n    \"on_failure_times\": 4619.825066568228,\n    \"on_failure_exact\": true,\n    \"on_failure_extra_args\": {\n      \"key_0\": \"string\"\n    },\n    \"on_recovery\": \"string\",\n    \"on_recovery_times\": 4589.149914134538,\n    \"on_recovery_extra_args\": {\n      \"key_0\": \"string\"\n    },\n    \"on_success\": \"string\",\n    \"on_success_extra_args\": {\n      \"key_0\": true\n    },\n    \"ws_error_handler_muted\": false,\n    \"retry\": {\n      \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n    },\n    \"summary\": \"string\",\n    \"description\": \"string\",\n    \"no_flow_overlap\": true,\n    \"tag\": \"string\",\n    \"paused_until\": \"1973-07-31T16:56:20.385Z\",\n    \"cron_version\": \"string\",\n    \"dynamic_skip\": \"string\",\n    \"jobs\": [\n      {\n        \"id\": \"string\",\n        \"success\": true,\n        \"duration_ms\": 544.4211418167289\n      },\n      {\n        \"id\": \"string\",\n        \"success\": true,\n        \"duration_ms\": 4036.9096407081306\n      }\n    ]\n  },\n  {\n    \"path\": \"string\",\n    \"edited_by\": \"string\",\n    \"edited_at\": \"1949-03-22T08:37:04.462Z\",\n    \"schedule\": \"string\",\n    \"script_path\": \"string\",\n    \"timezone\": \"string\",\n    \"extra_perms\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"is_flow\": true,\n    \"enabled\": true,\n    \"email\": \"string\",\n    \"permissioned_as\": \"string\",\n    \"args\": {\n      \"key_0\": 8449,\n      \"key_1\": true\n    },\n    \"error\": \"string\",\n    \"on_failure\": \"string\",\n    \"on_failure_times\": 1642.5615575834618,\n    \"on_failure_exact\": true,\n    \"on_failure_extra_args\": {\n      \"key_0\": 3416,\n      \"key_1\": 2975.2994347779536,\n      \"key_2\": 8398.020507683334\n    },\n    \"on_recovery\": \"string\",\n    \"on_recovery_times\": 3854.748428619703,\n    \"on_recovery_extra_args\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": \"string\"\n    },\n    \"on_success\": \"string\",\n    \"on_success_extra_args\": {\n      \"key_0\": 2668.20412809447,\n      \"key_1\": \"string\"\n    },\n    \"ws_error_handler_muted\": true,\n    \"retry\": {\n      \"value\": \"reference ../../openflow.openapi.yaml#/components/schemas/Retry not found in the OpenAPI spec\"\n    },\n    \"summary\": \"string\",\n    \"description\": \"string\",\n    \"no_flow_overlap\": true,\n    \"tag\": \"string\",\n    \"paused_until\": \"1978-01-26T21:45:05.559Z\",\n    \"cron_version\": \"string\",\n    \"dynamic_skip\": \"string\",\n    \"jobs\": [\n      {\n        \"id\": \"string\",\n        \"success\": true,\n        \"duration_ms\": 6457.705489678224\n      },\n      {\n        \"id\": \"string\",\n        \"success\": false,\n        \"duration_ms\": 3664.3788539978605\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2ba2ff1-c62a-42b9-bd0d-eed6282cee77",
+          "name": "Set Default Error or Recoevery Handler",
+          "request": {
+            "name": "Set Default Error or Recoevery Handler",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "schedules",
+                "setdefaulthandler"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"handler_type\": \"<string>\",\n  \"override_existing\": \"<boolean>\",\n  \"path\": \"<string>\",\n  \"extra_args\": \"<object>\",\n  \"number_of_occurence\": \"<integer>\",\n  \"number_of_occurence_exact\": \"<boolean>\",\n  \"workspace_handler_muted\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "276a4bfd-fcd7-42f9-abaf-3adeaae22c31",
+              "name": "default error handler set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "schedules",
+                    "setdefaulthandler"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"handler_type\": \"<string>\",\n  \"override_existing\": \"<boolean>\",\n  \"path\": \"<string>\",\n  \"extra_args\": \"<object>\",\n  \"number_of_occurence\": \"<integer>\",\n  \"number_of_occurence_exact\": \"<boolean>\",\n  \"workspace_handler_muted\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1ed0ee1e-60c1-4f6a-8848-9b591e8951d0",
+    "name": "Windmill admin schedule API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin indexSearch API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "indexSearch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Through Jobs with a String Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/srch/w/:workspace/index/search/job",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search_query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pagination_offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Through Jobs with a String Query"
+        },
+        {
+          "info": {
+            "name": "Search Through Service Logs with a String Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/srch/index/search/service_logs",
+            "params": [
+              {
+                "name": "search_query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "worker_group",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hostname",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_ts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_ts",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search Through Service Logs with a String Query"
+        },
+        {
+          "info": {
+            "name": "Search and Count the Log Line Hits on Every Provided Host",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/srch/index/search/count_service_logs",
+            "params": [
+              {
+                "name": "search_query",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "min_ts",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_ts",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search and Count the Log Line Hits on Every Provided Host"
+        },
+        {
+          "info": {
+            "name": "Get Index Disk Storage Sizes from the Indexer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/srch/index/storage/disk"
+          },
+          "docs": "Get Index Disk Storage Sizes from the Indexer."
+        },
+        {
+          "info": {
+            "name": "Clear an Index and Restart the Indexer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/indexer/delete/:idx_name",
+            "params": [
+              {
+                "name": "idx_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear an Index and Restart the Indexer."
+        },
+        {
+          "info": {
+            "name": "Get Index Storage Sizes (disk and S3).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/indexer/storage"
+          },
+          "docs": "Get Index Storage Sizes (disk and S3)."
+        },
+        {
+          "info": {
+            "name": "Get Indexer Status Including Liveness and Storage Sizes.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/indexer/status"
+          },
+          "docs": "Get Indexer Status Including Liveness and Storage Sizes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

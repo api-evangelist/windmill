@@ -1,0 +1,244 @@
+{
+  "item": [
+    {
+      "id": "824aaa48-9a91-4e08-b962-8227f3823720",
+      "name": "service_logs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f02ecd03-793f-4477-8949-b6abd9fba462",
+          "name": "List Log Files Ordered by Timestamp",
+          "request": {
+            "name": "List Log Files Ordered by Timestamp",
+            "description": {},
+            "url": {
+              "path": [
+                "service_logs",
+                "list_files"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<dateTime>",
+                  "description": "filter on started before (inclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "filter on created after (exclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "with_error",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff0cbedb-78fb-40ea-977d-1e44f3ee002a",
+              "name": "time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service_logs",
+                    "list_files"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "with_error",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"hostname\": \"string\",\n    \"mode\": \"string\",\n    \"log_ts\": \"1974-12-09T13:25:22.075Z\",\n    \"file_path\": \"string\",\n    \"json_fmt\": false,\n    \"worker_group\": \"string\",\n    \"ok_lines\": 6143,\n    \"err_lines\": 1683\n  },\n  {\n    \"hostname\": \"string\",\n    \"mode\": \"string\",\n    \"log_ts\": \"1968-09-08T21:38:17.264Z\",\n    \"file_path\": \"string\",\n    \"json_fmt\": true,\n    \"worker_group\": \"string\",\n    \"ok_lines\": 1384,\n    \"err_lines\": 60\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "658e9e13-bccd-4555-856f-5b08be41e1b6",
+          "name": "Get Log File by Path",
+          "request": {
+            "name": "Get Log File by Path",
+            "description": {},
+            "url": {
+              "path": [
+                "service_logs",
+                "get_log_file",
+                ":path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "path",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1b6ba41-48dc-493a-a646-4d68f23dbe8d",
+              "name": "log stream",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service_logs",
+                    "get_log_file",
+                    ":path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "path",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f8c3fa05-58c7-4bd8-86be-9d8c9fd27318",
+    "name": "Windmill admin service_logs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

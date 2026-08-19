@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin openapi API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "openapi",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Openapi Spec from Http Routes/webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/openapi/generate",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate Openapi Spec from Http Routes/webhook"
+        },
+        {
+          "info": {
+            "name": "Download the OpenAPI V3.1 Spec as a File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/openapi/download",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download the OpenAPI V3.1 Spec as a File"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

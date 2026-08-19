@@ -1,0 +1,306 @@
+{
+  "item": [
+    {
+      "id": "3f058304-5f22-4379-a491-ffff6e7b9b30",
+      "name": "health",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "846f4d0c-e08e-4eb7-88ab-827b21c49bc7",
+          "name": "Health Status",
+          "request": {
+            "name": "Health Status",
+            "description": {
+              "content": "Health status endpoint. Returns cached health status (database connectivity, worker count).\nCache TTL is fixed at 5 seconds. Use force=true query parameter to bypass cache.\nNote: This endpoint is intentionally different from Kubernetes probes to avoid confusion.\nFor k8s liveness/readiness probes, use /version endpoint.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "false",
+                  "description": "Force a fresh check, bypassing the cache"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d9ec27f-83f5-49e9-8420-cb01fa8a3bc3",
+              "name": "server is healthy or degraded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"degraded\",\n  \"checked_at\": \"1978-07-23T05:39:45.467Z\",\n  \"database_healthy\": false,\n  \"workers_alive\": 5653\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8193cc44-3d50-4066-b315-56ffa550ef7a",
+              "name": "server is unhealthy (database unreachable)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"degraded\",\n  \"checked_at\": \"1978-07-23T05:39:45.467Z\",\n  \"database_healthy\": false,\n  \"workers_alive\": 5653\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6296da7b-3cff-440e-ba4b-d453a9675c4a",
+          "name": "Detailed Health Status",
+          "request": {
+            "name": "Detailed Health Status",
+            "description": {
+              "content": "Returns detailed health information including database pool stats, worker details, and queue status.\nRequires authentication. Use for monitoring dashboards and debugging.\nThis endpoint always returns fresh data (no caching).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "health",
+                "detailed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d25e991d-41cb-4acd-a081-bf8b097b8cbe",
+              "name": "server is healthy or degraded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health",
+                    "detailed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unhealthy\",\n  \"checked_at\": \"2009-12-07T03:25:07.294Z\",\n  \"version\": \"string\",\n  \"checks\": {\n    \"database\": {\n      \"healthy\": true,\n      \"latency_ms\": 7655,\n      \"pool\": {\n        \"size\": 6692,\n        \"idle\": 1411,\n        \"max_connections\": 9413\n      }\n    },\n    \"readiness\": {\n      \"healthy\": false\n    },\n    \"workers\": {\n      \"healthy\": false,\n      \"active_count\": 445,\n      \"worker_groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"min_version\": \"string\",\n      \"versions\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"queue\": {\n      \"pending_jobs\": 1396,\n      \"running_jobs\": 633\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e95e6ef-8045-43eb-bf6a-3d01c9184acd",
+              "name": "server is unhealthy (database unreachable)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "health",
+                    "detailed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"unhealthy\",\n  \"checked_at\": \"2022-10-15T16:52:29.231Z\",\n  \"version\": \"string\",\n  \"checks\": {\n    \"database\": {\n      \"healthy\": false,\n      \"latency_ms\": 1948,\n      \"pool\": {\n        \"size\": 7991,\n        \"idle\": 624,\n        \"max_connections\": 1174\n      }\n    },\n    \"readiness\": {\n      \"healthy\": true\n    },\n    \"workers\": {\n      \"healthy\": true,\n      \"active_count\": 6404,\n      \"worker_groups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"min_version\": \"string\",\n      \"versions\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"queue\": {\n      \"pending_jobs\": 1928,\n      \"running_jobs\": 2157\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5a5a9d18-03fc-4f15-ad51-53111639923d",
+    "name": "Windmill admin health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

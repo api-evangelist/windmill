@@ -1,0 +1,2150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin workspace API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workspace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Workspaces Visible to Me",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/workspaces/list"
+          },
+          "docs": "List All Workspaces Visible to Me"
+        },
+        {
+          "info": {
+            "name": "Is Domain Allowed for Auto Invi",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/workspaces/allowed_domain_auto_invite"
+          },
+          "docs": "Is Domain Allowed for Auto Invi"
+        },
+        {
+          "info": {
+            "name": "List All Workspaces Visible to Me with User Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/workspaces/users"
+          },
+          "docs": "List All Workspaces Visible to Me with User Info"
+        },
+        {
+          "info": {
+            "name": "Get Workspace as Super Admin (require to be Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_as_superadmin",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Workspace as Super Admin (require to be Super Admin)"
+        },
+        {
+          "info": {
+            "name": "List All Workspaces as Super Admin (require to be Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/workspaces/list_as_superadmin",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List All Workspaces as Super Admin (require to be Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Create Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/workspaces/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Workspace"
+        },
+        {
+          "info": {
+            "name": "Create Forked Workspace Branch with Git Sync",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/create_workspace_fork_branch",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Forked Workspace Branch with Git Sync"
+        },
+        {
+          "info": {
+            "name": "Create Forked Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/create_fork",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Forked Workspace"
+        },
+        {
+          "info": {
+            "name": "Exists Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/workspaces/exists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exists Workspace"
+        },
+        {
+          "info": {
+            "name": "Exists Username",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/workspaces/exists_username",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exists Username"
+        },
+        {
+          "info": {
+            "name": "Get Github App Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/github_app/token",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Github App Token"
+        },
+        {
+          "info": {
+            "name": "Invite User to Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/invite_user",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invite User to Workspace"
+        },
+        {
+          "info": {
+            "name": "Add User to Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/add_user",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add User to Workspace"
+        },
+        {
+          "info": {
+            "name": "Create a Service Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/create_service_account",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Service Account"
+        },
+        {
+          "info": {
+            "name": "Delete User Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/delete_invite",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete User Invite"
+        },
+        {
+          "info": {
+            "name": "Archive Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/archive",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive Workspace"
+        },
+        {
+          "info": {
+            "name": "Unarchive Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/workspaces/unarchive/:workspace",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unarchive Workspace"
+        },
+        {
+          "info": {
+            "name": "Delete Workspace (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/workspaces/delete/:workspace",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "only_delete_forks",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete Workspace (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Leave Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/leave",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Leave Workspace"
+        },
+        {
+          "info": {
+            "name": "Get Workspace Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_workspace_name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Workspace Name"
+        },
+        {
+          "info": {
+            "name": "Change Workspace Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/change_workspace_name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change Workspace Name"
+        },
+        {
+          "info": {
+            "name": "Change Workspace Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/change_workspace_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change Workspace Id"
+        },
+        {
+          "info": {
+            "name": "Change Workspace Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/change_workspace_color",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change Workspace Id"
+        },
+        {
+          "info": {
+            "name": "Update Operator Settings for a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/operator_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the operator settings for a specific workspace. Requires workspace admin privileges."
+        },
+        {
+          "info": {
+            "name": "Compare Two Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/compare/:target_workspace_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "target_workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workspace to compare with"
+              }
+            ]
+          },
+          "docs": "Compares the current workspace with a target workspace to find differences in scripts, flows, apps, resources, and variables. Returns information about items that are ahead, behind, or in conflict."
+        },
+        {
+          "info": {
+            "name": "Resets the Ahead and Behind Deployement Counter After a Deployement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/reset_diff_tally/:fork_workspace_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fork_workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the workspace to compare with"
+              }
+            ]
+          },
+          "docs": "This endpoint should be called after a fork deployement"
+        },
+        {
+          "info": {
+            "name": "List Pending Invites for a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/list_pending_invites",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Pending Invites for a Workspace"
+        },
+        {
+          "info": {
+            "name": "Get Public Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_public_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the subset of workspace settings safe to expose to any workspace member. The full settings struct is admin-only via `getSettings`."
+        },
+        {
+          "info": {
+            "name": "Get Settings (admin Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the full workspace settings including admin-managed integration credentials. Admin-only — non-admin callers should use `getPublicSettings`."
+        },
+        {
+          "info": {
+            "name": "Get Deploy to",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_deploy_to",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Deploy to"
+        },
+        {
+          "info": {
+            "name": "Get if Workspace is Premium",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/is_premium",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get if Workspace is Premium"
+        },
+        {
+          "info": {
+            "name": "Get Premium Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/premium_info",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "skip_subscription_fetch",
+                "value": "",
+                "type": "query",
+                "description": "skip fetching subscription status from stripe"
+              }
+            ]
+          },
+          "docs": "Get Premium Info"
+        },
+        {
+          "info": {
+            "name": "Get Threshold Alert Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/threshold_alert",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Threshold Alert Info"
+        },
+        {
+          "info": {
+            "name": "Set Threshold Alert Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/threshold_alert",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Threshold Alert Info"
+        },
+        {
+          "info": {
+            "name": "Rebuild Dependency Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/rebuild_dependency_map",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Rebuild Dependency Map"
+        },
+        {
+          "info": {
+            "name": "Get Dependents of an Imported Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_dependents/:imported_path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "imported_path",
+                "value": "",
+                "type": "path",
+                "description": "The imported path to get dependents for"
+              }
+            ]
+          },
+          "docs": "Get Dependents of an Imported Path"
+        },
+        {
+          "info": {
+            "name": "Get Script Imports for an Importer Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_imports/:importer_path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "importer_path",
+                "value": "",
+                "type": "path",
+                "description": "The script path to get imports for"
+              }
+            ]
+          },
+          "docs": "Get Script Imports for an Importer Path"
+        },
+        {
+          "info": {
+            "name": "Get Dependents Amounts for Multiple Imported Paths",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/get_dependents_amounts",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Dependents Amounts for Multiple Imported Paths"
+        },
+        {
+          "info": {
+            "name": "Get Dependency Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_dependency_map",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Dependency Map"
+        },
+        {
+          "info": {
+            "name": "Edit Slack Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_slack_command",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Slack Command"
+        },
+        {
+          "info": {
+            "name": "Get Workspace Slack Oauth Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/slack_oauth_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Workspace Slack Oauth Config"
+        },
+        {
+          "info": {
+            "name": "Set Workspace Slack Oauth Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/slack_oauth_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Workspace Slack Oauth Config"
+        },
+        {
+          "info": {
+            "name": "Delete Workspace Slack Oauth Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/workspaces/slack_oauth_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Workspace Slack Oauth Config"
+        },
+        {
+          "info": {
+            "name": "Edit Teams Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_teams_command",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Teams Command"
+        },
+        {
+          "info": {
+            "name": "List Available Teams Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/available_teams_ids",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search teams by name. If omitted, returns first page of all teams."
+              },
+              {
+                "name": "next_link",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor URL from previous response. Pass this to fetch the next page of results."
+              }
+            ]
+          },
+          "docs": "List Available Teams Ids"
+        },
+        {
+          "info": {
+            "name": "List Available Channels for a Specific Team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/available_teams_channels",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Microsoft Teams team ID"
+              }
+            ]
+          },
+          "docs": "List Available Channels for a Specific Team"
+        },
+        {
+          "info": {
+            "name": "Connect Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/connect_teams",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect Teams"
+        },
+        {
+          "info": {
+            "name": "Connect Slack (non-interactive; Pre-minted Bot Token)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/connect_slack",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect Slack (non-interactive; Pre-minted Bot Token)"
+        },
+        {
+          "info": {
+            "name": "Run a Job that Sends a Message to Slack",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/run_slack_message_test_job",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a Job that Sends a Message to Slack"
+        },
+        {
+          "info": {
+            "name": "Run a Job that Sends a Message to Teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/run_teams_message_test_job",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a Job that Sends a Message to Teams"
+        },
+        {
+          "info": {
+            "name": "Edit Deploy to",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_deploy_to",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Deploy to"
+        },
+        {
+          "info": {
+            "name": "Edit Auto Invite",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_auto_invite",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Auto Invite"
+        },
+        {
+          "info": {
+            "name": "Edit Instance Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_instance_groups",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Instance Groups"
+        },
+        {
+          "info": {
+            "name": "Edit Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_webhook",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Webhook"
+        },
+        {
+          "info": {
+            "name": "Edit Copilot Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_copilot_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Copilot Config"
+        },
+        {
+          "info": {
+            "name": "Get Copilot Settings State",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_copilot_settings_state",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Copilot Settings State"
+        },
+        {
+          "info": {
+            "name": "Get Copilot Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_copilot_info",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Copilot Info"
+        },
+        {
+          "info": {
+            "name": "Edit Error Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_error_handler",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Error Handler"
+        },
+        {
+          "info": {
+            "name": "Edit Success Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_success_handler",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Success Handler"
+        },
+        {
+          "info": {
+            "name": "Edit Large File Storage Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_large_file_storage_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Large File Storage Settings"
+        },
+        {
+          "info": {
+            "name": "List Ducklakes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/list_ducklakes",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Ducklakes"
+        },
+        {
+          "info": {
+            "name": "List Datatables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/list_datatables",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Datatables"
+        },
+        {
+          "info": {
+            "name": "List Schemas of All Connected Datatables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/list_datatable_schemas",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Schemas of All Connected Datatables"
+        },
+        {
+          "info": {
+            "name": "List Tables of All Connected Datatables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/list_datatable_tables",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Tables of All Connected Datatables"
+        },
+        {
+          "info": {
+            "name": "Get One Datatable Table Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/get_datatable_table_schema",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "datatable_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schema_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "table_name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get One Datatable Table Schema"
+        },
+        {
+          "info": {
+            "name": "Edit Ducklake Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_ducklake_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Ducklake Settings"
+        },
+        {
+          "info": {
+            "name": "Edit Datatable Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_datatable_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Datatable Settings"
+        },
+        {
+          "info": {
+            "name": "Create a New PostgreSQL Database for a Datatable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/create_pg_database",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a New PostgreSQL Database for a Datatable"
+        },
+        {
+          "info": {
+            "name": "Drop Forked Datatable Databases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/drop_forked_datatable_databases",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Drop Forked Datatable Databases"
+        },
+        {
+          "info": {
+            "name": "Import a PostgreSQL Database from Source to Target via Pg_dump",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/import_pg_database",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import a PostgreSQL Database from Source to Target via Pg_dump"
+        },
+        {
+          "info": {
+            "name": "Export the Schema of a PostgreSQL Database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/export_pg_schema",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Export the Schema of a PostgreSQL Database"
+        },
+        {
+          "info": {
+            "name": "Get the Full Schema of a Datatable Database as TableEditorValues",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/get_datatable_full_schema",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get the Full Schema of a Datatable Database as TableEditorValues"
+        },
+        {
+          "info": {
+            "name": "Check if Git Sync is Available for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/git_sync_enabled",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check if Git Sync is Available for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Edit Workspace Git Sync Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_git_sync_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Workspace Git Sync Settings"
+        },
+        {
+          "info": {
+            "name": "Add or Update Individual Git Sync Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_git_sync_repository",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add or Update Individual Git Sync Repository"
+        },
+        {
+          "info": {
+            "name": "Delete Individual Git Sync Repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/workspaces/delete_git_sync_repository",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete Individual Git Sync Repository"
+        },
+        {
+          "info": {
+            "name": "Edit Workspace Deploy Ui Settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_deploy_ui_config",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Workspace Deploy Ui Settings"
+        },
+        {
+          "info": {
+            "name": "Edit Default App for Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/edit_default_app",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Default App for Workspace"
+        },
+        {
+          "info": {
+            "name": "Get Default Scripts for Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/default_scripts",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Default Scripts for Workspace"
+        },
+        {
+          "info": {
+            "name": "Edit Default Scripts for Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/default_scripts",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit Default Scripts for Workspace"
+        },
+        {
+          "info": {
+            "name": "Set Environment Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/set_environment_variable",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Environment Variable"
+        },
+        {
+          "info": {
+            "name": "Retrieves the Encryption Key for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/encryption_key",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the Encryption Key for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Update the Encryption Key for this Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/encryption_key",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the Encryption Key for this Workspace"
+        },
+        {
+          "info": {
+            "name": "Get Default App for Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/default_app",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Default App for Workspace"
+        },
+        {
+          "info": {
+            "name": "Get Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/usage",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Usage"
+        },
+        {
+          "info": {
+            "name": "Get Used Triggers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/used_triggers",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Used Triggers"
+        },
+        {
+          "info": {
+            "name": "List All Protection Rules for a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/protection_rules",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List All Protection Rules for a Workspace"
+        },
+        {
+          "info": {
+            "name": "Create a New Protection Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/protection_rules",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a New Protection Rule"
+        },
+        {
+          "info": {
+            "name": "Update an Existing Protection Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/protection_rules/:rule_name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rule_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the protection rule to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Existing Protection Rule"
+        },
+        {
+          "info": {
+            "name": "Delete a Protection Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/workspaces/protection_rules/:rule_name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "rule_name",
+                "value": "",
+                "type": "path",
+                "description": "Name of the protection rule to delete"
+              }
+            ]
+          },
+          "docs": "Delete a Protection Rule"
+        },
+        {
+          "info": {
+            "name": "List Users Eligible to be Deployment Request Assignees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/deployment_request/eligible_deployers",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns admins and members of wm_deployers in the parent workspace of the fork at `{workspace}`."
+        },
+        {
+          "info": {
+            "name": "Get the Currently Open Deployment Request for this Fork",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/deployment_request/open",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Currently Open Deployment Request for this Fork"
+        },
+        {
+          "info": {
+            "name": "Create a New Deployment Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/deployment_request",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a New Deployment Request"
+        },
+        {
+          "info": {
+            "name": "Cancel an Open Deployment Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/deployment_request/:id/cancel",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel an Open Deployment Request"
+        },
+        {
+          "info": {
+            "name": "Close a Deployment Request After a Successful Merge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/deployment_request/:id/close_merged",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Called by the UI after the deploy loop completes. Closes the request and marks every comment obsolete. Idempotent."
+        },
+        {
+          "info": {
+            "name": "Append a Comment to an Open Deployment Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/deployment_request/:id/comment",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append a Comment to an Open Deployment Request"
+        },
+        {
+          "info": {
+            "name": "Log AI Chat Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/log_chat",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Log AI Chat Message"
+        },
+        {
+          "info": {
+            "name": "Get Cloud Quota Usage and Limits for Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/workspaces/cloud_quotas",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Cloud Quota Usage and Limits for Workspace"
+        },
+        {
+          "info": {
+            "name": "Prune Old Versions of Scripts, Flows, or Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/workspaces/prune_versions",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prune Old Versions of Scripts, Flows, or Apps"
+        },
+        {
+          "info": {
+            "name": "Get the Workspace Shared UI Folder (full Content)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/shared_ui/get",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Workspace Shared UI Folder (full Content)"
+        },
+        {
+          "info": {
+            "name": "List Paths/sizes of the Workspace Shared UI Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/shared_ui/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Paths/sizes of the Workspace Shared UI Folder"
+        },
+        {
+          "info": {
+            "name": "Get the Current Version of the Workspace Shared UI Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/shared_ui/version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Current Version of the Workspace Shared UI Folder"
+        },
+        {
+          "info": {
+            "name": "Replace the Workspace Shared UI Folder (admin Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/w/:workspace/shared_ui",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replace the Workspace Shared UI Folder (admin Only)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

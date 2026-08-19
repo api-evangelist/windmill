@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin audit API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "audit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Audit Log (requires Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/audit/get/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Audit Log (requires Admin Privilege)"
+        },
+        {
+          "info": {
+            "name": "List Audit Logs (requires Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/audit/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "filter on created after (exclusive) timestamp"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "query",
+                "description": "filter on exact username of user"
+              },
+              {
+                "name": "operation",
+                "value": "",
+                "type": "query",
+                "description": "filter on exact or prefix name of operation"
+              },
+              {
+                "name": "operations",
+                "value": "",
+                "type": "query",
+                "description": "comma separated list of exact operations to include"
+              },
+              {
+                "name": "exclude_operations",
+                "value": "",
+                "type": "query",
+                "description": "comma separated list of operations to exclude"
+              },
+              {
+                "name": "resource",
+                "value": "",
+                "type": "query",
+                "description": "filter on exact or prefix name of resource"
+              },
+              {
+                "name": "action_kind",
+                "value": "",
+                "type": "query",
+                "description": "filter on type of operation"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get audit logs for all workspaces"
+              }
+            ]
+          },
+          "docs": "List Audit Logs (requires Admin Privilege)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

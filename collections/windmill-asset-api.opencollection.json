@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin asset API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "asset",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Assets in the Workspace with Cursor Pagination",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/assets/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (max 1000, default 50)"
+              },
+              {
+                "name": "cursor_created_at",
+                "value": "",
+                "type": "query",
+                "description": "Cursor timestamp for pagination (created_at of last item from previous page)"
+              },
+              {
+                "name": "cursor_id",
+                "value": "",
+                "type": "query",
+                "description": "Cursor ID for pagination (id of last item from previous page)"
+              },
+              {
+                "name": "asset_path",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset path (case-insensitive partial match)"
+              },
+              {
+                "name": "usage_path",
+                "value": "",
+                "type": "query",
+                "description": "Filter by usage path (case-insensitive partial match)"
+              },
+              {
+                "name": "asset_kinds",
+                "value": "",
+                "type": "query",
+                "description": "Filter by asset kinds (multiple values allowed)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "exact path match filter"
+              },
+              {
+                "name": "columns",
+                "value": "",
+                "type": "query",
+                "description": "JSONB subset match filter for columns using base64 encoded JSON"
+              },
+              {
+                "name": "broad_filter",
+                "value": "",
+                "type": "query",
+                "description": "broad search across multiple fields (case-insensitive substring match)"
+              }
+            ]
+          },
+          "docs": "List All Assets in the Workspace with Cursor Pagination"
+        },
+        {
+          "info": {
+            "name": "List All Assets Used by Given Usages Paths",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/assets/list_by_usages",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List All Assets Used by Given Usages Paths"
+        },
+        {
+          "info": {
+            "name": "List All Favorite Assets for the Authenticated User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/assets/list_favorites",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List All Favorite Assets for the Authenticated User"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

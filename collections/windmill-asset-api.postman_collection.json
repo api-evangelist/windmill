@@ -1,0 +1,445 @@
+{
+  "item": [
+    {
+      "id": "fc0e087b-ff6a-4cee-88ad-2414fd4bf6c3",
+      "name": "asset",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e06311a6-eb26-46af-b44b-b047a47c448a",
+          "name": "List All Assets in the Workspace with Cursor Pagination",
+          "request": {
+            "name": "List All Assets in the Workspace with Cursor Pagination",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "assets",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "50",
+                  "description": "Number of items per page (max 1000, default 50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor_created_at",
+                  "value": "<dateTime>",
+                  "description": "Cursor timestamp for pagination (created_at of last item from previous page)"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor_id",
+                  "value": "<long>",
+                  "description": "Cursor ID for pagination (id of last item from previous page)"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_path",
+                  "value": "<string>",
+                  "description": "Filter by asset path (case-insensitive partial match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "usage_path",
+                  "value": "<string>",
+                  "description": "Filter by usage path (case-insensitive partial match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "asset_kinds",
+                  "value": "<string>",
+                  "description": "Filter by asset kinds (multiple values allowed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "exact path match filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "columns",
+                  "value": "<string>",
+                  "description": "JSONB subset match filter for columns using base64 encoded JSON"
+                },
+                {
+                  "disabled": false,
+                  "key": "broad_filter",
+                  "value": "<string>",
+                  "description": "broad search across multiple fields (case-insensitive substring match)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "218ae8d9-562c-4b21-a854-e63aad5538a6",
+              "name": "paginated assets in the workspace",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "assets",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "per_page",
+                      "value": "50"
+                    },
+                    {
+                      "key": "cursor_created_at",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "cursor_id",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "asset_path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "usage_path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "asset_kinds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "broad_filter",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"assets\": [\n    {\n      \"path\": \"string\",\n      \"kind\": \"datatable\",\n      \"usages\": [\n        {\n          \"path\": \"string\",\n          \"kind\": \"job\",\n          \"access_type\": \"rw\",\n          \"columns\": {\n            \"key_0\": \"w\",\n            \"key_1\": \"w\",\n            \"key_2\": \"w\",\n            \"key_3\": \"rw\"\n          },\n          \"created_at\": \"2020-12-09T06:10:46.138Z\",\n          \"metadata\": {\n            \"runnable_path\": \"string\",\n            \"job_kind\": \"string\"\n          }\n        },\n        {\n          \"path\": \"string\",\n          \"kind\": \"job\",\n          \"access_type\": \"rw\",\n          \"columns\": {\n            \"key_0\": \"rw\",\n            \"key_1\": \"rw\",\n            \"key_2\": \"rw\",\n            \"key_3\": \"w\"\n          },\n          \"created_at\": \"1977-07-14T07:20:25.558Z\",\n          \"metadata\": {\n            \"runnable_path\": \"string\",\n            \"job_kind\": \"string\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"resource_type\": \"string\"\n      }\n    },\n    {\n      \"path\": \"string\",\n      \"kind\": \"s3object\",\n      \"usages\": [\n        {\n          \"path\": \"string\",\n          \"kind\": \"script\",\n          \"access_type\": \"rw\",\n          \"columns\": {\n            \"key_0\": \"r\",\n            \"key_1\": \"w\",\n            \"key_2\": \"r\",\n            \"key_3\": \"r\"\n          },\n          \"created_at\": \"1950-08-21T16:25:44.253Z\",\n          \"metadata\": {\n            \"runnable_path\": \"string\",\n            \"job_kind\": \"string\"\n          }\n        },\n        {\n          \"path\": \"string\",\n          \"kind\": \"flow\",\n          \"access_type\": \"rw\",\n          \"columns\": {\n            \"key_0\": \"w\",\n            \"key_1\": \"r\"\n          },\n          \"created_at\": \"1967-09-03T16:33:27.921Z\",\n          \"metadata\": {\n            \"runnable_path\": \"string\",\n            \"job_kind\": \"string\"\n          }\n        }\n      ],\n      \"metadata\": {\n        \"resource_type\": \"string\"\n      }\n    }\n  ],\n  \"next_cursor\": {\n    \"created_at\": \"1980-09-27T23:55:31.383Z\",\n    \"id\": 8139\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f1950f4-6bae-47ac-a0ce-3a5afa857bfc",
+          "name": "List All Assets Used by Given Usages Paths",
+          "request": {
+            "name": "List All Assets Used by Given Usages Paths",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "assets",
+                "list_by_usages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usages\": [\n    {\n      \"path\": \"<string>\",\n      \"kind\": \"<string>\"\n    },\n    {\n      \"path\": \"<string>\",\n      \"kind\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "244ef34b-3f13-40d2-b4dc-d014cbb18996",
+              "name": "all assets used by the given usage paths, in the same order",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "assets",
+                    "list_by_usages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"usages\": [\n    {\n      \"path\": \"<string>\",\n      \"kind\": \"<string>\"\n    },\n    {\n      \"path\": \"<string>\",\n      \"kind\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  [\n    {\n      \"path\": \"string\",\n      \"kind\": \"volume\",\n      \"access_type\": \"r\"\n    },\n    {\n      \"path\": \"string\",\n      \"kind\": \"volume\",\n      \"access_type\": \"r\"\n    }\n  ],\n  [\n    {\n      \"path\": \"string\",\n      \"kind\": \"volume\",\n      \"access_type\": \"w\"\n    },\n    {\n      \"path\": \"string\",\n      \"kind\": \"datatable\",\n      \"access_type\": \"rw\"\n    }\n  ]\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e3eb9b2-6623-4b0e-b9b2-6a7e5d9a9e54",
+          "name": "List All Favorite Assets for the Authenticated User",
+          "request": {
+            "name": "List All Favorite Assets for the Authenticated User",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "assets",
+                "list_favorites"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0eabad1d-0bbd-4e61-8387-5a220f1cfd4d",
+              "name": "list of favorite assets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "assets",
+                    "list_favorites"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"path\": \"string\"\n  },\n  {\n    \"path\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "290a1d85-1991-4651-a8dd-5c3b27a3e190",
+    "name": "Windmill admin asset API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

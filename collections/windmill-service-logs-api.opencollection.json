@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin service_logs API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "service_logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Log Files Ordered by Timestamp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/service_logs/list_files",
+            "params": [
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "filter on created after (exclusive) timestamp"
+              },
+              {
+                "name": "with_error",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Log Files Ordered by Timestamp"
+        },
+        {
+          "info": {
+            "name": "Get Log File by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/service_logs/get_log_file/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Log File by Path"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

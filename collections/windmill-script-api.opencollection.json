@@ -1,0 +1,952 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin script API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "script",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Hub Script Content by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/scripts/hub/get/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Hub Script Content by Path"
+        },
+        {
+          "info": {
+            "name": "Get Full Hub Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/scripts/hub/get_full/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Full Hub Script by Path"
+        },
+        {
+          "info": {
+            "name": "Record Hub Script Pick",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/scripts/hub/pick/:path",
+            "params": [
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Record Hub Script Pick"
+        },
+        {
+          "info": {
+            "name": "Get Top Hub Scripts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/scripts/hub/top",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "query limit"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "query scripts app"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "query scripts kind"
+              }
+            ]
+          },
+          "docs": "Get Top Hub Scripts"
+        },
+        {
+          "info": {
+            "name": "Query Hub Scripts by Similarity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/embeddings/query_hub_scripts",
+            "params": [
+              {
+                "name": "text",
+                "value": "",
+                "type": "query",
+                "description": "query text"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "query",
+                "description": "query scripts kind"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "query limit"
+              },
+              {
+                "name": "app",
+                "value": "",
+                "type": "query",
+                "description": "query scripts app"
+              }
+            ]
+          },
+          "docs": "Query Hub Scripts by Similarity"
+        },
+        {
+          "info": {
+            "name": "List Scripts for Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/list_search",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Scripts for Search"
+        },
+        {
+          "info": {
+            "name": "List All Scripts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "order_desc",
+                "value": "",
+                "type": "query",
+                "description": "order by desc order (default true)"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "path_start",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter matching starting path"
+              },
+              {
+                "name": "path_exact",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "first_parent_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter scripts whom first direct parent has exact hash"
+              },
+              {
+                "name": "last_parent_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter scripts whom last parent in the chain has exact hash.\nBeware that each script stores only a limited number of parents. Hence\nthe last parent hash for a script is not necessarily its top-most parent.\nTo find the top-most parent you will have to jump from last to last hash\n until finding the parent\n"
+              },
+              {
+                "name": "parent_hash",
+                "value": "",
+                "type": "query",
+                "description": "is the hash present in the array of stored parent hashes for this script.\nThe same warning applies than for last_parent_hash. A script only store a\nlimited number of direct parent\n"
+              },
+              {
+                "name": "show_archived",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nshow only the archived files.\nwhen multiple archived hash share the same path, only the ones with the latest create_at\nare\ned.\n"
+              },
+              {
+                "name": "include_without_main",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude scripts without an exported main function\n"
+              },
+              {
+                "name": "include_draft_only",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude scripts that have no deployed version\n"
+              },
+              {
+                "name": "is_template",
+                "value": "",
+                "type": "query",
+                "description": "(default regardless)\nif true show only the templates\nif false show only the non templates\nif not defined, show all regardless of if the script is a template\n"
+              },
+              {
+                "name": "kinds",
+                "value": "",
+                "type": "query",
+                "description": "(default regardless)\nscript kinds to filter, split by comma\n"
+              },
+              {
+                "name": "starred_only",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nshow only the starred items\n"
+              },
+              {
+                "name": "with_deployment_msg",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude deployment message\n"
+              },
+              {
+                "name": "languages",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include scripts written in the given languages.\nAccepts multiple values as a comma-separated list.\n"
+              },
+              {
+                "name": "without_description",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nIf true, the description field will be omitted from the response.\n"
+              },
+              {
+                "name": "dedicated_worker",
+                "value": "",
+                "type": "query",
+                "description": "(default regardless)\nIf true, show only scripts with dedicated_worker enabled.\nIf false, show only scripts with dedicated_worker disabled.\n"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label"
+              }
+            ]
+          },
+          "docs": "List All Scripts"
+        },
+        {
+          "info": {
+            "name": "List All Scripts Paths",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/list_paths",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List All Scripts Paths"
+        },
+        {
+          "info": {
+            "name": "Create Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new script when the path does not already exist.\nCreates a new version of an existing script when called with the same path and the current `parent_hash`.\n"
+        },
+        {
+          "info": {
+            "name": "Toggle ON and OFF the Workspace Error Handler for a Given Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/toggle_workspace_error_handler/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Toggle ON and OFF the Workspace Error Handler for a Given Script"
+        },
+        {
+          "info": {
+            "name": "Archive Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/archive/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive Script by Path"
+        },
+        {
+          "info": {
+            "name": "Archive Script by Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/archive/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive Script by Hash"
+        },
+        {
+          "info": {
+            "name": "Delete Script by Hash (erase Content but Keep Hash, Require Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/delete/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Script by Hash (erase Content but Keep Hash, Require Admin)"
+        },
+        {
+          "info": {
+            "name": "Delete Script at a Given Path (require Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/delete/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "keep_captures",
+                "value": "",
+                "type": "query",
+                "description": "keep captures"
+              }
+            ]
+          },
+          "docs": "Delete Script at a Given Path (require Admin)"
+        },
+        {
+          "info": {
+            "name": "Delete Scripts in Bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/scripts/delete_bulk",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete Scripts in Bulk"
+        },
+        {
+          "info": {
+            "name": "Get Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/get/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "with_starred_info",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Script by Path"
+        },
+        {
+          "info": {
+            "name": "Get Triggers Count of Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/get_triggers_count/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Triggers Count of Script"
+        },
+        {
+          "info": {
+            "name": "Get Tokens with Script Scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/list_tokens/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Tokens with Script Scope"
+        },
+        {
+          "info": {
+            "name": "Get Script by Path with Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/get/draft/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Script by Path with Draft"
+        },
+        {
+          "info": {
+            "name": "Get History of a Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/history/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get History of a Script by Path"
+        },
+        {
+          "info": {
+            "name": "List Script Paths Using Provided Script as a Relative Import",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/list_paths_from_workspace_runnable/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Script Paths Using Provided Script as a Relative Import"
+        },
+        {
+          "info": {
+            "name": "Get Scripts's Latest Version (hash)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/get_latest_version/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Scripts's Latest Version (hash)"
+        },
+        {
+          "info": {
+            "name": "Update History of a Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/history_update/h/:hash/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update History of a Script"
+        },
+        {
+          "info": {
+            "name": "List Dedicated Worker Scripts with Workspace Dependency Annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/list_dedicated_with_deps",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Dedicated Worker Scripts with Workspace Dependency Annotations"
+        },
+        {
+          "info": {
+            "name": "Raw Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/raw/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Raw Script by Path"
+        },
+        {
+          "info": {
+            "name": "raw script by path with a token (mostly used by lsp to be used with import maps to resolve scripts)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/scripts_u/tokened_raw/:workspace/:token/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "raw script by path with a token (mostly used by lsp to be used with import maps to resolve scripts)"
+        },
+        {
+          "info": {
+            "name": "Exists Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/exists/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Exists Script by Path"
+        },
+        {
+          "info": {
+            "name": "Get Script by Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/get/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "with_starred_info",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "authed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Script by Hash"
+        },
+        {
+          "info": {
+            "name": "Raw Script by Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/raw/h/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Raw Script by Hash"
+        },
+        {
+          "info": {
+            "name": "Get Script Deployment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/deployment_status/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Script Deployment Status"
+        },
+        {
+          "info": {
+            "name": "Get CI Test Results for a Script, Flow, or Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/scripts/ci_test_results/:kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get CI Test Results for a Script, Flow, or Resource"
+        },
+        {
+          "info": {
+            "name": "Get CI Test Results for Multiple Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/ci_test_results_batch",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get CI Test Results for Multiple Items"
+        },
+        {
+          "info": {
+            "name": "Store Raw Script Content Temporarily for CLI Lock Generation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/raw_temp/store",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Store Raw Script Content Temporarily for CLI Lock Generation"
+        },
+        {
+          "info": {
+            "name": "Diff Local Script Hashes Against Deployed Versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/scripts/raw_temp/diff",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Diff Local Script Hashes Against Deployed Versions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

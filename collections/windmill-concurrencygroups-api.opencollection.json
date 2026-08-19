@@ -1,0 +1,273 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin concurrencyGroups API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "concurrencyGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Concurrency Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/concurrency_groups/list"
+          },
+          "docs": "List All Concurrency Groups"
+        },
+        {
+          "info": {
+            "name": "Delete Concurrency Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/concurrency_groups/prune/:concurrency_id",
+            "params": [
+              {
+                "name": "concurrency_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Concurrency Group"
+        },
+        {
+          "info": {
+            "name": "Get the Concurrency Key for a Job that has Concurrency Limits Enabled",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/concurrency_groups/:id/key",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the Concurrency Key for a Job that has Concurrency Limits Enabled"
+        },
+        {
+          "info": {
+            "name": "Get Intervals of Job Runtime Concurrency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/concurrency_groups/list_jobs",
+            "params": [
+              {
+                "name": "concurrency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "row_limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "filter on running jobs"
+              },
+              {
+                "name": "scheduled_for_before_now",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+              },
+              {
+                "name": "completed_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "completed_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "created_before_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created before X for jobs in the queue only"
+              },
+              {
+                "name": "created_after_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created after X for jobs in the queue only"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "allow_wildcards",
+                "value": "",
+                "type": "query",
+                "description": "allow wildcards (*) in the filter of label, tag, worker"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "query",
+                "description": "filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')"
+              },
+              {
+                "name": "is_skipped",
+                "value": "",
+                "type": "query",
+                "description": "is the job skipped"
+              },
+              {
+                "name": "is_flow_step",
+                "value": "",
+                "type": "query",
+                "description": "is the job a flow step"
+              },
+              {
+                "name": "has_null_parent",
+                "value": "",
+                "type": "query",
+                "description": "has null parent"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              }
+            ]
+          },
+          "docs": "Get Intervals of Job Runtime Concurrency"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

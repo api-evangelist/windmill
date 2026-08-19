@@ -1,0 +1,320 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin schedule API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "schedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Preview Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/schedules/preview",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Preview Schedule"
+        },
+        {
+          "info": {
+            "name": "Create Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/schedules/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Schedule"
+        },
+        {
+          "info": {
+            "name": "Update Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/schedules/update/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Schedule"
+        },
+        {
+          "info": {
+            "name": "Set Enabled Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/schedules/setenabled/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Enabled Schedule"
+        },
+        {
+          "info": {
+            "name": "Delete Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/schedules/delete/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Schedule"
+        },
+        {
+          "info": {
+            "name": "Get Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/schedules/get/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Schedule"
+        },
+        {
+          "info": {
+            "name": "Does Schedule Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/schedules/exists/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Does Schedule Exists"
+        },
+        {
+          "info": {
+            "name": "List Schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/schedules/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "filter by path (script path)"
+              },
+              {
+                "name": "is_flow",
+                "value": "",
+                "type": "query",
+                "description": "filter schedules by whether they target a flow"
+              },
+              {
+                "name": "path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter schedules by path prefix"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "exact match on the schedule's path"
+              },
+              {
+                "name": "description",
+                "value": "",
+                "type": "query",
+                "description": "pattern match filter for description field (case-insensitive)"
+              },
+              {
+                "name": "summary",
+                "value": "",
+                "type": "query",
+                "description": "pattern match filter for summary field (case-insensitive)"
+              },
+              {
+                "name": "broad_filter",
+                "value": "",
+                "type": "query",
+                "description": "broad search across multiple fields (case-insensitive substring match)"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label"
+              }
+            ]
+          },
+          "docs": "List Schedules"
+        },
+        {
+          "info": {
+            "name": "List Schedules with Last 20 Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/schedules/list_with_jobs",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List Schedules with Last 20 Jobs"
+        },
+        {
+          "info": {
+            "name": "Set Default Error or Recoevery Handler",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/schedules/setdefaulthandler",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Default Error or Recoevery Handler"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

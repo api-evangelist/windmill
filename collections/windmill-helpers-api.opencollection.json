@@ -1,0 +1,832 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin helpers API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "helpers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/duckdb_connection_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket"
+        },
+        {
+          "info": {
+            "name": "Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/v2/duckdb_connection_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket"
+        },
+        {
+          "info": {
+            "name": "Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/polars_connection_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket"
+        },
+        {
+          "info": {
+            "name": "Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/v2/polars_connection_settings",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket"
+        },
+        {
+          "info": {
+            "name": "Returns the S3 Resource Associated to the Provided Path, or the workspace default S3 resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/v2/s3_resource_info",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the S3 Resource Associated to the Provided Path, or the workspace default S3 resource"
+        },
+        {
+          "info": {
+            "name": "Test Connection to the Workspace Object Storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/test_connection",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Test Connection to the Workspace Object Storage"
+        },
+        {
+          "info": {
+            "name": "List the File Keys Available in a Workspace Object Storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/list_stored_files",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "max_keys",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "marker",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List the File Keys Available in a Workspace Object Storage"
+        },
+        {
+          "info": {
+            "name": "Load Metadata of the File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_file_metadata",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load Metadata of the File"
+        },
+        {
+          "info": {
+            "name": "Load a Preview of the File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_file_preview",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_size_in_bytes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_mime_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "csv_separator",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "csv_has_header",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "read_bytes_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "read_bytes_length",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load a Preview of the File"
+        },
+        {
+          "info": {
+            "name": "List the File Keys Available in Instance Object Storage with Resource-based Access Control",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/list_git_repo_files",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "max_keys",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "marker",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "prefix",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List the File Keys Available in Instance Object Storage with Resource-based Access Control"
+        },
+        {
+          "info": {
+            "name": "Load a Preview of a File from Instance Storage with Resource-based Access Control",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_git_repo_file_preview",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_size_in_bytes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_mime_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "csv_separator",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "csv_has_header",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "read_bytes_from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "read_bytes_length",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load a Preview of a File from Instance Storage with Resource-based Access Control"
+        },
+        {
+          "info": {
+            "name": "Load File Metadata from Instance Storage with Resource-based Access Control",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_git_repo_file_metadata",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load File Metadata from Instance Storage with Resource-based Access Control"
+        },
+        {
+          "info": {
+            "name": "Check if S3 Path Exists and is a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/check_s3_folder_exists",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query",
+                "description": "S3 file key to check (e.g., gitrepos/{workspace_id}/u/user/resource/{commit_hash})"
+              },
+              {
+                "name": "marker_file",
+                "value": "",
+                "type": "query",
+                "description": "If provided, the folder is only considered to exist when this exact\nsentinel file is present under file_key. Lets callers distinguish a\nfully populated folder from a partial upload.\n"
+              }
+            ]
+          },
+          "docs": "Check if S3 Path Exists and is a Folder"
+        },
+        {
+          "info": {
+            "name": "Load a Preview of a Parquet File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_parquet_preview/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_col",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search_col",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search_term",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load a Preview of a Parquet File"
+        },
+        {
+          "info": {
+            "name": "Load the Table Row Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_table_count/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "search_col",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search_term",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load the Table Row Count"
+        },
+        {
+          "info": {
+            "name": "Load a Preview of a Csv File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/load_csv_preview/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_col",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_desc",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search_col",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search_term",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "csv_separator",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Load a Preview of a Csv File"
+        },
+        {
+          "info": {
+            "name": "Permanently Delete File from S3",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/job_helpers/delete_s3_file",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Permanently Delete File from S3"
+        },
+        {
+          "info": {
+            "name": "Move a S3 File from One Path to the Other Within the Same Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/move_s3_file",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "src_file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dest_file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Move a S3 File from One Path to the Other Within the Same Bucket"
+        },
+        {
+          "info": {
+            "name": "Upload File to S3 Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/upload_s3_file",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_extension",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3_resource_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "content_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "content_disposition",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Upload File to S3 Bucket"
+        },
+        {
+          "info": {
+            "name": "Upload a File to the Instance Storage Gitrepos Section for Viewing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/job_helpers/upload_git_repo_file_to_instance_storage",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_extension",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3_resource_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "content_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "content_disposition",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Upload a File to the Instance Storage Gitrepos Section for Viewing"
+        },
+        {
+          "info": {
+            "name": "Download File from S3 Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/download_s3_file",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3_resource_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Download File from S3 Bucket"
+        },
+        {
+          "info": {
+            "name": "Download File to S3 Bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/job_helpers/download_s3_parquet_file_as_csv",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3_resource_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Download File to S3 Bucket"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

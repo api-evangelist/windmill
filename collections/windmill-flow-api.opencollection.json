@@ -1,0 +1,589 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin flow API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "flow",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Hub Flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/flows/hub/list"
+          },
+          "docs": "List All Hub Flows"
+        },
+        {
+          "info": {
+            "name": "Get Hub Flow by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/flows/hub/get/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Hub Flow by Id"
+        },
+        {
+          "info": {
+            "name": "List All Flow Paths",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/list_paths",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List All Flow Paths"
+        },
+        {
+          "info": {
+            "name": "List Flows for Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/list_search",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Flows for Search"
+        },
+        {
+          "info": {
+            "name": "List All Flows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "order_desc",
+                "value": "",
+                "type": "query",
+                "description": "order by desc order (default true)"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "path_start",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter matching starting path"
+              },
+              {
+                "name": "path_exact",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "show_archived",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nshow only the archived files.\nwhen multiple archived hash share the same path, only the ones with the latest create_at\nare displayed.\n"
+              },
+              {
+                "name": "starred_only",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nshow only the starred items\n"
+              },
+              {
+                "name": "include_draft_only",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude items that have no deployed version\n"
+              },
+              {
+                "name": "with_deployment_msg",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude deployment message\n"
+              },
+              {
+                "name": "without_description",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nIf true, the description field will be omitted from the response.\n"
+              },
+              {
+                "name": "dedicated_worker",
+                "value": "",
+                "type": "query",
+                "description": "(default regardless)\nIf true, show only flows with dedicated_worker enabled.\nIf false, show only flows with dedicated_worker disabled.\n"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label"
+              }
+            ]
+          },
+          "docs": "List All Flows"
+        },
+        {
+          "info": {
+            "name": "Get Flow History by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/history/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow History by Path"
+        },
+        {
+          "info": {
+            "name": "Get Flow's Latest Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/get_latest_version/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow's Latest Version"
+        },
+        {
+          "info": {
+            "name": "List Flow Paths from Workspace Runnable",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/list_paths_from_workspace_runnable/:runnable_kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "match_path_start",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Flow Paths from Workspace Runnable"
+        },
+        {
+          "info": {
+            "name": "Get Flow Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/get/v/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow Version"
+        },
+        {
+          "info": {
+            "name": "Update Flow History",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/flows/history_update/v/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Flow History"
+        },
+        {
+          "info": {
+            "name": "Get Flow by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/get/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "with_starred_info",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Flow by Path"
+        },
+        {
+          "info": {
+            "name": "Get Flow Deployment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/deployment_status/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow Deployment Status"
+        },
+        {
+          "info": {
+            "name": "Get Triggers Count of Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/get_triggers_count/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Triggers Count of Flow"
+        },
+        {
+          "info": {
+            "name": "Get Tokens with Flow Scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/list_tokens/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Tokens with Flow Scope"
+        },
+        {
+          "info": {
+            "name": "Toggle ON and OFF the Workspace Error Handler for a Given Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/flows/toggle_workspace_error_handler/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Toggle ON and OFF the Workspace Error Handler for a Given Flow"
+        },
+        {
+          "info": {
+            "name": "Get Flow by Path with Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/get/draft/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow by Path with Draft"
+        },
+        {
+          "info": {
+            "name": "Exists Flow by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/flows/exists/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Exists Flow by Path"
+        },
+        {
+          "info": {
+            "name": "Create Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/flows/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Flow"
+        },
+        {
+          "info": {
+            "name": "Update Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/flows/update/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Flow"
+        },
+        {
+          "info": {
+            "name": "Archive Flow by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/flows/archive/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Archive Flow by Path"
+        },
+        {
+          "info": {
+            "name": "Delete Flow by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/flows/delete/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "keep_captures",
+                "value": "",
+                "type": "query",
+                "description": "keep captures"
+              }
+            ]
+          },
+          "docs": "Delete Flow by Path"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

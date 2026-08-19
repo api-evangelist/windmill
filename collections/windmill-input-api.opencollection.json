@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin input API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "input",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Inputs Used in Previously Completed Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/inputs/history",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runnable_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "include_preview",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List Inputs Used in Previously Completed Jobs"
+        },
+        {
+          "info": {
+            "name": "Get Args from History or Saved Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/inputs/:jobOrInputId/args",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "jobOrInputId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "input",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "allow_large",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Args from History or Saved Input"
+        },
+        {
+          "info": {
+            "name": "List Saved Inputs for a Runnable",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/inputs/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runnable_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List Saved Inputs for a Runnable"
+        },
+        {
+          "info": {
+            "name": "Create an Input for Future Use in a Script or Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/inputs/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "runnable_type",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an Input for Future Use in a Script or Flow"
+        },
+        {
+          "info": {
+            "name": "Update an Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/inputs/update",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an Input"
+        },
+        {
+          "info": {
+            "name": "Delete a Saved Input",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/inputs/delete/:input",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "input",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Saved Input"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

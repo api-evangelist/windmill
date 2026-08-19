@@ -1,0 +1,219 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin workspace_integration API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workspace_integration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Available Native Trigger Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/integrations/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Available Native Trigger Services"
+        },
+        {
+          "info": {
+            "name": "Check if Integrations for a Particular Service Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/exists",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check if Integrations for a Particular Service Exists"
+        },
+        {
+          "info": {
+            "name": "Create Native Trigger Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Native Trigger Service"
+        },
+        {
+          "info": {
+            "name": "Generate Connect Url for Native Trigger Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/generate_connect_url",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate Connect Url for Native Trigger Service"
+        },
+        {
+          "info": {
+            "name": "Check if Instance-level Credential Sharing is Available for a Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/instance_sharing_available",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check if Instance-level Credential Sharing is Available for a Service"
+        },
+        {
+          "info": {
+            "name": "Generate Connect Url Using Instance-level Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/generate_instance_connect_url",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate Connect Url Using Instance-level Credentials"
+        },
+        {
+          "info": {
+            "name": "Delete Native Trigger Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/delete",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Native Trigger Service"
+        },
+        {
+          "info": {
+            "name": "Native Trigger Service Oauth Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/native_triggers/integrations/:service_name/callback",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Native Trigger Service Oauth Callback"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,427 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin group API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Instance Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/groups/list"
+          },
+          "docs": "List Instance Groups"
+        },
+        {
+          "info": {
+            "name": "List Instance Groups with Workspace Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/groups/list_with_workspaces"
+          },
+          "docs": "List Instance Groups with Workspace Information"
+        },
+        {
+          "info": {
+            "name": "Get Instance Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/groups/get/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Instance Group"
+        },
+        {
+          "info": {
+            "name": "Create Instance Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/groups/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Instance Group"
+        },
+        {
+          "info": {
+            "name": "Update Instance Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/groups/update/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Instance Group"
+        },
+        {
+          "info": {
+            "name": "Delete Instance Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/groups/delete/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Instance Group"
+        },
+        {
+          "info": {
+            "name": "Add User to Instance Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/groups/adduser/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add User to Instance Group"
+        },
+        {
+          "info": {
+            "name": "Remove User from Instance Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/groups/removeuser/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove User from Instance Group"
+        },
+        {
+          "info": {
+            "name": "Export Instance Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/groups/export"
+          },
+          "docs": "Export Instance Groups"
+        },
+        {
+          "info": {
+            "name": "Overwrite Instance Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/groups/overwrite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Overwrite Instance Groups"
+        },
+        {
+          "info": {
+            "name": "List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/groups/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List Groups"
+        },
+        {
+          "info": {
+            "name": "List Group Names",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/groups/listnames",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "only_member_of",
+                "value": "",
+                "type": "query",
+                "description": "only list the groups the user is member of (default false)"
+              }
+            ]
+          },
+          "docs": "List Group Names"
+        },
+        {
+          "info": {
+            "name": "Create Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/groups/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Group"
+        },
+        {
+          "info": {
+            "name": "Update Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/groups/update/:name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Group"
+        },
+        {
+          "info": {
+            "name": "Delete Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/groups/delete/:name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Group"
+        },
+        {
+          "info": {
+            "name": "Get Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/groups/get/:name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Group"
+        },
+        {
+          "info": {
+            "name": "Add User to Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/groups/adduser/:name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add User to Group"
+        },
+        {
+          "info": {
+            "name": "Remove User to Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/groups/removeuser/:name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove User to Group"
+        },
+        {
+          "info": {
+            "name": "Get Group Permission History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/groups_history/get/:name",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "Get Group Permission History"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

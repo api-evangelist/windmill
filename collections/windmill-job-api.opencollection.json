@@ -1,0 +1,4246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin job API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "job",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Selected Jobs Script/flow Schemas Grouped by (kind, Path)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/list_selected_job_groups",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "List Selected Jobs Script/flow Schemas Grouped by (kind, Path)"
+        },
+        {
+          "info": {
+            "name": "Run Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduled_for",
+                "value": "",
+                "type": "query",
+                "description": "when to schedule this job (leave empty for immediate run)"
+              },
+              {
+                "name": "scheduled_in_secs",
+                "value": "",
+                "type": "query",
+                "description": "schedule the script to execute in the number of seconds starting now"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the script owner (default false)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Path"
+        },
+        {
+          "info": {
+            "name": "Run Script by Path with Get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/run_wait_result/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              }
+            ]
+          },
+          "docs": "Run Script by Path with Get"
+        },
+        {
+          "info": {
+            "name": "Run Script by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_wait_result/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Path"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Path and Wait Until Completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_wait_result/f/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow by Path and Wait Until Completion"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Version with GET and Wait Until Completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/run_wait_result/fv/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "flow version ID"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ]
+          },
+          "docs": "Run Flow by Version with GET and Wait Until Completion"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Version and Wait Until Completion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_wait_result/fv/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "flow version ID"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow by Version and Wait Until Completion"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Path with GET and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/run_and_stream/f/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ]
+          },
+          "docs": "Run Flow by Path with GET and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Path and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_and_stream/f/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow by Path and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Version with GET and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/run_and_stream/fv/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "flow version ID"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ]
+          },
+          "docs": "Run Flow by Version with GET and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Version and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_and_stream/fv/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "flow version ID"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow by Version and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Script by Path with GET and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/run_and_stream/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ]
+          },
+          "docs": "Run Script by Path with GET and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Script by Path and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_and_stream/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Path and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Script by Hash with GET and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/run_and_stream/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ]
+          },
+          "docs": "Run Script by Hash with GET and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Run Script by Hash and Stream Updates via SSE",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_and_stream/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "queue_limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum size of the queue for which the request would get rejected if that job would push it above that limit\n"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "poll_delay_ms",
+                "value": "",
+                "type": "query",
+                "description": "delay between polling for job updates in milliseconds"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Hash and Stream Updates via SSE"
+        },
+        {
+          "info": {
+            "name": "Get Job Result by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/result_by_id/:flow_job_id/:node_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "flow_job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Job Result by Id"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/f/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduled_for",
+                "value": "",
+                "type": "query",
+                "description": "when to schedule this job (leave empty for immediate run)"
+              },
+              {
+                "name": "scheduled_in_secs",
+                "value": "",
+                "type": "query",
+                "description": "schedule the script to execute in the number of seconds starting now"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the flow owner (default false)"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow by Path"
+        },
+        {
+          "info": {
+            "name": "Run Flow by Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/fv/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "flow version ID"
+              },
+              {
+                "name": "scheduled_for",
+                "value": "",
+                "type": "query",
+                "description": "when to schedule this job (leave empty for immediate run)"
+              },
+              {
+                "name": "scheduled_in_secs",
+                "value": "",
+                "type": "query",
+                "description": "schedule the script to execute in the number of seconds starting now"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the flow owner (default false)"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow by Version"
+        },
+        {
+          "info": {
+            "name": "Re-run Multiple Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/batch_rerun_jobs",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Re-run Multiple Jobs"
+        },
+        {
+          "info": {
+            "name": "Restart a Completed Flow at a Given Step",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/restart/f/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduled_for",
+                "value": "",
+                "type": "query",
+                "description": "when to schedule this job (leave empty for immediate run)"
+              },
+              {
+                "name": "scheduled_in_secs",
+                "value": "",
+                "type": "query",
+                "description": "schedule the script to execute in the number of seconds starting now"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the flow owner (default false)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Restart a Completed Flow at a Given Step"
+        },
+        {
+          "info": {
+            "name": "Run Script by Hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduled_for",
+                "value": "",
+                "type": "query",
+                "description": "when to schedule this job (leave empty for immediate run)"
+              },
+              {
+                "name": "scheduled_in_secs",
+                "value": "",
+                "type": "query",
+                "description": "schedule the script to execute in the number of seconds starting now"
+              },
+              {
+                "name": "skip_preprocessor",
+                "value": "",
+                "type": "query",
+                "description": "skip the preprocessor"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "Override the tag to use"
+              },
+              {
+                "name": "cache_ttl",
+                "value": "",
+                "type": "query",
+                "description": "Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the script owner (default false)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Hash"
+        },
+        {
+          "info": {
+            "name": "Run Script Preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/preview",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the script owner (default false)"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script Preview"
+        },
+        {
+          "info": {
+            "name": "Run Script Preview Without Starting a New Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_inline/preview",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script Preview Without Starting a New Job"
+        },
+        {
+          "info": {
+            "name": "Run Script by Path Without Starting a New Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_inline/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Path Without Starting a New Job"
+        },
+        {
+          "info": {
+            "name": "Run Script by Hash Without Starting a New Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_inline/h/:hash",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "hash",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script by Hash Without Starting a New Job"
+        },
+        {
+          "info": {
+            "name": "Run Script Preview and Wait for Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_wait_result/preview",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Script Preview and Wait for Result"
+        },
+        {
+          "info": {
+            "name": "Run Code-workflow Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/workflow_as_code/:job_id/:entrypoint",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "entrypoint",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Code-workflow Task"
+        },
+        {
+          "info": {
+            "name": "Run a One-off Dependencies Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/dependencies",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run a One-off Dependencies Job"
+        },
+        {
+          "info": {
+            "name": "Queue a One-off Dependencies Job and Return the Job Uuid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/dependencies_async",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queue a One-off Dependencies Job and Return the Job Uuid"
+        },
+        {
+          "info": {
+            "name": "Queue a One-off Flow Dependencies Job and Return the Job Uuid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/flow_dependencies_async",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Queue a One-off Flow Dependencies Job and Return the Job Uuid"
+        },
+        {
+          "info": {
+            "name": "Run Flow Preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/preview_flow",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_header",
+                "value": "",
+                "type": "query",
+                "description": "List of headers's keys (separated with ',') whove value are added to the args\nHeader's key lowercased and '-'' replaced to '_' such that 'Content-Type' becomes the 'content_type' arg key\n"
+              },
+              {
+                "name": "invisible_to_owner",
+                "value": "",
+                "type": "query",
+                "description": "make the run invisible to the the script owner (default false)"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "query",
+                "description": "The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow Preview"
+        },
+        {
+          "info": {
+            "name": "Run Flow Preview and Wait for Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run_wait_result/preview_flow",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "memory_id",
+                "value": "",
+                "type": "query",
+                "description": "memory ID for chat-enabled flows"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Flow Preview and Wait for Result"
+        },
+        {
+          "info": {
+            "name": "Run Dynamic Select Helper Function",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/run/dynamic_select",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Run Dynamic Select Helper Function"
+        },
+        {
+          "info": {
+            "name": "List All Queued Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/queue/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_desc",
+                "value": "",
+                "type": "query",
+                "description": "order by desc order (default true)"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "worker",
+                "value": "",
+                "type": "query",
+                "description": "filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "trigger_path",
+                "value": "",
+                "type": "query",
+                "description": "filter by trigger path. Supports comma-separated list (e.g. 'f/trigger1,f/trigger2') and negation by prefixing all values with '!' (e.g. '!f/trigger1,!f/trigger2')"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "query",
+                "description": "filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "scheduled_for_before_now",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "filter on suspended jobs"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "filter on running jobs"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "allow_wildcards",
+                "value": "",
+                "type": "query",
+                "description": "allow wildcards (*) in the filter of label, tag, worker"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              }
+            ]
+          },
+          "docs": "List All Queued Jobs"
+        },
+        {
+          "info": {
+            "name": "Get Queue Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/queue/count",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              }
+            ]
+          },
+          "docs": "Get Queue Count"
+        },
+        {
+          "info": {
+            "name": "Get Completed Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/completed/count",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Completed Count"
+        },
+        {
+          "info": {
+            "name": "Count Number of Completed Jobs with Filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/completed/count_jobs",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "completed_after_s_ago",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "tags",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Count Number of Completed Jobs with Filter"
+        },
+        {
+          "info": {
+            "name": "Get the Ids of All Jobs Matching the Given Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/list_filtered_uuids",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')"
+              },
+              {
+                "name": "worker",
+                "value": "",
+                "type": "query",
+                "description": "filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on created before (inclusive) timestamp"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on created after (exclusive) timestamp"
+              },
+              {
+                "name": "completed_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "completed_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "created_before_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created before X for jobs in the queue only"
+              },
+              {
+                "name": "created_after_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created after X for jobs in the queue only"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "filter on running jobs"
+              },
+              {
+                "name": "scheduled_for_before_now",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "filter on suspended jobs"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "is_skipped",
+                "value": "",
+                "type": "query",
+                "description": "is the job skipped"
+              },
+              {
+                "name": "is_flow_step",
+                "value": "",
+                "type": "query",
+                "description": "is the job a flow step"
+              },
+              {
+                "name": "has_null_parent",
+                "value": "",
+                "type": "query",
+                "description": "has null parent"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              }
+            ]
+          },
+          "docs": "Get the Ids of All Jobs Matching the Given Filters"
+        },
+        {
+          "info": {
+            "name": "Get the Ids of All Queued Jobs Matching the Given Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/queue/list_filtered_uuids",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_desc",
+                "value": "",
+                "type": "query",
+                "description": "order by desc order (default true)"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "scheduled_for_before_now",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "filter on suspended jobs"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "filter on running jobs"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "allow_wildcards",
+                "value": "",
+                "type": "query",
+                "description": "allow wildcards (*) in the filter of label, tag, worker"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "concurrency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              }
+            ]
+          },
+          "docs": "Get the Ids of All Queued Jobs Matching the Given Filters"
+        },
+        {
+          "info": {
+            "name": "Cancel Jobs Based on the Given Uuids",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/queue/cancel_selection",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "force_cancel",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel Jobs Based on the Given Uuids"
+        },
+        {
+          "info": {
+            "name": "Get OpenTelemetry Traces for a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/get_otel_traces/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get OpenTelemetry Traces for a Job"
+        },
+        {
+          "info": {
+            "name": "List All Completed Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/completed/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "order_desc",
+                "value": "",
+                "type": "query",
+                "description": "order by desc order (default true)"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')"
+              },
+              {
+                "name": "worker",
+                "value": "",
+                "type": "query",
+                "description": "filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "allow_wildcards",
+                "value": "",
+                "type": "query",
+                "description": "allow wildcards (*) in the filter of label, tag, worker"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "is_skipped",
+                "value": "",
+                "type": "query",
+                "description": "is the job skipped"
+              },
+              {
+                "name": "is_flow_step",
+                "value": "",
+                "type": "query",
+                "description": "is the job a flow step"
+              },
+              {
+                "name": "has_null_parent",
+                "value": "",
+                "type": "query",
+                "description": "has null parent"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              }
+            ]
+          },
+          "docs": "List All Completed Jobs"
+        },
+        {
+          "info": {
+            "name": "Export All Completed Jobs for Backup/migration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/completed/export",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "Export All Completed Jobs for Backup/migration"
+        },
+        {
+          "info": {
+            "name": "Import Completed Jobs from Backup/migration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/completed/import",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import Completed Jobs from Backup/migration"
+        },
+        {
+          "info": {
+            "name": "Export All Queued Jobs for Backup/migration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/queue/export",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "Export All Queued Jobs for Backup/migration"
+        },
+        {
+          "info": {
+            "name": "Import Queued Jobs from Backup/migration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/queue/import",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Import Queued Jobs from Backup/migration"
+        },
+        {
+          "info": {
+            "name": "Delete Jobs by IDs from All Related Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/delete",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete Jobs by IDs from All Related Tables"
+        },
+        {
+          "info": {
+            "name": "List All Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')"
+              },
+              {
+                "name": "worker",
+                "value": "",
+                "type": "query",
+                "description": "filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "created_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on created before (inclusive) timestamp"
+              },
+              {
+                "name": "created_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on created after (exclusive) timestamp"
+              },
+              {
+                "name": "completed_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "completed_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "created_before_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created before X for jobs in the queue only"
+              },
+              {
+                "name": "created_after_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created after X for jobs in the queue only"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "filter on running jobs"
+              },
+              {
+                "name": "scheduled_for_before_now",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "suspended",
+                "value": "",
+                "type": "query",
+                "description": "filter on suspended jobs"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "allow_wildcards",
+                "value": "",
+                "type": "query",
+                "description": "allow wildcards (*) in the filter of label, tag, worker"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "query",
+                "description": "filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')"
+              },
+              {
+                "name": "is_skipped",
+                "value": "",
+                "type": "query",
+                "description": "is the job skipped"
+              },
+              {
+                "name": "is_flow_step",
+                "value": "",
+                "type": "query",
+                "description": "is the job a flow step"
+              },
+              {
+                "name": "has_null_parent",
+                "value": "",
+                "type": "query",
+                "description": "has null parent"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              },
+              {
+                "name": "broad_filter",
+                "value": "",
+                "type": "query",
+                "description": "broad search across multiple fields (case-insensitive substring match on path, tag, schedule path, trigger kind, label)"
+              }
+            ]
+          },
+          "docs": "List All Jobs"
+        },
+        {
+          "info": {
+            "name": "Get Db Clock",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/jobs/db_clock"
+          },
+          "docs": "Get Db Clock"
+        },
+        {
+          "info": {
+            "name": "Count Jobs by Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/jobs/completed/count_by_tag",
+            "params": [
+              {
+                "name": "horizon_secs",
+                "value": "",
+                "type": "query",
+                "description": "Past Time horizon in seconds (when to start the count = now - horizon) (default is 3600)"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "query",
+                "description": "Specific workspace ID to filter results (optional)"
+              }
+            ]
+          },
+          "docs": "Count Jobs by Tag"
+        },
+        {
+          "info": {
+            "name": "Get Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "no_logs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no_code",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "approval_token",
+                "value": "",
+                "type": "query",
+                "description": "Approval token granting read access to the job when not logged in. The token must be the one issued for this job's flow (i.e. the flow id used when generating the approval URL)."
+              }
+            ]
+          },
+          "docs": "Get Job"
+        },
+        {
+          "info": {
+            "name": "Get Root Job Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_root_job_id/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Root Job Id"
+        },
+        {
+          "info": {
+            "name": "Get Job Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_logs/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "remove_ansi_warnings",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Job Logs"
+        },
+        {
+          "info": {
+            "name": "Get All Logs for a Flow Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_flow_all_logs/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get All Logs for a Flow Job"
+        },
+        {
+          "info": {
+            "name": "Get Completed Job Logs Tail",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_completed_logs_tail/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Completed Job Logs Tail"
+        },
+        {
+          "info": {
+            "name": "Get Job Args",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_args/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Job Args"
+        },
+        {
+          "info": {
+            "name": "Get Started at by Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/queue/get_started_at_by_ids",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get Started at by Ids"
+        },
+        {
+          "info": {
+            "name": "Get Job Updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/getupdate/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "log_offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stream_offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "get_progress",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no_logs",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Job Updates"
+        },
+        {
+          "info": {
+            "name": "Get Job Updates via Server-sent Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/getupdate_sse/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "log_offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stream_offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "get_progress",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "only_result",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no_logs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "fast",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Job Updates via Server-sent Events"
+        },
+        {
+          "info": {
+            "name": "Get Log File from Object Store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_log_file/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Log File from Object Store"
+        },
+        {
+          "info": {
+            "name": "Get Flow Debug Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_flow_debug_info/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow Debug Info"
+        },
+        {
+          "info": {
+            "name": "Get Completed Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/completed/get/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Completed Job"
+        },
+        {
+          "info": {
+            "name": "Get Completed Job Result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/completed/get_result/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "suspended_job",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "secret",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Completed Job Result"
+        },
+        {
+          "info": {
+            "name": "Get Completed Job Result if Job is Completed",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/completed/get_result_maybe/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "get_started",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Completed Job Result if Job is Completed"
+        },
+        {
+          "info": {
+            "name": "Get Completed Job Timing",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/completed/get_timing/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Completed Job Timing"
+        },
+        {
+          "info": {
+            "name": "Delete Completed Job (erase Content but Keep Run Id)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/completed/delete/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Completed Job (erase Content but Keep Run Id)"
+        },
+        {
+          "info": {
+            "name": "Cancel Queued or Running Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/queue/cancel/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel Queued or Running Job"
+        },
+        {
+          "info": {
+            "name": "Cancel All Queued Jobs for Persistent Script",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/queue/cancel_persistent/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel All Queued Jobs for Persistent Script"
+        },
+        {
+          "info": {
+            "name": "Force Cancel Queued Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/queue/force_cancel/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Force Cancel Queued Job"
+        },
+        {
+          "info": {
+            "name": "Get Queue Position for a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/queue/position/:scheduled_for",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "scheduled_for",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Queue Position for a Job"
+        },
+        {
+          "info": {
+            "name": "Get Scheduled for Timestamp for a Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/queue/scheduled_for/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Scheduled for Timestamp for a Job"
+        },
+        {
+          "info": {
+            "name": "Create an HMac Signature Given a Job Id and a Resume Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/job_signature/:id/:resume_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Create an HMac Signature Given a Job Id and a Resume Id"
+        },
+        {
+          "info": {
+            "name": "Get Resume Urls Given a Job_id, Resume_id and a Nonce to Resume a Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/resume_urls/:id/:resume_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flow_level",
+                "value": "",
+                "type": "query",
+                "description": "If true, generate resume URLs for the parent flow instead of the specific step. This allows pre-approvals that can be consumed by any later suspend step in the same flow."
+              }
+            ]
+          },
+          "docs": "Get Resume Urls Given a Job_id, Resume_id and a Nonce to Resume a Flow"
+        },
+        {
+          "info": {
+            "name": "Generate Interactive Slack Approval for Suspended Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/slack_approval/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "message",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "slack_resource_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flow_step_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "default_args_json",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dynamic_enums_json",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resume_button_text",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cancel_button_text",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generate Interactive Slack Approval for Suspended Job"
+        },
+        {
+          "info": {
+            "name": "Generate Interactive Teams Approval for Suspended Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/teams_approval/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "message",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "team_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "channel_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "flow_step_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "default_args_json",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dynamic_enums_json",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resume_button_text",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "cancel_button_text",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Generate Interactive Teams Approval for Suspended Job"
+        },
+        {
+          "info": {
+            "name": "Resume or Cancel a Suspended Flow/WAC Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/flow/resume_suspended/:job_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resume or cancel a suspended flow/WAC job. Uses approval rules to determine authorization. Either a valid approval_token or an authenticated session is required.\n"
+        },
+        {
+          "info": {
+            "name": "Get Approval Info for a Suspended Flow/WAC Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/flow/approval_info/:job_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "approval token for unauthenticated access"
+              }
+            ]
+          },
+          "docs": "Get approval info for a suspended flow/WAC job. Returns form schema, approval rules, and whether the current user can approve. Either a valid token query parameter or an authenticated session is required.\n"
+        },
+        {
+          "info": {
+            "name": "Resume a Job for a Suspended Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/resume/:id/:resume_id/:signature",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "payload",
+                "value": "",
+                "type": "query",
+                "description": "The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent\n`encodeURIComponent(btoa(JSON.stringify({a: 2})))`\n"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Resume a Job for a Suspended Flow"
+        },
+        {
+          "info": {
+            "name": "Resume a Job for a Suspended Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/resume/:id/:resume_id/:signature",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resume a Job for a Suspended Flow"
+        },
+        {
+          "info": {
+            "name": "Get Flow User State at a Given Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs/flow/user_states/:id/:key",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Flow User State at a Given Key"
+        },
+        {
+          "info": {
+            "name": "Set Flow User State at a Given Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/flow/user_states/:id/:key",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Flow User State at a Given Key"
+        },
+        {
+          "info": {
+            "name": "Resume a Job for a Suspended Flow as an Owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs/flow/resume/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resume a Job for a Suspended Flow as an Owner"
+        },
+        {
+          "info": {
+            "name": "Cancel a Job for a Suspended Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/cancel/:id/:resume_id/:signature",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Cancel a Job for a Suspended Flow"
+        },
+        {
+          "info": {
+            "name": "Cancel a Job for a Suspended Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/jobs_u/cancel/:id/:resume_id/:signature",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel a Job for a Suspended Flow"
+        },
+        {
+          "info": {
+            "name": "Get Parent Flow Job of Suspended Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/jobs_u/get_flow/:id/:resume_id/:signature",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resume_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "signature",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "approver",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Parent Flow Job of Suspended Job"
+        },
+        {
+          "info": {
+            "name": "Get Intervals of Job Runtime Concurrency",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/concurrency_groups/list_jobs",
+            "params": [
+              {
+                "name": "concurrency_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "row_limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')"
+              },
+              {
+                "name": "parent_job",
+                "value": "",
+                "type": "query",
+                "description": "The parent job that is at the origin and responsible for the execution of this script if any"
+              },
+              {
+                "name": "script_path_exact",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')"
+              },
+              {
+                "name": "script_path_start",
+                "value": "",
+                "type": "query",
+                "description": "filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')"
+              },
+              {
+                "name": "schedule_path",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter by schedule path"
+              },
+              {
+                "name": "script_hash",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "started_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "started_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "running",
+                "value": "",
+                "type": "query",
+                "description": "filter on running jobs"
+              },
+              {
+                "name": "scheduled_for_before_now",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs scheduled_for before now (hence waitinf for a worker)"
+              },
+              {
+                "name": "completed_before",
+                "value": "",
+                "type": "query",
+                "description": "filter on started before (inclusive) timestamp"
+              },
+              {
+                "name": "completed_after",
+                "value": "",
+                "type": "query",
+                "description": "filter on started after (exclusive) timestamp"
+              },
+              {
+                "name": "created_before_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created before X for jobs in the queue only"
+              },
+              {
+                "name": "created_after_queue",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs created after X for jobs in the queue only"
+              },
+              {
+                "name": "job_kinds",
+                "value": "",
+                "type": "query",
+                "description": "filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')"
+              },
+              {
+                "name": "args",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those args as a json subset (@> in postgres)"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')"
+              },
+              {
+                "name": "result",
+                "value": "",
+                "type": "query",
+                "description": "filter on jobs containing those result as a json subset (@> in postgres)"
+              },
+              {
+                "name": "allow_wildcards",
+                "value": "",
+                "type": "query",
+                "description": "allow wildcards (*) in the filter of label, tag, worker"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "query",
+                "description": "filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')"
+              },
+              {
+                "name": "is_skipped",
+                "value": "",
+                "type": "query",
+                "description": "is the job skipped"
+              },
+              {
+                "name": "is_flow_step",
+                "value": "",
+                "type": "query",
+                "description": "is the job a flow step"
+              },
+              {
+                "name": "has_null_parent",
+                "value": "",
+                "type": "query",
+                "description": "has null parent"
+              },
+              {
+                "name": "success",
+                "value": "",
+                "type": "query",
+                "description": "filter on successful jobs"
+              },
+              {
+                "name": "all_workspaces",
+                "value": "",
+                "type": "query",
+                "description": "get jobs from all workspaces (only valid if request come from the `admins` workspace)"
+              },
+              {
+                "name": "is_not_schedule",
+                "value": "",
+                "type": "query",
+                "description": "is not a scheduled job"
+              }
+            ]
+          },
+          "docs": "Get Intervals of Job Runtime Concurrency"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

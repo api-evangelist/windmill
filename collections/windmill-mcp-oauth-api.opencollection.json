@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin mcp_oauth API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "mcp_oauth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Discover MCP Server OAuth Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/mcp/oauth/discover",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Discover MCP Server OAuth Metadata"
+        },
+        {
+          "info": {
+            "name": "Start MCP OAuth Popup Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/mcp/oauth/start",
+            "params": [
+              {
+                "name": "mcp_server_url",
+                "value": "",
+                "type": "query",
+                "description": "URL of the MCP server to connect to"
+              },
+              {
+                "name": "scopes",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of OAuth scopes to request"
+              }
+            ]
+          },
+          "docs": "Opens in a popup, discovers OAuth metadata, registers client, and redirects to OAuth provider"
+        },
+        {
+          "info": {
+            "name": "MCP OAuth Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/mcp/oauth/callback",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "OAuth authorization code"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "CSRF state token"
+              }
+            ]
+          },
+          "docs": "Handles OAuth callback, exchanges code for tokens, returns HTML that posts message to opener"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

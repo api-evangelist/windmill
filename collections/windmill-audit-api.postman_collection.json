@@ -1,0 +1,363 @@
+{
+  "item": [
+    {
+      "id": "0c3da147-9e02-4f51-9f15-7923e79f7b21",
+      "name": "audit",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5b5cbc2e-6c93-451c-a711-91cbf30144dd",
+          "name": "Get Audit Log (requires Admin Privilege)",
+          "request": {
+            "name": "Get Audit Log (requires Admin Privilege)",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "audit",
+                "get",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1257628e-9994-42db-8dcf-7ddabab6f78e",
+              "name": "an audit log",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "audit",
+                    "get",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"workspace_id\": \"string\",\n  \"id\": 3884,\n  \"timestamp\": \"1992-02-26T16:53:08.325Z\",\n  \"username\": \"string\",\n  \"operation\": \"users.token.delete\",\n  \"action_kind\": \"Created\",\n  \"resource\": \"string\",\n  \"parameters\": {},\n  \"span\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5579ff4-80cf-460a-a866-6c6d3a2c36b3",
+          "name": "List Audit Logs (requires Admin Privilege)",
+          "request": {
+            "name": "List Audit Logs (requires Admin Privilege)",
+            "description": {},
+            "url": {
+              "path": [
+                "w",
+                ":workspace",
+                "audit",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "which page to return (start at 1, default 1)"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "number of items to return for a given page (default 30, max 100)"
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<dateTime>",
+                  "description": "filter on started before (inclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<dateTime>",
+                  "description": "filter on created after (exclusive) timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "username",
+                  "value": "<string>",
+                  "description": "filter on exact username of user"
+                },
+                {
+                  "disabled": false,
+                  "key": "operation",
+                  "value": "<string>",
+                  "description": "filter on exact or prefix name of operation"
+                },
+                {
+                  "disabled": false,
+                  "key": "operations",
+                  "value": "<string>",
+                  "description": "comma separated list of exact operations to include"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_operations",
+                  "value": "<string>",
+                  "description": "comma separated list of operations to exclude"
+                },
+                {
+                  "disabled": false,
+                  "key": "resource",
+                  "value": "<string>",
+                  "description": "filter on exact or prefix name of resource"
+                },
+                {
+                  "disabled": false,
+                  "key": "action_kind",
+                  "value": "<string>",
+                  "description": "filter on type of operation"
+                },
+                {
+                  "disabled": false,
+                  "key": "all_workspaces",
+                  "value": "<boolean>",
+                  "description": "get audit logs for all workspaces"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e696474a-fa72-4909-98e9-703cb9f9672e",
+              "name": "a list of audit logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "w",
+                    ":workspace",
+                    "audit",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "username",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operation",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "operations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "exclude_operations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resource",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "action_kind",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "all_workspaces",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"workspace_id\": \"string\",\n    \"id\": 7219,\n    \"timestamp\": \"1966-10-25T06:51:38.207Z\",\n    \"username\": \"string\",\n    \"operation\": \"igroup.create\",\n    \"action_kind\": \"Delete\",\n    \"resource\": \"string\",\n    \"parameters\": {},\n    \"span\": \"string\"\n  },\n  {\n    \"workspace_id\": \"string\",\n    \"id\": 4502,\n    \"timestamp\": \"2014-08-12T00:41:40.988Z\",\n    \"username\": \"string\",\n    \"operation\": \"jobs.run.noop\",\n    \"action_kind\": \"Execute\",\n    \"resource\": \"string\",\n    \"parameters\": {},\n    \"span\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4ac779a0-c407-4de2-91de-e89db2378ef5",
+    "name": "Windmill admin audit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: Windmill Team\n Email: contact@windmill.dev",
+      "type": "text/plain"
+    }
+  }
+}

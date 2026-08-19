@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin Git Sync API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Git Sync",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Connected Repositories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/github_app/connected_repositories",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination (default 1)"
+              }
+            ]
+          },
+          "docs": "Get Connected Repositories"
+        },
+        {
+          "info": {
+            "name": "Install a GitHub Installation from Another Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/github_app/install_from_workspace",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Install a GitHub Installation from Another Workspace"
+        },
+        {
+          "info": {
+            "name": "Delete a GitHub Installation from a Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/github_app/installation/:installation_id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "installation_id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the GitHub installation to delete"
+              }
+            ]
+          },
+          "docs": "Removes a GitHub installation from the specified workspace. Requires admin privileges."
+        },
+        {
+          "info": {
+            "name": "Export GitHub Installation JWT Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/github_app/export/:installationId",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "installationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Exports the JWT token for a specific GitHub installation in the workspace"
+        },
+        {
+          "info": {
+            "name": "Import GitHub Installation from JWT Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/github_app/import",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports a GitHub installation from a JWT token exported from another instance"
+        },
+        {
+          "info": {
+            "name": "GHES Installation Callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/github_app/ghes_installation_callback",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Register a self-managed GitHub App installation from GitHub Enterprise Server"
+        },
+        {
+          "info": {
+            "name": "Get GHES App Config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/github_app/ghes_config"
+          },
+          "docs": "Returns the GitHub Enterprise Server app configuration (without private key) for constructing the installation URL"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

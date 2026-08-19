@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin npm_proxy API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "npm_proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Npm Package Metadata from Private Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/npm_proxy/metadata/:package",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "npm package name"
+              }
+            ]
+          },
+          "docs": "Get Npm Package Metadata from Private Registry"
+        },
+        {
+          "info": {
+            "name": "Resolve Npm Package Version from Private Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/npm_proxy/resolve/:package",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "npm package name"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "version tag or reference"
+              }
+            ]
+          },
+          "docs": "Resolve Npm Package Version from Private Registry"
+        },
+        {
+          "info": {
+            "name": "Get Npm Package File Tree from Private Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/npm_proxy/filetree/:package/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "npm package name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "package version"
+              }
+            ]
+          },
+          "docs": "Get Npm Package File Tree from Private Registry"
+        },
+        {
+          "info": {
+            "name": "Get Specific File from Npm Package in Private Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/npm_proxy/file/:package/:version/:filepath",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "package",
+                "value": "",
+                "type": "path",
+                "description": "npm package name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "package version"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "path",
+                "description": "file path within package"
+              }
+            ]
+          },
+          "docs": "Get Specific File from Npm Package in Private Registry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

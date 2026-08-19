@@ -1,0 +1,1008 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin user API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "user",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login with Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with Password"
+        },
+        {
+          "info": {
+            "name": "Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/logout"
+          },
+          "docs": "Logout"
+        },
+        {
+          "info": {
+            "name": "Check if SMTP is Configured for Password Reset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/auth/is_smtp_configured"
+          },
+          "docs": "Check if SMTP is Configured for Password Reset"
+        },
+        {
+          "info": {
+            "name": "Check if Password Login is Disabled Instance-wide",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/auth/is_password_login_disabled"
+          },
+          "docs": "Check if Password Login is Disabled Instance-wide"
+        },
+        {
+          "info": {
+            "name": "Request Password Reset Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/request_password_reset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Request Password Reset Email"
+        },
+        {
+          "info": {
+            "name": "Reset Password Using Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/auth/reset_password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reset Password Using Token"
+        },
+        {
+          "info": {
+            "name": "Get User (require Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/get/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get User (require Admin Privilege)"
+        },
+        {
+          "info": {
+            "name": "Update User (require Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/users/update/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update User (require Admin Privilege)"
+        },
+        {
+          "info": {
+            "name": "Is Owner of Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/is_owner/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Is Owner of Path"
+        },
+        {
+          "info": {
+            "name": "Set Password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/setpassword",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Password"
+        },
+        {
+          "info": {
+            "name": "Set Password for a Specific User (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/set_password_of/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Password for a Specific User (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Set Login Type for a Specific User (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/set_login_type/:user",
+            "params": [
+              {
+                "name": "user",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set Login Type for a Specific User (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create User"
+        },
+        {
+          "info": {
+            "name": "Global Update User (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/update/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Global Update User (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Global Username Info (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/username_info/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Global Username Info (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Global Rename User (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/rename/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Global Rename User (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Global Delete User (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/users/delete/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Global Delete User (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Global Overwrite Users (require Super Admin and EE)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/overwrite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Global Overwrite Users (require Super Admin and EE)"
+        },
+        {
+          "info": {
+            "name": "Global Export Users (require Super Admin and EE)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/export"
+          },
+          "docs": "Global Export Users (require Super Admin and EE)"
+        },
+        {
+          "info": {
+            "name": "List External JWT Tokens (ee Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/ext_jwt_tokens",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query",
+                "description": "only tokens used in the last 30 days"
+              }
+            ]
+          },
+          "docs": "List External JWT Tokens (ee Only)"
+        },
+        {
+          "info": {
+            "name": "Submit User Onboarding Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/onboarding",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit User Onboarding Data"
+        },
+        {
+          "info": {
+            "name": "Delete User (require Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/users/delete/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete User (require Admin Privilege)"
+        },
+        {
+          "info": {
+            "name": "Preview Offboarding for a Workspace User (require Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/offboard_preview/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Preview Offboarding for a Workspace User (require Admin Privilege)"
+        },
+        {
+          "info": {
+            "name": "Offboard a Workspace User (reassign Objects, Optionally Delete User)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/users/offboard/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Offboard a Workspace User (reassign Objects, Optionally Delete User)"
+        },
+        {
+          "info": {
+            "name": "Preview Global Offboarding for a User Across All Workspaces (require Super Admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/offboard_preview/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Preview Global Offboarding for a User Across All Workspaces (require Super Admin)"
+        },
+        {
+          "info": {
+            "name": "Offboard a User Globally (reassign Objects Across Workspaces, Optionally Delete)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/offboard/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Offboard a User Globally (reassign Objects Across Workspaces, Optionally Delete)"
+        },
+        {
+          "info": {
+            "name": "Convert Manual User to Group User (require Admin Privilege)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/users/convert_to_group/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Convert Manual User to Group User (require Admin Privilege)"
+        },
+        {
+          "info": {
+            "name": "Get Current User Email (if Logged In)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/email"
+          },
+          "docs": "Get Current User Email (if Logged In)"
+        },
+        {
+          "info": {
+            "name": "Refresh the Current Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/refresh_token",
+            "params": [
+              {
+                "name": "if_expiring_in_less_than_s",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Refresh the Current Token"
+        },
+        {
+          "info": {
+            "name": "Get Tutorial Progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/tutorial_progress"
+          },
+          "docs": "Get Tutorial Progress"
+        },
+        {
+          "info": {
+            "name": "Update Tutorial Progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/tutorial_progress",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Tutorial Progress"
+        },
+        {
+          "info": {
+            "name": "Leave Instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/leave_instance"
+          },
+          "docs": "Leave Instance"
+        },
+        {
+          "info": {
+            "name": "Get Current Usage Outside of Premium Workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/usage"
+          },
+          "docs": "Get Current Usage Outside of Premium Workspaces"
+        },
+        {
+          "info": {
+            "name": "Get All Runnables in Every Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/all_runnables"
+          },
+          "docs": "Get All Runnables in Every Workspace"
+        },
+        {
+          "info": {
+            "name": "Get Current Global Whoami (if Logged In)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/whoami"
+          },
+          "docs": "Get Current Global Whoami (if Logged In)"
+        },
+        {
+          "info": {
+            "name": "List All Workspace Invites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/list_invites"
+          },
+          "docs": "List All Workspace Invites"
+        },
+        {
+          "info": {
+            "name": "Whoami",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/whoami",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Whoami"
+        },
+        {
+          "info": {
+            "name": "Accept Invite to Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/accept_invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Accept Invite to Workspace"
+        },
+        {
+          "info": {
+            "name": "Decline Invite to Workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/decline_invite",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Decline Invite to Workspace"
+        },
+        {
+          "info": {
+            "name": "Impersonate a Service Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/users/impersonate_service_account",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Impersonate a Service Account"
+        },
+        {
+          "info": {
+            "name": "Exit Service Account Impersonation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/users/exit_impersonation",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exit Service Account Impersonation"
+        },
+        {
+          "info": {
+            "name": "Whois",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/whois/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Whois"
+        },
+        {
+          "info": {
+            "name": "Exists Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/exists/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Exists Email"
+        },
+        {
+          "info": {
+            "name": "List All Users as Super Admin (require to be Super Amdin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/list_as_super_admin",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "active_only",
+                "value": "",
+                "type": "query",
+                "description": "filter only active users"
+              }
+            ]
+          },
+          "docs": "List All Users as Super Admin (require to be Super Amdin)"
+        },
+        {
+          "info": {
+            "name": "List Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Users"
+        },
+        {
+          "info": {
+            "name": "List Users Usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/list_usage",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Users Usage"
+        },
+        {
+          "info": {
+            "name": "List Usernames",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/list_usernames",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Usernames"
+        },
+        {
+          "info": {
+            "name": "Get Email from Username",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/users/username_to_email/:username",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "username",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Email from Username"
+        },
+        {
+          "info": {
+            "name": "Create Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/tokens/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Token"
+        },
+        {
+          "info": {
+            "name": "Create Token to Impersonate a User (require Superadmin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/tokens/impersonate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Token to Impersonate a User (require Superadmin)"
+        },
+        {
+          "info": {
+            "name": "Delete Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/users/tokens/delete/:token_prefix",
+            "params": [
+              {
+                "name": "token_prefix",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete Token"
+        },
+        {
+          "info": {
+            "name": "Update Scopes of an Existing Token (owner Only)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/users/tokens/update_scopes/:token_prefix",
+            "params": [
+              {
+                "name": "token_prefix",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Scopes of an Existing Token (owner Only)"
+        },
+        {
+          "info": {
+            "name": "List Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/users/tokens/list",
+            "params": [
+              {
+                "name": "exclude_ephemeral",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              }
+            ]
+          },
+          "docs": "List Token"
+        },
+        {
+          "info": {
+            "name": "Login with Oauth Authorization Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/oauth/login_callback/:client_name",
+            "params": [
+              {
+                "name": "client_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Login with Oauth Authorization Flow"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

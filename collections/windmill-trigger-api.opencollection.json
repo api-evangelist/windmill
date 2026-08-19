@@ -1,0 +1,92 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin trigger API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "trigger",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Resume All Suspended Jobs for a Specific Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/trigger/:trigger_kind/resume_suspended_trigger_jobs/:trigger_path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "path",
+                "description": "The kind of trigger"
+              },
+              {
+                "name": "trigger_path",
+                "value": "",
+                "type": "path",
+                "description": "The path of the trigger (can contain forward slashes)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resume All Suspended Jobs for a Specific Trigger"
+        },
+        {
+          "info": {
+            "name": "Cancel All Suspended Jobs for a Specific Trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/trigger/:trigger_kind/cancel_suspended_trigger_jobs/:trigger_path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "trigger_kind",
+                "value": "",
+                "type": "path",
+                "description": "The kind of trigger"
+              },
+              {
+                "name": "trigger_path",
+                "value": "",
+                "type": "path",
+                "description": "The path of the trigger (can contain forward slashes)"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel All Suspended Jobs for a Specific Trigger"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

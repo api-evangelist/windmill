@@ -1,0 +1,832 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Windmill admin app API",
+    "version": "1.694.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "app",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List All Hub Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/apps/hub/list"
+          },
+          "docs": "List All Hub Apps"
+        },
+        {
+          "info": {
+            "name": "Get Hub App by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/apps/hub/get/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Hub App by Id"
+        },
+        {
+          "info": {
+            "name": "Get Hub Raw App by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/apps/hub/get_raw/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Hub Raw App by Id"
+        },
+        {
+          "info": {
+            "name": "Get Public App by Custom Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/apps_u/public_app_by_custom_path/:custom_path",
+            "params": [
+              {
+                "name": "custom_path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public App by Custom Path"
+        },
+        {
+          "info": {
+            "name": "Get Raw App Data by",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/get_data/v/:secretWithExtension",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secretWithExtension",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Raw App Data by"
+        },
+        {
+          "info": {
+            "name": "List Apps for Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/list_search",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Apps for Search"
+        },
+        {
+          "info": {
+            "name": "List All Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/list",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "which page to return (start at 1, default 1)"
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "number of items to return for a given page (default 30, max 100)"
+              },
+              {
+                "name": "order_desc",
+                "value": "",
+                "type": "query",
+                "description": "order by desc order (default true)"
+              },
+              {
+                "name": "created_by",
+                "value": "",
+                "type": "query",
+                "description": "filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')"
+              },
+              {
+                "name": "path_start",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter matching starting path"
+              },
+              {
+                "name": "path_exact",
+                "value": "",
+                "type": "query",
+                "description": "mask to filter exact matching path"
+              },
+              {
+                "name": "starred_only",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\nshow only the starred items\n"
+              },
+              {
+                "name": "include_draft_only",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude items that have no deployed version\n"
+              },
+              {
+                "name": "with_deployment_msg",
+                "value": "",
+                "type": "query",
+                "description": "(default false)\ninclude deployment message\n"
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter by label"
+              }
+            ]
+          },
+          "docs": "List All Apps"
+        },
+        {
+          "info": {
+            "name": "Create App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps/create",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create App"
+        },
+        {
+          "info": {
+            "name": "Create App Raw",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps/create_raw",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "app",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "js",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "css",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Create App Raw"
+        },
+        {
+          "info": {
+            "name": "Does an App Exisst at Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/exists/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Does an App Exisst at Path"
+        },
+        {
+          "info": {
+            "name": "Get App by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/get/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "with_starred_info",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get App by Path"
+        },
+        {
+          "info": {
+            "name": "Get App Lite by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/get/lite/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get App Lite by Path"
+        },
+        {
+          "info": {
+            "name": "Get App by Path with Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/get/draft/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get App by Path with Draft"
+        },
+        {
+          "info": {
+            "name": "Get App History by Path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/history/p/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get App History by Path"
+        },
+        {
+          "info": {
+            "name": "Get Apps's Latest Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/get_latest_version/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Apps's Latest Version"
+        },
+        {
+          "info": {
+            "name": "List App Paths from Workspace Runnable",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/list_paths_from_workspace_runnable/:runnable_kind/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "runnable_kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List App Paths from Workspace Runnable"
+        },
+        {
+          "info": {
+            "name": "Update App History",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps/history_update/a/:id/v/:version",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update App History"
+        },
+        {
+          "info": {
+            "name": "Get Public App by Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps_u/public_app/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public App by Secret"
+        },
+        {
+          "info": {
+            "name": "Get Public Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps_u/public_resource/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Resource"
+        },
+        {
+          "info": {
+            "name": "Get Public Secret of App",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/secret_of/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Secret of App"
+        },
+        {
+          "info": {
+            "name": "Get Public Secret of Latest Version of an App Bundle",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/secret_of_latest_version/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Public Secret of Latest Version of an App Bundle"
+        },
+        {
+          "info": {
+            "name": "Get App by Version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/get/v/:id",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get App by Version"
+        },
+        {
+          "info": {
+            "name": "Delete App",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/apps/delete/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete App"
+        },
+        {
+          "info": {
+            "name": "Update App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps/update/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update App"
+        },
+        {
+          "info": {
+            "name": "Update App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps/update_raw/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "app",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "js",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "css",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Update App"
+        },
+        {
+          "info": {
+            "name": "Check if Custom Path Exists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/w/:workspace/apps/custom_path_exists/:custom_path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "custom_path",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Check if Custom Path Exists"
+        },
+        {
+          "info": {
+            "name": "Sign S3 Objects, to be Used by Anonymous Users in Public Apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps/sign_s3_objects",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sign S3 Objects, to be Used by Anonymous Users in Public Apps"
+        },
+        {
+          "info": {
+            "name": "ExecuteComponent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps_u/execute_component/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "ExecuteComponent"
+        },
+        {
+          "info": {
+            "name": "Upload S3 File from App",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/w/:workspace/apps_u/upload_s3_file/:path",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_key",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_extension",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "s3_resource_path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resource_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "storage",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "content_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "content_disposition",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Upload S3 File from App"
+        },
+        {
+          "info": {
+            "name": "Delete S3 File from App",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/w/:workspace/apps_u/delete_s3_file",
+            "params": [
+              {
+                "name": "workspace",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "delete_token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Delete S3 File from App"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
