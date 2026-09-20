@@ -1,0 +1,25 @@
+slug: windmill
+provider: Windmill
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: user
+  spec_file: windmill-user-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /auth/login 'Login with Password'; 'Reset Password Using Token'; 'Set Login Type for
+    a Specific User (require Super Admin)'; schemas Login, GlobalUserInfo, WorkspaceInvite, OffboardRequest
+  reason: Authentication, password lifecycle, user administration, invites and offboarding — this is identity
+    and access management (joiners-movers-leavers) for the platform, not HR employee records.
