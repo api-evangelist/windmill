@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin volume API
+  title: Windmill Volume API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: volume
+- name: Volume
 paths:
   /w/{workspace}/volumes/list:
     get:
       summary: List All Volumes in the Workspace
       operationId: listVolumes
       tags:
-      - volume
+      - Volume
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -41,7 +41,7 @@ paths:
       summary: Get the Volume Storage Name (secondary Storage) or Null for Primary
       operationId: getVolumeStorage
       tags:
-      - volume
+      - Volume
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -50,14 +50,15 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                nullable: true
+                type:
+                - string
+                - 'null'
   /w/{workspace}/volumes/create:
     post:
       summary: Create a New Volume
       operationId: createVolume
       tags:
-      - volume
+      - Volume
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -83,7 +84,7 @@ paths:
       summary: Delete a Volume (admin Only)
       operationId: deleteVolume
       tags:
-      - volume
+      - Volume
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: name
@@ -129,13 +130,15 @@ components:
         created_by:
           type: string
         updated_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         last_used_at:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         extra_perms:
           type: object
           additionalProperties: true

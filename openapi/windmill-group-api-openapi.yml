@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin group API
+  title: Windmill Group API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: group
+- name: Group
 paths:
   /groups/list:
     get:
       summary: List Instance Groups
       operationId: listInstanceGroups
       tags:
-      - group
+      - Group
       responses:
         '200':
           description: instance group list
@@ -39,7 +39,7 @@ paths:
       summary: List Instance Groups with Workspace Information
       operationId: listInstanceGroupsWithWorkspaces
       tags:
-      - group
+      - Group
       responses:
         '200':
           description: instance group list with workspaces
@@ -54,7 +54,7 @@ paths:
       summary: Get Instance Group
       operationId: getInstanceGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/Name'
       responses:
@@ -69,7 +69,7 @@ paths:
       summary: Create Instance Group
       operationId: createInstanceGroup
       tags:
-      - group
+      - Group
       requestBody:
         description: create instance group
         required: true
@@ -96,7 +96,7 @@ paths:
       summary: Update Instance Group
       operationId: updateInstanceGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/Name'
       requestBody:
@@ -110,8 +110,9 @@ paths:
                 new_summary:
                   type: string
                 instance_role:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                   description: Instance-level role for group members. 'superadmin', 'devops', 'user' or empty to clear.
               required:
               - new_summary
@@ -127,7 +128,7 @@ paths:
       summary: Delete Instance Group
       operationId: deleteInstanceGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/Name'
       responses:
@@ -142,7 +143,7 @@ paths:
       summary: Add User to Instance Group
       operationId: addUserToInstanceGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/Name'
       requestBody:
@@ -169,7 +170,7 @@ paths:
       summary: Remove User from Instance Group
       operationId: removeUserFromInstanceGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/Name'
       requestBody:
@@ -196,7 +197,7 @@ paths:
       summary: Export Instance Groups
       operationId: exportInstanceGroups
       tags:
-      - group
+      - Group
       responses:
         '200':
           description: exported instance groups
@@ -211,7 +212,7 @@ paths:
       summary: Overwrite Instance Groups
       operationId: overwriteInstanceGroups
       tags:
-      - group
+      - Group
       requestBody:
         description: overwrite instance groups
         required: true
@@ -233,7 +234,7 @@ paths:
       summary: List Groups
       operationId: listGroups
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -252,7 +253,7 @@ paths:
       summary: List Group Names
       operationId: listGroupNames
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: only_member_of
@@ -274,7 +275,7 @@ paths:
       summary: Create Group
       operationId: createGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -303,7 +304,7 @@ paths:
       summary: Update Group
       operationId: updateGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -329,7 +330,7 @@ paths:
       summary: Delete Group
       operationId: deleteGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -345,7 +346,7 @@ paths:
       summary: Get Group
       operationId: getGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -361,7 +362,7 @@ paths:
       summary: Add User to Group
       operationId: addUserToGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -387,7 +388,7 @@ paths:
       summary: Remove User to Group
       operationId: removeUserToGroup
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -413,7 +414,7 @@ paths:
       summary: Get Group Permission History
       operationId: getGroupPermissionHistory
       tags:
-      - group
+      - Group
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -439,88 +440,11 @@ paths:
                     change_type:
                       type: string
                     member_affected:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
-    InstanceGroupWithWorkspaces:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        instance_role:
-          type: string
-          nullable: true
-          enum:
-          - superadmin
-          - devops
-        workspaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkspaceInfo'
-    InstanceGroup:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        instance_role:
-          type: string
-          nullable: true
-          enum:
-          - superadmin
-          - devops
-    WorkspaceInfo:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        workspace_name:
-          type: string
-        role:
-          type: string
-      required:
-      - name
     Group:
       type: object
       properties:
@@ -556,13 +480,94 @@ components:
         external_id:
           type: string
         instance_role:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           enum:
           - superadmin
           - devops
       required:
       - name
+    InstanceGroup:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
+    WorkspaceInfo:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        workspace_name:
+          type: string
+        role:
+          type: string
+      required:
+      - name
+    InstanceGroupWithWorkspaces:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
+        workspaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceInfo'
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

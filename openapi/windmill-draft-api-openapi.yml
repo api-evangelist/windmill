@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin draft API
+  title: Windmill Draft API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: draft
+- name: Draft
 paths:
   /w/{workspace}/drafts/create:
     post:
       summary: Create Draft
       operationId: createDraft
       tags:
-      - draft
+      - Draft
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -59,7 +59,7 @@ paths:
       summary: Delete Draft
       operationId: deleteDraft
       tags:
-      - draft
+      - Draft
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: kind
@@ -81,14 +81,14 @@ paths:
                 type: string
 components:
   parameters:
-    ScriptPath:
-      name: path
+    WorkspaceId:
+      name: workspace
       in: path
       required: true
       schema:
         type: string
-    WorkspaceId:
-      name: workspace
+    ScriptPath:
+      name: path
       in: path
       required: true
       schema:

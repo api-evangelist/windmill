@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin job API
+  title: Windmill Job API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: job
+- name: Job
 paths:
   /w/{workspace}/jobs/list_selected_job_groups:
     post:
       summary: List Selected Jobs Script/flow Schemas Grouped by (kind, Path)
       operationId: listSelectedJobGroups
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -86,7 +86,7 @@ paths:
       x-mcp-instructions: You should first use getScriptByPath to retrieve the script's schema and understand what arguments are expected.
       x-mcp-tool-include-query-params: []
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -135,7 +135,7 @@ paths:
       summary: Run Script by Path
       operationId: runWaitResultScriptByPath
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -163,7 +163,7 @@ paths:
       summary: Run Script by Path with Get
       operationId: runWaitResultScriptByPathGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -186,7 +186,7 @@ paths:
       summary: Run Flow by Path and Wait Until Completion
       operationId: runWaitResultFlowByPath
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -218,7 +218,7 @@ paths:
       summary: Run Flow by Version and Wait Until Completion
       operationId: runWaitResultFlowByVersion
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: version
@@ -255,7 +255,7 @@ paths:
       summary: Run Flow by Version with GET and Wait Until Completion
       operationId: runWaitResultFlowByVersionGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: version
@@ -287,7 +287,7 @@ paths:
       summary: Run Flow by Path and Stream Updates via SSE
       operationId: runAndStreamFlowByPath
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -325,7 +325,7 @@ paths:
       summary: Run Flow by Path with GET and Stream Updates via SSE
       operationId: runAndStreamFlowByPathGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -358,7 +358,7 @@ paths:
       summary: Run Flow by Version and Stream Updates via SSE
       operationId: runAndStreamFlowByVersion
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: version
@@ -402,7 +402,7 @@ paths:
       summary: Run Flow by Version with GET and Stream Updates via SSE
       operationId: runAndStreamFlowByVersionGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: version
@@ -441,7 +441,7 @@ paths:
       summary: Run Script by Path and Stream Updates via SSE
       operationId: runAndStreamScriptByPath
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -476,7 +476,7 @@ paths:
       summary: Run Script by Path with GET and Stream Updates via SSE
       operationId: runAndStreamScriptByPathGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -506,7 +506,7 @@ paths:
       summary: Run Script by Hash and Stream Updates via SSE
       operationId: runAndStreamScriptByHash
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: hash
@@ -545,7 +545,7 @@ paths:
       summary: Run Script by Hash with GET and Stream Updates via SSE
       operationId: runAndStreamScriptByHashGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: hash
@@ -579,7 +579,7 @@ paths:
       summary: Get Job Result by Id
       operationId: resultById
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: flow_job_id
@@ -606,7 +606,7 @@ paths:
       x-mcp-instructions: You should first use getFlowByPath to retrieve the flow's schema and understand what arguments are expected.
       x-mcp-tool-include-query-params: []
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -657,7 +657,7 @@ paths:
       summary: Run Flow by Version
       operationId: runFlowByVersion
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: version
@@ -714,7 +714,7 @@ paths:
       summary: Re-run Multiple Jobs
       operationId: batchReRunJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -767,7 +767,7 @@ paths:
       summary: Restart a Completed Flow at a Given Step
       operationId: restartFlowAtStep
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -837,7 +837,7 @@ paths:
       summary: Run Script by Hash
       operationId: runScriptByHash
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -883,7 +883,7 @@ paths:
       summary: Run Script Preview
       operationId: runScriptPreview
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/IncludeHeader'
@@ -913,7 +913,7 @@ paths:
       summary: Run Script Preview Without Starting a New Job
       operationId: runScriptPreviewInline
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -934,7 +934,7 @@ paths:
       summary: Run Script by Path Without Starting a New Job
       operationId: runScriptByPathInline
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -956,7 +956,7 @@ paths:
       summary: Run Script by Hash Without Starting a New Job
       operationId: runScriptByHashInline
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -984,7 +984,7 @@ paths:
       - language
       - args
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1005,7 +1005,7 @@ paths:
       summary: Run Code-workflow Task
       operationId: runCodeWorkflowTask
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: job_id
@@ -1038,7 +1038,7 @@ paths:
       summary: Run a One-off Dependencies Job
       operationId: runRawScriptDependencies
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1075,7 +1075,7 @@ paths:
       summary: Queue a One-off Dependencies Job and Return the Job Uuid
       operationId: runRawScriptDependenciesAsync
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1108,7 +1108,7 @@ paths:
       summary: Queue a One-off Flow Dependencies Job and Return the Job Uuid
       operationId: runFlowDependenciesAsync
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1139,7 +1139,7 @@ paths:
       summary: Run Flow Preview
       operationId: runFlowPreview
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/IncludeHeader'
@@ -1175,7 +1175,7 @@ paths:
       summary: Run Flow Preview and Wait for Result
       operationId: runFlowPreviewAndWaitResult
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: memory_id
@@ -1202,7 +1202,7 @@ paths:
       summary: Run Dynamic Select Helper Function
       operationId: runDynamicSelect
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1226,7 +1226,7 @@ paths:
       operationId: listQueue
       x-mcp-tool: true
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/OrderDesc'
@@ -1276,7 +1276,7 @@ paths:
       summary: Get Queue Count
       operationId: getQueueCount
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: all_workspaces
@@ -1303,7 +1303,7 @@ paths:
       summary: Get Completed Count
       operationId: getCompletedCount
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1323,7 +1323,7 @@ paths:
       summary: Count Number of Completed Jobs with Filter
       operationId: countCompletedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: completed_after_s_ago
@@ -1354,7 +1354,7 @@ paths:
       summary: Get the Ids of All Jobs Matching the Given Filters
       operationId: listFilteredJobsUuids
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/CreatedBy'
@@ -1426,7 +1426,7 @@ paths:
       summary: Get the Ids of All Queued Jobs Matching the Given Filters
       operationId: listFilteredQueueUuids
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/OrderDesc'
@@ -1478,7 +1478,7 @@ paths:
       summary: Cancel Jobs Based on the Given Uuids
       operationId: cancelSelection
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: force_cancel
@@ -1512,7 +1512,7 @@ paths:
       summary: Get OpenTelemetry Traces for a Job
       operationId: getJobOtelTraces
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1530,7 +1530,7 @@ paths:
       summary: List All Completed Jobs
       operationId: listCompletedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/OrderDesc'
@@ -1586,7 +1586,7 @@ paths:
       summary: Export All Completed Jobs for Backup/migration
       operationId: exportCompletedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -1605,7 +1605,7 @@ paths:
       summary: Import Completed Jobs from Backup/migration
       operationId: importCompletedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1628,7 +1628,7 @@ paths:
       summary: Export All Queued Jobs for Backup/migration
       operationId: exportQueuedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -1647,7 +1647,7 @@ paths:
       summary: Import Queued Jobs from Backup/migration
       operationId: importQueuedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1670,7 +1670,7 @@ paths:
       summary: Delete Jobs by IDs from All Related Tables
       operationId: deleteJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1697,7 +1697,7 @@ paths:
       operationId: listJobs
       x-mcp-tool: true
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/CreatedBy'
@@ -1775,7 +1775,7 @@ paths:
       summary: Get Db Clock
       operationId: getDbClock
       tags:
-      - job
+      - Job
       responses:
         '200':
           description: the timestamp of the db that can be used to compute the drift
@@ -1788,7 +1788,7 @@ paths:
       summary: Count Jobs by Tag
       operationId: countJobsByTag
       tags:
-      - job
+      - Job
       parameters:
       - name: horizon_secs
         in: query
@@ -1825,7 +1825,7 @@ paths:
       operationId: getJob
       x-mcp-tool: true
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1854,7 +1854,7 @@ paths:
       summary: Get Root Job Id
       operationId: getRootJobId
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1871,7 +1871,7 @@ paths:
       operationId: getJobLogs
       x-mcp-tool: true
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1891,7 +1891,7 @@ paths:
       summary: Get All Logs for a Flow Job
       operationId: getFlowAllLogs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1907,7 +1907,7 @@ paths:
       summary: Get Completed Job Logs Tail
       operationId: getCompletedJobLogsTail
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1923,7 +1923,7 @@ paths:
       summary: Get Job Args
       operationId: getJobArgs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -1938,7 +1938,7 @@ paths:
       summary: Get Started at by Ids
       operationId: getStartedAtByIds
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1965,7 +1965,7 @@ paths:
       summary: Get Job Updates
       operationId: getJobUpdates
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2022,7 +2022,7 @@ paths:
       summary: Get Job Updates via Server-sent Events
       operationId: getJobUpdatesSSE
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2066,7 +2066,7 @@ paths:
       summary: Get Log File from Object Store
       operationId: getLogFileFromStore
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: path
@@ -2086,7 +2086,7 @@ paths:
       summary: Get Flow Debug Info
       operationId: getFlowDebugInfo
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2101,7 +2101,7 @@ paths:
       summary: Get Completed Job
       operationId: getCompletedJob
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2117,7 +2117,7 @@ paths:
       summary: Get Completed Job Result
       operationId: getCompletedJobResult
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2148,7 +2148,7 @@ paths:
       summary: Get Completed Job Result if Job is Completed
       operationId: getCompletedJobResultMaybe
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2176,7 +2176,7 @@ paths:
       summary: Get Completed Job Timing
       operationId: getCompletedJobTiming
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2203,7 +2203,7 @@ paths:
       summary: Delete Completed Job (erase Content but Keep Run Id)
       operationId: deleteCompletedJob
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2219,7 +2219,7 @@ paths:
       summary: Cancel Queued or Running Job
       operationId: cancelQueuedJob
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2245,7 +2245,7 @@ paths:
       summary: Cancel All Queued Jobs for Persistent Script
       operationId: cancelPersistentQueuedJobs
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -2271,7 +2271,7 @@ paths:
       summary: Force Cancel Queued Job
       operationId: forceCancelQueuedJob
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2297,7 +2297,7 @@ paths:
       summary: Get Queue Position for a Job
       operationId: getQueuePosition
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: scheduled_for
@@ -2322,7 +2322,7 @@ paths:
       summary: Get Scheduled for Timestamp for a Job
       operationId: getScheduledFor
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2338,7 +2338,7 @@ paths:
       summary: Create an HMac Signature Given a Job Id and a Resume Id
       operationId: createJobSignature
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2363,7 +2363,7 @@ paths:
       summary: Get Resume Urls Given a Job_id, Resume_id and a Nonce to Resume a Flow
       operationId: getResumeUrls
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2404,7 +2404,7 @@ paths:
       summary: Generate Interactive Slack Approval for Suspended Job
       operationId: getSlackApprovalPayload
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2459,7 +2459,7 @@ paths:
       summary: Generate Interactive Teams Approval for Suspended Job
       operationId: getTeamsApprovalPayload
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2512,12 +2512,10 @@ paths:
   /w/{workspace}/jobs_u/flow/resume_suspended/{job_id}:
     post:
       summary: Resume or Cancel a Suspended Flow/WAC Job
-      description: 'Resume or cancel a suspended flow/WAC job. Uses approval rules to determine authorization. Either a valid approval_token or an authenticated session is required.
-
-        '
+      description: Resume or cancel a suspended flow/WAC job. Uses approval rules to determine authorization. Either a valid approval_token or an authenticated session is required.
       operationId: resumeSuspended
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: job_id
@@ -2552,12 +2550,10 @@ paths:
   /w/{workspace}/jobs_u/flow/approval_info/{job_id}:
     get:
       summary: Get Approval Info for a Suspended Flow/WAC Job
-      description: 'Get approval info for a suspended flow/WAC job. Returns form schema, approval rules, and whether the current user can approve. Either a valid token query parameter or an authenticated session is required.
-
-        '
+      description: Get approval info for a suspended flow/WAC job. Returns form schema, approval rules, and whether the current user can approve. Either a valid token query parameter or an authenticated session is required.
       operationId: getApprovalInfo
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: job_id
@@ -2633,7 +2629,7 @@ paths:
       summary: Resume a Job for a Suspended Flow
       operationId: resumeSuspendedJobGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2663,7 +2659,7 @@ paths:
       summary: Resume a Job for a Suspended Flow
       operationId: resumeSuspendedJobPost
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2699,7 +2695,7 @@ paths:
       summary: Set Flow User State at a Given Key
       operationId: setFlowUserState
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2725,7 +2721,7 @@ paths:
       summary: Get Flow User State at a Given Key
       operationId: getFlowUserState
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2745,7 +2741,7 @@ paths:
       summary: Resume a Job for a Suspended Flow as an Owner
       operationId: resumeSuspendedFlowAsOwner
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2767,7 +2763,7 @@ paths:
       summary: Cancel a Job for a Suspended Flow
       operationId: cancelSuspendedJobGet
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2796,7 +2792,7 @@ paths:
       summary: Cancel a Job for a Suspended Flow
       operationId: cancelSuspendedJobPost
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2832,7 +2828,7 @@ paths:
       summary: Get Parent Flow Job of Suspended Job
       operationId: getSuspendedJobFlow
       tags:
-      - job
+      - Job
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -2880,7 +2876,7 @@ paths:
       summary: Get Intervals of Job Runtime Concurrency
       operationId: listExtendedJobs
       tags:
-      - job
+      - Job
       parameters:
       - name: concurrency_key
         in: query
@@ -2954,7 +2950,417 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExtendedJobs'
 components:
+  parameters:
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+    SkipPreprocessor:
+      name: skip_preprocessor
+      description: skip the preprocessor
+      in: query
+      schema:
+        type: boolean
+    ScriptHash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    IncludeHeader:
+      name: include_header
+      description: 'List of headers''s keys (separated with '','') whove value are added to the args
+
+        Header''s key lowercased and ''-'''' replaced to ''_'' such that ''Content-Type'' becomes the ''content_type'' arg key
+
+        '
+      in: query
+      schema:
+        type: string
+    ParentJob:
+      name: parent_job
+      description: The parent job that is at the origin and responsible for the execution of this script if any
+      in: query
+      schema:
+        type: string
+        format: uuid
+    Payload:
+      name: payload
+      description: 'The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent
+
+        `encodeURIComponent(btoa(JSON.stringify({a: 2})))`
+
+        '
+      in: query
+      schema:
+        type: string
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    Running:
+      name: running
+      description: filter on running jobs
+      in: query
+      schema:
+        type: boolean
+    AllowWildcards:
+      name: allow_wildcards
+      description: allow wildcards (*) in the filter of label, tag, worker
+      in: query
+      schema:
+        type: boolean
+    Label:
+      name: label
+      description: filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')
+      in: query
+      schema:
+        type: string
+    GetStarted:
+      name: get_started
+      in: query
+      schema:
+        type: boolean
+    CacheTtl:
+      name: cache_ttl
+      description: Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl
+      in: query
+      schema:
+        type: string
+    CreatedBeforeQueue:
+      name: created_before_queue
+      description: filter on jobs created before X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    QueueLimit:
+      name: queue_limit
+      description: 'The maximum size of the queue for which the request would get rejected if that job would push it above that limit
+
+        '
+      in: query
+      schema:
+        type: string
+    Worker:
+      name: worker
+      description: filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')
+      in: query
+      schema:
+        type: string
+    Suspended:
+      name: suspended
+      description: filter on suspended jobs
+      in: query
+      schema:
+        type: boolean
+    ScriptExactHash:
+      name: script_hash
+      description: mask to filter exact matching path
+      in: query
+      schema:
+        type: string
+    CompletedAfter:
+      name: completed_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    WorkerTag:
+      name: tag
+      description: Override the tag to use
+      in: query
+      schema:
+        type: string
+    CreatedBefore:
+      name: created_before
+      description: filter on created before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    StartedAfter:
+      name: started_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    JobTriggerKind:
+      name: trigger_kind
+      description: filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')
+      in: query
+      x-go-name: JobTriggerKindParam
+      schema:
+        type: string
+    TriggerPath:
+      name: trigger_path
+      description: filter by trigger path. Supports comma-separated list (e.g. 'f/trigger1,f/trigger2') and negation by prefixing all values with '!' (e.g. '!f/trigger1,!f/trigger2')
+      in: query
+      schema:
+        type: string
+    ScheduledForBeforeNow:
+      name: scheduled_for_before_now
+      description: filter on jobs scheduled_for before now (hence waitinf for a worker)
+      in: query
+      schema:
+        type: boolean
+    StartedBefore:
+      name: started_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Success:
+      name: success
+      description: filter on successful jobs
+      in: query
+      schema:
+        type: boolean
+    CreatedAfterQueue:
+      name: created_after_queue
+      description: filter on jobs created after X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ScriptStartPath:
+      name: script_path_start
+      description: filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')
+      in: query
+      schema:
+        type: string
+    CompletedBefore:
+      name: completed_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    SchedulePath:
+      name: schedule_path
+      description: mask to filter by schedule path
+      in: query
+      schema:
+        type: string
+    JobKinds:
+      name: job_kinds
+      description: filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')
+      in: query
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    ScriptExactPath:
+      name: script_path_exact
+      description: filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')
+      in: query
+      schema:
+        type: string
+    ResultFilter:
+      name: result
+      description: filter on jobs containing those result as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Tag:
+      name: tag
+      description: filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')
+      in: query
+      schema:
+        type: string
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    NewJobId:
+      name: job_id
+      description: The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)
+      in: query
+      schema:
+        type: string
+        format: uuid
+    CreatedAfter:
+      name: created_after
+      description: filter on created after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
   schemas:
+    InlineScriptArgs:
+      type: object
+      properties:
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+    FlowValue:
+      $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+    QueuedJob:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        id:
+          type: string
+          format: uuid
+        parent_job:
+          type: string
+          format: uuid
+        created_by:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        scheduled_for:
+          type: string
+          format: date-time
+        running:
+          type: boolean
+        script_path:
+          type: string
+        script_hash:
+          type: string
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        logs:
+          type: string
+        raw_code:
+          type: string
+        canceled:
+          type: boolean
+        canceled_by:
+          type: string
+        canceled_reason:
+          type: string
+        last_ping:
+          type: string
+          format: date-time
+        job_kind:
+          type: string
+          enum:
+          - script
+          - preview
+          - dependencies
+          - flowdependencies
+          - appdependencies
+          - flow
+          - flowpreview
+          - script_hub
+          - identity
+          - deploymentcallback
+          - singlestepflow
+          - flowscript
+          - flownode
+          - appscript
+          - aiagent
+          - unassigned_script
+          - unassigned_flow
+          - unassigned_singlestepflow
+        schedule_path:
+          type: string
+        permissioned_as:
+          type: string
+          description: 'The user (u/userfoo) or group (g/groupfoo) whom
+
+            the execution of this script will be permissioned_as and by extension its DT_TOKEN.
+
+            '
+        flow_status:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
+        workflow_as_code_status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        raw_flow:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
+        is_flow_step:
+          type: boolean
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        email:
+          type: string
+        visible_to_owner:
+          type: boolean
+        mem_peak:
+          type: integer
+        tag:
+          type: string
+        priority:
+          type: integer
+        self_wait_time_ms:
+          type: number
+        aggregate_wait_time_ms:
+          type: number
+        suspend:
+          type: number
+        preprocessed:
+          type: boolean
+        worker:
+          type: string
+      required:
+      - id
+      - running
+      - canceled
+      - job_kind
+      - permissioned_as
+      - is_flow_step
+      - email
+      - visible_to_owner
+      - tag
+    ObscuredJob:
+      type: object
+      properties:
+        typ:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
     FlowPreview:
       type: object
       properties:
@@ -2972,85 +3378,33 @@ components:
       - value
       - content
       - args
-    ObscuredJob:
-      type: object
-      properties:
-        typ:
-          type: string
-        started_at:
-          type: string
-          format: date-time
-        duration_ms:
-          type: number
-    FlowValue:
-      $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
-    RestartedFrom:
-      type: object
-      properties:
-        flow_job_id:
-          type: string
-          format: uuid
-        step_id:
-          type: string
-        branch_or_iteration_n:
-          type: integer
-          description: 0-based iteration index for ForLoop / branch index for BranchAll. Iterations 0..n-1 are preserved; iteration n is restarted.
-        flow_version:
-          type: integer
-        branch_chosen:
-          description: For BranchOne nested restart — the branch that was originally chosen, used to lock branch evaluation.
-          type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - default
-              - branch
-            branch:
-              type: integer
-        nested:
-          $ref: '#/components/schemas/RestartedFrom'
-          description: When set, the worker spawns the child for `step_id` as a `RestartedFlow` against `nested.flow_job_id` instead of fresh-launching it.
-    Preview:
-      type: object
-      properties:
-        content:
-          type: string
-          description: The code to run
-        path:
-          type: string
-          description: The path to the script
-        script_hash:
-          type: string
-          description: The hash of the script
-        args:
-          $ref: '#/components/schemas/ScriptArgs'
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        tag:
-          type: string
-        kind:
-          type: string
-          enum:
-          - code
-          - identity
-          - http
-        dedicated_worker:
-          type: boolean
-        lock:
-          type: string
-        flow_path:
-          type: string
-        modules:
-          type: object
-          nullable: true
-          description: Additional script modules keyed by relative file path
-          additionalProperties:
-            $ref: '#/components/schemas/ScriptModule'
-      required:
-      - args
-    InputTransform:
-      $ref: ../../openflow.openapi.yaml#/components/schemas/InputTransform
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
     ExportableCompletedJob:
       type: object
       description: Completed job with full data for export/import operations
@@ -3199,6 +3553,32 @@ components:
       - permissioned_as
       - email
       - visible_to_owner
+    WorkflowStatus:
+      type: object
+      properties:
+        scheduled_for:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
+        name:
+          type: string
+    RawScriptForDependencies:
+      type: object
+      properties:
+        raw_code:
+          type: string
+        path:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+      required:
+      - raw_code
+      - path
+      - language
     DynamicInputData:
       type: object
       properties:
@@ -3243,162 +3623,10 @@ components:
       required:
       - entrypoint_function
       - runnable_ref
-    Job:
-      oneOf:
-      - allOf:
-        - $ref: '#/components/schemas/CompletedJob'
-        - type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - CompletedJob
-      - allOf:
-        - $ref: '#/components/schemas/QueuedJob'
-        - type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - QueuedJob
-      discriminator:
-        propertyName: type
-    PreviewInline:
-      type: object
-      properties:
-        content:
-          type: string
-          description: The code to run
-        args:
-          $ref: '#/components/schemas/ScriptArgs'
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-      required:
-      - content
-      - args
-      - language
-    RunnableKind:
-      type: string
-      enum:
-      - script
-      - flow
     ScriptArgs:
       type: object
       description: The arguments to pass to the script or flow
       additionalProperties: true
-    QueuedJob:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        id:
-          type: string
-          format: uuid
-        parent_job:
-          type: string
-          format: uuid
-        created_by:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        started_at:
-          type: string
-          format: date-time
-        scheduled_for:
-          type: string
-          format: date-time
-        running:
-          type: boolean
-        script_path:
-          type: string
-        script_hash:
-          type: string
-        args:
-          $ref: '#/components/schemas/ScriptArgs'
-        logs:
-          type: string
-        raw_code:
-          type: string
-        canceled:
-          type: boolean
-        canceled_by:
-          type: string
-        canceled_reason:
-          type: string
-        last_ping:
-          type: string
-          format: date-time
-        job_kind:
-          type: string
-          enum:
-          - script
-          - preview
-          - dependencies
-          - flowdependencies
-          - appdependencies
-          - flow
-          - flowpreview
-          - script_hub
-          - identity
-          - deploymentcallback
-          - singlestepflow
-          - flowscript
-          - flownode
-          - appscript
-          - aiagent
-          - unassigned_script
-          - unassigned_flow
-          - unassigned_singlestepflow
-        schedule_path:
-          type: string
-        permissioned_as:
-          type: string
-          description: 'The user (u/userfoo) or group (g/groupfoo) whom
-
-            the execution of this script will be permissioned_as and by extension its DT_TOKEN.
-
-            '
-        flow_status:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowStatus
-        workflow_as_code_status:
-          $ref: '#/components/schemas/WorkflowStatus'
-        raw_flow:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/FlowValue
-        is_flow_step:
-          type: boolean
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        email:
-          type: string
-        visible_to_owner:
-          type: boolean
-        mem_peak:
-          type: integer
-        tag:
-          type: string
-        priority:
-          type: integer
-        self_wait_time_ms:
-          type: number
-        aggregate_wait_time_ms:
-          type: number
-        suspend:
-          type: number
-        preprocessed:
-          type: boolean
-        worker:
-          type: string
-      required:
-      - id
-      - running
-      - canceled
-      - job_kind
-      - permissioned_as
-      - is_flow_step
-      - email
-      - visible_to_owner
-      - tag
     ExportableQueuedJob:
       type: object
       description: Queued job with full data for export/import operations
@@ -3540,46 +3768,82 @@ components:
       - permissioned_as
       - email
       - visible_to_owner
-    ScriptLang:
-      type: string
-      enum:
-      - python3
-      - deno
-      - go
-      - bash
-      - powershell
-      - postgresql
-      - mysql
-      - bigquery
-      - snowflake
-      - mssql
-      - oracledb
-      - graphql
-      - nativets
-      - bun
-      - php
-      - rust
-      - ansible
-      - csharp
-      - nu
-      - java
-      - ruby
-      - rlang
-      - duckdb
-      - bunnative
-    WorkflowStatus:
+    Preview:
       type: object
       properties:
-        scheduled_for:
+        content:
           type: string
-          format: date-time
-        started_at:
+          description: The code to run
+        path:
           type: string
-          format: date-time
-        duration_ms:
-          type: number
-        name:
+          description: The path to the script
+        script_hash:
           type: string
+          description: The hash of the script
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        tag:
+          type: string
+        kind:
+          type: string
+          enum:
+          - code
+          - identity
+          - http
+        dedicated_worker:
+          type: boolean
+        lock:
+          type: string
+        flow_path:
+          type: string
+        modules:
+          type:
+          - object
+          - 'null'
+          description: Additional script modules keyed by relative file path
+          additionalProperties:
+            $ref: '#/components/schemas/ScriptModule'
+      required:
+      - args
+    ExtendedJobs:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        obscured_jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObscuredJob'
+        omitted_obscured_jobs:
+          description: Obscured jobs omitted for security because of too specific filtering
+          type: boolean
+      required:
+      - jobs
+      - obscured_jobs
+    Job:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/CompletedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - CompletedJob
+      - allOf:
+        - $ref: '#/components/schemas/QueuedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - QueuedJob
+      discriminator:
+        propertyName: type
     CompletedJob:
       type: object
       properties:
@@ -3704,36 +3968,33 @@ components:
       - email
       - visible_to_owner
       - tag
-    ExtendedJobs:
+    RestartedFrom:
       type: object
       properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
-        obscured_jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObscuredJob'
-        omitted_obscured_jobs:
-          description: Obscured jobs omitted for security because of too specific filtering
-          type: boolean
-      required:
-      - jobs
-      - obscured_jobs
-    RawScriptForDependencies:
-      type: object
-      properties:
-        raw_code:
+        flow_job_id:
           type: string
-        path:
+          format: uuid
+        step_id:
           type: string
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-      required:
-      - raw_code
-      - path
-      - language
+        branch_or_iteration_n:
+          type: integer
+          description: 0-based iteration index for ForLoop / branch index for BranchAll. Iterations 0..n-1 are preserved; iteration n is restarted.
+        flow_version:
+          type: integer
+        branch_chosen:
+          description: For BranchOne nested restart — the branch that was originally chosen, used to lock branch evaluation.
+          type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - default
+              - branch
+            branch:
+              type: integer
+        nested:
+          $ref: '#/components/schemas/RestartedFrom'
+          description: When set, the worker spawns the child for `step_id` as a `RestartedFlow` against `nested.flow_job_id` instead of fresh-launching it.
     WorkflowTask:
       type: object
       properties:
@@ -3751,297 +4012,34 @@ components:
         language:
           $ref: '#/components/schemas/ScriptLang'
         lock:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Lock file content for this module's dependencies
       required:
       - content
       - language
-    InlineScriptArgs:
+    InputTransform:
+      $ref: ../../openflow.openapi.yaml#/components/schemas/InputTransform
+    RunnableKind:
+      type: string
+      enum:
+      - script
+      - flow
+    PreviewInline:
       type: object
       properties:
+        content:
+          type: string
+          description: The code to run
         args:
           $ref: '#/components/schemas/ScriptArgs'
-  parameters:
-    TriggerPath:
-      name: trigger_path
-      description: filter by trigger path. Supports comma-separated list (e.g. 'f/trigger1,f/trigger2') and negation by prefixing all values with '!' (e.g. '!f/trigger1,!f/trigger2')
-      in: query
-      schema:
-        type: string
-    CreatedBeforeQueue:
-      name: created_before_queue
-      description: filter on jobs created before X for jobs in the queue only
-      in: query
-      schema:
-        type: string
-        format: date-time
-    ArgsFilter:
-      name: args
-      description: filter on jobs containing those args as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
-    SkipPreprocessor:
-      name: skip_preprocessor
-      description: skip the preprocessor
-      in: query
-      schema:
-        type: boolean
-    NewJobId:
-      name: job_id
-      description: The job id to assign to the created job. if missing, job is chosen randomly using the ULID scheme. If a job id already exists in the queue or as a completed job, the request to create one will fail (Bad Request)
-      in: query
-      schema:
-        type: string
-        format: uuid
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    CacheTtl:
-      name: cache_ttl
-      description: Override the cache time to live (in seconds). Can not be used to disable caching, only override with a new cache ttl
-      in: query
-      schema:
-        type: string
-    Worker:
-      name: worker
-      description: filter by worker this job ran on. Supports comma-separated list (e.g. 'worker-1,worker-2') and negation by prefixing all values with '!' (e.g. '!worker-1,!worker-2')
-      in: query
-      schema:
-        type: string
-    ParentJob:
-      name: parent_job
-      description: The parent job that is at the origin and responsible for the execution of this script if any
-      in: query
-      schema:
-        type: string
-        format: uuid
-    ScriptStartPath:
-      name: script_path_start
-      description: filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')
-      in: query
-      schema:
-        type: string
-    QueueLimit:
-      name: queue_limit
-      description: 'The maximum size of the queue for which the request would get rejected if that job would push it above that limit
-
-        '
-      in: query
-      schema:
-        type: string
-    Suspended:
-      name: suspended
-      description: filter on suspended jobs
-      in: query
-      schema:
-        type: boolean
-    GetStarted:
-      name: get_started
-      in: query
-      schema:
-        type: boolean
-    CreatedAfterQueue:
-      name: created_after_queue
-      description: filter on jobs created after X for jobs in the queue only
-      in: query
-      schema:
-        type: string
-        format: date-time
-    CompletedAfter:
-      name: completed_after
-      description: filter on started after (exclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
-    Tag:
-      name: tag
-      description: filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')
-      in: query
-      schema:
-        type: string
-    StartedBefore:
-      name: started_before
-      description: filter on started before (inclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    ScheduledForBeforeNow:
-      name: scheduled_for_before_now
-      description: filter on jobs scheduled_for before now (hence waitinf for a worker)
-      in: query
-      schema:
-        type: boolean
-    StartedAfter:
-      name: started_after
-      description: filter on started after (exclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Payload:
-      name: payload
-      description: 'The base64 encoded payload that has been encoded as a JSON. e.g how to encode such payload encodeURIComponent
-
-        `encodeURIComponent(btoa(JSON.stringify({a: 2})))`
-
-        '
-      in: query
-      schema:
-        type: string
-    ScriptExactPath:
-      name: script_path_exact
-      description: filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')
-      in: query
-      schema:
-        type: string
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    IncludeHeader:
-      name: include_header
-      description: 'List of headers''s keys (separated with '','') whove value are added to the args
-
-        Header''s key lowercased and ''-'''' replaced to ''_'' such that ''Content-Type'' becomes the ''content_type'' arg key
-
-        '
-      in: query
-      schema:
-        type: string
-    CompletedBefore:
-      name: completed_before
-      description: filter on started before (inclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    JobKinds:
-      name: job_kinds
-      description: filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')
-      in: query
-      schema:
-        type: string
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
-      in: query
-      schema:
-        type: boolean
-    CreatedBefore:
-      name: created_before
-      description: filter on created before (inclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    ScriptHash:
-      name: hash
-      in: path
-      required: true
-      schema:
-        type: string
-    ResultFilter:
-      name: result
-      description: filter on jobs containing those result as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
-    Success:
-      name: success
-      description: filter on successful jobs
-      in: query
-      schema:
-        type: boolean
-    Label:
-      name: label
-      description: filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')
-      in: query
-      schema:
-        type: string
-    WorkerTag:
-      name: tag
-      description: Override the tag to use
-      in: query
-      schema:
-        type: string
-    ScriptExactHash:
-      name: script_hash
-      description: mask to filter exact matching path
-      in: query
-      schema:
-        type: string
-    SchedulePath:
-      name: schedule_path
-      description: mask to filter by schedule path
-      in: query
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    Running:
-      name: running
-      description: filter on running jobs
-      in: query
-      schema:
-        type: boolean
-    AllowWildcards:
-      name: allow_wildcards
-      description: allow wildcards (*) in the filter of label, tag, worker
-      in: query
-      schema:
-        type: boolean
-    JobTriggerKind:
-      name: trigger_kind
-      description: filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')
-      in: query
-      x-go-name: JobTriggerKindParam
-      schema:
-        type: string
-    JobId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    CreatedAfter:
-      name: created_after
-      description: filter on created after (exclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+      required:
+      - content
+      - args
+      - language
   securitySchemes:
     bearerAuth:
       type: http

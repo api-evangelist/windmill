@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin variable API
+  title: Windmill Variable API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,7 +17,7 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: variable
+- name: Variable
 paths:
   /w/{workspace}/variables/create:
     post:
@@ -25,7 +25,7 @@ paths:
       operationId: createVariable
       x-mcp-tool: true
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: already_encrypted
@@ -52,7 +52,7 @@ paths:
       summary: Encrypt Value
       operationId: encryptValue
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -75,7 +75,7 @@ paths:
       operationId: deleteVariable
       x-mcp-tool: true
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -91,7 +91,7 @@ paths:
       summary: Delete Variables in Bulk
       operationId: deleteVariablesBulk
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -123,7 +123,7 @@ paths:
       operationId: updateVariable
       x-mcp-tool: true
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -152,7 +152,7 @@ paths:
       operationId: getVariable
       x-mcp-tool: true
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -184,7 +184,7 @@ paths:
       summary: Get Variable Value
       operationId: getVariableValue
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -207,7 +207,7 @@ paths:
       summary: Does Variable Exists at Path
       operationId: existsVariable
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -224,7 +224,7 @@ paths:
       operationId: listVariable
       x-mcp-tool: true
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: path_start
@@ -274,7 +274,7 @@ paths:
       summary: List Contextual Variables
       operationId: listContextualVariables
       tags:
-      - variable
+      - Variable
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -300,88 +300,19 @@ components:
       required: true
       schema:
         type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
       in: query
       schema:
         type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
   schemas:
-    EditVariable:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The path to the variable
-        value:
-          type: string
-          description: The new value of the variable
-        is_secret:
-          type: boolean
-          description: Whether the variable is a secret
-        description:
-          type: string
-          description: The new description of the variable
-        labels:
-          type: array
-          items:
-            type: string
-    ContextualVariable:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        description:
-          type: string
-        is_custom:
-          type: boolean
-      required:
-      - name
-      - value
-      - description
-      - is_custom
-    CreateVariable:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The path to the variable
-        value:
-          type: string
-          description: The value of the variable
-        is_secret:
-          type: boolean
-          description: Whether the variable is a secret
-        description:
-          type: string
-          description: The description of the variable
-        account:
-          type: integer
-          description: The account identifier
-        is_oauth:
-          type: boolean
-          description: Whether the variable is an OAuth variable
-        expires_at:
-          type: string
-          description: The expiration date of the variable
-          format: date-time
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - value
-      - is_secret
-      - description
     ListableVariable:
       type: object
       properties:
@@ -423,6 +354,75 @@ components:
       - path
       - is_secret
       - extra_perms
+    EditVariable:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the variable
+        value:
+          type: string
+          description: The new value of the variable
+        is_secret:
+          type: boolean
+          description: Whether the variable is a secret
+        description:
+          type: string
+          description: The new description of the variable
+        labels:
+          type: array
+          items:
+            type: string
+    CreateVariable:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the variable
+        value:
+          type: string
+          description: The value of the variable
+        is_secret:
+          type: boolean
+          description: Whether the variable is a secret
+        description:
+          type: string
+          description: The description of the variable
+        account:
+          type: integer
+          description: The account identifier
+        is_oauth:
+          type: boolean
+          description: Whether the variable is an OAuth variable
+        expires_at:
+          type: string
+          description: The expiration date of the variable
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - value
+      - is_secret
+      - description
+    ContextualVariable:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+        description:
+          type: string
+        is_custom:
+          type: boolean
+      required:
+      - name
+      - value
+      - description
+      - is_custom
   securitySchemes:
     bearerAuth:
       type: http

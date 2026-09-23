@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin indexSearch API
+  title: Windmill Index Search API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -171,7 +171,7 @@ paths:
                     type: object
   /srch/index/storage/disk:
     get:
-      summary: Get Index Disk Storage Sizes from the Indexer.
+      summary: Get Index Disk Storage Sizes from the Indexer
       operationId: getIndexDiskStorageSizes
       tags:
       - indexSearch
@@ -184,14 +184,16 @@ paths:
                 type: object
                 properties:
                   job_index_disk_size_bytes:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
                   log_index_disk_size_bytes:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
   /indexer/delete/{idx_name}:
     delete:
-      summary: Clear an Index and Restart the Indexer.
+      summary: Clear an Index and Restart the Indexer
       operationId: clearIndex
       tags:
       - indexSearch
@@ -213,7 +215,7 @@ paths:
                 type: string
   /indexer/storage:
     get:
-      summary: Get Index Storage Sizes (disk and S3).
+      summary: Get Index Storage Sizes (disk and S3)
       operationId: getIndexStorageSizes
       tags:
       - indexSearch
@@ -229,23 +231,27 @@ paths:
                     type: object
                     properties:
                       disk_size_bytes:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                       s3_size_bytes:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                   service_log_index:
                     type: object
                     properties:
                       disk_size_bytes:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
                       s3_size_bytes:
-                        type: integer
-                        nullable: true
+                        type:
+                        - integer
+                        - 'null'
   /indexer/status:
     get:
-      summary: Get Indexer Status Including Liveness and Storage Sizes.
+      summary: Get Indexer Status Including Liveness and Storage Sizes
       operationId: getIndexerStatus
       tags:
       - indexSearch
@@ -263,43 +269,58 @@ paths:
                       is_alive:
                         type: boolean
                       last_locked_at:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       storage:
                         type: object
                         properties:
                           disk_size_bytes:
-                            type: integer
-                            nullable: true
+                            type:
+                            - integer
+                            - 'null'
                           s3_size_bytes:
-                            type: integer
-                            nullable: true
+                            type:
+                            - integer
+                            - 'null'
                   log_indexer:
                     type: object
                     properties:
                       is_alive:
                         type: boolean
                       last_locked_at:
-                        type: string
+                        type:
+                        - string
+                        - 'null'
                         format: date-time
-                        nullable: true
                       owner:
-                        type: string
-                        nullable: true
+                        type:
+                        - string
+                        - 'null'
                       storage:
                         type: object
                         properties:
                           disk_size_bytes:
-                            type: integer
-                            nullable: true
+                            type:
+                            - integer
+                            - 'null'
                           s3_size_bytes:
-                            type: integer
-                            nullable: true
+                            type:
+                            - integer
+                            - 'null'
 components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     LogSearchHit:
       type: object
@@ -311,13 +332,6 @@ components:
       properties:
         dancer:
           type: string
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

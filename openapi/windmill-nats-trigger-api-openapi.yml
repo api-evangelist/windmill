@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin nats_trigger API
+  title: Windmill Nats Trigger API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -212,32 +212,70 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
   schemas:
+    EditNatsTrigger:
+      type: object
+      properties:
+        nats_resource_path:
+          type: string
+          description: Path to the NATS resource containing connection configuration
+        use_jetstream:
+          type: boolean
+          description: If true, uses NATS JetStream for durable message delivery
+        stream_name:
+          type:
+          - string
+          - 'null'
+          description: JetStream stream name (required when use_jetstream is true)
+        consumer_name:
+          type:
+          - string
+          - 'null'
+          description: JetStream consumer name (required when use_jetstream is true)
+        subjects:
+          type: array
+          items:
+            type: string
+          description: Array of NATS subjects to subscribe to
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - nats_resource_path
+      - use_jetstream
+      - subjects
+      - is_flow
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
     NatsTrigger:
       allOf:
       - $ref: '#/components/schemas/TriggerExtraProperty'
@@ -250,12 +288,14 @@ components:
           type: boolean
           description: If true, uses NATS JetStream for durable message delivery
         stream_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: JetStream stream name (required when use_jetstream is true)
         consumer_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: JetStream consumer name (required when use_jetstream is true)
         subjects:
           type: array
@@ -333,10 +373,6 @@ components:
       - edited_at
       - is_flow
       - mode
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
     TriggerMode:
       description: job trigger mode
       type: string
@@ -363,12 +399,14 @@ components:
           type: boolean
           description: If true, uses NATS JetStream for durable message delivery
         stream_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: JetStream stream name (required when use_jetstream is true)
         consumer_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: JetStream consumer name (required when use_jetstream is true)
         subjects:
           type: array
@@ -403,63 +441,31 @@ components:
       - nats_resource_path
       - use_jetstream
       - subjects
-    EditNatsTrigger:
-      type: object
-      properties:
-        nats_resource_path:
-          type: string
-          description: Path to the NATS resource containing connection configuration
-        use_jetstream:
-          type: boolean
-          description: If true, uses NATS JetStream for durable message delivery
-        stream_name:
-          type: string
-          nullable: true
-          description: JetStream stream name (required when use_jetstream is true)
-        consumer_name:
-          type: string
-          nullable: true
-          description: JetStream consumer name (required when use_jetstream is true)
-        subjects:
-          type: array
-          items:
-            type: string
-          description: Array of NATS subjects to subscribe to
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when a message is received
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - script_path
-      - nats_resource_path
-      - use_jetstream
-      - subjects
-      - is_flow
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

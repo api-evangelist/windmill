@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin health API
+  title: Windmill Health API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,7 +17,7 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: health
+- name: Health
 paths:
   /health/status:
     get:
@@ -28,12 +28,10 @@ paths:
 
         Note: This endpoint is intentionally different from Kubernetes probes to avoid confusion.
 
-        For k8s liveness/readiness probes, use /version endpoint.
-
-        '
+        For k8s liveness/readiness probes, use /version endpoint.'
       operationId: getHealthStatus
       tags:
-      - health
+      - Health
       security: []
       parameters:
       - name: force
@@ -63,12 +61,10 @@ paths:
 
         Requires authentication. Use for monitoring dashboards and debugging.
 
-        This endpoint always returns fresh data (no caching).
-
-        '
+        This endpoint always returns fresh data (no caching).'
       operationId: getHealthDetailed
       tags:
-      - health
+      - Health
       responses:
         '200':
           description: server is healthy or degraded
@@ -84,21 +80,6 @@ paths:
                 $ref: '#/components/schemas/DetailedHealthResponse'
 components:
   schemas:
-    QueueHealth:
-      type: object
-      description: Job queue status
-      required:
-      - pending_jobs
-      - running_jobs
-      properties:
-        pending_jobs:
-          type: integer
-          format: int64
-          description: Number of pending jobs in the queue
-        running_jobs:
-          type: integer
-          format: int64
-          description: Number of currently running jobs
     DetailedHealthResponse:
       type: object
       description: Detailed health status response (always fresh, no caching)
@@ -124,40 +105,6 @@ components:
           description: Server version (e.g., "EE 1.615.3")
         checks:
           $ref: '#/components/schemas/HealthChecks'
-    DatabaseHealth:
-      type: object
-      description: Database health status
-      required:
-      - healthy
-      - latency_ms
-      - pool
-      properties:
-        healthy:
-          type: boolean
-          description: Whether the database is reachable
-        latency_ms:
-          type: integer
-          format: int64
-          description: Database query latency in milliseconds
-        pool:
-          $ref: '#/components/schemas/PoolStats'
-    PoolStats:
-      type: object
-      description: Database connection pool statistics
-      required:
-      - size
-      - idle
-      - max_connections
-      properties:
-        size:
-          type: integer
-          description: Current number of connections in the pool
-        idle:
-          type: integer
-          description: Number of idle connections
-        max_connections:
-          type: integer
-          description: Maximum number of connections allowed
     WorkersHealth:
       type: object
       description: Workers health status
@@ -188,6 +135,32 @@ components:
           items:
             type: string
           description: List of active worker versions
+    ReadinessHealth:
+      type: object
+      description: Server readiness status
+      required:
+      - healthy
+      properties:
+        healthy:
+          type: boolean
+          description: Whether the server is ready to accept requests
+    PoolStats:
+      type: object
+      description: Database connection pool statistics
+      required:
+      - size
+      - idle
+      - max_connections
+      properties:
+        size:
+          type: integer
+          description: Current number of connections in the pool
+        idle:
+          type: integer
+          description: Number of idle connections
+        max_connections:
+          type: integer
+          description: Maximum number of connections allowed
     HealthChecks:
       type: object
       description: Detailed health checks
@@ -200,22 +173,11 @@ components:
         workers:
           $ref: '#/components/schemas/WorkersHealth'
           description: Worker status (null if database is unreachable)
-          nullable: true
         queue:
           $ref: '#/components/schemas/QueueHealth'
           description: Queue status (null if database is unreachable)
-          nullable: true
         readiness:
           $ref: '#/components/schemas/ReadinessHealth'
-    ReadinessHealth:
-      type: object
-      description: Server readiness status
-      required:
-      - healthy
-      properties:
-        healthy:
-          type: boolean
-          description: Whether the server is ready to accept requests
     HealthStatusResponse:
       type: object
       description: Health status response (cached with 5s TTL)
@@ -243,6 +205,38 @@ components:
           type: integer
           format: int64
           description: Number of workers that pinged within last 5 minutes
+    QueueHealth:
+      type: object
+      description: Job queue status
+      required:
+      - pending_jobs
+      - running_jobs
+      properties:
+        pending_jobs:
+          type: integer
+          format: int64
+          description: Number of pending jobs in the queue
+        running_jobs:
+          type: integer
+          format: int64
+          description: Number of currently running jobs
+    DatabaseHealth:
+      type: object
+      description: Database health status
+      required:
+      - healthy
+      - latency_ms
+      - pool
+      properties:
+        healthy:
+          type: boolean
+          description: Whether the database is reachable
+        latency_ms:
+          type: integer
+          format: int64
+          description: Database query latency in milliseconds
+        pool:
+          $ref: '#/components/schemas/PoolStats'
   securitySchemes:
     bearerAuth:
       type: http

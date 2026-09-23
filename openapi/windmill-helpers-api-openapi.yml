@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin helpers API
+  title: Windmill Helpers API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: helpers
+- name: Helpers
 paths:
   /w/{workspace}/job_helpers/duckdb_connection_settings:
     post:
-      summary: Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket
+      summary: Converts an S3 resource to the set of instructions necessary to connect DuckDB…
       operationId: duckdbConnectionSettings
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -49,10 +49,10 @@ paths:
                     type: string
   /w/{workspace}/job_helpers/v2/duckdb_connection_settings:
     post:
-      summary: Converts an S3 resource to the set of instructions necessary to connect DuckDB to an S3 bucket
+      summary: Converts an S3 resource to the set of instructions necessary to connect DuckDB…
       operationId: duckdbConnectionSettingsV2
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -81,10 +81,10 @@ paths:
                 - connection_settings_str
   /w/{workspace}/job_helpers/polars_connection_settings:
     post:
-      summary: Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket
+      summary: Converts an S3 resource to the set of arguments necessary to connect Polars to…
       operationId: polarsConnectionSettings
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -124,10 +124,10 @@ paths:
                 - client_kwargs
   /w/{workspace}/job_helpers/v2/polars_connection_settings:
     post:
-      summary: Converts an S3 resource to the set of arguments necessary to connect Polars to an S3 bucket
+      summary: Converts an S3 resource to the set of arguments necessary to connect Polars to…
       operationId: polarsConnectionSettingsV2
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -190,10 +190,10 @@ paths:
                 - storage_options
   /w/{workspace}/job_helpers/v2/s3_resource_info:
     post:
-      summary: Returns the S3 Resource Associated to the Provided Path, or the workspace default S3 resource
+      summary: Returns the S3 Resource Associated to the Provided Path, or the workspace…
       operationId: s3ResourceInfo
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -218,7 +218,7 @@ paths:
       summary: Test Connection to the Workspace Object Storage
       operationId: datasetStorageTestConnection
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: storage
@@ -236,7 +236,7 @@ paths:
       summary: List the File Keys Available in a Workspace Object Storage
       operationId: listStoredFiles
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: max_keys
@@ -279,7 +279,7 @@ paths:
       summary: Load Metadata of the File
       operationId: loadFileMetadata
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -303,7 +303,7 @@ paths:
       summary: Load a Preview of the File
       operationId: loadFilePreview
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -348,10 +348,10 @@ paths:
                 $ref: '#/components/schemas/WindmillFilePreview'
   /w/{workspace}/job_helpers/list_git_repo_files:
     get:
-      summary: List the File Keys Available in Instance Object Storage with Resource-based Access Control
+      summary: List the File Keys Available in Instance Object Storage with Resource-based…
       operationId: listGitRepoFiles
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: max_keys
@@ -393,10 +393,10 @@ paths:
                 - windmill_large_files
   /w/{workspace}/job_helpers/load_git_repo_file_preview:
     get:
-      summary: Load a Preview of a File from Instance Storage with Resource-based Access Control
+      summary: Load a Preview of a File from Instance Storage with Resource-based Access…
       operationId: loadGitRepoFilePreview
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -445,7 +445,7 @@ paths:
       summary: Load File Metadata from Instance Storage with Resource-based Access Control
       operationId: loadGitRepoFileMetadata
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -470,7 +470,7 @@ paths:
       summary: Check if S3 Path Exists and is a Folder
       operationId: checkS3FolderExists
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -513,7 +513,7 @@ paths:
       summary: Load a Preview of a Parquet File
       operationId: loadParquetPreview
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -555,7 +555,7 @@ paths:
       summary: Load the Table Row Count
       operationId: loadTableRowCount
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -586,7 +586,7 @@ paths:
       summary: Load a Preview of a Csv File
       operationId: loadCsvPreview
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -632,7 +632,7 @@ paths:
       summary: Permanently Delete File from S3
       operationId: deleteS3File
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -655,7 +655,7 @@ paths:
       summary: Move a S3 File from One Path to the Other Within the Same Bucket
       operationId: moveS3File
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: src_file_key
@@ -683,7 +683,7 @@ paths:
       summary: Upload File to S3 Bucket
       operationId: fileUpload
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -743,7 +743,7 @@ paths:
       summary: Upload a File to the Instance Storage Gitrepos Section for Viewing
       operationId: gitRepoViewerFileUpload
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -803,7 +803,7 @@ paths:
       summary: Download File from S3 Bucket
       operationId: fileDownload
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -838,7 +838,7 @@ paths:
       summary: Download File to S3 Bucket
       operationId: fileDownloadParquetAsCsv
       tags:
-      - helpers
+      - Helpers
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: file_key
@@ -864,27 +864,37 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    PolarsClientKwargs:
+    WindmillLargeFile:
       type: object
       properties:
-        region_name:
+        s3:
           type: string
       required:
-      - region_name
+      - s3
+    S3Resource:
+      type: object
+      properties:
+        bucket:
+          type: string
+        region:
+          type: string
+        endPoint:
+          type: string
+        useSSL:
+          type: boolean
+        accessKey:
+          type: string
+        secretKey:
+          type: string
+        pathStyle:
+          type: boolean
+      required:
+      - bucket
+      - region
+      - endPoint
+      - useSSL
+      - pathStyle
     WindmillFileMetadata:
       type: object
       properties:
@@ -916,36 +926,26 @@ components:
           - Unknown
       required:
       - content_type
-    WindmillLargeFile:
+    PolarsClientKwargs:
       type: object
       properties:
-        s3:
+        region_name:
           type: string
       required:
-      - s3
-    S3Resource:
-      type: object
-      properties:
-        bucket:
-          type: string
-        region:
-          type: string
-        endPoint:
-          type: string
-        useSSL:
-          type: boolean
-        accessKey:
-          type: string
-        secretKey:
-          type: string
-        pathStyle:
-          type: boolean
-      required:
-      - bucket
-      - region
-      - endPoint
-      - useSSL
-      - pathStyle
+      - region_name
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

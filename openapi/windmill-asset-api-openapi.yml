@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin asset API
+  title: Windmill Asset API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: asset
+- name: Asset
 paths:
   /w/{workspace}/assets/list:
     get:
       summary: List All Assets in the Workspace with Cursor Pagination
       operationId: listAssets
       tags:
-      - asset
+      - Asset
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: per_page
@@ -139,9 +139,10 @@ paths:
                               type: string
                               description: The type of the resource (only present when kind is 'resource')
                   next_cursor:
-                    type: object
+                    type:
+                    - object
+                    - 'null'
                     description: Cursor for the next page (null if no more pages)
-                    nullable: true
                     properties:
                       created_at:
                         type: string
@@ -156,7 +157,7 @@ paths:
       summary: List All Assets Used by Given Usages Paths
       operationId: listAssetsByUsage
       tags:
-      - asset
+      - Asset
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -207,7 +208,7 @@ paths:
       summary: List All Favorite Assets for the Authenticated User
       operationId: listFavoriteAssets
       tags:
-      - asset
+      - Asset
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -234,19 +235,6 @@ components:
       schema:
         type: string
   schemas:
-    AssetUsageAccessType:
-      type: string
-      enum:
-      - r
-      - w
-      - rw
-      nullable: true
-    AssetUsageKind:
-      type: string
-      enum:
-      - script
-      - flow
-      - job
     AssetKind:
       type: string
       enum:
@@ -255,6 +243,20 @@ components:
       - ducklake
       - datatable
       - volume
+    AssetUsageAccessType:
+      type:
+      - string
+      - 'null'
+      enum:
+      - r
+      - w
+      - rw
+    AssetUsageKind:
+      type: string
+      enum:
+      - script
+      - flow
+      - job
   securitySchemes:
     bearerAuth:
       type: http

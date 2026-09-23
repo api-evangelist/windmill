@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin capture API
+  title: Windmill Capture API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: capture
+- name: Capture
 paths:
   /w/{workspace}/capture/set_config:
     post:
       summary: Set Capture Config
       operationId: setCaptureConfig
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -59,7 +59,7 @@ paths:
       summary: Ping Capture Config
       operationId: pingCaptureConfig
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: trigger_kind
@@ -77,7 +77,7 @@ paths:
       summary: Get Capture Configs for a Script or Flow
       operationId: getCaptureConfigs
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableKind'
@@ -96,7 +96,7 @@ paths:
       summary: List Captures for a Script or Flow
       operationId: listCaptures
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableKind'
@@ -121,7 +121,7 @@ paths:
       summary: Move Captures and Configs for a Script or Flow
       operationId: moveCapturesAndConfigs
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableKind'
@@ -148,7 +148,7 @@ paths:
       summary: Get a Capture
       operationId: getCapture
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: id
@@ -167,7 +167,7 @@ paths:
       summary: Delete a Capture
       operationId: deleteCapture
       tags:
-      - capture
+      - Capture
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: id
@@ -179,41 +179,22 @@ paths:
         '200':
           description: capture deleted
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    RunnableKind:
-      name: runnable_kind
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-        - script
-        - flow
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
+    CaptureTriggerKind:
+      type: string
+      enum:
+      - webhook
+      - http
+      - websocket
+      - kafka
+      - default_email
+      - nats
+      - postgres
+      - sqs
+      - mqtt
+      - gcp
+      - azure
+      - email
     Capture:
       type: object
       properties:
@@ -232,21 +213,6 @@ components:
       - preprocessor_args
       - id
       - created_at
-    CaptureTriggerKind:
-      type: string
-      enum:
-      - webhook
-      - http
-      - websocket
-      - kafka
-      - default_email
-      - nats
-      - postgres
-      - sqs
-      - mqtt
-      - gcp
-      - azure
-      - email
     CaptureConfig:
       type: object
       properties:
@@ -260,6 +226,40 @@ components:
           format: date-time
       required:
       - trigger_kind
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    RunnableKind:
+      name: runnable_kind
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - script
+        - flow
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

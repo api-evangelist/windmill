@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin schedule API
+  title: Windmill Schedule API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: schedule
+- name: Schedule
 paths:
   /schedules/preview:
     post:
       summary: Preview Schedule
       operationId: previewSchedule
       tags:
-      - schedule
+      - Schedule
       requestBody:
         description: schedule
         required: true
@@ -65,7 +65,7 @@ paths:
 
         '
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -95,7 +95,7 @@ paths:
 
         '
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -118,7 +118,7 @@ paths:
       summary: Set Enabled Schedule
       operationId: setScheduleEnabled
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -152,7 +152,7 @@ paths:
       operationId: deleteSchedule
       x-mcp-tool: true
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -169,7 +169,7 @@ paths:
       operationId: getSchedule
       x-mcp-tool: true
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -185,7 +185,7 @@ paths:
       summary: Does Schedule Exists
       operationId: existsSchedule
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -202,7 +202,7 @@ paths:
       operationId: listSchedules
       x-mcp-tool: true
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -263,7 +263,7 @@ paths:
       summary: List Schedules with Last 20 Jobs
       operationId: listSchedulesWithJobs
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -282,7 +282,7 @@ paths:
       summary: Set Default Error or Recoevery Handler
       operationId: setDefaultErrorOrRecoveryHandler
       tags:
-      - schedule
+      - Schedule
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -319,8 +319,20 @@ paths:
           description: default error handler set
 components:
   parameters:
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
     WorkspaceId:
       name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
       in: path
       required: true
       schema:
@@ -331,18 +343,6 @@ components:
       in: query
       schema:
         type: integer
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    ArgsFilter:
-      name: args
-      description: filter on jobs containing those args as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
@@ -350,30 +350,125 @@ components:
       schema:
         type: integer
   schemas:
-    ScheduleWJobs:
-      allOf:
-      - $ref: '#/components/schemas/Schedule'
-      - type: object
-        properties:
-          jobs:
-            type: array
-            items:
-              type: object
-              properties:
-                id:
-                  type: string
-                success:
-                  type: boolean
-                duration_ms:
-                  type: number
-              required:
-              - id
-              - success
-              - duration_ms
     ScriptArgs:
       type: object
       description: The arguments to pass to the script or flow
       additionalProperties: true
+    NewSchedule:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this schedule. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`.
+        schedule:
+          type: string
+          description: Cron expression with 6 fields (seconds, minutes, hours, day of month, month, day of week). Example '0 0 12 * * *' for daily at noon
+        timezone:
+          type: string
+          description: IANA timezone for the schedule (e.g., 'UTC', 'Europe/Paris', 'America/New_York')
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        args:
+          $ref: '#/components/schemas/ScriptArgs'
+        enabled:
+          type: boolean
+          description: Whether the schedule is currently active and will trigger jobs
+        on_failure:
+          type:
+          - string
+          - 'null'
+          description: Path to a script or flow to run when the scheduled job fails
+        on_failure_times:
+          type:
+          - number
+          - 'null'
+          description: Number of consecutive failures before the on_failure handler is triggered (default 1)
+        on_failure_exact:
+          type:
+          - boolean
+          - 'null'
+          description: If true, trigger on_failure handler only on exactly N failures, not on every failure after N
+        on_failure_extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        on_recovery:
+          type:
+          - string
+          - 'null'
+          description: Path to a script or flow to run when the schedule recovers after failures
+        on_recovery_times:
+          type:
+          - number
+          - 'null'
+          description: Number of consecutive successes before the on_recovery handler is triggered (default 1)
+        on_recovery_extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        on_success:
+          type:
+          - string
+          - 'null'
+          description: Path to a script or flow to run after each successful execution
+        on_success_extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        ws_error_handler_muted:
+          type: boolean
+          description: If true, the workspace-level error handler will not be triggered for this schedule's failures
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+        no_flow_overlap:
+          type: boolean
+          description: If true, skip this schedule's execution if the previous run is still in progress (prevents concurrent runs)
+        summary:
+          type:
+          - string
+          - 'null'
+          description: Short summary describing the purpose of this schedule
+        description:
+          type:
+          - string
+          - 'null'
+          description: Detailed description of what this schedule does
+        tag:
+          type:
+          - string
+          - 'null'
+          description: Worker tag to route jobs to specific worker groups
+        paused_until:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: ISO 8601 datetime until which the schedule is paused. Schedule resumes automatically after this time
+        cron_version:
+          type:
+          - string
+          - 'null'
+          description: Cron parser version. Use 'v2' for extended syntax with additional features
+        dynamic_skip:
+          type:
+          - string
+          - 'null'
+          description: Path to a script that validates scheduled datetimes. Receives scheduled_for datetime and returns boolean to skip (true) or run (false)
+        permissioned_as:
+          type: string
+          description: The user or group this schedule runs as. Used during deployment to preserve the original schedule owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - schedule
+      - timezone
+      - script_path
+      - is_flow
+      - args
     Schedule:
       type: object
       properties:
@@ -404,7 +499,6 @@ components:
           description: True if script_path points to a flow, false if it points to a script
         args:
           $ref: '#/components/schemas/ScriptArgs'
-          nullable: true
         extra_perms:
           type: object
           additionalProperties:
@@ -417,75 +511,84 @@ components:
           type: string
           description: The user or group this schedule runs as (e.g., 'u/admin' or 'g/mygroup')
         error:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Last error message if the schedule failed to trigger
         on_failure:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script or flow to run when the scheduled job fails
         on_failure_times:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Number of consecutive failures before the on_failure handler is triggered (default 1)
         on_failure_exact:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: If true, trigger on_failure handler only on exactly N failures, not on every failure after N
         on_failure_extra_args:
           $ref: '#/components/schemas/ScriptArgs'
-          nullable: true
         on_recovery:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script or flow to run when the schedule recovers after failures
         on_recovery_times:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Number of consecutive successes before the on_recovery handler is triggered (default 1)
         on_recovery_extra_args:
           $ref: '#/components/schemas/ScriptArgs'
-          nullable: true
         on_success:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script or flow to run after each successful execution
         on_success_extra_args:
           $ref: '#/components/schemas/ScriptArgs'
-          nullable: true
         ws_error_handler_muted:
           type: boolean
           description: If true, the workspace-level error handler will not be triggered for this schedule's failures
         retry:
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          nullable: true
         summary:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Short summary describing the purpose of this schedule
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Detailed description of what this schedule does
         no_flow_overlap:
           type: boolean
           description: If true, skip this schedule's execution if the previous run is still in progress (prevents concurrent runs)
         tag:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Worker tag to route jobs to specific worker groups
         paused_until:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           description: ISO 8601 datetime until which the schedule is paused. Schedule resumes automatically after this time
         cron_version:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cron parser version. Use 'v2' for extended syntax with additional features
         dynamic_skip:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script that validates scheduled datetimes. Receives scheduled_for datetime and returns boolean to skip (true) or run (false)
         labels:
           type: array
@@ -504,114 +607,6 @@ components:
       - enabled
       - email
       - permissioned_as
-    NewSchedule:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The unique Windmill path for this schedule. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`.
-        schedule:
-          type: string
-          description: Cron expression with 6 fields (seconds, minutes, hours, day of month, month, day of week). Example '0 0 12 * * *' for daily at noon
-        timezone:
-          type: string
-          description: IANA timezone for the schedule (e.g., 'UTC', 'Europe/Paris', 'America/New_York')
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when triggered
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        args:
-          nullable: true
-          $ref: '#/components/schemas/ScriptArgs'
-        enabled:
-          type: boolean
-          description: Whether the schedule is currently active and will trigger jobs
-        on_failure:
-          type: string
-          nullable: true
-          description: Path to a script or flow to run when the scheduled job fails
-        on_failure_times:
-          type: number
-          nullable: true
-          description: Number of consecutive failures before the on_failure handler is triggered (default 1)
-        on_failure_exact:
-          type: boolean
-          nullable: true
-          description: If true, trigger on_failure handler only on exactly N failures, not on every failure after N
-        on_failure_extra_args:
-          nullable: true
-          $ref: '#/components/schemas/ScriptArgs'
-        on_recovery:
-          type: string
-          nullable: true
-          description: Path to a script or flow to run when the schedule recovers after failures
-        on_recovery_times:
-          type: number
-          nullable: true
-          description: Number of consecutive successes before the on_recovery handler is triggered (default 1)
-        on_recovery_extra_args:
-          nullable: true
-          $ref: '#/components/schemas/ScriptArgs'
-        on_success:
-          type: string
-          nullable: true
-          description: Path to a script or flow to run after each successful execution
-        on_success_extra_args:
-          nullable: true
-          $ref: '#/components/schemas/ScriptArgs'
-        ws_error_handler_muted:
-          type: boolean
-          description: If true, the workspace-level error handler will not be triggered for this schedule's failures
-        retry:
-          nullable: true
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-        no_flow_overlap:
-          type: boolean
-          description: If true, skip this schedule's execution if the previous run is still in progress (prevents concurrent runs)
-        summary:
-          type: string
-          nullable: true
-          description: Short summary describing the purpose of this schedule
-        description:
-          type: string
-          nullable: true
-          description: Detailed description of what this schedule does
-        tag:
-          type: string
-          nullable: true
-          description: Worker tag to route jobs to specific worker groups
-        paused_until:
-          type: string
-          nullable: true
-          format: date-time
-          description: ISO 8601 datetime until which the schedule is paused. Schedule resumes automatically after this time
-        cron_version:
-          type: string
-          nullable: true
-          description: Cron parser version. Use 'v2' for extended syntax with additional features
-        dynamic_skip:
-          type: string
-          nullable: true
-          description: Path to a script that validates scheduled datetimes. Receives scheduled_for datetime and returns boolean to skip (true) or run (false)
-        permissioned_as:
-          type: string
-          description: The user or group this schedule runs as. Used during deployment to preserve the original schedule owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - schedule
-      - timezone
-      - script_path
-      - is_flow
-      - args
     EditSchedule:
       type: object
       properties:
@@ -622,82 +617,91 @@ components:
           type: string
           description: IANA timezone for the schedule (e.g., 'UTC', 'Europe/Paris', 'America/New_York')
         args:
-          nullable: true
           $ref: '#/components/schemas/ScriptArgs'
         on_failure:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script or flow to run when the scheduled job fails
         on_failure_times:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Number of consecutive failures before the on_failure handler is triggered (default 1)
         on_failure_exact:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: If true, trigger on_failure handler only on exactly N failures, not on every failure after N
         on_failure_extra_args:
-          nullable: true
           $ref: '#/components/schemas/ScriptArgs'
         on_recovery:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script or flow to run when the schedule recovers after failures
         on_recovery_times:
-          type: number
-          nullable: true
+          type:
+          - number
+          - 'null'
           description: Number of consecutive successes before the on_recovery handler is triggered (default 1)
         on_recovery_extra_args:
-          nullable: true
           $ref: '#/components/schemas/ScriptArgs'
         on_success:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script or flow to run after each successful execution
         on_success_extra_args:
-          nullable: true
           $ref: '#/components/schemas/ScriptArgs'
         ws_error_handler_muted:
           type: boolean
           description: If true, the workspace-level error handler will not be triggered for this schedule's failures
         retry:
-          nullable: true
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
         no_flow_overlap:
           type: boolean
           description: If true, skip this schedule's execution if the previous run is still in progress (prevents concurrent runs)
         summary:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Short summary describing the purpose of this schedule
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Detailed description of what this schedule does
         tag:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Worker tag to route jobs to specific worker groups
         paused_until:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: date-time
           description: ISO 8601 datetime until which the schedule is paused. Schedule resumes automatically after this time
         cron_version:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Cron parser version. Use 'v2' for extended syntax with additional features
         dynamic_skip:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Path to a script that validates scheduled datetimes. Receives scheduled_for datetime and returns boolean to skip (true) or run (false)
         permissioned_as:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The user or group this schedule runs as (e.g., 'u/admin' or 'g/mygroup'). Only admins and wm_deployers can set this via preserve_permissioned_as.
         preserve_permissioned_as:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: If true and user is admin/wm_deployers, preserve the provided permissioned_as instead of using the deploying user's identity
         labels:
           type: array
@@ -707,6 +711,26 @@ components:
       - schedule
       - timezone
       - args
+    ScheduleWJobs:
+      allOf:
+      - $ref: '#/components/schemas/Schedule'
+      - type: object
+        properties:
+          jobs:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                success:
+                  type: boolean
+                duration_ms:
+                  type: number
+              required:
+              - id
+              - success
+              - duration_ms
   securitySchemes:
     bearerAuth:
       type: http

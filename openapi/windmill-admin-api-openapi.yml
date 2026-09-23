@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin API
+  title: Windmill Admin API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: admin
+- name: Admin
 paths:
   /w/{workspace}/users/get/{username}:
     get:
       summary: Get User (require Admin Privilege)
       operationId: getUser
       tags:
-      - admin
+      - Admin
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: username
@@ -44,7 +44,7 @@ paths:
       summary: Update User (require Admin Privilege)
       operationId: updateUser
       tags:
-      - admin
+      - Admin
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: username
@@ -71,7 +71,7 @@ paths:
       summary: Delete User (require Admin Privilege)
       operationId: deleteUser
       tags:
-      - admin
+      - Admin
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: username
@@ -91,7 +91,7 @@ paths:
       summary: Preview Offboarding for a Workspace User (require Admin Privilege)
       operationId: offboardPreview
       tags:
-      - admin
+      - Admin
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: username
@@ -111,7 +111,7 @@ paths:
       summary: Offboard a Workspace User (reassign Objects, Optionally Delete User)
       operationId: offboardWorkspaceUser
       tags:
-      - admin
+      - Admin
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: username
@@ -137,7 +137,7 @@ paths:
       summary: Convert Manual User to Group User (require Admin Privilege)
       operationId: convertUserToGroup
       tags:
-      - admin
+      - Admin
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: username
@@ -153,63 +153,25 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    OffboardPreview:
+    UserSource:
       type: object
       properties:
-        owned:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Objects under u/{username}/ that will be reassigned
-        executing_on_behalf:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
-        referencing:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/OffboardTokenInfo'
-          description: Tokens owned by this user (will be deleted)
-        http_triggers:
-          type: integer
-          description: HTTP triggers under the user's path (webhook URLs will change)
-        email_triggers:
-          type: integer
-          description: Email triggers under the user's path (email addresses will change)
+        source:
+          type: string
+          enum:
+          - domain
+          - instance_group
+          - manual
+          description: How the user was added to the workspace
+        domain:
+          type: string
+          description: The domain used for auto-invite (when source is 'domain')
+        group:
+          type: string
+          description: The instance group name (when source is 'instance_group')
       required:
-      - owned
-      - executing_on_behalf
-      - referencing
-      - tokens
-      - http_triggers
-      - email_triggers
-    EditWorkspaceUser:
-      type: object
-      properties:
-        is_admin:
-          type: boolean
-        operator:
-          type: boolean
-        disabled:
-          type: boolean
-    OffboardResponse:
-      type: object
-      properties:
-        conflicts:
-          type: array
-          items:
-            type: string
-          description: List of path conflicts that block the offboarding. Empty on success.
-        summary:
-          $ref: '#/components/schemas/OffboardSummary'
+      - source
     OffboardAffectedPaths:
       type: object
       properties:
@@ -243,24 +205,98 @@ components:
             type: array
             items:
               type: string
-    UserSource:
+    OffboardRequest:
       type: object
       properties:
-        source:
+        reassign_to:
           type: string
-          enum:
-          - domain
-          - instance_group
-          - manual
-          description: How the user was added to the workspace
-        domain:
+          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
+        new_on_behalf_of_user:
           type: string
-          description: The domain used for auto-invite (when source is 'domain')
-        group:
-          type: string
-          description: The instance group name (when source is 'instance_group')
+          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
+        delete_user:
+          type: boolean
+          default: true
+          description: Whether to also remove the user from the workspace
       required:
-      - source
+      - reassign_to
+    EditWorkspaceUser:
+      type: object
+      properties:
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+    OffboardSummary:
+      type: object
+      properties:
+        scripts_reassigned:
+          type: integer
+        flows_reassigned:
+          type: integer
+        apps_reassigned:
+          type: integer
+        resources_reassigned:
+          type: integer
+        variables_reassigned:
+          type: integer
+        schedules_reassigned:
+          type: integer
+        triggers_reassigned:
+          type: integer
+        drafts_deleted:
+          type: integer
+      required:
+      - scripts_reassigned
+      - flows_reassigned
+      - apps_reassigned
+      - resources_reassigned
+      - variables_reassigned
+      - schedules_reassigned
+      - triggers_reassigned
+      - drafts_deleted
+    OffboardPreview:
+      type: object
+      properties:
+        owned:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects under u/{username}/ that will be reassigned
+        executing_on_behalf:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
+        referencing:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffboardTokenInfo'
+          description: Tokens owned by this user (will be deleted)
+        http_triggers:
+          type: integer
+          description: HTTP triggers under the user's path (webhook URLs will change)
+        email_triggers:
+          type: integer
+          description: Email triggers under the user's path (email addresses will change)
+      required:
+      - owned
+      - executing_on_behalf
+      - referencing
+      - tokens
+      - http_triggers
+      - email_triggers
+    OffboardResponse:
+      type: object
+      properties:
+        conflicts:
+          type: array
+          items:
+            type: string
+          description: List of path conflicts that block the offboarding. Empty on success.
+        summary:
+          $ref: '#/components/schemas/OffboardSummary'
     OffboardTokenInfo:
       type: object
       properties:
@@ -308,7 +344,6 @@ components:
           items:
             type: string
         added_via:
-          nullable: true
           allOf:
           - $ref: '#/components/schemas/UserSource'
         is_service_account:
@@ -323,49 +358,13 @@ components:
       - disabled
       - folders
       - folders_owners
-    OffboardRequest:
-      type: object
-      properties:
-        reassign_to:
-          type: string
-          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
-        new_on_behalf_of_user:
-          type: string
-          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
-        delete_user:
-          type: boolean
-          default: true
-          description: Whether to also remove the user from the workspace
-      required:
-      - reassign_to
-    OffboardSummary:
-      type: object
-      properties:
-        scripts_reassigned:
-          type: integer
-        flows_reassigned:
-          type: integer
-        apps_reassigned:
-          type: integer
-        resources_reassigned:
-          type: integer
-        variables_reassigned:
-          type: integer
-        schedules_reassigned:
-          type: integer
-        triggers_reassigned:
-          type: integer
-        drafts_deleted:
-          type: integer
-      required:
-      - scripts_reassigned
-      - flows_reassigned
-      - apps_reassigned
-      - resources_reassigned
-      - variables_reassigned
-      - schedules_reassigned
-      - triggers_reassigned
-      - drafts_deleted
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

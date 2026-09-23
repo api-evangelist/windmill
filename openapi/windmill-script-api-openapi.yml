@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin script API
+  title: Windmill Script API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: script
+- name: Script
 paths:
   /scripts/hub/get/{path}:
     get:
       summary: Get Hub Script Content by Path
       operationId: getHubScriptContentByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/ScriptPath'
       responses:
@@ -39,7 +39,7 @@ paths:
       summary: Get Full Hub Script by Path
       operationId: getHubScriptByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/ScriptPath'
       responses:
@@ -67,7 +67,7 @@ paths:
       summary: Record Hub Script Pick
       operationId: pickHubScriptByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/ScriptPath'
       responses:
@@ -87,7 +87,7 @@ paths:
       summary: Get Top Hub Scripts
       operationId: getTopHubScripts
       tags:
-      - script
+      - Script
       parameters:
       - name: limit
         description: query limit
@@ -150,7 +150,7 @@ paths:
       summary: Query Hub Scripts by Similarity
       operationId: queryHubScripts
       tags:
-      - script
+      - Script
       parameters:
       - name: text
         description: query text
@@ -213,7 +213,7 @@ paths:
       summary: List Scripts for Search
       operationId: listSearchScript
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -239,7 +239,7 @@ paths:
       operationId: listScripts
       x-mcp-tool: true
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -399,7 +399,7 @@ paths:
       summary: List All Scripts Paths
       operationId: listScriptPaths
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -416,9 +416,7 @@ paths:
       summary: Create Script
       description: 'Creates a new script when the path does not already exist.
 
-        Creates a new version of an existing script when called with the same path and the current `parent_hash`.
-
-        '
+        Creates a new version of an existing script when called with the same path and the current `parent_hash`.'
       operationId: createScript
       x-mcp-tool: true
       x-mcp-instructions: To create a script, specify the path (e.g., 'f/my_folder/my_script'), the content (source code), and the language. For TypeScript, use 'bun' unless deno-specific APIs are needed.
@@ -432,7 +430,7 @@ paths:
       - tag
       - deployment_message
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -454,7 +452,7 @@ paths:
       summary: Toggle ON and OFF the Workspace Error Handler for a Given Script
       operationId: toggleWorkspaceErrorHandlerForScript
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -480,7 +478,7 @@ paths:
       summary: Archive Script by Path
       operationId: archiveScriptByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -496,7 +494,7 @@ paths:
       summary: Archive Script by Hash
       operationId: archiveScriptByHash
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -513,7 +511,7 @@ paths:
       operationId: deleteScriptByHash
       x-mcp-tool: true
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -530,7 +528,7 @@ paths:
       operationId: deleteScriptByPath
       x-mcp-tool: true
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -551,7 +549,7 @@ paths:
       summary: Delete Scripts in Bulk
       operationId: deleteScriptsBulk
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -583,7 +581,7 @@ paths:
       operationId: getScriptByPath
       x-mcp-tool: true
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -603,7 +601,7 @@ paths:
       summary: Get Triggers Count of Script
       operationId: getTriggersCountOfScript
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -619,7 +617,7 @@ paths:
       summary: Get Tokens with Script Scope
       operationId: listTokensOfScript
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -637,7 +635,7 @@ paths:
       summary: Get Script by Path with Draft
       operationId: getScriptByPathWithDraft
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -653,7 +651,7 @@ paths:
       summary: Get History of a Script by Path
       operationId: getScriptHistoryByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -671,7 +669,7 @@ paths:
       summary: List Script Paths Using Provided Script as a Relative Import
       operationId: listScriptPathsFromWorkspaceRunnable
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -692,7 +690,7 @@ paths:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
       tags:
-      - script
+      - Script
       responses:
         '200':
           description: Script version/hash
@@ -705,7 +703,7 @@ paths:
       summary: Update History of a Script
       operationId: updateScriptHistory
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -732,7 +730,7 @@ paths:
       summary: List Dedicated Worker Scripts with Workspace Dependency Annotations
       operationId: listDedicatedWithDeps
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -785,7 +783,7 @@ paths:
       summary: Raw Script by Path
       operationId: rawScriptByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -798,10 +796,10 @@ paths:
                 type: string
   /scripts_u/tokened_raw/{workspace}/{token}/{path}:
     get:
-      summary: raw script by path with a token (mostly used by lsp to be used with import maps to resolve scripts)
+      summary: raw script by path with a token (mostly used by lsp to be used with import maps…
       operationId: rawScriptByPathTokened
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Token'
@@ -818,7 +816,7 @@ paths:
       summary: Exists Script by Path
       operationId: existsScriptByPath
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -834,7 +832,7 @@ paths:
       summary: Get Script by Hash
       operationId: getScriptByHash
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -858,7 +856,7 @@ paths:
       summary: Raw Script by Hash
       operationId: rawScriptByHash
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -874,7 +872,7 @@ paths:
       summary: Get Script Deployment Status
       operationId: getScriptDeploymentStatus
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptHash'
@@ -898,7 +896,7 @@ paths:
       summary: Get CI Test Results for a Script, Flow, or Resource
       operationId: getCiTestResults
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: kind
@@ -929,7 +927,7 @@ paths:
       summary: Get CI Test Results for Multiple Items
       operationId: getCiTestResultsBatch
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -973,7 +971,7 @@ paths:
       summary: Store Raw Script Content Temporarily for CLI Lock Generation
       operationId: storeRawScriptTemp
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -995,7 +993,7 @@ paths:
       summary: Diff Local Script Hashes Against Deployed Versions
       operationId: diffRawScriptsWithDeployed
       tags:
-      - script
+      - Script
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1045,42 +1043,6 @@ paths:
                   type: string
 components:
   parameters:
-    Token:
-      name: token
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
     OrderDesc:
       name: order_desc
       description: order by desc order (default true)
@@ -1093,16 +1055,43 @@ components:
       required: true
       schema:
         type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Token:
+      name: token
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    ScriptHistory:
-      type: object
-      properties:
-        script_hash:
-          type: string
-        deployment_msg:
-          type: string
-      required:
-      - script_hash
     Script:
       type: object
       properties:
@@ -1213,8 +1202,9 @@ components:
         on_behalf_of_email:
           type: string
         modules:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: Additional script modules keyed by relative file path
           additionalProperties:
             $ref: '#/components/schemas/ScriptModule'
@@ -1239,34 +1229,89 @@ components:
       - kind
       - starred
       - has_preprocessor
-    TruncatedToken:
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
+    NewScriptWithDraft:
+      allOf:
+      - $ref: '#/components/schemas/NewScript'
+      - type: object
+        properties:
+          draft:
+            $ref: '#/components/schemas/NewScript'
+          hash:
+            type: string
+        required:
+        - hash
+    HubScriptKind:
+      type: string
+      enum:
+      - script
+      - failure
+      - trigger
+      - approval
+    ScriptHistory:
       type: object
       properties:
-        label:
+        script_hash:
           type: string
-        expiration:
-          type: string
-          format: date-time
-        token_prefix:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        last_used_at:
-          type: string
-          format: date-time
-        scopes:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-        workspace_id:
+        deployment_msg:
           type: string
       required:
-      - token_prefix
-      - created_at
-      - last_used_at
+      - script_hash
+    CiTestResult:
+      type: object
+      properties:
+        test_script_path:
+          type: string
+        job_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
+          type:
+          - string
+          - 'null'
+        started_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      required:
+      - test_script_path
+    AssetKind:
+      type: string
+      enum:
+      - s3object
+      - resource
+      - ducklake
+      - datatable
+      - volume
     TriggersCount:
       type: object
       properties:
@@ -1307,48 +1352,23 @@ components:
           type: number
         github_count:
           type: number
-    AssetKind:
-      type: string
-      enum:
-      - s3object
-      - resource
-      - ducklake
-      - datatable
-      - volume
-    ScriptLang:
-      type: string
-      enum:
-      - python3
-      - deno
-      - go
-      - bash
-      - powershell
-      - postgresql
-      - mysql
-      - bigquery
-      - snowflake
-      - mssql
-      - oracledb
-      - graphql
-      - nativets
-      - bun
-      - php
-      - rust
-      - ansible
-      - csharp
-      - nu
-      - java
-      - ruby
-      - rlang
-      - duckdb
-      - bunnative
-    HubScriptKind:
-      type: string
-      enum:
-      - script
-      - failure
-      - trigger
-      - approval
+    ScriptModule:
+      type: object
+      description: An additional module file associated with a script
+      properties:
+        content:
+          type: string
+          description: The source code content of this module
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        lock:
+          type:
+          - string
+          - 'null'
+          description: Lock file content for this module's dependencies
+      required:
+      - content
+      - language
     NewScript:
       type: object
       properties:
@@ -1462,8 +1482,9 @@ components:
                 - w
                 - rw
         modules:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: Additional script modules keyed by relative file path
           additionalProperties:
             $ref: '#/components/schemas/ScriptModule'
@@ -1476,51 +1497,34 @@ components:
       - summary
       - content
       - language
-    ScriptModule:
-      type: object
-      description: An additional module file associated with a script
-      properties:
-        content:
-          type: string
-          description: The source code content of this module
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        lock:
-          type: string
-          nullable: true
-          description: Lock file content for this module's dependencies
-      required:
-      - content
-      - language
-    CiTestResult:
+    TruncatedToken:
       type: object
       properties:
-        test_script_path:
+        label:
           type: string
-        job_id:
-          type: string
-          format: uuid
-          nullable: true
-        status:
-          type: string
-          nullable: true
-        started_at:
+        expiration:
           type: string
           format: date-time
-          nullable: true
-      required:
-      - test_script_path
-    NewScriptWithDraft:
-      allOf:
-      - $ref: '#/components/schemas/NewScript'
-      - type: object
-        properties:
-          draft:
-            $ref: '#/components/schemas/NewScript'
-          hash:
+        token_prefix:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+        scopes:
+          type: array
+          items:
             type: string
-        required:
-        - hash
+        email:
+          type: string
+        workspace_id:
+          type: string
+      required:
+      - token_prefix
+      - created_at
+      - last_used_at
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin gcp_trigger API
+  title: Windmill Gcp Trigger API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -279,6 +279,111 @@ paths:
                   type: string
 components:
   schemas:
+    PushConfig:
+      type: object
+      description: Configuration for push delivery mode.
+      properties:
+        audience:
+          type: string
+          description: The audience claim for OIDC tokens used in push authentication.
+        authenticate:
+          type: boolean
+          description: If true, push messages will include OIDC authentication tokens.
+      required:
+      - authenticate
+      - base_endpoint
+    SubscriptionMode:
+      type: string
+      enum:
+      - existing
+      - create_update
+      description: The mode of subscription. 'existing' means using an existing GCP subscription, while 'create_update' involves creating or updating a new subscription.
+    GcpTriggerData:
+      type: object
+      description: Data for creating or updating a Google Cloud Pub/Sub trigger.
+      properties:
+        gcp_resource_path:
+          type: string
+          description: Path to the GCP resource containing service account credentials for authentication.
+        subscription_mode:
+          $ref: '#/components/schemas/SubscriptionMode'
+        topic_id:
+          type: string
+          description: Google Cloud Pub/Sub topic ID to subscribe to.
+        subscription_id:
+          type: string
+          description: Google Cloud Pub/Sub subscription ID.
+        base_endpoint:
+          type: string
+          description: Base URL for push delivery endpoint.
+        delivery_type:
+          $ref: '#/components/schemas/DeliveryType'
+        delivery_config:
+          $ref: '#/components/schemas/PushConfig'
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received.
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script.
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        auto_acknowledge_msg:
+          type: boolean
+          description: If true, automatically acknowledge messages after processing.
+        ack_deadline:
+          type: integer
+          format: int32
+          minimum: 10
+          maximum: 600
+          description: Time in seconds within which the message must be acknowledged. If not provided, defaults to the subscription's acknowledgment deadline (600 seconds).
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails.
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler.
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions.
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - gcp_resource_path
+      - topic_id
+      - subscription_mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    DeleteGcpSubscription:
+      type: object
+      properties:
+        subscription_id:
+          type: string
+      required:
+      - subscription_id
+    GetAllTopicSubscription:
+      type: object
+      properties:
+        topic_id:
+          type: string
+      required:
+      - topic_id
     GcpTrigger:
       allOf:
       - $ref: '#/components/schemas/TriggerExtraProperty'
@@ -301,7 +406,6 @@ components:
           $ref: '#/components/schemas/DeliveryType'
         delivery_config:
           $ref: '#/components/schemas/PushConfig'
-          nullable: true
         subscription_mode:
           $ref: '#/components/schemas/SubscriptionMode'
         last_server_ping:
@@ -326,12 +430,6 @@ components:
       - subscription_id
       - delivery_type
       - subscription_mode
-    DeliveryType:
-      type: string
-      enum:
-      - push
-      - pull
-      description: Delivery mode for messages. 'push' for HTTP push delivery where messages are sent to a webhook endpoint, 'pull' for polling where the trigger actively fetches messages.
     TriggerExtraProperty:
       type: object
       properties:
@@ -380,30 +478,6 @@ components:
       - edited_at
       - is_flow
       - mode
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    SubscriptionMode:
-      type: string
-      enum:
-      - existing
-      - create_update
-      description: The mode of subscription. 'existing' means using an existing GCP subscription, while 'create_update' involves creating or updating a new subscription.
-    DeleteGcpSubscription:
-      type: object
-      properties:
-        subscription_id:
-          type: string
-      required:
-      - subscription_id
-    GetAllTopicSubscription:
-      type: object
-      properties:
-        topic_id:
-          type: string
-      required:
-      - topic_id
     TriggerMode:
       description: job trigger mode
       type: string
@@ -411,88 +485,12 @@ components:
       - enabled
       - disabled
       - suspended
-    GcpTriggerData:
-      type: object
-      description: Data for creating or updating a Google Cloud Pub/Sub trigger.
-      properties:
-        gcp_resource_path:
-          type: string
-          description: Path to the GCP resource containing service account credentials for authentication.
-        subscription_mode:
-          $ref: '#/components/schemas/SubscriptionMode'
-        topic_id:
-          type: string
-          description: Google Cloud Pub/Sub topic ID to subscribe to.
-        subscription_id:
-          type: string
-          description: Google Cloud Pub/Sub subscription ID.
-        base_endpoint:
-          type: string
-          description: Base URL for push delivery endpoint.
-        delivery_type:
-          $ref: '#/components/schemas/DeliveryType'
-        delivery_config:
-          nullable: true
-          $ref: '#/components/schemas/PushConfig'
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when a message is received.
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script.
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-        auto_acknowledge_msg:
-          type: boolean
-          description: If true, automatically acknowledge messages after processing.
-        ack_deadline:
-          type: integer
-          format: int32
-          minimum: 10
-          maximum: 600
-          description: Time in seconds within which the message must be acknowledged. If not provided, defaults to the subscription's acknowledgment deadline (600 seconds).
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails.
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler.
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions.
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - script_path
-      - is_flow
-      - gcp_resource_path
-      - topic_id
-      - subscription_mode
-    PushConfig:
-      type: object
-      description: Configuration for push delivery mode.
-      properties:
-        audience:
-          type: string
-          description: The audience claim for OIDC tokens used in push authentication.
-        authenticate:
-          type: boolean
-          description: If true, push messages will include OIDC authentication tokens.
-      required:
-      - authenticate
-      - base_endpoint
+    DeliveryType:
+      type: string
+      enum:
+      - push
+      - pull
+      description: Delivery mode for messages. 'push' for HTTP push delivery where messages are sent to a webhook endpoint, 'pull' for polling where the trigger actively fetches messages.
   parameters:
     WorkspaceId:
       name: workspace
@@ -506,15 +504,15 @@ components:
       required: true
       schema:
         type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

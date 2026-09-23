@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin mqtt_trigger API
+  title: Windmill Mqtt Trigger API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -212,37 +212,21 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
     MqttClientVersion:
       type: string
       enum:
       - v3
       - v5
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    MqttV3Config:
+      type: object
+      properties:
+        clean_session:
+          type: boolean
     MqttSubscribeTopic:
       type: object
       properties:
@@ -253,7 +237,63 @@ components:
       required:
       - qos
       - topic
-    EditMqttTrigger:
+    MqttTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        mqtt_resource_path:
+          type: string
+          description: Path to the MQTT resource containing broker connection configuration
+        subscribe_topics:
+          type: array
+          items:
+            $ref: '#/components/schemas/MqttSubscribeTopic'
+          description: Array of MQTT topics to subscribe to, each with topic name and QoS level
+        v3_config:
+          $ref: '#/components/schemas/MqttV3Config'
+          description: MQTT v3 specific configuration (clean_session)
+        v5_config:
+          $ref: '#/components/schemas/MqttV5Config'
+          description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
+        client_id:
+          type:
+          - string
+          - 'null'
+          description: MQTT client ID for this connection
+        client_version:
+          $ref: '#/components/schemas/MqttClientVersion'
+          description: MQTT protocol version ('v3' or 'v5')
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - subscribe_topics
+      - mqtt_resource_path
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    NewMqttTrigger:
       type: object
       properties:
         mqtt_resource_path:
@@ -265,19 +305,17 @@ components:
             $ref: '#/components/schemas/MqttSubscribeTopic'
           description: Array of MQTT topics to subscribe to, each with topic name and QoS level
         client_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: MQTT client ID for this connection
         v3_config:
-          nullable: true
           $ref: '#/components/schemas/MqttV3Config'
           description: MQTT v3 specific configuration (clean_session)
         v5_config:
-          nullable: true
           $ref: '#/components/schemas/MqttV5Config'
           description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
         client_version:
-          nullable: true
           $ref: '#/components/schemas/MqttClientVersion'
           description: MQTT protocol version ('v3' or 'v5')
         path:
@@ -314,7 +352,6 @@ components:
       - path
       - script_path
       - is_flow
-      - enabled
       - subscribe_topics
       - mqtt_resource_path
     TriggerExtraProperty:
@@ -365,82 +402,13 @@ components:
       - edited_at
       - is_flow
       - mode
-    MqttV3Config:
-      type: object
-      properties:
-        clean_session:
-          type: boolean
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
     MqttQoS:
       type: string
       enum:
       - qos0
       - qos1
       - qos2
-    MqttTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      properties:
-        mqtt_resource_path:
-          type: string
-          description: Path to the MQTT resource containing broker connection configuration
-        subscribe_topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/MqttSubscribeTopic'
-          description: Array of MQTT topics to subscribe to, each with topic name and QoS level
-        v3_config:
-          $ref: '#/components/schemas/MqttV3Config'
-          nullable: true
-          description: MQTT v3 specific configuration (clean_session)
-        v5_config:
-          $ref: '#/components/schemas/MqttV5Config'
-          nullable: true
-          description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
-        client_id:
-          type: string
-          nullable: true
-          description: MQTT client ID for this connection
-        client_version:
-          $ref: '#/components/schemas/MqttClientVersion'
-          nullable: true
-          description: MQTT protocol version ('v3' or 'v5')
-        server_id:
-          type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
-          type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-      required:
-      - subscribe_topics
-      - mqtt_resource_path
-    MqttV5Config:
-      type: object
-      properties:
-        clean_start:
-          type: boolean
-        topic_alias_maximum:
-          type: number
-        session_expiry_interval:
-          type: number
-    NewMqttTrigger:
+    EditMqttTrigger:
       type: object
       properties:
         mqtt_resource_path:
@@ -452,19 +420,17 @@ components:
             $ref: '#/components/schemas/MqttSubscribeTopic'
           description: Array of MQTT topics to subscribe to, each with topic name and QoS level
         client_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: MQTT client ID for this connection
         v3_config:
-          nullable: true
           $ref: '#/components/schemas/MqttV3Config'
           description: MQTT v3 specific configuration (clean_session)
         v5_config:
-          nullable: true
           $ref: '#/components/schemas/MqttV5Config'
           description: MQTT v5 specific configuration (clean_start, topic_alias_maximum, session_expiry_interval)
         client_version:
-          nullable: true
           $ref: '#/components/schemas/MqttClientVersion'
           description: MQTT protocol version ('v3' or 'v5')
         path:
@@ -501,15 +467,43 @@ components:
       - path
       - script_path
       - is_flow
+      - enabled
       - subscribe_topics
       - mqtt_resource_path
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
+    MqttV5Config:
+      type: object
+      properties:
+        clean_start:
+          type: boolean
+        topic_alias_maximum:
+          type: number
+        session_expiry_interval:
+          type: number
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin setting API
+  title: Windmill Setting API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: setting
+- name: Setting
 paths:
   /settings/refresh_custom_instance_user_pwd:
     post:
       summary: Refreshes the Password for the Custom_instance_user
       operationId: refreshCustomInstanceUserPwd
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: Success
@@ -37,7 +37,7 @@ paths:
       summary: Returns the Set-up Statuses of Custom Instance Pg Databases
       operationId: listCustomInstanceDbs
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: Statuses of all custom instance dbs
@@ -49,10 +49,10 @@ paths:
                   $ref: '#/components/schemas/CustomInstanceDb'
   /settings/setup_custom_instance_pg_database/{name}:
     post:
-      summary: Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the Custom_instance_user
+      summary: Runs CREATE DATABASE on the Windmill Postgres and Grants Access to the…
       operationId: setupCustomInstanceDb
       tags:
-      - setting
+      - Setting
       requestBody:
         required: true
         content:
@@ -81,7 +81,7 @@ paths:
       summary: Drops a Custom Instance Database (superadmin Only, Irreversible)
       operationId: dropCustomInstanceDb
       tags:
-      - setting
+      - Setting
       parameters:
       - in: path
         name: name
@@ -101,7 +101,7 @@ paths:
       summary: Get Global Settings
       operationId: getGlobal
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/Key'
       responses:
@@ -114,7 +114,7 @@ paths:
       summary: Post Global Settings
       operationId: setGlobal
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/Key'
       requestBody:
@@ -144,12 +144,10 @@ paths:
 
         instance config is unset. Ruff configuration is lint/format policy,
 
-        not a credential.
-
-        '
+        not a credential.'
       operationId: getRuffConfig
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: ruff.toml content (may be empty)
@@ -162,7 +160,7 @@ paths:
       summary: Get Local Settings
       operationId: getLocal
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: status
@@ -174,7 +172,7 @@ paths:
       summary: Test Smtp
       operationId: testSmtp
       tags:
-      - setting
+      - Setting
       requestBody:
         description: test smtp payload
         required: true
@@ -225,7 +223,7 @@ paths:
       summary: Test Critical Channels
       operationId: testCriticalChannels
       tags:
-      - setting
+      - Setting
       requestBody:
         description: test critical channel payload
         required: true
@@ -252,7 +250,7 @@ paths:
       summary: Get All Critical Alerts
       operationId: getCriticalAlerts
       tags:
-      - setting
+      - Setting
       parameters:
       - in: query
         name: page
@@ -270,8 +268,9 @@ paths:
       - in: query
         name: acknowledged
         schema:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Filter by acknowledgment status; true for acknowledged, false for unacknowledged, and omit for all alerts
       responses:
         '200':
@@ -298,7 +297,7 @@ paths:
       summary: Acknowledge a Critical Alert
       operationId: acknowledgeCriticalAlert
       tags:
-      - setting
+      - Setting
       parameters:
       - in: path
         name: id
@@ -319,7 +318,7 @@ paths:
       summary: Acknowledge All Unacknowledged Critical Alerts
       operationId: acknowledgeAllCriticalAlerts
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: Successfully acknowledged all unacknowledged critical alerts.
@@ -333,7 +332,7 @@ paths:
       summary: Test License Key
       operationId: testLicenseKey
       tags:
-      - setting
+      - Setting
       requestBody:
         description: test license key
         required: true
@@ -358,7 +357,7 @@ paths:
       summary: Test Object Storage Config
       operationId: testObjectStorageConfig
       tags:
-      - setting
+      - Setting
       requestBody:
         description: test object storage config
         required: true
@@ -379,15 +378,16 @@ paths:
       summary: Get Current or Last Object Storage Usage Computation (null if Never Run)
       operationId: getObjectStorageUsage
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: current or last storage-usage computation state
           content:
             application/json:
               schema:
-                nullable: true
-                type: object
+                type:
+                - object
+                - 'null'
                 properties:
                   running:
                     type: boolean
@@ -395,12 +395,14 @@ paths:
                     type: string
                     format: date-time
                   finished_at:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   current_prefix:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   scanned_objects:
                     type: integer
                     format: int64
@@ -420,8 +422,9 @@ paths:
                       - prefix
                       - size
                   error:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - running
                 - started_at
@@ -431,7 +434,7 @@ paths:
       summary: Start a Background Computation of Object Storage Usage by Top-level Folder
       operationId: computeObjectStorageUsage
       tags:
-      - setting
+      - Setting
       responses:
         '202':
           description: computation started
@@ -444,7 +447,7 @@ paths:
       summary: Start a Manual Cleanup of Expired Logs from Object Storage
       operationId: runLogCleanup
       tags:
-      - setting
+      - Setting
       responses:
         '202':
           description: cleanup started
@@ -457,15 +460,16 @@ paths:
       summary: Get Status of the Manual Log Cleanup Task
       operationId: getLogCleanupStatus
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: current or last log cleanup status (null if never run)
           content:
             application/json:
               schema:
-                nullable: true
-                type: object
+                type:
+                - object
+                - 'null'
                 properties:
                   running:
                     type: boolean
@@ -473,9 +477,10 @@ paths:
                     type: string
                     format: date-time
                   finished_at:
-                    type: string
+                    type:
+                    - string
+                    - 'null'
                     format: date-time
-                    nullable: true
                   phase:
                     type: string
                   total_service:
@@ -503,8 +508,9 @@ paths:
                     type: integer
                     format: int64
                   last_error:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                 required:
                 - running
                 - started_at
@@ -522,7 +528,7 @@ paths:
       summary: Send Stats
       operationId: sendStats
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: status
@@ -536,7 +542,7 @@ paths:
       description: Send a restart signal to all workers in the specified worker group. Workers will gracefully shut down and are expected to be restarted by their supervisor. Requires devops role.
       operationId: restartWorkerGroup
       tags:
-      - setting
+      - Setting
       parameters:
       - name: worker_group
         in: path
@@ -556,7 +562,7 @@ paths:
       summary: Get Telemetry Stats with HMAC Signature (EE Only)
       operationId: getStats
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: telemetry stats JSON with signature
@@ -574,14 +580,16 @@ paths:
       summary: Get Latest Key Renewal Attempt
       operationId: getLatestKeyRenewalAttempt
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: status
           content:
             application/json:
               schema:
-                type: object
+                type:
+                - object
+                - 'null'
                 properties:
                   result:
                     type: string
@@ -591,13 +599,12 @@ paths:
                 required:
                 - result
                 - attempted_at
-                nullable: true
   /settings/renew_license_key:
     post:
       summary: Renew License Key
       operationId: renewLicenseKey
       tags:
-      - setting
+      - Setting
       parameters:
       - name: license_key
         in: query
@@ -616,7 +623,7 @@ paths:
       summary: Create Customer Portal Session
       operationId: createCustomerPortalSession
       tags:
-      - setting
+      - Setting
       parameters:
       - name: license_key
         in: query
@@ -635,7 +642,7 @@ paths:
       summary: Test Metadata
       operationId: testMetadata
       tags:
-      - setting
+      - Setting
       requestBody:
         description: test metadata
         required: true
@@ -655,7 +662,7 @@ paths:
       summary: List Global Settings
       operationId: listGlobalSettings
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: list of settings
@@ -670,7 +677,7 @@ paths:
       summary: Get Full Instance Config (global Settings + Worker Configs)
       operationId: getInstanceConfig
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: full instance configuration
@@ -679,10 +686,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/InstanceConfig'
     put:
-      summary: Update Instance Config (bulk Upsert, No Deletes). Empty or Missing Global_settings/worker_configs are Skipped.
+      summary: Update Instance Config (bulk Upsert, No Deletes).
       operationId: setInstanceConfig
       tags:
-      - setting
+      - Setting
       requestBody:
         description: full instance configuration to apply
         required: true
@@ -702,7 +709,7 @@ paths:
       summary: Get Minimum Worker Versions Required to Stay Alive
       operationId: getMinKeepAliveVersion
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: minimum keep-alive versions for workers and agents
@@ -725,7 +732,7 @@ paths:
       summary: Get JWKS for Vault JWT Authentication
       operationId: getJwks
       tags:
-      - setting
+      - Setting
       responses:
         '200':
           description: JSON Web Key Set
@@ -738,7 +745,7 @@ paths:
       summary: Test Secret Backend Connection (HashiCorp Vault)
       operationId: testSecretBackend
       tags:
-      - setting
+      - Setting
       requestBody:
         description: Vault settings to test
         required: true
@@ -758,7 +765,7 @@ paths:
       summary: Migrate Secrets from Database to HashiCorp Vault
       operationId: migrateSecretsToVault
       tags:
-      - setting
+      - Setting
       requestBody:
         description: Vault settings for migration target
         required: true
@@ -778,7 +785,7 @@ paths:
       summary: Migrate Secrets from HashiCorp Vault to Database
       operationId: migrateSecretsToDatabase
       tags:
-      - setting
+      - Setting
       requestBody:
         description: Vault settings for migration source
         required: true
@@ -798,7 +805,7 @@ paths:
       summary: Test Azure Key Vault Connection
       operationId: testAzureKvBackend
       tags:
-      - setting
+      - Setting
       requestBody:
         description: Azure Key Vault settings to test
         required: true
@@ -818,7 +825,7 @@ paths:
       summary: Migrate Secrets from Database to Azure Key Vault
       operationId: migrateSecretsToAzureKv
       tags:
-      - setting
+      - Setting
       requestBody:
         description: Azure Key Vault settings for migration target
         required: true
@@ -838,7 +845,7 @@ paths:
       summary: Migrate Secrets from Azure Key Vault to Database
       operationId: migrateSecretsFromAzureKv
       tags:
-      - setting
+      - Setting
       requestBody:
         description: Azure Key Vault settings for migration source
         required: true
@@ -858,7 +865,7 @@ paths:
       summary: Test Connection to AWS Secrets Manager
       operationId: testAwsSmBackend
       tags:
-      - setting
+      - Setting
       requestBody:
         required: true
         content:
@@ -877,7 +884,7 @@ paths:
       summary: Migrate Secrets from Database to AWS Secrets Manager
       operationId: migrateSecretsToAwsSm
       tags:
-      - setting
+      - Setting
       requestBody:
         required: true
         content:
@@ -896,7 +903,7 @@ paths:
       summary: Migrate Secrets from AWS Secrets Manager to Database
       operationId: migrateSecretsFromAwsSm
       tags:
-      - setting
+      - Setting
       requestBody:
         required: true
         content:
@@ -915,7 +922,7 @@ paths:
       summary: Get Secondary Storage Names
       operationId: getSecondaryStorageNames
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: include_default
@@ -939,7 +946,7 @@ paths:
       summary: Get All Critical Alerts for this Workspace
       operationId: workspaceGetCriticalAlerts
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - in: query
@@ -958,8 +965,9 @@ paths:
       - in: query
         name: acknowledged
         schema:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Filter by acknowledgment status; true for acknowledged, false for unacknowledged, and omit for all alerts
       responses:
         '200':
@@ -986,7 +994,7 @@ paths:
       summary: Acknowledge a Critical Alert for this Workspace
       operationId: workspaceAcknowledgeCriticalAlert
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - in: path
@@ -1008,7 +1016,7 @@ paths:
       summary: Acknowledge All Unacknowledged Critical Alerts for this Workspace
       operationId: workspaceAcknowledgeAllCriticalAlerts
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1024,7 +1032,7 @@ paths:
       summary: Mute Critical Alert UI for this Workspace
       operationId: workspaceMuteCriticalAlertsUI
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1052,7 +1060,7 @@ paths:
       summary: Set Public App Rate Limit for this Workspace
       operationId: setPublicAppRateLimit
       tags:
-      - setting
+      - Setting
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1076,57 +1084,63 @@ paths:
                 type: string
                 example: 'Updated public app rate limit for workspace: workspace_id'
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Key:
-      name: key
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    InstanceConfig:
-      type: object
-      description: Unified instance configuration combining global settings and worker group configs
-      properties:
-        global_settings:
-          type: object
-          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
-
-            '
-          additionalProperties: true
-        worker_configs:
-          type: object
-          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
-
-            '
-          additionalProperties:
-            type: object
-            additionalProperties: true
-    CustomInstanceDb:
+    AzureKeyVaultSettings:
       type: object
       required:
-      - logs
-      - success
+      - vault_url
+      - tenant_id
+      - client_id
       properties:
-        logs:
-          $ref: '#/components/schemas/CustomInstanceDbLogs'
-        success:
-          type: boolean
-          description: Whether the operation completed successfully
-          example: true
-        error:
+        vault_url:
           type: string
-          nullable: true
-          description: Error message if the operation failed
-          example: Connection timeout
-        tag:
-          $ref: '#/components/schemas/CustomInstanceDbTag'
+          description: Azure Key Vault URL (e.g., https://myvault.vault.azure.net)
+        tenant_id:
+          type: string
+          description: Azure AD tenant ID
+        client_id:
+          type: string
+          description: Azure AD application (client) ID
+        client_secret:
+          type: string
+          description: Azure AD client secret
+        token:
+          type: string
+          description: Static Bearer token for testing/development (optional, if provided this is used instead of OAuth2 authentication)
+    GlobalSetting:
+      type: object
+      properties:
+        name:
+          type: string
+        value: {}
+      required:
+      - name
+      - value
+    AwsSecretsManagerSettings:
+      type: object
+      required:
+      - region
+      properties:
+        region:
+          type: string
+          description: AWS region (e.g., us-east-1)
+        access_key_id:
+          type: string
+          description: AWS Access Key ID (optional, uses default credential chain if not provided)
+        secret_access_key:
+          type: string
+          description: AWS Secret Access Key (optional)
+        endpoint_url:
+          type: string
+          description: Custom endpoint URL for testing (e.g., LocalStack)
+        prefix:
+          type: string
+          description: Prefix for secret names (e.g., windmill/)
+    CustomInstanceDbTag:
+      type: string
+      enum:
+      - ducklake
+      - datatable
     CustomInstanceDbLogs:
       type: object
       properties:
@@ -1142,17 +1156,6 @@ components:
           $ref: '#/components/schemas/LoggedWizardStatus'
         grant_permissions:
           $ref: '#/components/schemas/LoggedWizardStatus'
-    JwksResponse:
-      type: object
-      required:
-      - keys
-      properties:
-        keys:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-          description: Array of JSON Web Keys for JWT verification
     SecretMigrationReport:
       type: object
       required:
@@ -1202,6 +1205,61 @@ components:
         skip_ssl_verify:
           type: boolean
           description: Skip TLS certificate verification when connecting to Vault. Only use for self-signed certificates in development environments.
+    InstanceConfig:
+      type: object
+      description: Unified instance configuration combining global settings and worker group configs
+      properties:
+        global_settings:
+          type: object
+          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
+
+            '
+          additionalProperties: true
+        worker_configs:
+          type: object
+          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
+
+            '
+          additionalProperties:
+            type: object
+            additionalProperties: true
+    CustomInstanceDb:
+      type: object
+      required:
+      - logs
+      - success
+      properties:
+        logs:
+          $ref: '#/components/schemas/CustomInstanceDbLogs'
+        success:
+          type: boolean
+          description: Whether the operation completed successfully
+          example: true
+        error:
+          type:
+          - string
+          - 'null'
+          description: Error message if the operation failed
+          example: Connection timeout
+        tag:
+          $ref: '#/components/schemas/CustomInstanceDbTag'
+    LoggedWizardStatus:
+      type: string
+      enum:
+      - OK
+      - SKIP
+      - FAIL
+    JwksResponse:
+      type: object
+      required:
+      - keys
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Array of JSON Web Keys for JWT verification
     SecretMigrationFailure:
       type: object
       required:
@@ -1218,46 +1276,6 @@ components:
         error:
           type: string
           description: Error message
-    AwsSecretsManagerSettings:
-      type: object
-      required:
-      - region
-      properties:
-        region:
-          type: string
-          description: AWS region (e.g., us-east-1)
-        access_key_id:
-          type: string
-          description: AWS Access Key ID (optional, uses default credential chain if not provided)
-        secret_access_key:
-          type: string
-          description: AWS Secret Access Key (optional)
-        endpoint_url:
-          type: string
-          description: Custom endpoint URL for testing (e.g., LocalStack)
-        prefix:
-          type: string
-          description: Prefix for secret names (e.g., windmill/)
-    CustomInstanceDbTag:
-      type: string
-      enum:
-      - ducklake
-      - datatable
-    LoggedWizardStatus:
-      type: string
-      enum:
-      - OK
-      - SKIP
-      - FAIL
-    GlobalSetting:
-      type: object
-      properties:
-        name:
-          type: string
-        value: {}
-      required:
-      - name
-      - value
     CriticalAlert:
       type: object
       properties:
@@ -1275,35 +1293,28 @@ components:
           format: date-time
           description: Time when the alert was created
         acknowledged:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           description: Acknowledgment status of the alert, can be true, false, or null if not set
         workspace_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: Workspace id if the alert is in the scope of a workspace
-    AzureKeyVaultSettings:
-      type: object
-      required:
-      - vault_url
-      - tenant_id
-      - client_id
-      properties:
-        vault_url:
-          type: string
-          description: Azure Key Vault URL (e.g., https://myvault.vault.azure.net)
-        tenant_id:
-          type: string
-          description: Azure AD tenant ID
-        client_id:
-          type: string
-          description: Azure AD application (client) ID
-        client_secret:
-          type: string
-          description: Azure AD client secret
-        token:
-          type: string
-          description: Static Bearer token for testing/development (optional, if provided this is used instead of OAuth2 authentication)
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Key:
+      name: key
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

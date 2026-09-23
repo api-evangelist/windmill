@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin flow API
+  title: Windmill Flow API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: flow
+- name: Flow
 paths:
   /flows/hub/list:
     get:
       summary: List All Hub Flows
       operationId: listHubFlows
       tags:
-      - flow
+      - Flow
       responses:
         '200':
           description: hub flows list
@@ -64,7 +64,7 @@ paths:
       summary: Get Hub Flow by Id
       operationId: getHubFlowById
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/PathId'
       responses:
@@ -82,7 +82,7 @@ paths:
       summary: List All Flow Paths
       operationId: listFlowPaths
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -99,7 +99,7 @@ paths:
       summary: List Flows for Search
       operationId: listSearchFlow
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -124,7 +124,7 @@ paths:
       operationId: listFlows
       x-mcp-tool: true
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -231,7 +231,7 @@ paths:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
       tags:
-      - flow
+      - Flow
       responses:
         '200':
           description: Flow history
@@ -249,7 +249,7 @@ paths:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
       tags:
-      - flow
+      - Flow
       responses:
         '200':
           description: Flow version
@@ -262,7 +262,7 @@ paths:
       summary: List Flow Paths from Workspace Runnable
       operationId: listFlowPathsFromWorkspaceRunnable
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableKind'
@@ -292,7 +292,7 @@ paths:
         schema:
           type: number
       tags:
-      - flow
+      - Flow
       responses:
         '200':
           description: flow details
@@ -324,7 +324,7 @@ paths:
               required:
               - deployment_msg
       tags:
-      - flow
+      - Flow
       responses:
         '200':
           description: success
@@ -338,7 +338,7 @@ paths:
       operationId: getFlowByPath
       x-mcp-tool: true
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -358,7 +358,7 @@ paths:
       summary: Get Flow Deployment Status
       operationId: getFlowDeploymentStatus
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -380,7 +380,7 @@ paths:
       summary: Get Triggers Count of Flow
       operationId: getTriggersCountOfFlow
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -396,7 +396,7 @@ paths:
       summary: Get Tokens with Flow Scope
       operationId: listTokensOfFlow
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -414,7 +414,7 @@ paths:
       summary: Toggle ON and OFF the Workspace Error Handler for a Given Flow
       operationId: toggleWorkspaceErrorHandlerForFlow
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -440,7 +440,7 @@ paths:
       summary: Get Flow by Path with Draft
       operationId: getFlowByPathWithDraft
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -461,7 +461,7 @@ paths:
       summary: Exists Flow by Path
       operationId: existsFlowByPath
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -489,7 +489,7 @@ paths:
       - value
       - schema
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -530,7 +530,7 @@ paths:
       - value
       - schema
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -558,7 +558,7 @@ paths:
       summary: Archive Flow by Path
       operationId: archiveFlowByPath
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -585,7 +585,7 @@ paths:
       operationId: deleteFlowByPath
       x-mcp-tool: true
       tags:
-      - flow
+      - Flow
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/ScriptPath'
@@ -603,24 +603,12 @@ paths:
                 type: string
 components:
   parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
       schema:
-        type: string
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
+        type: boolean
     RunnableKind:
       name: runnable_kind
       in: path
@@ -630,45 +618,130 @@ components:
         enum:
         - script
         - flow
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
     CreatedBy:
       name: created_by
       description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
       in: query
       schema:
         type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
+    ScriptPath:
+      name: path
+      in: path
+      required: true
       schema:
-        type: integer
+        type: string
     Page:
       name: page
       description: which page to return (start at 1, default 1)
       in: query
       schema:
         type: integer
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
-        type: boolean
+        type: integer
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
   schemas:
+    TriggersCount:
+      type: object
+      properties:
+        primary_schedule:
+          type: object
+          properties:
+            schedule:
+              type: string
+        schedule_count:
+          type: number
+        http_routes_count:
+          type: number
+        webhook_count:
+          type: number
+        email_count:
+          type: number
+        default_email_count:
+          type: number
+        websocket_count:
+          type: number
+        postgres_count:
+          type: number
+        kafka_count:
+          type: number
+        nats_count:
+          type: number
+        mqtt_count:
+          type: number
+        gcp_count:
+          type: number
+        azure_count:
+          type: number
+        sqs_count:
+          type: number
+        nextcloud_count:
+          type: number
+        google_count:
+          type: number
+        github_count:
+          type: number
+    FlowVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        deployment_msg:
+          type: string
+      required:
+      - id
+      - created_at
+    OpenFlowWPath:
+      allOf:
+      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
+      - type: object
+        properties:
+          path:
+            type: string
+          tag:
+            type: string
+          ws_error_handler_muted:
+            type: boolean
+          priority:
+            type: integer
+          dedicated_worker:
+            type: boolean
+          timeout:
+            type: number
+          visible_to_runner_only:
+            type: boolean
+          on_behalf_of_email:
+            type: string
+          preserve_on_behalf_of:
+            type: boolean
+            description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
+          labels:
+            type: array
+            items:
+              type: string
+        required:
+        - path
     ExtraPerms:
       type: object
       additionalProperties:
         type: boolean
-    Flow:
-      allOf:
-      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
-      - $ref: '#/components/schemas/FlowMetadata'
-      - type: object
-        properties:
-          lock_error_logs:
-            type: string
-          version_id:
-            type: number
     FlowMetadata:
       type: object
       properties:
@@ -714,6 +787,16 @@ components:
       - edited_at
       - archived
       - extra_perms
+    Flow:
+      allOf:
+      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
+      - $ref: '#/components/schemas/FlowMetadata'
+      - type: object
+        properties:
+          lock_error_logs:
+            type: string
+          version_id:
+            type: number
     TruncatedToken:
       type: object
       properties:
@@ -742,89 +825,6 @@ components:
       - token_prefix
       - created_at
       - last_used_at
-    TriggersCount:
-      type: object
-      properties:
-        primary_schedule:
-          type: object
-          properties:
-            schedule:
-              type: string
-        schedule_count:
-          type: number
-        http_routes_count:
-          type: number
-        webhook_count:
-          type: number
-        email_count:
-          type: number
-        default_email_count:
-          type: number
-        websocket_count:
-          type: number
-        postgres_count:
-          type: number
-        kafka_count:
-          type: number
-        nats_count:
-          type: number
-        mqtt_count:
-          type: number
-        gcp_count:
-          type: number
-        azure_count:
-          type: number
-        sqs_count:
-          type: number
-        nextcloud_count:
-          type: number
-        google_count:
-          type: number
-        github_count:
-          type: number
-    OpenFlowWPath:
-      allOf:
-      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
-      - type: object
-        properties:
-          path:
-            type: string
-          tag:
-            type: string
-          ws_error_handler_muted:
-            type: boolean
-          priority:
-            type: integer
-          dedicated_worker:
-            type: boolean
-          timeout:
-            type: number
-          visible_to_runner_only:
-            type: boolean
-          on_behalf_of_email:
-            type: string
-          preserve_on_behalf_of:
-            type: boolean
-            description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
-          labels:
-            type: array
-            items:
-              type: string
-        required:
-        - path
-    FlowVersion:
-      type: object
-      properties:
-        id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        deployment_msg:
-          type: string
-      required:
-      - id
-      - created_at
   securitySchemes:
     bearerAuth:
       type: http

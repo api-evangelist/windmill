@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin azure_trigger API
+  title: Windmill Azure Trigger API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -303,59 +303,48 @@ paths:
                   $ref: '#/components/schemas/AzureArmResource'
 components:
   schemas:
-    AzureTriggerData:
+    AzureListTopics:
       type: object
-      description: Data for creating or updating an Azure Event Grid trigger.
+      properties:
+        scope_resource_id:
+          type: string
+      required:
+      - scope_resource_id
+    TestAzureConnection:
+      type: object
       properties:
         azure_resource_path:
           type: string
+      required:
+      - azure_resource_path
+    AzureDeleteSubscription:
+      type: object
+      properties:
         azure_mode:
           $ref: '#/components/schemas/AzureMode'
         scope_resource_id:
           type: string
         topic_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         subscription_name:
           type: string
-        base_endpoint:
-          type: string
-          description: Base URL for push delivery endpoints (push modes only).
-        event_type_filters:
-          type: array
-          items:
-            type: string
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-        is_flow:
-          type: boolean
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-        error_handler_path:
-          type: string
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-        permissioned_as:
-          type: string
-        preserve_permissioned_as:
-          type: boolean
-        labels:
-          type: array
-          items:
-            type: string
       required:
-      - path
-      - script_path
-      - is_flow
-      - azure_resource_path
       - azure_mode
       - scope_resource_id
       - subscription_name
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    AzureMode:
+      type: string
+      enum:
+      - basic_push
+      - namespace_push
+      - namespace_pull
+      description: Azure Event Grid trigger mode.
     AzureArmResource:
       type: object
       description: An ARM resource the service principal can see.
@@ -372,65 +361,6 @@ components:
       - id
       - name
       - type
-    AzureListSubscriptions:
-      type: object
-      properties:
-        scope_resource_id:
-          type: string
-        topic_name:
-          type: string
-      required:
-      - scope_resource_id
-      - topic_name
-    AzureTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      description: An Azure Event Grid trigger that executes a script or flow when events arrive.
-      properties:
-        azure_resource_path:
-          type: string
-        azure_mode:
-          $ref: '#/components/schemas/AzureMode'
-        scope_resource_id:
-          type: string
-          description: ARM resource ID of the topic (basic) or namespace (namespace modes).
-        topic_name:
-          type: string
-          nullable: true
-          description: Topic name within the namespace (namespace modes only).
-        subscription_name:
-          type: string
-        event_type_filters:
-          type: array
-          items:
-            type: string
-          nullable: true
-        server_id:
-          type: string
-        last_server_ping:
-          type: string
-          format: date-time
-        error:
-          type: string
-        error_handler_path:
-          type: string
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-      required:
-      - azure_resource_path
-      - azure_mode
-      - scope_resource_id
-      - subscription_name
-    TestAzureConnection:
-      type: object
-      properties:
-        azure_resource_path:
-          type: string
-      required:
-      - azure_resource_path
     TriggerExtraProperty:
       type: object
       properties:
@@ -479,10 +409,6 @@ components:
       - edited_at
       - is_flow
       - mode
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
     TriggerMode:
       description: job trigger mode
       type: string
@@ -490,36 +416,114 @@ components:
       - enabled
       - disabled
       - suspended
-    AzureDeleteSubscription:
+    AzureListSubscriptions:
       type: object
       properties:
+        scope_resource_id:
+          type: string
+        topic_name:
+          type: string
+      required:
+      - scope_resource_id
+      - topic_name
+    AzureTriggerData:
+      type: object
+      description: Data for creating or updating an Azure Event Grid trigger.
+      properties:
+        azure_resource_path:
+          type: string
         azure_mode:
           $ref: '#/components/schemas/AzureMode'
         scope_resource_id:
           type: string
         topic_name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         subscription_name:
           type: string
+        base_endpoint:
+          type: string
+          description: Base URL for push delivery endpoints (push modes only).
+        event_type_filters:
+          type: array
+          items:
+            type: string
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+        is_flow:
+          type: boolean
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+        permissioned_as:
+          type: string
+        preserve_permissioned_as:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
       required:
+      - path
+      - script_path
+      - is_flow
+      - azure_resource_path
       - azure_mode
       - scope_resource_id
       - subscription_name
-    AzureListTopics:
+    AzureTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
       type: object
+      description: An Azure Event Grid trigger that executes a script or flow when events arrive.
       properties:
+        azure_resource_path:
+          type: string
+        azure_mode:
+          $ref: '#/components/schemas/AzureMode'
         scope_resource_id:
           type: string
+          description: ARM resource ID of the topic (basic) or namespace (namespace modes).
+        topic_name:
+          type:
+          - string
+          - 'null'
+          description: Topic name within the namespace (namespace modes only).
+        subscription_name:
+          type: string
+        event_type_filters:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        server_id:
+          type: string
+        last_server_ping:
+          type: string
+          format: date-time
+        error:
+          type: string
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
       required:
+      - azure_resource_path
+      - azure_mode
       - scope_resource_id
-    AzureMode:
-      type: string
-      enum:
-      - basic_push
-      - namespace_push
-      - namespace_pull
-      description: Azure Event Grid trigger mode.
+      - subscription_name
   parameters:
     WorkspaceId:
       name: workspace

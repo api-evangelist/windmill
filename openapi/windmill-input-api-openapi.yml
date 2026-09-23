@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin input API
+  title: Windmill Input API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: input
+- name: Input
 paths:
   /w/{workspace}/inputs/history:
     get:
       summary: List Inputs Used in Previously Completed Jobs
       operationId: getInputHistory
       tags:
-      - input
+      - Input
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableId'
@@ -50,7 +50,7 @@ paths:
       summary: Get Args from History or Saved Input
       operationId: getArgsFromHistoryOrSavedInput
       tags:
-      - input
+      - Input
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: jobOrInputId
@@ -77,7 +77,7 @@ paths:
       summary: List Saved Inputs for a Runnable
       operationId: listInputs
       tags:
-      - input
+      - Input
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableId'
@@ -98,7 +98,7 @@ paths:
       summary: Create an Input for Future Use in a Script or Flow
       operationId: createInput
       tags:
-      - input
+      - Input
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/RunnableId'
@@ -123,7 +123,7 @@ paths:
       summary: Update an Input
       operationId: updateInput
       tags:
-      - input
+      - Input
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -146,7 +146,7 @@ paths:
       summary: Delete a Saved Input
       operationId: deleteInput
       tags:
-      - input
+      - Input
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/InputId'
@@ -159,6 +159,47 @@ paths:
                 type: string
                 format: uuid
 components:
+  parameters:
+    RunnableTypeQuery:
+      name: runnable_type
+      in: query
+      schema:
+        $ref: '#/components/schemas/RunnableType'
+    InputId:
+      name: input
+      in: path
+      required: true
+      schema:
+        type: string
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    RunnableId:
+      name: runnable_id
+      in: query
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
   schemas:
     RunnableType:
       type: string
@@ -213,47 +254,6 @@ components:
       - created_by
       - created_at
       - is_public
-  parameters:
-    RunnableId:
-      name: runnable_id
-      in: query
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    ArgsFilter:
-      name: args
-      description: filter on jobs containing those args as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    InputId:
-      name: input
-      in: path
-      required: true
-      schema:
-        type: string
-    RunnableTypeQuery:
-      name: runnable_type
-      in: query
-      schema:
-        $ref: '#/components/schemas/RunnableType'
   securitySchemes:
     bearerAuth:
       type: http

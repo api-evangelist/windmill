@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin concurrencyGroups API
+  title: Windmill Concurrency Groups API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -144,51 +144,173 @@ paths:
               schema:
                 $ref: '#/components/schemas/ExtendedJobs'
 components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    ParentJob:
+      name: parent_job
+      description: The parent job that is at the origin and responsible for the execution of this script if any
+      in: query
+      schema:
+        type: string
+        format: uuid
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    Running:
+      name: running
+      description: filter on running jobs
+      in: query
+      schema:
+        type: boolean
+    AllowWildcards:
+      name: allow_wildcards
+      description: allow wildcards (*) in the filter of label, tag, worker
+      in: query
+      schema:
+        type: boolean
+    Label:
+      name: label
+      description: filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')
+      in: query
+      schema:
+        type: string
+    CreatedBeforeQueue:
+      name: created_before_queue
+      description: filter on jobs created before X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ScriptExactHash:
+      name: script_hash
+      description: mask to filter exact matching path
+      in: query
+      schema:
+        type: string
+    CompletedAfter:
+      name: completed_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    JobTriggerKind:
+      name: trigger_kind
+      description: filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')
+      in: query
+      x-go-name: JobTriggerKindParam
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    StartedAfter:
+      name: started_after
+      description: filter on started after (exclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    ScheduledForBeforeNow:
+      name: scheduled_for_before_now
+      description: filter on jobs scheduled_for before now (hence waitinf for a worker)
+      in: query
+      schema:
+        type: boolean
+    ConcurrencyId:
+      name: concurrency_id
+      in: path
+      required: true
+      schema:
+        type: string
+    StartedBefore:
+      name: started_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    CreatedAfterQueue:
+      name: created_after_queue
+      description: filter on jobs created after X for jobs in the queue only
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ScriptStartPath:
+      name: script_path_start
+      description: filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')
+      in: query
+      schema:
+        type: string
+    CompletedBefore:
+      name: completed_before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    SchedulePath:
+      name: schedule_path
+      description: mask to filter by schedule path
+      in: query
+      schema:
+        type: string
+    JobKinds:
+      name: job_kinds
+      description: filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')
+      in: query
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    ScriptExactPath:
+      name: script_path_exact
+      description: filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')
+      in: query
+      schema:
+        type: string
+    ResultFilter:
+      name: result
+      description: filter on jobs containing those result as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    Tag:
+      name: tag
+      description: filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')
+      in: query
+      schema:
+        type: string
   schemas:
-    ObscuredJob:
-      type: object
-      properties:
-        typ:
-          type: string
-        started_at:
-          type: string
-          format: date-time
-        duration_ms:
-          type: number
-    ConcurrencyGroup:
-      type: object
-      properties:
-        concurrency_key:
-          type: string
-        total_running:
-          type: number
-      required:
-      - concurrency_key
-      - total_running
-    Job:
-      oneOf:
-      - allOf:
-        - $ref: '#/components/schemas/CompletedJob'
-        - type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - CompletedJob
-      - allOf:
-        - $ref: '#/components/schemas/QueuedJob'
-        - type: object
-          properties:
-            type:
-              type: string
-              enum:
-              - QueuedJob
-      discriminator:
-        propertyName: type
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
     QueuedJob:
       type: object
       properties:
@@ -302,6 +424,16 @@ components:
       - email
       - visible_to_owner
       - tag
+    ObscuredJob:
+      type: object
+      properties:
+        typ:
+          type: string
+        started_at:
+          type: string
+          format: date-time
+        duration_ms:
+          type: number
     ScriptLang:
       type: string
       enum:
@@ -342,6 +474,47 @@ components:
           type: number
         name:
           type: string
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    ExtendedJobs:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+        obscured_jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/ObscuredJob'
+        omitted_obscured_jobs:
+          description: Obscured jobs omitted for security because of too specific filtering
+          type: boolean
+      required:
+      - jobs
+      - obscured_jobs
+    Job:
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/CompletedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - CompletedJob
+      - allOf:
+        - $ref: '#/components/schemas/QueuedJob'
+        - type: object
+          properties:
+            type:
+              type: string
+              enum:
+              - QueuedJob
+      discriminator:
+        propertyName: type
     CompletedJob:
       type: object
       properties:
@@ -466,189 +639,16 @@ components:
       - email
       - visible_to_owner
       - tag
-    ExtendedJobs:
+    ConcurrencyGroup:
       type: object
       properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
-        obscured_jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ObscuredJob'
-        omitted_obscured_jobs:
-          description: Obscured jobs omitted for security because of too specific filtering
-          type: boolean
+        concurrency_key:
+          type: string
+        total_running:
+          type: number
       required:
-      - jobs
-      - obscured_jobs
-  parameters:
-    CreatedBeforeQueue:
-      name: created_before_queue
-      description: filter on jobs created before X for jobs in the queue only
-      in: query
-      schema:
-        type: string
-        format: date-time
-    ArgsFilter:
-      name: args
-      description: filter on jobs containing those args as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    ParentJob:
-      name: parent_job
-      description: The parent job that is at the origin and responsible for the execution of this script if any
-      in: query
-      schema:
-        type: string
-        format: uuid
-    ScriptStartPath:
-      name: script_path_start
-      description: filter by script path prefix. Supports comma-separated list (e.g. 'f/folder1,f/folder2') and negation by prefixing all values with '!' (e.g. '!f/folder1,!f/folder2')
-      in: query
-      schema:
-        type: string
-    CreatedAfterQueue:
-      name: created_after_queue
-      description: filter on jobs created after X for jobs in the queue only
-      in: query
-      schema:
-        type: string
-        format: date-time
-    CompletedAfter:
-      name: completed_after
-      description: filter on started after (exclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
-    Tag:
-      name: tag
-      description: filter by tag/worker group. Supports comma-separated list (e.g. 'gpu,highmem') and negation by prefixing all values with '!' (e.g. '!gpu,!highmem')
-      in: query
-      schema:
-        type: string
-    StartedBefore:
-      name: started_before
-      description: filter on started before (inclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    ScheduledForBeforeNow:
-      name: scheduled_for_before_now
-      description: filter on jobs scheduled_for before now (hence waitinf for a worker)
-      in: query
-      schema:
-        type: boolean
-    StartedAfter:
-      name: started_after
-      description: filter on started after (exclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    ScriptExactPath:
-      name: script_path_exact
-      description: filter by exact matching script path. Supports comma-separated list (e.g. 'f/script1,f/script2') and negation by prefixing all values with '!' (e.g. '!f/script1,!f/script2')
-      in: query
-      schema:
-        type: string
-    CompletedBefore:
-      name: completed_before
-      description: filter on started before (inclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    JobKinds:
-      name: job_kinds
-      description: filter by job kind. Supports comma-separated list of values ('preview', 'script', 'dependencies', 'flow') and negation by prefixing all values with '!' (e.g. '!preview,!dependencies')
-      in: query
-      schema:
-        type: string
-    ResultFilter:
-      name: result
-      description: filter on jobs containing those result as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
-    SchedulePath:
-      name: schedule_path
-      description: mask to filter by schedule path
-      in: query
-      schema:
-        type: string
-    ConcurrencyId:
-      name: concurrency_id
-      in: path
-      required: true
-      schema:
-        type: string
-    ScriptExactHash:
-      name: script_hash
-      description: mask to filter exact matching path
-      in: query
-      schema:
-        type: string
-    Label:
-      name: label
-      description: filter by exact matching job label. Supports comma-separated list (e.g. 'deploy,release') and negation by prefixing all values with '!' (e.g. '!deploy,!release')
-      in: query
-      schema:
-        type: string
-    Running:
-      name: running
-      description: filter on running jobs
-      in: query
-      schema:
-        type: boolean
-    AllowWildcards:
-      name: allow_wildcards
-      description: allow wildcards (*) in the filter of label, tag, worker
-      in: query
-      schema:
-        type: boolean
-    JobTriggerKind:
-      name: trigger_kind
-      description: filter by trigger kind. Supports comma-separated list (e.g. 'schedule,webhook') and negation by prefixing all values with '!' (e.g. '!schedule,!webhook')
-      in: query
-      x-go-name: JobTriggerKindParam
-      schema:
-        type: string
-    JobId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
+      - concurrency_key
+      - total_running
   securitySchemes:
     bearerAuth:
       type: http

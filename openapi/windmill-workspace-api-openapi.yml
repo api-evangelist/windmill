@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin workspace API
+  title: Windmill Workspace API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: workspace
+- name: Workspace
 paths:
   /workspaces/list:
     get:
       summary: List All Workspaces Visible to Me
       operationId: listWorkspaces
       tags:
-      - workspace
+      - Workspace
       responses:
         '200':
           description: all workspaces
@@ -39,7 +39,7 @@ paths:
       summary: Is Domain Allowed for Auto Invi
       operationId: isDomainAllowed
       tags:
-      - workspace
+      - Workspace
       responses:
         '200':
           description: domain allowed or not
@@ -52,7 +52,7 @@ paths:
       summary: List All Workspaces Visible to Me with User Info
       operationId: listUserWorkspaces
       tags:
-      - workspace
+      - Workspace
       responses:
         '200':
           description: workspace with associated username
@@ -65,7 +65,7 @@ paths:
       summary: Get Workspace as Super Admin (require to be Super Admin)
       operationId: getWorkspaceAsSuperAdmin
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -80,7 +80,7 @@ paths:
       summary: List All Workspaces as Super Admin (require to be Super Admin)
       operationId: listWorkspacesAsSuperAdmin
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/Page'
       - $ref: '#/components/parameters/PerPage'
@@ -98,7 +98,7 @@ paths:
       summary: Create Workspace
       operationId: createWorkspace
       tags:
-      - workspace
+      - Workspace
       requestBody:
         description: new token
         required: true
@@ -118,7 +118,7 @@ paths:
       summary: Create Forked Workspace Branch with Git Sync
       operationId: createWorkspaceForkGitBranch
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -143,7 +143,7 @@ paths:
       summary: Create Forked Workspace
       operationId: createWorkspaceFork
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -165,7 +165,7 @@ paths:
       summary: Exists Workspace
       operationId: existsWorkspace
       tags:
-      - workspace
+      - Workspace
       requestBody:
         description: id of workspace
         required: true
@@ -190,7 +190,7 @@ paths:
       summary: Exists Username
       operationId: existsUsername
       tags:
-      - workspace
+      - Workspace
       requestBody:
         required: true
         content:
@@ -217,7 +217,7 @@ paths:
       summary: Get Github App Token
       operationId: getGithubAppToken
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -249,7 +249,7 @@ paths:
       summary: Invite User to Workspace
       operationId: inviteUser
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -267,8 +267,9 @@ paths:
                 operator:
                   type: boolean
                 parent_workspace_id:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
               required:
               - email
               - is_admin
@@ -285,7 +286,7 @@ paths:
       summary: Add User to Workspace
       operationId: addUser
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -320,7 +321,7 @@ paths:
       summary: Create a Service Account
       operationId: createServiceAccount
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -346,7 +347,7 @@ paths:
       summary: Delete User Invite
       operationId: delete invite
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -379,7 +380,7 @@ paths:
       summary: Archive Workspace
       operationId: archiveWorkspace
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -394,7 +395,7 @@ paths:
       summary: Unarchive Workspace
       operationId: unarchiveWorkspace
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -409,7 +410,7 @@ paths:
       summary: Delete Workspace (require Super Admin)
       operationId: deleteWorkspace
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: only_delete_forks
@@ -429,7 +430,7 @@ paths:
       summary: Leave Workspace
       operationId: leaveWorkspace
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -444,7 +445,7 @@ paths:
       summary: Get Workspace Name
       operationId: getWorkspaceName
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -459,7 +460,7 @@ paths:
       summary: Change Workspace Name
       operationId: changeWorkspaceName
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -484,7 +485,7 @@ paths:
       summary: Change Workspace Id
       operationId: changeWorkspaceId
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -511,7 +512,7 @@ paths:
       summary: Change Workspace Id
       operationId: changeWorkspaceColor
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -535,7 +536,7 @@ paths:
       summary: Update Operator Settings for a Workspace
       description: Updates the operator settings for a specific workspace. Requires workspace admin privileges.
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -557,7 +558,7 @@ paths:
       summary: Compare Two Workspaces
       description: Compares the current workspace with a target workspace to find differences in scripts, flows, apps, resources, and variables. Returns information about items that are ahead, behind, or in conflict.
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: target_workspace_id
@@ -579,7 +580,7 @@ paths:
       summary: Resets the Ahead and Behind Deployement Counter After a Deployement
       description: This endpoint should be called after a fork deployement
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: fork_workspace_id
@@ -599,7 +600,7 @@ paths:
       summary: List Pending Invites for a Workspace
       operationId: listPendingInvites
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -617,7 +618,7 @@ paths:
       description: Returns the subset of workspace settings safe to expose to any workspace member. The full settings struct is admin-only via `getSettings`.
       operationId: getPublicSettings
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -656,7 +657,7 @@ paths:
       description: Returns the full workspace settings including admin-managed integration credentials. Admin-only — non-admin callers should use `getPublicSettings`.
       operationId: getSettings
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -731,7 +732,7 @@ paths:
       summary: Get Deploy to
       operationId: getDeployTo
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -749,7 +750,7 @@ paths:
       summary: Get if Workspace is Premium
       operationId: getIsPremium
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -764,7 +765,7 @@ paths:
       summary: Get Premium Info
       operationId: getPremiumInfo
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: skip_subscription_fetch
@@ -801,7 +802,7 @@ paths:
       summary: Get Threshold Alert Info
       operationId: getThresholdAlert
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -821,7 +822,7 @@ paths:
       summary: Set Threshold Alert Info
       operationId: setThresholdAlert
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -846,7 +847,7 @@ paths:
       summary: Rebuild Dependency Map
       operationId: rebuildDependencyMap
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -861,7 +862,7 @@ paths:
       summary: Get Dependents of an Imported Path
       operationId: getDependents
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: imported_path
@@ -884,7 +885,7 @@ paths:
       summary: Get Script Imports for an Importer Path
       operationId: getImports
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: importer_path
@@ -907,7 +908,7 @@ paths:
       summary: Get Dependents Amounts for Multiple Imported Paths
       operationId: getDependentsAmounts
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -933,7 +934,7 @@ paths:
       summary: Get Dependency Map
       operationId: getDependencyMap
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -950,7 +951,7 @@ paths:
       summary: Edit Slack Command
       operationId: editSlackCommand
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -975,7 +976,7 @@ paths:
       summary: Get Workspace Slack Oauth Config
       operationId: getWorkspaceSlackOauthConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -987,17 +988,19 @@ paths:
                 type: object
                 properties:
                   slack_oauth_client_id:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   slack_oauth_client_secret:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Masked with *** if set
     post:
       summary: Set Workspace Slack Oauth Config
       operationId: setWorkspaceSlackOauthConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1026,7 +1029,7 @@ paths:
       summary: Delete Workspace Slack Oauth Config
       operationId: deleteWorkspaceSlackOauthConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1041,7 +1044,7 @@ paths:
       summary: Edit Teams Command
       operationId: editTeamsCommand
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1066,7 +1069,7 @@ paths:
       summary: List Available Teams Ids
       operationId: listAvailableTeamsIds
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: search
@@ -1105,15 +1108,16 @@ paths:
                     type: integer
                     description: Number of teams per page (configurable via TEAMS_PER_PAGE env var)
                   next_link:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: URL to fetch next page of results. Null if no more pages.
   /w/{workspace}/workspaces/available_teams_channels:
     get:
       summary: List Available Channels for a Specific Team
       operationId: listAvailableTeamsChannels
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: team_id
@@ -1146,7 +1150,7 @@ paths:
       summary: Connect Teams
       operationId: connectTeams
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1173,7 +1177,7 @@ paths:
       summary: Connect Slack (non-interactive; Pre-minted Bot Token)
       operationId: connectSlack
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1203,7 +1207,7 @@ paths:
       summary: Run a Job that Sends a Message to Slack
       operationId: runSlackMessageTestJob
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1235,7 +1239,7 @@ paths:
       summary: Run a Job that Sends a Message to Teams
       operationId: runTeamsMessageTestJob
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1267,7 +1271,7 @@ paths:
       summary: Edit Deploy to
       operationId: editDeployTo
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1291,7 +1295,7 @@ paths:
       summary: Edit Auto Invite
       operationId: editAutoInvite
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1320,7 +1324,7 @@ paths:
       summary: Edit Instance Groups
       operationId: editInstanceGroups
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1351,7 +1355,7 @@ paths:
       summary: Edit Webhook
       operationId: editWebhook
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1376,7 +1380,7 @@ paths:
       summary: Edit Copilot Config
       operationId: editCopilotConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1411,7 +1415,7 @@ paths:
       summary: Get Copilot Settings State
       operationId: getCopilotSettingsState
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1436,7 +1440,7 @@ paths:
       summary: Get Copilot Info
       operationId: getCopilotInfo
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1451,7 +1455,7 @@ paths:
       summary: Edit Error Handler
       operationId: editErrorHandler
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1473,7 +1477,7 @@ paths:
       summary: Edit Success Handler
       operationId: editSuccessHandler
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1495,7 +1499,7 @@ paths:
       summary: Edit Large File Storage Settings
       operationId: editLargeFileStorageConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1519,7 +1523,7 @@ paths:
       summary: List Ducklakes
       operationId: listDucklakes
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1536,7 +1540,7 @@ paths:
       summary: List Datatables
       operationId: listDataTables
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1567,7 +1571,7 @@ paths:
       summary: List Schemas of All Connected Datatables
       operationId: listDataTableSchemas
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1584,7 +1588,7 @@ paths:
       summary: List Tables of All Connected Datatables
       operationId: listDataTableTables
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1601,7 +1605,7 @@ paths:
       summary: Get One Datatable Table Schema
       operationId: getDataTableTableSchema
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: datatable_name
@@ -1631,7 +1635,7 @@ paths:
       summary: Edit Ducklake Settings
       operationId: editDucklakeConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1657,7 +1661,7 @@ paths:
       summary: Edit Datatable Settings
       operationId: editDataTableConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1683,7 +1687,7 @@ paths:
       summary: Create a New PostgreSQL Database for a Datatable
       operationId: createPgDatabase
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1715,7 +1719,7 @@ paths:
       summary: Drop Forked Datatable Databases
       operationId: dropForkedDatatableDatabases
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1745,7 +1749,7 @@ paths:
       summary: Import a PostgreSQL Database from Source to Target via Pg_dump
       operationId: importPgDatabase
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1787,7 +1791,7 @@ paths:
       summary: Export the Schema of a PostgreSQL Database
       operationId: exportPgSchema
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1815,7 +1819,7 @@ paths:
       summary: Get the Full Schema of a Datatable Database as TableEditorValues
       operationId: getDatatableFullSchema
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1899,7 +1903,7 @@ paths:
       summary: Check if Git Sync is Available for this Workspace
       operationId: getGitSyncEnabled
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -1913,23 +1917,27 @@ paths:
                   enabled:
                     type: boolean
                   reason:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   max_repos:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
                   user_count:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
                   max_users:
-                    type: integer
-                    nullable: true
+                    type:
+                    - integer
+                    - 'null'
   /w/{workspace}/workspaces/edit_git_sync_config:
     post:
       summary: Edit Workspace Git Sync Settings
       operationId: editWorkspaceGitSyncConfig
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1953,7 +1961,7 @@ paths:
       summary: Add or Update Individual Git Sync Repository
       operationId: editGitSyncRepository
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1983,7 +1991,7 @@ paths:
       summary: Delete Individual Git Sync Repository
       operationId: deleteGitSyncRepository
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2010,7 +2018,7 @@ paths:
       summary: Edit Workspace Deploy Ui Settings
       operationId: editWorkspaceDeployUISettings
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2034,7 +2042,7 @@ paths:
       summary: Edit Default App for Workspace
       operationId: editWorkspaceDefaultApp
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2059,7 +2067,7 @@ paths:
       summary: Edit Default Scripts for Workspace
       operationId: editDefaultScripts
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2079,7 +2087,7 @@ paths:
       summary: Get Default Scripts for Workspace
       operationId: get default scripts
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2094,7 +2102,7 @@ paths:
       summary: Set Environment Variable
       operationId: setEnvironmentVariable
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2123,7 +2131,7 @@ paths:
       summary: Retrieves the Encryption Key for this Workspace
       operationId: getWorkspaceEncryptionKey
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2142,7 +2150,7 @@ paths:
       summary: Update the Encryption Key for this Workspace
       operationId: setWorkspaceEncryptionKey
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2171,7 +2179,7 @@ paths:
       summary: Get Default App for Workspace
       operationId: getWorkspaceDefaultApp
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2191,7 +2199,7 @@ paths:
       summary: Get Usage
       operationId: getWorkspaceUsage
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2206,7 +2214,7 @@ paths:
       summary: Get Used Triggers
       operationId: getUsedTriggers
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2262,7 +2270,7 @@ paths:
       summary: List All Protection Rules for a Workspace
       operationId: listProtectionRules
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2278,7 +2286,7 @@ paths:
       summary: Create a New Protection Rule
       operationId: createProtectionRule
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2318,7 +2326,7 @@ paths:
       summary: Update an Existing Protection Rule
       operationId: updateProtectionRule
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: rule_name
@@ -2358,7 +2366,7 @@ paths:
       summary: Delete a Protection Rule
       operationId: deleteProtectionRule
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: rule_name
@@ -2382,7 +2390,7 @@ paths:
       description: Returns admins and members of wm_deployers in the parent workspace of the fork at `{workspace}`.
       operationId: listDeploymentRequestEligibleDeployers
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2399,7 +2407,7 @@ paths:
       summary: Get the Currently Open Deployment Request for this Fork
       operationId: getOpenDeploymentRequest
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2408,7 +2416,6 @@ paths:
           content:
             application/json:
               schema:
-                nullable: true
                 allOf:
                 - $ref: '#/components/schemas/DeploymentRequest'
   /w/{workspace}/deployment_request:
@@ -2416,7 +2423,7 @@ paths:
       summary: Create a New Deployment Request
       operationId: createDeploymentRequest
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2449,7 +2456,7 @@ paths:
       summary: Cancel an Open Deployment Request
       operationId: cancelDeploymentRequest
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: id
@@ -2471,7 +2478,7 @@ paths:
       description: Called by the UI after the deploy loop completes. Closes the request and marks every comment obsolete. Idempotent.
       operationId: closeDeploymentRequestMerged
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: id
@@ -2492,7 +2499,7 @@ paths:
       summary: Append a Comment to an Open Deployment Request
       operationId: createDeploymentRequestComment
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: id
@@ -2513,15 +2520,18 @@ paths:
                 body:
                   type: string
                 parent_id:
-                  type: integer
+                  type:
+                  - integer
+                  - 'null'
                   format: int64
-                  nullable: true
                 anchor_kind:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
                 anchor_path:
-                  type: string
-                  nullable: true
+                  type:
+                  - string
+                  - 'null'
       responses:
         '200':
           description: comment created
@@ -2536,7 +2546,7 @@ paths:
       summary: Log AI Chat Message
       operationId: logAiChat
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2567,7 +2577,7 @@ paths:
       summary: Get Cloud Quota Usage and Limits for Workspace
       operationId: getCloudQuotas
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2599,7 +2609,7 @@ paths:
       summary: Prune Old Versions of Scripts, Flows, or Apps
       operationId: pruneVersions
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2634,7 +2644,7 @@ paths:
       summary: Get the Workspace Shared UI Folder (full Content)
       operationId: getSharedUi
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2667,7 +2677,7 @@ paths:
       summary: List Paths/sizes of the Workspace Shared UI Folder
       operationId: listSharedUi
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2706,7 +2716,7 @@ paths:
       summary: Get the Current Version of the Workspace Shared UI Folder
       operationId: getSharedUiVersion
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -2727,7 +2737,7 @@ paths:
       summary: Replace the Workspace Shared UI Folder (admin Only)
       operationId: updateSharedUi
       tags:
-      - workspace
+      - Workspace
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -2752,244 +2762,46 @@ paths:
                 type: string
 components:
   schemas:
-    GitRepositorySettings:
+    CreateWorkspaceFork:
       type: object
       properties:
-        script_path:
+        id:
           type: string
-        git_repo_resource_path:
+        name:
           type: string
-        use_individual_branch:
-          type: boolean
-        group_by_folder:
-          type: boolean
-        collapsed:
-          type: boolean
-        settings:
-          type: object
-          properties:
-            include_path:
-              type: array
-              items:
-                type: string
-            include_type:
-              type: array
-              items:
-                $ref: '#/components/schemas/GitSyncObjectType'
-            exclude_path:
-              type: array
-              items:
-                type: string
-            extra_include_path:
-              type: array
-              items:
-                type: string
-        exclude_types_override:
+        color:
+          type: string
+        forked_datatables:
           type: array
           items:
-            $ref: '#/components/schemas/GitSyncObjectType'
-      required:
-      - git_repo_resource_path
-    WorkspaceGitSyncSettings:
-      type: object
-      properties:
-        repositories:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitRepositorySettings'
-    WorkspaceItemDiff:
-      type: object
-      required:
-      - kind
-      - path
-      - ahead
-      - behind
-      - has_changes
-      - exists_in_source
-      - exists_in_fork
-      properties:
-        kind:
-          type: string
-          enum:
-          - script
-          - flow
-          - app
-          - raw_app
-          - resource
-          - variable
-          - resource_type
-          description: Type of the item
-        path:
-          type: string
-          description: Path of the item in the workspace
-        ahead:
-          type: integer
-          description: Number of versions source is ahead of target
-        behind:
-          type: integer
-          description: Number of versions source is behind target
-        has_changes:
-          type: boolean
-          description: Whether the item has any differences
-        exists_in_source:
-          type: boolean
-          description: If the item exists in the source workspace
-        exists_in_fork:
-          type: boolean
-          description: If the item exists in the fork workspace
-    WorkspaceComparison:
-      type: object
-      required:
-      - all_ahead_items_visible
-      - all_behind_items_visible
-      - skipped_comparison
-      - diffs
-      - summary
-      properties:
-        all_ahead_items_visible:
-          type: boolean
-          description: All items with changes ahead are visible by the user of the request.
-        all_behind_items_visible:
-          type: boolean
-          description: All items with changes behind are visible by the user of the request.
-        skipped_comparison:
-          type: boolean
-          description: Whether the comparison was skipped. This happens with old forks that where not being kept track of
-        diffs:
-          type: array
-          description: List of differences found between workspaces
-          items:
-            $ref: '#/components/schemas/WorkspaceItemDiff'
-        summary:
-          $ref: '#/components/schemas/CompareSummary'
-          description: Summary statistics of the comparison
-    RuleBypasserUsers:
-      type: array
-      description: Users that can bypass this ruleset
-      items:
-        type: string
-    ErrorHandlerConfig:
-      type: object
-      description: Configuration for the workspace error handler
-      properties:
-        path:
-          type: string
-          description: Path to the error handler script or flow
-        extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        muted_on_cancel:
-          type: boolean
-          default: false
-        muted_on_user_path:
-          type: boolean
-          default: false
-    DataTableSchema:
-      type: object
-      required:
-      - datatable_name
-      - schemas
-      properties:
-        datatable_name:
-          type: string
-        schemas:
-          type: object
-          description: 'Hierarchical schema: schema_name -> table_name -> column_name -> compact_type (e.g. ''int4'', ''text?'', ''int4?=0'')'
-          additionalProperties:
             type: object
-            description: Tables in this schema
-            additionalProperties:
-              type: object
-              description: Columns in this table
-              additionalProperties:
+            required:
+            - name
+            - new_dbname
+            properties:
+              name:
                 type: string
-                description: 'Compact type: ''type[?][=default]'' where ? means nullable'
-        error:
-          type: string
-    ProtectionRules:
-      type: array
-      description: Configuration of protection restrictions
-      items:
-        $ref: '#/components/schemas/ProtectionRuleKind'
-    SuccessHandlerConfig:
-      type: object
-      description: Configuration for the workspace success handler
-      properties:
-        path:
-          type: string
-          description: Path to the success handler script or flow
-        extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-    CreateWorkspace:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        username:
-          type: string
-        color:
-          type: string
+                description: Datatable name
+              new_dbname:
+                type: string
+                description: New database name for the fork
       required:
       - id
       - name
-    EditSuccessHandler:
-      description: Request body for editing the workspace success handler. Accepts both new grouped format and legacy flat format for backward compatibility.
-      oneOf:
-      - $ref: '#/components/schemas/EditSuccessHandlerNew'
-      - $ref: '#/components/schemas/EditSuccessHandlerLegacy'
-    Workspace:
+      - parent_workspace_id
+    InstanceAISummary:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        owner:
-          type: string
-        domain:
-          type: string
-        color:
-          type: string
-        parent_workspace_id:
-          type: string
-          nullable: true
-      required:
-      - id
-      - name
-      - owner
-      - created_at
-    WorkspaceDeployUISettings:
-      type: object
-      properties:
-        include_path:
+        providers:
           type: array
           items:
-            type: string
-        include_type:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitSyncObjectType'
-    DataTableTableSchema:
-      type: object
+            $ref: '#/components/schemas/InstanceAIProviderSummary'
+        default_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        code_completion_model:
+          $ref: '#/components/schemas/AIProviderModel'
       required:
-      - datatable_name
-      - schema_name
-      - table_name
-      - columns
-      properties:
-        datatable_name:
-          type: string
-        schema_name:
-          type: string
-        table_name:
-          type: string
-        columns:
-          type: object
-          description: 'Columns in this table: column_name -> compact_type'
-          additionalProperties:
-            type: string
-            description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+      - providers
     CompareSummary:
       type: object
       required:
@@ -3038,6 +2850,53 @@ components:
         conflicts:
           type: integer
           description: Number of items that are both ahead and behind (conflicts)
+    QuotaInfo:
+      type: object
+      properties:
+        used:
+          type: integer
+        limit:
+          type: integer
+        prunable:
+          type: integer
+      required:
+      - used
+      - limit
+      - prunable
+    DependencyDependent:
+      type: object
+      properties:
+        importer_path:
+          type: string
+        importer_kind:
+          type: string
+          enum:
+          - script
+          - flow
+          - app
+        importer_node_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      required:
+      - importer_path
+      - importer_kind
+    CreateWorkspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        color:
+          type: string
+      required:
+      - id
+      - name
     EditSuccessHandlerLegacy:
       type: object
       description: Legacy flat format for editing success handler (deprecated, use new format)
@@ -3047,45 +2906,22 @@ components:
           description: Path to the success handler script or flow
         success_handler_extra_args:
           $ref: '#/components/schemas/ScriptArgs'
-    InstanceAIProviderSummary:
-      type: object
-      properties:
-        provider:
-          $ref: '#/components/schemas/AIProvider'
-        models:
-          type: array
-          items:
-            type: string
-      required:
-      - provider
-      - models
-    DependencyMap:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-          nullable: true
-        importer_path:
-          type: string
-          nullable: true
-        importer_kind:
-          type: string
-          nullable: true
-        imported_path:
-          type: string
-          nullable: true
-        importer_node_id:
-          type: string
-          nullable: true
-    DeploymentRequestAssignee:
+    DataTableTables:
       type: object
       required:
-      - username
-      - email
+      - datatable_name
+      - schemas
       properties:
-        username:
+        datatable_name:
           type: string
-        email:
+        schemas:
+          type: object
+          description: 'Hierarchical metadata: schema_name -> table_names'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        error:
           type: string
     LargeFileStorage:
       type: object
@@ -3131,6 +2967,63 @@ components:
                 type: string
               public_resource:
                 type: boolean
+    InstanceAIProviderSummary:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/AIProvider'
+        models:
+          type: array
+          items:
+            type: string
+      required:
+      - provider
+      - models
+    WorkspaceItemDiff:
+      type: object
+      required:
+      - kind
+      - path
+      - ahead
+      - behind
+      - has_changes
+      - exists_in_source
+      - exists_in_fork
+      properties:
+        kind:
+          type: string
+          enum:
+          - script
+          - flow
+          - app
+          - raw_app
+          - resource
+          - variable
+          - resource_type
+          description: Type of the item
+        path:
+          type: string
+          description: Path of the item in the workspace
+        ahead:
+          type: integer
+          description: Number of versions source is ahead of target
+        behind:
+          type: integer
+          description: Number of versions source is behind target
+        has_changes:
+          type: boolean
+          description: Whether the item has any differences
+        exists_in_source:
+          type: boolean
+          description: If the item exists in the source workspace
+        exists_in_fork:
+          type: boolean
+          description: If the item exists in the fork workspace
+    RuleBypasserGroups:
+      type: array
+      description: Groups that can bypass this ruleset
+      items:
+        type: string
     DataTableSettings:
       type: object
       required:
@@ -3163,63 +3056,53 @@ components:
                     type: object
                     description: Schema snapshot at fork time
                     additionalProperties: true
-    QuotaInfo:
+    ProtectionRuleset:
       type: object
-      properties:
-        used:
-          type: integer
-        limit:
-          type: integer
-        prunable:
-          type: integer
+      description: A workspace protection rule defining restrictions and bypass permissions
       required:
-      - used
-      - limit
-      - prunable
-    DeploymentRequestEligibleDeployer:
-      type: object
-      required:
-      - username
-      - email
-      - is_admin
+      - name
+      - rules
+      - bypass_groups
+      - bypass_users
       properties:
-        username:
+        name:
           type: string
-        email:
+          description: Unique name for the protection rule
+          example: Production Protection
+        workspace_id:
           type: string
-        is_admin:
-          type: boolean
-    DependencyDependent:
+        rules:
+          $ref: '#/components/schemas/ProtectionRules'
+        bypass_groups:
+          $ref: '#/components/schemas/RuleBypasserGroups'
+        bypass_users:
+          $ref: '#/components/schemas/RuleBypasserUsers'
+    ProtectionRules:
+      type: array
+      description: Configuration of protection restrictions
+      items:
+        $ref: '#/components/schemas/ProtectionRuleKind'
+    AIConfig:
       type: object
       properties:
-        importer_path:
-          type: string
-        importer_kind:
-          type: string
-          enum:
-          - script
-          - flow
-          - app
-        importer_node_ids:
-          type: array
-          items:
+        providers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AIProviderConfig'
+        default_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        code_completion_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        custom_prompts:
+          type: object
+          additionalProperties:
             type: string
-          nullable: true
-      required:
-      - importer_path
-      - importer_kind
-    EditErrorHandlerLegacy:
-      type: object
-      description: Legacy flat format for editing error handler (deprecated, use new format)
-      properties:
-        error_handler:
-          type: string
-          description: Path to the error handler script or flow
-        error_handler_extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        error_handler_muted_on_cancel:
-          type: boolean
-          default: false
+        max_tokens_per_model:
+          type: object
+          additionalProperties:
+            type: integer
+            minimum: 1
+            maximum: 2000000
     DeploymentRequest:
       type: object
       required:
@@ -3254,143 +3137,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DeploymentRequestComment'
-    ProtectionRuleKind:
-      type: string
-      enum:
-      - DisableDirectDeployment
-      - DisableWorkspaceForking
-      - RestrictDeployToDeployers
-    AIConfig:
+    AIProviderConfig:
       type: object
       properties:
-        providers:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/AIProviderConfig'
-        default_model:
-          $ref: '#/components/schemas/AIProviderModel'
-        code_completion_model:
-          $ref: '#/components/schemas/AIProviderModel'
-        custom_prompts:
-          type: object
-          additionalProperties:
-            type: string
-        max_tokens_per_model:
-          type: object
-          additionalProperties:
-            type: integer
-            minimum: 1
-            maximum: 2000000
-    DeploymentRequestComment:
-      type: object
-      required:
-      - id
-      - author
-      - author_email
-      - body
-      - obsolete
-      - created_at
-      properties:
-        id:
-          type: integer
-          format: int64
-        parent_id:
-          type: integer
-          format: int64
-          nullable: true
-        author:
+        resource_path:
           type: string
-        author_email:
-          type: string
-        body:
-          type: string
-        anchor_kind:
-          type: string
-          nullable: true
-        anchor_path:
-          type: string
-          nullable: true
-        obsolete:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    AIProvider:
-      type: string
-      enum:
-      - openai
-      - azure_openai
-      - anthropic
-      - mistral
-      - deepseek
-      - googleai
-      - groq
-      - openrouter
-      - togetherai
-      - aws_bedrock
-      - customai
-    CreateWorkspaceFork:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        color:
-          type: string
-        forked_datatables:
+        models:
           type: array
           items:
+            type: string
+      required:
+      - resource_path
+      - models
+    DataTableSchema:
+      type: object
+      required:
+      - datatable_name
+      - schemas
+      properties:
+        datatable_name:
+          type: string
+        schemas:
+          type: object
+          description: 'Hierarchical schema: schema_name -> table_name -> column_name -> compact_type (e.g. ''int4'', ''text?'', ''int4?=0'')'
+          additionalProperties:
             type: object
-            required:
-            - name
-            - new_dbname
-            properties:
-              name:
+            description: Tables in this schema
+            additionalProperties:
+              type: object
+              description: Columns in this table
+              additionalProperties:
                 type: string
-                description: Datatable name
-              new_dbname:
-                type: string
-                description: New database name for the fork
-      required:
-      - id
-      - name
-      - parent_workspace_id
-    AIProviderModel:
-      type: object
-      properties:
-        model:
+                description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+        error:
           type: string
-        provider:
-          $ref: '#/components/schemas/AIProvider'
-      required:
-      - model
-      - provider
-    ProtectionRuleset:
-      type: object
-      description: A workspace protection rule defining restrictions and bypass permissions
-      required:
-      - name
-      - rules
-      - bypass_groups
-      - bypass_users
-      properties:
-        name:
-          type: string
-          description: Unique name for the protection rule
-          example: Production Protection
-        workspace_id:
-          type: string
-        rules:
-          $ref: '#/components/schemas/ProtectionRules'
-        bypass_groups:
-          $ref: '#/components/schemas/RuleBypasserGroups'
-        bypass_users:
-          $ref: '#/components/schemas/RuleBypasserUsers'
     DucklakeSettings:
       type: object
       required:
@@ -3428,9 +3208,250 @@ components:
                 - path
               extra_args:
                 type: string
-    OperatorSettings:
-      nullable: true
+    DataTableTableSchema:
       type: object
+      required:
+      - datatable_name
+      - schema_name
+      - table_name
+      - columns
+      properties:
+        datatable_name:
+          type: string
+        schema_name:
+          type: string
+        table_name:
+          type: string
+        columns:
+          type: object
+          description: 'Columns in this table: column_name -> compact_type'
+          additionalProperties:
+            type: string
+            description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+    UserWorkspaceList:
+      type: object
+      properties:
+        email:
+          type: string
+        workspaces:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              username:
+                type: string
+              color:
+                type: string
+              operator_settings:
+                $ref: '#/components/schemas/OperatorSettings'
+              parent_workspace_id:
+                type:
+                - string
+                - 'null'
+              created_by:
+                type:
+                - string
+                - 'null'
+              disabled:
+                type: boolean
+            required:
+            - id
+            - name
+            - username
+            - color
+            - disabled
+      required:
+      - email
+      - workspaces
+    DeploymentRequestAssignee:
+      type: object
+      required:
+      - username
+      - email
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+    DependentsAmount:
+      type: object
+      properties:
+        imported_path:
+          type: string
+        count:
+          type: integer
+          format: int64
+      required:
+      - imported_path
+      - count
+    EditSuccessHandlerNew:
+      type: object
+      description: New grouped format for editing success handler
+      properties:
+        path:
+          type: string
+          description: Path to the success handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    AutoInviteConfig:
+      type: object
+      description: Configuration for auto-inviting users to the workspace
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        domain:
+          type: string
+        operator:
+          type: boolean
+          default: false
+          description: If true, auto-invited users are added as operators. If false, they are added as developers.
+        mode:
+          type: string
+          enum:
+          - invite
+          - add
+          default: invite
+        instance_groups:
+          type: array
+          items:
+            type: string
+        instance_groups_roles:
+          type: object
+          additionalProperties:
+            type: string
+    EditErrorHandler:
+      description: Request body for editing the workspace error handler. Accepts both new grouped format and legacy flat format for backward compatibility.
+      oneOf:
+      - $ref: '#/components/schemas/EditErrorHandlerNew'
+      - $ref: '#/components/schemas/EditErrorHandlerLegacy'
+    SuccessHandlerConfig:
+      type: object
+      description: Configuration for the workspace success handler
+      properties:
+        path:
+          type: string
+          description: Path to the success handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    ProtectionRuleKind:
+      type: string
+      enum:
+      - DisableDirectDeployment
+      - DisableWorkspaceForking
+      - RestrictDeployToDeployers
+    AIProviderModel:
+      type: object
+      properties:
+        model:
+          type: string
+        provider:
+          $ref: '#/components/schemas/AIProvider'
+      required:
+      - model
+      - provider
+    S3PermissionRule:
+      type: object
+      properties:
+        pattern:
+          type: string
+        allow:
+          type: string
+      required:
+      - pattern
+      - allow
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    GitSyncObjectType:
+      type: string
+      enum:
+      - script
+      - flow
+      - app
+      - folder
+      - resource
+      - variable
+      - secret
+      - resourcetype
+      - schedule
+      - user
+      - group
+      - trigger
+      - settings
+      - key
+      - workspacedependencies
+    WorkspaceDefaultScripts:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        hidden:
+          type: array
+          items:
+            type: string
+        default_script_content:
+          additionalProperties:
+            type: string
+    WorkspaceDeployUISettings:
+      type: object
+      properties:
+        include_path:
+          type: array
+          items:
+            type: string
+        include_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitSyncObjectType'
+    DeploymentRequestComment:
+      type: object
+      required:
+      - id
+      - author
+      - author_email
+      - body
+      - obsolete
+      - created_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        parent_id:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        author:
+          type: string
+        author_email:
+          type: string
+        body:
+          type: string
+        anchor_kind:
+          type:
+          - string
+          - 'null'
+        anchor_path:
+          type:
+          - string
+          - 'null'
+        obsolete:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    OperatorSettings:
+      type:
+      - object
+      - 'null'
       required:
       - runs
       - schedules
@@ -3473,6 +3494,26 @@ components:
         workers:
           type: boolean
           description: Whether operators can view workers page
+    WorkspaceGitSyncSettings:
+      type: object
+      properties:
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitRepositorySettings'
+    DeploymentRequestEligibleDeployer:
+      type: object
+      required:
+      - username
+      - email
+      - is_admin
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        is_admin:
+          type: boolean
     WorkspaceInvite:
       type: object
       properties:
@@ -3485,191 +3526,137 @@ components:
         operator:
           type: boolean
         parent_workspace_id:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       required:
       - workspace_id
       - email
       - is_admin
       - operator
-    AutoInviteConfig:
+    EditErrorHandlerLegacy:
       type: object
-      description: Configuration for auto-inviting users to the workspace
+      description: Legacy flat format for editing error handler (deprecated, use new format)
       properties:
-        enabled:
-          type: boolean
-          default: false
-        domain:
+        error_handler:
           type: string
-        operator:
-          type: boolean
-          default: false
-          description: If true, auto-invited users are added as operators. If false, they are added as developers.
-        mode:
-          type: string
-          enum:
-          - invite
-          - add
-          default: invite
-        instance_groups:
-          type: array
-          items:
-            type: string
-        instance_groups_roles:
-          type: object
-          additionalProperties:
-            type: string
-    S3PermissionRule:
-      type: object
-      properties:
-        pattern:
-          type: string
-        allow:
-          type: string
-      required:
-      - pattern
-      - allow
-    WorkspaceDefaultScripts:
-      type: object
-      properties:
-        order:
-          type: array
-          items:
-            type: string
-        hidden:
-          type: array
-          items:
-            type: string
-        default_script_content:
-          additionalProperties:
-            type: string
-    EditErrorHandler:
-      description: Request body for editing the workspace error handler. Accepts both new grouped format and legacy flat format for backward compatibility.
-      oneOf:
-      - $ref: '#/components/schemas/EditErrorHandlerNew'
-      - $ref: '#/components/schemas/EditErrorHandlerLegacy'
-    DependentsAmount:
-      type: object
-      properties:
-        imported_path:
-          type: string
-        count:
-          type: integer
-          format: int64
-      required:
-      - imported_path
-      - count
-    DataTableTables:
-      type: object
-      required:
-      - datatable_name
-      - schemas
-      properties:
-        datatable_name:
-          type: string
-        schemas:
-          type: object
-          description: 'Hierarchical metadata: schema_name -> table_names'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        error:
-          type: string
-    GitSyncObjectType:
-      type: string
-      enum:
-      - script
-      - flow
-      - app
-      - folder
-      - resource
-      - variable
-      - secret
-      - resourcetype
-      - schedule
-      - user
-      - group
-      - trigger
-      - settings
-      - key
-      - workspacedependencies
-    InstanceAISummary:
-      type: object
-      properties:
-        providers:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstanceAIProviderSummary'
-        default_model:
-          $ref: '#/components/schemas/AIProviderModel'
-        code_completion_model:
-          $ref: '#/components/schemas/AIProviderModel'
-      required:
-      - providers
-    EditSuccessHandlerNew:
-      type: object
-      description: New grouped format for editing success handler
-      properties:
-        path:
-          type: string
-          description: Path to the success handler script or flow
-        extra_args:
+          description: Path to the error handler script or flow
+        error_handler_extra_args:
           $ref: '#/components/schemas/ScriptArgs'
-    AIProviderConfig:
+        error_handler_muted_on_cancel:
+          type: boolean
+          default: false
+    GitRepositorySettings:
       type: object
       properties:
-        resource_path:
+        script_path:
           type: string
-        models:
+        git_repo_resource_path:
+          type: string
+        use_individual_branch:
+          type: boolean
+        group_by_folder:
+          type: boolean
+        collapsed:
+          type: boolean
+        settings:
+          type: object
+          properties:
+            include_path:
+              type: array
+              items:
+                type: string
+            include_type:
+              type: array
+              items:
+                $ref: '#/components/schemas/GitSyncObjectType'
+            exclude_path:
+              type: array
+              items:
+                type: string
+            extra_include_path:
+              type: array
+              items:
+                type: string
+        exclude_types_override:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/GitSyncObjectType'
       required:
-      - resource_path
-      - models
-    RuleBypasserGroups:
+      - git_repo_resource_path
+    EditSuccessHandler:
+      description: Request body for editing the workspace success handler. Accepts both new grouped format and legacy flat format for backward compatibility.
+      oneOf:
+      - $ref: '#/components/schemas/EditSuccessHandlerNew'
+      - $ref: '#/components/schemas/EditSuccessHandlerLegacy'
+    DependencyMap:
+      type: object
+      properties:
+        workspace_id:
+          type:
+          - string
+          - 'null'
+        importer_path:
+          type:
+          - string
+          - 'null'
+        importer_kind:
+          type:
+          - string
+          - 'null'
+        imported_path:
+          type:
+          - string
+          - 'null'
+        importer_node_id:
+          type:
+          - string
+          - 'null'
+    WorkspaceComparison:
+      type: object
+      required:
+      - all_ahead_items_visible
+      - all_behind_items_visible
+      - skipped_comparison
+      - diffs
+      - summary
+      properties:
+        all_ahead_items_visible:
+          type: boolean
+          description: All items with changes ahead are visible by the user of the request.
+        all_behind_items_visible:
+          type: boolean
+          description: All items with changes behind are visible by the user of the request.
+        skipped_comparison:
+          type: boolean
+          description: Whether the comparison was skipped. This happens with old forks that where not being kept track of
+        diffs:
+          type: array
+          description: List of differences found between workspaces
+          items:
+            $ref: '#/components/schemas/WorkspaceItemDiff'
+        summary:
+          $ref: '#/components/schemas/CompareSummary'
+          description: Summary statistics of the comparison
+    RuleBypasserUsers:
       type: array
-      description: Groups that can bypass this ruleset
+      description: Users that can bypass this ruleset
       items:
         type: string
-    UserWorkspaceList:
-      type: object
-      properties:
-        email:
-          type: string
-        workspaces:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              username:
-                type: string
-              color:
-                type: string
-              operator_settings:
-                $ref: '#/components/schemas/OperatorSettings'
-              parent_workspace_id:
-                type: string
-                nullable: true
-              created_by:
-                type: string
-                nullable: true
-              disabled:
-                type: boolean
-            required:
-            - id
-            - name
-            - username
-            - color
-            - disabled
-      required:
-      - email
-      - workspaces
+    AIProvider:
+      type: string
+      enum:
+      - openai
+      - azure_openai
+      - anthropic
+      - mistral
+      - deepseek
+      - googleai
+      - groq
+      - openrouter
+      - togetherai
+      - aws_bedrock
+      - customai
     EditErrorHandlerNew:
       type: object
       description: New grouped format for editing error handler
@@ -3685,7 +3672,50 @@ components:
         muted_on_user_path:
           type: boolean
           default: false
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        domain:
+          type: string
+        color:
+          type: string
+        parent_workspace_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - owner
+      - created_at
+    ErrorHandlerConfig:
+      type: object
+      description: Configuration for the workspace error handler
+      properties:
+        path:
+          type: string
+          description: Path to the error handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        muted_on_cancel:
+          type: boolean
+          default: false
+        muted_on_user_path:
+          type: boolean
+          default: false
   parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
@@ -3698,12 +3728,6 @@ components:
       in: query
       schema:
         type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

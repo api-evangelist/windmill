@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin config API
+  title: Windmill Config API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: config
+- name: Config
 paths:
   /configs/list_worker_groups:
     get:
       summary: List Worker Groups
       operationId: listWorkerGroups
       tags:
-      - config
+      - Config
       responses:
         '200':
           description: a list of worker group configs
@@ -46,7 +46,7 @@ paths:
       summary: Get Config
       operationId: get config
       tags:
-      - config
+      - Config
       parameters:
       - $ref: '#/components/parameters/Name'
       responses:
@@ -61,7 +61,7 @@ paths:
       summary: Update Config
       operationId: updateConfig
       tags:
-      - config
+      - Config
       parameters:
       - $ref: '#/components/parameters/Name'
       requestBody:
@@ -81,7 +81,7 @@ paths:
       summary: Delete Config
       operationId: deleteConfig
       tags:
-      - config
+      - Config
       parameters:
       - $ref: '#/components/parameters/Name'
       responses:
@@ -96,7 +96,7 @@ paths:
       summary: List Configs
       operationId: listConfigs
       tags:
-      - config
+      - Config
       responses:
         '200':
           description: list of configs
@@ -111,7 +111,7 @@ paths:
       summary: List Autoscaling Events
       operationId: listAutoscalingEvents
       tags:
-      - config
+      - Config
       parameters:
       - name: worker_group
         in: path
@@ -134,7 +134,7 @@ paths:
       summary: Check Kubernetes Autoscaling Health for a Worker Group
       operationId: nativeKubernetesAutoscalingHealthcheck
       tags:
-      - config
+      - Config
       responses:
         '200':
           description: Kubernetes autoscaling is healthy
@@ -146,10 +146,10 @@ paths:
                 type: string
   /configs/list_available_python_versions:
     get:
-      summary: Get Currently Available Python Versions Provided by UV.
+      summary: Get Currently Available Python Versions Provided by UV
       operationId: listAvailablePythonVersions
       tags:
-      - config
+      - Config
       responses:
         '200':
           description: List of python versions
@@ -164,7 +164,7 @@ paths:
       summary: List All Workspace Dependencies
       operationId: listAllWorkspaceDependencies
       tags:
-      - config
+      - Config
       responses:
         '200':
           description: a list of workspace dependency summaries
@@ -189,7 +189,7 @@ paths:
       summary: List All Dedicated Scripts with Their Dependencies
       operationId: listAllDedicatedWithDeps
       tags:
-      - config
+      - Config
       responses:
         '200':
           description: a list of dedicated scripts with workspace dependencies
@@ -216,43 +216,7 @@ paths:
                   - language
                   - workspace_dep_names
 components:
-  parameters:
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
-    Config:
-      type: object
-      properties:
-        name:
-          type: string
-        config:
-          type: object
-      required:
-      - name
-    Configs:
-      type: object
-      nullable: true
-      properties:
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Alert'
     Alert:
       type: object
       properties:
@@ -274,6 +238,15 @@ components:
       - jobs_num_threshold
       - alert_cooldown_seconds
       - alert_time_threshold_seconds
+    Config:
+      type: object
+      properties:
+        name:
+          type: string
+        config:
+          type: object
+      required:
+      - name
     AutoscalingEvent:
       type: object
       properties:
@@ -291,6 +264,15 @@ components:
         applied_at:
           type: string
           format: date-time
+    Configs:
+      type:
+      - object
+      - 'null'
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
     ScriptLang:
       type: string
       enum:
@@ -318,6 +300,25 @@ components:
       - rlang
       - duckdb
       - bunnative
+  parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

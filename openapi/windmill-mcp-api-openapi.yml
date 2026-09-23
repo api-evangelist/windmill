@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin mcp API
+  title: Windmill MCP API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: mcp
+- name: MCP
 paths:
   /mcp/w/{workspace}/list_tools:
     get:
       summary: List Available MCP Tools
       operationId: listMcpTools
       tags:
-      - mcp
+      - MCP
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -70,17 +70,20 @@ components:
           type: string
           description: HTTP method (GET, POST, etc.)
         path_params_schema:
-          type: object
+          type:
+          - object
+          - 'null'
           description: JSON schema for path parameters
-          nullable: true
         query_params_schema:
-          type: object
+          type:
+          - object
+          - 'null'
           description: JSON schema for query parameters
-          nullable: true
         body_schema:
-          type: object
+          type:
+          - object
+          - 'null'
           description: JSON schema for request body
-          nullable: true
   securitySchemes:
     bearerAuth:
       type: http

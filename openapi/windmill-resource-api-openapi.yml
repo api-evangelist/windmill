@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin resource API
+  title: Windmill Resource API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,7 +17,7 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: resource
+- name: Resource
 paths:
   /w/{workspace}/resources/create:
     post:
@@ -25,7 +25,7 @@ paths:
       operationId: createResource
       x-mcp-tool: true
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: update_if_exists
@@ -53,7 +53,7 @@ paths:
       operationId: deleteResource
       x-mcp-tool: true
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -69,7 +69,7 @@ paths:
       summary: Delete Resources in Bulk
       operationId: deleteResourcesBulk
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -101,7 +101,7 @@ paths:
       operationId: updateResource
       x-mcp-tool: true
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -124,7 +124,7 @@ paths:
       summary: Update Resource Value
       operationId: updateResourceValue
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -150,7 +150,7 @@ paths:
       operationId: getResource
       x-mcp-tool: true
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -166,7 +166,7 @@ paths:
       summary: Get Resource Interpolated (variables and Resources are Fully Unrolled)
       operationId: getResourceValueInterpolated
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -192,7 +192,7 @@ paths:
       summary: Get Resource Value
       operationId: getResourceValue
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -207,7 +207,7 @@ paths:
       summary: Get Git Repository Latest Commit Hash
       operationId: getGitCommitHash
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -233,7 +233,7 @@ paths:
       summary: Does Resource Exists
       operationId: existsResource
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -250,7 +250,7 @@ paths:
       operationId: listResource
       x-mcp-tool: true
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Page'
@@ -310,7 +310,7 @@ paths:
       summary: List Resources for Search
       operationId: listSearchResource
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -334,7 +334,7 @@ paths:
       summary: Get MCP Tools from Resource
       operationId: getMcpTools
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -362,7 +362,7 @@ paths:
       summary: List Resource Names
       operationId: listResourceNames
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Name'
@@ -388,7 +388,7 @@ paths:
       summary: Create Resource_type
       operationId: createResourceType
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -410,7 +410,7 @@ paths:
       summary: Get Map from Resource Type to Format Extension
       operationId: fileResourceTypeToFileExtMap
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -424,8 +424,9 @@ paths:
                   type: object
                   properties:
                     format_extension:
-                      type: string
-                      nullable: true
+                      type:
+                      - string
+                      - 'null'
                     is_fileset:
                       type: boolean
   /w/{workspace}/resources/type/delete/{path}:
@@ -433,7 +434,7 @@ paths:
       summary: Delete Resource_type
       operationId: deleteResourceType
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -449,7 +450,7 @@ paths:
       summary: Update Resource_type
       operationId: updateResourceType
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -472,7 +473,7 @@ paths:
       summary: Get Resource_type
       operationId: getResourceType
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -488,7 +489,7 @@ paths:
       summary: Does Resource_type Exists
       operationId: existsResourceType
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/Path'
@@ -505,7 +506,7 @@ paths:
       operationId: listResourceType
       x-mcp-tool: true
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -522,7 +523,7 @@ paths:
       summary: List Resource_types Names
       operationId: listResourceTypeNames
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -539,7 +540,7 @@ paths:
       summary: Query Resource Types by Similarity
       operationId: queryResourceTypes
       tags:
-      - resource
+      - Resource
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - name: text
@@ -573,37 +574,6 @@ paths:
                   - name
                   - score
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
     Resource:
       type: object
@@ -636,14 +606,23 @@ components:
       - path
       - resource_type
       - is_oauth
-    EditResourceType:
+    EditResource:
       type: object
       properties:
-        schema: {}
+        path:
+          type: string
+          description: The path to the resource
         description:
           type: string
-        is_fileset:
-          type: boolean
+          description: The new description of the resource
+        value: {}
+        resource_type:
+          type: string
+          description: The new resource_type to be associated with the resource
+        labels:
+          type: array
+          items:
+            type: string
     CreateResource:
       type: object
       properties:
@@ -665,44 +644,6 @@ components:
       - path
       - value
       - resource_type
-    EditResource:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The path to the resource
-        description:
-          type: string
-          description: The new description of the resource
-        value: {}
-        resource_type:
-          type: string
-          description: The new resource_type to be associated with the resource
-        labels:
-          type: array
-          items:
-            type: string
-    ResourceType:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        name:
-          type: string
-        schema: {}
-        description:
-          type: string
-        created_by:
-          type: string
-        edited_at:
-          type: string
-          format: date-time
-        format_extension:
-          type: string
-        is_fileset:
-          type: boolean
-      required:
-      - name
     ListableResource:
       type: object
       properties:
@@ -746,6 +687,66 @@ components:
       - is_oauth
       - is_linked
       - is_refreshed
+    ResourceType:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        name:
+          type: string
+        schema: {}
+        description:
+          type: string
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        format_extension:
+          type: string
+        is_fileset:
+          type: boolean
+      required:
+      - name
+    EditResourceType:
+      type: object
+      properties:
+        schema: {}
+        description:
+          type: string
+        is_fileset:
+          type: boolean
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

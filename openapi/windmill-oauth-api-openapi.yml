@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin oauth API
+  title: Windmill OAUTH API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: oauth
+- name: OAuth
 paths:
   /w/{workspace}/oauth/connect_slack_callback:
     post:
       summary: Connect Slack Callback
       operationId: connectSlackCallback
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -54,7 +54,7 @@ paths:
       summary: Connect Slack Callback Instance
       operationId: connectSlackCallbackInstance
       tags:
-      - oauth
+      - OAuth
       requestBody:
         description: code endpoint
         required: true
@@ -82,7 +82,7 @@ paths:
       summary: Connect Slack Instance (non-interactive; Pre-minted Bot Token)
       operationId: connectSlackInstance
       tags:
-      - oauth
+      - OAuth
       requestBody:
         description: connect slack at the instance level with a pre-minted bot token
         required: true
@@ -110,7 +110,7 @@ paths:
       summary: Connect Callback
       operationId: connectCallback
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/ClientName'
       requestBody:
@@ -140,7 +140,7 @@ paths:
       summary: Create OAuth Account
       operationId: createAccount
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -194,7 +194,7 @@ paths:
       summary: Connect OAuth Using Client Credentials
       operationId: connectClientCredentials
       tags:
-      - oauth
+      - OAuth
       parameters:
       - name: client
         in: path
@@ -238,7 +238,7 @@ paths:
       summary: Refresh Token
       operationId: refreshToken
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AccountId'
@@ -266,7 +266,7 @@ paths:
       summary: Disconnect Account
       operationId: disconnectAccount
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/AccountId'
@@ -282,7 +282,7 @@ paths:
       summary: Disconnect Slack
       operationId: disconnectSlack
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -297,7 +297,7 @@ paths:
       summary: Disconnect Teams
       operationId: disconnectTeams
       tags:
-      - oauth
+      - OAuth
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       responses:
@@ -312,7 +312,7 @@ paths:
       summary: List Oauth Logins
       operationId: listOAuthLogins
       tags:
-      - oauth
+      - OAuth
       responses:
         '200':
           description: list of oauth and saml login clients
@@ -344,7 +344,7 @@ paths:
       summary: List Oauth Connects
       operationId: listOAuthConnects
       tags:
-      - oauth
+      - OAuth
       responses:
         '200':
           description: list of oauth connects clients
@@ -359,7 +359,7 @@ paths:
       summary: Get Oauth Connect
       operationId: getOAuthConnect
       tags:
-      - oauth
+      - OAuth
       parameters:
       - name: client
         description: client name
@@ -387,8 +387,8 @@ paths:
                       type: string
 components:
   parameters:
-    ClientName:
-      name: client_name
+    WorkspaceId:
+      name: workspace
       in: path
       required: true
       schema:
@@ -399,8 +399,8 @@ components:
       required: true
       schema:
         type: integer
-    WorkspaceId:
-      name: workspace
+    ClientName:
+      name: client_name
       in: path
       required: true
       schema:

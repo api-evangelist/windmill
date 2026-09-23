@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin kafka_trigger API
+  title: Windmill Kafka Trigger API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -256,32 +256,76 @@ paths:
         '200':
           description: kafka offsets committed successfully
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
+    KafkaTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        kafka_resource_path:
+          type: string
+          description: Path to the Kafka resource containing connection configuration
+        group_id:
+          type: string
+          description: Kafka consumer group ID for this trigger
+        topics:
+          type: array
+          items:
+            type: string
+          description: Array of Kafka topic names to subscribe to
+        filters:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value: {}
+            required:
+            - key
+            - value
+        filter_logic:
+          type: string
+          enum:
+          - and
+          - or
+          default: and
+          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
+        auto_offset_reset:
+          type: string
+          enum:
+          - latest
+          - earliest
+          default: latest
+          description: Initial offset behavior when consumer group has no committed offset. 'latest' starts from new messages only, 'earliest' starts from the beginning.
+        auto_commit:
+          type: boolean
+          default: true
+          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - kafka_resource_path
+      - group_id
+      - topics
+      - filters
     NewKafkaTrigger:
       type: object
       properties:
@@ -363,6 +407,10 @@ components:
       - group_id
       - topics
       - filters
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
     TriggerExtraProperty:
       type: object
       properties:
@@ -411,79 +459,13 @@ components:
       - edited_at
       - is_flow
       - mode
-    KafkaTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      properties:
-        kafka_resource_path:
-          type: string
-          description: Path to the Kafka resource containing connection configuration
-        group_id:
-          type: string
-          description: Kafka consumer group ID for this trigger
-        topics:
-          type: array
-          items:
-            type: string
-          description: Array of Kafka topic names to subscribe to
-        filters:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value: {}
-            required:
-            - key
-            - value
-        filter_logic:
-          type: string
-          enum:
-          - and
-          - or
-          default: and
-          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
-        auto_offset_reset:
-          type: string
-          enum:
-          - latest
-          - earliest
-          default: latest
-          description: Initial offset behavior when consumer group has no committed offset. 'latest' starts from new messages only, 'earliest' starts from the beginning.
-        auto_commit:
-          type: boolean
-          default: true
-          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
-        server_id:
-          type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
-          type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-      required:
-      - kafka_resource_path
-      - group_id
-      - topics
-      - filters
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     EditKafkaTrigger:
       type: object
       properties:
@@ -563,13 +545,31 @@ components:
       - topics
       - filters
       - is_flow
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

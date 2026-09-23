@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin raw_app API
+  title: Windmill Raw App API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -67,33 +67,33 @@ paths:
                   $ref: '#/components/schemas/ListableRawApp'
 components:
   parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
     OrderDesc:
       name: order_desc
       description: order by desc order (default true)
       in: query
       schema:
         type: boolean
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
     CreatedBy:
       name: created_by
       description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
       in: query
       schema:
         type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

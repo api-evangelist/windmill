@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill admin metrics API
+  title: Windmill Metrics API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -17,14 +17,14 @@ security:
 - bearerAuth: []
 - cookieAuth: []
 tags:
-- name: metrics
+- name: Metrics
 paths:
   /w/{workspace}/job_metrics/get/{id}:
     post:
       summary: Get Job Metrics
       operationId: getJobMetrics
       tags:
-      - metrics
+      - Metrics
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -69,7 +69,7 @@ paths:
       summary: Set Job Metrics
       operationId: setJobProgress
       tags:
-      - metrics
+      - Metrics
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -97,7 +97,7 @@ paths:
       summary: Get Job Progress
       operationId: getJobProgress
       tags:
-      - metrics
+      - Metrics
       parameters:
       - $ref: '#/components/parameters/WorkspaceId'
       - $ref: '#/components/parameters/JobId'
@@ -124,28 +124,6 @@ components:
         type: string
         format: uuid
   schemas:
-    ScalarMetric:
-      type: object
-      properties:
-        metric_id:
-          type: string
-        value:
-          type: number
-      required:
-      - id
-      - value
-    TimeseriesMetric:
-      type: object
-      properties:
-        metric_id:
-          type: string
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricDataPoint'
-      required:
-      - id
-      - values
     MetricDataPoint:
       type: object
       properties:
@@ -166,6 +144,28 @@ components:
           type: string
       required:
       - id
+    TimeseriesMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+      required:
+      - id
+      - values
+    ScalarMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        value:
+          type: number
+      required:
+      - id
+      - value
   securitySchemes:
     bearerAuth:
       type: http
