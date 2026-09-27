@@ -865,36 +865,6 @@ paths:
                 type: string
 components:
   schemas:
-    WindmillLargeFile:
-      type: object
-      properties:
-        s3:
-          type: string
-      required:
-      - s3
-    S3Resource:
-      type: object
-      properties:
-        bucket:
-          type: string
-        region:
-          type: string
-        endPoint:
-          type: string
-        useSSL:
-          type: boolean
-        accessKey:
-          type: string
-        secretKey:
-          type: string
-        pathStyle:
-          type: boolean
-      required:
-      - bucket
-      - region
-      - endPoint
-      - useSSL
-      - pathStyle
     WindmillFileMetadata:
       type: object
       properties:
@@ -926,6 +896,13 @@ components:
           - Unknown
       required:
       - content_type
+    WindmillLargeFile:
+      type: object
+      properties:
+        s3:
+          type: string
+      required:
+      - s3
     PolarsClientKwargs:
       type: object
       properties:
@@ -933,6 +910,29 @@ components:
           type: string
       required:
       - region_name
+    S3Resource:
+      type: object
+      properties:
+        bucket:
+          type: string
+        region:
+          type: string
+        endPoint:
+          type: string
+        useSSL:
+          type: boolean
+        accessKey:
+          type: string
+        secretKey:
+          type: string
+        pathStyle:
+          type: boolean
+      required:
+      - bucket
+      - region
+      - endPoint
+      - useSSL
+      - pathStyle
   parameters:
     WorkspaceId:
       name: workspace

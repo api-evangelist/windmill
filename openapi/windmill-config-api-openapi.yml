@@ -44,7 +44,7 @@ paths:
   /configs/get/{name}:
     get:
       summary: Get Config
-      operationId: get config
+      operationId: getConfig
       tags:
       - Config
       parameters:
@@ -56,6 +56,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Configs'
+      x-operation-id-source: normalized
+      x-operation-id-original: get config
   /configs/update/{name}:
     post:
       summary: Update Config
@@ -216,7 +218,53 @@ paths:
                   - language
                   - workspace_dep_names
 components:
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
     Alert:
       type: object
       properties:
@@ -247,6 +295,15 @@ components:
           type: object
       required:
       - name
+    Configs:
+      type:
+      - object
+      - 'null'
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
     AutoscalingEvent:
       type: object
       properties:
@@ -264,61 +321,6 @@ components:
         applied_at:
           type: string
           format: date-time
-    Configs:
-      type:
-      - object
-      - 'null'
-      properties:
-        alerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Alert'
-    ScriptLang:
-      type: string
-      enum:
-      - python3
-      - deno
-      - go
-      - bash
-      - powershell
-      - postgresql
-      - mysql
-      - bigquery
-      - snowflake
-      - mssql
-      - oracledb
-      - graphql
-      - nativets
-      - bun
-      - php
-      - rust
-      - ansible
-      - csharp
-      - nu
-      - java
-      - ruby
-      - rlang
-      - duckdb
-      - bunnative
-  parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -314,6 +314,17 @@ paths:
                             - integer
                             - 'null'
 components:
+  schemas:
+    JobSearchHit:
+      type: object
+      properties:
+        dancer:
+          type: string
+    LogSearchHit:
+      type: object
+      properties:
+        dancer:
+          type: string
   parameters:
     WorkspaceId:
       name: workspace
@@ -321,17 +332,6 @@ components:
       required: true
       schema:
         type: string
-  schemas:
-    LogSearchHit:
-      type: object
-      properties:
-        dancer:
-          type: string
-    JobSearchHit:
-      type: object
-      properties:
-        dancer:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

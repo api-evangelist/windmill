@@ -235,14 +235,12 @@ components:
       schema:
         type: string
   schemas:
-    AssetKind:
+    AssetUsageKind:
       type: string
       enum:
-      - s3object
-      - resource
-      - ducklake
-      - datatable
-      - volume
+      - script
+      - flow
+      - job
     AssetUsageAccessType:
       type:
       - string
@@ -251,12 +249,14 @@ components:
       - r
       - w
       - rw
-    AssetUsageKind:
+    AssetKind:
       type: string
       enum:
-      - script
-      - flow
-      - job
+      - s3object
+      - resource
+      - ducklake
+      - datatable
+      - volume
   securitySchemes:
     bearerAuth:
       type: http

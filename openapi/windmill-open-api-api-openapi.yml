@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   version: 1.694.0
-  title: Windmill Openapi API
+  title: Windmill OpenAPI API
   contact:
     name: Windmill Team
     email: contact@windmill.dev
@@ -64,41 +64,6 @@ paths:
                 format: binary
 components:
   schemas:
-    OpenapiSpecFormat:
-      type: string
-      enum:
-      - yaml
-      - json
-    GenerateOpenapiSpec:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/OpenapiV3Info'
-        url:
-          type: string
-        openapi_spec_format:
-          $ref: '#/components/schemas/OpenapiSpecFormat'
-        http_route_filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
-        webhook_filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookFilters'
-    OpenapiHttpRouteFilters:
-      type: object
-      properties:
-        folder_regex:
-          type: string
-        path_regex:
-          type: string
-        route_path_regex:
-          type: string
-      required:
-      - folder_regex
-      - path_regex
-      - route_path_regex
     OpenapiV3Info:
       type: object
       properties:
@@ -133,11 +98,46 @@ components:
       required:
       - title
       - version
+    GenerateOpenapiSpec:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/OpenapiV3Info'
+        url:
+          type: string
+        openapi_spec_format:
+          $ref: '#/components/schemas/OpenapiSpecFormat'
+        http_route_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
+        webhook_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilters'
     RunnableKind:
       type: string
       enum:
       - script
       - flow
+    OpenapiSpecFormat:
+      type: string
+      enum:
+      - yaml
+      - json
+    OpenapiHttpRouteFilters:
+      type: object
+      properties:
+        folder_regex:
+          type: string
+        path_regex:
+          type: string
+        route_path_regex:
+          type: string
+      required:
+      - folder_regex
+      - path_regex
+      - route_path_regex
     WebhookFilters:
       type: object
       properties:

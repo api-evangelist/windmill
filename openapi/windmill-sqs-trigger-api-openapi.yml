@@ -212,85 +212,62 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   schemas:
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    AwsAuthResourceType:
-      type: string
-      enum:
-      - oidc
-      - credentials
-    SqsTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
+    TriggerExtraProperty:
       type: object
       properties:
-        queue_url:
+        path:
           type: string
-          description: The full URL of the AWS SQS queue to poll for messages
-        aws_auth_resource_type:
-          $ref: '#/components/schemas/AwsAuthResourceType'
-          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
-        aws_resource_path:
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
           type: string
-          description: Path to the AWS resource containing credentials or OIDC configuration
-        message_attributes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Array of SQS message attribute names to include with each message
-        server_id:
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
           type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
           type: string
           format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
       required:
-      - queue_url
-      - aws_resource_path
-      - aws_auth_resource_type
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     NewSqsTrigger:
       type: object
       properties:
@@ -347,61 +324,59 @@ components:
       - script_path
       - is_flow
       - aws_auth_resource_type
-    TriggerMode:
-      description: job trigger mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    AwsAuthResourceType:
       type: string
       enum:
-      - enabled
-      - disabled
-      - suspended
-    TriggerExtraProperty:
+      - oidc
+      - credentials
+    SqsTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
       type: object
       properties:
-        path:
+        queue_url:
           type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
+          description: The full URL of the AWS SQS queue to poll for messages
+        aws_auth_resource_type:
+          $ref: '#/components/schemas/AwsAuthResourceType'
+          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
+        aws_resource_path:
           type: string
-          description: Path to the script or flow to execute when triggered
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as (permissioned_as)
-        extra_perms:
-          type: object
-          description: Additional permissions for this trigger
-          additionalProperties:
-            type: boolean
-        workspace_id:
-          type: string
-          description: The workspace this trigger belongs to
-        edited_by:
-          type: string
-          description: Username of the last person who edited this trigger
-        edited_at:
-          type: string
-          format: date-time
-          description: Timestamp of the last edit
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-          description: Trigger mode (enabled/disabled)
-        labels:
-          type: array
+          description: Path to the AWS resource containing credentials or OIDC configuration
+        message_attributes:
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          default: []
+          description: Array of SQS message attribute names to include with each message
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
       required:
-      - path
-      - script_path
-      - permissioned_as
-      - extra_perms
-      - workspace_id
-      - edited_by
-      - edited_at
-      - is_flow
-      - mode
+      - queue_url
+      - aws_resource_path
+      - aws_auth_resource_type
     EditSqsTrigger:
       type: object
       properties:
@@ -459,6 +434,31 @@ components:
       - is_flow
       - enabled
       - aws_auth_resource_type
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

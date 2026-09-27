@@ -345,7 +345,7 @@ paths:
   /w/{workspace}/workspaces/delete_invite:
     post:
       summary: Delete User Invite
-      operationId: delete invite
+      operationId: deleteInvite
       tags:
       - Workspace
       parameters:
@@ -375,6 +375,8 @@ paths:
             text/plain:
               schema:
                 type: string
+      x-operation-id-source: normalized
+      x-operation-id-original: delete invite
   /w/{workspace}/workspaces/archive:
     post:
       summary: Archive Workspace
@@ -2085,7 +2087,7 @@ paths:
                 type: string
     get:
       summary: Get Default Scripts for Workspace
-      operationId: get default scripts
+      operationId: getDefaultScripts
       tags:
       - Workspace
       parameters:
@@ -2097,6 +2099,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/WorkspaceDefaultScripts'
+      x-operation-id-source: normalized
+      x-operation-id-original: get default scripts
   /w/{workspace}/workspaces/set_environment_variable:
     post:
       summary: Set Environment Variable
@@ -2762,6 +2766,315 @@ paths:
                 type: string
 components:
   schemas:
+    RuleBypasserGroups:
+      type: array
+      description: Groups that can bypass this ruleset
+      items:
+        type: string
+    DataTableSchema:
+      type: object
+      required:
+      - datatable_name
+      - schemas
+      properties:
+        datatable_name:
+          type: string
+        schemas:
+          type: object
+          description: 'Hierarchical schema: schema_name -> table_name -> column_name -> compact_type (e.g. ''int4'', ''text?'', ''int4?=0'')'
+          additionalProperties:
+            type: object
+            description: Tables in this schema
+            additionalProperties:
+              type: object
+              description: Columns in this table
+              additionalProperties:
+                type: string
+                description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+        error:
+          type: string
+    ProtectionRules:
+      type: array
+      description: Configuration of protection restrictions
+      items:
+        $ref: '#/components/schemas/ProtectionRuleKind'
+    QuotaInfo:
+      type: object
+      properties:
+        used:
+          type: integer
+        limit:
+          type: integer
+        prunable:
+          type: integer
+      required:
+      - used
+      - limit
+      - prunable
+    ErrorHandlerConfig:
+      type: object
+      description: Configuration for the workspace error handler
+      properties:
+        path:
+          type: string
+          description: Path to the error handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        muted_on_cancel:
+          type: boolean
+          default: false
+        muted_on_user_path:
+          type: boolean
+          default: false
+    EditSuccessHandler:
+      description: Request body for editing the workspace success handler. Accepts both new grouped format and legacy flat format for backward compatibility.
+      oneOf:
+      - $ref: '#/components/schemas/EditSuccessHandlerNew'
+      - $ref: '#/components/schemas/EditSuccessHandlerLegacy'
+    S3PermissionRule:
+      type: object
+      properties:
+        pattern:
+          type: string
+        allow:
+          type: string
+      required:
+      - pattern
+      - allow
+    DependencyMap:
+      type: object
+      properties:
+        workspace_id:
+          type:
+          - string
+          - 'null'
+        importer_path:
+          type:
+          - string
+          - 'null'
+        importer_kind:
+          type:
+          - string
+          - 'null'
+        imported_path:
+          type:
+          - string
+          - 'null'
+        importer_node_id:
+          type:
+          - string
+          - 'null'
+    SuccessHandlerConfig:
+      type: object
+      description: Configuration for the workspace success handler
+      properties:
+        path:
+          type: string
+          description: Path to the success handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    WorkspaceDeployUISettings:
+      type: object
+      properties:
+        include_path:
+          type: array
+          items:
+            type: string
+        include_type:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitSyncObjectType'
+    EditErrorHandlerNew:
+      type: object
+      description: New grouped format for editing error handler
+      properties:
+        path:
+          type: string
+          description: Path to the error handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        muted_on_cancel:
+          type: boolean
+          default: false
+        muted_on_user_path:
+          type: boolean
+          default: false
+    InstanceAIProviderSummary:
+      type: object
+      properties:
+        provider:
+          $ref: '#/components/schemas/AIProvider'
+        models:
+          type: array
+          items:
+            type: string
+      required:
+      - provider
+      - models
+    DataTableTables:
+      type: object
+      required:
+      - datatable_name
+      - schemas
+      properties:
+        datatable_name:
+          type: string
+        schemas:
+          type: object
+          description: 'Hierarchical metadata: schema_name -> table_names'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        error:
+          type: string
+    AIProvider:
+      type: string
+      enum:
+      - openai
+      - azure_openai
+      - anthropic
+      - mistral
+      - deepseek
+      - googleai
+      - groq
+      - openrouter
+      - togetherai
+      - aws_bedrock
+      - customai
+    DeploymentRequestComment:
+      type: object
+      required:
+      - id
+      - author
+      - author_email
+      - body
+      - obsolete
+      - created_at
+      properties:
+        id:
+          type: integer
+          format: int64
+        parent_id:
+          type:
+          - integer
+          - 'null'
+          format: int64
+        author:
+          type: string
+        author_email:
+          type: string
+        body:
+          type: string
+        anchor_kind:
+          type:
+          - string
+          - 'null'
+        anchor_path:
+          type:
+          - string
+          - 'null'
+        obsolete:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    WorkspaceDefaultScripts:
+      type: object
+      properties:
+        order:
+          type: array
+          items:
+            type: string
+        hidden:
+          type: array
+          items:
+            type: string
+        default_script_content:
+          additionalProperties:
+            type: string
+    UserWorkspaceList:
+      type: object
+      properties:
+        email:
+          type: string
+        workspaces:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              username:
+                type: string
+              color:
+                type: string
+              operator_settings:
+                $ref: '#/components/schemas/OperatorSettings'
+              parent_workspace_id:
+                type:
+                - string
+                - 'null'
+              created_by:
+                type:
+                - string
+                - 'null'
+              disabled:
+                type: boolean
+            required:
+            - id
+            - name
+            - username
+            - color
+            - disabled
+      required:
+      - email
+      - workspaces
+    DucklakeSettings:
+      type: object
+      required:
+      - ducklakes
+      properties:
+        ducklakes:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+            - catalog
+            - storage
+            properties:
+              catalog:
+                type: object
+                properties:
+                  resource_type:
+                    type: string
+                    enum:
+                    - postgresql
+                    - mysql
+                    - instance
+                  resource_path:
+                    type: string
+                required:
+                - resource_type
+              storage:
+                type: object
+                properties:
+                  storage:
+                    type: string
+                  path:
+                    type: string
+                required:
+                - path
+              extra_args:
+                type: string
+    ProtectionRuleKind:
+      type: string
+      enum:
+      - DisableDirectDeployment
+      - DisableWorkspaceForking
+      - RestrictDeployToDeployers
     CreateWorkspaceFork:
       type: object
       properties:
@@ -2789,6 +3102,220 @@ components:
       - id
       - name
       - parent_workspace_id
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        owner:
+          type: string
+        domain:
+          type: string
+        color:
+          type: string
+        parent_workspace_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - owner
+      - created_at
+    AIProviderConfig:
+      type: object
+      properties:
+        resource_path:
+          type: string
+        models:
+          type: array
+          items:
+            type: string
+      required:
+      - resource_path
+      - models
+    EditSuccessHandlerNew:
+      type: object
+      description: New grouped format for editing success handler
+      properties:
+        path:
+          type: string
+          description: Path to the success handler script or flow
+        extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    GitRepositorySettings:
+      type: object
+      properties:
+        script_path:
+          type: string
+        git_repo_resource_path:
+          type: string
+        use_individual_branch:
+          type: boolean
+        group_by_folder:
+          type: boolean
+        collapsed:
+          type: boolean
+        settings:
+          type: object
+          properties:
+            include_path:
+              type: array
+              items:
+                type: string
+            include_type:
+              type: array
+              items:
+                $ref: '#/components/schemas/GitSyncObjectType'
+            exclude_path:
+              type: array
+              items:
+                type: string
+            extra_include_path:
+              type: array
+              items:
+                type: string
+        exclude_types_override:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitSyncObjectType'
+      required:
+      - git_repo_resource_path
+    DeploymentRequestEligibleDeployer:
+      type: object
+      required:
+      - username
+      - email
+      - is_admin
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        is_admin:
+          type: boolean
+    AIConfig:
+      type: object
+      properties:
+        providers:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AIProviderConfig'
+        default_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        code_completion_model:
+          $ref: '#/components/schemas/AIProviderModel'
+        custom_prompts:
+          type: object
+          additionalProperties:
+            type: string
+        max_tokens_per_model:
+          type: object
+          additionalProperties:
+            type: integer
+            minimum: 1
+            maximum: 2000000
+    AIProviderModel:
+      type: object
+      properties:
+        model:
+          type: string
+        provider:
+          $ref: '#/components/schemas/AIProvider'
+      required:
+      - model
+      - provider
+    CreateWorkspace:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        color:
+          type: string
+      required:
+      - id
+      - name
+    WorkspaceComparison:
+      type: object
+      required:
+      - all_ahead_items_visible
+      - all_behind_items_visible
+      - skipped_comparison
+      - diffs
+      - summary
+      properties:
+        all_ahead_items_visible:
+          type: boolean
+          description: All items with changes ahead are visible by the user of the request.
+        all_behind_items_visible:
+          type: boolean
+          description: All items with changes behind are visible by the user of the request.
+        skipped_comparison:
+          type: boolean
+          description: Whether the comparison was skipped. This happens with old forks that where not being kept track of
+        diffs:
+          type: array
+          description: List of differences found between workspaces
+          items:
+            $ref: '#/components/schemas/WorkspaceItemDiff'
+        summary:
+          $ref: '#/components/schemas/CompareSummary'
+          description: Summary statistics of the comparison
+    DependencyDependent:
+      type: object
+      properties:
+        importer_path:
+          type: string
+        importer_kind:
+          type: string
+          enum:
+          - script
+          - flow
+          - app
+        importer_node_ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      required:
+      - importer_path
+      - importer_kind
+    DataTableTableSchema:
+      type: object
+      required:
+      - datatable_name
+      - schema_name
+      - table_name
+      - columns
+      properties:
+        datatable_name:
+          type: string
+        schema_name:
+          type: string
+        table_name:
+          type: string
+        columns:
+          type: object
+          description: 'Columns in this table: column_name -> compact_type'
+          additionalProperties:
+            type: string
+            description: 'Compact type: ''type[?][=default]'' where ? means nullable'
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    RuleBypasserUsers:
+      type: array
+      description: Users that can bypass this ruleset
+      items:
+        type: string
     InstanceAISummary:
       type: object
       properties:
@@ -2802,6 +3329,128 @@ components:
           $ref: '#/components/schemas/AIProviderModel'
       required:
       - providers
+    EditSuccessHandlerLegacy:
+      type: object
+      description: Legacy flat format for editing success handler (deprecated, use new format)
+      properties:
+        success_handler:
+          type: string
+          description: Path to the success handler script or flow
+        success_handler_extra_args:
+          $ref: '#/components/schemas/ScriptArgs'
+    DeploymentRequestAssignee:
+      type: object
+      required:
+      - username
+      - email
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+    GitSyncObjectType:
+      type: string
+      enum:
+      - script
+      - flow
+      - app
+      - folder
+      - resource
+      - variable
+      - secret
+      - resourcetype
+      - schedule
+      - user
+      - group
+      - trigger
+      - settings
+      - key
+      - workspacedependencies
+    EditErrorHandler:
+      description: Request body for editing the workspace error handler. Accepts both new grouped format and legacy flat format for backward compatibility.
+      oneOf:
+      - $ref: '#/components/schemas/EditErrorHandlerNew'
+      - $ref: '#/components/schemas/EditErrorHandlerLegacy'
+    OperatorSettings:
+      type:
+      - object
+      - 'null'
+      required:
+      - runs
+      - schedules
+      - resources
+      - assets
+      - variables
+      - triggers
+      - audit_logs
+      - groups
+      - folders
+      - workers
+      properties:
+        runs:
+          type: boolean
+          description: Whether operators can view runs
+        schedules:
+          type: boolean
+          description: Whether operators can view schedules
+        resources:
+          type: boolean
+          description: Whether operators can view resources
+        variables:
+          type: boolean
+          description: Whether operators can view variables
+        assets:
+          type: boolean
+          description: Whether operators can view assets
+        audit_logs:
+          type: boolean
+          description: Whether operators can view audit logs
+        triggers:
+          type: boolean
+          description: Whether operators can view triggers
+        groups:
+          type: boolean
+          description: Whether operators can view groups page
+        folders:
+          type: boolean
+          description: Whether operators can view folders page
+        workers:
+          type: boolean
+          description: Whether operators can view workers page
+    DeploymentRequest:
+      type: object
+      required:
+      - id
+      - source_workspace_id
+      - fork_workspace_id
+      - requested_by
+      - requested_by_email
+      - requested_at
+      - assignees
+      - comments
+      properties:
+        id:
+          type: integer
+          format: int64
+        source_workspace_id:
+          type: string
+        fork_workspace_id:
+          type: string
+        requested_by:
+          type: string
+        requested_by_email:
+          type: string
+        requested_at:
+          type: string
+          format: date-time
+        assignees:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentRequestAssignee'
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeploymentRequestComment'
     CompareSummary:
       type: object
       required:
@@ -2850,79 +3499,60 @@ components:
         conflicts:
           type: integer
           description: Number of items that are both ahead and behind (conflicts)
-    QuotaInfo:
+    WorkspaceGitSyncSettings:
       type: object
       properties:
-        used:
-          type: integer
-        limit:
-          type: integer
-        prunable:
-          type: integer
-      required:
-      - used
-      - limit
-      - prunable
-    DependencyDependent:
+        repositories:
+          type: array
+          items:
+            $ref: '#/components/schemas/GitRepositorySettings'
+    WorkspaceInvite:
       type: object
       properties:
-        importer_path:
+        workspace_id:
           type: string
-        importer_kind:
+        email:
+          type: string
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        parent_workspace_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - workspace_id
+      - email
+      - is_admin
+      - operator
+    AutoInviteConfig:
+      type: object
+      description: Configuration for auto-inviting users to the workspace
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        domain:
+          type: string
+        operator:
+          type: boolean
+          default: false
+          description: If true, auto-invited users are added as operators. If false, they are added as developers.
+        mode:
           type: string
           enum:
-          - script
-          - flow
-          - app
-        importer_node_ids:
-          type:
-          - array
-          - 'null'
+          - invite
+          - add
+          default: invite
+        instance_groups:
+          type: array
           items:
             type: string
-      required:
-      - importer_path
-      - importer_kind
-    CreateWorkspace:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        username:
-          type: string
-        color:
-          type: string
-      required:
-      - id
-      - name
-    EditSuccessHandlerLegacy:
-      type: object
-      description: Legacy flat format for editing success handler (deprecated, use new format)
-      properties:
-        success_handler:
-          type: string
-          description: Path to the success handler script or flow
-        success_handler_extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-    DataTableTables:
-      type: object
-      required:
-      - datatable_name
-      - schemas
-      properties:
-        datatable_name:
-          type: string
-        schemas:
+        instance_groups_roles:
           type: object
-          description: 'Hierarchical metadata: schema_name -> table_names'
           additionalProperties:
-            type: array
-            items:
-              type: string
-        error:
-          type: string
+            type: string
     LargeFileStorage:
       type: object
       properties:
@@ -2967,18 +3597,38 @@ components:
                 type: string
               public_resource:
                 type: boolean
-    InstanceAIProviderSummary:
+    DataTableSettings:
       type: object
-      properties:
-        provider:
-          $ref: '#/components/schemas/AIProvider'
-        models:
-          type: array
-          items:
-            type: string
       required:
-      - provider
-      - models
+      - datatables
+      properties:
+        datatables:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+            - database
+            properties:
+              database:
+                type: object
+                properties:
+                  resource_type:
+                    type: string
+                    enum:
+                    - postgresql
+                    - instance
+                  resource_path:
+                    type: string
+                required:
+                - resource_type
+              forked_from:
+                type: object
+                description: Fork origin info with schema snapshot
+                properties:
+                  schema:
+                    type: object
+                    description: Schema snapshot at fork time
+                    additionalProperties: true
     WorkspaceItemDiff:
       type: object
       required:
@@ -3019,43 +3669,6 @@ components:
         exists_in_fork:
           type: boolean
           description: If the item exists in the fork workspace
-    RuleBypasserGroups:
-      type: array
-      description: Groups that can bypass this ruleset
-      items:
-        type: string
-    DataTableSettings:
-      type: object
-      required:
-      - datatables
-      properties:
-        datatables:
-          type: object
-          additionalProperties:
-            type: object
-            required:
-            - database
-            properties:
-              database:
-                type: object
-                properties:
-                  resource_type:
-                    type: string
-                    enum:
-                    - postgresql
-                    - instance
-                  resource_path:
-                    type: string
-                required:
-                - resource_type
-              forked_from:
-                type: object
-                description: Fork origin info with schema snapshot
-                properties:
-                  schema:
-                    type: object
-                    description: Schema snapshot at fork time
-                    additionalProperties: true
     ProtectionRuleset:
       type: object
       description: A workspace protection rule defining restrictions and bypass permissions
@@ -3077,206 +3690,6 @@ components:
           $ref: '#/components/schemas/RuleBypasserGroups'
         bypass_users:
           $ref: '#/components/schemas/RuleBypasserUsers'
-    ProtectionRules:
-      type: array
-      description: Configuration of protection restrictions
-      items:
-        $ref: '#/components/schemas/ProtectionRuleKind'
-    AIConfig:
-      type: object
-      properties:
-        providers:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/AIProviderConfig'
-        default_model:
-          $ref: '#/components/schemas/AIProviderModel'
-        code_completion_model:
-          $ref: '#/components/schemas/AIProviderModel'
-        custom_prompts:
-          type: object
-          additionalProperties:
-            type: string
-        max_tokens_per_model:
-          type: object
-          additionalProperties:
-            type: integer
-            minimum: 1
-            maximum: 2000000
-    DeploymentRequest:
-      type: object
-      required:
-      - id
-      - source_workspace_id
-      - fork_workspace_id
-      - requested_by
-      - requested_by_email
-      - requested_at
-      - assignees
-      - comments
-      properties:
-        id:
-          type: integer
-          format: int64
-        source_workspace_id:
-          type: string
-        fork_workspace_id:
-          type: string
-        requested_by:
-          type: string
-        requested_by_email:
-          type: string
-        requested_at:
-          type: string
-          format: date-time
-        assignees:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeploymentRequestAssignee'
-        comments:
-          type: array
-          items:
-            $ref: '#/components/schemas/DeploymentRequestComment'
-    AIProviderConfig:
-      type: object
-      properties:
-        resource_path:
-          type: string
-        models:
-          type: array
-          items:
-            type: string
-      required:
-      - resource_path
-      - models
-    DataTableSchema:
-      type: object
-      required:
-      - datatable_name
-      - schemas
-      properties:
-        datatable_name:
-          type: string
-        schemas:
-          type: object
-          description: 'Hierarchical schema: schema_name -> table_name -> column_name -> compact_type (e.g. ''int4'', ''text?'', ''int4?=0'')'
-          additionalProperties:
-            type: object
-            description: Tables in this schema
-            additionalProperties:
-              type: object
-              description: Columns in this table
-              additionalProperties:
-                type: string
-                description: 'Compact type: ''type[?][=default]'' where ? means nullable'
-        error:
-          type: string
-    DucklakeSettings:
-      type: object
-      required:
-      - ducklakes
-      properties:
-        ducklakes:
-          type: object
-          additionalProperties:
-            type: object
-            required:
-            - catalog
-            - storage
-            properties:
-              catalog:
-                type: object
-                properties:
-                  resource_type:
-                    type: string
-                    enum:
-                    - postgresql
-                    - mysql
-                    - instance
-                  resource_path:
-                    type: string
-                required:
-                - resource_type
-              storage:
-                type: object
-                properties:
-                  storage:
-                    type: string
-                  path:
-                    type: string
-                required:
-                - path
-              extra_args:
-                type: string
-    DataTableTableSchema:
-      type: object
-      required:
-      - datatable_name
-      - schema_name
-      - table_name
-      - columns
-      properties:
-        datatable_name:
-          type: string
-        schema_name:
-          type: string
-        table_name:
-          type: string
-        columns:
-          type: object
-          description: 'Columns in this table: column_name -> compact_type'
-          additionalProperties:
-            type: string
-            description: 'Compact type: ''type[?][=default]'' where ? means nullable'
-    UserWorkspaceList:
-      type: object
-      properties:
-        email:
-          type: string
-        workspaces:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              username:
-                type: string
-              color:
-                type: string
-              operator_settings:
-                $ref: '#/components/schemas/OperatorSettings'
-              parent_workspace_id:
-                type:
-                - string
-                - 'null'
-              created_by:
-                type:
-                - string
-                - 'null'
-              disabled:
-                type: boolean
-            required:
-            - id
-            - name
-            - username
-            - color
-            - disabled
-      required:
-      - email
-      - workspaces
-    DeploymentRequestAssignee:
-      type: object
-      required:
-      - username
-      - email
-      properties:
-        username:
-          type: string
-        email:
-          type: string
     DependentsAmount:
       type: object
       properties:
@@ -3288,252 +3701,6 @@ components:
       required:
       - imported_path
       - count
-    EditSuccessHandlerNew:
-      type: object
-      description: New grouped format for editing success handler
-      properties:
-        path:
-          type: string
-          description: Path to the success handler script or flow
-        extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-    AutoInviteConfig:
-      type: object
-      description: Configuration for auto-inviting users to the workspace
-      properties:
-        enabled:
-          type: boolean
-          default: false
-        domain:
-          type: string
-        operator:
-          type: boolean
-          default: false
-          description: If true, auto-invited users are added as operators. If false, they are added as developers.
-        mode:
-          type: string
-          enum:
-          - invite
-          - add
-          default: invite
-        instance_groups:
-          type: array
-          items:
-            type: string
-        instance_groups_roles:
-          type: object
-          additionalProperties:
-            type: string
-    EditErrorHandler:
-      description: Request body for editing the workspace error handler. Accepts both new grouped format and legacy flat format for backward compatibility.
-      oneOf:
-      - $ref: '#/components/schemas/EditErrorHandlerNew'
-      - $ref: '#/components/schemas/EditErrorHandlerLegacy'
-    SuccessHandlerConfig:
-      type: object
-      description: Configuration for the workspace success handler
-      properties:
-        path:
-          type: string
-          description: Path to the success handler script or flow
-        extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-    ProtectionRuleKind:
-      type: string
-      enum:
-      - DisableDirectDeployment
-      - DisableWorkspaceForking
-      - RestrictDeployToDeployers
-    AIProviderModel:
-      type: object
-      properties:
-        model:
-          type: string
-        provider:
-          $ref: '#/components/schemas/AIProvider'
-      required:
-      - model
-      - provider
-    S3PermissionRule:
-      type: object
-      properties:
-        pattern:
-          type: string
-        allow:
-          type: string
-      required:
-      - pattern
-      - allow
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    GitSyncObjectType:
-      type: string
-      enum:
-      - script
-      - flow
-      - app
-      - folder
-      - resource
-      - variable
-      - secret
-      - resourcetype
-      - schedule
-      - user
-      - group
-      - trigger
-      - settings
-      - key
-      - workspacedependencies
-    WorkspaceDefaultScripts:
-      type: object
-      properties:
-        order:
-          type: array
-          items:
-            type: string
-        hidden:
-          type: array
-          items:
-            type: string
-        default_script_content:
-          additionalProperties:
-            type: string
-    WorkspaceDeployUISettings:
-      type: object
-      properties:
-        include_path:
-          type: array
-          items:
-            type: string
-        include_type:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitSyncObjectType'
-    DeploymentRequestComment:
-      type: object
-      required:
-      - id
-      - author
-      - author_email
-      - body
-      - obsolete
-      - created_at
-      properties:
-        id:
-          type: integer
-          format: int64
-        parent_id:
-          type:
-          - integer
-          - 'null'
-          format: int64
-        author:
-          type: string
-        author_email:
-          type: string
-        body:
-          type: string
-        anchor_kind:
-          type:
-          - string
-          - 'null'
-        anchor_path:
-          type:
-          - string
-          - 'null'
-        obsolete:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-    OperatorSettings:
-      type:
-      - object
-      - 'null'
-      required:
-      - runs
-      - schedules
-      - resources
-      - assets
-      - variables
-      - triggers
-      - audit_logs
-      - groups
-      - folders
-      - workers
-      properties:
-        runs:
-          type: boolean
-          description: Whether operators can view runs
-        schedules:
-          type: boolean
-          description: Whether operators can view schedules
-        resources:
-          type: boolean
-          description: Whether operators can view resources
-        variables:
-          type: boolean
-          description: Whether operators can view variables
-        assets:
-          type: boolean
-          description: Whether operators can view assets
-        audit_logs:
-          type: boolean
-          description: Whether operators can view audit logs
-        triggers:
-          type: boolean
-          description: Whether operators can view triggers
-        groups:
-          type: boolean
-          description: Whether operators can view groups page
-        folders:
-          type: boolean
-          description: Whether operators can view folders page
-        workers:
-          type: boolean
-          description: Whether operators can view workers page
-    WorkspaceGitSyncSettings:
-      type: object
-      properties:
-        repositories:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitRepositorySettings'
-    DeploymentRequestEligibleDeployer:
-      type: object
-      required:
-      - username
-      - email
-      - is_admin
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-        is_admin:
-          type: boolean
-    WorkspaceInvite:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        email:
-          type: string
-        is_admin:
-          type: boolean
-        operator:
-          type: boolean
-        parent_workspace_id:
-          type:
-          - string
-          - 'null'
-      required:
-      - workspace_id
-      - email
-      - is_admin
-      - operator
     EditErrorHandlerLegacy:
       type: object
       description: Legacy flat format for editing error handler (deprecated, use new format)
@@ -3546,170 +3713,13 @@ components:
         error_handler_muted_on_cancel:
           type: boolean
           default: false
-    GitRepositorySettings:
-      type: object
-      properties:
-        script_path:
-          type: string
-        git_repo_resource_path:
-          type: string
-        use_individual_branch:
-          type: boolean
-        group_by_folder:
-          type: boolean
-        collapsed:
-          type: boolean
-        settings:
-          type: object
-          properties:
-            include_path:
-              type: array
-              items:
-                type: string
-            include_type:
-              type: array
-              items:
-                $ref: '#/components/schemas/GitSyncObjectType'
-            exclude_path:
-              type: array
-              items:
-                type: string
-            extra_include_path:
-              type: array
-              items:
-                type: string
-        exclude_types_override:
-          type: array
-          items:
-            $ref: '#/components/schemas/GitSyncObjectType'
-      required:
-      - git_repo_resource_path
-    EditSuccessHandler:
-      description: Request body for editing the workspace success handler. Accepts both new grouped format and legacy flat format for backward compatibility.
-      oneOf:
-      - $ref: '#/components/schemas/EditSuccessHandlerNew'
-      - $ref: '#/components/schemas/EditSuccessHandlerLegacy'
-    DependencyMap:
-      type: object
-      properties:
-        workspace_id:
-          type:
-          - string
-          - 'null'
-        importer_path:
-          type:
-          - string
-          - 'null'
-        importer_kind:
-          type:
-          - string
-          - 'null'
-        imported_path:
-          type:
-          - string
-          - 'null'
-        importer_node_id:
-          type:
-          - string
-          - 'null'
-    WorkspaceComparison:
-      type: object
-      required:
-      - all_ahead_items_visible
-      - all_behind_items_visible
-      - skipped_comparison
-      - diffs
-      - summary
-      properties:
-        all_ahead_items_visible:
-          type: boolean
-          description: All items with changes ahead are visible by the user of the request.
-        all_behind_items_visible:
-          type: boolean
-          description: All items with changes behind are visible by the user of the request.
-        skipped_comparison:
-          type: boolean
-          description: Whether the comparison was skipped. This happens with old forks that where not being kept track of
-        diffs:
-          type: array
-          description: List of differences found between workspaces
-          items:
-            $ref: '#/components/schemas/WorkspaceItemDiff'
-        summary:
-          $ref: '#/components/schemas/CompareSummary'
-          description: Summary statistics of the comparison
-    RuleBypasserUsers:
-      type: array
-      description: Users that can bypass this ruleset
-      items:
-        type: string
-    AIProvider:
-      type: string
-      enum:
-      - openai
-      - azure_openai
-      - anthropic
-      - mistral
-      - deepseek
-      - googleai
-      - groq
-      - openrouter
-      - togetherai
-      - aws_bedrock
-      - customai
-    EditErrorHandlerNew:
-      type: object
-      description: New grouped format for editing error handler
-      properties:
-        path:
-          type: string
-          description: Path to the error handler script or flow
-        extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        muted_on_cancel:
-          type: boolean
-          default: false
-        muted_on_user_path:
-          type: boolean
-          default: false
-    Workspace:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        owner:
-          type: string
-        domain:
-          type: string
-        color:
-          type: string
-        parent_workspace_id:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - name
-      - owner
-      - created_at
-    ErrorHandlerConfig:
-      type: object
-      description: Configuration for the workspace error handler
-      properties:
-        path:
-          type: string
-          description: Path to the error handler script or flow
-        extra_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        muted_on_cancel:
-          type: boolean
-          default: false
-        muted_on_user_path:
-          type: boolean
-          default: false
   parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
     WorkspaceId:
       name: workspace
       in: path
@@ -3719,12 +3729,6 @@ components:
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
       in: query
       schema:
         type: integer

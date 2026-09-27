@@ -303,64 +303,6 @@ paths:
                   $ref: '#/components/schemas/AzureArmResource'
 components:
   schemas:
-    AzureListTopics:
-      type: object
-      properties:
-        scope_resource_id:
-          type: string
-      required:
-      - scope_resource_id
-    TestAzureConnection:
-      type: object
-      properties:
-        azure_resource_path:
-          type: string
-      required:
-      - azure_resource_path
-    AzureDeleteSubscription:
-      type: object
-      properties:
-        azure_mode:
-          $ref: '#/components/schemas/AzureMode'
-        scope_resource_id:
-          type: string
-        topic_name:
-          type:
-          - string
-          - 'null'
-        subscription_name:
-          type: string
-      required:
-      - azure_mode
-      - scope_resource_id
-      - subscription_name
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    AzureMode:
-      type: string
-      enum:
-      - basic_push
-      - namespace_push
-      - namespace_pull
-      description: Azure Event Grid trigger mode.
-    AzureArmResource:
-      type: object
-      description: An ARM resource the service principal can see.
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        location:
-          type: string
-        type:
-          type: string
-      required:
-      - id
-      - name
-      - type
     TriggerExtraProperty:
       type: object
       properties:
@@ -416,6 +358,48 @@ components:
       - enabled
       - disabled
       - suspended
+    AzureDeleteSubscription:
+      type: object
+      properties:
+        azure_mode:
+          $ref: '#/components/schemas/AzureMode'
+        scope_resource_id:
+          type: string
+        topic_name:
+          type:
+          - string
+          - 'null'
+        subscription_name:
+          type: string
+      required:
+      - azure_mode
+      - scope_resource_id
+      - subscription_name
+    AzureListTopics:
+      type: object
+      properties:
+        scope_resource_id:
+          type: string
+      required:
+      - scope_resource_id
+    AzureMode:
+      type: string
+      enum:
+      - basic_push
+      - namespace_push
+      - namespace_pull
+      description: Azure Event Grid trigger mode.
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    TestAzureConnection:
+      type: object
+      properties:
+        azure_resource_path:
+          type: string
+      required:
+      - azure_resource_path
     AzureListSubscriptions:
       type: object
       properties:
@@ -426,6 +410,50 @@ components:
       required:
       - scope_resource_id
       - topic_name
+    AzureTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      description: An Azure Event Grid trigger that executes a script or flow when events arrive.
+      properties:
+        azure_resource_path:
+          type: string
+        azure_mode:
+          $ref: '#/components/schemas/AzureMode'
+        scope_resource_id:
+          type: string
+          description: ARM resource ID of the topic (basic) or namespace (namespace modes).
+        topic_name:
+          type:
+          - string
+          - 'null'
+          description: Topic name within the namespace (namespace modes only).
+        subscription_name:
+          type: string
+        event_type_filters:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        server_id:
+          type: string
+        last_server_ping:
+          type: string
+          format: date-time
+        error:
+          type: string
+        error_handler_path:
+          type: string
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+      required:
+      - azure_resource_path
+      - azure_mode
+      - scope_resource_id
+      - subscription_name
     AzureTriggerData:
       type: object
       description: Data for creating or updating an Azure Event Grid trigger.
@@ -480,63 +508,23 @@ components:
       - azure_mode
       - scope_resource_id
       - subscription_name
-    AzureTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
+    AzureArmResource:
       type: object
-      description: An Azure Event Grid trigger that executes a script or flow when events arrive.
+      description: An ARM resource the service principal can see.
       properties:
-        azure_resource_path:
+        id:
           type: string
-        azure_mode:
-          $ref: '#/components/schemas/AzureMode'
-        scope_resource_id:
+        name:
           type: string
-          description: ARM resource ID of the topic (basic) or namespace (namespace modes).
-        topic_name:
-          type:
-          - string
-          - 'null'
-          description: Topic name within the namespace (namespace modes only).
-        subscription_name:
+        location:
           type: string
-        event_type_filters:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        server_id:
+        type:
           type: string
-        last_server_ping:
-          type: string
-          format: date-time
-        error:
-          type: string
-        error_handler_path:
-          type: string
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
       required:
-      - azure_resource_path
-      - azure_mode
-      - scope_resource_id
-      - subscription_name
+      - id
+      - name
+      - type
   parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
@@ -549,6 +537,18 @@ components:
       in: query
       schema:
         type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -521,7 +521,7 @@ paths:
   /w/{workspace}/apps_u/public_resource/{path}:
     get:
       summary: Get Public Resource
-      operationId: get public resource
+      operationId: getPublicResource
       tags:
       - App
       parameters:
@@ -533,6 +533,8 @@ paths:
           content:
             application/json:
               schema: {}
+      x-operation-id-source: normalized
+      x-operation-id-original: get public resource
   /w/{workspace}/apps/secret_of/{path}:
     get:
       summary: Get Public Secret of App
@@ -902,23 +904,14 @@ paths:
                 type: string
 components:
   parameters:
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
-        type: boolean
-    RunnableKind:
-      name: runnable_kind
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-        - script
-        - flow
-    WorkspaceId:
-      name: workspace
+        type: integer
+    ScriptPath:
+      name: path
       in: path
       required: true
       schema:
@@ -929,30 +922,6 @@ components:
       in: query
       schema:
         type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    CustomPath:
-      name: custom_path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
@@ -965,21 +934,80 @@ components:
       required: true
       schema:
         type: integer
+    RunnableKind:
+      name: runnable_kind
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - script
+        - flow
     PathVersion:
       name: version
       in: path
       required: true
       schema:
         type: integer
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+    CustomPath:
+      name: custom_path
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    AppWithLastVersionWDraft:
-      allOf:
-      - $ref: '#/components/schemas/AppWithLastVersion'
-      - type: object
-        properties:
-          draft_only:
-            type: boolean
-          draft: {}
+    Policy:
+      type: object
+      properties:
+        triggerables:
+          type: object
+          additionalProperties:
+            type: object
+        triggerables_v2:
+          type: object
+          additionalProperties:
+            type: object
+        s3_inputs:
+          type: array
+          items:
+            type: object
+        allowed_s3_keys:
+          type: array
+          items:
+            type: object
+            properties:
+              s3_path:
+                type: string
+              resource:
+                type: string
+        execution_mode:
+          type: string
+          enum:
+          - viewer
+          - publisher
+          - anonymous
+        on_behalf_of:
+          type: string
+        on_behalf_of_email:
+          type: string
     AppHistory:
       type: object
       properties:
@@ -989,50 +1017,19 @@ components:
           type: string
       required:
       - version
-    ListableApp:
+    S3Object:
       type: object
       properties:
-        id:
-          type: integer
-        workspace_id:
+        s3:
           type: string
-        path:
+        filename:
           type: string
-        summary:
+        storage:
           type: string
-        version:
-          type: integer
-        extra_perms:
-          type: object
-          additionalProperties:
-            type: boolean
-        starred:
-          type: boolean
-        edited_at:
+        presigned:
           type: string
-          format: date-time
-        execution_mode:
-          type: string
-          enum:
-          - viewer
-          - publisher
-          - anonymous
-        raw_app:
-          type: boolean
-        labels:
-          type: array
-          items:
-            type: string
-          default: []
       required:
-      - id
-      - workspace_id
-      - path
-      - summary
-      - version
-      - extra_perms
-      - edited_at
-      - execution_mode
+      - s3
     AppWithLastVersion:
       type: object
       properties:
@@ -1090,53 +1087,58 @@ components:
       - execution_mode
       - extra_perms
       - raw_app
-    S3Object:
+    AppWithLastVersionWDraft:
+      allOf:
+      - $ref: '#/components/schemas/AppWithLastVersion'
+      - type: object
+        properties:
+          draft_only:
+            type: boolean
+          draft: {}
+    ListableApp:
       type: object
       properties:
-        s3:
+        id:
+          type: integer
+        workspace_id:
           type: string
-        filename:
+        path:
           type: string
-        storage:
+        summary:
           type: string
-        presigned:
-          type: string
-      required:
-      - s3
-    Policy:
-      type: object
-      properties:
-        triggerables:
+        version:
+          type: integer
+        extra_perms:
           type: object
           additionalProperties:
-            type: object
-        triggerables_v2:
-          type: object
-          additionalProperties:
-            type: object
-        s3_inputs:
-          type: array
-          items:
-            type: object
-        allowed_s3_keys:
-          type: array
-          items:
-            type: object
-            properties:
-              s3_path:
-                type: string
-              resource:
-                type: string
+            type: boolean
+        starred:
+          type: boolean
+        edited_at:
+          type: string
+          format: date-time
         execution_mode:
           type: string
           enum:
           - viewer
           - publisher
           - anonymous
-        on_behalf_of:
-          type: string
-        on_behalf_of_email:
-          type: string
+        raw_app:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - id
+      - workspace_id
+      - path
+      - summary
+      - version
+      - extra_perms
+      - edited_at
+      - execution_mode
   securitySchemes:
     bearerAuth:
       type: http

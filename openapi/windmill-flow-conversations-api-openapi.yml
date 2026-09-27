@@ -100,61 +100,25 @@ paths:
                   $ref: '#/components/schemas/FlowConversationMessage'
 components:
   parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    FlowConversation:
-      type: object
-      required:
-      - id
-      - workspace_id
-      - flow_path
-      - created_at
-      - updated_at
-      - created_by
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier for the conversation
-        workspace_id:
-          type: string
-          description: The workspace ID where the conversation belongs
-        flow_path:
-          type: string
-          description: Path of the flow this conversation is for
-        title:
-          type:
-          - string
-          - 'null'
-          description: Optional title for the conversation
-        created_at:
-          type: string
-          format: date-time
-          description: When the conversation was created
-        updated_at:
-          type: string
-          format: date-time
-          description: When the conversation was last updated
-        created_by:
-          type: string
-          description: Username who created the conversation
     FlowConversationMessage:
       type: object
       required:
@@ -204,6 +168,42 @@ components:
         success:
           type: boolean
           description: Whether the message is a success
+    FlowConversation:
+      type: object
+      required:
+      - id
+      - workspace_id
+      - flow_path
+      - created_at
+      - updated_at
+      - created_by
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the conversation
+        workspace_id:
+          type: string
+          description: The workspace ID where the conversation belongs
+        flow_path:
+          type: string
+          description: Path of the flow this conversation is for
+        title:
+          type:
+          - string
+          - 'null'
+          description: Optional title for the conversation
+        created_at:
+          type: string
+          format: date-time
+          description: When the conversation was created
+        updated_at:
+          type: string
+          format: date-time
+          description: When the conversation was last updated
+        created_by:
+          type: string
+          description: Username who created the conversation
   securitySchemes:
     bearerAuth:
       type: http

@@ -67,18 +67,12 @@ paths:
                   $ref: '#/components/schemas/ListableRawApp'
 components:
   parameters:
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
-        type: boolean
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
+        type: integer
     CreatedBy:
       name: created_by
       description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
@@ -91,12 +85,18 @@ components:
       in: query
       schema:
         type: integer
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
       in: query
       schema:
-        type: integer
+        type: boolean
   schemas:
     ListableRawApp:
       type: object

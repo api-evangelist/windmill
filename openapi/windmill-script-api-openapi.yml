@@ -1042,56 +1042,152 @@ paths:
                 items:
                   type: string
 components:
-  parameters:
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
-      in: query
-      schema:
-        type: boolean
-    ScriptHash:
-      name: hash
-      in: path
-      required: true
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Token:
-      name: token
-      in: path
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
+    NewScript:
+      type: object
+      properties:
+        path:
+          type: string
+        parent_hash:
+          type: string
+        summary:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+        schema:
+          type: object
+        is_template:
+          type: boolean
+        lock:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        kind:
+          type: string
+          enum:
+          - script
+          - failure
+          - trigger
+          - command
+          - approval
+          - preprocessor
+        tag:
+          type: string
+        draft_only:
+          type: boolean
+        envs:
+          type: array
+          items:
+            type: string
+        concurrent_limit:
+          type: integer
+        concurrency_time_window_s:
+          type: integer
+        cache_ttl:
+          type: number
+        cache_ignore_s3_path:
+          type: boolean
+        dedicated_worker:
+          type: boolean
+        ws_error_handler_muted:
+          type: boolean
+        priority:
+          type: integer
+        restart_unless_cancelled:
+          type: boolean
+        timeout:
+          type: integer
+        delete_after_secs:
+          type: integer
+          description: If set, delete the job's args, result and logs after this many seconds following job completion
+        deployment_message:
+          type: string
+        concurrency_key:
+          type: string
+        debounce_key:
+          type: string
+        debounce_delay_s:
+          type: integer
+        debounce_args_to_accumulate:
+          type: array
+          items:
+            type: string
+        max_total_debouncing_time:
+          type: integer
+        max_total_debounces_amount:
+          type: integer
+        visible_to_runner_only:
+          type: boolean
+        auto_kind:
+          type: string
+        codebase:
+          type: string
+        has_preprocessor:
+          type: boolean
+        on_behalf_of_email:
+          type: string
+        preserve_on_behalf_of:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
+        assets:
+          type: array
+          items:
+            type: object
+            required:
+            - path
+            - kind
+            properties:
+              path:
+                type: string
+              kind:
+                $ref: '#/components/schemas/AssetKind'
+              access_type:
+                type: string
+                enum:
+                - r
+                - w
+                - rw
+              alt_access_type:
+                type: string
+                enum:
+                - r
+                - w
+                - rw
+        modules:
+          type:
+          - object
+          - 'null'
+          description: Additional script modules keyed by relative file path
+          additionalProperties:
+            $ref: '#/components/schemas/ScriptModule'
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - summary
+      - content
+      - language
+    ScriptModule:
+      type: object
+      description: An additional module file associated with a script
+      properties:
+        content:
+          type: string
+          description: The source code content of this module
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        lock:
+          type:
+          - string
+          - 'null'
+          description: Lock file content for this module's dependencies
+      required:
+      - content
+      - language
     Script:
       type: object
       properties:
@@ -1229,60 +1325,14 @@ components:
       - kind
       - starred
       - has_preprocessor
-    ScriptLang:
+    AssetKind:
       type: string
       enum:
-      - python3
-      - deno
-      - go
-      - bash
-      - powershell
-      - postgresql
-      - mysql
-      - bigquery
-      - snowflake
-      - mssql
-      - oracledb
-      - graphql
-      - nativets
-      - bun
-      - php
-      - rust
-      - ansible
-      - csharp
-      - nu
-      - java
-      - ruby
-      - rlang
-      - duckdb
-      - bunnative
-    NewScriptWithDraft:
-      allOf:
-      - $ref: '#/components/schemas/NewScript'
-      - type: object
-        properties:
-          draft:
-            $ref: '#/components/schemas/NewScript'
-          hash:
-            type: string
-        required:
-        - hash
-    HubScriptKind:
-      type: string
-      enum:
-      - script
-      - failure
-      - trigger
-      - approval
-    ScriptHistory:
-      type: object
-      properties:
-        script_hash:
-          type: string
-        deployment_msg:
-          type: string
-      required:
-      - script_hash
+      - s3object
+      - resource
+      - ducklake
+      - datatable
+      - volume
     CiTestResult:
       type: object
       properties:
@@ -1304,14 +1354,6 @@ components:
           format: date-time
       required:
       - test_script_path
-    AssetKind:
-      type: string
-      enum:
-      - s3object
-      - resource
-      - ducklake
-      - datatable
-      - volume
     TriggersCount:
       type: object
       properties:
@@ -1352,151 +1394,6 @@ components:
           type: number
         github_count:
           type: number
-    ScriptModule:
-      type: object
-      description: An additional module file associated with a script
-      properties:
-        content:
-          type: string
-          description: The source code content of this module
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        lock:
-          type:
-          - string
-          - 'null'
-          description: Lock file content for this module's dependencies
-      required:
-      - content
-      - language
-    NewScript:
-      type: object
-      properties:
-        path:
-          type: string
-        parent_hash:
-          type: string
-        summary:
-          type: string
-        description:
-          type: string
-        content:
-          type: string
-        schema:
-          type: object
-        is_template:
-          type: boolean
-        lock:
-          type: string
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        kind:
-          type: string
-          enum:
-          - script
-          - failure
-          - trigger
-          - command
-          - approval
-          - preprocessor
-        tag:
-          type: string
-        draft_only:
-          type: boolean
-        envs:
-          type: array
-          items:
-            type: string
-        concurrent_limit:
-          type: integer
-        concurrency_time_window_s:
-          type: integer
-        cache_ttl:
-          type: number
-        cache_ignore_s3_path:
-          type: boolean
-        dedicated_worker:
-          type: boolean
-        ws_error_handler_muted:
-          type: boolean
-        priority:
-          type: integer
-        restart_unless_cancelled:
-          type: boolean
-        timeout:
-          type: integer
-        delete_after_secs:
-          type: integer
-          description: If set, delete the job's args, result and logs after this many seconds following job completion
-        deployment_message:
-          type: string
-        concurrency_key:
-          type: string
-        debounce_key:
-          type: string
-        debounce_delay_s:
-          type: integer
-        debounce_args_to_accumulate:
-          type: array
-          items:
-            type: string
-        max_total_debouncing_time:
-          type: integer
-        max_total_debounces_amount:
-          type: integer
-        visible_to_runner_only:
-          type: boolean
-        auto_kind:
-          type: string
-        codebase:
-          type: string
-        has_preprocessor:
-          type: boolean
-        on_behalf_of_email:
-          type: string
-        preserve_on_behalf_of:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
-        assets:
-          type: array
-          items:
-            type: object
-            required:
-            - path
-            - kind
-            properties:
-              path:
-                type: string
-              kind:
-                $ref: '#/components/schemas/AssetKind'
-              access_type:
-                type: string
-                enum:
-                - r
-                - w
-                - rw
-              alt_access_type:
-                type: string
-                enum:
-                - r
-                - w
-                - rw
-        modules:
-          type:
-          - object
-          - 'null'
-          description: Additional script modules keyed by relative file path
-          additionalProperties:
-            $ref: '#/components/schemas/ScriptModule'
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - summary
-      - content
-      - language
     TruncatedToken:
       type: object
       properties:
@@ -1525,6 +1422,109 @@ components:
       - token_prefix
       - created_at
       - last_used_at
+    ScriptHistory:
+      type: object
+      properties:
+        script_hash:
+          type: string
+        deployment_msg:
+          type: string
+      required:
+      - script_hash
+    NewScriptWithDraft:
+      allOf:
+      - $ref: '#/components/schemas/NewScript'
+      - type: object
+        properties:
+          draft:
+            $ref: '#/components/schemas/NewScript'
+          hash:
+            type: string
+        required:
+        - hash
+    ScriptLang:
+      type: string
+      enum:
+      - python3
+      - deno
+      - go
+      - bash
+      - powershell
+      - postgresql
+      - mysql
+      - bigquery
+      - snowflake
+      - mssql
+      - oracledb
+      - graphql
+      - nativets
+      - bun
+      - php
+      - rust
+      - ansible
+      - csharp
+      - nu
+      - java
+      - ruby
+      - rlang
+      - duckdb
+      - bunnative
+    HubScriptKind:
+      type: string
+      enum:
+      - script
+      - failure
+      - trigger
+      - approval
+  parameters:
+    Token:
+      name: token
+      in: path
+      required: true
+      schema:
+        type: string
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    ScriptHash:
+      name: hash
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

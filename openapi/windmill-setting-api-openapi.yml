@@ -1107,15 +1107,11 @@ components:
         token:
           type: string
           description: Static Bearer token for testing/development (optional, if provided this is used instead of OAuth2 authentication)
-    GlobalSetting:
-      type: object
-      properties:
-        name:
-          type: string
-        value: {}
-      required:
-      - name
-      - value
+    CustomInstanceDbTag:
+      type: string
+      enum:
+      - ducklake
+      - datatable
     AwsSecretsManagerSettings:
       type: object
       required:
@@ -1136,26 +1132,30 @@ components:
         prefix:
           type: string
           description: Prefix for secret names (e.g., windmill/)
-    CustomInstanceDbTag:
+    LoggedWizardStatus:
       type: string
       enum:
-      - ducklake
-      - datatable
-    CustomInstanceDbLogs:
+      - OK
+      - SKIP
+      - FAIL
+    InstanceConfig:
       type: object
+      description: Unified instance configuration combining global settings and worker group configs
       properties:
-        super_admin:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        database_credentials:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        valid_dbname:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        created_database:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        db_connect:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        grant_permissions:
-          $ref: '#/components/schemas/LoggedWizardStatus'
+        global_settings:
+          type: object
+          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
+
+            '
+          additionalProperties: true
+        worker_configs:
+          type: object
+          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
+
+            '
+          additionalProperties:
+            type: object
+            additionalProperties: true
     SecretMigrationReport:
       type: object
       required:
@@ -1181,101 +1181,6 @@ components:
           items:
             $ref: '#/components/schemas/SecretMigrationFailure'
           description: Details of any failures encountered during migration
-    VaultSettings:
-      type: object
-      required:
-      - address
-      - mount_path
-      properties:
-        address:
-          type: string
-          description: HashiCorp Vault server address (e.g., https://vault.company.com:8200)
-        mount_path:
-          type: string
-          description: KV v2 secrets engine mount path (e.g., windmill)
-        jwt_role:
-          type: string
-          description: Vault JWT auth role name for Windmill (optional, if not provided token auth is used)
-        namespace:
-          type: string
-          description: Vault Enterprise namespace (optional)
-        token:
-          type: string
-          description: Static Vault token for testing/development (optional, if provided this is used instead of JWT authentication)
-        skip_ssl_verify:
-          type: boolean
-          description: Skip TLS certificate verification when connecting to Vault. Only use for self-signed certificates in development environments.
-    InstanceConfig:
-      type: object
-      description: Unified instance configuration combining global settings and worker group configs
-      properties:
-        global_settings:
-          type: object
-          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
-
-            '
-          additionalProperties: true
-        worker_configs:
-          type: object
-          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
-
-            '
-          additionalProperties:
-            type: object
-            additionalProperties: true
-    CustomInstanceDb:
-      type: object
-      required:
-      - logs
-      - success
-      properties:
-        logs:
-          $ref: '#/components/schemas/CustomInstanceDbLogs'
-        success:
-          type: boolean
-          description: Whether the operation completed successfully
-          example: true
-        error:
-          type:
-          - string
-          - 'null'
-          description: Error message if the operation failed
-          example: Connection timeout
-        tag:
-          $ref: '#/components/schemas/CustomInstanceDbTag'
-    LoggedWizardStatus:
-      type: string
-      enum:
-      - OK
-      - SKIP
-      - FAIL
-    JwksResponse:
-      type: object
-      required:
-      - keys
-      properties:
-        keys:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-          description: Array of JSON Web Keys for JWT verification
-    SecretMigrationFailure:
-      type: object
-      required:
-      - workspace_id
-      - path
-      - error
-      properties:
-        workspace_id:
-          type: string
-          description: Workspace ID where the secret is located
-        path:
-          type: string
-          description: Path of the secret that failed to migrate
-        error:
-          type: string
-          description: Error message
     CriticalAlert:
       type: object
       properties:
@@ -1302,15 +1207,110 @@ components:
           - string
           - 'null'
           description: Workspace id if the alert is in the scope of a workspace
+    CustomInstanceDbLogs:
+      type: object
+      properties:
+        super_admin:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        database_credentials:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        valid_dbname:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        created_database:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        db_connect:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        grant_permissions:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+    SecretMigrationFailure:
+      type: object
+      required:
+      - workspace_id
+      - path
+      - error
+      properties:
+        workspace_id:
+          type: string
+          description: Workspace ID where the secret is located
+        path:
+          type: string
+          description: Path of the secret that failed to migrate
+        error:
+          type: string
+          description: Error message
+    VaultSettings:
+      type: object
+      required:
+      - address
+      - mount_path
+      properties:
+        address:
+          type: string
+          description: HashiCorp Vault server address (e.g., https://vault.company.com:8200)
+        mount_path:
+          type: string
+          description: KV v2 secrets engine mount path (e.g., windmill)
+        jwt_role:
+          type: string
+          description: Vault JWT auth role name for Windmill (optional, if not provided token auth is used)
+        namespace:
+          type: string
+          description: Vault Enterprise namespace (optional)
+        token:
+          type: string
+          description: Static Vault token for testing/development (optional, if provided this is used instead of JWT authentication)
+        skip_ssl_verify:
+          type: boolean
+          description: Skip TLS certificate verification when connecting to Vault. Only use for self-signed certificates in development environments.
+    JwksResponse:
+      type: object
+      required:
+      - keys
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+          description: Array of JSON Web Keys for JWT verification
+    CustomInstanceDb:
+      type: object
+      required:
+      - logs
+      - success
+      properties:
+        logs:
+          $ref: '#/components/schemas/CustomInstanceDbLogs'
+        success:
+          type: boolean
+          description: Whether the operation completed successfully
+          example: true
+        error:
+          type:
+          - string
+          - 'null'
+          description: Error message if the operation failed
+          example: Connection timeout
+        tag:
+          $ref: '#/components/schemas/CustomInstanceDbTag'
+    GlobalSetting:
+      type: object
+      properties:
+        name:
+          type: string
+        value: {}
+      required:
+      - name
+      - value
   parameters:
-    WorkspaceId:
-      name: workspace
+    Key:
+      name: key
       in: path
       required: true
       schema:
         type: string
-    Key:
-      name: key
+    WorkspaceId:
+      name: workspace
       in: path
       required: true
       schema:

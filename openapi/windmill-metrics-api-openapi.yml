@@ -109,21 +109,17 @@ paths:
               schema:
                 type: integer
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    JobId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
   schemas:
+    ScalarMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        value:
+          type: number
+      required:
+      - id
+      - value
     MetricDataPoint:
       type: object
       properties:
@@ -135,15 +131,6 @@ components:
       required:
       - timestamp
       - value
-    MetricMetadata:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      required:
-      - id
     TimeseriesMetric:
       type: object
       properties:
@@ -156,16 +143,29 @@ components:
       required:
       - id
       - values
-    ScalarMetric:
+    MetricMetadata:
       type: object
       properties:
-        metric_id:
+        id:
           type: string
-        value:
-          type: number
+        name:
+          type: string
       required:
       - id
-      - value
+  parameters:
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

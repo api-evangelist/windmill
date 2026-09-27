@@ -154,81 +154,6 @@ paths:
                 type: string
 components:
   schemas:
-    UserSource:
-      type: object
-      properties:
-        source:
-          type: string
-          enum:
-          - domain
-          - instance_group
-          - manual
-          description: How the user was added to the workspace
-        domain:
-          type: string
-          description: The domain used for auto-invite (when source is 'domain')
-        group:
-          type: string
-          description: The instance group name (when source is 'instance_group')
-      required:
-      - source
-    OffboardAffectedPaths:
-      type: object
-      properties:
-        scripts:
-          type: array
-          items:
-            type: string
-        flows:
-          type: array
-          items:
-            type: string
-        apps:
-          type: array
-          items:
-            type: string
-        resources:
-          type: array
-          items:
-            type: string
-        variables:
-          type: array
-          items:
-            type: string
-        schedules:
-          type: array
-          items:
-            type: string
-        triggers:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    OffboardRequest:
-      type: object
-      properties:
-        reassign_to:
-          type: string
-          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
-        new_on_behalf_of_user:
-          type: string
-          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
-        delete_user:
-          type: boolean
-          default: true
-          description: Whether to also remove the user from the workspace
-      required:
-      - reassign_to
-    EditWorkspaceUser:
-      type: object
-      properties:
-        is_admin:
-          type: boolean
-        operator:
-          type: boolean
-        disabled:
-          type: boolean
     OffboardSummary:
       type: object
       properties:
@@ -297,6 +222,81 @@ components:
           description: List of path conflicts that block the offboarding. Empty on success.
         summary:
           $ref: '#/components/schemas/OffboardSummary'
+    EditWorkspaceUser:
+      type: object
+      properties:
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+    OffboardRequest:
+      type: object
+      properties:
+        reassign_to:
+          type: string
+          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
+        new_on_behalf_of_user:
+          type: string
+          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
+        delete_user:
+          type: boolean
+          default: true
+          description: Whether to also remove the user from the workspace
+      required:
+      - reassign_to
+    OffboardAffectedPaths:
+      type: object
+      properties:
+        scripts:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            type: string
+        apps:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        variables:
+          type: array
+          items:
+            type: string
+        schedules:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    UserSource:
+      type: object
+      properties:
+        source:
+          type: string
+          enum:
+          - domain
+          - instance_group
+          - manual
+          description: How the user was added to the workspace
+        domain:
+          type: string
+          description: The domain used for auto-invite (when source is 'domain')
+        group:
+          type: string
+          description: The instance group name (when source is 'instance_group')
+      required:
+      - source
     OffboardTokenInfo:
       type: object
       properties:
