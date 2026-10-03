@@ -386,25 +386,6 @@ paths:
                     items:
                       type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    AccountId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    ClientName:
-      name: client_name
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     TokenResponse:
       type: object
@@ -423,6 +404,25 @@ components:
           type: string
       required:
       - access_token
+  parameters:
+    AccountId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    ClientName:
+      name: client_name
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

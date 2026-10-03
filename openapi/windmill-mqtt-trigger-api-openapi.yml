@@ -213,6 +213,60 @@ paths:
                 type: string
 components:
   schemas:
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    MqttQoS:
+      type: string
+      enum:
+      - qos0
+      - qos1
+      - qos2
     MqttTrigger:
       allOf:
       - $ref: '#/components/schemas/TriggerExtraProperty'
@@ -262,67 +316,30 @@ components:
       required:
       - subscribe_topics
       - mqtt_resource_path
-    MqttQoS:
-      type: string
-      enum:
-      - qos0
-      - qos1
-      - qos2
-    TriggerExtraProperty:
+    MqttV5Config:
       type: object
       properties:
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when triggered
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as (permissioned_as)
-        extra_perms:
-          type: object
-          description: Additional permissions for this trigger
-          additionalProperties:
-            type: boolean
-        workspace_id:
-          type: string
-          description: The workspace this trigger belongs to
-        edited_by:
-          type: string
-          description: Username of the last person who edited this trigger
-        edited_at:
-          type: string
-          format: date-time
-          description: Timestamp of the last edit
-        is_flow:
+        clean_start:
           type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-          description: Trigger mode (enabled/disabled)
-        labels:
-          type: array
-          items:
-            type: string
-          default: []
-      required:
-      - path
-      - script_path
-      - permissioned_as
-      - extra_perms
-      - workspace_id
-      - edited_by
-      - edited_at
-      - is_flow
-      - mode
-    TriggerMode:
-      description: job trigger mode
+        topic_alias_maximum:
+          type: number
+        session_expiry_interval:
+          type: number
+    MqttClientVersion:
       type: string
       enum:
-      - enabled
-      - disabled
-      - suspended
+      - v3
+      - v5
+    MqttSubscribeTopic:
+      type: object
+      properties:
+        qos:
+          $ref: '#/components/schemas/MqttQoS'
+        topic:
+          type: string
+      required:
+      - qos
+      - topic
     NewMqttTrigger:
       type: object
       properties:
@@ -384,39 +401,6 @@ components:
       - is_flow
       - subscribe_topics
       - mqtt_resource_path
-    MqttSubscribeTopic:
-      type: object
-      properties:
-        qos:
-          $ref: '#/components/schemas/MqttQoS'
-        topic:
-          type: string
-      required:
-      - qos
-      - topic
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    MqttV3Config:
-      type: object
-      properties:
-        clean_session:
-          type: boolean
-    MqttV5Config:
-      type: object
-      properties:
-        clean_start:
-          type: boolean
-        topic_alias_maximum:
-          type: number
-        session_expiry_interval:
-          type: number
-    MqttClientVersion:
-      type: string
-      enum:
-      - v3
-      - v5
     EditMqttTrigger:
       type: object
       properties:
@@ -479,16 +463,32 @@ components:
       - enabled
       - subscribe_topics
       - mqtt_resource_path
+    MqttV3Config:
+      type: object
+      properties:
+        clean_session:
+          type: boolean
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

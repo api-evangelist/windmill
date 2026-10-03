@@ -106,13 +106,6 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     JobTriggerKind:
       description: job trigger kind (schedule, http, websocket...)
@@ -133,6 +126,13 @@ components:
       - azure
       - google
       - github
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -159,48 +159,18 @@ paths:
                 type: string
                 format: uuid
 components:
-  parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    RunnableId:
-      name: runnable_id
-      in: query
-      schema:
-        type: string
-    RunnableTypeQuery:
-      name: runnable_type
-      in: query
-      schema:
-        $ref: '#/components/schemas/RunnableType'
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    InputId:
-      name: input
-      in: path
-      required: true
-      schema:
-        type: string
-    ArgsFilter:
-      name: args
-      description: filter on jobs containing those args as a json subset (@> in postgres)
-      in: query
-      schema:
-        type: string
   schemas:
+    CreateInput:
+      type: object
+      properties:
+        name:
+          type: string
+        args:
+          type: object
+      required:
+      - name
+      - args
+      - created_by
     UpdateInput:
       type: object
       properties:
@@ -243,17 +213,47 @@ components:
       - created_by
       - created_at
       - is_public
-    CreateInput:
-      type: object
-      properties:
-        name:
-          type: string
-        args:
-          type: object
-      required:
-      - name
-      - args
-      - created_by
+  parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    ArgsFilter:
+      name: args
+      description: filter on jobs containing those args as a json subset (@> in postgres)
+      in: query
+      schema:
+        type: string
+    RunnableId:
+      name: runnable_id
+      in: query
+      schema:
+        type: string
+    InputId:
+      name: input
+      in: path
+      required: true
+      schema:
+        type: string
+    RunnableTypeQuery:
+      name: runnable_type
+      in: query
+      schema:
+        $ref: '#/components/schemas/RunnableType'
   securitySchemes:
     bearerAuth:
       type: http

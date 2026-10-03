@@ -864,6 +864,19 @@ paths:
               schema:
                 type: string
 components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     WindmillFileMetadata:
       type: object
@@ -880,6 +893,13 @@ components:
           format: date-time
         version_id:
           type: string
+    PolarsClientKwargs:
+      type: object
+      properties:
+        region_name:
+          type: string
+      required:
+      - region_name
     WindmillFilePreview:
       type: object
       properties:
@@ -896,20 +916,6 @@ components:
           - Unknown
       required:
       - content_type
-    WindmillLargeFile:
-      type: object
-      properties:
-        s3:
-          type: string
-      required:
-      - s3
-    PolarsClientKwargs:
-      type: object
-      properties:
-        region_name:
-          type: string
-      required:
-      - region_name
     S3Resource:
       type: object
       properties:
@@ -933,19 +939,13 @@ components:
       - endPoint
       - useSSL
       - pathStyle
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
+    WindmillLargeFile:
+      type: object
+      properties:
+        s3:
+          type: string
+      required:
+      - s3
   securitySchemes:
     bearerAuth:
       type: http

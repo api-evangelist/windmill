@@ -83,13 +83,12 @@ paths:
                 type: string
 components:
   parameters:
-    After:
-      name: after
-      description: filter on created after (exclusive) timestamp
-      in: query
+    Path:
+      name: path
+      in: path
+      required: true
       schema:
         type: string
-        format: date-time
     Before:
       name: before
       description: filter on started before (inclusive) timestamp
@@ -97,12 +96,13 @@ components:
       schema:
         type: string
         format: date-time
-    Path:
-      name: path
-      in: path
-      required: true
+    After:
+      name: after
+      description: filter on created after (exclusive) timestamp
+      in: query
       schema:
         type: string
+        format: date-time
   securitySchemes:
     bearerAuth:
       type: http

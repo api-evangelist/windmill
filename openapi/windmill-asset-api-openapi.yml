@@ -227,20 +227,7 @@ paths:
                       type: string
                       description: The asset path
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    AssetUsageKind:
-      type: string
-      enum:
-      - script
-      - flow
-      - job
     AssetUsageAccessType:
       type:
       - string
@@ -257,6 +244,19 @@ components:
       - ducklake
       - datatable
       - volume
+    AssetUsageKind:
+      type: string
+      enum:
+      - script
+      - flow
+      - job
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

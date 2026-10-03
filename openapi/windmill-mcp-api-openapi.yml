@@ -37,13 +37,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/EndpointTool'
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     EndpointTool:
       type: object
@@ -84,6 +77,13 @@ components:
           - object
           - 'null'
           description: JSON schema for request body
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -217,102 +217,7 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    WebsocketTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      properties:
-        url:
-          type: string
-          description: The WebSocket URL to connect to (can be a static URL or computed by a runnable)
-        server_id:
-          type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
-          type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
-        filters:
-          type: array
-          description: Array of key-value filters to match incoming messages (only matching messages trigger the script)
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value: {}
-            required:
-            - key
-            - value
-        filter_logic:
-          type: string
-          enum:
-          - and
-          - or
-          default: and
-          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
-        initial_messages:
-          type:
-          - array
-          - 'null'
-          description: Messages to send immediately after connecting (can be raw strings or computed by runnables)
-          items:
-            $ref: '#/components/schemas/WebsocketTriggerInitialMessage'
-        url_runnable_args:
-          description: Arguments to pass to the script/flow that computes the WebSocket URL
-          $ref: '#/components/schemas/ScriptArgs'
-        can_return_message:
-          type: boolean
-          description: If true, the script can return a message to send back through the WebSocket
-        can_return_error_result:
-          type: boolean
-          description: If true, error results are sent back through the WebSocket
-        heartbeat:
-          $ref: '#/components/schemas/WebsocketHeartbeat'
-          description: Optional periodic heartbeat message configuration
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          description: Arguments to pass to the error handler
-          $ref: '#/components/schemas/ScriptArgs'
-        retry:
-          description: Retry configuration for failed executions
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-      required:
-      - url
-      - filters
-      - can_return_message
-      - can_return_error_result
     TriggerExtraProperty:
       type: object
       properties:
@@ -361,38 +266,86 @@ components:
       - edited_at
       - is_flow
       - mode
-    WebsocketTriggerInitialMessage:
-      anyOf:
-      - type: object
-        properties:
-          raw_message:
-            type: string
-        required:
-        - raw_message
-      - type: object
-        properties:
-          runnable_result:
+    EditWebsocketTrigger:
+      type: object
+      properties:
+        url:
+          type: string
+          description: The WebSocket URL to connect to (can be a static URL or computed by a runnable)
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        filters:
+          type: array
+          description: Array of key-value filters to match incoming messages (only matching messages trigger the script)
+          items:
             type: object
             properties:
-              path:
+              key:
                 type: string
-              args:
-                $ref: '#/components/schemas/ScriptArgs'
-              is_flow:
-                type: boolean
+              value: {}
             required:
-            - path
-            - args
-            - is_flow
-        required:
-        - runnable_result
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
+            - key
+            - value
+        filter_logic:
+          type: string
+          enum:
+          - and
+          - or
+          default: and
+          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
+        initial_messages:
+          type:
+          - array
+          - 'null'
+          description: Messages to send immediately after connecting (can be raw strings or computed by runnables)
+          items:
+            $ref: '#/components/schemas/WebsocketTriggerInitialMessage'
+        url_runnable_args:
+          description: Arguments to pass to the script/flow that computes the WebSocket URL
+          $ref: '#/components/schemas/ScriptArgs'
+        can_return_message:
+          type: boolean
+          description: If true, the script can return a message to send back through the WebSocket
+        can_return_error_result:
+          type: boolean
+          description: If true, error results are sent back through the WebSocket
+        heartbeat:
+          $ref: '#/components/schemas/WebsocketHeartbeat'
+          description: Optional periodic heartbeat message configuration
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          description: Arguments to pass to the error handler
+          $ref: '#/components/schemas/ScriptArgs'
+        retry:
+          description: Retry configuration for failed executions
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - url
+      - is_flow
+      - filters
+      - can_return_message
+      - can_return_error_result
     WebsocketHeartbeat:
       type: object
       properties:
@@ -409,10 +362,13 @@ components:
       required:
       - interval_secs
       - message
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     NewWebsocketTrigger:
       type: object
       properties:
@@ -495,21 +451,24 @@ components:
       - filters
       - can_return_message
       - can_return_error_result
-    EditWebsocketTrigger:
+    WebsocketTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
       type: object
       properties:
         url:
           type: string
           description: The WebSocket URL to connect to (can be a static URL or computed by a runnable)
-        path:
+        server_id:
           type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
           type: string
-          description: Path to the script or flow to execute when a message is received
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
         filters:
           type: array
           description: Array of key-value filters to match incoming messages (only matching messages trigger the script)
@@ -557,24 +516,65 @@ components:
         retry:
           description: Retry configuration for failed executions
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
       required:
-      - path
-      - script_path
       - url
-      - is_flow
       - filters
       - can_return_message
       - can_return_error_result
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    WebsocketTriggerInitialMessage:
+      anyOf:
+      - type: object
+        properties:
+          raw_message:
+            type: string
+        required:
+        - raw_message
+      - type: object
+        properties:
+          runnable_result:
+            type: object
+            properties:
+              path:
+                type: string
+              args:
+                $ref: '#/components/schemas/ScriptArgs'
+              is_flow:
+                type: boolean
+            required:
+            - path
+            - args
+            - is_flow
+        required:
+        - runnable_result
+  parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -154,6 +154,119 @@ paths:
                 type: string
 components:
   schemas:
+    EditWorkspaceUser:
+      type: object
+      properties:
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+    OffboardResponse:
+      type: object
+      properties:
+        conflicts:
+          type: array
+          items:
+            type: string
+          description: List of path conflicts that block the offboarding. Empty on success.
+        summary:
+          $ref: '#/components/schemas/OffboardSummary'
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+        username:
+          type: string
+        is_admin:
+          type: boolean
+        name:
+          type: string
+        is_super_admin:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+        groups:
+          type: array
+          items:
+            type: string
+        folders:
+          type: array
+          items:
+            type: string
+        folders_owners:
+          type: array
+          items:
+            type: string
+        added_via:
+          allOf:
+          - $ref: '#/components/schemas/UserSource'
+        is_service_account:
+          type: boolean
+      required:
+      - email
+      - username
+      - is_admin
+      - is_super_admin
+      - created_at
+      - operator
+      - disabled
+      - folders
+      - folders_owners
+    OffboardAffectedPaths:
+      type: object
+      properties:
+        scripts:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            type: string
+        apps:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        variables:
+          type: array
+          items:
+            type: string
+        schedules:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    OffboardTokenInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        expiration:
+          type: string
+      required:
+      - label
+      - scopes
     OffboardSummary:
       type: object
       properties:
@@ -212,25 +325,6 @@ components:
       - tokens
       - http_triggers
       - email_triggers
-    OffboardResponse:
-      type: object
-      properties:
-        conflicts:
-          type: array
-          items:
-            type: string
-          description: List of path conflicts that block the offboarding. Empty on success.
-        summary:
-          $ref: '#/components/schemas/OffboardSummary'
-    EditWorkspaceUser:
-      type: object
-      properties:
-        is_admin:
-          type: boolean
-        operator:
-          type: boolean
-        disabled:
-          type: boolean
     OffboardRequest:
       type: object
       properties:
@@ -246,39 +340,6 @@ components:
           description: Whether to also remove the user from the workspace
       required:
       - reassign_to
-    OffboardAffectedPaths:
-      type: object
-      properties:
-        scripts:
-          type: array
-          items:
-            type: string
-        flows:
-          type: array
-          items:
-            type: string
-        apps:
-          type: array
-          items:
-            type: string
-        resources:
-          type: array
-          items:
-            type: string
-        variables:
-          type: array
-          items:
-            type: string
-        schedules:
-          type: array
-          items:
-            type: string
-        triggers:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
     UserSource:
       type: object
       properties:
@@ -297,67 +358,6 @@ components:
           description: The instance group name (when source is 'instance_group')
       required:
       - source
-    OffboardTokenInfo:
-      type: object
-      properties:
-        label:
-          type: string
-        scopes:
-          type: array
-          items:
-            type: string
-        expiration:
-          type: string
-      required:
-      - label
-      - scopes
-    User:
-      type: object
-      properties:
-        email:
-          type: string
-        username:
-          type: string
-        is_admin:
-          type: boolean
-        name:
-          type: string
-        is_super_admin:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-        operator:
-          type: boolean
-        disabled:
-          type: boolean
-        groups:
-          type: array
-          items:
-            type: string
-        folders:
-          type: array
-          items:
-            type: string
-        folders_owners:
-          type: array
-          items:
-            type: string
-        added_via:
-          allOf:
-          - $ref: '#/components/schemas/UserSource'
-        is_service_account:
-          type: boolean
-      required:
-      - email
-      - username
-      - is_admin
-      - is_super_admin
-      - created_at
-      - operator
-      - disabled
-      - folders
-      - folders_owners
   parameters:
     WorkspaceId:
       name: workspace

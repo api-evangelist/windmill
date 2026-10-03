@@ -575,15 +575,15 @@ paths:
                   - score
 components:
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer
@@ -606,83 +606,6 @@ components:
       schema:
         type: string
   schemas:
-    EditResourceType:
-      type: object
-      properties:
-        schema: {}
-        description:
-          type: string
-        is_fileset:
-          type: boolean
-    ResourceType:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        name:
-          type: string
-        schema: {}
-        description:
-          type: string
-        created_by:
-          type: string
-        edited_at:
-          type: string
-          format: date-time
-        format_extension:
-          type: string
-        is_fileset:
-          type: boolean
-      required:
-      - name
-    Resource:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        path:
-          type: string
-        description:
-          type: string
-        resource_type:
-          type: string
-        value: {}
-        is_oauth:
-          type: boolean
-        extra_perms:
-          type: object
-          additionalProperties:
-            type: boolean
-        created_by:
-          type: string
-        edited_at:
-          type: string
-          format: date-time
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - resource_type
-      - is_oauth
-    EditResource:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The path to the resource
-        description:
-          type: string
-          description: The new description of the resource
-        value: {}
-        resource_type:
-          type: string
-          description: The new resource_type to be associated with the resource
-        labels:
-          type: array
-          items:
-            type: string
     ListableResource:
       type: object
       properties:
@@ -726,6 +649,66 @@ components:
       - is_oauth
       - is_linked
       - is_refreshed
+    EditResourceType:
+      type: object
+      properties:
+        schema: {}
+        description:
+          type: string
+        is_fileset:
+          type: boolean
+    Resource:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        path:
+          type: string
+        description:
+          type: string
+        resource_type:
+          type: string
+        value: {}
+        is_oauth:
+          type: boolean
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - resource_type
+      - is_oauth
+    ResourceType:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        name:
+          type: string
+        schema: {}
+        description:
+          type: string
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        format_extension:
+          type: string
+        is_fileset:
+          type: boolean
+      required:
+      - name
     CreateResource:
       type: object
       properties:
@@ -747,6 +730,23 @@ components:
       - path
       - value
       - resource_type
+    EditResource:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the resource
+        description:
+          type: string
+          description: The new description of the resource
+        value: {}
+        resource_type:
+          type: string
+          description: The new resource_type to be associated with the resource
+        labels:
+          type: array
+          items:
+            type: string
   securitySchemes:
     bearerAuth:
       type: http

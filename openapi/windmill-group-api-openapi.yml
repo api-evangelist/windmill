@@ -445,15 +445,15 @@ paths:
                       - 'null'
 components:
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer
@@ -470,50 +470,6 @@ components:
       schema:
         type: string
   schemas:
-    InstanceGroupWithWorkspaces:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        instance_role:
-          type:
-          - string
-          - 'null'
-          enum:
-          - superadmin
-          - devops
-        workspaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkspaceInfo'
-    InstanceGroup:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        instance_role:
-          type:
-          - string
-          - 'null'
-          enum:
-          - superadmin
-          - devops
     ExportedInstanceGroup:
       type: object
       properties:
@@ -540,6 +496,26 @@ components:
           - devops
       required:
       - name
+    InstanceGroup:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
     Group:
       type: object
       properties:
@@ -568,6 +544,30 @@ components:
           type: string
       required:
       - name
+    InstanceGroupWithWorkspaces:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
+        workspaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceInfo'
   securitySchemes:
     bearerAuth:
       type: http

@@ -36,22 +36,6 @@ paths:
                   $ref: '#/components/schemas/ScopeDomain'
 components:
   schemas:
-    ScopeDomain:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        scopes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScopeDefinition'
-      required:
-      - name
-      - scopes
     ScopeDefinition:
       type: object
       properties:
@@ -69,6 +53,22 @@ components:
       - value
       - label
       - requires_resource_path
+    ScopeDomain:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        scopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ScopeDefinition'
+      required:
+      - name
+      - scopes
   securitySchemes:
     bearerAuth:
       type: http

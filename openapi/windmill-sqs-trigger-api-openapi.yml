@@ -261,13 +261,6 @@ components:
       - edited_at
       - is_flow
       - mode
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
     NewSqsTrigger:
       type: object
       properties:
@@ -324,59 +317,11 @@ components:
       - script_path
       - is_flow
       - aws_auth_resource_type
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
     AwsAuthResourceType:
       type: string
       enum:
       - oidc
       - credentials
-    SqsTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      properties:
-        queue_url:
-          type: string
-          description: The full URL of the AWS SQS queue to poll for messages
-        aws_auth_resource_type:
-          $ref: '#/components/schemas/AwsAuthResourceType'
-          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
-        aws_resource_path:
-          type: string
-          description: Path to the AWS resource containing credentials or OIDC configuration
-        message_attributes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Array of SQS message attribute names to include with each message
-        server_id:
-          type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
-          type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-      required:
-      - queue_url
-      - aws_resource_path
-      - aws_auth_resource_type
     EditSqsTrigger:
       type: object
       properties:
@@ -434,16 +379,71 @@ components:
       - is_flow
       - enabled
       - aws_auth_resource_type
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    SqsTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        queue_url:
+          type: string
+          description: The full URL of the AWS SQS queue to poll for messages
+        aws_auth_resource_type:
+          $ref: '#/components/schemas/AwsAuthResourceType'
+          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
+        aws_resource_path:
+          type: string
+          description: Path to the AWS resource containing credentials or OIDC configuration
+        message_attributes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Array of SQS message attribute names to include with each message
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - queue_url
+      - aws_resource_path
+      - aws_auth_resource_type
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

@@ -395,16 +395,6 @@ paths:
                 type: string
 components:
   schemas:
-    SharedDriveEntry:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - name
     NextCloudEventType:
       type: object
       properties:
@@ -422,39 +412,31 @@ components:
       - id
       - name
       - path
-    GoogleDriveFilesResponse:
+    GoogleDriveFile:
       type: object
       properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/GoogleDriveFile'
-        next_page_token:
-          type: string
-      required:
-      - files
-    NativeServiceName:
-      type: string
-      enum:
-      - nextcloud
-      - google
-      - github
-    GithubRepoEntry:
-      type: object
-      properties:
-        full_name:
+        id:
           type: string
         name:
           type: string
-        owner:
+        mime_type:
           type: string
-        private:
+        is_folder:
           type: boolean
+          default: false
       required:
-      - full_name
+      - id
       - name
-      - owner
-      - private
+      - mime_type
+    CreateTriggerResponse:
+      type: object
+      description: Response returned when a native trigger is created
+      properties:
+        external_id:
+          type: string
+          description: The external ID of the created trigger from the external service
+      required:
+      - external_id
     GoogleCalendarEntry:
       type: object
       properties:
@@ -468,6 +450,16 @@ components:
       required:
       - id
       - summary
+    SharedDriveEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
     NativeTrigger:
       type: object
       description: A native trigger stored in Windmill
@@ -507,6 +499,23 @@ components:
       - script_path
       - is_flow
       - service_config
+    GoogleDriveFilesResponse:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoogleDriveFile'
+        next_page_token:
+          type: string
+      required:
+      - files
+    NativeServiceName:
+      type: string
+      enum:
+      - nextcloud
+      - google
+      - github
     NativeTriggerWithExternal:
       type: object
       description: Full trigger response containing both Windmill data and external service data
@@ -551,15 +560,6 @@ components:
       - is_flow
       - service_config
       - external_data
-    CreateTriggerResponse:
-      type: object
-      description: Response returned when a native trigger is created
-      properties:
-        external_id:
-          type: string
-          description: The external ID of the created trigger from the external service
-      required:
-      - external_id
     NativeTriggerData:
       type: object
       description: Data for creating or updating a native trigger
@@ -583,32 +583,32 @@ components:
       - script_path
       - is_flow
       - service_config
-    GoogleDriveFile:
+    GithubRepoEntry:
       type: object
       properties:
-        id:
+        full_name:
           type: string
         name:
           type: string
-        mime_type:
+        owner:
           type: string
-        is_folder:
+        private:
           type: boolean
-          default: false
       required:
-      - id
+      - full_name
       - name
-      - mime_type
+      - owner
+      - private
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

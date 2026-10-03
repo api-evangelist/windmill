@@ -327,6 +327,20 @@ components:
       - edited_at
       - is_flow
       - mode
+    GetAllTopicSubscription:
+      type: object
+      properties:
+        topic_id:
+          type: string
+      required:
+      - topic_id
+    DeleteGcpSubscription:
+      type: object
+      properties:
+        subscription_id:
+          type: string
+      required:
+      - subscription_id
     PushConfig:
       type: object
       description: Configuration for push delivery mode.
@@ -340,89 +354,6 @@ components:
       required:
       - authenticate
       - base_endpoint
-    GcpTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      description: A Google Cloud Pub/Sub trigger that executes a script or flow when messages are received.
-      properties:
-        gcp_resource_path:
-          type: string
-          description: Path to the GCP resource containing service account credentials for authentication.
-        topic_id:
-          type: string
-          description: Google Cloud Pub/Sub topic ID to subscribe to.
-        subscription_id:
-          type: string
-          description: Google Cloud Pub/Sub subscription ID.
-        server_id:
-          type: string
-          description: ID of the server currently handling this trigger (internal use).
-        delivery_type:
-          $ref: '#/components/schemas/DeliveryType'
-        delivery_config:
-          $ref: '#/components/schemas/PushConfig'
-        subscription_mode:
-          $ref: '#/components/schemas/SubscriptionMode'
-        last_server_ping:
-          type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal use).
-        error:
-          type: string
-          description: Last error message if the trigger failed.
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails.
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler.
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions.
-      required:
-      - gcp_resource_path
-      - topic_id
-      - subscription_id
-      - delivery_type
-      - subscription_mode
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
-    SubscriptionMode:
-      type: string
-      enum:
-      - existing
-      - create_update
-      description: The mode of subscription. 'existing' means using an existing GCP subscription, while 'create_update' involves creating or updating a new subscription.
-    GetAllTopicSubscription:
-      type: object
-      properties:
-        topic_id:
-          type: string
-      required:
-      - topic_id
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    DeliveryType:
-      type: string
-      enum:
-      - push
-      - pull
-      description: Delivery mode for messages. 'push' for HTTP push delivery where messages are sent to a webhook endpoint, 'pull' for polling where the trigger actively fetches messages.
-    DeleteGcpSubscription:
-      type: object
-      properties:
-        subscription_id:
-          type: string
-      required:
-      - subscription_id
     GcpTriggerData:
       type: object
       description: Data for creating or updating a Google Cloud Pub/Sub trigger.
@@ -491,16 +422,85 @@ components:
       - gcp_resource_path
       - topic_id
       - subscription_mode
+    SubscriptionMode:
+      type: string
+      enum:
+      - existing
+      - create_update
+      description: The mode of subscription. 'existing' means using an existing GCP subscription, while 'create_update' involves creating or updating a new subscription.
+    DeliveryType:
+      type: string
+      enum:
+      - push
+      - pull
+      description: Delivery mode for messages. 'push' for HTTP push delivery where messages are sent to a webhook endpoint, 'pull' for polling where the trigger actively fetches messages.
+    GcpTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      description: A Google Cloud Pub/Sub trigger that executes a script or flow when messages are received.
+      properties:
+        gcp_resource_path:
+          type: string
+          description: Path to the GCP resource containing service account credentials for authentication.
+        topic_id:
+          type: string
+          description: Google Cloud Pub/Sub topic ID to subscribe to.
+        subscription_id:
+          type: string
+          description: Google Cloud Pub/Sub subscription ID.
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal use).
+        delivery_type:
+          $ref: '#/components/schemas/DeliveryType'
+        delivery_config:
+          $ref: '#/components/schemas/PushConfig'
+        subscription_mode:
+          $ref: '#/components/schemas/SubscriptionMode'
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal use).
+        error:
+          type: string
+          description: Last error message if the trigger failed.
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails.
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler.
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions.
+      required:
+      - gcp_resource_path
+      - topic_id
+      - subscription_id
+      - delivery_type
+      - subscription_mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

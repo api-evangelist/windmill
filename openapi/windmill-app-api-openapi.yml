@@ -903,77 +903,51 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    RunnableKind:
-      name: runnable_kind
-      in: path
-      required: true
-      schema:
-        type: string
-        enum:
-        - script
-        - flow
-    PathVersion:
-      name: version
-      in: path
-      required: true
-      schema:
-        type: integer
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
-      in: query
-      schema:
-        type: boolean
-    CustomPath:
-      name: custom_path
-      in: path
-      required: true
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
+    ListableApp:
+      type: object
+      properties:
+        id:
+          type: integer
+        workspace_id:
+          type: string
+        path:
+          type: string
+        summary:
+          type: string
+        version:
+          type: integer
+        extra_perms:
+          type: object
+          additionalProperties:
+            type: boolean
+        starred:
+          type: boolean
+        edited_at:
+          type: string
+          format: date-time
+        execution_mode:
+          type: string
+          enum:
+          - viewer
+          - publisher
+          - anonymous
+        raw_app:
+          type: boolean
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - id
+      - workspace_id
+      - path
+      - summary
+      - version
+      - extra_perms
+      - edited_at
+      - execution_mode
     Policy:
       type: object
       properties:
@@ -1008,15 +982,14 @@ components:
           type: string
         on_behalf_of_email:
           type: string
-    AppHistory:
-      type: object
-      properties:
-        version:
-          type: integer
-        deployment_msg:
-          type: string
-      required:
-      - version
+    AppWithLastVersionWDraft:
+      allOf:
+      - $ref: '#/components/schemas/AppWithLastVersion'
+      - type: object
+        properties:
+          draft_only:
+            type: boolean
+          draft: {}
     S3Object:
       type: object
       properties:
@@ -1087,58 +1060,85 @@ components:
       - execution_mode
       - extra_perms
       - raw_app
-    AppWithLastVersionWDraft:
-      allOf:
-      - $ref: '#/components/schemas/AppWithLastVersion'
-      - type: object
-        properties:
-          draft_only:
-            type: boolean
-          draft: {}
-    ListableApp:
+    AppHistory:
       type: object
       properties:
-        id:
-          type: integer
-        workspace_id:
-          type: string
-        path:
-          type: string
-        summary:
-          type: string
         version:
           type: integer
-        extra_perms:
-          type: object
-          additionalProperties:
-            type: boolean
-        starred:
-          type: boolean
-        edited_at:
+        deployment_msg:
           type: string
-          format: date-time
-        execution_mode:
-          type: string
-          enum:
-          - viewer
-          - publisher
-          - anonymous
-        raw_app:
-          type: boolean
-        labels:
-          type: array
-          items:
-            type: string
-          default: []
       required:
-      - id
-      - workspace_id
-      - path
-      - summary
       - version
-      - extra_perms
-      - edited_at
-      - execution_mode
+  parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    CustomPath:
+      name: custom_path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    RunnableKind:
+      name: runnable_kind
+      in: path
+      required: true
+      schema:
+        type: string
+        enum:
+        - script
+        - flow
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
+    PathVersion:
+      name: version
+      in: path
+      required: true
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

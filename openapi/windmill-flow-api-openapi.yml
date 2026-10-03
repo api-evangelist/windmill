@@ -603,6 +603,10 @@ paths:
                 type: string
 components:
   schemas:
+    ExtraPerms:
+      type: object
+      additionalProperties:
+        type: boolean
     TruncatedToken:
       type: object
       properties:
@@ -631,6 +635,46 @@ components:
       - token_prefix
       - created_at
       - last_used_at
+    TriggersCount:
+      type: object
+      properties:
+        primary_schedule:
+          type: object
+          properties:
+            schedule:
+              type: string
+        schedule_count:
+          type: number
+        http_routes_count:
+          type: number
+        webhook_count:
+          type: number
+        email_count:
+          type: number
+        default_email_count:
+          type: number
+        websocket_count:
+          type: number
+        postgres_count:
+          type: number
+        kafka_count:
+          type: number
+        nats_count:
+          type: number
+        mqtt_count:
+          type: number
+        gcp_count:
+          type: number
+        azure_count:
+          type: number
+        sqs_count:
+          type: number
+        nextcloud_count:
+          type: number
+        google_count:
+          type: number
+        github_count:
+          type: number
     Flow:
       allOf:
       - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
@@ -641,6 +685,49 @@ components:
             type: string
           version_id:
             type: number
+    FlowVersion:
+      type: object
+      properties:
+        id:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+        deployment_msg:
+          type: string
+      required:
+      - id
+      - created_at
+    OpenFlowWPath:
+      allOf:
+      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
+      - type: object
+        properties:
+          path:
+            type: string
+          tag:
+            type: string
+          ws_error_handler_muted:
+            type: boolean
+          priority:
+            type: integer
+          dedicated_worker:
+            type: boolean
+          timeout:
+            type: number
+          visible_to_runner_only:
+            type: boolean
+          on_behalf_of_email:
+            type: string
+          preserve_on_behalf_of:
+            type: boolean
+            description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
+          labels:
+            type: array
+            items:
+              type: string
+        required:
+        - path
     FlowMetadata:
       type: object
       properties:
@@ -686,102 +773,27 @@ components:
       - edited_at
       - archived
       - extra_perms
-    ExtraPerms:
-      type: object
-      additionalProperties:
-        type: boolean
-    TriggersCount:
-      type: object
-      properties:
-        primary_schedule:
-          type: object
-          properties:
-            schedule:
-              type: string
-        schedule_count:
-          type: number
-        http_routes_count:
-          type: number
-        webhook_count:
-          type: number
-        email_count:
-          type: number
-        default_email_count:
-          type: number
-        websocket_count:
-          type: number
-        postgres_count:
-          type: number
-        kafka_count:
-          type: number
-        nats_count:
-          type: number
-        mqtt_count:
-          type: number
-        gcp_count:
-          type: number
-        azure_count:
-          type: number
-        sqs_count:
-          type: number
-        nextcloud_count:
-          type: number
-        google_count:
-          type: number
-        github_count:
-          type: number
-    FlowVersion:
-      type: object
-      properties:
-        id:
-          type: integer
-        created_at:
-          type: string
-          format: date-time
-        deployment_msg:
-          type: string
-      required:
-      - id
-      - created_at
-    OpenFlowWPath:
-      allOf:
-      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
-      - type: object
-        properties:
-          path:
-            type: string
-          tag:
-            type: string
-          ws_error_handler_muted:
-            type: boolean
-          priority:
-            type: integer
-          dedicated_worker:
-            type: boolean
-          timeout:
-            type: number
-          visible_to_runner_only:
-            type: boolean
-          on_behalf_of_email:
-            type: string
-          preserve_on_behalf_of:
-            type: boolean
-            description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
-          labels:
-            type: array
-            items:
-              type: string
-        required:
-        - path
   parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer
-    ScriptPath:
-      name: path
+    WorkspaceId:
+      name: workspace
       in: path
       required: true
       schema:
@@ -792,12 +804,6 @@ components:
       in: query
       schema:
         type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
     PathId:
       name: id
       in: path
@@ -813,12 +819,6 @@ components:
         enum:
         - script
         - flow
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
     OrderDesc:
       name: order_desc
       description: order by desc order (default true)

@@ -64,6 +64,61 @@ paths:
                 format: binary
 components:
   schemas:
+    OpenapiHttpRouteFilters:
+      type: object
+      properties:
+        folder_regex:
+          type: string
+        path_regex:
+          type: string
+        route_path_regex:
+          type: string
+      required:
+      - folder_regex
+      - path_regex
+      - route_path_regex
+    GenerateOpenapiSpec:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/OpenapiV3Info'
+        url:
+          type: string
+        openapi_spec_format:
+          $ref: '#/components/schemas/OpenapiSpecFormat'
+        http_route_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
+        webhook_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilters'
+    OpenapiSpecFormat:
+      type: string
+      enum:
+      - yaml
+      - json
+    WebhookFilters:
+      type: object
+      properties:
+        user_or_folder_regex:
+          type: string
+          enum:
+          - '*'
+          - u
+          - f
+        user_or_folder_regex_value:
+          type: string
+        path:
+          type: string
+        runnable_kind:
+          $ref: '#/components/schemas/RunnableKind'
+      required:
+      - user_or_folder_regex
+      - user_or_folder_regex_value
+      - path
+      - runnable_kind
     OpenapiV3Info:
       type: object
       properties:
@@ -98,66 +153,11 @@ components:
       required:
       - title
       - version
-    GenerateOpenapiSpec:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/OpenapiV3Info'
-        url:
-          type: string
-        openapi_spec_format:
-          $ref: '#/components/schemas/OpenapiSpecFormat'
-        http_route_filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
-        webhook_filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookFilters'
     RunnableKind:
       type: string
       enum:
       - script
       - flow
-    OpenapiSpecFormat:
-      type: string
-      enum:
-      - yaml
-      - json
-    OpenapiHttpRouteFilters:
-      type: object
-      properties:
-        folder_regex:
-          type: string
-        path_regex:
-          type: string
-        route_path_regex:
-          type: string
-      required:
-      - folder_regex
-      - path_regex
-      - route_path_regex
-    WebhookFilters:
-      type: object
-      properties:
-        user_or_folder_regex:
-          type: string
-          enum:
-          - '*'
-          - u
-          - f
-        user_or_folder_regex_value:
-          type: string
-        path:
-          type: string
-        runnable_kind:
-          $ref: '#/components/schemas/RunnableKind'
-      required:
-      - user_or_folder_regex
-      - user_or_folder_regex_value
-      - path
-      - runnable_kind
   parameters:
     WorkspaceId:
       name: workspace

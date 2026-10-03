@@ -77,18 +77,50 @@ paths:
                   $ref: '#/components/schemas/AuditLog'
 components:
   parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Before:
+      name: before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
+    ResourceName:
+      name: resource
+      description: filter on exact or prefix name of resource
+      in: query
+      schema:
+        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer
-    Operation:
-      name: operation
-      description: filter on exact or prefix name of operation
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    After:
+      name: after
+      description: filter on created after (exclusive) timestamp
       in: query
       schema:
         type: string
+        format: date-time
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
     ActionKind:
       name: action_kind
       description: filter on type of operation
@@ -100,47 +132,15 @@ components:
         - Update
         - Delete
         - Execute
-    After:
-      name: after
-      description: filter on created after (exclusive) timestamp
+    Operation:
+      name: operation
+      description: filter on exact or prefix name of operation
       in: query
-      schema:
-        type: string
-        format: date-time
-    Before:
-      name: before
-      description: filter on started before (inclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
       schema:
         type: string
     Username:
       name: username
       description: filter on exact username of user
-      in: query
-      schema:
-        type: string
-    ResourceName:
-      name: resource
-      description: filter on exact or prefix name of resource
       in: query
       schema:
         type: string

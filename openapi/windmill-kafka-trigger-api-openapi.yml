@@ -305,13 +305,85 @@ components:
       - edited_at
       - is_flow
       - mode
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
+    EditKafkaTrigger:
+      type: object
+      properties:
+        kafka_resource_path:
+          type: string
+          description: Path to the Kafka resource containing connection configuration
+        group_id:
+          type: string
+          description: Kafka consumer group ID for this trigger
+        topics:
+          type: array
+          items:
+            type: string
+          description: Array of Kafka topic names to subscribe to
+        filters:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value: {}
+            required:
+            - key
+            - value
+        filter_logic:
+          type: string
+          enum:
+          - and
+          - or
+          default: and
+          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
+        auto_offset_reset:
+          type: string
+          enum:
+          - latest
+          - earliest
+          default: latest
+          description: Initial offset behavior when consumer group has no committed offset.
+        auto_commit:
+          type: boolean
+          default: true
+          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - kafka_resource_path
+      - group_id
+      - topics
+      - filters
+      - is_flow
     KafkaTrigger:
       allOf:
       - $ref: '#/components/schemas/TriggerExtraProperty'
@@ -381,10 +453,6 @@ components:
       - group_id
       - topics
       - filters
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
     NewKafkaTrigger:
       type: object
       properties:
@@ -466,95 +534,27 @@ components:
       - group_id
       - topics
       - filters
-    EditKafkaTrigger:
+    ScriptArgs:
       type: object
-      properties:
-        kafka_resource_path:
-          type: string
-          description: Path to the Kafka resource containing connection configuration
-        group_id:
-          type: string
-          description: Kafka consumer group ID for this trigger
-        topics:
-          type: array
-          items:
-            type: string
-          description: Array of Kafka topic names to subscribe to
-        filters:
-          type: array
-          items:
-            type: object
-            properties:
-              key:
-                type: string
-              value: {}
-            required:
-            - key
-            - value
-        filter_logic:
-          type: string
-          enum:
-          - and
-          - or
-          default: and
-          description: Logic to apply when evaluating filters. 'and' requires all filters to match, 'or' requires any filter to match.
-        auto_offset_reset:
-          type: string
-          enum:
-          - latest
-          - earliest
-          default: latest
-          description: Initial offset behavior when consumer group has no committed offset.
-        auto_commit:
-          type: boolean
-          default: true
-          description: When true (default), offsets are committed automatically after receiving each message. When false, you must manually commit offsets using the commit_offsets endpoint.
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when a message is received
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - script_path
-      - kafka_resource_path
-      - group_id
-      - topics
-      - filters
-      - is_flow
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer

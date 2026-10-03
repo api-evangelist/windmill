@@ -446,7 +446,196 @@ paths:
               schema:
                 type: string
 components:
+  parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    PublicationName:
+      name: publication
+      in: path
+      required: true
+      description: The name of the publication
+      schema:
+        type: string
   schemas:
+    TableToTrack:
+      type: array
+      items:
+        type: object
+        properties:
+          table_name:
+            type: string
+          columns_name:
+            type: array
+            items:
+              type: string
+          where_clause:
+            type: string
+        required:
+        - table_name
+    PostgresTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        postgres_resource_path:
+          type: string
+          description: Path to the PostgreSQL resource containing connection configuration
+        publication_name:
+          type: string
+          description: Name of the PostgreSQL publication to subscribe to for change data capture
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        replication_slot_name:
+          type: string
+          description: Name of the PostgreSQL logical replication slot to use
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - postgres_resource_path
+      - replication_slot_name
+      - publication_name
+    Slot:
+      type: object
+      properties:
+        name:
+          type: string
+    TemplateScript:
+      type: object
+      properties:
+        postgres_resource_path:
+          type: string
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relations'
+        language:
+          $ref: '#/components/schemas/Language'
+      required:
+      - postgres_resource_path
+      - relations
+      - language
+    Relations:
+      type: object
+      properties:
+        schema_name:
+          type: string
+        table_to_track:
+          $ref: '#/components/schemas/TableToTrack'
+      required:
+      - schema_name
+      - table_to_track
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
+    SlotList:
+      type: object
+      properties:
+        slot_name:
+          type: string
+        active:
+          type: boolean
+    NewPostgresTrigger:
+      type: object
+      properties:
+        replication_slot_name:
+          type: string
+          description: Name of the PostgreSQL logical replication slot to use
+        publication_name:
+          type: string
+          description: Name of the PostgreSQL publication to subscribe to for change data capture
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when database changes are detected
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+        postgres_resource_path:
+          type: string
+          description: Path to the PostgreSQL resource containing connection configuration
+        publication:
+          $ref: '#/components/schemas/PublicationData'
+          description: Configuration for creating/managing the publication (tables, operations)
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - script_path
+      - is_flow
+      - enabled
+      - postgres_resource_path
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
     TriggerExtraProperty:
       type: object
       properties:
@@ -495,30 +684,19 @@ components:
       - edited_at
       - is_flow
       - mode
-    TemplateScript:
+    PublicationData:
       type: object
       properties:
-        postgres_resource_path:
-          type: string
-        relations:
+        table_to_track:
           type: array
           items:
             $ref: '#/components/schemas/Relations'
-        language:
-          $ref: '#/components/schemas/Language'
+        transaction_to_track:
+          type: array
+          items:
+            type: string
       required:
-      - postgres_resource_path
-      - relations
-      - language
-    Slot:
-      type: object
-      properties:
-        name:
-          type: string
-    Language:
-      type: string
-      enum:
-      - Typescript
+      - transaction_to_track
     EditPostgresTrigger:
       type: object
       properties:
@@ -572,188 +750,10 @@ components:
       - postgres_resource_path
       - publication_name
       - replication_slot_name
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    Relations:
-      type: object
-      properties:
-        schema_name:
-          type: string
-        table_to_track:
-          $ref: '#/components/schemas/TableToTrack'
-      required:
-      - schema_name
-      - table_to_track
-    TableToTrack:
-      type: array
-      items:
-        type: object
-        properties:
-          table_name:
-            type: string
-          columns_name:
-            type: array
-            items:
-              type: string
-          where_clause:
-            type: string
-        required:
-        - table_name
-    PostgresTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      properties:
-        postgres_resource_path:
-          type: string
-          description: Path to the PostgreSQL resource containing connection configuration
-        publication_name:
-          type: string
-          description: Name of the PostgreSQL publication to subscribe to for change data capture
-        server_id:
-          type: string
-          description: ID of the server currently handling this trigger (internal)
-        replication_slot_name:
-          type: string
-          description: Name of the PostgreSQL logical replication slot to use
-        error:
-          type: string
-          description: Last error message if the trigger failed
-        last_server_ping:
-          type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-      required:
-      - postgres_resource_path
-      - replication_slot_name
-      - publication_name
-    NewPostgresTrigger:
-      type: object
-      properties:
-        replication_slot_name:
-          type: string
-          description: Name of the PostgreSQL logical replication slot to use
-        publication_name:
-          type: string
-          description: Name of the PostgreSQL publication to subscribe to for change data capture
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when database changes are detected
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-        postgres_resource_path:
-          type: string
-          description: Path to the PostgreSQL resource containing connection configuration
-        publication:
-          $ref: '#/components/schemas/PublicationData'
-          description: Configuration for creating/managing the publication (tables, operations)
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - script_path
-      - is_flow
-      - enabled
-      - postgres_resource_path
-    PublicationData:
-      type: object
-      properties:
-        table_to_track:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relations'
-        transaction_to_track:
-          type: array
-          items:
-            type: string
-      required:
-      - transaction_to_track
-    TriggerMode:
-      description: job trigger mode
+    Language:
       type: string
       enum:
-      - enabled
-      - disabled
-      - suspended
-    SlotList:
-      type: object
-      properties:
-        slot_name:
-          type: string
-        active:
-          type: boolean
-  parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    PublicationName:
-      name: publication
-      in: path
-      required: true
-      description: The name of the publication
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
+      - Typescript
   securitySchemes:
     bearerAuth:
       type: http

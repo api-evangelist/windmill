@@ -110,27 +110,6 @@ paths:
                 type: integer
 components:
   schemas:
-    ScalarMetric:
-      type: object
-      properties:
-        metric_id:
-          type: string
-        value:
-          type: number
-      required:
-      - id
-      - value
-    MetricDataPoint:
-      type: object
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-        value:
-          type: number
-      required:
-      - timestamp
-      - value
     TimeseriesMetric:
       type: object
       properties:
@@ -143,6 +122,17 @@ components:
       required:
       - id
       - values
+    MetricDataPoint:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        value:
+          type: number
+      required:
+      - timestamp
+      - value
     MetricMetadata:
       type: object
       properties:
@@ -152,7 +142,23 @@ components:
           type: string
       required:
       - id
+    ScalarMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        value:
+          type: number
+      required:
+      - id
+      - value
   parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
     JobId:
       name: id
       in: path
@@ -160,12 +166,6 @@ components:
       schema:
         type: string
         format: uuid
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
