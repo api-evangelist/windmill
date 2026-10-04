@@ -386,24 +386,6 @@ paths:
                     items:
                       type: string
 components:
-  schemas:
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-        expires_in:
-          type: integer
-        refresh_token:
-          type: string
-        scope:
-          type: array
-          items:
-            type: string
-        grant_type:
-          type: string
-      required:
-      - access_token
   parameters:
     AccountId:
       name: id
@@ -423,6 +405,24 @@ components:
       required: true
       schema:
         type: string
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        expires_in:
+          type: integer
+        refresh_token:
+          type: string
+        scope:
+          type: array
+          items:
+            type: string
+        grant_type:
+          type: string
+      required:
+      - access_token
   securitySchemes:
     bearerAuth:
       type: http

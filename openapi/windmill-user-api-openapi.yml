@@ -1246,6 +1246,15 @@ paths:
                 type: string
 components:
   schemas:
+    GlobalOffboardPreview:
+      type: object
+      properties:
+        workspaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkspaceOffboardPreview'
+      required:
+      - workspaces
     UserUsage:
       type: object
       properties:
@@ -1281,80 +1290,6 @@ components:
       - schedules_reassigned
       - triggers_reassigned
       - drafts_deleted
-    OffboardAffectedPaths:
-      type: object
-      properties:
-        scripts:
-          type: array
-          items:
-            type: string
-        flows:
-          type: array
-          items:
-            type: string
-        apps:
-          type: array
-          items:
-            type: string
-        resources:
-          type: array
-          items:
-            type: string
-        variables:
-          type: array
-          items:
-            type: string
-        schedules:
-          type: array
-          items:
-            type: string
-        triggers:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-    PasswordResetResponse:
-      type: object
-      properties:
-        message:
-          type: string
-      required:
-      - message
-    OffboardResponse:
-      type: object
-      properties:
-        conflicts:
-          type: array
-          items:
-            type: string
-          description: List of path conflicts that block the offboarding. Empty on success.
-        summary:
-          $ref: '#/components/schemas/OffboardSummary'
-    Login:
-      type: object
-      properties:
-        email:
-          type: string
-        password:
-          type: string
-      required:
-      - email
-      - password
-    NewTokenImpersonate:
-      type: object
-      properties:
-        label:
-          type: string
-        expiration:
-          type: string
-          format: date-time
-        impersonate_email:
-          type: string
-        workspace_id:
-          type: string
-      required:
-      - impersonate_email
     User:
       type: object
       properties:
@@ -1402,6 +1337,94 @@ components:
       - disabled
       - folders
       - folders_owners
+    OffboardTokenInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        expiration:
+          type: string
+      required:
+      - label
+      - scopes
+    WorkspaceOffboardPreview:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        username:
+          type: string
+        preview:
+          $ref: '#/components/schemas/OffboardPreview'
+      required:
+      - workspace_id
+      - username
+      - preview
+    ExportedUser:
+      type: object
+      properties:
+        email:
+          type: string
+        password_hash:
+          type: string
+        super_admin:
+          type: boolean
+        verified:
+          type: boolean
+        name:
+          type: string
+        company:
+          type: string
+        first_time_user:
+          type: boolean
+        username:
+          type: string
+      required:
+      - email
+      - super_admin
+      - verified
+      - first_time_user
+    EditWorkspaceUser:
+      type: object
+      properties:
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        disabled:
+          type: boolean
+    UserSource:
+      type: object
+      properties:
+        source:
+          type: string
+          enum:
+          - domain
+          - instance_group
+          - manual
+          description: How the user was added to the workspace
+        domain:
+          type: string
+          description: The domain used for auto-invite (when source is 'domain')
+        group:
+          type: string
+          description: The instance group name (when source is 'instance_group')
+      required:
+      - source
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+      - email
+      - password
     NewToken:
       type: object
       properties:
@@ -1416,6 +1439,149 @@ components:
             type: string
         workspace_id:
           type: string
+    OffboardAffectedPaths:
+      type: object
+      properties:
+        scripts:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            type: string
+        apps:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        variables:
+          type: array
+          items:
+            type: string
+        schedules:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+    PasswordResetResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+      - message
+    WorkspaceInvite:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        email:
+          type: string
+        is_admin:
+          type: boolean
+        operator:
+          type: boolean
+        parent_workspace_id:
+          type:
+          - string
+          - 'null'
+      required:
+      - workspace_id
+      - email
+      - is_admin
+      - operator
+    NewTokenImpersonate:
+      type: object
+      properties:
+        label:
+          type: string
+        expiration:
+          type: string
+          format: date-time
+        impersonate_email:
+          type: string
+        workspace_id:
+          type: string
+      required:
+      - impersonate_email
+    OffboardPreview:
+      type: object
+      properties:
+        owned:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects under u/{username}/ that will be reassigned
+        executing_on_behalf:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
+        referencing:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
+        tokens:
+          type: array
+          items:
+            $ref: '#/components/schemas/OffboardTokenInfo'
+          description: Tokens owned by this user (will be deleted)
+        http_triggers:
+          type: integer
+          description: HTTP triggers under the user's path (webhook URLs will change)
+        email_triggers:
+          type: integer
+          description: Email triggers under the user's path (email addresses will change)
+      required:
+      - owned
+      - executing_on_behalf
+      - referencing
+      - tokens
+      - http_triggers
+      - email_triggers
+    WorkspaceReassignment:
+      type: object
+      properties:
+        reassign_to:
+          type: string
+          description: 'Target: ''u/{username}'' or ''f/{folder}'''
+        new_on_behalf_of_user:
+          type: string
+          description: Required when reassign_to is a folder. Username to use as permissioned_as.
+      required:
+      - reassign_to
+    TruncatedToken:
+      type: object
+      properties:
+        label:
+          type: string
+        expiration:
+          type: string
+          format: date-time
+        token_prefix:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+        scopes:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        workspace_id:
+          type: string
+      required:
+      - token_prefix
+      - created_at
+      - last_used_at
     GlobalUserInfo:
       type: object
       properties:
@@ -1457,131 +1623,28 @@ components:
       - first_time_user
       - role_source
       - disabled
-    ExportedUser:
+    OffboardResponse:
       type: object
       properties:
-        email:
-          type: string
-        password_hash:
-          type: string
-        super_admin:
-          type: boolean
-        verified:
-          type: boolean
-        name:
-          type: string
-        company:
-          type: string
-        first_time_user:
-          type: boolean
-        username:
-          type: string
-      required:
-      - email
-      - super_admin
-      - verified
-      - first_time_user
-    WorkspaceReassignment:
-      type: object
-      properties:
-        reassign_to:
-          type: string
-          description: 'Target: ''u/{username}'' or ''f/{folder}'''
-        new_on_behalf_of_user:
-          type: string
-          description: Required when reassign_to is a folder. Username to use as permissioned_as.
-      required:
-      - reassign_to
-    OffboardPreview:
-      type: object
-      properties:
-        owned:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Objects under u/{username}/ that will be reassigned
-        executing_on_behalf:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
-        referencing:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/OffboardTokenInfo'
-          description: Tokens owned by this user (will be deleted)
-        http_triggers:
-          type: integer
-          description: HTTP triggers under the user's path (webhook URLs will change)
-        email_triggers:
-          type: integer
-          description: Email triggers under the user's path (email addresses will change)
-      required:
-      - owned
-      - executing_on_behalf
-      - referencing
-      - tokens
-      - http_triggers
-      - email_triggers
-    UserSource:
-      type: object
-      properties:
-        source:
-          type: string
-          enum:
-          - domain
-          - instance_group
-          - manual
-          description: How the user was added to the workspace
-        domain:
-          type: string
-          description: The domain used for auto-invite (when source is 'domain')
-        group:
-          type: string
-          description: The instance group name (when source is 'instance_group')
-      required:
-      - source
-    WorkspaceOffboardPreview:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        username:
-          type: string
-        preview:
-          $ref: '#/components/schemas/OffboardPreview'
-      required:
-      - workspace_id
-      - username
-      - preview
-    OffboardTokenInfo:
-      type: object
-      properties:
-        label:
-          type: string
-        scopes:
+        conflicts:
           type: array
           items:
             type: string
-        expiration:
-          type: string
-      required:
-      - label
-      - scopes
-    OffboardRequest:
+          description: List of path conflicts that block the offboarding. Empty on success.
+        summary:
+          $ref: '#/components/schemas/OffboardSummary'
+    GlobalOffboardRequest:
       type: object
       properties:
-        reassign_to:
-          type: string
-          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
-        new_on_behalf_of_user:
-          type: string
-          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
+        reassignments:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/WorkspaceReassignment'
+          description: Map of workspace_id to reassignment config
         delete_user:
           type: boolean
           default: true
-          description: Whether to also remove the user from the workspace
-      required:
-      - reassign_to
+          description: Whether to also remove the user from the instance
     ExternalJwtToken:
       type: object
       properties:
@@ -1614,99 +1677,24 @@ components:
       - is_admin
       - is_operator
       - last_used_at
-    EditWorkspaceUser:
+    OffboardRequest:
       type: object
       properties:
-        is_admin:
-          type: boolean
-        operator:
-          type: boolean
-        disabled:
-          type: boolean
-    TruncatedToken:
-      type: object
-      properties:
-        label:
+        reassign_to:
           type: string
-        expiration:
+          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
+        new_on_behalf_of_user:
           type: string
-          format: date-time
-        token_prefix:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        last_used_at:
-          type: string
-          format: date-time
-        scopes:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-        workspace_id:
-          type: string
-      required:
-      - token_prefix
-      - created_at
-      - last_used_at
-    GlobalOffboardPreview:
-      type: object
-      properties:
-        workspaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/WorkspaceOffboardPreview'
-      required:
-      - workspaces
-    WorkspaceInvite:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        email:
-          type: string
-        is_admin:
-          type: boolean
-        operator:
-          type: boolean
-        parent_workspace_id:
-          type:
-          - string
-          - 'null'
-      required:
-      - workspace_id
-      - email
-      - is_admin
-      - operator
-    GlobalOffboardRequest:
-      type: object
-      properties:
-        reassignments:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/WorkspaceReassignment'
-          description: Map of workspace_id to reassignment config
+          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
         delete_user:
           type: boolean
           default: true
-          description: Whether to also remove the user from the instance
+          description: Whether to also remove the user from the workspace
+      required:
+      - reassign_to
   parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
     ClientName:
       name: client_name
-      in: path
-      required: true
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
       in: path
       required: true
       schema:
@@ -1717,9 +1705,21 @@ components:
       required: true
       schema:
         type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
       in: query
       schema:
         type: integer

@@ -216,6 +216,13 @@ paths:
                 type: string
 components:
   schemas:
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     TriggerExtraProperty:
       type: object
       properties:
@@ -281,6 +288,10 @@ components:
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
       required:
       - local_part
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
     EditEmailTrigger:
       type: object
       properties:
@@ -350,42 +361,31 @@ components:
       - script_path
       - local_part
       - is_flow
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
   parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
       in: query
       schema:
         type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
     Path:
       name: path
       in: path
       required: true
       schema:
         type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

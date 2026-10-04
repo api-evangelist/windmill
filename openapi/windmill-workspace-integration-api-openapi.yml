@@ -219,6 +219,20 @@ paths:
                 type: string
 components:
   schemas:
+    WorkspaceIntegrations:
+      type: object
+      properties:
+        service_name:
+          $ref: '#/components/schemas/NativeServiceName'
+        oauth_data:
+          $ref: '#/components/schemas/WorkspaceOAuthConfig'
+        resource_path:
+          type:
+          - string
+          - 'null'
+          description: Path to the resource storing the OAuth token
+      required:
+      - service_name
     WorkspaceOAuthConfig:
       type: object
       properties:
@@ -241,20 +255,6 @@ components:
       - client_secret
       - base_url
       - redirect_uri
-    WorkspaceIntegrations:
-      type: object
-      properties:
-        service_name:
-          $ref: '#/components/schemas/NativeServiceName'
-        oauth_data:
-          $ref: '#/components/schemas/WorkspaceOAuthConfig'
-        resource_path:
-          type:
-          - string
-          - 'null'
-          description: Path to the resource storing the OAuth token
-      required:
-      - service_name
     NativeServiceName:
       type: string
       enum:

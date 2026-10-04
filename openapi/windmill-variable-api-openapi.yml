@@ -287,48 +287,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/ContextualVariable'
 components:
-  parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    ContextualVariable:
-      type: object
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-        description:
-          type: string
-        is_custom:
-          type: boolean
-      required:
-      - name
-      - value
-      - description
-      - is_custom
     CreateVariable:
       type: object
       properties:
@@ -363,6 +322,25 @@ components:
       - value
       - is_secret
       - description
+    EditVariable:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the variable
+        value:
+          type: string
+          description: The new value of the variable
+        is_secret:
+          type: boolean
+          description: Whether the variable is a secret
+        description:
+          type: string
+          description: The new description of the variable
+        labels:
+          type: array
+          items:
+            type: string
     ListableVariable:
       type: object
       properties:
@@ -404,25 +382,47 @@ components:
       - path
       - is_secret
       - extra_perms
-    EditVariable:
+    ContextualVariable:
       type: object
       properties:
-        path:
+        name:
           type: string
-          description: The path to the variable
         value:
           type: string
-          description: The new value of the variable
-        is_secret:
-          type: boolean
-          description: Whether the variable is a secret
         description:
           type: string
-          description: The new description of the variable
-        labels:
-          type: array
-          items:
-            type: string
+        is_custom:
+          type: boolean
+      required:
+      - name
+      - value
+      - description
+      - is_custom
+  parameters:
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

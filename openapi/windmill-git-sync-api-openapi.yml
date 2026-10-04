@@ -196,13 +196,6 @@ paths:
                 - app_slug
                 - client_id
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     GithubInstallations:
       type: array
@@ -242,6 +235,13 @@ components:
         - repositories
         - total_count
         - per_page
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

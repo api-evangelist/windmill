@@ -163,16 +163,97 @@ components:
           type: boolean
         disabled:
           type: boolean
-    OffboardResponse:
+    UserSource:
       type: object
       properties:
-        conflicts:
+        source:
+          type: string
+          enum:
+          - domain
+          - instance_group
+          - manual
+          description: How the user was added to the workspace
+        domain:
+          type: string
+          description: The domain used for auto-invite (when source is 'domain')
+        group:
+          type: string
+          description: The instance group name (when source is 'instance_group')
+      required:
+      - source
+    OffboardRequest:
+      type: object
+      properties:
+        reassign_to:
+          type: string
+          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
+        new_on_behalf_of_user:
+          type: string
+          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
+        delete_user:
+          type: boolean
+          default: true
+          description: Whether to also remove the user from the workspace
+      required:
+      - reassign_to
+    OffboardPreview:
+      type: object
+      properties:
+        owned:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects under u/{username}/ that will be reassigned
+        executing_on_behalf:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
+        referencing:
+          $ref: '#/components/schemas/OffboardAffectedPaths'
+          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
+        tokens:
           type: array
           items:
-            type: string
-          description: List of path conflicts that block the offboarding. Empty on success.
-        summary:
-          $ref: '#/components/schemas/OffboardSummary'
+            $ref: '#/components/schemas/OffboardTokenInfo'
+          description: Tokens owned by this user (will be deleted)
+        http_triggers:
+          type: integer
+          description: HTTP triggers under the user's path (webhook URLs will change)
+        email_triggers:
+          type: integer
+          description: Email triggers under the user's path (email addresses will change)
+      required:
+      - owned
+      - executing_on_behalf
+      - referencing
+      - tokens
+      - http_triggers
+      - email_triggers
+    OffboardSummary:
+      type: object
+      properties:
+        scripts_reassigned:
+          type: integer
+        flows_reassigned:
+          type: integer
+        apps_reassigned:
+          type: integer
+        resources_reassigned:
+          type: integer
+        variables_reassigned:
+          type: integer
+        schedules_reassigned:
+          type: integer
+        triggers_reassigned:
+          type: integer
+        drafts_deleted:
+          type: integer
+      required:
+      - scripts_reassigned
+      - flows_reassigned
+      - apps_reassigned
+      - resources_reassigned
+      - variables_reassigned
+      - schedules_reassigned
+      - triggers_reassigned
+      - drafts_deleted
     User:
       type: object
       properties:
@@ -220,6 +301,20 @@ components:
       - disabled
       - folders
       - folders_owners
+    OffboardTokenInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        expiration:
+          type: string
+      required:
+      - label
+      - scopes
     OffboardAffectedPaths:
       type: object
       properties:
@@ -253,111 +348,16 @@ components:
             type: array
             items:
               type: string
-    OffboardTokenInfo:
+    OffboardResponse:
       type: object
       properties:
-        label:
-          type: string
-        scopes:
+        conflicts:
           type: array
           items:
             type: string
-        expiration:
-          type: string
-      required:
-      - label
-      - scopes
-    OffboardSummary:
-      type: object
-      properties:
-        scripts_reassigned:
-          type: integer
-        flows_reassigned:
-          type: integer
-        apps_reassigned:
-          type: integer
-        resources_reassigned:
-          type: integer
-        variables_reassigned:
-          type: integer
-        schedules_reassigned:
-          type: integer
-        triggers_reassigned:
-          type: integer
-        drafts_deleted:
-          type: integer
-      required:
-      - scripts_reassigned
-      - flows_reassigned
-      - apps_reassigned
-      - resources_reassigned
-      - variables_reassigned
-      - schedules_reassigned
-      - triggers_reassigned
-      - drafts_deleted
-    OffboardPreview:
-      type: object
-      properties:
-        owned:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Objects under u/{username}/ that will be reassigned
-        executing_on_behalf:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Objects not under the user's path but that execute on behalf of this user (permissioned_as/on_behalf_of will be updated)
-        referencing:
-          $ref: '#/components/schemas/OffboardAffectedPaths'
-          description: Scripts/flows/apps/resources whose content or value references this user's paths (may break after reassignment)
-        tokens:
-          type: array
-          items:
-            $ref: '#/components/schemas/OffboardTokenInfo'
-          description: Tokens owned by this user (will be deleted)
-        http_triggers:
-          type: integer
-          description: HTTP triggers under the user's path (webhook URLs will change)
-        email_triggers:
-          type: integer
-          description: Email triggers under the user's path (email addresses will change)
-      required:
-      - owned
-      - executing_on_behalf
-      - referencing
-      - tokens
-      - http_triggers
-      - email_triggers
-    OffboardRequest:
-      type: object
-      properties:
-        reassign_to:
-          type: string
-          description: 'Target for reassignment: ''u/{username}'' or ''f/{folder}'''
-        new_on_behalf_of_user:
-          type: string
-          description: Required when reassign_to is a folder. The username whose identity will be used as permissioned_as for schedules and triggers.
-        delete_user:
-          type: boolean
-          default: true
-          description: Whether to also remove the user from the workspace
-      required:
-      - reassign_to
-    UserSource:
-      type: object
-      properties:
-        source:
-          type: string
-          enum:
-          - domain
-          - instance_group
-          - manual
-          description: How the user was added to the workspace
-        domain:
-          type: string
-          description: The domain used for auto-invite (when source is 'domain')
-        group:
-          type: string
-          description: The instance group name (when source is 'instance_group')
-      required:
-      - source
+          description: List of path conflicts that block the offboarding. Empty on success.
+        summary:
+          $ref: '#/components/schemas/OffboardSummary'
   parameters:
     WorkspaceId:
       name: workspace

@@ -133,6 +133,33 @@ paths:
                 $ref: '#/components/schemas/WorkspaceDependencies'
 components:
   schemas:
+    WorkspaceDependencies:
+      type: object
+      properties:
+        id:
+          type: integer
+        archived:
+          type: boolean
+        name:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        workspace_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - workspace_id
+      - language
+      - created_at
+      - content
+      - id
+      - archived
     ScriptLang:
       type: string
       enum:
@@ -177,33 +204,6 @@ components:
       - workspace_id
       - language
       - content
-    WorkspaceDependencies:
-      type: object
-      properties:
-        id:
-          type: integer
-        archived:
-          type: boolean
-        name:
-          type: string
-        description:
-          type: string
-        content:
-          type: string
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        workspace_id:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-      required:
-      - workspace_id
-      - language
-      - created_at
-      - content
-      - id
-      - archived
   parameters:
     WorkspaceId:
       name: workspace

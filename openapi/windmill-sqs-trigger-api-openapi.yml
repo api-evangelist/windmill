@@ -212,7 +212,83 @@ paths:
               schema:
                 type: string
 components:
+  parameters:
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
   schemas:
+    SqsTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        queue_url:
+          type: string
+          description: The full URL of the AWS SQS queue to poll for messages
+        aws_auth_resource_type:
+          $ref: '#/components/schemas/AwsAuthResourceType'
+          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
+        aws_resource_path:
+          type: string
+          description: Path to the AWS resource containing credentials or OIDC configuration
+        message_attributes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Array of SQS message attribute names to include with each message
+        server_id:
+          type: string
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
+          type: string
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - queue_url
+      - aws_resource_path
+      - aws_auth_resource_type
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     TriggerExtraProperty:
       type: object
       properties:
@@ -261,62 +337,6 @@ components:
       - edited_at
       - is_flow
       - mode
-    NewSqsTrigger:
-      type: object
-      properties:
-        queue_url:
-          type: string
-          description: The full URL of the AWS SQS queue to poll for messages
-        aws_auth_resource_type:
-          $ref: '#/components/schemas/AwsAuthResourceType'
-          description: Authentication type - 'credentials' for access key/secret, 'oidc' for OpenID Connect
-        aws_resource_path:
-          type: string
-          description: Path to the AWS resource containing credentials or OIDC configuration
-        message_attributes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Array of SQS message attribute names to include with each message
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when a message is received
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - queue_url
-      - aws_resource_path
-      - path
-      - script_path
-      - is_flow
-      - aws_auth_resource_type
     AwsAuthResourceType:
       type: string
       enum:
@@ -383,9 +403,7 @@ components:
       type: object
       description: The arguments to pass to the script or flow
       additionalProperties: true
-    SqsTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
+    NewSqsTrigger:
       type: object
       properties:
         queue_url:
@@ -404,16 +422,17 @@ components:
           items:
             type: string
           description: Array of SQS message attribute names to include with each message
-        server_id:
+        path:
           type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
           type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
         error_handler_path:
           type: string
           description: Path to a script or flow to run when the triggered job fails
@@ -423,42 +442,23 @@ components:
         retry:
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
           description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
       required:
       - queue_url
       - aws_resource_path
+      - path
+      - script_path
+      - is_flow
       - aws_auth_resource_type
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
-  parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

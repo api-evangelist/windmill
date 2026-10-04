@@ -100,13 +100,6 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
     Volume:
       type: object
@@ -142,6 +135,13 @@ components:
         extra_perms:
           type: object
           additionalProperties: true
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -864,35 +864,7 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    WindmillFileMetadata:
-      type: object
-      properties:
-        mime_type:
-          type: string
-        size_in_bytes:
-          type: integer
-        last_modified:
-          type: string
-          format: date-time
-        expires:
-          type: string
-          format: date-time
-        version_id:
-          type: string
     PolarsClientKwargs:
       type: object
       properties:
@@ -900,22 +872,6 @@ components:
           type: string
       required:
       - region_name
-    WindmillFilePreview:
-      type: object
-      properties:
-        msg:
-          type: string
-        content:
-          type: string
-        content_type:
-          type: string
-          enum:
-          - RawText
-          - Csv
-          - Parquet
-          - Unknown
-      required:
-      - content_type
     S3Resource:
       type: object
       properties:
@@ -946,6 +902,50 @@ components:
           type: string
       required:
       - s3
+    WindmillFileMetadata:
+      type: object
+      properties:
+        mime_type:
+          type: string
+        size_in_bytes:
+          type: integer
+        last_modified:
+          type: string
+          format: date-time
+        expires:
+          type: string
+          format: date-time
+        version_id:
+          type: string
+    WindmillFilePreview:
+      type: object
+      properties:
+        msg:
+          type: string
+        content:
+          type: string
+        content_type:
+          type: string
+          enum:
+          - RawText
+          - Csv
+          - Parquet
+          - Unknown
+      required:
+      - content_type
+  parameters:
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

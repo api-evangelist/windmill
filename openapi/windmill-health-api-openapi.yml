@@ -80,6 +80,23 @@ paths:
                 $ref: '#/components/schemas/DetailedHealthResponse'
 components:
   schemas:
+    DatabaseHealth:
+      type: object
+      description: Database health status
+      required:
+      - healthy
+      - latency_ms
+      - pool
+      properties:
+        healthy:
+          type: boolean
+          description: Whether the database is reachable
+        latency_ms:
+          type: integer
+          format: int64
+          description: Database query latency in milliseconds
+        pool:
+          $ref: '#/components/schemas/PoolStats'
     QueueHealth:
       type: object
       description: Job queue status
@@ -95,6 +112,33 @@ components:
           type: integer
           format: int64
           description: Number of currently running jobs
+    HealthStatusResponse:
+      type: object
+      description: Health status response (cached with 5s TTL)
+      required:
+      - status
+      - checked_at
+      - database_healthy
+      - workers_alive
+      properties:
+        status:
+          type: string
+          enum:
+          - healthy
+          - degraded
+          - unhealthy
+          description: Overall health status
+        checked_at:
+          type: string
+          format: date-time
+          description: Timestamp when the health check was actually performed (not cache return time)
+        database_healthy:
+          type: boolean
+          description: Whether the database is reachable
+        workers_alive:
+          type: integer
+          format: int64
+          description: Number of workers that pinged within last 5 minutes
     DetailedHealthResponse:
       type: object
       description: Detailed health status response (always fresh, no caching)
@@ -120,23 +164,6 @@ components:
           description: Server version (e.g., "EE 1.615.3")
         checks:
           $ref: '#/components/schemas/HealthChecks'
-    HealthChecks:
-      type: object
-      description: Detailed health checks
-      required:
-      - database
-      - readiness
-      properties:
-        database:
-          $ref: '#/components/schemas/DatabaseHealth'
-        workers:
-          $ref: '#/components/schemas/WorkersHealth'
-          description: Worker status (null if database is unreachable)
-        queue:
-          $ref: '#/components/schemas/QueueHealth'
-          description: Queue status (null if database is unreachable)
-        readiness:
-          $ref: '#/components/schemas/ReadinessHealth'
     ReadinessHealth:
       type: object
       description: Server readiness status
@@ -176,50 +203,6 @@ components:
           items:
             type: string
           description: List of active worker versions
-    DatabaseHealth:
-      type: object
-      description: Database health status
-      required:
-      - healthy
-      - latency_ms
-      - pool
-      properties:
-        healthy:
-          type: boolean
-          description: Whether the database is reachable
-        latency_ms:
-          type: integer
-          format: int64
-          description: Database query latency in milliseconds
-        pool:
-          $ref: '#/components/schemas/PoolStats'
-    HealthStatusResponse:
-      type: object
-      description: Health status response (cached with 5s TTL)
-      required:
-      - status
-      - checked_at
-      - database_healthy
-      - workers_alive
-      properties:
-        status:
-          type: string
-          enum:
-          - healthy
-          - degraded
-          - unhealthy
-          description: Overall health status
-        checked_at:
-          type: string
-          format: date-time
-          description: Timestamp when the health check was actually performed (not cache return time)
-        database_healthy:
-          type: boolean
-          description: Whether the database is reachable
-        workers_alive:
-          type: integer
-          format: int64
-          description: Number of workers that pinged within last 5 minutes
     PoolStats:
       type: object
       description: Database connection pool statistics
@@ -237,6 +220,23 @@ components:
         max_connections:
           type: integer
           description: Maximum number of connections allowed
+    HealthChecks:
+      type: object
+      description: Detailed health checks
+      required:
+      - database
+      - readiness
+      properties:
+        database:
+          $ref: '#/components/schemas/DatabaseHealth'
+        workers:
+          $ref: '#/components/schemas/WorkersHealth'
+          description: Worker status (null if database is unreachable)
+        queue:
+          $ref: '#/components/schemas/QueueHealth'
+          description: Queue status (null if database is unreachable)
+        readiness:
+          $ref: '#/components/schemas/ReadinessHealth'
   securitySchemes:
     bearerAuth:
       type: http

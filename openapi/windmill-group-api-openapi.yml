@@ -444,78 +444,7 @@ paths:
                       - string
                       - 'null'
 components:
-  parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    ExportedInstanceGroup:
-      type: object
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        id:
-          type: string
-        scim_display_name:
-          type: string
-        external_id:
-          type: string
-        instance_role:
-          type:
-          - string
-          - 'null'
-          enum:
-          - superadmin
-          - devops
-      required:
-      - name
-    InstanceGroup:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        instance_role:
-          type:
-          - string
-          - 'null'
-          enum:
-          - superadmin
-          - devops
     Group:
       type: object
       properties:
@@ -531,17 +460,6 @@ components:
           type: object
           additionalProperties:
             type: boolean
-      required:
-      - name
-    WorkspaceInfo:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        workspace_name:
-          type: string
-        role:
-          type: string
       required:
       - name
     InstanceGroupWithWorkspaces:
@@ -568,6 +486,88 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WorkspaceInfo'
+    ExportedInstanceGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        scim_display_name:
+          type: string
+        external_id:
+          type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
+      required:
+      - name
+    WorkspaceInfo:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        workspace_name:
+          type: string
+        role:
+          type: string
+      required:
+      - name
+    InstanceGroup:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

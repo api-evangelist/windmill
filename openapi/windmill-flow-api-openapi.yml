@@ -603,38 +603,6 @@ paths:
                 type: string
 components:
   schemas:
-    ExtraPerms:
-      type: object
-      additionalProperties:
-        type: boolean
-    TruncatedToken:
-      type: object
-      properties:
-        label:
-          type: string
-        expiration:
-          type: string
-          format: date-time
-        token_prefix:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        last_used_at:
-          type: string
-          format: date-time
-        scopes:
-          type: array
-          items:
-            type: string
-        email:
-          type: string
-        workspace_id:
-          type: string
-      required:
-      - token_prefix
-      - created_at
-      - last_used_at
     TriggersCount:
       type: object
       properties:
@@ -675,16 +643,6 @@ components:
           type: number
         github_count:
           type: number
-    Flow:
-      allOf:
-      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
-      - $ref: '#/components/schemas/FlowMetadata'
-      - type: object
-        properties:
-          lock_error_logs:
-            type: string
-          version_id:
-            type: number
     FlowVersion:
       type: object
       properties:
@@ -698,36 +656,6 @@ components:
       required:
       - id
       - created_at
-    OpenFlowWPath:
-      allOf:
-      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
-      - type: object
-        properties:
-          path:
-            type: string
-          tag:
-            type: string
-          ws_error_handler_muted:
-            type: boolean
-          priority:
-            type: integer
-          dedicated_worker:
-            type: boolean
-          timeout:
-            type: number
-          visible_to_runner_only:
-            type: boolean
-          on_behalf_of_email:
-            type: string
-          preserve_on_behalf_of:
-            type: boolean
-            description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
-          labels:
-            type: array
-            items:
-              type: string
-        required:
-        - path
     FlowMetadata:
       type: object
       properties:
@@ -773,37 +701,79 @@ components:
       - edited_at
       - archived
       - extra_perms
+    Flow:
+      allOf:
+      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
+      - $ref: '#/components/schemas/FlowMetadata'
+      - type: object
+        properties:
+          lock_error_logs:
+            type: string
+          version_id:
+            type: number
+    OpenFlowWPath:
+      allOf:
+      - $ref: ../../openflow.openapi.yaml#/components/schemas/OpenFlow
+      - type: object
+        properties:
+          path:
+            type: string
+          tag:
+            type: string
+          ws_error_handler_muted:
+            type: boolean
+          priority:
+            type: integer
+          dedicated_worker:
+            type: boolean
+          timeout:
+            type: number
+          visible_to_runner_only:
+            type: boolean
+          on_behalf_of_email:
+            type: string
+          preserve_on_behalf_of:
+            type: boolean
+            description: When true and the caller is a member of the 'wm_deployers' group, preserves the original on_behalf_of_email value instead of overwriting it.
+          labels:
+            type: array
+            items:
+              type: string
+        required:
+        - path
+    TruncatedToken:
+      type: object
+      properties:
+        label:
+          type: string
+        expiration:
+          type: string
+          format: date-time
+        token_prefix:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_used_at:
+          type: string
+          format: date-time
+        scopes:
+          type: array
+          items:
+            type: string
+        email:
+          type: string
+        workspace_id:
+          type: string
+      required:
+      - token_prefix
+      - created_at
+      - last_used_at
+    ExtraPerms:
+      type: object
+      additionalProperties:
+        type: boolean
   parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    ScriptPath:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
     PathId:
       name: id
       in: path
@@ -819,12 +789,42 @@ components:
         enum:
         - script
         - flow
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
     OrderDesc:
       name: order_desc
       description: order by desc order (default true)
       in: query
       schema:
         type: boolean
+    ScriptPath:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

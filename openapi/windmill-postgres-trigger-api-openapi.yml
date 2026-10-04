@@ -446,60 +446,21 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    PublicationName:
-      name: publication
-      in: path
-      required: true
-      description: The name of the publication
-      schema:
-        type: string
   schemas:
-    TableToTrack:
-      type: array
-      items:
-        type: object
-        properties:
-          table_name:
-            type: string
-          columns_name:
-            type: array
-            items:
-              type: string
-          where_clause:
-            type: string
-        required:
-        - table_name
+    SlotList:
+      type: object
+      properties:
+        slot_name:
+          type: string
+        active:
+          type: boolean
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     PostgresTrigger:
       allOf:
       - $ref: '#/components/schemas/TriggerExtraProperty'
@@ -542,45 +503,6 @@ components:
       properties:
         name:
           type: string
-    TemplateScript:
-      type: object
-      properties:
-        postgres_resource_path:
-          type: string
-        relations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relations'
-        language:
-          $ref: '#/components/schemas/Language'
-      required:
-      - postgres_resource_path
-      - relations
-      - language
-    Relations:
-      type: object
-      properties:
-        schema_name:
-          type: string
-        table_to_track:
-          $ref: '#/components/schemas/TableToTrack'
-      required:
-      - schema_name
-      - table_to_track
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
-    SlotList:
-      type: object
-      properties:
-        slot_name:
-          type: string
-        active:
-          type: boolean
     NewPostgresTrigger:
       type: object
       properties:
@@ -632,71 +554,6 @@ components:
       - is_flow
       - enabled
       - postgres_resource_path
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    TriggerExtraProperty:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when triggered
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as (permissioned_as)
-        extra_perms:
-          type: object
-          description: Additional permissions for this trigger
-          additionalProperties:
-            type: boolean
-        workspace_id:
-          type: string
-          description: The workspace this trigger belongs to
-        edited_by:
-          type: string
-          description: Username of the last person who edited this trigger
-        edited_at:
-          type: string
-          format: date-time
-          description: Timestamp of the last edit
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-          description: Trigger mode (enabled/disabled)
-        labels:
-          type: array
-          items:
-            type: string
-          default: []
-      required:
-      - path
-      - script_path
-      - permissioned_as
-      - extra_perms
-      - workspace_id
-      - edited_by
-      - edited_at
-      - is_flow
-      - mode
-    PublicationData:
-      type: object
-      properties:
-        table_to_track:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relations'
-        transaction_to_track:
-          type: array
-          items:
-            type: string
-      required:
-      - transaction_to_track
     EditPostgresTrigger:
       type: object
       properties:
@@ -754,6 +611,149 @@ components:
       type: string
       enum:
       - Typescript
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    PublicationData:
+      type: object
+      properties:
+        table_to_track:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relations'
+        transaction_to_track:
+          type: array
+          items:
+            type: string
+      required:
+      - transaction_to_track
+    TableToTrack:
+      type: array
+      items:
+        type: object
+        properties:
+          table_name:
+            type: string
+          columns_name:
+            type: array
+            items:
+              type: string
+          where_clause:
+            type: string
+        required:
+        - table_name
+    TemplateScript:
+      type: object
+      properties:
+        postgres_resource_path:
+          type: string
+        relations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relations'
+        language:
+          $ref: '#/components/schemas/Language'
+      required:
+      - postgres_resource_path
+      - relations
+      - language
+    Relations:
+      type: object
+      properties:
+        schema_name:
+          type: string
+        table_to_track:
+          $ref: '#/components/schemas/TableToTrack'
+      required:
+      - schema_name
+      - table_to_track
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    PublicationName:
+      name: publication
+      in: path
+      required: true
+      description: The name of the publication
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
   securitySchemes:
     bearerAuth:
       type: http

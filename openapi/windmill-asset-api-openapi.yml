@@ -228,14 +228,12 @@ paths:
                       description: The asset path
 components:
   schemas:
-    AssetUsageAccessType:
-      type:
-      - string
-      - 'null'
+    AssetUsageKind:
+      type: string
       enum:
-      - r
-      - w
-      - rw
+      - script
+      - flow
+      - job
     AssetKind:
       type: string
       enum:
@@ -244,12 +242,14 @@ components:
       - ducklake
       - datatable
       - volume
-    AssetUsageKind:
-      type: string
+    AssetUsageAccessType:
+      type:
+      - string
+      - 'null'
       enum:
-      - script
-      - flow
-      - job
+      - r
+      - w
+      - rw
   parameters:
     WorkspaceId:
       name: workspace
