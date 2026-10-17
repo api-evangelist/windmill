@@ -77,31 +77,6 @@ paths:
                   $ref: '#/components/schemas/AuditLog'
 components:
   parameters:
-    After:
-      name: after
-      description: filter on created after (exclusive) timestamp
-      in: query
-      schema:
-        type: string
-        format: date-time
-    PathId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: integer
-    Username:
-      name: username
-      description: filter on exact username of user
-      in: query
-      schema:
-        type: string
-    Operation:
-      name: operation
-      description: filter on exact or prefix name of operation
-      in: query
-      schema:
-        type: string
     ResourceName:
       name: resource
       description: filter on exact or prefix name of resource
@@ -114,9 +89,27 @@ components:
       in: query
       schema:
         type: integer
-    Before:
-      name: before
-      description: filter on started before (inclusive) timestamp
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Operation:
+      name: operation
+      description: filter on exact or prefix name of operation
+      in: query
+      schema:
+        type: string
+    PathId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    After:
+      name: after
+      description: filter on created after (exclusive) timestamp
       in: query
       schema:
         type: string
@@ -132,10 +125,10 @@ components:
         - Update
         - Delete
         - Execute
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
+    Username:
+      name: username
+      description: filter on exact username of user
+      in: query
       schema:
         type: string
     Page:
@@ -144,6 +137,13 @@ components:
       in: query
       schema:
         type: integer
+    Before:
+      name: before
+      description: filter on started before (inclusive) timestamp
+      in: query
+      schema:
+        type: string
+        format: date-time
   schemas:
     AuditLog:
       type: object

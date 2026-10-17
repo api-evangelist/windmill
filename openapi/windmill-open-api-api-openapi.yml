@@ -64,6 +64,41 @@ paths:
                 format: binary
 components:
   schemas:
+    GenerateOpenapiSpec:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/OpenapiV3Info'
+        url:
+          type: string
+        openapi_spec_format:
+          $ref: '#/components/schemas/OpenapiSpecFormat'
+        http_route_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
+        webhook_filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookFilters'
+    OpenapiSpecFormat:
+      type: string
+      enum:
+      - yaml
+      - json
+    OpenapiHttpRouteFilters:
+      type: object
+      properties:
+        folder_regex:
+          type: string
+        path_regex:
+          type: string
+        route_path_regex:
+          type: string
+      required:
+      - folder_regex
+      - path_regex
+      - route_path_regex
     OpenapiV3Info:
       type: object
       properties:
@@ -98,46 +133,11 @@ components:
       required:
       - title
       - version
-    OpenapiSpecFormat:
-      type: string
-      enum:
-      - yaml
-      - json
     RunnableKind:
       type: string
       enum:
       - script
       - flow
-    OpenapiHttpRouteFilters:
-      type: object
-      properties:
-        folder_regex:
-          type: string
-        path_regex:
-          type: string
-        route_path_regex:
-          type: string
-      required:
-      - folder_regex
-      - path_regex
-      - route_path_regex
-    GenerateOpenapiSpec:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/OpenapiV3Info'
-        url:
-          type: string
-        openapi_spec_format:
-          $ref: '#/components/schemas/OpenapiSpecFormat'
-        http_route_filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenapiHttpRouteFilters'
-        webhook_filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/WebhookFilters'
     WebhookFilters:
       type: object
       properties:

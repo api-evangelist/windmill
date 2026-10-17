@@ -73,22 +73,16 @@ components:
       in: query
       schema:
         type: integer
-    OrderDesc:
-      name: order_desc
-      description: order by desc order (default true)
-      in: query
-      schema:
-        type: boolean
-    CreatedBy:
-      name: created_by
-      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
-      in: query
-      schema:
-        type: string
     WorkspaceId:
       name: workspace
       in: path
       required: true
+      schema:
+        type: string
+    CreatedBy:
+      name: created_by
+      description: filter by exact matching user creator. Supports comma-separated list (e.g. 'alice,bob') and negation by prefixing all values with '!' (e.g. '!alice,!bob')
+      in: query
       schema:
         type: string
     Page:
@@ -97,6 +91,12 @@ components:
       in: query
       schema:
         type: integer
+    OrderDesc:
+      name: order_desc
+      description: order by desc order (default true)
+      in: query
+      schema:
+        type: boolean
   schemas:
     ListableRawApp:
       type: object

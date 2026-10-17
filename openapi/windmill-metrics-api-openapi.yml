@@ -109,7 +109,42 @@ paths:
               schema:
                 type: integer
 components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    JobId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
   schemas:
+    TimeseriesMetric:
+      type: object
+      properties:
+        metric_id:
+          type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/MetricDataPoint'
+      required:
+      - id
+      - values
+    MetricMetadata:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
     MetricDataPoint:
       type: object
       properties:
@@ -131,41 +166,6 @@ components:
       required:
       - id
       - value
-    MetricMetadata:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-    TimeseriesMetric:
-      type: object
-      properties:
-        metric_id:
-          type: string
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/MetricDataPoint'
-      required:
-      - id
-      - values
-  parameters:
-    JobId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

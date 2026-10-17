@@ -574,7 +574,59 @@ paths:
                   - name
                   - score
 components:
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    ResourceType:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        name:
+          type: string
+        schema: {}
+        description:
+          type: string
+        created_by:
+          type: string
+        edited_at:
+          type: string
+          format: date-time
+        format_extension:
+          type: string
+        is_fileset:
+          type: boolean
+      required:
+      - name
     EditResource:
       type: object
       properties:
@@ -592,14 +644,6 @@ components:
           type: array
           items:
             type: string
-    EditResourceType:
-      type: object
-      properties:
-        schema: {}
-        description:
-          type: string
-        is_fileset:
-          type: boolean
     ListableResource:
       type: object
       properties:
@@ -643,48 +687,6 @@ components:
       - is_oauth
       - is_linked
       - is_refreshed
-    ResourceType:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        name:
-          type: string
-        schema: {}
-        description:
-          type: string
-        created_by:
-          type: string
-        edited_at:
-          type: string
-          format: date-time
-        format_extension:
-          type: string
-        is_fileset:
-          type: boolean
-      required:
-      - name
-    CreateResource:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The path to the resource
-        value: {}
-        description:
-          type: string
-          description: The description of the resource
-        resource_type:
-          type: string
-          description: The resource_type associated with the resource
-        labels:
-          type: array
-          items:
-            type: string
-      required:
-      - path
-      - value
-      - resource_type
     Resource:
       type: object
       properties:
@@ -716,37 +718,35 @@ components:
       - path
       - resource_type
       - is_oauth
-  parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
+    CreateResource:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The path to the resource
+        value: {}
+        description:
+          type: string
+          description: The description of the resource
+        resource_type:
+          type: string
+          description: The resource_type associated with the resource
+        labels:
+          type: array
+          items:
+            type: string
+      required:
+      - path
+      - value
+      - resource_type
+    EditResourceType:
+      type: object
+      properties:
+        schema: {}
+        description:
+          type: string
+        is_fileset:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http

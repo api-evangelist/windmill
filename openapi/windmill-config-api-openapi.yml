@@ -218,6 +218,25 @@ paths:
                   - language
                   - workspace_dep_names
 components:
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
     Configs:
       type:
@@ -228,6 +247,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Alert'
+    Alert:
+      type: object
+      properties:
+        name:
+          type: string
+        tags_to_monitor:
+          type: array
+          items:
+            type: string
+        jobs_num_threshold:
+          type: integer
+        alert_cooldown_seconds:
+          type: integer
+        alert_time_threshold_seconds:
+          type: integer
+      required:
+      - name
+      - tags_to_monitor
+      - jobs_num_threshold
+      - alert_cooldown_seconds
+      - alert_time_threshold_seconds
     AutoscalingEvent:
       type: object
       properties:
@@ -272,27 +312,6 @@ components:
       - rlang
       - duckdb
       - bunnative
-    Alert:
-      type: object
-      properties:
-        name:
-          type: string
-        tags_to_monitor:
-          type: array
-          items:
-            type: string
-        jobs_num_threshold:
-          type: integer
-        alert_cooldown_seconds:
-          type: integer
-        alert_time_threshold_seconds:
-          type: integer
-      required:
-      - name
-      - tags_to_monitor
-      - jobs_num_threshold
-      - alert_cooldown_seconds
-      - alert_time_threshold_seconds
     Config:
       type: object
       properties:
@@ -302,25 +321,6 @@ components:
           type: object
       required:
       - name
-  parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
   securitySchemes:
     bearerAuth:
       type: http

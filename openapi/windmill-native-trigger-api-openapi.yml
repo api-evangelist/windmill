@@ -395,6 +395,45 @@ paths:
                 type: string
 components:
   schemas:
+    NativeTrigger:
+      type: object
+      description: A native trigger stored in Windmill
+      properties:
+        external_id:
+          type: string
+          description: The unique identifier from the external service
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        service_name:
+          $ref: '#/components/schemas/NativeServiceName'
+        script_path:
+          type: string
+          description: The path to the script or flow that will be triggered
+        is_flow:
+          type: boolean
+          description: Whether the trigger targets a flow (true) or a script (false)
+        service_config:
+          type: object
+          description: Configuration for the trigger including event_type and service_config
+          additionalProperties: true
+        error:
+          type:
+          - string
+          - 'null'
+          description: Error message if the trigger is in an error state
+        summary:
+          type:
+          - string
+          - 'null'
+          description: Short summary to be displayed when listed
+      required:
+      - external_id
+      - workspace_id
+      - service_name
+      - script_path
+      - is_flow
+      - service_config
     GoogleCalendarEntry:
       type: object
       properties:
@@ -408,6 +447,43 @@ components:
       required:
       - id
       - summary
+    GoogleDriveFilesResponse:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoogleDriveFile'
+        next_page_token:
+          type: string
+      required:
+      - files
+    GoogleDriveFile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        mime_type:
+          type: string
+        is_folder:
+          type: boolean
+          default: false
+      required:
+      - id
+      - name
+      - mime_type
+    SharedDriveEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - id
+      - name
     CreateTriggerResponse:
       type: object
       description: Response returned when a native trigger is created
@@ -440,65 +516,6 @@ components:
       - script_path
       - is_flow
       - service_config
-    GoogleDriveFilesResponse:
-      type: object
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/GoogleDriveFile'
-        next_page_token:
-          type: string
-      required:
-      - files
-    NativeServiceName:
-      type: string
-      enum:
-      - nextcloud
-      - google
-      - github
-    SharedDriveEntry:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - name
-    GithubRepoEntry:
-      type: object
-      properties:
-        full_name:
-          type: string
-        name:
-          type: string
-        owner:
-          type: string
-        private:
-          type: boolean
-      required:
-      - full_name
-      - name
-      - owner
-      - private
-    GoogleDriveFile:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        mime_type:
-          type: string
-        is_folder:
-          type: boolean
-          default: false
-      required:
-      - id
-      - name
-      - mime_type
     NativeTriggerWithExternal:
       type: object
       description: Full trigger response containing both Windmill data and external service data
@@ -560,58 +577,41 @@ components:
       - id
       - name
       - path
-    NativeTrigger:
+    GithubRepoEntry:
       type: object
-      description: A native trigger stored in Windmill
       properties:
-        external_id:
+        full_name:
           type: string
-          description: The unique identifier from the external service
-        workspace_id:
+        name:
           type: string
-          description: The workspace this trigger belongs to
-        service_name:
-          $ref: '#/components/schemas/NativeServiceName'
-        script_path:
+        owner:
           type: string
-          description: The path to the script or flow that will be triggered
-        is_flow:
+        private:
           type: boolean
-          description: Whether the trigger targets a flow (true) or a script (false)
-        service_config:
-          type: object
-          description: Configuration for the trigger including event_type and service_config
-          additionalProperties: true
-        error:
-          type:
-          - string
-          - 'null'
-          description: Error message if the trigger is in an error state
-        summary:
-          type:
-          - string
-          - 'null'
-          description: Short summary to be displayed when listed
       required:
-      - external_id
-      - workspace_id
-      - service_name
-      - script_path
-      - is_flow
-      - service_config
+      - full_name
+      - name
+      - owner
+      - private
+    NativeServiceName:
+      type: string
+      enum:
+      - nextcloud
+      - google
+      - github
   parameters:
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
     WorkspaceId:
       name: workspace
       in: path
       required: true
       schema:
         type: string
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
     Page:
       name: page
       description: which page to return (start at 1, default 1)

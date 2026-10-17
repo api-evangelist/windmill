@@ -1085,17 +1085,124 @@ paths:
                 example: 'Updated public app rate limit for workspace: workspace_id'
 components:
   schemas:
+    CriticalAlert:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier for the alert
+        alert_type:
+          type: string
+          description: Type of alert (e.g., critical_error)
+        message:
+          type: string
+          description: The message content of the alert
+        created_at:
+          type: string
+          format: date-time
+          description: Time when the alert was created
+        acknowledged:
+          type:
+          - boolean
+          - 'null'
+          description: Acknowledgment status of the alert, can be true, false, or null if not set
+        workspace_id:
+          type:
+          - string
+          - 'null'
+          description: Workspace id if the alert is in the scope of a workspace
+    CustomInstanceDb:
+      type: object
+      required:
+      - logs
+      - success
+      properties:
+        logs:
+          $ref: '#/components/schemas/CustomInstanceDbLogs'
+        success:
+          type: boolean
+          description: Whether the operation completed successfully
+          example: true
+        error:
+          type:
+          - string
+          - 'null'
+          description: Error message if the operation failed
+          example: Connection timeout
+        tag:
+          $ref: '#/components/schemas/CustomInstanceDbTag'
+    CustomInstanceDbTag:
+      type: string
+      enum:
+      - ducklake
+      - datatable
+    CustomInstanceDbLogs:
+      type: object
+      properties:
+        super_admin:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        database_credentials:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        valid_dbname:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        created_database:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        db_connect:
+          $ref: '#/components/schemas/LoggedWizardStatus'
+        grant_permissions:
+          $ref: '#/components/schemas/LoggedWizardStatus'
     LoggedWizardStatus:
       type: string
       enum:
       - OK
       - SKIP
       - FAIL
-    CustomInstanceDbTag:
-      type: string
-      enum:
-      - ducklake
-      - datatable
+    AzureKeyVaultSettings:
+      type: object
+      required:
+      - vault_url
+      - tenant_id
+      - client_id
+      properties:
+        vault_url:
+          type: string
+          description: Azure Key Vault URL (e.g., https://myvault.vault.azure.net)
+        tenant_id:
+          type: string
+          description: Azure AD tenant ID
+        client_id:
+          type: string
+          description: Azure AD application (client) ID
+        client_secret:
+          type: string
+          description: Azure AD client secret
+        token:
+          type: string
+          description: Static Bearer token for testing/development (optional, if provided this is used instead of OAuth2 authentication)
+    VaultSettings:
+      type: object
+      required:
+      - address
+      - mount_path
+      properties:
+        address:
+          type: string
+          description: HashiCorp Vault server address (e.g., https://vault.company.com:8200)
+        mount_path:
+          type: string
+          description: KV v2 secrets engine mount path (e.g., windmill)
+        jwt_role:
+          type: string
+          description: Vault JWT auth role name for Windmill (optional, if not provided token auth is used)
+        namespace:
+          type: string
+          description: Vault Enterprise namespace (optional)
+        token:
+          type: string
+          description: Static Vault token for testing/development (optional, if provided this is used instead of JWT authentication)
+        skip_ssl_verify:
+          type: boolean
+          description: Skip TLS certificate verification when connecting to Vault. Only use for self-signed certificates in development environments.
     SecretMigrationReport:
       type: object
       required:
@@ -1121,62 +1228,6 @@ components:
           items:
             $ref: '#/components/schemas/SecretMigrationFailure'
           description: Details of any failures encountered during migration
-    SecretMigrationFailure:
-      type: object
-      required:
-      - workspace_id
-      - path
-      - error
-      properties:
-        workspace_id:
-          type: string
-          description: Workspace ID where the secret is located
-        path:
-          type: string
-          description: Path of the secret that failed to migrate
-        error:
-          type: string
-          description: Error message
-    AzureKeyVaultSettings:
-      type: object
-      required:
-      - vault_url
-      - tenant_id
-      - client_id
-      properties:
-        vault_url:
-          type: string
-          description: Azure Key Vault URL (e.g., https://myvault.vault.azure.net)
-        tenant_id:
-          type: string
-          description: Azure AD tenant ID
-        client_id:
-          type: string
-          description: Azure AD application (client) ID
-        client_secret:
-          type: string
-          description: Azure AD client secret
-        token:
-          type: string
-          description: Static Bearer token for testing/development (optional, if provided this is used instead of OAuth2 authentication)
-    InstanceConfig:
-      type: object
-      description: Unified instance configuration combining global settings and worker group configs
-      properties:
-        global_settings:
-          type: object
-          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
-
-            '
-          additionalProperties: true
-        worker_configs:
-          type: object
-          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
-
-            '
-          additionalProperties:
-            type: object
-            additionalProperties: true
     AwsSecretsManagerSettings:
       type: object
       required:
@@ -1206,65 +1257,40 @@ components:
       required:
       - name
       - value
-    CustomInstanceDb:
+    SecretMigrationFailure:
       type: object
       required:
-      - logs
-      - success
+      - workspace_id
+      - path
+      - error
       properties:
-        logs:
-          $ref: '#/components/schemas/CustomInstanceDbLogs'
-        success:
-          type: boolean
-          description: Whether the operation completed successfully
-          example: true
+        workspace_id:
+          type: string
+          description: Workspace ID where the secret is located
+        path:
+          type: string
+          description: Path of the secret that failed to migrate
         error:
-          type:
-          - string
-          - 'null'
-          description: Error message if the operation failed
-          example: Connection timeout
-        tag:
-          $ref: '#/components/schemas/CustomInstanceDbTag'
-    VaultSettings:
+          type: string
+          description: Error message
+    InstanceConfig:
       type: object
-      required:
-      - address
-      - mount_path
+      description: Unified instance configuration combining global settings and worker group configs
       properties:
-        address:
-          type: string
-          description: HashiCorp Vault server address (e.g., https://vault.company.com:8200)
-        mount_path:
-          type: string
-          description: KV v2 secrets engine mount path (e.g., windmill)
-        jwt_role:
-          type: string
-          description: Vault JWT auth role name for Windmill (optional, if not provided token auth is used)
-        namespace:
-          type: string
-          description: Vault Enterprise namespace (optional)
-        token:
-          type: string
-          description: Static Vault token for testing/development (optional, if provided this is used instead of JWT authentication)
-        skip_ssl_verify:
-          type: boolean
-          description: Skip TLS certificate verification when connecting to Vault. Only use for self-signed certificates in development environments.
-    CustomInstanceDbLogs:
-      type: object
-      properties:
-        super_admin:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        database_credentials:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        valid_dbname:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        created_database:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        db_connect:
-          $ref: '#/components/schemas/LoggedWizardStatus'
-        grant_permissions:
-          $ref: '#/components/schemas/LoggedWizardStatus'
+        global_settings:
+          type: object
+          description: 'Global settings keyed by setting name. Known fields include base_url, license_key, retention_period_secs, smtp_settings, otel, etc. Unknown fields are preserved as-is.
+
+            '
+          additionalProperties: true
+        worker_configs:
+          type: object
+          description: 'Worker group configurations keyed by group name (e.g. "default", "gpu"). Each value contains worker_tags, init_bash, autoscaling, etc.
+
+            '
+          additionalProperties:
+            type: object
+            additionalProperties: true
     JwksResponse:
       type: object
       required:
@@ -1276,41 +1302,15 @@ components:
             type: object
             additionalProperties: true
           description: Array of JSON Web Keys for JWT verification
-    CriticalAlert:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier for the alert
-        alert_type:
-          type: string
-          description: Type of alert (e.g., critical_error)
-        message:
-          type: string
-          description: The message content of the alert
-        created_at:
-          type: string
-          format: date-time
-          description: Time when the alert was created
-        acknowledged:
-          type:
-          - boolean
-          - 'null'
-          description: Acknowledgment status of the alert, can be true, false, or null if not set
-        workspace_id:
-          type:
-          - string
-          - 'null'
-          description: Workspace id if the alert is in the scope of a workspace
   parameters:
-    WorkspaceId:
-      name: workspace
+    Key:
+      name: key
       in: path
       required: true
       schema:
         type: string
-    Key:
-      name: key
+    WorkspaceId:
+      name: workspace
       in: path
       required: true
       schema:

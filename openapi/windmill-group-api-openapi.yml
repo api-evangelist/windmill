@@ -445,6 +445,26 @@ paths:
                       - 'null'
 components:
   schemas:
+    InstanceGroup:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        summary:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        instance_role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - superadmin
+          - devops
     Group:
       type: object
       properties:
@@ -486,6 +506,17 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WorkspaceInfo'
+    WorkspaceInfo:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        workspace_name:
+          type: string
+        role:
+          type: string
+      required:
+      - name
     ExportedInstanceGroup:
       type: object
       properties:
@@ -512,37 +543,6 @@ components:
           - devops
       required:
       - name
-    WorkspaceInfo:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        workspace_name:
-          type: string
-        role:
-          type: string
-      required:
-      - name
-    InstanceGroup:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-        summary:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        instance_role:
-          type:
-          - string
-          - 'null'
-          enum:
-          - superadmin
-          - devops
   parameters:
     PerPage:
       name: per_page
@@ -550,12 +550,6 @@ components:
       in: query
       schema:
         type: integer
-    Name:
-      name: name
-      in: path
-      required: true
-      schema:
-        type: string
     WorkspaceId:
       name: workspace
       in: path
@@ -568,6 +562,12 @@ components:
       in: query
       schema:
         type: integer
+    Name:
+      name: name
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

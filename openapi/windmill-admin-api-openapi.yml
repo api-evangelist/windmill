@@ -153,7 +153,28 @@ paths:
               schema:
                 type: string
 components:
+  parameters:
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
+    OffboardTokenInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        scopes:
+          type: array
+          items:
+            type: string
+        expiration:
+          type: string
+      required:
+      - label
+      - scopes
     EditWorkspaceUser:
       type: object
       properties:
@@ -163,24 +184,6 @@ components:
           type: boolean
         disabled:
           type: boolean
-    UserSource:
-      type: object
-      properties:
-        source:
-          type: string
-          enum:
-          - domain
-          - instance_group
-          - manual
-          description: How the user was added to the workspace
-        domain:
-          type: string
-          description: The domain used for auto-invite (when source is 'domain')
-        group:
-          type: string
-          description: The instance group name (when source is 'instance_group')
-      required:
-      - source
     OffboardRequest:
       type: object
       properties:
@@ -226,6 +229,39 @@ components:
       - tokens
       - http_triggers
       - email_triggers
+    OffboardAffectedPaths:
+      type: object
+      properties:
+        scripts:
+          type: array
+          items:
+            type: string
+        flows:
+          type: array
+          items:
+            type: string
+        apps:
+          type: array
+          items:
+            type: string
+        resources:
+          type: array
+          items:
+            type: string
+        variables:
+          type: array
+          items:
+            type: string
+        schedules:
+          type: array
+          items:
+            type: string
+        triggers:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
     OffboardSummary:
       type: object
       properties:
@@ -301,53 +337,24 @@ components:
       - disabled
       - folders
       - folders_owners
-    OffboardTokenInfo:
+    UserSource:
       type: object
       properties:
-        label:
+        source:
           type: string
-        scopes:
-          type: array
-          items:
-            type: string
-        expiration:
+          enum:
+          - domain
+          - instance_group
+          - manual
+          description: How the user was added to the workspace
+        domain:
           type: string
+          description: The domain used for auto-invite (when source is 'domain')
+        group:
+          type: string
+          description: The instance group name (when source is 'instance_group')
       required:
-      - label
-      - scopes
-    OffboardAffectedPaths:
-      type: object
-      properties:
-        scripts:
-          type: array
-          items:
-            type: string
-        flows:
-          type: array
-          items:
-            type: string
-        apps:
-          type: array
-          items:
-            type: string
-        resources:
-          type: array
-          items:
-            type: string
-        variables:
-          type: array
-          items:
-            type: string
-        schedules:
-          type: array
-          items:
-            type: string
-        triggers:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
+      - source
     OffboardResponse:
       type: object
       properties:
@@ -358,13 +365,6 @@ components:
           description: List of path conflicts that block the offboarding. Empty on success.
         summary:
           $ref: '#/components/schemas/OffboardSummary'
-  parameters:
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

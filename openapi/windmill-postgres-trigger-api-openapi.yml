@@ -447,13 +447,54 @@ paths:
                 type: string
 components:
   schemas:
-    SlotList:
+    TriggerExtraProperty:
       type: object
       properties:
-        slot_name:
+        path:
           type: string
-        active:
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
           type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
     TriggerMode:
       description: job trigger mode
       type: string
@@ -498,11 +539,17 @@ components:
       - postgres_resource_path
       - replication_slot_name
       - publication_name
-    Slot:
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
+    SlotList:
       type: object
       properties:
-        name:
+        slot_name:
           type: string
+        active:
+          type: boolean
     NewPostgresTrigger:
       type: object
       properties:
@@ -554,6 +601,38 @@ components:
       - is_flow
       - enabled
       - postgres_resource_path
+    Slot:
+      type: object
+      properties:
+        name:
+          type: string
+    Relations:
+      type: object
+      properties:
+        schema_name:
+          type: string
+        table_to_track:
+          $ref: '#/components/schemas/TableToTrack'
+      required:
+      - schema_name
+      - table_to_track
+    PublicationData:
+      type: object
+      properties:
+        table_to_track:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relations'
+        transaction_to_track:
+          type: array
+          items:
+            type: string
+      required:
+      - transaction_to_track
+    Language:
+      type: string
+      enum:
+      - Typescript
     EditPostgresTrigger:
       type: object
       properties:
@@ -607,75 +686,6 @@ components:
       - postgres_resource_path
       - publication_name
       - replication_slot_name
-    Language:
-      type: string
-      enum:
-      - Typescript
-    TriggerExtraProperty:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when triggered
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as (permissioned_as)
-        extra_perms:
-          type: object
-          description: Additional permissions for this trigger
-          additionalProperties:
-            type: boolean
-        workspace_id:
-          type: string
-          description: The workspace this trigger belongs to
-        edited_by:
-          type: string
-          description: Username of the last person who edited this trigger
-        edited_at:
-          type: string
-          format: date-time
-          description: Timestamp of the last edit
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-          description: Trigger mode (enabled/disabled)
-        labels:
-          type: array
-          items:
-            type: string
-          default: []
-      required:
-      - path
-      - script_path
-      - permissioned_as
-      - extra_perms
-      - workspace_id
-      - edited_by
-      - edited_at
-      - is_flow
-      - mode
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    PublicationData:
-      type: object
-      properties:
-        table_to_track:
-          type: array
-          items:
-            $ref: '#/components/schemas/Relations'
-        transaction_to_track:
-          type: array
-          items:
-            type: string
-      required:
-      - transaction_to_track
     TableToTrack:
       type: array
       items:
@@ -706,19 +716,9 @@ components:
       - postgres_resource_path
       - relations
       - language
-    Relations:
-      type: object
-      properties:
-        schema_name:
-          type: string
-        table_to_track:
-          $ref: '#/components/schemas/TableToTrack'
-      required:
-      - schema_name
-      - table_to_track
   parameters:
-    Id:
-      name: id
+    WorkspaceId:
+      name: workspace
       in: path
       required: true
       schema:
@@ -736,12 +736,6 @@ components:
       required: true
       schema:
         type: string
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
     PerPage:
       name: per_page
       description: number of items to return for a given page (default 30, max 100)
@@ -754,6 +748,12 @@ components:
       in: query
       schema:
         type: integer
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

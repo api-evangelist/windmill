@@ -212,8 +212,83 @@ paths:
               schema:
                 type: string
 components:
+  parameters:
+    PerPage:
+      name: per_page
+      description: number of items to return for a given page (default 30, max 100)
+      in: query
+      schema:
+        type: integer
+    WorkspaceId:
+      name: workspace
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      description: which page to return (start at 1, default 1)
+      in: query
+      schema:
+        type: integer
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    EditNatsTrigger:
+    TriggerExtraProperty:
+      type: object
+      properties:
+        path:
+          type: string
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
+          type: string
+          description: Path to the script or flow to execute when triggered
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as (permissioned_as)
+        extra_perms:
+          type: object
+          description: Additional permissions for this trigger
+          additionalProperties:
+            type: boolean
+        workspace_id:
+          type: string
+          description: The workspace this trigger belongs to
+        edited_by:
+          type: string
+          description: Username of the last person who edited this trigger
+        edited_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last edit
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
+        mode:
+          $ref: '#/components/schemas/TriggerMode'
+          description: Trigger mode (enabled/disabled)
+        labels:
+          type: array
+          items:
+            type: string
+          default: []
+      required:
+      - path
+      - script_path
+      - permissioned_as
+      - extra_perms
+      - workspace_id
+      - edited_by
+      - edited_at
+      - is_flow
+      - mode
+    NatsTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
       type: object
       properties:
         nats_resource_path:
@@ -237,15 +312,16 @@ components:
           items:
             type: string
           description: Array of NATS subjects to subscribe to
-        path:
+        server_id:
           type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
+          description: ID of the server currently handling this trigger (internal)
+        last_server_ping:
           type: string
-          description: Path to the script or flow to execute when a message is received
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
+          format: date-time
+          description: Timestamp of last server heartbeat (internal)
+        error:
+          type: string
+          description: Last error message if the trigger failed
         error_handler_path:
           type: string
           description: Path to a script or flow to run when the triggered job fails
@@ -255,23 +331,17 @@ components:
         retry:
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
           description: Retry configuration for failed executions
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
-        preserve_permissioned_as:
-          type: boolean
-          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
-        labels:
-          type: array
-          items:
-            type: string
       required:
-      - path
-      - script_path
       - nats_resource_path
       - use_jetstream
       - subjects
-      - is_flow
+    TriggerMode:
+      description: job trigger mode
+      type: string
+      enum:
+      - enabled
+      - disabled
+      - suspended
     NewNatsTrigger:
       type: object
       properties:
@@ -333,68 +403,7 @@ components:
       - nats_resource_path
       - use_jetstream
       - subjects
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
-    TriggerExtraProperty:
-      type: object
-      properties:
-        path:
-          type: string
-          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
-        script_path:
-          type: string
-          description: Path to the script or flow to execute when triggered
-        permissioned_as:
-          type: string
-          description: The user or group this trigger runs as (permissioned_as)
-        extra_perms:
-          type: object
-          description: Additional permissions for this trigger
-          additionalProperties:
-            type: boolean
-        workspace_id:
-          type: string
-          description: The workspace this trigger belongs to
-        edited_by:
-          type: string
-          description: Username of the last person who edited this trigger
-        edited_at:
-          type: string
-          format: date-time
-          description: Timestamp of the last edit
-        is_flow:
-          type: boolean
-          description: True if script_path points to a flow, false if it points to a script
-        mode:
-          $ref: '#/components/schemas/TriggerMode'
-          description: Trigger mode (enabled/disabled)
-        labels:
-          type: array
-          items:
-            type: string
-          default: []
-      required:
-      - path
-      - script_path
-      - permissioned_as
-      - extra_perms
-      - workspace_id
-      - edited_by
-      - edited_at
-      - is_flow
-      - mode
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    NatsTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
+    EditNatsTrigger:
       type: object
       properties:
         nats_resource_path:
@@ -418,16 +427,15 @@ components:
           items:
             type: string
           description: Array of NATS subjects to subscribe to
-        server_id:
+        path:
           type: string
-          description: ID of the server currently handling this trigger (internal)
-        last_server_ping:
+          description: The unique Windmill path for this trigger. Must be of the form `u/<user>/<path>` or `f/<folder>/<path>`. This is the trigger object path, not the HTTP route path.
+        script_path:
           type: string
-          format: date-time
-          description: Timestamp of last server heartbeat (internal)
-        error:
-          type: string
-          description: Last error message if the trigger failed
+          description: Path to the script or flow to execute when a message is received
+        is_flow:
+          type: boolean
+          description: True if script_path points to a flow, false if it points to a script
         error_handler_path:
           type: string
           description: Path to a script or flow to run when the triggered job fails
@@ -437,35 +445,27 @@ components:
         retry:
           $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
           description: Retry configuration for failed executions
+        permissioned_as:
+          type: string
+          description: The user or group this trigger runs as. Used during deployment to preserve the original trigger owner.
+        preserve_permissioned_as:
+          type: boolean
+          description: When true and the caller is a member of the 'wm_deployers' group, preserves the original permissioned_as value instead of overwriting it.
+        labels:
+          type: array
+          items:
+            type: string
       required:
+      - path
+      - script_path
       - nats_resource_path
       - use_jetstream
       - subjects
-  parameters:
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
-    PerPage:
-      name: per_page
-      description: number of items to return for a given page (default 30, max 100)
-      in: query
-      schema:
-        type: integer
-    WorkspaceId:
-      name: workspace
-      in: path
-      required: true
-      schema:
-        type: string
-    Page:
-      name: page
-      description: which page to return (start at 1, default 1)
-      in: query
-      schema:
-        type: integer
+      - is_flow
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
   securitySchemes:
     bearerAuth:
       type: http

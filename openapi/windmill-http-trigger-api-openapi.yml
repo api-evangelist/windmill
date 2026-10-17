@@ -243,19 +243,10 @@ paths:
                 type: string
 components:
   schemas:
-    HttpRequestType:
-      type: string
-      enum:
-      - sync
-      - async
-      - sync_sse
-    TriggerMode:
-      description: job trigger mode
-      type: string
-      enum:
-      - enabled
-      - disabled
-      - suspended
+    ScriptArgs:
+      type: object
+      description: The arguments to pass to the script or flow
+      additionalProperties: true
     TriggerExtraProperty:
       type: object
       properties:
@@ -304,15 +295,13 @@ components:
       - edited_at
       - is_flow
       - mode
-    AuthenticationMethod:
+    TriggerMode:
+      description: job trigger mode
       type: string
       enum:
-      - none
-      - windmill
-      - api_key
-      - basic_http
-      - custom_script
-      - signature
+      - enabled
+      - disabled
+      - suspended
     NewHttpTrigger:
       type: object
       properties:
@@ -413,6 +402,99 @@ components:
       - authentication_method
       - http_method
       - is_static_website
+    HttpTrigger:
+      allOf:
+      - $ref: '#/components/schemas/TriggerExtraProperty'
+      type: object
+      properties:
+        route_path:
+          type: string
+          description: The URL route path that will trigger this endpoint (e.g., 'api/myendpoint'). Must NOT start with a /.
+        static_asset_config:
+          type:
+          - object
+          - 'null'
+          description: Configuration for serving static assets (s3 bucket, storage path, filename)
+          properties:
+            s3:
+              type: string
+              description: S3 bucket path for static assets
+            storage:
+              type: string
+              description: Storage path for static assets
+            filename:
+              type: string
+              description: Filename for the static asset
+          required:
+          - s3
+        http_method:
+          $ref: '#/components/schemas/HttpMethod'
+          description: HTTP method (get, post, put, delete, patch) that triggers this endpoint
+        authentication_resource_path:
+          type:
+          - string
+          - 'null'
+          description: Path to the resource containing authentication configuration (for api_key, basic_http, custom_script, signature methods)
+        summary:
+          type:
+          - string
+          - 'null'
+          description: Short summary describing the purpose of this trigger
+        description:
+          type:
+          - string
+          - 'null'
+          description: Detailed description of what this trigger does
+        request_type:
+          $ref: '#/components/schemas/HttpRequestType'
+          description: How the request is handled - 'sync' waits for result, 'async' returns job ID immediately, 'sync_sse' streams results via Server-Sent Events
+        authentication_method:
+          $ref: '#/components/schemas/AuthenticationMethod'
+          description: How requests are authenticated - 'none' (public), 'windmill' (Windmill token), 'api_key', 'basic_http', 'custom_script', 'signature'
+        is_static_website:
+          type: boolean
+          description: If true, serves static files from S3/storage instead of running a script
+        workspaced_route:
+          type: boolean
+          description: If true, the route includes the workspace ID in the path
+        wrap_body:
+          type: boolean
+          description: If true, wraps the request body in a 'body' parameter
+        raw_string:
+          type: boolean
+          description: If true, passes the request body as a raw string instead of parsing as JSON
+        error_handler_path:
+          type: string
+          description: Path to a script or flow to run when the triggered job fails
+        error_handler_args:
+          $ref: '#/components/schemas/ScriptArgs'
+          description: Arguments to pass to the error handler
+        retry:
+          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
+          description: Retry configuration for failed executions
+      required:
+      - route_path
+      - request_type
+      - authentication_method
+      - http_method
+      - is_static_website
+      - workspaced_route
+      - wrap_body
+      - raw_string
+    HttpRequestType:
+      type: string
+      enum:
+      - sync
+      - async
+      - sync_sse
+    HttpMethod:
+      type: string
+      enum:
+      - get
+      - post
+      - put
+      - delete
+      - patch
     EditHttpTrigger:
       type: object
       properties:
@@ -511,97 +593,15 @@ components:
       - authentication_method
       - http_method
       - is_static_website
-    ScriptArgs:
-      type: object
-      description: The arguments to pass to the script or flow
-      additionalProperties: true
-    HttpMethod:
+    AuthenticationMethod:
       type: string
       enum:
-      - get
-      - post
-      - put
-      - delete
-      - patch
-    HttpTrigger:
-      allOf:
-      - $ref: '#/components/schemas/TriggerExtraProperty'
-      type: object
-      properties:
-        route_path:
-          type: string
-          description: The URL route path that will trigger this endpoint (e.g., 'api/myendpoint'). Must NOT start with a /.
-        static_asset_config:
-          type:
-          - object
-          - 'null'
-          description: Configuration for serving static assets (s3 bucket, storage path, filename)
-          properties:
-            s3:
-              type: string
-              description: S3 bucket path for static assets
-            storage:
-              type: string
-              description: Storage path for static assets
-            filename:
-              type: string
-              description: Filename for the static asset
-          required:
-          - s3
-        http_method:
-          $ref: '#/components/schemas/HttpMethod'
-          description: HTTP method (get, post, put, delete, patch) that triggers this endpoint
-        authentication_resource_path:
-          type:
-          - string
-          - 'null'
-          description: Path to the resource containing authentication configuration (for api_key, basic_http, custom_script, signature methods)
-        summary:
-          type:
-          - string
-          - 'null'
-          description: Short summary describing the purpose of this trigger
-        description:
-          type:
-          - string
-          - 'null'
-          description: Detailed description of what this trigger does
-        request_type:
-          $ref: '#/components/schemas/HttpRequestType'
-          description: How the request is handled - 'sync' waits for result, 'async' returns job ID immediately, 'sync_sse' streams results via Server-Sent Events
-        authentication_method:
-          $ref: '#/components/schemas/AuthenticationMethod'
-          description: How requests are authenticated - 'none' (public), 'windmill' (Windmill token), 'api_key', 'basic_http', 'custom_script', 'signature'
-        is_static_website:
-          type: boolean
-          description: If true, serves static files from S3/storage instead of running a script
-        workspaced_route:
-          type: boolean
-          description: If true, the route includes the workspace ID in the path
-        wrap_body:
-          type: boolean
-          description: If true, wraps the request body in a 'body' parameter
-        raw_string:
-          type: boolean
-          description: If true, passes the request body as a raw string instead of parsing as JSON
-        error_handler_path:
-          type: string
-          description: Path to a script or flow to run when the triggered job fails
-        error_handler_args:
-          $ref: '#/components/schemas/ScriptArgs'
-          description: Arguments to pass to the error handler
-        retry:
-          $ref: ../../openflow.openapi.yaml#/components/schemas/Retry
-          description: Retry configuration for failed executions
-      required:
-      - route_path
-      - request_type
-      - authentication_method
-      - http_method
-      - is_static_website
-      - workspaced_route
-      - wrap_body
-      - raw_string
+      - none
+      - windmill
+      - api_key
+      - basic_http
+      - custom_script
+      - signature
   parameters:
     PerPage:
       name: per_page
@@ -609,12 +609,6 @@ components:
       in: query
       schema:
         type: integer
-    Path:
-      name: path
-      in: path
-      required: true
-      schema:
-        type: string
     WorkspaceId:
       name: workspace
       in: path
@@ -627,6 +621,12 @@ components:
       in: query
       schema:
         type: integer
+    Path:
+      name: path
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

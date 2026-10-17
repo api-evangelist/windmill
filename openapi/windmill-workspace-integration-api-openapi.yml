@@ -219,20 +219,6 @@ paths:
                 type: string
 components:
   schemas:
-    WorkspaceIntegrations:
-      type: object
-      properties:
-        service_name:
-          $ref: '#/components/schemas/NativeServiceName'
-        oauth_data:
-          $ref: '#/components/schemas/WorkspaceOAuthConfig'
-        resource_path:
-          type:
-          - string
-          - 'null'
-          description: Path to the resource storing the OAuth token
-      required:
-      - service_name
     WorkspaceOAuthConfig:
       type: object
       properties:
@@ -255,12 +241,20 @@ components:
       - client_secret
       - base_url
       - redirect_uri
-    NativeServiceName:
-      type: string
-      enum:
-      - nextcloud
-      - google
-      - github
+    WorkspaceIntegrations:
+      type: object
+      properties:
+        service_name:
+          $ref: '#/components/schemas/NativeServiceName'
+        oauth_data:
+          $ref: '#/components/schemas/WorkspaceOAuthConfig'
+        resource_path:
+          type:
+          - string
+          - 'null'
+          description: Path to the resource storing the OAuth token
+      required:
+      - service_name
     RedirectUri:
       type: object
       properties:
@@ -268,6 +262,12 @@ components:
           type: string
       required:
       - redirect_uri
+    NativeServiceName:
+      type: string
+      enum:
+      - nextcloud
+      - google
+      - github
   parameters:
     WorkspaceId:
       name: workspace

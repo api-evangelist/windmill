@@ -133,6 +133,23 @@ paths:
                 $ref: '#/components/schemas/WorkspaceDependencies'
 components:
   schemas:
+    NewWorkspaceDependencies:
+      type: object
+      properties:
+        workspace_id:
+          type: string
+        language:
+          $ref: '#/components/schemas/ScriptLang'
+        name:
+          type: string
+        description:
+          type: string
+        content:
+          type: string
+      required:
+      - workspace_id
+      - language
+      - content
     WorkspaceDependencies:
       type: object
       properties:
@@ -187,23 +204,6 @@ components:
       - rlang
       - duckdb
       - bunnative
-    NewWorkspaceDependencies:
-      type: object
-      properties:
-        workspace_id:
-          type: string
-        language:
-          $ref: '#/components/schemas/ScriptLang'
-        name:
-          type: string
-        description:
-          type: string
-        content:
-          type: string
-      required:
-      - workspace_id
-      - language
-      - content
   parameters:
     WorkspaceId:
       name: workspace
